@@ -35,7 +35,7 @@ To exercise the auto-update UI without publishing a release: `VITE_ZENCOPY_FAKE_
 Dev builds only — the flag is ignored in production ([src/lib/updater.ts](src/lib/updater.ts)).
 
 Run everything relevant to your change before opening a PR.
-Windows- and Linux-side compilation is CI's job (the Rust code here is only ever compiled for macOS locally) — re-enable GitHub Actions before relying on that signal.
+Windows- and Linux-side compilation is CI's job (the Rust code here is only ever compiled for macOS locally).
 See [.github/workflows/ci.yml](.github/workflows/ci.yml) for the exact recipe.
 
 ## React
@@ -120,8 +120,6 @@ Keep the summary line short and factual; put the "why" and any surprising contex
   On other Wayland compositors (KDE, wlroots, …) the app runs but the trigger stays inert — copycopy logs a warning to stderr.
   Don't claim broader Linux coverage than that in docs or UI.
 - **macOS main-thread constraint.** `copycopy` installs `CGEventTap`, which must run on the main run loop; keep the Tauri `setup` hook path intact.
-- **release-plz opens a patch-release PR for any un-released commit** (including `docs:` / `refactor:` / `chore:`).
-  Close the PR if a docs-only release is undesirable.
 - **Corporate proxy quirks (local dev only):** if TLS revocation checks fail behind a corporate proxy, set `CARGO_HTTP_CHECK_REVOKE=false` for cargo and pass `--ssl-no-revoke` to curl.
 
 ## Where to look first
