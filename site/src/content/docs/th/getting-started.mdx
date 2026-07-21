@@ -38,8 +38,11 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
     anyway**
   </TabItem>
   <TabItem label="macOS">
-    เปิดไฟล์ `.dmg` แล้วลาก ZenCopy ไปไว้ในโฟลเดอร์ **Applications** ครั้งแรกให้คลิกขวา
-    (หรือคลิกสองนิ้ว) ที่แอปแล้วเลือก **Open** macOS จะถามหนึ่งครั้งสำหรับแอปที่มาจากนอก App Store
+    เปิดไฟล์ `.dmg` แล้วลาก ZenCopy ไปไว้ในโฟลเดอร์ **Applications** เมื่อเปิดครั้งแรก macOS
+    จะเตือนว่าไม่สามารถตรวจสอบยืนยันแอปได้ — เป็นหน้าจอที่แสดงสำหรับแอปที่เผยแพร่นอก App Store
+    ให้คลิก **Done** (ไม่ใช่ **Move to Trash**) แล้วเปิด **System Settings → Privacy & Security**
+    เลื่อนลงไปที่ส่วน Security แล้วคลิก **Open Anyway** ของ ZenCopy macOS
+    จะถามเรื่องนี้เพียงครั้งเดียว
   </TabItem>
   <TabItem label="Linux">
     ดาวน์โหลด `.AppImage` ทำให้เรียกใช้ได้ (`chmod +x`) แล้วเรียกใช้ รูปแบบนี้มีการอัปเดตจากในแอปให้

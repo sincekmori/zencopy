@@ -2203,8 +2203,8 @@ pub fn run() {
                 let handle = app.handle().clone();
                 let status_handle = app.handle().clone();
                 // copycopy::Capture carries no Drop glue, so the listener stays
-                // installed for the whole process; binding the handle is enough.
-                let _capture = copycopy::start_with_status(
+                // installed for the whole process even after the handle drops.
+                let capture = copycopy::start_with_status(
                     copycopy::Config::default(),
                     move |event| {
                         if is_blank(&event) {
@@ -2241,13 +2241,28 @@ pub fn run() {
                             .emit("trigger-status", &status)
                             .or_log("emit trigger-status");
                     },
-                )
-                .inspect_err(|error| {
-                    // Also into the log file — a setup failure aborts the app and
-                    // its panic message only reaches stderr, which nobody keeps.
-                    log::error!("failed to install the Ctrl/Cmd+C+C listener: {error}");
-                })?;
-                log::info!("global Ctrl/Cmd+C+C capture listener installed");
+                );
+                match capture {
+                    Ok(_capture) => {
+                        log::info!("global Ctrl/Cmd+C+C capture listener installed");
+                    }
+                    Err(error) => {
+                        // Not fatal — on macOS this is the normal first launch:
+                        // CGEventTap cannot be created until the user grants
+                        // Input Monitoring, so start with a dormant trigger and
+                        // let the welcome/settings windows explain the fix
+                        // (TriggerNotice), like the inert Linux states.
+                        log::error!("failed to install the Ctrl/Cmd+C+C listener: {error}");
+                        let status = copycopy::TriggerStatus::Failed {
+                            message: error.to_string(),
+                        };
+                        if let Ok(mut latest) = TRIGGER_STATUS.lock() {
+                            *latest = Some(status.clone());
+                        }
+                        app.emit("trigger-status", &status)
+                            .or_log("emit trigger-status");
+                    }
+                }
             }
 
             // First run (fresh install, or a factory reset followed by a

@@ -1,4 +1,5 @@
 import { useT } from "@/lib/i18n.tsx";
+import { IS_MAC } from "@/lib/platform.ts";
 import { type TriggerStatus, useTriggerStatus } from "@/lib/trigger-status.ts";
 
 /** The notice text for a status, or undefined for states that need no UI
@@ -15,7 +16,10 @@ function noticeText(
       return t.trigger.unsupportedSession;
     }
     case "failed": {
-      return t.trigger.failed;
+      // On macOS the listener failing to start means the Input Monitoring /
+      // Accessibility permissions are missing — say so instead of pointing at
+      // the log.
+      return IS_MAC ? t.trigger.macosPermissions : t.trigger.failed;
     }
     default: {
       return undefined;

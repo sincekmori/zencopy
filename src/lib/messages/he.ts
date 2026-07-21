@@ -110,6 +110,8 @@ export const he: Messages = {
     unsupportedSession:
       "בסשן שולחן העבודה הזה אי אפשר לזהות את הטריגר — ZenCopy דורש GNOME על Wayland או X11.",
     failed: "הטריגר לא הצליח להתחיל. פרטים ביומן.",
+    macosPermissions:
+      "נותר צעד אחד: macOS זקוק לאישור שלכם כדי לזהות את ההעתקה הכפולה. ב‑System Settings ← Privacy & Security, אשרו את ZenCopy גם תחת Input Monitoring וגם תחת Accessibility, ואז סגרו את ZenCopy והפעילו אותו מחדש.",
   },
   actions: {
     builtinLabels: { translate: "תרגום", explain: "הסבר", polish: "ליטוש" },

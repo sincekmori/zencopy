@@ -37,8 +37,10 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
     对它还不认识的新应用做的一次性检查 — 选择**更多信息 → 仍要运行**即可。
   </TabItem>
   <TabItem label="macOS">
-    打开 `.dmg`，把 ZenCopy 拖进**应用程序**文件夹。第一次运行时，右键（或双指点按）应用并选择
-    **打开**。对于来自 App Store 之外的应用，macOS 只会询问这一次。
+    打开 `.dmg`，把 ZenCopy 拖进**应用程序**文件夹。第一次启动时，macOS 会警告无法验证该应用 —
+    这是它为来自 App Store 之外的应用显示的界面。请点按**完成**（不要点**移到废纸篓**），打开
+    **系统设置 → 隐私与安全性**，向下滚动到“安全性”部分，点按 ZenCopy 对应的**仍要打开**。macOS
+    只会询问这一次。
   </TabItem>
   <TabItem label="Linux">
     下载 `.AppImage`，添加可执行权限（`chmod +x`）后运行。这是支持应用内更新的格式。也提供 `.deb` 和

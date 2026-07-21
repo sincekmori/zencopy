@@ -117,6 +117,8 @@ export const ja: Messages = {
     unsupportedSession:
       "このデスクトップセッションではトリガーを検知できません。GNOME(Wayland)または X11 が必要です。",
     failed: "トリガーを開始できませんでした。詳細はログを確認してください。",
+    macosPermissions:
+      "あと一歩です。コピーの 2 連打を検知するには macOS の許可が必要です。システム設定 → プライバシーとセキュリティ で「入力監視」と「アクセシビリティ」の両方で ZenCopy を許可し、ZenCopy を起動し直してください。",
   },
   actions: {
     // Zen stays "Zen" everywhere (intentionally omitted).

@@ -112,6 +112,8 @@ export const fa: Messages = {
     unsupportedSession:
       "در این نشست دسکتاپ امکان پایش راه‌انداز نیست — ZenCopy به GNOME روی Wayland یا X11 نیاز دارد.",
     failed: "راه‌انداز شروع نشد. جزئیات را در گزارش ببینید.",
+    macosPermissions:
+      "یک قدم مانده است: macOS برای تشخیص کپی دوباره به اجازهٔ شما نیاز دارد. در System Settings → Privacy & Security، به ZenCopy در هر دو بخش Input Monitoring و Accessibility اجازه دهید، سپس از ZenCopy خارج شوید و دوباره اجرایش کنید.",
   },
   actions: {
     builtinLabels: { translate: "ترجمه", explain: "توضیح", polish: "ویرایش" },

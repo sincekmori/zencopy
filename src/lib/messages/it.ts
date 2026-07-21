@@ -115,6 +115,8 @@ export const it: Messages = {
     unsupportedSession:
       "In questa sessione desktop il trigger non può essere rilevato — ZenCopy richiede GNOME su Wayland o X11.",
     failed: "Impossibile avviare il trigger. Controlla il log per i dettagli.",
+    macosPermissions:
+      "Manca un passaggio: macOS ha bisogno della tua autorizzazione per accorgersi della doppia copia. In Impostazioni di Sistema → Privacy e sicurezza, consenti ZenCopy sia in Monitoraggio input sia in Accessibilità, poi chiudi e riapri ZenCopy.",
   },
   actions: {
     builtinLabels: { translate: "Traduci", explain: "Spiega", polish: "Rifinisci" },

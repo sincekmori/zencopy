@@ -118,6 +118,8 @@ export const fr: Messages = {
     unsupportedSession:
       "Cette session de bureau ne permet pas d'observer le déclencheur — ZenCopy requiert GNOME sous Wayland ou X11.",
     failed: "Le déclencheur n'a pas pu démarrer. Consultez le journal pour plus de détails.",
+    macosPermissions:
+      "Encore une étape : macOS a besoin de votre autorisation pour remarquer le double copier. Dans Réglages Système → Confidentialité et sécurité, autorisez ZenCopy sous Surveillance de l'entrée et Accessibilité, puis quittez ZenCopy et relancez-le.",
   },
   actions: {
     builtinLabels: { translate: "Traduire", explain: "Expliquer", polish: "Peaufiner" },

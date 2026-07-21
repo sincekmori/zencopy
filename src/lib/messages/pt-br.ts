@@ -115,6 +115,8 @@ export const ptBR: Messages = {
     unsupportedSession:
       "Esta sessão de desktop não permite observar o gatilho — o ZenCopy precisa do GNOME no Wayland ou X11.",
     failed: "Não foi possível iniciar o gatilho. Veja o log para detalhes.",
+    macosPermissions:
+      "Falta um passo: o macOS precisa da sua permissão para perceber a cópia dupla. Em Ajustes do Sistema → Privacidade e Segurança, permita o ZenCopy tanto em Monitoramento de Entrada quanto em Acessibilidade, depois encerre e reabra o ZenCopy.",
   },
   actions: {
     builtinLabels: { translate: "Traduzir", explain: "Explicar", polish: "Aprimorar" },

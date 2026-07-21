@@ -37,8 +37,11 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
     مرة واحدة للتطبيقات الجديدة التي لا يعرفها بعد — اختر **More info ← Run anyway**.
   </TabItem>
   <TabItem label="macOS">
-    افتح ملف `.dmg` واسحب ZenCopy إلى مجلد **Applications**. في المرة الأولى، انقر على التطبيق بالزر
-    الأيمن (أو بإصبعين) واختر **Open**. يسأل macOS مرة واحدة عن التطبيقات القادمة من خارج App Store.
+    افتح ملف `.dmg` واسحب ZenCopy إلى مجلد **Applications**. عند التشغيل الأول، يحذّر macOS من أنه
+    لم يتمكن من التحقق من التطبيق — وهي الشاشة التي يعرضها للتطبيقات الموزّعة من خارج App Store.
+    انقر على **Done** (وليس **Move to Trash**)، ثم افتح **System Settings ← Privacy & Security**،
+    ومرّر لأسفل إلى قسم Security، وانقر على **Open Anyway** بجانب ZenCopy. يطلب macOS هذا مرة واحدة
+    فقط.
   </TabItem>
   <TabItem label="Linux">
     نزِّل ملف `.AppImage` واجعله قابلًا للتنفيذ (`chmod +x`) ثم شغّله. هذه هي الصيغة التي تدعم

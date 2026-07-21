@@ -109,6 +109,8 @@ export const zhHant: Messages = {
       "還差一步。GNOME 會在登入時載入觸發器擴充功能。請登出並重新登入一次，然後再次啟動 ZenCopy。",
     unsupportedSession: "此桌面工作階段無法監測觸發器 — ZenCopy 需要 Wayland 上的 GNOME 或 X11。",
     failed: "無法啟動觸發器。詳情請查看記錄檔。",
+    macosPermissions:
+      "還差一步。macOS 需要你的許可才能察覺兩次複製。請在「系統設定 → 隱私權與安全性」中的「輸入監控」與「輔助使用」兩項都允許 ZenCopy，然後將 ZenCopy 結束一次再重新啟動。",
   },
   actions: {
     builtinLabels: { translate: "翻譯", explain: "解說", polish: "潤飾" },

@@ -108,6 +108,8 @@ export const zhHans: Messages = {
       "还差一步：GNOME 在登录时加载触发器扩展。请注销并重新登录一次，然后再次启动 ZenCopy。",
     unsupportedSession: "此桌面会话无法监测触发器 — ZenCopy 需要 Wayland 上的 GNOME 或 X11。",
     failed: "触发器无法启动。详情请查看日志。",
+    macosPermissions:
+      "还差一步：macOS 需要你的许可才能察觉两次复制。请在“系统设置 → 隐私与安全性”中的“输入监控”和“辅助功能”里都允许 ZenCopy，然后退出 ZenCopy 再重新启动。",
   },
   actions: {
     builtinLabels: { translate: "翻译", explain: "解释", polish: "润色" },
