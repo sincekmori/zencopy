@@ -72,11 +72,11 @@ Logs enthalten nie deine kopierten Inhalte oder API-Schlüssel.
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Die `.msi`-Deinstallation entfernt alles: Einstellungen, API-Schlüssel, eigene Aktionen, Logs
-    und das Webview-Profil. Der `.exe`-Deinstaller (NSIS) fragt stattdessen mit einer Checkbox
-    **Anwendungsdaten löschen** nach. (Ein harmloser Rest in beiden Fällen: War „Bei Anmeldung
-    starten“ aktiviert, kann ein ins Leere zeigender Registry-Eintrag zurückbleiben — Windows
-    ignoriert Einträge, deren Ziel nicht existiert.)
+    Der Deinstaller fragt mit einer Checkbox **Anwendungsdaten löschen** nach — ist sie angehakt,
+    wird alles entfernt: Einstellungen, API-Schlüssel, eigene Aktionen, Logs und das Webview-Profil.
+    (Ein harmloser Rest, ob du sie anhakst oder nicht: War „Bei Anmeldung starten“ aktiviert, kann
+    ein ins Leere zeigender Registry-Eintrag zurückbleiben — Windows ignoriert Einträge, deren Ziel
+    nicht existiert.)
   </TabItem>
   <TabItem label="macOS">
     Die App in den Papierkorb zu ziehen löscht ihre Daten nicht — das ist die macOS-Konvention, und

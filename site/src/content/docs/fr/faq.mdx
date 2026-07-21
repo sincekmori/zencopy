@@ -72,11 +72,11 @@ Les journaux ne contiennent jamais votre contenu copié ni vos clés d'API.
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    La désinstallation du `.msi` supprime tout : les réglages, les clés d'API, les actions
-    personnalisées, les journaux et le profil de la webview. Le désinstalleur `.exe` (NSIS) pose la
-    question via une case **Delete application data**. (Un reste inoffensif dans les deux cas : si
-    le lancement à la connexion était activé, une entrée de registre pointant vers rien peut
-    subsister — Windows ignore les entrées dont la cible n'existe pas.)
+    Le désinstalleur pose la question via une case **Delete application data** — la cocher supprime
+    tout : les réglages, les clés d'API, les actions personnalisées, les journaux et le profil de la
+    webview. (Un reste inoffensif, que vous la cochiez ou non : si le lancement à la connexion était
+    activé, une entrée de registre pointant vers rien peut subsister — Windows ignore les entrées
+    dont la cible n'existe pas.)
   </TabItem>
   <TabItem label="macOS">
     Glisser l'application dans la corbeille ne supprime pas ses données — c'est la convention macOS,

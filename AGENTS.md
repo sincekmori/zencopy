@@ -20,7 +20,7 @@ Everything CI runs is scripted or is a one-liner:
 - `bun run lint:dead` — knip: unused files, exports, and dependencies across root + site.
   Note its limit: a value that is _serialized on one side of the Rust ↔ TS IPC boundary and schema-declared on the other_ looks used to every per-language tool — when adding or removing a `CapturePayload`-style field, check both sides by hand.
 - `bun run format:check` — oxfmt, then prettier (`prettier-plugin-astro`) for `site/**/*.astro` (write with `bun run format`).
-  `.mdx` is deliberately outside both formatters: prettier reflows prose to a fixed column width, which the Semantic Line Breaks policy below forbids.
+  oxfmt also formats `site/**/*.mdx`, reflowing prose to a fixed column width — so the Semantic Line Breaks policy below applies to `.md` files only, and `.mdx` edits need a `bun run format` pass before committing.
 - `bun run lint:toml` — Tombi with `--error-on-warnings`
 - `bun run build` — `tsc -b && vite build` (produces `dist/`)
 - `cargo fmt --manifest-path src-tauri/Cargo.toml --check`
@@ -95,10 +95,11 @@ TOML files are linted with [Tombi](https://tombi-toml.github.io/tombi/), the sam
 
 ## Prose (Markdown)
 
-All Markdown prose in this repo uses **Semantic Line Breaks** ([sembr.org](https://sembr.org/)): one physical line per sentence.
+All `.md` prose in this repo uses **Semantic Line Breaks** ([sembr.org](https://sembr.org/)): one physical line per sentence.
 Optionally break after independent clauses (`,`, `;`, `:`, `—`) for clarity.
-oxfmt's `proseWrap` defaults to `preserve`, so hand-authored line breaks are kept as-is.
+oxfmt's `proseWrap` defaults to `preserve` for `.md`, so hand-authored line breaks are kept as-is.
 Do NOT reflow paragraphs to a fixed column width — it hides real prose changes in reflow noise and makes `git blame` sentence-level attribution useless.
+The exception is `site/**/*.mdx`, which oxfmt does reflow to a fixed column width: let the formatter own the wrapping there and run `bun run format` after editing.
 
 ## Commits
 

@@ -72,10 +72,10 @@ Logs never contain your copied content or API keys.
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    The `.msi` uninstall removes everything: settings, API keys, custom actions, logs, and the
-    webview profile. The `.exe` (NSIS) uninstaller instead asks with a **Delete application data**
-    checkbox. (One harmless leftover either way: if launch-at-login was enabled, a registry entry
-    pointing at nothing may remain — Windows ignores entries whose target does not exist.)
+    The uninstaller asks with a **Delete application data** checkbox — checking it removes
+    everything: settings, API keys, custom actions, logs, and the webview profile. (One harmless
+    leftover whether or not you check it: if launch-at-login was enabled, a registry entry pointing
+    at nothing may remain — Windows ignores entries whose target does not exist.)
   </TabItem>
   <TabItem label="macOS">
     Dropping the app in the Trash does not delete its data — that is the macOS convention, and

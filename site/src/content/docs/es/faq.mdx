@@ -72,11 +72,11 @@ Los logs nunca contienen tu contenido copiado ni tus claves de API.
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    La desinstalación del `.msi` elimina todo: ajustes, claves de API, acciones propias, logs y el
-    perfil del webview. El desinstalador `.exe` (NSIS), en cambio, pregunta con una casilla
-    **Eliminar los datos de la aplicación**. (Un resto inofensivo en ambos casos: si el inicio al
-    iniciar sesión estaba activado, puede quedar una entrada del registro que apunta a nada —
-    Windows ignora las entradas cuyo destino no existe.)
+    El desinstalador pregunta con una casilla **Eliminar los datos de la aplicación** — al marcarla
+    se elimina todo: ajustes, claves de API, acciones propias, logs y el perfil del webview. (Un
+    resto inofensivo, la marques o no: si el inicio al iniciar sesión estaba activado, puede quedar
+    una entrada del registro que apunta a nada — Windows ignora las entradas cuyo destino no
+    existe.)
   </TabItem>
   <TabItem label="macOS">
     Arrastrar la aplicación a la Papelera no borra sus datos — esa es la convención de macOS, y

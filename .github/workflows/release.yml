@@ -52,10 +52,9 @@ jobs:
       # of the updater private key, ..._PASSWORD its password ("" if none).
       # OS code signing (notarization etc.) is a separate, later concern.
       #
-      # updaterJsonPreferNsis: bundle.targets is "all", so Windows builds both
-      # MSI and NSIS — point latest.json at NSIS, the recommended updater
-      # format for Tauri v2 (also pins us against the action's hinted future
-      # default flip).
+      # Windows ships NSIS only (bundle.targets excludes msi), the recommended
+      # updater format for Tauri v2, so latest.json points at NSIS without
+      # needing updaterJsonPreferNsis.
       - uses: tauri-apps/tauri-action@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +65,6 @@ jobs:
           releaseName: "ZenCopy ${{ github.ref_name }}"
           releaseDraft: true
           prerelease: false
-          updaterJsonPreferNsis: true
           generateReleaseNotes: true
           retryAttempts: 2
           args: ${{ matrix.args }}

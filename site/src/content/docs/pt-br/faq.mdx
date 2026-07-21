@@ -72,11 +72,10 @@ Os logs nunca contêm seu conteúdo copiado nem suas chaves de API.
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    A desinstalação pelo `.msi` remove tudo: configurações, chaves de API, ações personalizadas,
-    logs e o perfil do webview. Já o desinstalador `.exe` (NSIS) pergunta, com uma caixa de seleção
-    **Excluir os dados do aplicativo**. (Uma sobra inofensiva em ambos os casos: se o início ao
-    fazer login estava ativado, pode restar uma entrada de registro apontando para nada — o Windows
-    ignora entradas cujo alvo não existe.)
+    O desinstalador pergunta com uma caixa de seleção **Excluir os dados do aplicativo** — marcá-la
+    remove tudo: configurações, chaves de API, ações personalizadas, logs e o perfil do webview.
+    (Uma sobra inofensiva, marcando-a ou não: se o início ao fazer login estava ativado, pode restar
+    uma entrada de registro apontando para nada — o Windows ignora entradas cujo alvo não existe.)
   </TabItem>
   <TabItem label="macOS">
     Jogar o aplicativo no Lixo não apaga os dados dele — essa é a convenção do macOS, e o ZenCopy a

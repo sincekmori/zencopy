@@ -59,14 +59,10 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["nsis", "app", "dmg", "appimage", "deb", "rpm"],
     "createUpdaterArtifacts": true,
     "copyright": "© 2026 Shinsuke Mori",
     "windows": {
-      "wix": {
-        "fragmentPaths": ["windows/purge-app-data.wxs"],
-        "componentRefs": ["PurgeAppData"]
-      },
       "nsis": {
         "installerIcon": "icons/icon.ico"
       }

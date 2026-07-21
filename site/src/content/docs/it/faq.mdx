@@ -72,11 +72,10 @@ I log non contengono mai i tuoi contenuti copiati né le chiavi API.
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    La disinstallazione del `.msi` rimuove tutto: impostazioni, chiavi API, azioni personalizzate,
-    log e il profilo della webview. Il disinstallatore `.exe` (NSIS) invece lo chiede con una
-    casella **Delete application data**. (In entrambi i casi un residuo innocuo: se l'avvio
-    all'accesso era attivo, può restare una voce di registro che punta al nulla — Windows ignora le
-    voci il cui destinatario non esiste.)
+    Il disinstallatore lo chiede con una casella **Delete application data** — spuntandola rimuove
+    tutto: impostazioni, chiavi API, azioni personalizzate, log e il profilo della webview. (Che tu
+    la spunti o no, un residuo innocuo: se l'avvio all'accesso era attivo, può restare una voce di
+    registro che punta al nulla — Windows ignora le voci il cui destinatario non esiste.)
   </TabItem>
   <TabItem label="macOS">
     Trascinare l'app nel Cestino non elimina i suoi dati — è la convenzione di macOS, e ZenCopy la

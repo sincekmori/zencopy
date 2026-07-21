@@ -72,11 +72,10 @@ Logi nigdy nie zawierają skopiowanej treści ani kluczy API.
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Odinstalowanie wersji `.msi` usuwa wszystko: ustawienia, klucze API, własne akcje, logi i profil
-    webview. Deinstalator `.exe` (NSIS) zamiast tego pyta polem wyboru **Usuń dane aplikacji**. (W
-    obu przypadkach jedna nieszkodliwa pozostałość: jeśli włączone było uruchamianie przy logowaniu,
-    może zostać wpis rejestru wskazujący donikąd — Windows ignoruje wpisy, których cel nie
-    istnieje.)
+    Deinstalator pyta polem wyboru **Usuń dane aplikacji** — po jego zaznaczeniu usuwa wszystko:
+    ustawienia, klucze API, własne akcje, logi i profil webview. (Niezależnie od zaznaczenia jedna
+    nieszkodliwa pozostałość: jeśli włączone było uruchamianie przy logowaniu, może zostać wpis
+    rejestru wskazujący donikąd — Windows ignoruje wpisy, których cel nie istnieje.)
   </TabItem>
   <TabItem label="macOS">
     Przeniesienie aplikacji do Kosza nie usuwa jej danych — taka jest konwencja macOS i ZenCopy się
