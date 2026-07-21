@@ -1,0 +1,185 @@
+---
+title: Konfiguracja
+description: Co oferuje okno ustawień (dla wszystkich) i szczegółowe dostosowanie przez pliki konfiguracyjne (dla zaawansowanych użytkowników).
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+ZenCopy działa od razu, bez żadnej konfiguracji.
+Ta strona przyda się, gdy zechcesz lepiej dopasować go do siebie.
+Pierwsza połowa, o **oknie ustawień**, jest dla wszystkich; druga połowa, o **plikach konfiguracyjnych**, dla zaawansowanych użytkowników.
+
+## Okno ustawień
+
+Otwórz je z menu ikony w zasobniku albo ikoną koła zębatego w okienku.
+Ma trzy karty: **Ogólne, AI i Akcje**.
+
+### Ogólne
+
+- **Pozycja okienka** — w którym rogu ekranu pojawiają się wyniki.
+- **Motyw** — jasny / ciemny / zgodny z systemem.
+- **Język** — język interfejsu (domyślnie zgodny z systemem).
+- **Uruchamiaj przy logowaniu** — ZenCopy czeka w gotowości, gdy tylko komputer jest włączony.
+- **Potwierdzaj przed wysłaniem obrazów i plików** — czy pytać jednorazowo, zanim obrazy lub pliki trafią do AI.
+
+### AI
+
+Tu zmienisz usługę AI (dostawcę, model, klucz API).
+Przycisk **Testuj** od razu mówi, czy połączenie działa.
+
+Na tej karcie jest też pole **O Tobie**.
+To miejsce, by w kilku prostych zdaniach, w dowolnym języku, opisać swoją rolę i preferencje.
+
+> Przykład: „Sprzedaż. Piszę głównie e-maile do klientów — uprzejme, ale nie sztywne, wniosek na początku.”
+
+Z wypełnionym polem każda akcja dopasowuje wyniki do Ciebie.
+Wyjaśnienia przychodzą na Twoim poziomie wiedzy, a wersje robocze wracają w preferowanym przez Ciebie tonie.
+Pole nigdy nie wpływa na niezwiązane zadania, a sam jego tekst nigdy nie pojawia się w wynikach.
+
+### Akcje
+
+Lista tego, „co dzieje się po podwójnym kopiowaniu”.
+
+- Wstępnie zainstalowane akcje można otwierać i czytać — służą zarazem jako gotowe przykłady.
+- **Nowa akcja** wymaga tylko nazwy i opisu, co ma zostać zrobione.
+  Na przykład: nazwa „Streszczenie w 3 linijkach”, instrukcja „Streść to w 3 linijkach”.
+- Nie masz pewności, jak pisać instrukcje? Zanotuj z grubsza, czego chcesz, i naciśnij **Szkicuj z AI** — skonfigurowane przez Ciebie AI zamieni to w porządną instrukcję.
+- ★ oznacza akcję domyślną — tę, którą podwójne kopiowanie uruchamia w pierwszej kolejności.
+- **Routing** pozwala wybrać inną akcję dla każdego rodzaju treści (tekst / obraz / pliki).
+
+Zbudowane przez Ciebie akcje można udostępniać: **Eksportuj (.md)** zapisuje akcję jako plik, a odbiorca po prostu wkleja ją w **Importuj** albo wybiera plik.
+
+## Pliki konfiguracyjne (dla zaawansowanych użytkowników)
+
+Od tego miejsca strona dotyczy bezpośredniej edycji plików tekstowych.
+**Wszystko, co niezbędne, jest dostępne z okna ustawień, więc śmiało możesz zakończyć lekturę tutaj.**
+
+Pliki są odczytywane z katalogu konfiguracyjnego aplikacji danego użytkownika.
+Dokładna ścieżka jest też wypisywana do logu przy starcie:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%APPDATA%\app.zencopy`</TabItem>
+  <TabItem label="macOS">`~/Library/Application Support/app.zencopy`</TabItem>
+  <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
+</Tabs>
+
+Domyślny routing jest wbudowany w aplikację; `routing.json` może go jedynie **nadpisywać**.
+Pliki akcji są **addytywne**:
+definiują nowe akcje, a wbudowane pozostają nienaruszalne (lokalny plik podszywający się pod id wbudowanej akcji jest ignorowany).
+Zmiany obowiązują od następnego wyzwolenia — restart nie jest potrzebny.
+
+### `ai-sdk-catalog.json`
+
+Dostawcy plus mapowanie **rola → model**.
+Format pliku ma swój dom w [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — każde pole jest tam udokumentowane (łącznie z `$schema` do walidacji i podpowiedzi w edytorze), a w [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) znajdują się konfiguracje w trzech rozmiarach.
+Punkty startowe w stylu ZenCopy (to, co zapisuje interfejs ustawień, lokalny Ollama, role dla akcji) znajdziesz w [Przepisach](/pl/recipes/).
+
+Klucze API trafiają wprost do tego lokalnego pliku (interfejs ustawień zapisuje ten sam format); nigdy nie opuszczają Twojego komputera.
+Zmienne środowiskowe nie są odczytywane — aplikacje z interfejsem graficznym uruchamia system, a nie Twoja powłoka, więc zmienne wyeksportowane w `.zshrc` i podobnych nigdy do nich nie docierają.
+Plik jest walidowany schematem przy każdym odczycie.
+Zepsuta edycja pokazuje się jako czytelny komunikat w okienku i w edytorze ustawień — nic nie zawodzi po cichu.
+
+### `routing.json`
+
+Która akcja obsługuje który rodzaj przechwycenia:
+płaska mapa `kind → action` plus opcjonalna lista `overrides` o wyższym priorytecie (wygrywa pierwsze dopasowanie).
+Cztery rodzaje to `text`, `rich_text`, `image` i `files`; fabrycznie tekst trafia do akcji Zen, a obrazy i pliki do akcji Wyjaśnij.
+Płaską mapę można edytować w aplikacji (Ustawienia → Akcje → Routing), więc tego pliku potrzebujesz tylko dla `overrides`.
+
+```json
+{
+  "text": "zen",
+  "rich_text": "zen",
+  "image": "explain",
+  "files": "explain",
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+}
+```
+
+Warunki `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (wszystkie z wieloznacznikiem `*`), plus `min_chars` / `max_chars`.
+
+Dla przechwyceń `image` i `files` do modelu wysyłana jest sama treść (łącznie do 10 MB na jedno przechwycenie).
+Typy plików są rozpoznawane po **zawartości**, nie po nazwach:
+obrazy, PDF-y i audio są dołączane bez zmian, a pliki tekstowe (Markdown, kod źródłowy, CSV, …) stają się tekstem przechwycenia (`{{ text }}`) i zachowują się dokładnie tak, jakby ich zawartość została skopiowana.
+Kodowania znaków są wykrywane automatycznie, z konwersją starszych formatów takich jak Shift_JIS i UTF-16.
+Wszystko inne jest odrzucane z czytelnym komunikatem.
+Razem z zawartością wysyłane są pełne ścieżki, aby model mógł odróżnić pliki od siebie i wiedział, gdzie się znajdują.
+Ponieważ załączniki binarne mogą kosztować więcej niż tekst, okienko pyta przed ich wysłaniem (pliki tekstowe działają bez pytania) — potwierdzenie można wyłączyć na miejscu albo w Ustawieniach.
+
+### `actions/*.md`
+
+Jeden plik = jedna akcja: frontmatter YAML + treść promptu w [Liquid](https://liquidjs.com).
+Ten sam pojedynczy plik jest zarazem formatem udostępniania — Ustawienia → Akcje → Importuj przyjmuje go jako wklejony tekst albo wybrany plik.
+
+```markdown
+---
+id: summarize
+label: Streszczenie
+role: default
+instructions: Jesteś zwięzłym asystentem.
+---
+
+Streść w 3 linijkach, w języku {{ locale }}:
+
+{{ text }}
+```
+
+| Frontmatter    | Znaczenie                                                             |
+| -------------- | --------------------------------------------------------------------- |
+| `id`           | Nazwa, do której odwołuje się `routing.json` (domyślnie: nazwa pliku) |
+| `label`        | Wyświetlana w okienku                                                 |
+| `role`         | Rola z katalogu użyta do uruchomienia (domyślnie: `default`)          |
+| `instructions` | Prompt systemowy (szablon Liquid)                                     |
+
+Zmienne szablonu, z przykładowymi wartościami dla akapitu skopiowanego w przeglądarce:
+
+| Zmienna              | Przykład                                           |
+| -------------------- | -------------------------------------------------- |
+| `{{ text }}`         | Skopiowany tekst (kopie HTML stają się Markdownem) |
+| `{{ markup }}`       | Źródło HTML/RTF kopii sformatowanej                |
+| `{{ format }}`       | `html` (lub `rtf`; puste dla zwykłych kopii)       |
+| `{{ app_name }}`     | `Safari`                                           |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                            |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`   |
+| `{{ window_title }}` | `Cennik – Example`                                 |
+| `{{ url }}`          | `https://example.com/pricing` (tylko przeglądarki) |
+| `{{ process_id }}`   | `8123`                                             |
+| `{{ now }}`          | `2026-07-08 20:15:00`                              |
+| `{{ locale }}`       | `pl`                                               |
+
+Jest też specyficzny dla ZenCopy filtr `language_name`: `{{ locale | language_name }}` rozwija się do „Polish” zamiast „pl”, co brzmi naturalnie w promptcie.
+Aby zobaczyć rzeczywiste wartości, włącz w Ustawieniach **Tryb deweloperski** — zmienne szablonu każdego przechwycenia pojawiają się w okienku jako JSON.
+
+Proste akcje (nazwa i instrukcja) można też tworzyć z okna ustawień; to, co ono zapisuje, to dokładnie ten format pliku.
+
+#### Zaawansowane szablony
+
+Zarówno frontmatter `instructions`, jak i treść są pełnoprawnymi szablonami [LiquidJS](https://liquidjs.com/tags/overview.html): działają instrukcje warunkowe, pętle i [filtry](https://liquidjs.com/filters/overview.html).
+Jedna akcja może dostosować się do tego, skąd pochodzi kopia:
+
+```markdown
+---
+id: context-aware
+label: Zależna od kontekstu
+---
+
+{% if url contains "github.com" %}
+Zrób przegląd tego kodu i wskaż jedno największe ryzyko:
+{% elsif app_name == "Slack" %}
+Streść ten wątek czatu w 2 linijkach:
+{% else %}
+Wyjaśnij to w języku {{ locale }}:
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+## Logi
+
+Logi strukturalne (z usuniętymi sekretami i skopiowaną treścią) trafiają w trybie deweloperskim do terminala, a w wydaniu do pliku z rotacją:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>

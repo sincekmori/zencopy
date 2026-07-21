@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+
+      # Tauri v2 system libraries, plus the X11 headers rdev (copycopy's Linux
+      # key listener) compiles against.
+      - name: Install Linux system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file \
+            libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev \
+            libx11-dev libxtst-dev libxi-dev
+
+      - uses: oven-sh/setup-bun@v2
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # knip analyzes the site workspace too; without its node_modules the
+      # astro/wrangler binaries are unresolvable and report as false positives.
+      - name: Install site dependencies
+        run: bun install --frozen-lockfile --cwd site
+
+      # Frontend: lint, dead-code scan, format, type-check + build (also
+      # produces dist/ for the Rust build's frontendDist).
+      - run: bun run lint
+      - run: bun run lint:dead
+      - run: bun run format:check
+      - run: bun run lint:toml
+      - run: bun run build
+
+      # Backend.
+      - run: cargo fmt --manifest-path src-tauri/Cargo.toml --check
+      - run: cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+      - run: cargo test --manifest-path src-tauri/Cargo.toml
+      - run: cargo build --manifest-path src-tauri/Cargo.toml

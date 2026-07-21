@@ -1,0 +1,108 @@
+---
+title: FAQ
+description: Costi, privacy, conflitti con altre app e risoluzione dei problemi.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Costa qualcosa?
+
+ZenCopy in sé è software libero e open source (Apache-2.0).
+Non c'è nessun account e nessun abbonamento.
+
+Quanto addebita il servizio di IA è una questione tra te e quel servizio.
+Con il [piano gratuito di Google](/it/getting-started/), è completamente gratuito — finché non registri un metodo di pagamento, non ti può essere addebitato nulla.
+E con un'IA che gira interamente sul tuo computer (Ollama, per esempio), non c'è alcun servizio esterno da pagare fin dall'inizio.
+
+## Dove va a finire il contenuto che copio?
+
+Solo quando copi due volte il contenuto va **direttamente al servizio di IA che hai configurato** — e da nessun'altra parte.
+Non c'è nessun server di ZenCopy, nessun relay e nessun tracciamento dell'uso (telemetria).
+Nemmeno la tua chiave API lascia mai la tua macchina.
+
+## Un copia normale attiva qualcosa?
+
+No.
+Un singolo <span data-os-modifier>Ctrl/⌘</span> + C non avvia niente, non legge niente e non invia niente.
+Solo due copie in rapida successione sono il segnale.
+E anche in quel caso, il contenuto degli appunti contrassegnato come riservato da altre app (i gestori di password, per esempio) viene ignorato.
+
+## Quanto posso fidarmi delle risposte dell'IA?
+
+L'IA sa sbagliare con grande scioltezza.
+È davvero utile per cogliere il senso generale di un testo, ma per numeri, nomi e qualsiasi cosa con conseguenze — contratti, testi medici — verifica sull'originale prima di agire.
+
+## In cosa differisce dagli altri strumenti "IA sulla selezione"?
+
+La maggior parte degli strumenti di questo tipo è solo per macOS, funziona solo sul testo selezionato ed è legata all'IA di un unico fornitore o a un abbonamento.
+ZenCopy funziona su **Windows, macOS e Linux**, gestisce **testo, testo formattato, immagini e file**, e ti lascia **scegliere il servizio di IA** (OpenAI / Google / Anthropic / un gateway aziendale / Ollama in locale).
+[Anche quale azione viene eseguita lo decidi tu](/it/configuration/#routingjson).
+Nessun account, nessun abbonamento, nessuna telemetria — software open source.
+
+## Anche un'altra app reagisce a Ctrl/⌘ + C + C (es. DeepL)
+
+Nessuna app può appropriarsi del segnale "copia due volte" a livello di sistema operativo.
+Se un'altra app è in ascolto sullo stesso segnale (DeepL è il caso più noto), reagiscono **entrambe** e appaiono due popup.
+ZenCopy non intercetta né blocca alcun evento di tastiera, quindi non si rompe nulla — il sintomo è tutto qui.
+Disattiva la scorciatoia nell'app che usi meno (per DeepL: Impostazioni → Generale → scorciatoia per tradurre).
+
+## Il popup non appare mai (macOS)
+
+Quasi certamente sono le autorizzazioni.
+Consenti sia **Monitoraggio input** sia **Accessibilità** per ZenCopy in Impostazioni di Sistema → Privacy e sicurezza, poi chiudi e riavvia l'app.
+(Queste due autorizzazioni sono il modo in cui l'app si accorge che copia è stato premuto due volte.)
+
+## Non arriva nessun risultato / dice che è scaduto il tempo
+
+Se la risposta resta muta per 90 secondi, ZenCopy interrompe l'esecuzione invece di aspettare all'infinito.
+Controlla la connessione a internet e le impostazioni del servizio di IA (chiave API e così via), poi premi **Riprova**.
+Un'IA locale può metterci un po' a caricarsi la prima volta, ed è per questo che il timeout è volutamente generoso.
+
+## Dove sono i log?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+I log non contengono mai i tuoi contenuti copiati né le chiavi API.
+
+## Cosa rimuove la disinstallazione?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    La disinstallazione del `.msi` rimuove tutto: impostazioni, chiavi API, azioni personalizzate,
+    log e il profilo della webview. Il disinstallatore `.exe` (NSIS) invece lo chiede con una
+    casella **Delete application data**. (In entrambi i casi un residuo innocuo: se l'avvio
+    all'accesso era attivo, può restare una voce di registro che punta al nulla — Windows ignora le
+    voci il cui destinatario non esiste.)
+  </TabItem>
+  <TabItem label="macOS">
+    Trascinare l'app nel Cestino non elimina i suoi dati — è la convenzione di macOS, e ZenCopy la
+    segue. Per una pulizia completa, esegui prima **Impostazioni → Ripristina tutte le
+    impostazioni** (rimuove tutte le impostazioni, chiavi API incluse; i log restano a scopo
+    diagnostico, quindi elimina a mano `~/Library/Logs/app.zencopy` per una pulizia davvero totale),
+    poi cestina l'app.
+  </TabItem>
+  <TabItem label="Linux">
+    I gestori di pacchetti rimuovono solo l'app; i dati utente restano — anche questa è la
+    convenzione di Linux. Per una pulizia completa, esegui prima **Impostazioni → Ripristina tutte
+    le impostazioni**, poi rimuovi il pacchetto o l'AppImage. L'estensione GNOME del trigger si può
+    rimuovere con `gnome-extensions uninstall copycopy@sincekmori.github.io`.
+  </TabItem>
+</Tabs>
+
+## Quali ambienti Linux sono supportati?
+
+**GNOME su Wayland, e X11.**
+Su GNOME Wayland, i processi in background non possono osservare i tasti né gli appunti per scelta di progetto, quindi ZenCopy (tramite il crate [`copycopy`](https://crates.io/crates/copycopy)) include una piccola estensione di GNOME Shell che rileva la doppia copia dall'interno del compositor.
+Viene installata automaticamente nel tuo profilo utente al primo avvio (senza sudo) e diventa attiva dopo essere usciti e rientrati una volta.
+Su X11 funziona un normale listener passivo dei tasti, come su Windows.
+Gli altri compositor Wayland (KDE Plasma, basati su wlroots) non offrono un modo non privilegiato di osservare il trigger e non sono ancora supportati — l'app gira, ma il trigger resta inerte.
+
+## L'icona nella barra di sistema non compare (Linux)
+
+L'icona di ZenCopy nella barra di sistema usa il protocollo AppIndicator.
+Il GNOME di Ubuntu lo supporta di serie, ma il GNOME vanilla (Fedora, per esempio) non mostra nulla finché non installi l'estensione Shell **AppIndicator and KStatusNotifierItem Support**.
+In ogni caso l'app in sé funziona — il menu della barra di sistema è solo una delle vie d'accesso.

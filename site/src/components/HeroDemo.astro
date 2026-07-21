@@ -1,0 +1,82 @@
+---
+/**
+ * The landing page's wordless demo — the same animation that greets
+ * first-run users inside the app. Geometry and timeline live once in the
+ * shared stylesheet (imported across the project boundary, like the brand
+ * SVGs); this shell maps the landing page's ink-on-paper palette onto its
+ * hooks and derives the design unit from container-query width, so the
+ * 320×180 grid scales fluidly.
+ */
+import "../../../src/assets/hero-demo.css";
+import {
+  HERO_BARS,
+  HERO_LINES,
+  heroKeycaps,
+} from "../../../src/lib/hero-demo.ts";
+
+// "Ctrl/⌘" is the no-JS fallback; data-os-modifier swaps it to the visitor's
+// own key (⌘ or Ctrl) via the head script in astro.config.mjs.
+const keycaps = heroKeycaps("Ctrl/⌘");
+---
+
+<div aria-hidden="true" class="stage">
+  <div class="hd-canvas">
+    <div class="hd-lines">
+      {
+        HERO_LINES.map((line) => (
+          <div class="hd-line" style={`width: ${line.width}`}>
+            {line.sweep ? <div class:list={["hd-sweep", line.sweep]} /> : null}
+          </div>
+        ))
+      }
+    </div>
+    <div class="hd-keys">
+      {
+        keycaps.map((cap) => (
+          <span class:list={["hd-keycap", cap.pulse]}>
+            <span class="hd-glow" />
+            {/* Only the modifier is OS-swapped; C is literal. */}
+            {cap.pulse === "hd-kmod" ? (
+              <span class="hd-label" data-os-modifier>
+                {cap.label}
+              </span>
+            ) : (
+              <span class="hd-label">{cap.label}</span>
+            )}
+          </span>
+        ))
+      }
+    </div>
+    <div class="hd-pop">
+      <div class="hd-bars">
+        {
+          HERO_BARS.map((width, i) => (
+            <div
+              class:list={["hd-bar", `hd-b${i + 1}`]}
+              style={`width: ${width}`}
+            />
+          ))
+        }
+      </div>
+      <div class="hd-check">
+        <span class="hd-tick-a"></span>
+        <span class="hd-tick-b"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .stage {
+    container-type: inline-size;
+    width: min(100%, 30rem);
+    aspect-ratio: 320 / 180;
+    margin: 0 auto;
+    --u: calc(100cqw / 320);
+    --hd-track: color-mix(in srgb, var(--ink) 8%, transparent);
+    --hd-accent: var(--ink);
+    --hd-border: var(--hairline);
+    --hd-text: var(--ink-soft);
+    --hd-surface: var(--paper);
+  }
+</style>

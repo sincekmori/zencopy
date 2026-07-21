@@ -1,0 +1,165 @@
+---
+title: Pierwsze kroki
+description: Od instalacji, przez przygotowanie darmowego klucza AI, po pierwsze podwójne kopiowanie. Jeśli umiesz obsługiwać komputer, poradzisz sobie z konfiguracją.
+---
+
+import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
+Jeśli umiesz kopiować, umiesz też korzystać z ZenCopy.
+Do nauczenia jest dokładnie jedna rzecz — **zwykły skrót kopiowania, naciśnięty szybko dwa razy**.
+To wystarczy, aby w rogu ekranu pojawiło się streszczenie, tłumaczenie, wyjaśnienie albo dopracowana wersja tego, co zaznaczysz.
+Działa tak samo w każdej aplikacji.
+
+## Co ZenCopy robi dla Ciebie na co dzień
+
+- Zaznacz długi raport lub artykuł i otrzymaj **tylko najważniejsze punkty, w kilku linijkach**
+- Zamień stronę lub czat w obcym języku **na swój język, od razu**
+- Poproś o **wyjaśnienie prostymi słowami** nieznanych terminów, ekranów błędów czy języka umów
+- Przekaż wstępną wersję e-maila lub wypracowania i odbierz ją **dopracowaną**
+
+Kroki są zawsze takie same: zaznacz, potem skopiuj dwa razy.
+Bez przełączania aplikacji i bez szukania miejsca do wklejenia.
+
+## Czego potrzebujesz
+
+1. **Komputer** — ZenCopy działa na Windows, macOS i Linuksie.
+   (Co dokładnie liczy się jako obsługiwany Linux, znajdziesz w [FAQ](/pl/faq/).)
+2. **Konto Google** — utworzysz jeden długi ciąg znaków zwany „kluczem API”, aby korzystać z AI za darmo.
+   Jeśli to pojęcie jest dla Ciebie nowe, nie martw się: ta strona przeprowadzi Cię przez wszystko krok po kroku.
+
+## Instalacja
+
+Pobierz instalator dla swojego systemu z [GitHub Releases](https://github.com/sincekmori/zencopy/releases/latest):
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Pobierz i uruchom instalator `.msi`. Może pojawić się ekran „System Windows ochronił ten
+    komputer”. To jednorazowe sprawdzenie, które Windows pokazuje przy nowych, nieznanych mu jeszcze
+    aplikacjach — wybierz **Więcej informacji → Uruchom mimo to**.
+  </TabItem>
+  <TabItem label="macOS">
+    Otwórz plik `.dmg` i przeciągnij ZenCopy do folderu **Aplikacje**. Za pierwszym razem kliknij
+    aplikację prawym przyciskiem (lub dwoma palcami) i wybierz **Otwórz**. macOS pyta jednorazowo o
+    aplikacje pochodzące spoza App Store.
+  </TabItem>
+  <TabItem label="Linux">
+    Pobierz plik `.AppImage`, nadaj mu prawo uruchamiania (`chmod +x`) i uruchom go. To format z
+    aktualizacjami wewnątrz aplikacji. Istnieją też pakiety `.deb` i `.rpm`, ale ich aktualizacja
+    oznacza ponowną instalację nowego wydania.
+  </TabItem>
+</Tabs>
+
+Gdy pojawi się nowa wersja, ZenCopy sam ją znajdzie i zaproponuje aktualizację jednym kliknięciem.
+
+Instrukcje budowania ze źródeł znajdują się w [repozytorium GitHub](https://github.com/sincekmori/zencopy).
+
+## Przygotuj darmowy klucz AI
+
+ZenCopy sam w sobie jest darmowy, ale właściwe streszczanie i tłumaczenie wykonuje zewnętrzne AI — ten sam rodzaj AI, z którego być może korzystasz już przez Gemini lub ChatGPT.
+Klucz, który pozwala Twojej własnej aplikacji korzystać z takiego AI, to **klucz API** — jeden długi ciąg znaków.
+Pomyśl o nim jak o kluczu do domu: **należy tylko do Ciebie i nigdy nikomu go nie pokazujesz**.
+To wszystko, co musisz o nim zapamiętać.
+
+Najprostszą opcją jest darmowy klucz Google:
+
+<Steps>
+
+1. Otwórz [stronę kluczy API w Google AI Studio](https://aistudio.google.com/api-keys) i zaloguj się swoim kontem Google.
+
+2. Naciśnij przycisk **Create API key**.
+
+3. Skopiuj długi ciąg znaków, który się pojawi (zaczyna się od `AIza…`).
+   To jest Twój klucz API.
+
+</Steps>
+
+Do użytku osobistego darmowy plan w zupełności wystarcza i jest **całkowicie darmowy: dopóki nie zarejestrujesz metody płatności, żadna opłata nie może zostać naliczona**.
+Jeśli kiedyś osiągniesz limit darmowego planu, nic nie zostanie naliczone — zapytania zostaną po prostu wstrzymane na jakiś czas.
+Warto wiedzieć jedno: **w darmowym planie Google to, co wysyłasz, może być wykorzystywane do ulepszania ich usług** (zgodnie z warunkami Google).
+Jeśli pracujesz z poufnymi dokumentami firmowymi, przejdź na plan płatny albo wybierz [inne AI lub AI lokalne](/pl/configuration/).
+
+## Pierwsze uruchomienie
+
+1. Uruchomienie ZenCopy nie otwiera od razu żadnego okna.
+   Aplikacja osiada w obszarze małych ikon na brzegu ekranu (prawy dolny róg paska zadań w Windows, pasek menu u góry na Macu).
+2. Przy pierwszym uruchomieniu otwiera się krótki ekran powitalny.
+   Wklej skopiowany przed chwilą klucz API i naciśnij **Zacznij z tym kluczem**.
+   **Konfiguracja zakończona.**
+3. To, co kopiujesz, jest wysyłane **bezpośrednio** do skonfigurowanej przez Ciebie usługi AI.
+   Po drodze nie ma żadnego serwera pośredniczącego ani śledzenia użycia.
+
+Aby korzystać z AI innego niż Google (OpenAI, Anthropic, brama firmowa, lokalny Ollama itd.), wybierz **Skonfiguruj inaczej** i wskaż je w Ustawieniach.
+
+### O uprawnieniach
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">Nie trzeba niczego ustawiać. Działa od razu po uruchomieniu.</TabItem>
+  <TabItem label="macOS">
+    Na macOS aplikacja potrzebuje dwóch uprawnień, aby mogła zauważyć, że skrót kopiowania naciśnięto dwa razy:
+
+    - **Ustawienia systemowe → Prywatność i ochrona → Monitorowanie wprowadzania danych** — zezwól ZenCopy
+    - **Ustawienia systemowe → Prywatność i ochrona → Dostępność** — zezwól ZenCopy
+
+    Oba istnieją po to, aby aplikacja mogła zauważyć **sygnał** — nie po to, aby czytała Twój ekran.
+    Po zezwoleniu na oba zamknij ZenCopy i uruchom aplikację ponownie.
+
+  </TabItem>
+  <TabItem label="Linux">
+    Żadnych pytań o uprawnienia.
+    W GNOME (Wayland) pierwsze uruchomienie automatycznie instaluje małe rozszerzenie GNOME Shell w Twoim profilu użytkownika (`~/.local/share/gnome-shell/extensions/`, bez sudo) — tylko coś działającego wewnątrz kompozytora może tam wykryć podwójne kopiowanie.
+    GNOME wczytuje nowe rozszerzenia przy logowaniu, więc po pierwszym uruchomieniu **wyloguj się i zaloguj ponownie**.
+    Dopóki rozszerzenie nie jest aktywne, ekran powitalny i ustawienia będą o tym przypominać.
+    Na X11 działa od razu po uruchomieniu.
+  </TabItem>
+</Tabs>
+
+## Wypróbuj
+
+Po skonfigurowaniu możesz wypróbować ZenCopy na tej właśnie stronie.
+Zaznacz dowolny akapit i naciśnij **<span data-os-modifier>Ctrl/⌘</span> + C + C** (skopiuj szybko dwa razy).
+Film pokazuje działanie na tekście strony internetowej:
+
+<video
+  class="demo-video"
+  width="1748"
+  height="1130"
+  controls
+  muted
+  playsinline
+  preload="metadata"
+  poster="/demo/zen.en.jpg"
+  src="/demo/zen.en.mp4"
+>
+  <a href="/demo/zen.en.mp4">Obejrzyj film demonstracyjny</a>
+</video>
+
+## Codzienne użycie
+
+1. Zaznacz tekst w dowolnej aplikacji i naciśnij **<span data-os-modifier>Ctrl/⌘</span> + C + C**.
+2. W rogu ekranu pojawia się okienko, a wynik spływa na bieżąco.
+3. Etykieta nad wynikiem („Zen”, „Przetłumacz”, …) to **przełącznik**.
+   Kliknij ją, aby uruchomić inną akcję na tej samej skopiowanej treści.
+   Już obejrzane wyniki są zachowywane, więc przełączenie z powrotem jest natychmiastowe — tylko **Ponów** uruchamia akcję od nowa.
+   Naciśnij ☆ obok etykiety, aby ustawić tę akcję jako nową domyślną.
+4. Z poziomu okienka możesz zatrzymać działającą akcję przyciskiem **Zatrzymaj**, uruchomić ją ponownie przyciskiem **Ponów** albo skopiować wynik przyciskiem **Kopiuj**.
+   Zamkniesz je klawiszem **Esc** lub kliknięciem obok.
+5. Wynik zamknięty za wcześnie? **Pokaż aplikację** w menu ikony w zasobniku przywraca ostatni w każdej chwili.
+
+Cztery akcje są wbudowane:
+**Zen** (skróć do jednego zdania), **Wyjaśnij** (spraw, by było zrozumiałe), **Przetłumacz** (na Twój język) i **Dopracuj** (popraw wstępną wersję tekstu).
+Dodanie własnej wymaga tylko nazwy i opisu tego, co ma zostać zrobione (zobacz [Konfigurację](/pl/configuration/)).
+
+I nie chodzi tylko o tekst.
+Zrzuty ekranu i skopiowane pliki (obrazy, PDF-y, audio, pliki tekstowe) działają tym samym gestem.
+Zanim obraz lub inny plik binarny zostanie wysłany, ZenCopy jednorazowo prosi o potwierdzenie.
+
+## Zaprojektowany z myślą o bezpieczeństwie
+
+- **Zwykłe pojedyncze kopiowanie nie robi nic.** Nic nie jest odczytywane ani wysyłane.
+- Treść schowka oznaczona jako poufna przez inne aplikacje (na przykład menedżery haseł) jest ignorowana nawet przy podwójnym kopiowaniu.
+- Treść trafia wyłącznie do usługi AI, którą samodzielnie skonfigurujesz.
+
+## Dalej
+
+- [Konfiguracja](/pl/configuration/): pozycja okienka, motywy i budowanie własnych akcji.
+- [FAQ](/pl/faq/): koszty, konflikty z innymi aplikacjami i rozwiązywanie problemów.

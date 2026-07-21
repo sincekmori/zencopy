@@ -1,0 +1,167 @@
+---
+title: Premiers pas
+description: De l'installation à la préparation d'une clé d'IA gratuite, jusqu'à votre premier double copier. Si vous savez utiliser un ordinateur, vous saurez tout configurer.
+---
+
+import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
+Si vous savez copier, vous savez utiliser ZenCopy.
+Il n'y a qu'une seule chose à apprendre — **votre copier habituel, effectué deux fois de suite rapidement**.
+Cela suffit pour faire apparaître dans un coin de votre écran un résumé, une traduction, une explication ou une version peaufinée de ce que vous venez de sélectionner.
+Et cela fonctionne de la même façon depuis n'importe quelle application.
+
+## Ce que ZenCopy fait pour vous, au quotidien
+
+- Sélectionnez un long rapport ou un article et obtenez **l'essentiel, en quelques lignes**
+- Transformez une page ou une conversation en langue étrangère **dans votre langue, sur-le-champ**
+- Faites-vous **expliquer en termes simples** les mots inconnus, les écrans d'erreur ou le langage des contrats
+- Confiez un brouillon d'e-mail ou de dissertation et récupérez-le **mis au propre**
+
+Les étapes sont toujours les mêmes : sélectionner, puis copier deux fois.
+Pas besoin de changer d'application ni de chercher où coller.
+
+## Ce qu'il vous faut
+
+1. **Un ordinateur** — ZenCopy fonctionne sous Windows, macOS et Linux.
+   (Pour savoir ce qui compte comme Linux pris en charge, consultez la [FAQ](/fr/faq/).)
+2. **Un compte Google** — vous allez créer une longue chaîne de caractères appelée « clé d'API » pour utiliser l'IA gratuitement.
+   Si ce terme est nouveau pour vous, pas d'inquiétude : cette page vous guide pas à pas.
+
+## Installation
+
+Téléchargez l'installateur pour votre système depuis [GitHub Releases](https://github.com/sincekmori/zencopy/releases/latest) :
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Téléchargez et lancez l'installateur `.msi`. Un écran « Windows a protégé votre ordinateur »
+    peut apparaître. C'est une vérification que Windows affiche une seule fois pour les nouvelles
+    applications qu'il ne connaît pas encore — choisissez **Informations complémentaires → Exécuter
+    quand même**.
+  </TabItem>
+  <TabItem label="macOS">
+    Ouvrez le `.dmg` et glissez ZenCopy dans votre dossier **Applications**. La première fois,
+    faites un clic droit (ou un clic à deux doigts) sur l'application et choisissez **Ouvrir**.
+    macOS pose une seule fois la question pour les applications qui viennent d'ailleurs que l'App
+    Store.
+  </TabItem>
+  <TabItem label="Linux">
+    Téléchargez l'`.AppImage`, rendez-le exécutable (`chmod +x`) et lancez-le. C'est le format qui
+    propose les mises à jour intégrées. Des paquets `.deb` et `.rpm` existent aussi, mais les mettre
+    à jour revient à réinstaller une nouvelle version.
+  </TabItem>
+</Tabs>
+
+Quand une nouvelle version sort, ZenCopy la détecte tout seul et propose une mise à jour en un clic.
+
+Les instructions pour compiler depuis les sources se trouvent dans le [dépôt GitHub](https://github.com/sincekmori/zencopy).
+
+## Préparer une clé d'IA gratuite
+
+ZenCopy est gratuit, mais les résumés et les traductions proprement dits sont réalisés par une IA externe — le même genre d'IA que vous utilisez peut-être déjà via Gemini ou ChatGPT.
+La clé qui permet à votre propre application d'utiliser une telle IA est une **clé d'API** — une longue chaîne de caractères.
+Voyez-la comme une clé de maison : **elle n'appartient qu'à vous, et vous ne la montrez jamais à personne**.
+C'est tout ce qu'il faut en retenir.
+
+L'option la plus simple est la clé gratuite de Google :
+
+<Steps>
+
+1. Ouvrez la [page des clés d'API dans Google AI Studio](https://aistudio.google.com/api-keys) et connectez-vous avec votre compte Google.
+
+2. Appuyez sur le bouton **Create API key**.
+
+3. Copiez la longue chaîne qui apparaît (elle commence par `AIza…`).
+   C'est votre clé d'API.
+
+</Steps>
+
+Pour un usage personnel, l'offre gratuite suffit, et elle est **entièrement gratuite : tant que vous n'enregistrez pas de moyen de paiement, rien ne peut vous être facturé**.
+Si vous atteignez un jour la limite de l'offre gratuite, rien n'est facturé — les requêtes sont simplement mises en pause un moment.
+Une chose à savoir : **avec l'offre gratuite de Google, ce que vous envoyez peut être utilisé pour améliorer leurs services** (selon les conditions de Google).
+Si vous traitez des documents de travail confidentiels, passez à une configuration payante ou choisissez [une autre IA ou une IA locale](/fr/configuration/).
+
+## Premier lancement
+
+1. Le démarrage de ZenCopy n'ouvre pas de fenêtre tout de suite.
+   L'application s'installe dans la petite zone d'icônes au bord de votre écran (en bas à droite de la barre des tâches sous Windows, dans la barre des menus en haut sur Mac).
+2. Au tout premier lancement, un court écran de bienvenue s'ouvre.
+   Collez la clé d'API que vous venez de copier et appuyez sur **Commencer avec cette clé**.
+   **La configuration est terminée.**
+3. Ce que vous copiez est envoyé **directement** au service d'IA que vous avez configuré.
+   Il n'y a aucun serveur relais entre les deux, et aucun suivi d'utilisation.
+
+Pour utiliser une autre IA que Google (OpenAI, Anthropic, une passerelle d'entreprise, Ollama en local, etc.), choisissez **Configurer autrement** et sélectionnez-la dans les réglages.
+
+### À propos des autorisations
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">Rien à configurer. Cela fonctionne dès le lancement.</TabItem>
+  <TabItem label="macOS">
+    Sous macOS, l'application a besoin de deux autorisations pour remarquer que copier a été appuyé deux fois :
+
+    - **Réglages Système → Confidentialité et sécurité → Surveillance de l'entrée** — autorisez ZenCopy
+    - **Réglages Système → Confidentialité et sécurité → Accessibilité** — autorisez ZenCopy
+
+    Ces deux autorisations servent uniquement à remarquer le **signal** — pas à lire votre écran.
+    Après les avoir accordées toutes les deux, quittez ZenCopy une fois puis relancez-le.
+
+  </TabItem>
+  <TabItem label="Linux">
+    Aucune demande d'autorisation.
+    Sous GNOME (Wayland), le premier lancement installe automatiquement une petite extension GNOME Shell dans votre profil utilisateur (`~/.local/share/gnome-shell/extensions/`, sans sudo) — là, seul un composant à l'intérieur du compositeur peut détecter un double copier.
+    GNOME charge les nouvelles extensions à l'ouverture de session, alors **déconnectez-vous puis reconnectez-vous une fois** après le premier lancement.
+    Tant que l'extension n'est pas active, les écrans de bienvenue et de réglages vous le rappellent.
+    Sous X11, cela fonctionne dès le lancement.
+  </TabItem>
+</Tabs>
+
+## Essayez
+
+Une fois la configuration terminée, vous pouvez essayer sur cette page même.
+Sélectionnez n'importe quel paragraphe et appuyez sur **<span data-os-modifier>Ctrl/⌘</span> + C + C** (copier, deux fois, rapidement).
+La vidéo montre le fonctionnement sur le texte d'une page web :
+
+<video
+  class="demo-video"
+  width="1748"
+  height="1130"
+  controls
+  muted
+  playsinline
+  preload="metadata"
+  poster="/demo/zen.en.jpg"
+  src="/demo/zen.en.mp4"
+>
+  <a href="/demo/zen.en.mp4">Voir la vidéo de démonstration</a>
+</video>
+
+## Au quotidien
+
+1. Sélectionnez du texte dans n'importe quelle application et appuyez sur **<span data-os-modifier>Ctrl/⌘</span> + C + C**.
+2. Un popup apparaît dans un coin de votre écran et le résultat s'y affiche au fur et à mesure.
+3. L'étiquette au-dessus du résultat (« Zen », « Traduire », …) est un **sélecteur**.
+   Cliquez dessus pour lancer une autre action sur le même contenu copié.
+   Les résultats déjà affichés sont conservés, donc y revenir est instantané — seul **Réessayer** relance une action.
+   Appuyez sur la ☆ à côté d'une étiquette pour faire de cette action votre nouvelle action par défaut.
+4. Depuis le popup, vous pouvez **Arrêter** une action en cours, **Réessayer**, ou **Copier** le résultat.
+   Fermez-le avec **Échap** ou d'un clic à l'extérieur.
+5. Résultat fermé trop tôt ? **Afficher l'application**, dans le menu de l'icône ZenCopy, le fait revenir à tout moment.
+
+Quatre actions sont intégrées :
+**Zen** (condenser en une phrase), **Expliquer** (rendre compréhensible), **Traduire** (dans votre langue) et **Peaufiner** (mettre un brouillon au propre).
+Ajouter la vôtre ne demande rien de plus qu'un nom et une description de ce que vous attendez (voir [Configuration](/fr/configuration/)).
+
+Et il n'y a pas que le texte.
+Les captures d'écran et les fichiers copiés (images, PDF, audio, fichiers texte) fonctionnent avec le même geste.
+Avant d'envoyer une image ou un autre fichier binaire, ZenCopy vous demande d'abord confirmation.
+
+## Conçu pour être sûr
+
+- **Un simple copier ne déclenche rien.** Rien n'est lu, rien n'est envoyé.
+- Le contenu du presse-papiers marqué comme confidentiel par d'autres applications (les gestionnaires de mots de passe, par exemple) est ignoré, même en cas de double copier.
+- Le contenu ne va qu'au service d'IA que vous avez configuré vous-même.
+
+## Et ensuite
+
+- [Configuration](/fr/configuration/) : la position du popup, les thèmes et la création de vos propres actions.
+- [FAQ](/fr/faq/) : les coûts, les conflits avec d'autres applications et le dépannage.

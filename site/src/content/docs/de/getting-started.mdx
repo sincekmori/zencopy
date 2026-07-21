@@ -1,0 +1,165 @@
+---
+title: Erste Schritte
+description: Von der Installation über einen kostenlosen KI-Schlüssel bis zum ersten Doppel-Kopieren. Wer einen Computer bedienen kann, schafft auch diese Einrichtung.
+---
+
+import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
+Wenn du kopieren kannst, kannst du ZenCopy benutzen.
+Es gibt genau eine Sache zu lernen — **dein gewohntes Kopieren, zweimal gedrückt, schnell hintereinander**.
+Das allein lässt eine Zusammenfassung, eine Übersetzung, eine Erklärung oder eine überarbeitete Fassung deiner Auswahl in der Ecke deines Bildschirms erscheinen.
+Es funktioniert in jeder App gleich.
+
+## Was ZenCopy dir jeden Tag abnimmt
+
+- Einen langen Bericht oder Artikel auswählen und **nur die Kernpunkte, in wenigen Zeilen** bekommen
+- Eine fremdsprachige Seite oder einen Chat **auf der Stelle in deine Sprache** bringen
+- Unbekannte Begriffe, Fehlermeldungen oder Vertragssprache **in einfachen Worten erklären** lassen
+- Einen groben Entwurf einer E-Mail oder eines Textes abgeben und ihn **aufpoliert** zurückbekommen
+
+Die Schritte sind immer dieselben: auswählen, dann zweimal kopieren.
+Kein App-Wechsel, kein Suchen nach einem Ort zum Einfügen.
+
+## Was du brauchst
+
+1. **Einen Computer** — ZenCopy läuft auf Windows, macOS und Linux.
+   (Was als unterstütztes Linux zählt, steht in den [FAQ](/de/faq/).)
+2. **Ein Google-Konto** — du erstellst damit eine lange Zeichenkette, den „API-Schlüssel“, um die KI kostenlos zu nutzen.
+   Wenn dir der Begriff neu ist, keine Sorge: Diese Seite führt dich Schritt für Schritt hindurch.
+
+## Installieren
+
+Lade das Installationsprogramm für dein Betriebssystem von [GitHub Releases](https://github.com/sincekmori/zencopy/releases/latest) herunter:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Lade den `.msi`-Installer herunter und führe ihn aus. Möglicherweise erscheint der Hinweis „Der
+    Computer wurde durch Windows geschützt“. Das ist eine einmalige Prüfung, die Windows bei neuen,
+    noch unbekannten Apps anzeigt — wähle **Weitere Informationen → Trotzdem ausführen**.
+  </TabItem>
+  <TabItem label="macOS">
+    Öffne die `.dmg`-Datei und ziehe ZenCopy in deinen **Programme**-Ordner. Beim ersten Mal klickst
+    du mit der rechten Maustaste (oder mit zwei Fingern) auf die App und wählst **Öffnen**. macOS
+    fragt einmalig bei Apps nach, die nicht aus dem App Store stammen.
+  </TabItem>
+  <TabItem label="Linux">
+    Lade das `.AppImage` herunter, mache es ausführbar (`chmod +x`) und starte es. Dieses Format
+    bringt In-App-Updates mit. `.deb`- und `.rpm`-Pakete gibt es auch, aber ein Update bedeutet
+    dort, eine neue Version zu installieren.
+  </TabItem>
+</Tabs>
+
+Wenn eine neue Version erscheint, findet ZenCopy sie von selbst und bietet ein Update mit einem Klick an.
+
+Eine Anleitung zum Bauen aus dem Quellcode findest du im [GitHub-Repository](https://github.com/sincekmori/zencopy).
+
+## Einen kostenlosen KI-Schlüssel vorbereiten
+
+ZenCopy selbst ist kostenlos, aber das eigentliche Zusammenfassen und Übersetzen übernimmt eine externe KI — dieselbe Art von KI, die du vielleicht schon über Gemini oder ChatGPT nutzt.
+Der Schlüssel, mit dem deine eigene App eine solche KI verwenden darf, ist ein **API-Schlüssel** — eine lange Zeichenkette.
+Stell ihn dir wie einen Haustürschlüssel vor: **Er gehört dir allein, und du zeigst ihn niemandem**.
+Mehr musst du dir dazu nicht merken.
+
+Am einfachsten ist der kostenlose Schlüssel von Google:
+
+<Steps>
+
+1. Öffne die [API-Schlüssel-Seite in Google AI Studio](https://aistudio.google.com/api-keys) und melde dich mit deinem Google-Konto an.
+
+2. Drücke die Schaltfläche **Create API key** (API-Schlüssel erstellen).
+
+3. Kopiere die lange Zeichenkette, die erscheint (sie beginnt mit `AIza…`).
+   Das ist dein API-Schlüssel.
+
+</Steps>
+
+Für den persönlichen Gebrauch reicht das kostenlose Kontingent, und es ist **wirklich kostenlos: Solange du keine Zahlungsmethode hinterlegst, kann dir nichts berechnet werden**.
+Erreichst du einmal die Grenze des kostenlosen Kontingents, wird nichts abgerechnet — Anfragen pausieren einfach eine Weile.
+Eines solltest du wissen: **Im kostenlosen Kontingent von Google kann das, was du sendest, zur Verbesserung von Googles Diensten verwendet werden** (laut Googles Bedingungen).
+Wenn du mit vertraulichen Arbeitsdokumenten umgehst, wechsle zu einem bezahlten Zugang oder wähle [eine andere oder eine lokale KI](/de/configuration/).
+
+## Der erste Start
+
+1. Beim Start öffnet ZenCopy nicht sofort ein Fenster.
+   Es richtet sich im kleinen Symbolbereich am Bildschirmrand ein (unten rechts in der Taskleiste unter Windows, in der Menüleiste oben auf dem Mac).
+2. Beim allerersten Start öffnet sich ein kurzer Willkommensbildschirm.
+   Füge den gerade kopierten API-Schlüssel ein und drücke **Mit diesem Schlüssel starten**.
+   **Die Einrichtung ist abgeschlossen.**
+3. Was du kopierst, wird **direkt** an den KI-Dienst gesendet, den du eingerichtet hast.
+   Dazwischen liegt kein Relay-Server, und es gibt keine Nutzungserfassung.
+
+Um eine andere KI als die von Google zu verwenden (OpenAI, Anthropic, ein Firmen-Gateway, lokales Ollama und mehr), wähle **Anders einrichten** und stelle sie in den Einstellungen ein.
+
+### Zu den Berechtigungen
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">Nichts einzurichten. Es funktioniert direkt nach dem Start.</TabItem>
+  <TabItem label="macOS">
+    Unter macOS braucht die App zwei Berechtigungen, um zu bemerken, dass zweimal kopiert wurde:
+
+    - **Systemeinstellungen → Datenschutz & Sicherheit → Eingabeüberwachung** — ZenCopy erlauben
+    - **Systemeinstellungen → Datenschutz & Sicherheit → Bedienungshilfen** — ZenCopy erlauben
+
+    Beide existieren, damit die App das **Signal** bemerken kann — nicht, damit sie deinen Bildschirm lesen kann.
+    Beende ZenCopy nach dem Erlauben einmal und starte es neu.
+
+  </TabItem>
+  <TabItem label="Linux">
+    Keine Berechtigungsabfragen.
+    Unter GNOME (Wayland) installiert der erste Start automatisch eine kleine GNOME-Shell-Erweiterung in dein Benutzerprofil (`~/.local/share/gnome-shell/extensions/`, ohne sudo) — nur etwas innerhalb des Compositors kann dort ein doppeltes Kopieren erkennen.
+    GNOME lädt neue Erweiterungen beim Anmelden, also **melde dich nach dem ersten Start einmal ab und wieder an**.
+    Bis die Erweiterung aktiv ist, erinnern dich der Willkommens- und der Einstellungsbildschirm daran.
+    Unter X11 funktioniert es direkt nach dem Start.
+  </TabItem>
+</Tabs>
+
+## Probier es aus
+
+Sobald du eingerichtet bist, kannst du es direkt auf dieser Seite ausprobieren.
+Wähle einen beliebigen Absatz aus und drücke **<span data-os-modifier>Ctrl/⌘</span> + C + C** (zweimal schnell kopieren).
+Das Video zeigt es mit dem Text einer Webseite:
+
+<video
+  class="demo-video"
+  width="1748"
+  height="1130"
+  controls
+  muted
+  playsinline
+  preload="metadata"
+  poster="/demo/zen.en.jpg"
+  src="/demo/zen.en.mp4"
+>
+  <a href="/demo/zen.en.mp4">Demo-Video ansehen</a>
+</video>
+
+## Der Alltag damit
+
+1. Wähle Text in einer beliebigen App aus und drücke **<span data-os-modifier>Ctrl/⌘</span> + C + C**.
+2. Ein Popup erscheint in der Ecke deines Bildschirms, und das Ergebnis erscheint nach und nach.
+3. Das Label über dem Ergebnis („Zen“, „Übersetzen“, …) ist ein **Umschalter**.
+   Klicke darauf, um eine andere Aktion auf denselben kopierten Inhalt anzuwenden.
+   Bereits gesehene Ergebnisse bleiben erhalten, das Zurückschalten geht also sofort — nur **Erneut versuchen** führt eine Aktion noch einmal aus.
+   Drücke das ☆ neben einem Label, um diese Aktion zu deinem neuen Standard zu machen.
+4. Im Popup kannst du eine laufende Aktion mit **Stopp** anhalten, sie **Erneut versuchen** oder das Ergebnis **Kopieren**.
+   Schließe es mit **Esc** oder einem Klick daneben.
+5. Ein Ergebnis zu früh geschlossen? **App anzeigen** im Tray-Menü holt das letzte jederzeit zurück.
+
+Vier Aktionen sind eingebaut:
+**Zen** (auf einen Satz verdichten), **Erklären** (verständlich machen), **Übersetzen** (in deine Sprache) und **Überarbeiten** (einen Entwurf aufpolieren).
+Eigene hinzuzufügen kostet nicht mehr als einen Namen und eine Beschreibung dessen, was passieren soll (siehe [Konfiguration](/de/configuration/)).
+
+Und es geht nicht nur um Text.
+Screenshots und kopierte Dateien (Bilder, PDFs, Audio, Textdateien) funktionieren mit derselben Geste.
+Bevor ein Bild oder eine andere Binärdatei gesendet wird, fragt ZenCopy einmal nach.
+
+## Auf Sicherheit ausgelegt
+
+- **Ein gewöhnliches einzelnes Kopieren tut nichts.** Nichts wird gelesen, nichts gesendet.
+- Zwischenablage-Inhalte, die andere Apps als vertraulich markieren (zum Beispiel Passwort-Manager), werden auch bei einem doppelten Kopieren ignoriert.
+- Inhalte gehen nur an den KI-Dienst, den du selbst eingerichtet hast.
+
+## Weiter geht's
+
+- [Konfiguration](/de/configuration/): Popup-Position, Designs und eigene Aktionen bauen.
+- [FAQ](/de/faq/): Kosten, Konflikte mit anderen Apps und Fehlerbehebung.

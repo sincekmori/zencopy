@@ -1,0 +1,107 @@
+---
+title: SSS
+description: Maliyetler, gizlilik, diğer uygulamalarla çakışmalar ve sorun giderme.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Para tutuyor mu?
+
+ZenCopy'nin kendisi ücretsiz, açık kaynaklı bir yazılımdır (Apache-2.0).
+Hesap da abonelik de yok.
+
+AI hizmetinin aldığı ücret, seninle o hizmet arasındadır.
+[Google'ın ücretsiz katmanıyla](/tr/getting-started/) tamamen ücretsizdir — bir ödeme yöntemi kaydetmediğin sürece senden ücret alınamaz.
+Tamamen kendi bilgisayarında çalışan bir AI ile de (örneğin Ollama) zaten ödeme yapılacak harici bir hizmet yoktur.
+
+## Kopyaladığım içerik nereye gidiyor?
+
+İçerik yalnızca iki kez kopyaladığında, **doğrudan yapılandırdığın AI hizmetine** gider — başka hiçbir yere değil.
+ZenCopy sunucusu yok, aktarma yok, kullanım takibi (telemetri) yok.
+API anahtarın da makinenden asla çıkmaz.
+
+## Sıradan bir kopyalama bir şey tetikler mi?
+
+Hayır.
+Tek bir <span data-os-modifier>Ctrl/⌘</span> + C hiçbir şey başlatmaz, hiçbir şey okumaz ve hiçbir şey göndermez.
+Sinyal, yalnızca art arda hızlıca yapılan iki kopyalamadır.
+O zaman bile, başka uygulamaların gizli olarak işaretlediği pano içeriği (örneğin parola yöneticileri) yok sayılır.
+
+## AI'nın yanıtlarına ne kadar güvenebilirim?
+
+AI, gayet akıcı biçimde yanılabilir.
+Bir metnin özünü kavramakta gerçekten işe yarar; ama sayılar, adlar ve sonuçları ağır her konuda — sözleşmeler, tıbbi metinler — harekete geçmeden önce aslıyla karşılaştır.
+
+## Diğer "seçime AI" araçlarından farkı ne?
+
+Bu alandaki araçların çoğu yalnızca macOS'te çalışır, yalnızca seçili metinle sınırlıdır ve tek bir firmanın AI'sına ya da bir aboneliğe bağlıdır.
+ZenCopy **Windows, macOS ve Linux'ta** çalışır; **metin, zengin metin, görsel ve dosyaları** işler; **AI hizmetini sen seçersin** (OpenAI / Google / Anthropic / kurumsal ağ geçidi / yerel Ollama).
+[Hangi eylemin çalışacağı da senin kararın](/tr/configuration/#routingjson).
+Hesap yok, abonelik yok, telemetri yok — açık kaynaklı yazılım.
+
+## Ctrl/⌘ + C + C'ye başka bir uygulama da tepki veriyor (örn. DeepL)
+
+Hiçbir uygulama "iki kez kopyala" sinyalini işletim sistemi düzeyinde sahiplenemez.
+Aynı sinyali başka bir uygulama da dinliyorsa (en bilineni DeepL), **ikisi de** tepki verir ve iki açılır pencere görünür.
+ZenCopy hiçbir tuş olayını ne yakalar ne engeller; dolayısıyla hiçbir şey bozulmaz — belirtinin tamamı budur.
+Kısayolu, daha az kullandığın uygulamada kapat (DeepL için: Ayarlar → Genel → çeviri kısayolu).
+
+## Açılır pencere hiç görünmüyor (macOS)
+
+Neredeyse kesin olarak izin meselesi.
+Sistem Ayarları → Gizlilik ve Güvenlik altında ZenCopy için hem **Giriş İzleme** hem **Erişilebilirlik** iznini ver, sonra uygulamayı kapatıp yeniden başlat.
+(Uygulama, kopyalamaya iki kez basıldığını bu iki izinle fark eder.)
+
+## Sonuç gelmiyor / zaman aşımı diyor
+
+Yanıt 90 saniye boyunca sessiz kalırsa ZenCopy sonsuza dek beklemek yerine çalışmayı başarısız sayar.
+İnternet bağlantını ve AI hizmeti ayarlarını (API anahtarı vb.) kontrol et, sonra **Yeniden dene** düğmesine bas.
+Yerel bir AI'nın ilk yüklenmesi zaman alabilir; zaman aşımının bilerek cömert tutulmasının nedeni bu.
+
+## Günlükler nerede?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Günlükler kopyaladığın içeriği ya da API anahtarlarını asla içermez.
+
+## Kaldırmak neleri siler?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    `.msi` kaldırması her şeyi siler: ayarlar, API anahtarları, kendi eylemlerin, günlükler ve
+    webview profili. `.exe` (NSIS) kaldırıcısı ise **Delete application data** (uygulama verilerini
+    sil) onay kutusuyla sorar. (Her iki durumda da zararsız bir kalıntı olabilir: oturum açılınca
+    başlatma etkinse, hiçbir yeri göstermeyen bir kayıt defteri girdisi kalabilir — Windows, hedefi
+    var olmayan girdileri yok sayar.)
+  </TabItem>
+  <TabItem label="macOS">
+    Uygulamayı Çöp Sepeti'ne atmak verilerini silmez — macOS geleneği budur ve ZenCopy buna uyar.
+    Tam bir temizlik için önce **Ayarlar → Tüm ayarları sıfırla** adımını çalıştır (API anahtarları
+    dahil tüm ayarları siler; günlükler tanılama için kalır, gerçekten temiz bir başlangıç için
+    `~/Library/Logs/app.zencopy` klasörünü elle sil), sonra uygulamayı çöpe at.
+  </TabItem>
+  <TabItem label="Linux">
+    Paket yöneticileri yalnızca uygulamayı kaldırır; kullanıcı verileri kalır — bu da Linux
+    geleneğidir. Tam bir temizlik için önce **Ayarlar → Tüm ayarları sıfırla** adımını çalıştır,
+    sonra paketi ya da AppImage'ı kaldır. GNOME tetikleyici uzantısı `gnome-extensions uninstall
+    copycopy@sincekmori.github.io` komutuyla kaldırılabilir.
+  </TabItem>
+</Tabs>
+
+## Hangi Linux ortamları destekleniyor?
+
+**Wayland üzerinde GNOME ve X11.**
+GNOME Wayland'de arka plan süreçleri, tasarım gereği tuşları ya da panoyu gözlemleyemez; bu yüzden ZenCopy ([`copycopy`](https://crates.io/crates/copycopy) crate'i aracılığıyla), çift kopyalamayı compositor'ün içinden algılayan küçük bir GNOME Shell uzantısıyla gelir.
+Uzantı ilk açılışta kullanıcı profiline otomatik kurulur (sudo gerekmez) ve bir kez oturumu kapatıp yeniden açınca etkinleşir.
+X11'de, Windows'taki gibi sıradan bir pasif tuş dinleyicisi iş görür.
+Diğer Wayland compositor'leri (KDE Plasma, wlroots tabanlılar) tetikleyiciyi ayrıcalıksız gözlemlemenin bir yolunu sunmaz ve henüz desteklenmez — uygulama çalışır ama tetikleyici devre dışı kalır.
+
+## Tepsi simgesi görünmüyor (Linux)
+
+ZenCopy'nin tepsi simgesi AppIndicator protokolünü kullanır.
+Ubuntu'nun GNOME'u bunu hazır olarak destekler; ama saf GNOME (örneğin Fedora), **AppIndicator and KStatusNotifierItem Support** Shell uzantısı kurulana kadar hiçbir şey göstermez.
+Her iki durumda da uygulamanın kendisi çalışır — tepsi menüsü yalnızca giriş yollarından biridir.

@@ -1,0 +1,108 @@
+---
+title: FAQ
+description: Biaya, privasi, bentrok dengan aplikasi lain, dan pemecahan masalah.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Apakah berbayar?
+
+ZenCopy sendiri adalah perangkat lunak gratis dan open source (Apache-2.0).
+Tidak ada akun dan tidak ada langganan.
+
+Biaya dari layanan AI adalah urusan antara kamu dan layanan itu.
+Dengan [tingkat gratis Google](/id/getting-started/), semuanya benar-benar gratis — selama kamu tidak mendaftarkan metode pembayaran, kamu tidak bisa ditagih.
+Dan dengan AI yang berjalan sepenuhnya di komputermu sendiri (Ollama, misalnya), sejak awal memang tidak ada layanan eksternal yang perlu dibayar.
+
+## Ke mana konten yang kusalin pergi?
+
+Hanya saat kamu menyalin dua kali, konten pergi **langsung ke layanan AI yang kamu atur** — dan tidak ke mana pun selain itu.
+Tidak ada server ZenCopy, tidak ada relai, dan tidak ada pelacakan pemakaian (telemetri).
+Kunci API kamu juga tidak pernah meninggalkan perangkatmu.
+
+## Apakah salinan biasa memicu sesuatu?
+
+Tidak.
+Satu kali <span data-os-modifier>Ctrl/⌘</span> + C tidak memulai apa pun, tidak membaca apa pun, dan tidak mengirim apa pun.
+Sinyalnya hanyalah dua salinan yang dilakukan beruntun dengan cepat.
+Bahkan saat itu pun, konten papan klip yang ditandai rahasia oleh aplikasi lain (pengelola kata sandi, misalnya) diabaikan.
+
+## Seberapa jauh jawaban AI bisa dipercaya?
+
+AI bisa salah dengan cara yang sangat meyakinkan.
+AI sungguh berguna untuk menangkap inti sebuah teks, tetapi untuk angka, nama, dan apa pun yang berdampak besar — kontrak, teks medis — periksa dulu terhadap aslinya sebelum menindaklanjutinya.
+
+## Apa bedanya dengan alat "AI pada teks terpilih" lain?
+
+Kebanyakan alat sejenis hanya untuk macOS, hanya bekerja pada teks yang dipilih, dan terikat pada AI satu vendor atau sebuah langganan.
+ZenCopy berjalan di **Windows, macOS, dan Linux**, menangani **teks, teks kaya, gambar, dan berkas**, dan membiarkan **kamu memilih layanan AI-nya** (OpenAI / Google / Anthropic / gateway perusahaan / Ollama lokal).
+[Aksi mana yang berjalan juga kamu yang menentukan](/id/configuration/#routingjson).
+Tanpa akun, tanpa langganan, tanpa telemetri — perangkat lunak open source.
+
+## Aplikasi lain juga bereaksi terhadap Ctrl/⌘ + C + C (mis. DeepL)
+
+Tidak ada aplikasi yang bisa memiliki sinyal "salin dua kali" di tingkat OS.
+Kalau aplikasi lain juga mendengarkan sinyal yang sama (DeepL yang paling dikenal), **keduanya** bereaksi dan dua popup muncul.
+ZenCopy tidak mencegat maupun memblokir peristiwa tombol apa pun, jadi tidak ada yang rusak — hanya itu saja gejalanya.
+Nonaktifkan pintasan di aplikasi yang lebih jarang kamu pakai (untuk DeepL: Settings → General → pintasan untuk menerjemahkan).
+
+## Popup tidak pernah muncul (macOS)
+
+Hampir pasti soal izin.
+Izinkan **Input Monitoring** dan **Accessibility** untuk ZenCopy di System Settings → Privacy & Security, lalu tutup dan jalankan ulang aplikasinya.
+(Lewat dua izin inilah aplikasi menyadari bahwa tombol salin ditekan dua kali.)
+
+## Tidak ada hasil yang kembali / muncul pesan waktu habis
+
+Kalau respons hening selama 90 detik, ZenCopy menggagalkan proses alih-alih menunggu selamanya.
+Periksa koneksi internet dan pengaturan layanan AI (kunci API dan sebagainya), lalu tekan **Coba lagi**.
+AI lokal bisa butuh waktu untuk memuat pada kali pertama, itulah sebabnya batas waktunya sengaja dibuat longgar.
+
+## Di mana lognya?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Log tidak pernah berisi konten yang kamu salin maupun kunci API.
+
+## Apa yang dihapus saat pencopotan?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Pencopotan lewat `.msi` menghapus semuanya: pengaturan, kunci API, aksi buatan sendiri, log, dan
+    profil webview. Pencopot `.exe` (NSIS) sebaliknya bertanya lewat kotak centang **Delete
+    application data**. (Satu sisa tak berbahaya di kedua cara: kalau mulai-saat-masuk pernah
+    diaktifkan, entri registri yang tidak menunjuk ke mana-mana bisa tertinggal — Windows
+    mengabaikan entri yang targetnya tidak ada.)
+  </TabItem>
+  <TabItem label="macOS">
+    Membuang aplikasi ke Trash tidak menghapus datanya — itu konvensi macOS, dan ZenCopy
+    mengikutinya. Untuk penghapusan menyeluruh, jalankan dulu **Pengaturan → Reset semua
+    pengaturan** (menghapus semua pengaturan termasuk kunci API; log tetap ada untuk diagnostik,
+    jadi hapus `~/Library/Logs/app.zencopy` secara manual agar benar-benar bersih), lalu buang
+    aplikasinya ke Trash.
+  </TabItem>
+  <TabItem label="Linux">
+    Pengelola paket hanya menghapus aplikasinya; data pengguna tetap ada — juga konvensi Linux.
+    Untuk penghapusan menyeluruh, jalankan dulu **Pengaturan → Reset semua pengaturan**, lalu hapus
+    paket atau AppImage-nya. Ekstensi pemicu GNOME bisa dihapus dengan `gnome-extensions uninstall
+    copycopy@sincekmori.github.io`.
+  </TabItem>
+</Tabs>
+
+## Lingkungan Linux mana yang didukung?
+
+**GNOME di Wayland, dan X11.**
+Di GNOME Wayland, proses latar belakang memang dirancang tidak bisa mengamati tombol maupun papan klip, jadi ZenCopy (lewat crate [`copycopy`](https://crates.io/crates/copycopy)) menyertakan ekstensi GNOME Shell kecil yang mendeteksi salin dua kali dari dalam compositor.
+Ekstensi ini dipasang otomatis ke profil penggunamu pada peluncuran pertama (tanpa sudo) dan aktif setelah keluar lalu masuk kembali sekali.
+Di X11, pendengar tombol pasif biasa bekerja, seperti di Windows.
+Compositor Wayland lain (KDE Plasma, berbasis wlroots) tidak menawarkan cara tanpa hak istimewa untuk mengamati pemicunya dan belum didukung — aplikasinya berjalan, tetapi pemicunya tetap diam.
+
+## Ikon tray tidak muncul (Linux)
+
+Ikon tray ZenCopy memakai protokol AppIndicator.
+GNOME milik Ubuntu mendukungnya sejak awal, tetapi GNOME murni (Fedora, misalnya) tidak menampilkan apa pun sampai ekstensi Shell **AppIndicator and KStatusNotifierItem Support** dipasang.
+Apa pun keadaannya, aplikasinya sendiri tetap berfungsi — menu tray hanyalah salah satu pintu masuk.

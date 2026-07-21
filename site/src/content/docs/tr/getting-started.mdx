@@ -1,0 +1,165 @@
+---
+title: Başlarken
+description: Kurulumdan ücretsiz AI anahtarı hazırlamaya ve ilk çift kopyalamana kadar. Bilgisayar kullanabiliyorsan bunu da kurabilirsin.
+---
+
+import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
+Kopyalamayı biliyorsan ZenCopy'yi kullanabilirsin.
+Öğrenmen gereken tam olarak tek bir şey var — **her zamanki kopyalaman, iki kez, hızlıca**.
+Yalnızca bu hareket, seçtiğin içeriğin özetini, çevirisini, açıklamasını ya da elden geçirilmiş bir hâlini ekranının köşesine getirir.
+Hangi uygulamanın üzerinde olursan ol, aynı şekilde çalışır.
+
+## ZenCopy her gün senin için ne yapar
+
+- Uzun bir raporu ya da makaleyi seç, **yalnızca kilit noktaları birkaç satırda** al
+- Yabancı dildeki bir sayfayı ya da yazışmayı **olduğun yerde kendi diline** çevir
+- Bilmediğin terimleri, hata ekranlarını ya da sözleşme dilini **sade sözcüklerle açıklat**
+- E-posta ya da yazı taslağını ver, **temizlenmiş hâlini** geri al
+
+Adımlar hep aynı: seç, sonra iki kez kopyala.
+Uygulama değiştirmek yok, yapıştıracak yer aramak yok.
+
+## Neye ihtiyacın var
+
+1. **Bir bilgisayar** — ZenCopy Windows, macOS ve Linux'ta çalışır.
+   (Hangi Linux ortamlarının desteklendiğini görmek için [SSS](/tr/faq/) sayfasına bak.)
+2. **Bir Google hesabı** — AI'yı ücretsiz kullanmak için "API anahtarı" denen uzun bir dize oluşturacaksın.
+   Bu terim sana yabancıysa endişelenme: bu sayfa her adımı tek tek anlatıyor.
+
+## Kurulum
+
+İşletim sistemine uygun yükleyiciyi [GitHub Releases](https://github.com/sincekmori/zencopy/releases/latest) sayfasından indir:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    `.msi` yükleyicisini indirip çalıştır. "Windows kişisel bilgisayarınızı korudu" ekranıyla
+    karşılaşabilirsin. Bu, Windows'un henüz tanımadığı yeni uygulamalar için bir kereliğine
+    gösterdiği bir kontrol — **Daha fazla bilgi → Yine de çalıştır** seçeneğini seç.
+  </TabItem>
+  <TabItem label="macOS">
+    `.dmg` dosyasını aç ve ZenCopy'yi **Applications** (Uygulamalar) klasörüne sürükle. İlk seferde
+    uygulamaya sağ tıklayıp (ya da iki parmakla tıklayıp) **Aç**'ı seç. macOS, App Store dışından
+    gelen uygulamalar için bunu bir kez sorar.
+  </TabItem>
+  <TabItem label="Linux">
+    `.AppImage` dosyasını indir, çalıştırılabilir yap (`chmod +x`) ve çalıştır. Uygulama içi
+    güncellemeleri destekleyen biçim bu. `.deb` ve `.rpm` paketleri de var; ancak onları
+    güncellemek, yeni sürümü yeniden kurmak demek.
+  </TabItem>
+</Tabs>
+
+Yeni bir sürüm çıktığında ZenCopy bunu kendiliğinden bulur ve tek tıkla güncelleme önerir.
+
+Kaynaktan derleme talimatları [GitHub deposunda](https://github.com/sincekmori/zencopy) yer alıyor.
+
+## Ücretsiz bir AI anahtarı hazırla
+
+ZenCopy'nin kendisi ücretsiz; ama asıl özetleme ve çeviri işini harici bir AI yapıyor — Gemini ya da ChatGPT üzerinden zaten kullanıyor olabileceğin türden bir AI.
+Kendi uygulamanın böyle bir AI'yı kullanmasını sağlayan anahtar, **API anahtarı** denen uzun bir dizedir.
+Onu bir ev anahtarı gibi düşün: **yalnızca sana aittir ve kimseye göstermezsin**.
+Bu konuda hatırlaman gereken tek şey bu.
+
+En kolay seçenek Google'ın ücretsiz anahtarı:
+
+<Steps>
+
+1. [Google AI Studio'daki API anahtarları sayfasını](https://aistudio.google.com/api-keys) aç ve Google hesabınla oturum aç.
+
+2. **Create API key** (API anahtarı oluştur) düğmesine bas.
+
+3. Beliren uzun dizeyi kopyala (`AIza…` ile başlar).
+   İşte API anahtarın bu.
+
+</Steps>
+
+Kişisel kullanım için ücretsiz katman yeterli ve **tamamen ücretsiz: bir ödeme yöntemi kaydetmediğin sürece senden ücret alınamaz**.
+Ücretsiz katmanın sınırına ulaşırsan bir ücret doğmaz — istekler bir süreliğine bekletilir, o kadar.
+Bilmekte fayda olan bir nokta: **Google'ın ücretsiz katmanında gönderdiklerin, hizmetlerini geliştirmek için kullanılabilir** (Google'ın koşulları gereği).
+Gizli iş belgeleriyle çalışıyorsan ücretli bir kuruluma geç ya da [başka bir AI veya yerel bir AI](/tr/configuration/) seç.
+
+## İlk açılış
+
+1. ZenCopy'yi başlatmak hemen bir pencere açmaz.
+   Uygulama, ekranının kenarındaki küçük simge alanına yerleşir (Windows'ta görev çubuğunun sağ altı, Mac'te üstteki menü çubuğu).
+2. İlk açılışta kısa bir karşılama ekranı görünür.
+   Az önce kopyaladığın API anahtarını yapıştır ve **Bu anahtarla başla** düğmesine bas.
+   **Kurulum tamamlandı.**
+3. Kopyaladıkların, yapılandırdığın AI hizmetine **doğrudan** gönderilir.
+   Arada bir aktarma sunucusu yok, kullanım takibi de yok.
+
+Google dışında bir AI kullanmak için (OpenAI, Anthropic, kurumsal bir ağ geçidi, yerel Ollama vb.) **Başka bir yolla kur** seçeneğini seç ve Ayarlar'dan istediğini belirle.
+
+### İzinler hakkında
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">Ayarlanacak bir şey yok. Açılışın hemen ardından çalışır.</TabItem>
+  <TabItem label="macOS">
+    macOS'te uygulamanın, kopyalamaya iki kez basıldığını fark edebilmesi için iki izne ihtiyacı var:
+
+    - **Sistem Ayarları → Gizlilik ve Güvenlik → Giriş İzleme** — ZenCopy'ye izin ver
+    - **Sistem Ayarları → Gizlilik ve Güvenlik → Erişilebilirlik** — ZenCopy'ye izin ver
+
+    İkisi de uygulamanın **sinyali** fark edebilmesi için var — ekranını okuması için değil.
+    İkisine de izin verdikten sonra ZenCopy'yi bir kez kapatıp yeniden başlat.
+
+  </TabItem>
+  <TabItem label="Linux">
+    İzin istemi yoktur.
+    GNOME'da (Wayland) ilk açılış, kullanıcı profiline küçük bir GNOME Shell uzantısı kurar (`~/.local/share/gnome-shell/extensions/`, sudo gerekmez) — orada çift kopyalamayı yalnızca compositor'ün içindeki bir şey algılayabilir.
+    GNOME yeni uzantıları oturum açılırken yükler; bu yüzden ilk açılıştan sonra **bir kez oturumu kapatıp yeniden aç**.
+    Uzantı etkinleşene kadar karşılama ve ayarlar ekranları sana hatırlatmayı sürdürür.
+    X11'de açılışın hemen ardından çalışır.
+  </TabItem>
+</Tabs>
+
+## Dene
+
+Kurulumu bitirdiysen tam da bu sayfada deneyebilirsin.
+Herhangi bir paragrafı seç ve **<span data-os-modifier>Ctrl/⌘</span> + C + C** tuşlarına bas (kopyalama, iki kez, hızlıca).
+Videoda, bir web sayfasının metni üzerinde çalışırken görülüyor:
+
+<video
+  class="demo-video"
+  width="1748"
+  height="1130"
+  controls
+  muted
+  playsinline
+  preload="metadata"
+  poster="/demo/zen.en.jpg"
+  src="/demo/zen.en.mp4"
+>
+  <a href="/demo/zen.en.mp4">Tanıtım videosunu izle</a>
+</video>
+
+## Günlük kullanım
+
+1. Herhangi bir uygulamada metni seç ve **<span data-os-modifier>Ctrl/⌘</span> + C + C** tuşlarına bas.
+2. Ekranının köşesinde bir açılır pencere belirir ve sonuç akmaya başlar.
+3. Sonucun üstündeki etiket ("Zen", "Çevir", …) bir **değiştiricidir**.
+   Tıklayarak aynı kopyalanan içerik üzerinde başka bir eylem çalıştırabilirsin.
+   Daha önce gördüğün sonuçlar saklanır, geri dönmek anlıktır — eylemi yalnızca **Yeniden dene** seçeneği tekrar çalıştırır.
+   Bir etiketin yanındaki ☆ simgesine basarak o eylemi yeni varsayılanın yapabilirsin.
+4. Açılır pencereden çalışan bir eylemi **Durdur** ile durdurabilir, **Yeniden dene** ile tekrarlayabilir ya da sonucu **Kopyala** ile alabilirsin.
+   **Esc** ile ya da dışarıya tıklayarak kapat.
+5. Bir sonucu erken mi kapattın? Tepsi menüsündeki **Uygulamayı göster**, sonuncusunu her an geri getirir.
+
+Dört eylem yerleşik gelir:
+**Zen** (tek cümleye indirger), **Açıkla** (anlaşılır kılar), **Çevir** (kendi diline) ve **İyileştir** (taslağı elden geçirir).
+Kendi eylemini eklemek, bir ad ile ne yapılmasını istediğini yazmaktan ibaret ([Yapılandırma](/tr/configuration/) sayfasına bak).
+
+Üstelik yalnızca metin de değil.
+Ekran görüntüleri ve kopyalanan dosyalar (görseller, PDF'ler, ses, metin dosyaları) aynı hareketle çalışır.
+Bir görsel ya da başka bir ikili dosya gönderilmeden önce ZenCopy senden bir kez onay ister.
+
+## Güvenli olacak şekilde tasarlandı
+
+- **Sıradan tek bir kopyalama hiçbir şey yapmaz.** Hiçbir şey okunmaz, hiçbir şey gönderilmez.
+- Başka uygulamaların gizli olarak işaretlediği pano içeriği (örneğin parola yöneticileri) çift kopyalamada bile yok sayılır.
+- İçerik yalnızca kendi yapılandırdığın AI hizmetine gider.
+
+## Sırada ne var
+
+- [Yapılandırma](/tr/configuration/): açılır pencere konumu, temalar ve kendi eylemlerini oluşturma.
+- [SSS](/tr/faq/): maliyetler, diğer uygulamalarla çakışmalar ve sorun giderme.

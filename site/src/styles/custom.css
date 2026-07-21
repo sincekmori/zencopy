@@ -1,0 +1,38 @@
+/* Monochrome zen palette: the brand ink (#18181b) on white, slate on dark.
+   Starlight derives links, buttons, and highlights from these accents. */
+:root {
+  --sl-color-accent-low: #e4e4e7;
+  --sl-color-accent: #18181b;
+  --sl-color-accent-high: #18181b;
+}
+
+:root[data-theme="dark"] {
+  --sl-color-accent-low: #27272a;
+  --sl-color-accent: #f1f5f9;
+  --sl-color-accent-high: #f4f4f5;
+}
+
+/* The hero icon is a rounded square, not a photo — keep it modest. */
+[data-has-hero] .hero img {
+  width: 8rem;
+  height: 8rem;
+}
+
+/* Demo screen recordings embedded in the docs (top half of the screen,
+   landscape) — full content width, or the popup text becomes unreadable. */
+.demo-video {
+  width: 100%;
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 0.75rem;
+}
+
+/* Header selects (theme, language): Starlight hard-codes narrow widths
+   (6.25em / 7em) as inline styles, which ellipsizes our labels ("システム" →
+   "シス…", "Português (Brasil)" → "Portu…"). `auto` lets each <select> take
+   its intrinsic width — the widest of its own options — so nothing is ever
+   truncated and the width is stable across selections. !important is needed
+   to beat the inline custom property. */
+starlight-theme-select label,
+starlight-lang-select label {
+  --sl-select-width: auto !important;
+}

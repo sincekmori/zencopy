@@ -1,0 +1,185 @@
+---
+title: 配置
+description: 设置窗口能做什么（面向所有人），以及通过配置文件进行的精细定制（面向进阶用户）。
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+ZenCopy 开箱即用，什么都不用配置。
+本页是当你想让它更贴合自己时的指南。
+前半部分讲**设置窗口**，面向所有人；后半部分讲**配置文件**，面向进阶用户。
+
+## 设置窗口
+
+可以从托盘图标的菜单，或弹窗上的齿轮图标打开。
+它有三个标签页：**通用、AI、动作**。
+
+### 通用
+
+- **弹窗位置** — 结果出现在屏幕的哪个角落。
+- **主题** — 浅色 / 深色 / 跟随系统。
+- **语言** — 界面语言（默认跟随操作系统）。
+- **登录时启动** — 只要电脑开着，ZenCopy 就随时待命。
+- **发送图片和文件前确认** — 在把图片或文件发送给 AI 之前，是否先询问一次。
+
+### AI
+
+在这里更改 AI 服务（提供商、模型、API 密钥）。
+点**测试**按钮，马上就能知道连接是否正常。
+
+这个标签页还有一个**关于你**输入框。
+用平实的语言写几句你的角色和偏好即可，语言不限。
+
+> 例如：“销售。写的大多是客户邮件——礼貌但不生硬，结论先行。”
+
+填好之后，每个动作的结果都会为你量身调整。
+解释会贴合你的知识水平，改出来的文稿会符合你偏好的语气。
+它不会影响无关的任务，写的内容本身也不会出现在结果里。
+
+### 动作
+
+这是“复制两次之后做什么”的列表。
+
+- 预装的动作可以打开阅读 — 它们同时也是现成的写法示例。
+- **新建动作**只需要一个名称和你想要的效果。
+  例如：名称“3 行摘要”，指令“用 3 行总结这段内容”。
+- 没把握写好指令？把想要的效果随手写下来，点**用 AI 起草** — 你配置的 AI 会把它整理成一条规范的指令。
+- ★ 标记的是默认动作 — 复制两次后最先运行的那个。
+- **路由**可以按内容类型（文本 / 图片 / 文件）分别指定不同的动作。
+
+你创建的动作可以分享：**导出**会把它写成一个文件，接收方只需粘贴到**导入**里，或直接选择文件。
+
+## 配置文件（进阶用户）
+
+从这里开始，讲的是直接编辑文本文件。
+**所有基本功能都能在设置窗口里完成，所以到这里就停下也完全没问题。**
+
+文件从每个用户各自的应用配置目录读取。
+确切路径也会在启动时打印到日志里：
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%APPDATA%\app.zencopy`</TabItem>
+  <TabItem label="macOS">`~/Library/Application Support/app.zencopy`</TabItem>
+  <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
+</Tabs>
+
+路由的默认值内嵌在应用里；`routing.json` 永远只起**覆盖**作用。
+动作文件是**只增不改**的：
+它们定义新的动作，内置动作不可触碰（声明内置 id 的本地文件会被忽略）。
+编辑在下一次触发时生效 — 无需重启。
+
+### `ai-sdk-catalog.json`
+
+提供商，加上 **role → 模型**的映射。
+这个文件格式的老家是 [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — 每个字段都在那里有文档（包括供编辑器校验和补全用的 `$schema`），[`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) 里有三种规模的配置。
+面向 ZenCopy 的起步配置（设置界面写出的形式、本地 Ollama、供动作使用的 role）见[配置示例](/zh-hans/recipes/)。
+
+API 密钥直接写进这个本地文件（设置界面写出的也是同样的格式）；它们绝不会离开你的电脑。
+不会读取环境变量 — GUI 应用由操作系统而不是你的 shell 启动，所以在 `.zshrc` 之类文件里 export 的变量根本到不了它那里。
+每次读取时都会按 schema 校验这个文件。
+改坏了会在弹窗和设置编辑器里显示明确的提示 — 不会有任何静默失败。
+
+### `routing.json`
+
+哪种捕获由哪个动作处理：
+一个扁平的 `kind → action` 映射，加上一个可选的、优先级更高的 `overrides` 列表（先匹配者胜出）。
+四种 kind 是 `text`、`rich_text`、`image` 和 `files`；初始状态下，文本路由到 Zen，图片和文件路由到解释。
+扁平映射可以在应用内编辑（设置 → 动作 → 路由），所以只有用 `overrides` 时才需要碰这个文件。
+
+```json
+{
+  "text": "zen",
+  "rich_text": "zen",
+  "image": "explain",
+  "files": "explain",
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+}
+```
+
+`when` 的条件：`kind`、`app_name`、`exec_name`、`window_title`、`url`（都支持 `*` 通配符），以及 `min_chars` / `max_chars`。
+
+对于 `image` 和 `files` 类型的捕获，内容本身会发送给模型（每次捕获合计上限 10 MB）。
+文件类型按**内容**判断，而不是按文件名：
+图片、PDF 和音频原样附加，文本文件（Markdown、源代码、CSV 等）则成为这次捕获的文本（`{{ text }}`），表现得和你直接复制其内容完全一样。
+字符编码会自动检测，Shift_JIS、UTF-16 之类的旧格式也会被转换。
+其余类型会被拒绝，并给出明确的提示。
+完整路径会随内容一起发送，让模型能区分不同文件、知道它们的位置。
+由于二进制附件可能比文本花费更多，弹窗会在发送前先询问（文本文件无需确认直接运行）— 这个确认可以当场关闭，也可以在设置里关闭。
+
+### `actions/*.md`
+
+一个文件 = 一个动作：YAML frontmatter + [Liquid](https://liquidjs.com) 提示词正文。
+这同一个文件也就是分享格式 — 设置 → 动作 → 导入既接受粘贴的文本，也接受选择的文件。
+
+```markdown
+---
+id: summarize
+label: 摘要
+role: default
+instructions: 你是一位简洁的助手。
+---
+
+请用 {{ locale }} 把以下内容总结为 3 行：
+
+{{ text }}
+```
+
+| Frontmatter    | 含义                                          |
+| -------------- | --------------------------------------------- |
+| `id`           | 供 `routing.json` 引用的名称（默认为文件名）  |
+| `label`        | 显示在弹窗中                                  |
+| `role`         | 运行时使用的 catalog role（默认为 `default`） |
+| `instructions` | 系统提示词（Liquid 模板）                     |
+
+模板变量，以及在浏览器中复制一个段落时的示例值：
+
+| 变量                 | 示例                                             |
+| -------------------- | ------------------------------------------------ |
+| `{{ text }}`         | 复制的文本（HTML 富文本复制会转换为 Markdown）   |
+| `{{ markup }}`       | 富文本复制的 HTML/RTF 源码                       |
+| `{{ format }}`       | `html`（或 `rtf`；纯文本复制时为空）             |
+| `{{ app_name }}`     | `Safari`                                         |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                          |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari` |
+| `{{ window_title }}` | `定价 – Example`                                 |
+| `{{ url }}`          | `https://example.com/pricing`（仅浏览器）        |
+| `{{ process_id }}`   | `8123`                                           |
+| `{{ now }}`          | `2026-07-08 20:15:00`                            |
+| `{{ locale }}`       | `zh-hans`                                        |
+
+另外还有一个 ZenCopy 专有的 `language_name` 过滤器：`{{ locale | language_name }}` 会展开为“Simplified Chinese”而不是“zh-hans”，在提示词里读起来更自然。
+想看到实际的值，在设置里启用**开发者模式** — 每次捕获的模板变量会以 JSON 的形式出现在弹窗中。
+
+简单的动作（一个名称加一条指令）也可以在设置窗口里创建；它写出的正是这种文件格式。
+
+#### 进阶模板
+
+`instructions` frontmatter 和正文都是完整的 [LiquidJS](https://liquidjs.com/tags/overview.html) 模板：条件、循环和[过滤器](https://liquidjs.com/filters/overview.html)全都可用。
+一个动作可以根据复制来源自动切换行为：
+
+```markdown
+---
+id: context-aware
+label: 随上下文切换
+---
+
+{% if url contains "github.com" %}
+请审查这段代码，并指出其中最大的一个风险：
+{% elsif app_name == "Slack" %}
+请用 2 行总结这段聊天讨论：
+{% else %}
+请用 {{ locale }} 解释以下内容：
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+## 日志
+
+结构化日志（密钥和复制内容已脱敏）在开发版输出到终端，在正式版输出到自动轮转的文件：
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>

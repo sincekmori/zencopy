@@ -1,0 +1,108 @@
+---
+title: FAQ
+description: Les coûts, la confidentialité, les conflits avec d'autres applications et le dépannage.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Est-ce payant ?
+
+ZenCopy est un logiciel gratuit et open source (Apache-2.0).
+Il n'y a ni compte ni abonnement.
+
+Ce que le service d'IA facture ne regarde que vous et ce service.
+Avec [l'offre gratuite de Google](/fr/getting-started/), c'est entièrement gratuit — tant que vous n'enregistrez pas de moyen de paiement, rien ne peut vous être facturé.
+Et avec une IA qui tourne entièrement sur votre propre ordinateur (Ollama, par exemple), il n'y a tout simplement aucun service externe à payer.
+
+## Où va le contenu que je copie ?
+
+C'est seulement quand vous copiez deux fois que le contenu part **directement vers le service d'IA que vous avez configuré** — et nulle part ailleurs.
+Il n'y a pas de serveur ZenCopy, pas de relais, pas de suivi d'utilisation (télémétrie).
+Votre clé d'API ne quitte pas non plus votre machine.
+
+## Un copier ordinaire déclenche-t-il quelque chose ?
+
+Non.
+Un seul <span data-os-modifier>Ctrl/⌘</span> + C ne démarre rien, ne lit rien et n'envoie rien.
+Seuls deux copiers rapprochés constituent le signal.
+Et même dans ce cas, le contenu du presse-papiers marqué comme confidentiel par d'autres applications (les gestionnaires de mots de passe, par exemple) est ignoré.
+
+## À quel point puis-je me fier aux réponses de l'IA ?
+
+L'IA peut se tromper avec beaucoup d'aplomb.
+Elle est réellement utile pour saisir l'essentiel d'un texte, mais pour les chiffres, les noms et tout ce qui a des conséquences — contrats, textes médicaux — vérifiez avec l'original avant d'agir.
+
+## En quoi est-ce différent des autres outils « IA sur la sélection » ?
+
+La plupart des outils de ce type sont réservés à macOS, ne traitent que le texte sélectionné et sont liés à l'IA d'un seul éditeur ou à un abonnement.
+ZenCopy fonctionne sous **Windows, macOS et Linux**, traite **le texte, le texte enrichi, les images et les fichiers**, et vous laisse **choisir le service d'IA** (OpenAI / Google / Anthropic / une passerelle d'entreprise / Ollama en local).
+[Le choix de l'action qui s'exécute vous appartient aussi](/fr/configuration/#routingjson).
+Pas de compte, pas d'abonnement, pas de télémétrie — un logiciel open source.
+
+## Une autre application réagit aussi à Ctrl/⌘ + C + C (DeepL, par exemple)
+
+Aucune application ne peut s'approprier le signal « copier deux fois » au niveau du système.
+Si une autre application écoute le même signal (DeepL est le cas le plus connu), **les deux** réagissent et deux popups apparaissent.
+ZenCopy n'intercepte ni ne bloque aucun événement clavier, donc rien ne casse — le symptôme s'arrête là.
+Désactivez le raccourci dans l'application que vous utilisez le moins (pour DeepL : Réglages → Général → raccourci de traduction).
+
+## Le popup n'apparaît jamais (macOS)
+
+Ce sont presque certainement les autorisations.
+Autorisez à la fois **Surveillance de l'entrée** et **Accessibilité** pour ZenCopy dans Réglages Système → Confidentialité et sécurité, puis quittez et relancez l'application.
+(Ces deux autorisations sont ce qui permet à l'application de remarquer que copier a été appuyé deux fois.)
+
+## Aucun résultat n'arrive / un dépassement de délai est signalé
+
+Si la réponse reste silencieuse pendant 90 secondes, ZenCopy interrompt l'exécution plutôt que d'attendre indéfiniment.
+Vérifiez votre connexion Internet et les réglages du service d'IA (clé d'API, etc.), puis appuyez sur **Réessayer**.
+Une IA locale peut mettre du temps à se charger la première fois, c'est pourquoi le délai est volontairement généreux.
+
+## Où sont les journaux ?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Les journaux ne contiennent jamais votre contenu copié ni vos clés d'API.
+
+## Que supprime la désinstallation ?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    La désinstallation du `.msi` supprime tout : les réglages, les clés d'API, les actions
+    personnalisées, les journaux et le profil de la webview. Le désinstalleur `.exe` (NSIS) pose la
+    question via une case **Delete application data**. (Un reste inoffensif dans les deux cas : si
+    le lancement à la connexion était activé, une entrée de registre pointant vers rien peut
+    subsister — Windows ignore les entrées dont la cible n'existe pas.)
+  </TabItem>
+  <TabItem label="macOS">
+    Glisser l'application dans la corbeille ne supprime pas ses données — c'est la convention macOS,
+    et ZenCopy la respecte. Pour un effacement complet, lancez d'abord **Réglages → Réinitialiser
+    tous les réglages** (supprime tous les réglages, clés d'API comprises ; les journaux restent
+    pour le diagnostic, supprimez donc `~/Library/Logs/app.zencopy` à la main pour repartir vraiment
+    de zéro), puis mettez l'application à la corbeille.
+  </TabItem>
+  <TabItem label="Linux">
+    Les gestionnaires de paquets ne suppriment que l'application ; les données utilisateur restent —
+    c'est aussi la convention Linux. Pour un effacement complet, lancez d'abord **Réglages →
+    Réinitialiser tous les réglages**, puis supprimez le paquet ou l'AppImage. L'extension GNOME du
+    déclencheur se retire avec `gnome-extensions uninstall copycopy@sincekmori.github.io`.
+  </TabItem>
+</Tabs>
+
+## Quels environnements Linux sont pris en charge ?
+
+**GNOME sous Wayland, et X11.**
+Sous GNOME Wayland, les processus en arrière-plan ne peuvent, par conception, observer ni les touches ni le presse-papiers ; ZenCopy (via le crate [`copycopy`](https://crates.io/crates/copycopy)) fournit donc une petite extension GNOME Shell qui détecte le double copier depuis l'intérieur du compositeur.
+Elle est installée automatiquement dans votre profil utilisateur au premier lancement (sans sudo) et devient active après une déconnexion puis une reconnexion.
+Sous X11, un simple écouteur de touches passif fonctionne, comme sous Windows.
+Les autres compositeurs Wayland (KDE Plasma, ceux basés sur wlroots) n'offrent aucun moyen non privilégié d'observer le déclencheur et ne sont pas encore pris en charge — l'application se lance, mais le déclencheur reste inerte.
+
+## L'icône n'apparaît pas dans la zone de notification (Linux)
+
+L'icône de ZenCopy utilise le protocole AppIndicator.
+Le GNOME d'Ubuntu le prend en charge d'emblée, mais le GNOME de base (Fedora, par exemple) n'affiche rien tant que l'extension Shell **AppIndicator and KStatusNotifierItem Support** n'est pas installée.
+Dans les deux cas, l'application elle-même fonctionne — le menu de l'icône n'est qu'un point d'entrée parmi d'autres.

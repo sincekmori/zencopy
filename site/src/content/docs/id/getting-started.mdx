@@ -1,0 +1,165 @@
+---
+title: Memulai
+description: Dari memasang, menyiapkan kunci AI gratis, hingga salin-dua-kali pertamamu. Kalau kamu bisa memakai komputer, kamu bisa menyiapkan ini.
+---
+
+import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
+Kalau kamu bisa menyalin, kamu bisa memakai ZenCopy.
+Hanya ada satu hal yang perlu dipelajari — **perintah salin biasamu, ditekan dua kali dengan cepat**.
+Cukup dengan itu, ringkasan, terjemahan, penjelasan, atau tulisan yang sudah dirapikan dari apa pun yang kamu pilih muncul di sudut layarmu.
+Cara kerjanya sama di atas aplikasi apa pun.
+
+## Apa yang ZenCopy lakukan untukmu setiap hari
+
+- Pilih laporan atau artikel panjang dan dapatkan **poin-poin pentingnya saja, dalam beberapa baris**
+- Ubah halaman atau obrolan berbahasa asing **ke bahasamu, saat itu juga**
+- Minta istilah asing, layar galat, atau bahasa kontrak **dijelaskan dengan kata-kata sederhana**
+- Serahkan draf kasar email atau esai dan dapatkan hasil yang **sudah dirapikan**
+
+Langkahnya selalu sama: pilih, lalu salin dua kali.
+Tanpa berpindah aplikasi, tanpa mencari-cari tempat menempel.
+
+## Apa yang kamu butuhkan
+
+1. **Komputer** — ZenCopy berjalan di Windows, macOS, dan Linux.
+   (Untuk lingkungan Linux yang termasuk didukung, lihat [FAQ](/id/faq/).)
+2. **Akun Google** — kamu akan membuat satu string panjang bernama "kunci API" untuk memakai AI secara gratis.
+   Kalau istilah itu terdengar baru bagimu, jangan khawatir: halaman ini memandumu langkah demi langkah.
+
+## Pemasangan
+
+Unduh installer untuk sistem operasimu dari [GitHub Releases](https://github.com/sincekmori/zencopy/releases/latest):
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Unduh dan jalankan installer `.msi`. Kamu mungkin melihat layar "Windows protected your PC". Itu
+    pemeriksaan satu kali yang ditampilkan Windows untuk aplikasi baru yang belum dikenalnya — pilih
+    **More info → Run anyway**.
+  </TabItem>
+  <TabItem label="macOS">
+    Buka berkas `.dmg` dan seret ZenCopy ke folder **Applications**. Saat pertama kali, klik kanan
+    (atau klik dua jari) aplikasinya dan pilih **Open**. macOS bertanya sekali tentang aplikasi yang
+    datang dari luar App Store.
+  </TabItem>
+  <TabItem label="Linux">
+    Unduh berkas `.AppImage`, jadikan dapat dieksekusi (`chmod +x`), lalu jalankan. Inilah format
+    yang mendukung pembaruan dari dalam aplikasi. Paket `.deb` dan `.rpm` juga tersedia, tetapi
+    memperbaruinya berarti memasang ulang rilis baru.
+  </TabItem>
+</Tabs>
+
+Saat versi baru terbit, ZenCopy menemukannya sendiri dan menawarkan pembaruan sekali klik.
+
+Petunjuk membangun dari kode sumber ada di [repositori GitHub](https://github.com/sincekmori/zencopy).
+
+## Menyiapkan kunci AI gratis
+
+ZenCopy sendiri gratis, tetapi pekerjaan meringkas dan menerjemahkan yang sebenarnya dilakukan oleh AI eksternal — jenis AI yang mungkin sudah kamu pakai lewat Gemini atau ChatGPT.
+Kunci yang membuat aplikasimu sendiri bisa memakai AI semacam itu adalah **kunci API** — satu string panjang.
+Anggap saja seperti kunci rumah: **kunci itu milikmu sendiri, dan jangan pernah tunjukkan kepada siapa pun**.
+Hanya itu yang perlu kamu ingat tentangnya.
+
+Pilihan termudah adalah kunci gratis dari Google:
+
+<Steps>
+
+1. Buka [halaman API keys di Google AI Studio](https://aistudio.google.com/api-keys) dan masuk dengan akun Google-mu.
+
+2. Tekan tombol **Create API key**.
+
+3. Salin string panjang yang muncul (diawali `AIza…`).
+   Itulah kunci API kamu.
+
+</Steps>
+
+Untuk pemakaian pribadi, tingkat gratisnya sudah cukup, dan **benar-benar gratis: selama kamu tidak mendaftarkan metode pembayaran, kamu tidak bisa ditagih**.
+Kalau suatu saat kamu mencapai batas tingkat gratis, tidak ada tagihan — permintaan hanya dijeda sementara.
+Satu hal yang patut diketahui: **pada tingkat gratis Google, apa yang kamu kirim dapat dipakai untuk meningkatkan layanan mereka** (sesuai ketentuan Google).
+Kalau kamu menangani dokumen kerja yang rahasia, beralihlah ke pengaturan berbayar atau pilih [AI lain atau AI lokal](/id/configuration/).
+
+## Peluncuran pertama
+
+1. Menjalankan ZenCopy tidak langsung membuka jendela.
+   Aplikasinya menetap di area ikon kecil di tepi layarmu (kanan bawah taskbar di Windows, bilah menu di bagian atas pada Mac).
+2. Pada peluncuran pertama kali, layar sambutan singkat terbuka.
+   Tempel kunci API yang baru saja kamu salin dan tekan **Mulai dengan kunci ini**.
+   **Penyiapan selesai.**
+3. Apa yang kamu salin dikirim **langsung** ke layanan AI yang kamu atur.
+   Tidak ada server perantara di tengahnya, dan tidak ada pelacakan pemakaian.
+
+Untuk memakai AI selain Google (OpenAI, Anthropic, gateway perusahaan, Ollama lokal, dan sebagainya), pilih **Siapkan dengan cara lain** lalu tentukan di Pengaturan.
+
+### Tentang izin
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">Tidak ada yang perlu disiapkan. Langsung bekerja setelah dijalankan.</TabItem>
+  <TabItem label="macOS">
+    Di macOS, aplikasi memerlukan dua izin agar bisa menyadari bahwa tombol salin ditekan dua kali:
+
+    - **System Settings → Privacy & Security → Input Monitoring** — izinkan ZenCopy
+    - **System Settings → Privacy & Security → Accessibility** — izinkan ZenCopy
+
+    Keduanya ada supaya aplikasi bisa menangkap **sinyalnya** — bukan supaya bisa membaca layarmu.
+    Setelah mengizinkan keduanya, tutup ZenCopy sekali lalu jalankan lagi.
+
+  </TabItem>
+  <TabItem label="Linux">
+    Tidak ada permintaan izin.
+    Di GNOME (Wayland), peluncuran pertama otomatis memasang ekstensi GNOME Shell kecil ke profil penggunamu (`~/.local/share/gnome-shell/extensions/`, tanpa sudo) — hanya sesuatu di dalam compositor yang bisa mendeteksi salin dua kali di sana.
+    GNOME memuat ekstensi baru saat login, jadi **keluar lalu masuk kembali sekali** setelah peluncuran pertama.
+    Sampai ekstensinya aktif, layar sambutan dan pengaturan akan terus mengingatkanmu.
+    Di X11, langsung bekerja setelah dijalankan.
+  </TabItem>
+</Tabs>
+
+## Coba sendiri
+
+Setelah penyiapan selesai, kamu bisa mencobanya di halaman ini juga.
+Pilih paragraf mana pun dan tekan **<span data-os-modifier>Ctrl/⌘</span> + C + C** (salin, dua kali, dengan cepat).
+Video berikut menunjukkannya bekerja pada teks sebuah halaman web:
+
+<video
+  class="demo-video"
+  width="1748"
+  height="1130"
+  controls
+  muted
+  playsinline
+  preload="metadata"
+  poster="/demo/zen.en.jpg"
+  src="/demo/zen.en.mp4"
+>
+  <a href="/demo/zen.en.mp4">Tonton video demonya</a>
+</video>
+
+## Pemakaian sehari-hari
+
+1. Pilih teks di aplikasi mana pun dan tekan **<span data-os-modifier>Ctrl/⌘</span> + C + C**.
+2. Popup muncul di sudut layarmu dan hasilnya mengalir masuk.
+3. Label di atas hasil ("Zen", "Terjemahkan", …) adalah **pengalih**.
+   Klik untuk menjalankan aksi lain pada konten salinan yang sama.
+   Hasil yang sudah pernah kamu lihat tetap tersimpan, jadi berpindah kembali terjadi seketika — hanya **Coba lagi** yang menjalankan aksi sekali lagi.
+   Tekan ☆ di samping label untuk menjadikan aksi itu bawaan barumu.
+4. Dari popup kamu bisa **Hentikan** aksi yang sedang berjalan, **Coba lagi**, atau **Salin** hasilnya.
+   Tutup dengan **Esc** atau klik di luar popup.
+5. Terlanjur menutup hasil terlalu cepat? **Tampilkan aplikasi** di menu tray akan menampilkan kembali hasil terakhir kapan saja.
+
+Empat aksi sudah terpasang sejak awal:
+**Zen** (padatkan menjadi satu kalimat), **Jelaskan** (buat jadi mudah dipahami), **Terjemahkan** (ke bahasamu), dan **Rapikan** (rapikan draf).
+Menambahkan aksimu sendiri hanya butuh nama dan deskripsi tentang apa yang kamu inginkan (lihat [Konfigurasi](/id/configuration/)).
+
+Dan bukan hanya teks.
+Tangkapan layar dan berkas yang disalin (gambar, PDF, audio, berkas teks) bekerja dengan gerakan yang sama.
+Sebelum gambar atau berkas biner lain dikirim, ZenCopy akan meminta konfirmasi Anda sekali.
+
+## Dirancang agar aman
+
+- **Salinan tunggal biasa tidak melakukan apa-apa.** Tidak ada yang dibaca, tidak ada yang dikirim.
+- Konten papan klip yang ditandai rahasia oleh aplikasi lain (pengelola kata sandi, misalnya) diabaikan bahkan pada salin dua kali.
+- Konten hanya pergi ke layanan AI yang kamu atur sendiri.
+
+## Selanjutnya
+
+- [Konfigurasi](/id/configuration/): posisi popup, tema, dan membuat aksimu sendiri.
+- [FAQ](/id/faq/): biaya, bentrok dengan aplikasi lain, dan pemecahan masalah.

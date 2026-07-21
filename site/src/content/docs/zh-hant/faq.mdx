@@ -1,0 +1,105 @@
+---
+title: 常見問題
+description: 費用、隱私、與其他應用程式的衝突，以及疑難排解。
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## 需要付費嗎？
+
+ZenCopy 本身是免費的開放原始碼軟體（Apache-2.0）。
+沒有帳號，也沒有訂閱。
+
+AI 服務收多少費用，是你與該服務之間的事。
+使用 [Google 的免費方案](/zh-hant/getting-started/)完全免費——只要不登錄付款方式，就不可能被收費。
+若使用完全在自己電腦上執行的 AI（例如 Ollama），從一開始就沒有需要付費的外部服務。
+
+## 我複製的內容會被送到哪裡？
+
+只有在你複製兩次時，內容才會**直接送到你設定的 AI 服務**——除此之外哪裡都不去。
+沒有 ZenCopy 的伺服器，沒有中繼，也沒有使用追蹤（遙測）。
+你的 API 金鑰同樣不會離開你的電腦。
+
+## 平常的複製會觸發什麼嗎？
+
+不會。
+單次的 <span data-os-modifier>Ctrl/⌘</span> + C 不啟動任何東西、不讀取任何東西，也不傳送任何東西。
+只有快速連按兩次複製才是訊號。
+即便如此，被其他應用程式（例如密碼管理器）標示為機密的剪貼簿內容仍會被忽略。
+
+## AI 的回答有多可信？
+
+AI 可能講得很流暢卻是錯的。
+用來掌握文章大意確實好用，但對於數字、姓名，以及任何事關重大的內容——合約、醫療文字——在採取行動前，請對照原文確認。
+
+## 這和其他「選取即 AI」工具有什麼不同？
+
+這個領域的多數工具只支援 macOS、只處理選取的文字，而且綁定單一廠商的 AI 或訂閱制。
+ZenCopy 可在 **Windows、macOS 和 Linux** 上執行，能處理**文字、RTF 文字、圖片與檔案**，而且 **AI 服務由你選擇**（OpenAI／Google／Anthropic／企業閘道／本機 Ollama）。
+[執行哪個動作也由你決定](/zh-hant/configuration/#routingjson)。
+沒有帳號、沒有訂閱、沒有遙測——開放原始碼軟體。
+
+## 另一個應用程式也對 Ctrl/⌘ + C + C 有反應（例如 DeepL）
+
+沒有任何應用程式能在作業系統層級獨占「複製兩次」這個訊號。
+如果另一個應用程式也在監聽同一個訊號（最有名的是 DeepL），**兩者**都會反應，出現兩個彈出視窗。
+ZenCopy 不攔截也不阻擋任何按鍵事件，所以不會有東西壞掉——症狀就只是這樣而已。
+請在你比較少用的那個應用程式裡停用快捷鍵（DeepL 的話：設定 → 一般 → 翻譯快捷鍵）。
+
+## 彈出視窗一直沒出現（macOS）
+
+幾乎可以肯定是權限問題。
+在系統設定 → 隱私權與安全性中，為 ZenCopy 允許**輸入監控**和**輔助使用**兩項權限，然後結束並重新啟動應用程式。
+（應用程式就是靠這兩項權限，才能察覺複製被按了兩次。）
+
+## 沒有結果回來／顯示逾時
+
+如果回應沉默超過 90 秒，ZenCopy 會讓這次執行失敗，而不是永遠等下去。
+請檢查網路連線和 AI 服務設定（API 金鑰等），然後按**重試**。
+本機 AI 第一次載入可能需要一段時間，所以逾時時間刻意設得寬鬆。
+
+## 記錄檔在哪裡？
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+記錄檔絕不會包含你複製的內容或 API 金鑰。
+
+## 解除安裝會移除哪些東西？
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    `.msi` 的解除安裝會移除所有東西：設定、API 金鑰、自訂動作、記錄檔，以及 webview
+    設定檔。`.exe`（NSIS）解除安裝程式則會以**刪除應用程式資料**核取方塊詢問你。（兩種方式都
+    可能留下一個無害的殘留：如果曾啟用登入時啟動，登錄中可能留下一筆指向不存在目標的項目—— Windows
+    會忽略目標不存在的項目。）
+  </TabItem>
+  <TabItem label="macOS">
+    把應用程式丟進垃圾桶並不會刪除它的資料——這是 macOS 的慣例，ZenCopy 也遵循它。想要完整
+    清除，請先執行**設定 → 重設所有設定**（移除包含 API 金鑰在內的所有設定；記錄檔會保留供
+    診斷之用，想要真正一乾二淨，請自行刪除 `~/Library/Logs/app.zencopy`），然後再把應用程式
+    丟進垃圾桶。
+  </TabItem>
+  <TabItem label="Linux">
+    套件管理器只會移除應用程式；使用者資料會留下——這同樣是 Linux 的慣例。想要完整清除，
+    請先執行**設定 → 重設所有設定**，再移除套件或 AppImage。GNOME 的觸發器擴充功能可以用
+    `gnome-extensions uninstall copycopy@sincekmori.github.io` 移除。
+  </TabItem>
+</Tabs>
+
+## 支援哪些 Linux 環境？
+
+**Wayland 上的 GNOME，以及 X11。**
+在 GNOME Wayland 上，背景程序在設計上無法觀察按鍵或剪貼簿，所以 ZenCopy（透過 [`copycopy`](https://crates.io/crates/copycopy) crate）附帶了一個小型 GNOME Shell 擴充功能，從 compositor 內部偵測連續兩次複製。
+它會在第一次啟動時自動安裝到你的使用者目錄（不需要 sudo），登出再登入一次後生效。
+在 X11 上，一般的被動按鍵監聽即可運作，和 Windows 相同。
+其他 Wayland compositor（KDE Plasma、以 wlroots 為基礎的環境）沒有免特權觀察觸發訊號的途徑，目前尚不支援——應用程式可以執行，但觸發器不會有反應。
+
+## 常駐圖示沒有顯示（Linux）
+
+ZenCopy 的常駐圖示使用 AppIndicator 協定。
+Ubuntu 的 GNOME 內建支援它，但原生 GNOME（例如 Fedora）在安裝 **AppIndicator and KStatusNotifierItem Support** Shell 擴充功能之前不會顯示任何東西。
+無論如何，應用程式本身都能運作——常駐選單只是入口之一。

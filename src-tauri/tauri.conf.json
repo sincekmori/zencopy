@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "ZenCopy",
+  "identifier": "app.zencopy",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "bun run dev",
+    "beforeBuildCommand": "bun run build"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "settings",
+        "title": "ZenCopy",
+        "width": 640,
+        "height": 720,
+        "minWidth": 480,
+        "minHeight": 520,
+        "resizable": true,
+        "center": true,
+        "visible": false,
+        "dragDropEnabled": false
+      },
+      {
+        "label": "popup",
+        "width": 380,
+        "height": 360,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "shadow": false,
+        "focus": false,
+        "visible": false
+      },
+      {
+        "label": "about",
+        "title": "ZenCopy",
+        "width": 360,
+        "height": 440,
+        "resizable": false,
+        "center": true,
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY0ODc2QjE0NkVBQjIyQTcKUldTbklxdHVGR3VIOUJobUcwdm9uOHJaTjlQeTY3cnB3WDlhRENFYkhUTFFMVmF2K1hKSlFvSWkK",
+      "endpoints": ["https://github.com/sincekmori/zencopy/releases/latest/download/latest.json"]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "createUpdaterArtifacts": true,
+    "copyright": "© 2026 Shinsuke Mori",
+    "windows": {
+      "wix": {
+        "fragmentPaths": ["windows/purge-app-data.wxs"],
+        "componentRefs": ["PurgeAppData"]
+      },
+      "nsis": {
+        "installerIcon": "icons/icon.ico"
+      }
+    },
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

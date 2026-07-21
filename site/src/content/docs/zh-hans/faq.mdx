@@ -1,0 +1,104 @@
+---
+title: FAQ
+description: 费用、隐私、与其他应用的冲突，以及遇到问题时怎么办。
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## 需要付费吗？
+
+ZenCopy 本身是免费的开源软件（Apache-2.0）。
+没有账号，也没有订阅。
+
+AI 服务收不收费，是你和那家服务之间的事。
+使用 [Google 的免费额度](/zh-hans/getting-started/)则完全免费 — 只要不登记付款方式，就不可能被扣费。
+而如果用完全在你自己电脑上运行的 AI（例如 Ollama），根本就不存在需要付费的外部服务。
+
+## 我复制的内容会去哪里？
+
+只有当你复制两次时，内容才会**直接发送给你配置的 AI 服务** — 除此之外哪里都不去。
+没有 ZenCopy 的服务器，没有中转，也没有使用情况追踪（遥测）。
+你的 API 密钥同样绝不离开你的电脑。
+
+## 普通的复制会触发什么吗？
+
+不会。
+单独一次 <span data-os-modifier>Ctrl/⌘</span> + C 什么都不启动、什么都不读取、什么都不发送。
+只有快速连续的两次复制才是信号。
+即便如此，被其他应用（例如密码管理器）标记为机密的剪贴板内容也会被忽略。
+
+## AI 的回答有多可信？
+
+AI 可能一本正经地说错话。
+用它把握一段文字的大意确实很有用，但涉及数字、名称，以及任何后果重大的内容 — 合同、医疗文本 — 请先对照原文核实，再据此行动。
+
+## 它和其他“选中即用 AI”的工具有什么不同？
+
+这个领域的多数工具只支持 macOS、只处理选中的文本，并且绑定在某一家的 AI 或某种订阅上。
+ZenCopy 运行在 **Windows、macOS 和 Linux** 上，能处理**文本、富文本、图片和文件**，并且 **AI 服务由你来选**（OpenAI / Google / Anthropic / 企业网关 / 本地 Ollama）。
+[运行哪个动作也由你决定](/zh-hans/configuration/#routingjson)。
+无账号、无订阅、无遥测 — 开源软件。
+
+## 另一个应用也响应 Ctrl/⌘ + C + C（例如 DeepL）
+
+没有任何应用能在操作系统层面独占“复制两次”这个信号。
+如果另一个应用也在监听同一个信号（DeepL 是最有名的一个），**两边**都会响应，出现两个弹窗。
+ZenCopy 不拦截、不屏蔽任何按键事件，所以不会有东西坏掉 — 症状仅此而已。
+在你用得较少的那个应用里关掉这个快捷键即可（DeepL：设置 → 通用 → 翻译快捷键）。
+
+## 弹窗一直不出现（macOS）
+
+几乎可以肯定是权限问题。
+在系统设置 → 隐私与安全性中，为 ZenCopy 同时允许**输入监控**和**辅助功能**，然后退出并重新启动应用。
+（应用正是靠这两项权限来察觉复制被按了两次。）
+
+## 没有返回结果 / 提示超时
+
+如果响应静默超过 90 秒，ZenCopy 会判定这次运行失败，而不是无限等下去。
+请检查网络连接和 AI 服务的设置（API 密钥等），然后点**重试**。
+本地 AI 第一次加载可能需要一段时间，所以这个超时时间特意设得比较宽裕。
+
+## 日志在哪里？
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+日志中绝不包含你复制的内容或 API 密钥。
+
+## 卸载会删除什么？
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    `.msi` 的卸载会删除全部内容：设置、API 密钥、自定义动作、日志和 webview
+    配置。`.exe`（NSIS）卸载程序则会用一个**删除应用数据**复选框来询问。（两种方式都可能留下一处无害的残留：如果启用过登录时启动，注册表里可能残留一条指向空目标的条目
+    — Windows 会忽略目标不存在的条目。）
+  </TabItem>
+  <TabItem label="macOS">
+    把应用拖进废纸篓并不会删除它的数据 — 这是 macOS 的惯例，ZenCopy
+    也遵循它。想彻底清除，请先运行**设置 → 重置所有设置**（会删除包括 API
+    密钥在内的所有设置；日志会为诊断保留，想真正干干净净就手动删除
+    `~/Library/Logs/app.zencopy`），然后再把应用移到废纸篓。
+  </TabItem>
+  <TabItem label="Linux">
+    包管理器只移除应用本身；用户数据会留下 — 这同样是 Linux 的惯例。想彻底清除，请先运行**设置 →
+    重置所有设置**，再移除软件包或 AppImage。GNOME 触发器扩展可以用 `gnome-extensions uninstall
+    copycopy@sincekmori.github.io` 移除。
+  </TabItem>
+</Tabs>
+
+## 支持哪些 Linux 环境？
+
+**Wayland 上的 GNOME，以及 X11。**
+在 GNOME Wayland 上，后台进程在设计上无法观察按键或剪贴板，所以 ZenCopy（通过 [`copycopy`](https://crates.io/crates/copycopy) crate）附带了一个小型 GNOME Shell 扩展，从合成器内部检测两次复制。
+它在首次启动时自动安装到你的用户配置目录（无需 sudo），注销并重新登录一次后生效。
+在 X11 上，和 Windows 一样，普通的被动按键监听即可工作。
+其他 Wayland 合成器（KDE Plasma、基于 wlroots 的）没有提供无特权观察触发信号的途径，目前不支持 — 应用可以运行，但触发器保持沉默。
+
+## 托盘图标不显示（Linux）
+
+ZenCopy 的托盘图标使用 AppIndicator 协议。
+Ubuntu 的 GNOME 开箱即支持，但原版 GNOME（例如 Fedora）在安装 **AppIndicator and KStatusNotifierItem Support** 这个 Shell 扩展之前什么都不显示。
+无论哪种情况，应用本身都正常工作 — 托盘菜单只是入口之一。

@@ -1,0 +1,108 @@
+---
+title: FAQ
+description: Kosten, Datenschutz, Konflikte mit anderen Apps und Fehlerbehebung.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Kostet es etwas?
+
+ZenCopy selbst ist kostenlose Open-Source-Software (Apache-2.0).
+Es gibt kein Konto und kein Abo.
+
+Was der KI-Dienst berechnet, ist eine Sache zwischen dir und diesem Dienst.
+Mit dem [kostenlosen Kontingent von Google](/de/getting-started/) ist es komplett kostenlos — solange du keine Zahlungsmethode hinterlegst, kann dir nichts berechnet werden.
+Und bei einer KI, die vollständig auf deinem eigenen Computer läuft (zum Beispiel Ollama), gibt es von vornherein keinen externen Dienst, den man bezahlen müsste.
+
+## Wohin gehen meine kopierten Inhalte?
+
+Nur wenn du zweimal kopierst, geht der Inhalt **direkt an den KI-Dienst, den du eingerichtet hast** — und nirgendwo sonst hin.
+Es gibt keinen ZenCopy-Server, kein Relay und keine Nutzungserfassung (Telemetrie).
+Auch dein API-Schlüssel verlässt dein Gerät nie.
+
+## Löst ein gewöhnliches Kopieren irgendetwas aus?
+
+Nein.
+Ein einzelnes <span data-os-modifier>Ctrl/⌘</span> + C startet nichts, liest nichts und sendet nichts.
+Nur zwei Kopiervorgänge kurz hintereinander sind das Signal.
+Und selbst dann werden Zwischenablage-Inhalte ignoriert, die andere Apps als vertraulich markieren (zum Beispiel Passwort-Manager).
+
+## Wie sehr kann ich den Antworten der KI vertrauen?
+
+KI kann wortgewandt falschliegen.
+Sie ist wirklich nützlich, um den Kern eines Textes zu erfassen — aber bei Zahlen, Namen und allem mit Folgen (Verträge, medizinische Texte) prüfe gegen das Original, bevor du danach handelst.
+
+## Was unterscheidet das von anderen „KI auf Auswahl“-Tools?
+
+Die meisten Tools in diesem Bereich gibt es nur für macOS, sie funktionieren nur mit ausgewähltem Text und sind an die KI eines Anbieters oder ein Abo gebunden.
+ZenCopy läuft auf **Windows, macOS und Linux**, verarbeitet **Text, formatierten Text, Bilder und Dateien**, und **du wählst den KI-Dienst** (OpenAI / Google / Anthropic / ein Firmen-Gateway / lokales Ollama).
+[Auch welche Aktion läuft, entscheidest du](/de/configuration/#routingjson).
+Kein Konto, kein Abo, keine Telemetrie — Open-Source-Software.
+
+## Eine andere App reagiert ebenfalls auf Ctrl/⌘ + C + C (z. B. DeepL)
+
+Keine App kann das Signal „zweimal kopieren“ auf Betriebssystemebene für sich beanspruchen.
+Wenn eine andere App auf dasselbe Signal lauscht (DeepL ist das bekannte Beispiel), reagieren **beide**, und zwei Popups erscheinen.
+ZenCopy fängt keine Tastenereignisse ab und blockiert keine — es geht also nichts kaputt, das ist schon das ganze Symptom.
+Deaktiviere die Tastenkombination in der App, die du seltener nutzt (bei DeepL: Einstellungen → Allgemein → Tastenkombination zum Übersetzen).
+
+## Das Popup erscheint nie (macOS)
+
+Fast sicher eine Frage der Berechtigungen.
+Erlaube ZenCopy unter Systemeinstellungen → Datenschutz & Sicherheit sowohl **Eingabeüberwachung** als auch **Bedienungshilfen**, und beende und starte die App danach neu.
+(Über diese beiden Berechtigungen bemerkt die App, dass Kopieren zweimal gedrückt wurde.)
+
+## Es kommt kein Ergebnis zurück / es heißt, die Zeit sei abgelaufen
+
+Bleibt die Antwort 90 Sekunden lang still, bricht ZenCopy den Lauf ab, statt ewig zu warten.
+Prüfe deine Internetverbindung und die Einstellungen des KI-Dienstes (API-Schlüssel und so weiter) und drücke dann **Erneut versuchen**.
+Eine lokale KI kann beim ersten Mal eine Weile zum Laden brauchen — deshalb ist die Zeitgrenze bewusst großzügig.
+
+## Wo liegen die Logs?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Logs enthalten nie deine kopierten Inhalte oder API-Schlüssel.
+
+## Was entfernt eine Deinstallation?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Die `.msi`-Deinstallation entfernt alles: Einstellungen, API-Schlüssel, eigene Aktionen, Logs
+    und das Webview-Profil. Der `.exe`-Deinstaller (NSIS) fragt stattdessen mit einer Checkbox
+    **Anwendungsdaten löschen** nach. (Ein harmloser Rest in beiden Fällen: War „Bei Anmeldung
+    starten“ aktiviert, kann ein ins Leere zeigender Registry-Eintrag zurückbleiben — Windows
+    ignoriert Einträge, deren Ziel nicht existiert.)
+  </TabItem>
+  <TabItem label="macOS">
+    Die App in den Papierkorb zu ziehen löscht ihre Daten nicht — das ist die macOS-Konvention, und
+    ZenCopy hält sich daran. Für eine vollständige Bereinigung führe zuerst **Einstellungen → Alle
+    Einstellungen zurücksetzen** aus (entfernt alle Einstellungen inklusive API-Schlüssel; Logs
+    bleiben für die Diagnose erhalten — lösche `~/Library/Logs/app.zencopy` von Hand, wenn wirklich
+    nichts übrig bleiben soll) und wirf die App danach in den Papierkorb.
+  </TabItem>
+  <TabItem label="Linux">
+    Paketmanager entfernen nur die App; Benutzerdaten bleiben — ebenfalls die Linux-Konvention. Für
+    eine vollständige Bereinigung führe zuerst **Einstellungen → Alle Einstellungen zurücksetzen**
+    aus und entferne dann das Paket oder das AppImage. Die GNOME-Trigger-Erweiterung lässt sich mit
+    `gnome-extensions uninstall copycopy@sincekmori.github.io` entfernen.
+  </TabItem>
+</Tabs>
+
+## Welche Linux-Umgebungen werden unterstützt?
+
+**GNOME unter Wayland sowie X11.**
+Unter GNOME Wayland können Hintergrundprozesse konstruktionsbedingt weder Tasten noch die Zwischenablage beobachten, deshalb bringt ZenCopy (über das [`copycopy`](https://crates.io/crates/copycopy)-Crate) eine kleine GNOME-Shell-Erweiterung mit, die das doppelte Kopieren aus dem Inneren des Compositors erkennt.
+Sie wird beim ersten Start automatisch in dein Benutzerprofil installiert (ohne sudo) und wird aktiv, nachdem du dich einmal ab- und wieder angemeldet hast.
+Unter X11 funktioniert ein gewöhnlicher passiver Tasten-Listener, wie unter Windows.
+Andere Wayland-Compositor (KDE Plasma, wlroots-basierte) bieten keinen unprivilegierten Weg, den Trigger zu beobachten, und werden noch nicht unterstützt — die App läuft, aber der Trigger bleibt stumm.
+
+## Das Tray-Symbol taucht nicht auf (Linux)
+
+Das Tray-Symbol von ZenCopy nutzt das AppIndicator-Protokoll.
+Ubuntus GNOME unterstützt es von Haus aus, aber pures GNOME (zum Beispiel Fedora) zeigt nichts an, bis die Shell-Erweiterung **AppIndicator and KStatusNotifierItem Support** installiert ist.
+So oder so funktioniert die App selbst — das Tray-Menü ist nur einer von mehreren Zugängen.

@@ -1,0 +1,77 @@
+---
+/**
+ * The bare domain carries no content of its own: it sends the visitor to the
+ * best-matching locale by browser language, client-side (the site is
+ * statically hosted, so there is no server to negotiate Accept-Language).
+ * The matching mirrors the app's locale_from_tag (src-tauri/src/lib.rs).
+ * No-JS visitors fall through to the meta refresh onto /en/, which has a
+ * visible language selector.
+ */
+import { LANDING_LOCALES } from "../components/landing-copy.ts";
+
+const codes = LANDING_LOCALES.filter((entry) => entry.code !== "en").map(
+  (entry) => entry.code,
+);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>ZenCopy</title>
+    <meta content="noindex" name="robots" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    {
+      LANDING_LOCALES.map((entry) => (
+        <link
+          href={`https://zencopy.app/${entry.code}/`}
+          hreflang={entry.lang}
+          rel="alternate"
+        />
+      ))
+    }
+    <link href="https://zencopy.app/" hreflang="x-default" rel="alternate" />
+    <script define:vars={{ codes }} is:inline>
+      const pick = (raw) => {
+        const tag = (raw ?? "").toLowerCase();
+        if (tag.startsWith("zh")) {
+          return ["hant", "tw", "hk", "mo"].some((hint) => tag.includes(hint))
+            ? "zh-hant"
+            : "zh-hans";
+        }
+        if (tag.startsWith("pt")) {
+          return "pt-br";
+        }
+        return codes.find((code) => tag.startsWith(code));
+      };
+      (() => {
+        const languages = navigator.languages ?? [navigator.language];
+        for (const tag of languages) {
+          const code = pick(tag);
+          if (code) {
+            location.replace(`/${code}/`);
+            return;
+          }
+        }
+        location.replace("/en/");
+      })();
+    </script>
+    <noscript>
+      <meta content="0; url=/en/" http-equiv="refresh" />
+    </noscript>
+  </head>
+  <body>
+    <p>
+      {
+        LANDING_LOCALES.map((entry, index) => (
+          <>
+            {index > 0 && " · "}
+            <a href={`/${entry.code}/`} lang={entry.lang}>
+              {entry.label}
+            </a>
+          </>
+        ))
+      }
+    </p>
+  </body>
+</html>

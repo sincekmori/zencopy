@@ -1,0 +1,107 @@
+---
+title: Câu hỏi thường gặp
+description: Chi phí, quyền riêng tư, xung đột với ứng dụng khác và cách khắc phục sự cố.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Có tốn tiền không?
+
+Bản thân ZenCopy là phần mềm mã nguồn mở miễn phí (Apache-2.0).
+Không có tài khoản và không có phí thuê bao.
+
+Dịch vụ AI thu phí thế nào là chuyện giữa bạn và dịch vụ đó.
+Với [gói miễn phí của Google](/vi/getting-started/), hoàn toàn miễn phí — chừng nào bạn chưa đăng ký phương thức thanh toán, bạn không thể bị tính tiền.
+Còn với AI chạy hoàn toàn trên máy tính của bạn (ví dụ Ollama), ngay từ đầu đã không có dịch vụ bên ngoài nào để trả tiền.
+
+## Nội dung tôi sao chép đi đâu?
+
+Chỉ khi bạn sao chép hai lần, nội dung mới được gửi **thẳng đến dịch vụ AI bạn đã cấu hình** — và không đi đâu khác.
+Không có máy chủ ZenCopy, không có trung gian, và không có theo dõi sử dụng (telemetry).
+Khóa API của bạn cũng không bao giờ rời khỏi máy.
+
+## Sao chép bình thường có kích hoạt gì không?
+
+Không.
+Một lần <span data-os-modifier>Ctrl/⌘</span> + C không khởi động gì, không đọc gì và không gửi gì.
+Chỉ hai lần sao chép liên tiếp thật nhanh mới là tín hiệu.
+Ngay cả khi đó, nội dung bộ nhớ tạm được các ứng dụng khác đánh dấu là bảo mật (ví dụ trình quản lý mật khẩu) vẫn bị bỏ qua.
+
+## Có thể tin câu trả lời của AI đến mức nào?
+
+AI có thể sai một cách rất trôi chảy.
+Nó thực sự hữu ích để nắm đại ý của một văn bản, nhưng với con số, tên riêng và mọi thứ hệ trọng — hợp đồng, nội dung y tế — hãy đối chiếu với bản gốc trước khi hành động dựa trên đó.
+
+## Khác gì các công cụ "AI trên vùng chọn" khác?
+
+Phần lớn công cụ trong mảng này chỉ chạy trên macOS, chỉ xử lý văn bản được chọn, và bị gắn với AI của một hãng hoặc một gói thuê bao.
+ZenCopy chạy trên **Windows, macOS và Linux**, xử lý **văn bản, văn bản định dạng, hình ảnh và tệp**, và để **bạn chọn dịch vụ AI** (OpenAI / Google / Anthropic / gateway công ty / Ollama chạy tại máy).
+[Hành động nào chạy cũng do bạn quyết định](/vi/configuration/#routingjson).
+Không tài khoản, không thuê bao, không telemetry — phần mềm mã nguồn mở.
+
+## Một ứng dụng khác cũng phản ứng với Ctrl/⌘ + C + C (ví dụ DeepL)
+
+Không ứng dụng nào có thể độc chiếm tín hiệu "sao chép hai lần" ở cấp hệ điều hành.
+Nếu một ứng dụng khác cũng đang lắng nghe cùng tín hiệu đó (DeepL là ví dụ nổi tiếng nhất), **cả hai** cùng phản ứng và hai cửa sổ nổi hiện ra.
+ZenCopy không chặn cũng không can thiệp bất kỳ sự kiện phím nào, nên không có gì hỏng — hiện tượng chỉ có vậy.
+Hãy tắt phím tắt trong ứng dụng bạn ít dùng hơn (với DeepL: Settings → General → phím tắt dịch).
+
+## Cửa sổ nổi không bao giờ hiện ra (macOS)
+
+Gần như chắc chắn là do quyền hệ thống.
+Cho phép cả **Input Monitoring** và **Accessibility** cho ZenCopy trong System Settings → Privacy & Security, rồi thoát và khởi động lại ứng dụng.
+(Hai quyền này là cách ứng dụng nhận biết thao tác sao chép được nhấn hai lần.)
+
+## Không có kết quả trả về / báo hết thời gian chờ
+
+Nếu phản hồi im lặng suốt 90 giây, ZenCopy kết thúc lượt chạy với lỗi thay vì chờ mãi.
+Kiểm tra kết nối mạng và cài đặt dịch vụ AI (khóa API, v.v.), rồi nhấn **Thử lại**.
+AI chạy tại máy có thể mất một lúc để nạp lần đầu, vì vậy thời gian chờ được cố ý đặt rộng rãi.
+
+## Nhật ký nằm ở đâu?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Nhật ký không bao giờ chứa nội dung bạn sao chép hay khóa API.
+
+## Gỡ cài đặt sẽ xóa những gì?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Trình gỡ cài đặt của bản `.msi` xóa mọi thứ: cài đặt, khóa API, hành động tự tạo, nhật ký và hồ
+    sơ webview. Trình gỡ cài đặt `.exe` (NSIS) thì hỏi bằng ô chọn **Delete application data**. (Một
+    thứ vô hại có thể còn sót lại trong cả hai trường hợp: nếu tính năng khởi động khi đăng nhập
+    từng được bật, một mục registry trỏ vào chỗ trống có thể còn lại — Windows bỏ qua các mục có
+    đích không tồn tại.)
+  </TabItem>
+  <TabItem label="macOS">
+    Kéo ứng dụng vào Thùng rác không xóa dữ liệu của nó — đó là quy ước của macOS, và ZenCopy tuân
+    theo. Để xóa sạch hoàn toàn, trước tiên chạy **Cài đặt → Đặt lại toàn bộ cài đặt** (xóa mọi cài
+    đặt gồm cả khóa API; nhật ký được giữ lại để chẩn đoán, nên hãy tự xóa
+    `~/Library/Logs/app.zencopy` nếu muốn sạch tuyệt đối), sau đó bỏ ứng dụng vào Thùng rác.
+  </TabItem>
+  <TabItem label="Linux">
+    Trình quản lý gói chỉ gỡ ứng dụng; dữ liệu người dùng vẫn còn — cũng là quy ước của Linux. Để
+    xóa sạch hoàn toàn, trước tiên chạy **Cài đặt → Đặt lại toàn bộ cài đặt**, sau đó gỡ gói hoặc
+    AppImage. Tiện ích mở rộng kích hoạt cho GNOME gỡ được bằng `gnome-extensions uninstall
+    copycopy@sincekmori.github.io`.
+  </TabItem>
+</Tabs>
+
+## Những môi trường Linux nào được hỗ trợ?
+
+**GNOME trên Wayland, và X11.**
+Trên GNOME Wayland, tiến trình chạy nền theo thiết kế không thể quan sát phím bấm hay bộ nhớ tạm, vì vậy ZenCopy (qua crate [`copycopy`](https://crates.io/crates/copycopy)) đi kèm một tiện ích mở rộng GNOME Shell nhỏ phát hiện thao tác sao chép hai lần từ bên trong compositor.
+Nó được tự động cài vào hồ sơ người dùng của bạn ở lần khởi động đầu tiên (không cần sudo) và hoạt động sau khi đăng xuất rồi đăng nhập lại một lần.
+Trên X11, một trình lắng nghe phím thụ động thông thường hoạt động được, như trên Windows.
+Các compositor Wayland khác (KDE Plasma, các bản dựa trên wlroots) không có cách nào quan sát thao tác kích hoạt mà không cần đặc quyền, nên chưa được hỗ trợ — ứng dụng vẫn chạy, nhưng trình kích hoạt nằm im.
+
+## Biểu tượng khay hệ thống không hiện ra (Linux)
+
+Biểu tượng khay hệ thống của ZenCopy dùng giao thức AppIndicator.
+GNOME của Ubuntu hỗ trợ sẵn, nhưng GNOME nguyên bản (ví dụ Fedora) không hiển thị gì cho đến khi cài tiện ích mở rộng Shell **AppIndicator and KStatusNotifierItem Support**.
+Dù thế nào, bản thân ứng dụng vẫn hoạt động — menu khay chỉ là một lối vào.

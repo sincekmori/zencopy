@@ -1,0 +1,78 @@
+[package]
+name = "zencopy"
+version = "0.1.0"
+description = "ZenCopy — copy twice, act instantly"
+license = "Apache-2.0"
+edition = "2024"
+
+# The library that powers the app. Kept separate from the binary so the same
+# code can drive desktop and (future) mobile entry points. Desktop links only
+# the rlib; add "staticlib" (iOS) and "cdylib" (Android) back when mobile
+# work starts — declaring them now just makes every release build link two
+# artifacts nothing uses (expensive under fat LTO).
+[lib]
+name = "zencopy_lib"
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "image-png", "macos-private-api"] }
+tauri-plugin-single-instance = "2"
+tauri-plugin-store = "2"
+tauri-plugin-log = "2"
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-autostart = "2"
+# Open the repository URL in the user's default browser (About window).
+tauri-plugin-opener = "2"
+# Auto-update from GitHub Releases (signed artifacts + latest.json), applied
+# from the About window; process provides the relaunch after install.
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+log = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Action files: YAML frontmatter parsing + `{{now}}` template variable.
+serde_yaml_ng = "0.10"
+chrono = "0.4"
+uuid = { version = "1", features = ["v4"] }
+# Encode captured images as PNG data URLs for the popup preview.
+base64 = "0.22"
+# Detect the OS locale to label native chrome (the tray menu).
+sys-locale = "0.3"
+# OS name/version for the startup log banner (issue-report context).
+os_info = { version = "3", default-features = false }
+# Detect attachment types from magic bytes — file contents, not extensions.
+infer = { version = "0.19", default-features = false }
+# Text-file decoding, browser-grade: chardetng guesses the legacy encoding
+# (Shift_JIS on Japanese Windows, …), encoding_rs decodes it to UTF-8.
+encoding_rs = "0.8"
+chardetng = "1.0"
+# Rich (HTML) copies become Markdown for {{ text }} — the popup renders
+# Markdown, so inline code, bold, and links survive the round trip.
+htmd = "0.5"
+
+# The engine: detects the global Ctrl/Cmd+C+C trigger and hands us a
+# CaptureEvent. Windows, macOS, and Linux (GNOME Wayland via a bundled Shell
+# extension, X11 via a key listener).
+copycopy = "0.3.2"
+
+# Native file-open dialog — "import an action from a .md file" in settings
+# (Rust-side only; the webview never gains dialog permissions).
+tauri-plugin-dialog = "2"
+
+# Linux focus workaround: present windows with a fresh X server timestamp so
+# Mutter's focus-stealing prevention accepts the request (see
+# `focus_with_server_time` in lib.rs). Both crates are already in the tree
+# via tauri/tao — this only makes them a direct dependency.
+[target.'cfg(target_os = "linux")'.dependencies]
+gtk = "0.18"
+gdkx11 = "0.18"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

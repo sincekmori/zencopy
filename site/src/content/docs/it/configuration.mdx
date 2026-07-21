@@ -1,0 +1,185 @@
+---
+title: Configurazione
+description: Cosa offre la finestra delle impostazioni (per tutti), e la personalizzazione fine tramite file di configurazione (per utenti esperti).
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+ZenCopy funziona subito, senza configurare nulla.
+Questa pagina è per quando vuoi che ti si adatti meglio.
+La prima metà, sulla **finestra delle impostazioni**, è per tutti; la seconda metà, sui **file di configurazione**, è per utenti esperti.
+
+## La finestra delle impostazioni
+
+Aprila dal menu dell'icona nella barra di sistema, o dall'icona a ingranaggio sul popup.
+Ha tre schede: **Generali, IA e Azioni**.
+
+### Generali
+
+- **Posizione del popup** — in quale angolo dello schermo appaiono i risultati.
+- **Tema** — chiaro / scuro / segui il sistema.
+- **Lingua** — la lingua dell'interfaccia (segue il sistema operativo per impostazione predefinita).
+- **Avvia all'accesso** — avere ZenCopy pronto ogni volta che il computer è acceso.
+- **Conferma prima di inviare** — se chiedere una conferma prima che immagini o file vadano all'IA.
+
+### IA
+
+Qui cambi il servizio di IA (provider, modello, chiave API).
+Il pulsante **Prova** ti dice subito se la connessione funziona.
+
+La scheda ha anche un campo **Su di te**.
+È uno spazio dove descrivere il tuo ruolo e le tue preferenze in poche frasi semplici, in qualsiasi lingua.
+
+> Esempio: "Commerciale. Scrivo soprattutto e-mail ai clienti — cortesi ma non rigide, la conclusione per prima."
+
+Con questo campo compilato, ogni azione adatta i risultati a te.
+Le spiegazioni arrivano al tuo livello di conoscenza, e le bozze tornano nel tono che preferisci.
+Non influisce mai sui compiti non pertinenti, e il testo in sé non compare mai nei risultati.
+
+### Azioni
+
+L'elenco di "cosa succede dopo una doppia copia".
+
+- Le azioni preinstallate possono essere aperte e lette — fanno anche da esempi svolti.
+- Una **nuova azione** richiede solo un nome e cosa vuoi che faccia.
+  Per esempio: nome "Riassunto in 3 righe", istruzione "Riassumi in 3 righe".
+- Non ti senti sicuro nello scrivere le istruzioni? Annota all'incirca cosa vuoi e premi **Bozza con IA** — l'IA che hai configurato la trasforma in un'istruzione ben formulata.
+- La ★ indica l'azione predefinita — quella che una doppia copia esegue per prima.
+- **Routing** ti permette di scegliere un'azione diversa per ogni tipo di contenuto (testo / immagine / file).
+
+Le azioni che crei possono essere condivise: **Esporta (.md)** ne scrive una come file, e chi la riceve non deve far altro che incollarla in **Importa** o scegliere il file.
+
+## File di configurazione (per utenti esperti)
+
+Da qui in poi, questa pagina parla di modificare direttamente file di testo.
+**Tutto l'essenziale è disponibile dalla finestra delle impostazioni, quindi puoi tranquillamente smettere di leggere qui.**
+
+I file vengono letti dalla directory di configurazione dell'app, per utente.
+Il percorso esatto viene anche scritto nel log all'avvio:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%APPDATA%\app.zencopy`</TabItem>
+  <TabItem label="macOS">`~/Library/Application Support/app.zencopy`</TabItem>
+  <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
+</Tabs>
+
+I valori predefiniti del routing sono incorporati nell'app; `routing.json` non fa altro che **sovrascriverli**.
+I file delle azioni sono **additivi**:
+definiscono nuove azioni, e le integrate sono intoccabili (un file locale che rivendica l'id di un'azione integrata viene ignorato).
+Le modifiche si applicano al trigger successivo — nessun riavvio necessario.
+
+### `ai-sdk-catalog.json`
+
+I provider più una mappatura **role → model**.
+La casa del formato di file è [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — ogni campo è documentato lì (incluso uno `$schema` per la validazione e il completamento nell'editor), e [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) contiene configurazioni in tre taglie.
+Per punti di partenza in stile ZenCopy (ciò che scrive l'interfaccia delle impostazioni, Ollama in locale, role per le azioni), vedi le [Ricette](/it/recipes/).
+
+Le chiavi API vanno direttamente in questo file locale (l'interfaccia delle impostazioni scrive lo stesso formato); non lasciano mai la tua macchina.
+Le variabili d'ambiente non vengono lette — le app con interfaccia grafica sono avviate dal sistema operativo, non dalla tua shell, quindi le variabili esportate in `.zshrc` e simili non le raggiungono mai.
+Il file viene validato con lo schema a ogni lettura.
+Una modifica errata appare come messaggio chiaro nel popup e nell'editor delle impostazioni — niente fallisce in silenzio.
+
+### `routing.json`
+
+Quale azione gestisce quale tipo di cattura:
+una mappa piatta `kind → action` più un elenco `overrides` opzionale e a priorità più alta (vince la prima corrispondenza).
+I quattro kind sono `text`, `rich_text`, `image` e `files`; in partenza il testo è instradato su Zen, immagini e file su Spiega.
+La mappa piatta è modificabile nell'app (Impostazioni → Azioni → Routing), quindi devi toccare questo file solo per gli `overrides`.
+
+```json
+{
+  "text": "zen",
+  "rich_text": "zen",
+  "image": "explain",
+  "files": "explain",
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+}
+```
+
+Condizioni di `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tutte con wildcard `*`), più `min_chars` / `max_chars`.
+
+Per le catture `image` e `files`, il contenuto stesso viene inviato al modello (fino a 10 MB totali per cattura).
+I tipi di file sono rilevati dal **contenuto**, non dai nomi:
+immagini, PDF e audio vengono allegati così come sono, mentre i file di testo (Markdown, codice sorgente, CSV, …) diventano il testo della cattura (`{{ text }}`) e si comportano esattamente come se ne avessi copiato il contenuto.
+Le codifiche dei caratteri vengono rilevate automaticamente, convertendo formati datati come Shift_JIS e UTF-16.
+Tutto il resto viene rifiutato con un messaggio chiaro.
+I percorsi completi viaggiano insieme ai contenuti, così il modello può distinguere i file e sa dove si trovano.
+Poiché gli allegati binari possono costare più del testo, il popup chiede prima di inviarli (i file di testo partono senza conferma) — la conferma si può disattivare lì stesso o nelle Impostazioni.
+
+### `actions/*.md`
+
+Un file = un'azione: frontmatter YAML + un corpo del prompt in [Liquid](https://liquidjs.com).
+Lo stesso singolo file è anche il formato di condivisione — Impostazioni → Azioni → Importa lo accetta come testo incollato o come file scelto.
+
+```markdown
+---
+id: summarize
+label: Riassumi
+role: default
+instructions: Sei un assistente conciso.
+---
+
+Riassumi in 3 righe, in {{ locale }}:
+
+{{ text }}
+```
+
+| Frontmatter    | Significato                                                      |
+| -------------- | ---------------------------------------------------------------- |
+| `id`           | Nome referenziato da `routing.json` (predefinito: nome del file) |
+| `label`        | Mostrato nel popup                                               |
+| `role`         | Role del catalog con cui eseguire (predefinito: `default`)       |
+| `instructions` | Prompt di sistema (template Liquid)                              |
+
+Variabili di template, con valori d'esempio per un paragrafo copiato in un browser:
+
+| Variabile            | Esempio                                                        |
+| -------------------- | -------------------------------------------------------------- |
+| `{{ text }}`         | Il testo copiato (le copie HTML formattate diventano Markdown) |
+| `{{ markup }}`       | Il sorgente HTML/RTF di una copia formattata                   |
+| `{{ format }}`       | `html` (o `rtf`; vuoto per le copie semplici)                  |
+| `{{ app_name }}`     | `Safari`                                                       |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                        |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`               |
+| `{{ window_title }}` | `Pricing – Example`                                            |
+| `{{ url }}`          | `https://example.com/pricing` (solo browser)                   |
+| `{{ process_id }}`   | `8123`                                                         |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                          |
+| `{{ locale }}`       | `it`                                                           |
+
+C'è anche un filtro `language_name` specifico di ZenCopy: `{{ locale | language_name }}` si espande in "Italian" invece di "it", che in un prompt suona naturale.
+Per vedere i valori reali, attiva la **modalità sviluppatore** nelle Impostazioni — le variabili di template di ogni cattura appaiono nel popup come JSON.
+
+Le azioni semplici (un nome e un'istruzione) si possono creare anche dalla finestra delle impostazioni; ciò che scrive è esattamente questo formato di file.
+
+#### Template avanzati
+
+Sia il frontmatter `instructions` sia il corpo sono template [LiquidJS](https://liquidjs.com/tags/overview.html) completi: condizioni, cicli e [filtri](https://liquidjs.com/filters/overview.html) funzionano tutti.
+Una singola azione può adattarsi alla provenienza della copia:
+
+```markdown
+---
+id: context-aware
+label: Sensibile al contesto
+---
+
+{% if url contains "github.com" %}
+Rivedi questo codice e indica il singolo rischio più grande:
+{% elsif app_name == "Slack" %}
+Riassumi questa conversazione in 2 righe:
+{% else %}
+Spiega questo in {{ locale }}:
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+## Log
+
+I log strutturati (segreti e contenuti copiati oscurati) vanno al terminale in sviluppo e a un file a rotazione in release:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>

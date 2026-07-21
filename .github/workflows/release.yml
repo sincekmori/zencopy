@@ -1,0 +1,72 @@
+name: Release
+
+# Push a tag like v0.1.0 to build installers and open a draft GitHub release.
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            args: "--target universal-apple-darwin"
+          - os: windows-latest
+            args: ""
+          - os: ubuntu-latest
+            args: ""
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+
+      # Tauri v2 system libraries, plus the X11 headers rdev (copycopy's Linux
+      # key listener) compiles against.
+      - name: Install Linux system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file \
+            libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev \
+            libx11-dev libxtst-dev libxi-dev
+
+      - uses: oven-sh/setup-bun@v2
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.os == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # Builds the frontend (beforeBuildCommand) + the app, then uploads the
+      # bundles and the updater artifacts (signed installers + latest.json) to
+      # a draft release. Secrets: TAURI_SIGNING_PRIVATE_KEY holds the contents
+      # of the updater private key, ..._PASSWORD its password ("" if none).
+      # OS code signing (notarization etc.) is a separate, later concern.
+      #
+      # updaterJsonPreferNsis: bundle.targets is "all", so Windows builds both
+      # MSI and NSIS — point latest.json at NSIS, the recommended updater
+      # format for Tauri v2 (also pins us against the action's hinted future
+      # default flip).
+      - uses: tauri-apps/tauri-action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "ZenCopy ${{ github.ref_name }}"
+          releaseDraft: true
+          prerelease: false
+          updaterJsonPreferNsis: true
+          generateReleaseNotes: true
+          retryAttempts: 2
+          args: ${{ matrix.args }}

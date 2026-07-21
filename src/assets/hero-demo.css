@@ -1,0 +1,360 @@
+/* The ZenCopy hero animation: abstract text lines get "selected", the
+ * trigger keys pulse (modifier + C + C), and a small popup card streams a
+ * result — the whole app in one 5.5s loop, wordless.
+ *
+ * Shared by the app's welcome screen (src/components/welcome-hero.tsx) and
+ * the landing page (site/src/components/HeroDemo.astro): geometry and
+ * timeline live HERE, once. Each host supplies, on a wrapper element:
+ *   --u          one design pixel of the 320×180 grid (the app pins 1px;
+ *                the site derives it from container-query width)
+ *   --hd-track   the resting "text line" / keycap fill
+ *   --hd-accent  the selection sweep, key glow, and check mark
+ *   --hd-border  keycap and popup borders
+ *   --hd-text    keycap labels (and, mixed down, the result bars)
+ *   --hd-surface the popup card's background
+ */
+
+.hd-canvas {
+  --hd-sweep: color-mix(in oklab, var(--hd-accent) 25%, transparent);
+  --hd-glow: color-mix(in oklab, var(--hd-accent) 15%, transparent);
+  --hd-bar: color-mix(in oklab, var(--hd-text) 35%, transparent);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ——— the copied text ——— */
+.hd-lines {
+  position: absolute;
+  top: calc(24 * var(--u));
+  left: calc(20 * var(--u));
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--u));
+}
+.hd-line {
+  position: relative;
+  height: calc(8 * var(--u));
+  border-radius: 999px;
+  background: var(--hd-track);
+  overflow: hidden;
+}
+.hd-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--hd-sweep);
+  transform-origin: left center;
+}
+.hd-hla {
+  animation: hd-hla 5.5s linear infinite;
+}
+.hd-hlb {
+  animation: hd-hlb 5.5s linear infinite;
+}
+.hd-hlc {
+  animation: hd-hlc 5.5s linear infinite;
+}
+.hd-hld {
+  animation: hd-hld 5.5s linear infinite;
+}
+@keyframes hd-hla {
+  0%,
+  3.6% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  9.1%,
+  81.8% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  90.9%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+@keyframes hd-hlb {
+  0%,
+  9.1% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  14.5%,
+  81.8% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  90.9%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+@keyframes hd-hlc {
+  0%,
+  14.5% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  20%,
+  81.8% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  90.9%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+@keyframes hd-hld {
+  0%,
+  20% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  25.5%,
+  81.8% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  90.9%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* ——— the trigger ——— */
+.hd-keys {
+  position: absolute;
+  bottom: calc(20 * var(--u));
+  left: calc(20 * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+}
+.hd-keycap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(28 * var(--u));
+  height: calc(28 * var(--u));
+  padding: 0 calc(6 * var(--u));
+  border: 1px solid var(--hd-border);
+  border-radius: calc(6 * var(--u));
+  background: var(--hd-track);
+}
+.hd-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: calc(6 * var(--u));
+  background: var(--hd-glow);
+  opacity: 0;
+}
+.hd-label {
+  position: relative;
+  font-size: calc(11 * var(--u));
+  font-weight: 500;
+  color: var(--hd-text);
+}
+.hd-kmod {
+  animation: hd-press-mod 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.hd-kmod .hd-glow {
+  animation: hd-glow-mod 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.hd-kc {
+  animation: hd-press-c 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.hd-kc .hd-glow {
+  animation: hd-glow-c 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+/* Ctrl/⌘ is a modifier: it is held down for the whole chord, so it presses
+   and lights, stays lit through both C taps, then releases with the second C
+   as the popup appears. */
+@keyframes hd-press-mod {
+  0%,
+  29.1%,
+  56%,
+  100% {
+    transform: none;
+  }
+  32.3%,
+  52.7% {
+    transform: translateY(calc(1 * var(--u))) scale(0.94);
+  }
+}
+@keyframes hd-glow-mod {
+  0%,
+  29.1%,
+  56%,
+  100% {
+    opacity: 0;
+  }
+  32.3%,
+  52.7% {
+    opacity: 1;
+  }
+}
+/* One C key, pressed twice while the modifier is held: the first press is a
+   tap (down then straight back up — a blink), a beat's gap, then the second
+   press lights and stays lit (held) until it releases with the modifier as
+   the popup appears. */
+@keyframes hd-press-c {
+  0%,
+  36.4%,
+  41.8%,
+  44.5%,
+  56%,
+  100% {
+    transform: none;
+  }
+  39.1% {
+    transform: translateY(calc(1 * var(--u))) scale(0.93);
+  }
+  47.3%,
+  52.7% {
+    transform: translateY(calc(1 * var(--u))) scale(0.94);
+  }
+}
+@keyframes hd-glow-c {
+  0%,
+  36.4%,
+  41.8%,
+  44.5%,
+  56%,
+  100% {
+    opacity: 0;
+  }
+  39.1% {
+    opacity: 1;
+  }
+  47.3%,
+  52.7% {
+    opacity: 1;
+  }
+}
+
+/* ——— the popup ——— */
+.hd-pop {
+  position: absolute;
+  top: calc(20 * var(--u));
+  right: calc(16 * var(--u));
+  width: calc(122 * var(--u));
+  padding: calc(12 * var(--u));
+  border: 1px solid var(--hd-border);
+  border-radius: calc(8 * var(--u));
+  background: var(--hd-surface);
+  box-shadow: 0 calc(8 * var(--u)) calc(24 * var(--u)) rgb(0 0 0 / 0.08);
+  animation: hd-pop 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes hd-pop {
+  0%,
+  52.7% {
+    opacity: 0;
+    transform: translate(calc(12 * var(--u)), calc(-10 * var(--u))) scale(0.97);
+  }
+  61.8%,
+  81.8% {
+    opacity: 1;
+    transform: none;
+  }
+  90.9%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+.hd-bars {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--u));
+}
+.hd-bar {
+  height: calc(6 * var(--u));
+  border-radius: 999px;
+  background: var(--hd-bar);
+  transform-origin: left center;
+}
+.hd-b1 {
+  animation: hd-b1 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.hd-b2 {
+  animation: hd-b2 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes hd-b1 {
+  0%,
+  61.8% {
+    opacity: 0;
+    transform: scaleX(0.3);
+  }
+  68.2%,
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+@keyframes hd-b2 {
+  0%,
+  67.3% {
+    opacity: 0;
+    transform: scaleX(0.3);
+  }
+  73.6%,
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+.hd-check {
+  position: relative;
+  width: calc(12 * var(--u));
+  height: calc(12 * var(--u));
+  margin-top: calc(10 * var(--u));
+  margin-left: auto;
+  animation: hd-check 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes hd-check {
+  0%,
+  73.6% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  79.1%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hd-tick-a,
+.hd-tick-b {
+  position: absolute;
+  height: calc(2 * var(--u));
+  border-radius: 999px;
+  background: var(--hd-accent);
+}
+.hd-tick-a {
+  top: calc(6.5 * var(--u));
+  left: calc(0.5 * var(--u));
+  width: calc(5 * var(--u));
+  transform: rotate(45deg);
+}
+.hd-tick-b {
+  top: calc(5.5 * var(--u));
+  left: calc(3.5 * var(--u));
+  width: calc(8.5 * var(--u));
+  transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hd-canvas,
+  .hd-canvas * {
+    animation: none !important;
+  }
+}

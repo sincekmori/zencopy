@@ -1,0 +1,114 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "jsPlugins": ["eslint-plugin-import-zod", "oxlint-tailwindcss"],
+  "plugins": [
+    "typescript",
+    "react",
+    "react-perf",
+    "unicorn",
+    "oxc",
+    "jsx-a11y",
+    "import",
+    "promise"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn",
+    "pedantic": "warn",
+    "style": "warn"
+  },
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
+  "settings": {
+    "react": {
+      "version": "19.2"
+    },
+    "tailwindcss": {
+      "entryPoint": "src/index.css"
+    }
+  },
+  "ignorePatterns": ["dist", "src-tauri", "node_modules"],
+  "rules": {
+    "import-zod/prefer-zod-namespace": "error",
+    "tailwindcss/no-unknown-classes": ["error", { "ignorePrefixes": ["hd-"] }],
+    "tailwindcss/no-conflicting-classes": "error",
+    "tailwindcss/no-contradicting-variants": "error",
+    "tailwindcss/no-dark-without-light": "error",
+    "tailwindcss/no-deprecated-classes": "error",
+    "tailwindcss/no-duplicate-classes": "error",
+    "tailwindcss/enforce-canonical": "error",
+    "tailwindcss/enforce-logical": "error",
+    "tailwindcss/enforce-physical": "off",
+    "tailwindcss/enforce-shorthand": "error",
+    "tailwindcss/enforce-sort-order": "error",
+    "tailwindcss/enforce-consistent-important-position": "error",
+    "tailwindcss/enforce-consistent-line-wrapping": "off",
+    "tailwindcss/enforce-consistent-variable-syntax": "error",
+    "tailwindcss/enforce-negative-arbitrary-values": "error",
+    "tailwindcss/consistent-variant-order": "error",
+    "tailwindcss/max-class-count": "error",
+    "tailwindcss/no-restricted-classes": "error",
+    "tailwindcss/no-arbitrary-value": "off",
+    "tailwindcss/no-hardcoded-colors": "error",
+    "tailwindcss/no-unnecessary-arbitrary-value": "error",
+    "tailwindcss/no-unnecessary-whitespace": "error",
+    "tailwindcss/prefer-theme-tokens": "error",
+    "import/extensions": ["error", "always", { "ignorePackages": true, "checkTypeImports": true }],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-max-depth": "off",
+    "import/no-named-export": "off",
+    "import/prefer-default-export": "off",
+    "import/exports-last": "off",
+    "import/group-exports": "off",
+    "import/max-dependencies": "off",
+    "react-perf/jsx-no-new-function-as-prop": "off",
+    "import/no-namespace": "off",
+    "import/no-unassigned-import": "off",
+    "import/consistent-type-specifier-style": "off",
+    "eslint/func-style": "off",
+    "eslint/sort-keys": "off",
+    "eslint/sort-imports": "off",
+    "eslint/no-ternary": "off",
+    "eslint/capitalized-comments": "off",
+    "eslint/init-declarations": "off",
+    "eslint/max-lines-per-function": "off",
+    "eslint/max-lines": "off",
+    "eslint/max-statements": "off",
+    "eslint/no-inline-comments": "off",
+    "eslint/no-magic-numbers": "off",
+    "eslint/prefer-destructuring": "off",
+    "eslint/prefer-named-capture-group": "off",
+    "eslint/id-length": "off",
+    "unicorn/prefer-query-selector": "off",
+    "unicorn/no-useless-undefined": "off",
+    "unicorn/prefer-top-level-await": "off",
+    "unicorn/filename-case": [
+      "warn",
+      {
+        "cases": {
+          "kebabCase": true,
+          "camelCase": true,
+          "pascalCase": true
+        }
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.config.ts", "vite.config.ts", "scripts/**/*.ts"],
+      "rules": {
+        "import/no-nodejs-modules": "off"
+      }
+    },
+    {
+      "files": ["src/components/ui/**"],
+      "rules": {
+        "tailwindcss/max-class-count": "off"
+      }
+    }
+  ]
+}

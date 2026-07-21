@@ -1,0 +1,118 @@
+---
+/**
+ * Sidebar override: every page in the flat list is expanded one level deeper
+ * into its own h2 headings, so the left rail answers "what is written where"
+ * at a glance. Headings come from each page's own rendered content, which
+ * makes them locale-correct for free (the ja pages contribute ja headings
+ * and anchors).
+ *
+ * The site's sidebar config is deliberately a flat list of links; this
+ * component asserts that instead of half-supporting groups it never sees.
+ */
+import type { MarkdownHeading } from "astro";
+import { getCollection, render } from "astro:content";
+
+const { sidebar } = Astro.locals.starlightRoute;
+
+const docs = await getCollection("docs");
+
+/** Pages that stay collapsed — a plain link, no heading expansion. The FAQ's
+ *  h2s are whole questions and the legal pages are reference text; expanding
+ *  either would drown the rail in long lines nobody scans. */
+const COLLAPSED = new Set(["faq", "privacy", "terms"]);
+
+/** The h2 sections of the docs page a sidebar href points at. */
+async function sectionsOf(href: string): Promise<MarkdownHeading[]> {
+  const id = href.replaceAll(/^\/|\/$/gu, "");
+  if (COLLAPSED.has(id.split("/").at(-1) ?? "")) {
+    return [];
+  }
+  const entry = docs.find((doc) => doc.id === id);
+  if (!entry) {
+    return [];
+  }
+  const { headings } = await render(entry);
+  return headings.filter((heading) => heading.depth === 2);
+}
+
+const links = await Promise.all(
+  sidebar.map(async (entry) => {
+    if (entry.type !== "link") {
+      throw new Error(
+        "Sidebar override expects a flat list of links — got a group.",
+      );
+    }
+    return { entry, sections: await sectionsOf(entry.href) };
+  }),
+);
+---
+
+<nav aria-label="Main">
+  <ul>
+    {
+      links.map(({ entry, sections }) => (
+        <li>
+          <a
+            aria-current={entry.isCurrent ? "page" : undefined}
+            href={entry.href}
+            {...entry.attrs}
+          >
+            {entry.label}
+          </a>
+          {sections.length > 0 ? (
+            <ul class="sections">
+              {sections.map((section) => (
+                <li>
+                  <a href={`${entry.href}#${section.slug}`}>{section.text}</a>
+                </li>
+              ))}
+            </ul>
+          ) : undefined}
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  nav {
+    padding: 1rem var(--sl-sidebar-pad-x, 1rem);
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  a {
+    display: block;
+    padding: 0.3em 0.5em;
+    border-radius: 0.25rem;
+    font-size: var(--sl-text-base);
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  a:hover {
+    color: var(--sl-color-white);
+  }
+  a[aria-current="page"],
+  a[aria-current="page"]:hover {
+    background-color: var(--sl-color-text-accent);
+    color: var(--sl-color-text-invert);
+  }
+  .sections {
+    margin: 0.15rem 0 0.5rem;
+    border-inline-start: 1px solid var(--sl-color-hairline-light);
+    margin-inline-start: 0.5rem;
+    padding-inline-start: 0.25rem;
+  }
+  .sections a {
+    font-size: var(--sl-text-sm);
+    font-weight: 400;
+    color: var(--sl-color-gray-3);
+  }
+  .sections a:hover {
+    color: var(--sl-color-white);
+  }
+</style>

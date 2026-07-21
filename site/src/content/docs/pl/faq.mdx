@@ -1,0 +1,108 @@
+---
+title: FAQ
+description: Koszty, prywatność, konflikty z innymi aplikacjami i rozwiązywanie problemów.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Czy to kosztuje?
+
+ZenCopy sam w sobie jest darmowym oprogramowaniem open source (Apache-2.0).
+Nie ma konta ani subskrypcji.
+
+To, co nalicza usługa AI, jest sprawą między Tobą a tą usługą.
+Z [darmowym planem Google](/pl/getting-started/) jest całkowicie za darmo — dopóki nie zarejestrujesz metody płatności, żadna opłata nie może zostać naliczona.
+A przy AI działającym w całości na Twoim komputerze (na przykład Ollama) nie ma w ogóle zewnętrznej usługi, której trzeba by płacić.
+
+## Dokąd trafia skopiowana treść?
+
+Tylko przy podwójnym kopiowaniu treść trafia **bezpośrednio do skonfigurowanej przez Ciebie usługi AI** — i nigdzie indziej.
+Nie ma serwera ZenCopy, pośrednika ani śledzenia użycia (telemetrii).
+Twój klucz API również nigdy nie opuszcza Twojego komputera.
+
+## Czy zwykłe kopiowanie coś uruchamia?
+
+Nie.
+Pojedyncze <span data-os-modifier>Ctrl/⌘</span> + C niczego nie uruchamia, nie odczytuje i nie wysyła.
+Sygnałem są wyłącznie dwa kopiowania szybko po sobie.
+Nawet wtedy treść schowka oznaczona przez inne aplikacje jako poufna (na przykład menedżery haseł) jest ignorowana.
+
+## Na ile można ufać odpowiedziom AI?
+
+AI potrafi mylić się bardzo płynnie.
+Jest naprawdę użyteczne do uchwycenia sensu tekstu, ale liczby, nazwiska i wszystko, od czego coś zależy — umowy, teksty medyczne — sprawdź z oryginałem, zanim na tym polegasz.
+
+## Czym to się różni od innych narzędzi „AI na zaznaczeniu”?
+
+Większość narzędzi w tej kategorii działa tylko na macOS, tylko na zaznaczonym tekście i jest związana z AI jednego dostawcy albo z subskrypcją.
+ZenCopy działa na **Windows, macOS i Linuksie**, obsługuje **tekst, tekst sformatowany, obrazy i pliki**, a **usługę AI wybierasz Ty** (OpenAI / Google / Anthropic / brama firmowa / lokalny Ollama).
+[To, która akcja się uruchamia, również zależy od Ciebie](/pl/configuration/#routingjson).
+Bez konta, bez subskrypcji, bez telemetrii — oprogramowanie open source.
+
+## Na Ctrl/⌘ + C + C reaguje też inna aplikacja (np. DeepL)
+
+Żadna aplikacja nie może zawłaszczyć sygnału „podwójnego kopiowania” na poziomie systemu.
+Jeśli inna aplikacja nasłuchuje tego samego sygnału (najbardziej znany przypadek to DeepL), reagują **obie** i pojawiają się dwa okienka.
+ZenCopy nie przechwytuje ani nie blokuje żadnych zdarzeń klawiszy, więc nic się nie psuje — cały objaw to właśnie te dwa okienka.
+Wyłącz skrót w tej aplikacji, której używasz rzadziej (w DeepL: Ustawienia → Ogólne → skrót do tłumaczenia).
+
+## Okienko w ogóle się nie pojawia (macOS)
+
+Niemal na pewno chodzi o uprawnienia.
+Zezwól ZenCopy zarówno na **Monitorowanie wprowadzania danych**, jak i na **Dostępność** w Ustawieniach systemowych → Prywatność i ochrona, a potem zamknij i uruchom aplikację ponownie.
+(To właśnie dzięki tym dwóm uprawnieniom aplikacja zauważa, że kopiowanie naciśnięto dwa razy.)
+
+## Wynik nie wraca / pojawia się komunikat o przekroczeniu czasu
+
+Jeśli odpowiedź milczy przez 90 sekund, ZenCopy przerywa działanie zamiast czekać w nieskończoność.
+Sprawdź połączenie z internetem i ustawienia usługi AI (klucz API itd.), a potem naciśnij **Ponów**.
+Lokalne AI może przy pierwszym uruchomieniu wczytywać się dłuższą chwilę — dlatego limit czasu jest celowo hojny.
+
+## Gdzie są logi?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Logi nigdy nie zawierają skopiowanej treści ani kluczy API.
+
+## Co usuwa odinstalowanie?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    Odinstalowanie wersji `.msi` usuwa wszystko: ustawienia, klucze API, własne akcje, logi i profil
+    webview. Deinstalator `.exe` (NSIS) zamiast tego pyta polem wyboru **Usuń dane aplikacji**. (W
+    obu przypadkach jedna nieszkodliwa pozostałość: jeśli włączone było uruchamianie przy logowaniu,
+    może zostać wpis rejestru wskazujący donikąd — Windows ignoruje wpisy, których cel nie
+    istnieje.)
+  </TabItem>
+  <TabItem label="macOS">
+    Przeniesienie aplikacji do Kosza nie usuwa jej danych — taka jest konwencja macOS i ZenCopy się
+    jej trzyma. Aby wyczyścić wszystko, najpierw uruchom **Ustawienia → Zresetuj wszystkie
+    ustawienia** (usuwa wszystkie ustawienia łącznie z kluczami API; logi zostają do diagnostyki,
+    więc dla naprawdę czystego stanu usuń ręcznie `~/Library/Logs/app.zencopy`), a potem przenieś
+    aplikację do Kosza.
+  </TabItem>
+  <TabItem label="Linux">
+    Menedżery pakietów usuwają tylko aplikację; dane użytkownika zostają — to również konwencja
+    Linuksa. Aby wyczyścić wszystko, najpierw uruchom **Ustawienia → Zresetuj wszystkie
+    ustawienia**, a potem usuń pakiet lub AppImage. Rozszerzenie wyzwalacza dla GNOME można usunąć
+    poleceniem `gnome-extensions uninstall copycopy@sincekmori.github.io`.
+  </TabItem>
+</Tabs>
+
+## Które środowiska Linuksa są obsługiwane?
+
+**GNOME na Waylandzie oraz X11.**
+Na GNOME Wayland procesy działające w tle z założenia nie mogą obserwować klawiszy ani schowka, więc ZenCopy (poprzez crate [`copycopy`](https://crates.io/crates/copycopy)) dostarcza małe rozszerzenie GNOME Shell, które wykrywa podwójne kopiowanie od wewnątrz kompozytora.
+Jest ono automatycznie instalowane w profilu użytkownika przy pierwszym uruchomieniu (bez sudo) i staje się aktywne po jednorazowym wylogowaniu i zalogowaniu.
+Na X11 wystarcza zwykły pasywny nasłuch klawiszy, tak jak w Windows.
+Inne kompozytory Waylanda (KDE Plasma, oparte na wlroots) nie oferują nieuprzywilejowanego sposobu obserwowania wyzwalacza i nie są jeszcze obsługiwane — aplikacja działa, ale wyzwalacz pozostaje nieaktywny.
+
+## Ikona w zasobniku się nie pokazuje (Linux)
+
+Ikona ZenCopy w zasobniku korzysta z protokołu AppIndicator.
+GNOME w Ubuntu obsługuje go od razu, ale czysty GNOME (na przykład w Fedorze) nie pokaże niczego, dopóki nie zostanie zainstalowane rozszerzenie Shell **AppIndicator and KStatusNotifierItem Support**.
+Tak czy inaczej sama aplikacja działa — menu w zasobniku to tylko jedna z dróg dostępu.

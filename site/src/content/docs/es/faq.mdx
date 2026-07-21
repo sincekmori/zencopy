@@ -1,0 +1,108 @@
+---
+title: Preguntas frecuentes
+description: Costes, privacidad, conflictos con otras aplicaciones y solución de problemas.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## ¿Cuesta dinero?
+
+ZenCopy en sí es software gratuito y de código abierto (Apache-2.0).
+No hay cuenta ni suscripción.
+
+Lo que cobre el servicio de IA es entre tú y ese servicio.
+Con el [nivel gratuito de Google](/es/getting-started/), es totalmente gratis — mientras no registres un método de pago, no te pueden cobrar.
+Y con una IA que corre por completo en tu propia computadora (Ollama, por ejemplo), no hay ningún servicio externo al que pagar.
+
+## ¿A dónde va lo que copio?
+
+Solo cuando copias dos veces, el contenido va **directamente al servicio de IA que configuraste** — y a ningún otro sitio.
+No hay servidor de ZenCopy, ni intermediario, ni seguimiento de uso (telemetría).
+Tu clave de API tampoco sale nunca de tu máquina.
+
+## ¿Un copiado normal activa algo?
+
+No.
+Un solo <span data-os-modifier>Ctrl/⌘</span> + C no inicia nada, no lee nada y no envía nada.
+La señal son únicamente dos copiados en rápida sucesión.
+E incluso entonces, el contenido del portapapeles que otras aplicaciones marcan como confidencial (los gestores de contraseñas, por ejemplo) se ignora.
+
+## ¿Cuánto puedo confiar en las respuestas de la IA?
+
+La IA puede equivocarse con mucha fluidez.
+Es realmente útil para captar la idea general de un texto, pero con números, nombres y cualquier cosa con consecuencias — contratos, textos médicos — compara con el original antes de actuar.
+
+## ¿En qué se diferencia de otras herramientas de "IA sobre la selección"?
+
+La mayoría de las herramientas de este tipo son solo para macOS, funcionan solo con texto seleccionado y están atadas a la IA de un único proveedor o a una suscripción.
+ZenCopy funciona en **Windows, macOS y Linux**, maneja **texto, texto enriquecido, imágenes y archivos**, y te deja **elegir a ti el servicio de IA** (OpenAI / Google / Anthropic / una pasarela corporativa / Ollama local).
+[Qué acción se ejecuta también lo decides tú](/es/configuration/#routingjson).
+Sin cuenta, sin suscripción, sin telemetría — software de código abierto.
+
+## Otra aplicación también reacciona a Ctrl/⌘ + C + C (p. ej., DeepL)
+
+Ninguna aplicación puede adueñarse de la señal de "copiar dos veces" a nivel del sistema operativo.
+Si otra aplicación escucha la misma señal (DeepL es la más conocida), reaccionan **ambas** y aparecen dos popups.
+ZenCopy no intercepta ni bloquea ningún evento de teclado, así que nada se rompe — ese es todo el síntoma.
+Desactiva el atajo en la aplicación que menos uses (en DeepL: Ajustes → General → atajo para traducir).
+
+## El popup nunca aparece (macOS)
+
+Casi con toda seguridad son los permisos.
+Concede tanto **Monitoreo de entrada** como **Accesibilidad** a ZenCopy en Ajustes del Sistema → Privacidad y seguridad, y luego cierra y vuelve a abrir la aplicación.
+(Esos dos permisos son la manera en que la aplicación nota que se pulsó copiar dos veces.)
+
+## No llega ningún resultado / dice que se agotó el tiempo
+
+Si la respuesta queda en silencio durante 90 segundos, ZenCopy da la ejecución por fallida en lugar de esperar para siempre.
+Comprueba tu conexión a internet y los ajustes del servicio de IA (la clave de API, etc.) y pulsa **Reintentar**.
+Una IA local puede tardar un rato en cargar la primera vez, y por eso el tiempo límite es deliberadamente generoso.
+
+## ¿Dónde están los logs?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Los logs nunca contienen tu contenido copiado ni tus claves de API.
+
+## ¿Qué elimina la desinstalación?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    La desinstalación del `.msi` elimina todo: ajustes, claves de API, acciones propias, logs y el
+    perfil del webview. El desinstalador `.exe` (NSIS), en cambio, pregunta con una casilla
+    **Eliminar los datos de la aplicación**. (Un resto inofensivo en ambos casos: si el inicio al
+    iniciar sesión estaba activado, puede quedar una entrada del registro que apunta a nada —
+    Windows ignora las entradas cuyo destino no existe.)
+  </TabItem>
+  <TabItem label="macOS">
+    Arrastrar la aplicación a la Papelera no borra sus datos — esa es la convención de macOS, y
+    ZenCopy la sigue. Para un borrado completo, ejecuta primero **Ajustes → Restablecer todos los
+    ajustes** (elimina todos los ajustes, incluidas las claves de API; los logs se conservan para
+    diagnóstico, así que borra `~/Library/Logs/app.zencopy` a mano si quieres dejarlo impecable) y
+    luego lleva la aplicación a la Papelera.
+  </TabItem>
+  <TabItem label="Linux">
+    Los gestores de paquetes eliminan solo la aplicación; los datos de usuario se quedan — también
+    es la convención en Linux. Para un borrado completo, ejecuta primero **Ajustes → Restablecer
+    todos los ajustes** y luego elimina el paquete o el AppImage. La extensión del disparador de
+    GNOME se puede quitar con `gnome-extensions uninstall copycopy@sincekmori.github.io`.
+  </TabItem>
+</Tabs>
+
+## ¿Qué entornos de Linux son compatibles?
+
+**GNOME en Wayland, y X11.**
+En GNOME Wayland, los procesos en segundo plano no pueden observar las teclas ni el portapapeles, por diseño, así que ZenCopy (mediante el crate [`copycopy`](https://crates.io/crates/copycopy)) incluye una pequeña extensión de GNOME Shell que detecta el doble copiado desde dentro del compositor.
+Se instala automáticamente en tu perfil de usuario en el primer inicio (sin sudo) y se activa tras cerrar sesión y volver a entrar una vez.
+En X11 funciona un escuchador de teclas pasivo normal, como en Windows.
+Otros compositores de Wayland (KDE Plasma, los basados en wlroots) no ofrecen ninguna forma sin privilegios de observar el disparador y aún no son compatibles — la aplicación corre, pero el disparador queda inerte.
+
+## El icono de la bandeja no aparece (Linux)
+
+El icono de bandeja de ZenCopy usa el protocolo AppIndicator.
+El GNOME de Ubuntu lo admite de fábrica, pero el GNOME estándar (el de Fedora, por ejemplo) no muestra nada hasta que se instala la extensión de Shell **AppIndicator and KStatusNotifierItem Support**.
+En cualquier caso, la aplicación en sí funciona — el menú de la bandeja es solo una de las puertas de entrada.

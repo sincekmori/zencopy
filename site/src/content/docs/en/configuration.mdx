@@ -1,0 +1,185 @@
+---
+title: Configuration
+description: What the settings window offers (for everyone), and fine-grained customization through config files (for power users).
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+ZenCopy works out of the box with nothing configured.
+This page is for when you want it to fit you better.
+The first half, about the **settings window**, is for everyone; the second half, about **config files**, is for power users.
+
+## The settings window
+
+Open it from the tray icon's menu, or the gear icon on the popup.
+It has three tabs: **General, AI, and Actions**.
+
+### General
+
+- **Popup position** — which corner of the screen results appear in.
+- **Theme** — light / dark / follow the system.
+- **Language** — the display language (follows your OS by default).
+- **Launch at login** — have ZenCopy waiting whenever your computer is on.
+- **Confirmation before sending** — whether to ask once before images or files go to the AI.
+
+### AI
+
+This is where you change the AI service (provider, model, API key).
+The **Test** button tells you right away whether the connection works.
+
+The tab also has an **About you** field.
+It is a place to describe your role and preferences in a few plain sentences, in any language.
+
+> Example: "Sales. I mostly write customer emails — polite but not stiff, conclusion first."
+
+With this filled in, every action tailors its results to you.
+Explanations arrive at your level of knowledge, and drafts come back in your preferred tone.
+It never affects unrelated tasks, and the text itself never shows up in results.
+
+### Actions
+
+The list of "what happens after a double copy".
+
+- The pre-installed actions can be opened and read — they double as worked examples.
+- A **new action** takes nothing but a name and what you want done.
+  For example: name "3-line summary", instruction "Summarize this in 3 lines".
+- Not confident writing instructions? Jot down roughly what you want and press **Draft with AI** — your configured AI turns it into a well-formed instruction.
+- The ★ marks the default action — the one a double copy runs first.
+- **Routing** lets you pick a different action per kind of content (text / image / files).
+
+Actions you build can be shared: **Export** writes one as a file, and the receiving side just pastes it into **Import** or picks the file.
+
+## Config files (for power users)
+
+From here on, this page is about editing text files directly.
+**Everything essential is available from the settings window, so feel free to stop reading here.**
+
+Files are read from the per-user app config directory.
+The exact path is also printed to the log at startup:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%APPDATA%\app.zencopy`</TabItem>
+  <TabItem label="macOS">`~/Library/Application Support/app.zencopy`</TabItem>
+  <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
+</Tabs>
+
+Routing defaults are embedded in the app; `routing.json` only ever **overrides** them.
+Action files are **additive**:
+they define new actions, and the built-ins are untouchable (a local file claiming a built-in id is ignored).
+Edits apply on the next trigger — no restart needed.
+
+### `ai-sdk-catalog.json`
+
+Providers plus a **role → model** mapping.
+The file format's home is [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — every field is documented there (including a `$schema` for editor validation and completion), and [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) has configs in three sizes.
+For ZenCopy-flavored starting points (what the settings UI writes, local Ollama, roles for actions), see [Recipes](/en/recipes/).
+
+API keys go straight into this local file (the settings UI writes the same format); they never leave your machine.
+Environment variables are not read — GUI apps are launched by the OS, not by your shell, so variables exported in `.zshrc` and friends never reach them.
+The file is schema-validated on every read.
+A broken edit shows up as a clear message in the popup and the settings editor — nothing fails silently.
+
+### `routing.json`
+
+Which action handles which kind of capture:
+a flat `kind → action` map plus an optional, higher-priority `overrides` list (first match wins).
+The four kinds are `text`, `rich_text`, `image`, and `files`; out of the box, text routes to Zen and images and files route to Explain.
+The flat map is editable in-app (Settings → Actions → Routing), so you only need to touch this file for `overrides`.
+
+```json
+{
+  "text": "zen",
+  "rich_text": "zen",
+  "image": "explain",
+  "files": "explain",
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+}
+```
+
+`when` conditions: `kind`, `app_name`, `exec_name`, `window_title`, `url` (all with `*` wildcards), plus `min_chars` / `max_chars`.
+
+For `image` and `files` captures, the content itself is sent to the model (up to 10 MB total per capture).
+File types are detected from **content**, not names:
+images, PDFs, and audio are attached as-is, while text files (Markdown, source code, CSV, …) become the capture's text (`{{ text }}`) and behave exactly as if you had copied their contents.
+Character encodings are auto-detected, converting legacy formats like Shift_JIS and UTF-16.
+Anything else is declined with a clear message.
+Full paths ride along with the contents so the model can tell files apart and knows where they live.
+Because binary attachments can cost more than text, the popup asks before sending them (text files run without a prompt) — the confirmation can be turned off in place or in Settings.
+
+### `actions/*.md`
+
+One file = one action: YAML frontmatter + a [Liquid](https://liquidjs.com) prompt body.
+The same single file is the sharing format — Settings → Actions → Import accepts it as pasted text or a picked file.
+
+```markdown
+---
+id: summarize
+label: Summarize
+role: default
+instructions: You are a concise assistant.
+---
+
+Summarize in 3 lines, in {{ locale }}:
+
+{{ text }}
+```
+
+| Frontmatter    | Meaning                                                  |
+| -------------- | -------------------------------------------------------- |
+| `id`           | Name referenced from `routing.json` (default: file name) |
+| `label`        | Shown in the popup                                       |
+| `role`         | Catalog role to run with (default: `default`)            |
+| `instructions` | System prompt (Liquid template)                          |
+
+Template variables, with example values for a paragraph copied in a browser:
+
+| Variable             | Example                                            |
+| -------------------- | -------------------------------------------------- |
+| `{{ text }}`         | The copied text (rich HTML copies become Markdown) |
+| `{{ markup }}`       | The HTML/RTF source of a rich copy                 |
+| `{{ format }}`       | `html` (or `rtf`; empty for plain copies)          |
+| `{{ app_name }}`     | `Safari`                                           |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                            |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`   |
+| `{{ window_title }}` | `Pricing – Example`                                |
+| `{{ url }}`          | `https://example.com/pricing` (browsers only)      |
+| `{{ process_id }}`   | `8123`                                             |
+| `{{ now }}`          | `2026-07-08 20:15:00`                              |
+| `{{ locale }}`       | `en`                                               |
+
+There is also a ZenCopy-specific `language_name` filter: `{{ locale | language_name }}` expands to "English" rather than "en", which reads naturally in a prompt.
+To see the real values, enable **developer mode** in Settings — each capture's template variables appear in the popup as JSON.
+
+Simple actions (a name and an instruction) can also be created from the settings window; what it writes is exactly this file format.
+
+#### Advanced templating
+
+Both the `instructions` frontmatter and the body are full [LiquidJS](https://liquidjs.com/tags/overview.html) templates: conditionals, loops, and [filters](https://liquidjs.com/filters/overview.html) all work.
+A single action can adapt to where the copy came from:
+
+```markdown
+---
+id: context-aware
+label: Context aware
+---
+
+{% if url contains "github.com" %}
+Review this code and point out the single biggest risk:
+{% elsif app_name == "Slack" %}
+Summarize this chat thread in 2 lines:
+{% else %}
+Explain this in {{ locale }}:
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+## Logs
+
+Structured logs (secrets and copied content redacted) go to the terminal in dev and to a rotating file in release:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>

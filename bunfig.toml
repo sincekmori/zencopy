@@ -1,0 +1,5 @@
+# The global 7-day minimum-release-age wait (~/.bunfig.toml, supply-chain
+# mitigation) stays in force here; only our own libraries are exempt, so a
+# fresh ai-sdk-catalog / ai-sdk-ping release is installable the day it ships.
+[install]
+minimumReleaseAgeExcludes = ["ai-sdk-catalog", "ai-sdk-ping"]

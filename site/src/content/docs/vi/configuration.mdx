@@ -1,0 +1,185 @@
+---
+title: Cấu hình
+description: Cửa sổ cài đặt có những gì (dành cho mọi người), và cách tùy chỉnh chi tiết qua các tệp cấu hình (dành cho người dùng thành thạo).
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+ZenCopy hoạt động ngay mà không cần cấu hình gì.
+Trang này dành cho lúc bạn muốn ứng dụng hợp với mình hơn.
+Nửa đầu, về **cửa sổ cài đặt**, dành cho mọi người; nửa sau, về **tệp cấu hình**, dành cho người dùng thành thạo.
+
+## Cửa sổ cài đặt
+
+Mở từ menu của biểu tượng khay hệ thống, hoặc biểu tượng bánh răng trên cửa sổ nổi.
+Cửa sổ có ba thẻ: **Chung, AI và Hành động**.
+
+### Chung
+
+- **Vị trí cửa sổ nổi** — kết quả hiện ra ở góc màn hình nào.
+- **Giao diện** — sáng / tối / theo hệ thống.
+- **Ngôn ngữ** — ngôn ngữ hiển thị (mặc định theo hệ điều hành của bạn).
+- **Khởi động khi đăng nhập** — để ZenCopy luôn sẵn sàng mỗi khi máy tính bật.
+- **Xác nhận trước khi gửi** — có hỏi một lần trước khi hình ảnh hoặc tệp được gửi đến AI hay không.
+
+### AI
+
+Đây là nơi bạn đổi dịch vụ AI (nhà cung cấp, mô hình, khóa API).
+Nút **Kiểm tra** cho bạn biết ngay kết nối có hoạt động hay không.
+
+Thẻ này còn có ô **Về bạn**.
+Đó là nơi mô tả vai trò và sở thích của bạn bằng vài câu đơn giản, bằng bất kỳ ngôn ngữ nào.
+
+> Ví dụ: "Nhân viên kinh doanh. Chủ yếu viết email cho khách hàng — lịch sự nhưng không cứng nhắc, kết luận trước."
+
+Điền vào đây rồi, mọi hành động sẽ điều chỉnh kết quả cho phù hợp với bạn.
+Lời giải thích đến đúng mức hiểu biết của bạn, và bản nháp trở về theo giọng văn bạn ưa thích.
+Nó không bao giờ ảnh hưởng đến những nhiệm vụ không liên quan, và bản thân đoạn văn đó không bao giờ xuất hiện trong kết quả.
+
+### Hành động
+
+Danh sách "điều gì xảy ra sau khi sao chép hai lần".
+
+- Các hành động cài sẵn có thể mở ra xem — chúng đồng thời là ví dụ mẫu.
+- Một **hành động mới** chỉ cần một cái tên và điều bạn muốn làm.
+  Ví dụ: tên "Tóm tắt 3 dòng", chỉ dẫn "Tóm tắt nội dung này trong 3 dòng".
+- Chưa tự tin viết chỉ dẫn? Ghi đại ý bạn muốn rồi nhấn **Soạn bằng AI** — AI bạn đã cấu hình sẽ biến nó thành một chỉ dẫn hoàn chỉnh.
+- Dấu ★ đánh dấu hành động mặc định — hành động chạy trước tiên khi sao chép hai lần.
+- **Định tuyến** cho phép chọn hành động khác nhau theo từng loại nội dung (văn bản / hình ảnh / tệp).
+
+Hành động bạn tạo có thể chia sẻ: **Xuất (.md)** ghi nó thành một tệp, và phía nhận chỉ cần dán vào **Nhập** hoặc chọn tệp.
+
+## Tệp cấu hình (dành cho người dùng thành thạo)
+
+Từ đây trở đi, trang này nói về việc chỉnh sửa trực tiếp các tệp văn bản.
+**Mọi thứ thiết yếu đều có trong cửa sổ cài đặt, nên bạn hoàn toàn có thể dừng đọc tại đây.**
+
+Các tệp được đọc từ thư mục cấu hình ứng dụng của từng người dùng.
+Đường dẫn chính xác cũng được ghi vào nhật ký khi khởi động:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%APPDATA%\app.zencopy`</TabItem>
+  <TabItem label="macOS">`~/Library/Application Support/app.zencopy`</TabItem>
+  <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
+</Tabs>
+
+Các giá trị định tuyến mặc định được nhúng sẵn trong ứng dụng; `routing.json` chỉ **ghi đè** lên chúng.
+Các tệp hành động mang tính **bổ sung**:
+chúng định nghĩa hành động mới, còn các hành động dựng sẵn là bất khả xâm phạm (tệp cục bộ nhận id của hành động dựng sẵn sẽ bị bỏ qua).
+Chỉnh sửa có hiệu lực ở lần kích hoạt kế tiếp — không cần khởi động lại.
+
+### `ai-sdk-catalog.json`
+
+Các nhà cung cấp cùng một ánh xạ **vai trò → mô hình**.
+Nhà gốc của định dạng tệp là [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — mọi trường đều được mô tả ở đó (kèm `$schema` để trình soạn thảo kiểm tra và tự hoàn thành), và [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) có cấu hình ở ba kích cỡ.
+Về các điểm khởi đầu dành riêng cho ZenCopy (những gì giao diện cài đặt ghi ra, Ollama chạy tại máy, vai trò cho hành động), xem [Cấu hình mẫu](/vi/recipes/).
+
+Khóa API được ghi thẳng vào tệp cục bộ này (giao diện cài đặt ghi cùng định dạng); chúng không bao giờ rời khỏi máy bạn.
+Biến môi trường không được đọc — ứng dụng đồ họa do hệ điều hành khởi chạy, không phải shell của bạn, nên các biến export trong `.zshrc` và những tệp tương tự không bao giờ đến được chúng.
+Tệp được kiểm tra theo schema ở mỗi lần đọc.
+Một chỉnh sửa hỏng sẽ hiện thành thông báo rõ ràng trong cửa sổ nổi và trình soạn thảo cài đặt — không có gì thất bại trong im lặng.
+
+### `routing.json`
+
+Hành động nào xử lý loại nội dung bắt được nào:
+một ánh xạ phẳng `kind → action` cộng với danh sách `overrides` tùy chọn có độ ưu tiên cao hơn (quy tắc khớp đầu tiên thắng).
+Bốn loại là `text`, `rich_text`, `image` và `files`; theo mặc định, văn bản được định tuyến đến Zen, còn hình ảnh và tệp đến Giải thích.
+Ánh xạ phẳng chỉnh được ngay trong ứng dụng (Cài đặt → Hành động → Định tuyến), nên bạn chỉ cần đụng đến tệp này khi dùng `overrides`.
+
+```json
+{
+  "text": "zen",
+  "rich_text": "zen",
+  "image": "explain",
+  "files": "explain",
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+}
+```
+
+Điều kiện trong `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tất cả hỗ trợ ký tự đại diện `*`), cộng với `min_chars` / `max_chars`.
+
+Với nội dung bắt được loại `image` và `files`, bản thân nội dung được gửi đến mô hình (tổng cộng tối đa 10 MB cho mỗi lần bắt).
+Loại tệp được nhận diện từ **nội dung**, không phải tên tệp:
+hình ảnh, PDF và âm thanh được đính kèm nguyên trạng, còn tệp văn bản (Markdown, mã nguồn, CSV, …) trở thành phần văn bản của lần bắt (`{{ text }}`) và hoạt động y như thể bạn đã sao chép nội dung bên trong.
+Bảng mã ký tự được tự động nhận diện, chuyển đổi cả các định dạng cũ như Shift_JIS và UTF-16.
+Mọi thứ khác đều bị từ chối kèm thông báo rõ ràng.
+Đường dẫn đầy đủ đi kèm nội dung để mô hình phân biệt được các tệp và biết chúng nằm ở đâu.
+Vì tệp đính kèm nhị phân có thể tốn kém hơn văn bản, cửa sổ nổi sẽ hỏi trước khi gửi (tệp văn bản chạy không cần hỏi) — có thể tắt bước xác nhận ngay tại chỗ hoặc trong Cài đặt.
+
+### `actions/*.md`
+
+Một tệp = một hành động: frontmatter YAML + phần thân prompt viết bằng [Liquid](https://liquidjs.com).
+Chính tệp đơn này cũng là định dạng chia sẻ — Cài đặt → Hành động → Nhập chấp nhận nó dưới dạng văn bản dán vào hoặc tệp được chọn.
+
+```markdown
+---
+id: summarize
+label: Tóm tắt
+role: default
+instructions: Bạn là một trợ lý súc tích.
+---
+
+Tóm tắt trong 3 dòng, bằng {{ locale }}:
+
+{{ text }}
+```
+
+| Frontmatter    | Ý nghĩa                                                   |
+| -------------- | --------------------------------------------------------- |
+| `id`           | Tên được tham chiếu từ `routing.json` (mặc định: tên tệp) |
+| `label`        | Hiển thị trên cửa sổ nổi                                  |
+| `role`         | Vai trò trong catalog dùng để chạy (mặc định: `default`)  |
+| `instructions` | System prompt (mẫu Liquid)                                |
+
+Các biến mẫu, kèm giá trị ví dụ cho một đoạn văn sao chép trong trình duyệt:
+
+| Biến                 | Ví dụ                                                           |
+| -------------------- | --------------------------------------------------------------- |
+| `{{ text }}`         | Văn bản đã sao chép (bản sao HTML định dạng trở thành Markdown) |
+| `{{ markup }}`       | Mã nguồn HTML/RTF của một bản sao định dạng                     |
+| `{{ format }}`       | `html` (hoặc `rtf`; để trống với bản sao thuần)                 |
+| `{{ app_name }}`     | `Safari`                                                        |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                         |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`                |
+| `{{ window_title }}` | `Bảng giá – Example`                                            |
+| `{{ url }}`          | `https://example.com/pricing` (chỉ với trình duyệt)             |
+| `{{ process_id }}`   | `8123`                                                          |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                           |
+| `{{ locale }}`       | `vi`                                                            |
+
+Còn có bộ lọc `language_name` riêng của ZenCopy: `{{ locale | language_name }}` khai triển thành "Vietnamese" thay vì "vi", đọc tự nhiên hơn trong một prompt.
+Để xem giá trị thật, hãy bật **chế độ nhà phát triển** trong Cài đặt — các biến mẫu của mỗi lần bắt sẽ hiện trong cửa sổ nổi dưới dạng JSON.
+
+Hành động đơn giản (một cái tên và một chỉ dẫn) cũng tạo được từ cửa sổ cài đặt; những gì nó ghi ra chính xác là định dạng tệp này.
+
+#### Mẫu nâng cao
+
+Cả trường `instructions` trong frontmatter lẫn phần thân đều là mẫu [LiquidJS](https://liquidjs.com/tags/overview.html) đầy đủ: câu điều kiện, vòng lặp và [bộ lọc](https://liquidjs.com/filters/overview.html) đều hoạt động.
+Một hành động duy nhất có thể thích ứng theo nơi nội dung được sao chép:
+
+```markdown
+---
+id: context-aware
+label: Tùy ngữ cảnh
+---
+
+{% if url contains "github.com" %}
+Hãy xem xét đoạn mã này và chỉ ra rủi ro lớn nhất:
+{% elsif app_name == "Slack" %}
+Tóm tắt chuỗi trò chuyện này trong 2 dòng:
+{% else %}
+Giải thích nội dung này bằng {{ locale }}:
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+## Nhật ký
+
+Nhật ký có cấu trúc (đã che thông tin bí mật và nội dung sao chép) được ghi ra terminal khi phát triển và vào tệp xoay vòng ở bản phát hành:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>

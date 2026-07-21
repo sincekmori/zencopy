@@ -1,0 +1,106 @@
+---
+title: FAQ
+description: Costs, privacy, clashes with other apps, and troubleshooting.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+## Does it cost money?
+
+ZenCopy itself is free, open-source software (Apache-2.0).
+There is no account and no subscription.
+
+What the AI service charges is between you and that service.
+With [Google's free tier](/en/getting-started/#prepare-a-free-ai-key), it is completely free — unless you register a payment method, you cannot be charged.
+And with an AI that runs entirely on your own computer (Ollama, for example), there is no external service to pay in the first place.
+
+## Where does my copied content go?
+
+Only when you copy twice does the content go **directly to the AI service you configured** — and nowhere else.
+There is no ZenCopy server, no relay, and no usage tracking (telemetry).
+Your API key never leaves your machine either.
+
+## Does an ordinary copy trigger anything?
+
+No.
+A single <span data-os-modifier>Ctrl/⌘</span> + C starts nothing, reads nothing, and sends nothing.
+Only two copies in quick succession are the signal.
+Even then, clipboard content marked confidential by other apps (password managers, for example) is ignored.
+
+## How much can I trust the AI's answers?
+
+AI can be fluently wrong.
+It is genuinely useful for grasping the gist of a text, but for numbers, names, and anything consequential — contracts, medical text — check against the original before acting on it.
+
+## How is this different from other "AI on selection" tools?
+
+Most tools in this space are macOS-only, work on selected text only, and are tied to one vendor's AI or a subscription.
+ZenCopy runs on **Windows, macOS, and Linux**, handles **text, rich text, images, and files**, and lets **you choose the AI service** (OpenAI / Google / Anthropic / a corporate gateway / local Ollama).
+[Which action runs is also yours to decide](/en/configuration/#routingjson).
+No account, no subscription, no telemetry — open-source software.
+
+## Another app also reacts to Ctrl/⌘ + C + C (e.g. DeepL)
+
+No app can own the "copy twice" signal at the OS level.
+If another app is listening for the same signal (DeepL is the well-known one), **both** react and two popups appear.
+ZenCopy neither intercepts nor blocks any key events, so nothing breaks — that is the whole symptom.
+Disable the shortcut in whichever app you use less (for DeepL: Settings → General → shortcut for translating).
+
+## The popup never appears (macOS)
+
+Almost certainly permissions.
+Allow both **Input Monitoring** and **Accessibility** for ZenCopy under System Settings → Privacy & Security, then quit and restart the app.
+(These two permissions are how the app notices that copy was pressed twice.)
+
+## No result comes back / it says it timed out
+
+If the response goes silent for 90 seconds, ZenCopy fails the run instead of waiting forever.
+Check your internet connection and the AI service settings (API key and so on), then press **Retry**.
+A local AI can take a while to load the first time, which is why the timeout is deliberately generous.
+
+## Where are the logs?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
+
+Logs never contain your copied content or API keys.
+
+## What does uninstalling remove?
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">
+    The `.msi` uninstall removes everything: settings, API keys, custom actions, logs, and the
+    webview profile. The `.exe` (NSIS) uninstaller instead asks with a **Delete application data**
+    checkbox. (One harmless leftover either way: if launch-at-login was enabled, a registry entry
+    pointing at nothing may remain — Windows ignores entries whose target does not exist.)
+  </TabItem>
+  <TabItem label="macOS">
+    Dropping the app in the Trash does not delete its data — that is the macOS convention, and
+    ZenCopy follows it. For a full wipe, first run **Settings → Reset all settings** (removes all
+    settings including API keys; logs stay for diagnostics, so delete `~/Library/Logs/app.zencopy`
+    by hand for a truly clean slate), then trash the app.
+  </TabItem>
+  <TabItem label="Linux">
+    Package managers remove the app only; user data stays — also the Linux convention. For a full
+    wipe, first run **Settings → Reset all settings**, then remove the package or AppImage. The
+    GNOME trigger extension can be removed with `gnome-extensions uninstall
+    copycopy@sincekmori.github.io`.
+  </TabItem>
+</Tabs>
+
+## Which Linux environments are supported?
+
+**GNOME on Wayland, and X11.**
+On GNOME Wayland, background processes cannot observe keys or the clipboard by design, so ZenCopy (via the [`copycopy`](https://crates.io/crates/copycopy) crate) ships a small GNOME Shell extension that detects the double copy from inside the compositor.
+It is auto-installed into your user profile on first launch (no sudo) and becomes active after logging out and back in once.
+On X11, an ordinary passive key listener works, as on Windows.
+Other Wayland compositors (KDE Plasma, wlroots-based) offer no unprivileged way to observe the trigger and are not supported yet — the app runs, but the trigger stays inert.
+
+## The tray icon does not show up (Linux)
+
+ZenCopy's tray icon uses the AppIndicator protocol.
+Ubuntu's GNOME supports it out of the box, but vanilla GNOME (Fedora, for example) shows nothing until the **AppIndicator and KStatusNotifierItem Support** Shell extension is installed.
+Either way the app itself works — the tray menu is just one way in.

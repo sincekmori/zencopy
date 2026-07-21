@@ -1,0 +1,157 @@
+import { emit } from "@tauri-apps/api/event";
+import { GripVertical } from "lucide-react";
+import { useEffect, useState } from "react";
+import { type ActionInfo, listActions } from "@/lib/actions.ts";
+import { useActionLabel, useT } from "@/lib/i18n.tsx";
+import { createLogger } from "@/lib/log.ts";
+import { getQuickActions, QUICK_SLOT_COUNT, setQuickActions } from "@/lib/settings.ts";
+import { cn } from "@/lib/utils.ts";
+import { Select } from "@/components/ui/select.tsx";
+
+const log = createLogger("quick-actions-settings");
+
+/** The four popup quick slots (number keys 1–4): drag to reorder, pick the
+ *  action per slot. Positions are stable so the numbers a user memorizes
+ *  never move on their own; assignments stay duplicate-free (choosing an
+ *  action already in another slot swaps the two). The default action is
+ *  chosen in the actions list, not here — one star, one place. */
+export function QuickActionsSettings(): React.JSX.Element {
+  const t = useT();
+  const actionLabel = useActionLabel();
+  const [actions, setActions] = useState<ActionInfo[]>([]);
+  const [slots, setSlots] = useState<string[]>([]);
+  const [dragIndex, setDragIndex] = useState<number | undefined>(undefined);
+
+  const reload = (): void => {
+    void (async () => {
+      try {
+        const [list, quick] = await Promise.all([listActions(), getQuickActions()]);
+        setActions(list);
+        setSlots(quick);
+      } catch (error) {
+        log.error("loading quick actions failed", error);
+      }
+    })();
+  };
+
+  useEffect(() => {
+    reload();
+  }, []);
+
+  // Persist + broadcast so the popup's row updates live.
+  const commit = (next: string[]): void => {
+    setSlots(next);
+    void (async () => {
+      try {
+        await setQuickActions(next);
+        await emit("quick-actions-changed", next);
+      } catch (error) {
+        log.error("saving quick actions failed", error);
+        reload();
+      }
+    })();
+  };
+
+  // Assign an action to a slot. If it already occupies another slot, swap them
+  // so the four stay distinct without ever leaving a slot empty.
+  const assign = (slotIndex: number, id: string): void => {
+    const next = [...slots];
+    const existing = next.indexOf(id);
+    if (existing !== -1 && existing !== slotIndex) {
+      next[existing] = next[slotIndex] ?? id;
+    }
+    next[slotIndex] = id;
+    commit(next);
+  };
+
+  const move = (from: number, to: number): void => {
+    if (from === to) {
+      return;
+    }
+    const next = [...slots];
+    const [moved] = next.splice(from, 1);
+    if (moved === undefined) {
+      return;
+    }
+    next.splice(to, 0, moved);
+    commit(next);
+  };
+
+  return (
+    <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
+      <div>
+        <h2 className="text-sm font-medium">{t.settings.quickTitle}</h2>
+        <p className="mt-1 text-xs text-muted-foreground">{t.settings.quickHint}</p>
+      </div>
+      <ul className="flex flex-col gap-2">
+        {slots.map((id, index) => {
+          const known = actions.some((a) => a.id === id);
+          return (
+            // Slot order IS the identity here (the number is the slot), so the
+            // index key is correct, not a fallback.
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={index}>
+              {/* Drag lives on this generic wrapper, not the <li> — a11y rules
+                  reserve DnD handlers for non-semantic elements. */}
+              <div
+                draggable
+                onDragStart={(event) => {
+                  // WebKit won't start a drag without data on the transfer.
+                  event.dataTransfer.setData("text/plain", String(index));
+                  event.dataTransfer.effectAllowed = "move";
+                  setDragIndex(index);
+                }}
+                onDragOver={(event) => {
+                  event.preventDefault();
+                  event.dataTransfer.dropEffect = "move";
+                }}
+                onDrop={(event) => {
+                  event.preventDefault();
+                  if (dragIndex !== undefined) {
+                    move(dragIndex, index);
+                  }
+                  setDragIndex(undefined);
+                }}
+                onDragEnd={() => {
+                  setDragIndex(undefined);
+                }}
+                className={cn(
+                  "flex items-center gap-2 rounded-lg border bg-background/40 p-2 transition-colors",
+                  dragIndex === index && "opacity-50",
+                )}
+              >
+                <GripVertical className="size-4 shrink-0 cursor-grab text-muted-foreground/50" />
+                <kbd className="flex size-6 shrink-0 items-center justify-center rounded border bg-muted font-mono text-xs text-muted-foreground">
+                  {index + 1}
+                </kbd>
+                <Select
+                  className="flex-1"
+                  value={id}
+                  onChange={(event) => {
+                    assign(index, event.target.value);
+                  }}
+                >
+                  {/* An id pointing at a deleted action stays listed raw, so the
+                      slot's state is visible instead of silently blank. */}
+                  {known ? undefined : <option value={id}>{id}</option>}
+                  {actions.map((action) => (
+                    <option key={action.id} value={action.id}>
+                      {actionLabel(action.id, action.label)}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+            </li>
+          );
+        })}
+        {slots.length === 0 ? (
+          <li className="text-xs text-muted-foreground">
+            {Array.from({ length: QUICK_SLOT_COUNT })
+              .map(() => "…")
+              .join(" ")}
+          </li>
+        ) : undefined}
+      </ul>
+    </section>
+  );
+}

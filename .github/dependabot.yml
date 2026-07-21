@@ -1,0 +1,45 @@
+# Weekly dependency PRs for every ecosystem in the repo.
+# The 7-day cooldown mirrors the machine-wide bun minimumReleaseAge policy.
+# Only our own first-party libraries skip the wait: the bun exempt list matches
+# bunfig.toml's minimumReleaseAgeExcludes exactly (ai-sdk-catalog, ai-sdk-ping),
+# and cargo exempts copycopy for the same reason.
+version: 2
+updates:
+  - package-ecosystem: bun
+    directories:
+      - "/"
+      - "/site"
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+      exclude:
+        - ai-sdk-catalog
+        - ai-sdk-ping
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: cargo
+    directory: "/src-tauri"
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+      exclude:
+        - copycopy
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday

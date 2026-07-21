@@ -1,0 +1,8 @@
+# Checkout text files with LF everywhere (Windows runners default to
+# core.autocrlf=true, which would break oxfmt --check with CRLF conversions).
+* text=auto eol=lf
+
+# Binary assets — never convert.
+*.png binary
+*.ico binary
+*.icns binary

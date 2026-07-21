@@ -1,0 +1,15 @@
+// Cloudflare Workers (static assets) deployment for zencopy.app.
+// Deploy with `bun run deploy` (astro build && wrangler deploy); the custom
+// domain attaches automatically via `routes` — the zone lives in the same
+// Cloudflare account as the Worker.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zencopy",
+  "compatibility_date": "2026-07-21",
+  "routes": [{ "pattern": "zencopy.app", "custom_domain": true }],
+  "assets": {
+    "directory": "./dist",
+    // Serve Starlight's 404.html for unknown paths.
+    "not_found_handling": "404-page",
+  },
+}

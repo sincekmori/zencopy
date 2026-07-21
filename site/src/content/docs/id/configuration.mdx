@@ -1,0 +1,185 @@
+---
+title: Konfigurasi
+description: Apa saja yang tersedia di jendela pengaturan (untuk semua orang), dan kustomisasi mendetail lewat berkas konfigurasi (untuk pengguna mahir).
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+ZenCopy langsung bisa dipakai tanpa mengatur apa pun.
+Halaman ini untuk saat kamu ingin ZenCopy lebih pas denganmu.
+Paruh pertama, tentang **jendela pengaturan**, ditujukan untuk semua orang; paruh kedua, tentang **berkas konfigurasi**, untuk pengguna mahir.
+
+## Jendela pengaturan
+
+Buka dari menu ikon tray, atau dari ikon roda gigi pada popup.
+Ada tiga tab: **Umum, AI, dan Aksi**.
+
+### Umum
+
+- **Posisi popup** — di sudut layar mana hasil muncul.
+- **Tema** — terang / gelap / ikut sistem.
+- **Bahasa** — bahasa tampilan (mengikuti OS secara bawaan).
+- **Mulai saat masuk** — ZenCopy siap sedia kapan pun komputermu menyala.
+- **Konfirmasi sebelum mengirim gambar & berkas** — apakah popup bertanya dulu sebelum gambar atau berkas dikirim ke AI.
+
+### AI
+
+Di sinilah kamu mengubah layanan AI (penyedia, model, kunci API).
+Tombol **Uji** langsung memberi tahu apakah koneksinya berfungsi.
+
+Tab ini juga punya kolom **Tentang kamu**.
+Ini tempat menuliskan peran dan preferensimu dalam beberapa kalimat sederhana, dalam bahasa apa pun.
+
+> Contoh: "Sales. Kebanyakan menulis email pelanggan — sopan tapi tidak kaku, kesimpulan di awal."
+
+Dengan kolom ini terisi, setiap aksi menyesuaikan hasilnya untukmu.
+Penjelasan datang sesuai tingkat pengetahuanmu, dan draf kembali dengan nada yang kamu sukai.
+Kolom ini tidak pernah memengaruhi tugas yang tidak berkaitan, dan teksnya sendiri tidak pernah muncul di hasil.
+
+### Aksi
+
+Daftar "apa yang terjadi setelah salin dua kali".
+
+- Aksi yang sudah terpasang bisa dibuka dan dibaca — sekaligus menjadi contoh cara menulisnya.
+- **Aksi baru** hanya butuh nama dan apa yang ingin kamu lakukan.
+  Misalnya: nama "Ringkasan 3 baris", instruksi "Ringkas ini dalam 3 baris".
+- Belum percaya diri menulis instruksi? Tulis kasar saja apa yang kamu mau dan tekan **Draf dengan AI** — AI yang sudah kamu atur akan mengubahnya menjadi instruksi yang rapi.
+- Tanda ★ menandai aksi bawaan — yang pertama dijalankan oleh salin dua kali.
+- **Perutean** memungkinkanmu memilih aksi yang berbeda untuk tiap jenis konten (teks / gambar / berkas).
+
+Aksi buatanmu bisa dibagikan: **Ekspor (.md)** menuliskannya sebagai berkas, dan pihak penerima cukup menempelkannya ke **Impor** atau memilih berkasnya.
+
+## Berkas konfigurasi (untuk pengguna mahir)
+
+Mulai dari sini, halaman ini membahas penyuntingan berkas teks secara langsung.
+**Semua hal penting sudah tersedia dari jendela pengaturan, jadi silakan berhenti membaca di sini.**
+
+Berkas dibaca dari direktori konfigurasi aplikasi milik tiap pengguna.
+Jalur persisnya juga dicetak ke log saat aplikasi dijalankan:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%APPDATA%\app.zencopy`</TabItem>
+  <TabItem label="macOS">`~/Library/Application Support/app.zencopy`</TabItem>
+  <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
+</Tabs>
+
+Nilai bawaan perutean tertanam di dalam aplikasi; `routing.json` hanya bekerja sebagai **penimpa** atasnya.
+Berkas aksi bersifat **tambahan**:
+berkas itu mendefinisikan aksi baru, dan aksi bawaan tidak tersentuh (berkas lokal yang mengaku memakai id bawaan akan diabaikan).
+Suntingan berlaku pada pemicu berikutnya — tanpa perlu memulai ulang.
+
+### `ai-sdk-catalog.json`
+
+Penyedia plus pemetaan **role → model**.
+Rumah format berkas ini adalah [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — setiap field didokumentasikan di sana (termasuk `$schema` untuk validasi dan pelengkapan otomatis di editor), dan [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) memuat contoh konfigurasi dalam tiga ukuran.
+Untuk titik awal bergaya ZenCopy (apa yang ditulis UI pengaturan, Ollama lokal, role untuk aksi), lihat [Resep](/id/recipes/).
+
+Kunci API ditulis langsung ke berkas lokal ini (UI pengaturan menulis format yang sama); kunci tidak pernah meninggalkan perangkatmu.
+Variabel lingkungan tidak dibaca — aplikasi GUI dijalankan oleh OS, bukan oleh shell-mu, sehingga variabel yang di-export di `.zshrc` dan sejenisnya tidak pernah sampai ke sana.
+Berkas ini divalidasi terhadap skema pada setiap pembacaan.
+Suntingan yang rusak muncul sebagai pesan yang jelas di popup dan editor pengaturan — tidak ada yang gagal secara diam-diam.
+
+### `routing.json`
+
+Aksi mana yang menangani jenis tangkapan mana:
+peta datar `kind → action` plus daftar `overrides` opsional dengan prioritas lebih tinggi (kecocokan pertama menang).
+Empat jenisnya adalah `text`, `rich_text`, `image`, dan `files`; sejak awal, teks dirutekan ke Zen sementara gambar dan berkas dirutekan ke Jelaskan.
+Peta datarnya bisa disunting di dalam aplikasi (Pengaturan → Aksi → Perutean), jadi kamu hanya perlu menyentuh berkas ini untuk `overrides`.
+
+```json
+{
+  "text": "zen",
+  "rich_text": "zen",
+  "image": "explain",
+  "files": "explain",
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+}
+```
+
+Kondisi `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (semuanya mendukung wildcard `*`), plus `min_chars` / `max_chars`.
+
+Untuk tangkapan `image` dan `files`, kontennya sendiri dikirim ke model (total hingga 10 MB per tangkapan).
+Jenis berkas dideteksi dari **isinya**, bukan namanya:
+gambar, PDF, dan audio dilampirkan apa adanya, sedangkan berkas teks (Markdown, kode sumber, CSV, …) menjadi teks tangkapan (`{{ text }}`) dan berperilaku persis seperti saat kamu menyalin isinya.
+Pengodean karakter dideteksi otomatis, dan format lawas seperti Shift_JIS serta UTF-16 dikonversi.
+Berkas jenis lain ditolak dengan pesan yang jelas.
+Jalur lengkap ikut terkirim bersama isinya agar model bisa membedakan berkas dan tahu di mana letaknya.
+Karena lampiran biner bisa lebih mahal daripada teks, popup bertanya dulu sebelum mengirimnya (berkas teks berjalan tanpa bertanya) — konfirmasinya bisa dimatikan di tempat atau di Pengaturan.
+
+### `actions/*.md`
+
+Satu berkas = satu aksi: frontmatter YAML + isi prompt [Liquid](https://liquidjs.com).
+Berkas tunggal yang sama juga menjadi format berbagi — Pengaturan → Aksi → Impor menerimanya sebagai teks yang ditempel atau berkas yang dipilih.
+
+```markdown
+---
+id: summarize
+label: Ringkas
+role: default
+instructions: Kamu adalah asisten yang ringkas.
+---
+
+Ringkas dalam 3 baris, dalam {{ locale }}:
+
+{{ text }}
+```
+
+| Frontmatter    | Arti                                                        |
+| -------------- | ----------------------------------------------------------- |
+| `id`           | Nama yang dirujuk dari `routing.json` (bawaan: nama berkas) |
+| `label`        | Ditampilkan di popup                                        |
+| `role`         | Role catalog yang dipakai saat berjalan (bawaan: `default`) |
+| `instructions` | Prompt sistem (templat Liquid)                              |
+
+Variabel templat, dengan contoh nilai untuk paragraf yang disalin di browser:
+
+| Variabel             | Contoh                                                 |
+| -------------------- | ------------------------------------------------------ |
+| `{{ text }}`         | Teks yang disalin (salinan HTML kaya menjadi Markdown) |
+| `{{ markup }}`       | Sumber HTML/RTF dari salinan kaya                      |
+| `{{ format }}`       | `html` (atau `rtf`; kosong untuk salinan polos)        |
+| `{{ app_name }}`     | `Safari`                                               |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`       |
+| `{{ window_title }}` | `Harga – Example`                                      |
+| `{{ url }}`          | `https://example.com/pricing` (khusus browser)         |
+| `{{ process_id }}`   | `8123`                                                 |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                  |
+| `{{ locale }}`       | `id`                                                   |
+
+Ada juga filter `language_name` khusus ZenCopy: `{{ locale | language_name }}` diperluas menjadi "Indonesian" alih-alih "id", sehingga terbaca alami dalam sebuah prompt.
+Untuk melihat nilai sebenarnya, aktifkan **Mode pengembang** di Pengaturan — variabel templat setiap tangkapan muncul di popup sebagai JSON.
+
+Aksi sederhana (nama dan instruksi saja) juga bisa dibuat dari jendela pengaturan; yang ditulisnya persis format berkas ini.
+
+#### Templat tingkat lanjut
+
+Frontmatter `instructions` maupun isi prompt sama-sama merupakan templat [LiquidJS](https://liquidjs.com/tags/overview.html) penuh: percabangan, perulangan, dan [filter](https://liquidjs.com/filters/overview.html) semuanya berfungsi.
+Satu aksi bisa menyesuaikan diri dengan asal salinan:
+
+```markdown
+---
+id: context-aware
+label: Peka konteks
+---
+
+{% if url contains "github.com" %}
+Tinjau kode ini dan tunjukkan satu risiko terbesarnya:
+{% elsif app_name == "Slack" %}
+Ringkas utas obrolan ini dalam 2 baris:
+{% else %}
+Jelaskan ini dalam {{ locale }}:
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+## Log
+
+Log terstruktur (rahasia dan konten yang disalin sudah disamarkan) menuju terminal dalam mode dev dan berkas berotasi dalam rilis:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>

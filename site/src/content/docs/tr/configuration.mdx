@@ -1,0 +1,185 @@
+---
+title: Yapılandırma
+description: Ayarlar penceresinin sunduğu her şey (herkes için) ve yapılandırma dosyalarıyla ince ayar (ileri düzey kullanıcılar için).
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+ZenCopy hiçbir şey ayarlamadan, kutudan çıktığı gibi çalışır.
+Bu sayfa, onu kendine daha çok uydurmak istediğin an için.
+**Ayarlar penceresini** anlatan ilk yarı herkes için; **yapılandırma dosyalarını** anlatan ikinci yarı ileri düzey kullanıcılar için.
+
+## Ayarlar penceresi
+
+Tepsi simgesinin menüsünden ya da açılır penceredeki dişli simgesinden açabilirsin.
+Üç sekmesi var: **Genel, AI ve Eylemler**.
+
+### Genel
+
+- **Açılır pencere konumu** — sonuçların ekranın hangi köşesinde görüneceği.
+- **Tema** — açık / koyu / sistemi izle.
+- **Dil** — arayüz dili (varsayılan olarak işletim sistemini izler).
+- **Oturum açılınca başlat** — bilgisayarın açıkken ZenCopy hep hazır beklesin.
+- **Görsel ve dosya göndermeden önce onayla** — görseller ya da dosyalar AI'ya gitmeden önce bir kez sorulsun mu.
+
+### AI
+
+AI hizmetini (sağlayıcı, model, API anahtarı) burada değiştirirsin.
+**Sına** düğmesi bağlantının çalışıp çalışmadığını anında söyler.
+
+Bu sekmede bir de **Senin hakkında** alanı var.
+Rolünü ve tercihlerini, istediğin dilde birkaç sade cümleyle anlattığın yer.
+
+> Örnek: "Satış. Çoğunlukla müşteri e-postası yazıyorum — kibar ama resmî değil, önce sonuç."
+
+Bunu doldurduğunda her eylem sonuçlarını sana göre uyarlar.
+Açıklamalar bilgi düzeyine uygun gelir, taslaklar tercih ettiğin tonda geri döner.
+İlgisiz görevleri asla etkilemez ve yazdığın metin sonuçlarda asla görünmez.
+
+### Eylemler
+
+"Çift kopyalamadan sonra ne olacağının" listesi.
+
+- Önceden yüklü eylemler açılıp okunabilir — aynı zamanda çalışan birer örnektirler.
+- **Yeni eylem** için bir ad ile ne yapılmasını istediğin yeter.
+  Örneğin: ad "3 satırlık özet", talimat "Bunu 3 satırda özetle".
+- Talimat yazmakta kendine güvenmiyor musun? İstediğini kabaca karala ve **AI ile taslak oluştur** düğmesine bas — yapılandırdığın AI onu düzgün bir talimata dönüştürür.
+- ★ varsayılan eylemi gösterir — çift kopyalamanın ilk çalıştırdığı eylem.
+- **Yönlendirme**, içerik türüne göre (metin / görsel / dosyalar) farklı bir eylem seçmeni sağlar.
+
+Oluşturduğun eylemler paylaşılabilir: **Dışa aktar** bir eylemi dosya olarak yazar; karşı taraf onu **İçe aktar**'a yapıştırır ya da dosyayı seçer.
+
+## Yapılandırma dosyaları (ileri düzey kullanıcılar için)
+
+Buradan sonrası, metin dosyalarını doğrudan düzenlemekle ilgili.
+**Temel her şey ayarlar penceresinden yapılabildiği için burada okumayı bırakabilirsin.**
+
+Dosyalar, kullanıcıya özel uygulama yapılandırma dizininden okunur.
+Tam yol, açılışta günlüğe de yazılır:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%APPDATA%\app.zencopy`</TabItem>
+  <TabItem label="macOS">`~/Library/Application Support/app.zencopy`</TabItem>
+  <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
+</Tabs>
+
+Yönlendirme varsayılanları uygulamaya gömülüdür; `routing.json` onları yalnızca **geçersiz kılar**.
+Eylem dosyaları **ekleme amaçlıdır**:
+yeni eylemler tanımlarlar; yerleşik eylemlere dokunulamaz (yerleşik bir id'yi sahiplenen yerel dosya yok sayılır).
+Düzenlemeler bir sonraki tetiklemede geçerli olur — yeniden başlatmak gerekmez.
+
+### `ai-sdk-catalog.json`
+
+Sağlayıcılar ve bir **role → model** eşlemesi.
+Dosya biçiminin ana yurdu [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — her alan orada belgelenmiştir (düzenleyicide doğrulama ve tamamlama sağlayan `$schema` dahil) ve [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) içinde üç boyda hazır yapılandırma vardır.
+ZenCopy'ye özgü başlangıç noktaları için (ayarlar arayüzünün yazdığı biçim, yerel Ollama, eylemler için role'ler) [Tarifler](/tr/recipes/) sayfasına bak.
+
+API anahtarları doğrudan bu yerel dosyaya yazılır (ayarlar arayüzü de aynı biçimi yazar); makinenden asla çıkmazlar.
+Ortam değişkenleri okunmaz — grafik arayüzlü uygulamaları kabuk değil işletim sistemi başlatır; bu yüzden `.zshrc` ve benzerlerinde export edilen değişkenler onlara hiç ulaşmaz.
+Dosya her okunuşta şemaya göre doğrulanır.
+Bozuk bir düzenleme, açılır pencerede ve ayarlar düzenleyicisinde net bir mesaj olarak görünür — hiçbir şey sessizce başarısız olmaz.
+
+### `routing.json`
+
+Hangi tür yakalamayı hangi eylemin işleyeceği:
+düz bir `kind → action` eşlemesi ve isteğe bağlı, daha öncelikli bir `overrides` listesi (ilk eşleşen kazanır).
+Dört tür şunlardır: `text`, `rich_text`, `image` ve `files`; başlangıçta metin Zen'e, görseller ve dosyalar Açıkla'ya yönlendirilir.
+Düz eşleme uygulama içinden düzenlenebilir (Ayarlar → Eylemler → Yönlendirme); bu dosyaya yalnızca `overrides` için dokunman gerekir.
+
+```json
+{
+  "text": "zen",
+  "rich_text": "zen",
+  "image": "explain",
+  "files": "explain",
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+}
+```
+
+`when` koşulları: `kind`, `app_name`, `exec_name`, `window_title`, `url` (hepsi `*` joker karakteriyle), ayrıca `min_chars` / `max_chars`.
+
+`image` ve `files` yakalamalarında modele içeriğin kendisi gönderilir (yakalama başına toplam 10 MB'a kadar).
+Dosya türleri adlarından değil **içerikten** algılanır:
+görseller, PDF'ler ve ses olduğu gibi eklenir; metin dosyaları (Markdown, kaynak kodu, CSV, …) yakalamanın metni (`{{ text }}`) olur ve tıpkı içeriklerini kopyalamışsın gibi davranır.
+Karakter kodlamaları otomatik algılanır; Shift_JIS ve UTF-16 gibi eski biçimler dönüştürülür.
+Bunların dışındaki her şey net bir mesajla geri çevrilir.
+Modelin dosyaları ayırt edebilmesi ve nerede olduklarını bilmesi için içerikle birlikte tam yollar da gönderilir.
+İkili ekler metinden pahalı olabildiği için açılır pencere göndermeden önce sorar (metin dosyaları sormadan çalışır) — onay, oracıkta ya da Ayarlar'dan kapatılabilir.
+
+### `actions/*.md`
+
+1 dosya = 1 eylem: YAML frontmatter + [Liquid](https://liquidjs.com) prompt gövdesi.
+Aynı tek dosya paylaşım biçimidir de — Ayarlar → Eylemler → İçe aktar onu yapıştırılmış metin ya da seçilmiş dosya olarak kabul eder.
+
+```markdown
+---
+id: summarize
+label: Özetle
+role: default
+instructions: Özlü bir asistansın.
+---
+
+Şunu {{ locale }} dilinde 3 satırda özetle:
+
+{{ text }}
+```
+
+| Frontmatter    | Anlamı                                                           |
+| -------------- | ---------------------------------------------------------------- |
+| `id`           | `routing.json` içinden başvurulan ad (varsayılan: dosya adı)     |
+| `label`        | Açılır pencerede gösterilir                                      |
+| `role`         | Çalıştırmada kullanılacak katalog role'ü (varsayılan: `default`) |
+| `instructions` | Sistem prompt'u (Liquid şablonu)                                 |
+
+Şablon değişkenleri ve tarayıcıda kopyalanan bir paragraf için örnek değerler:
+
+| Değişken             | Örnek                                                       |
+| -------------------- | ----------------------------------------------------------- |
+| `{{ text }}`         | Kopyalanan metin (zengin HTML kopyaları Markdown'a dönüşür) |
+| `{{ markup }}`       | Zengin kopyanın HTML/RTF kaynağı                            |
+| `{{ format }}`       | `html` (ya da `rtf`; düz kopyalarda boş)                    |
+| `{{ app_name }}`     | `Safari`                                                    |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                     |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`            |
+| `{{ window_title }}` | `Fiyatlandırma – Example`                                   |
+| `{{ url }}`          | `https://example.com/pricing` (yalnızca tarayıcılarda)      |
+| `{{ process_id }}`   | `8123`                                                      |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                       |
+| `{{ locale }}`       | `tr`                                                        |
+
+Ayrıca ZenCopy'ye özgü bir `language_name` filtresi var: `{{ locale | language_name }}`, "tr" yerine "Turkish" olarak açılır; bu da bir prompt içinde doğal okunur.
+Gerçek değerleri görmek için Ayarlar'dan **Geliştirici modu**nu etkinleştir — her yakalamanın şablon değişkenleri açılır pencerede JSON olarak görünür.
+
+Basit eylemler (bir ad ve bir talimat) ayarlar penceresinden de oluşturulabilir; yazdığı, tam olarak bu dosya biçimidir.
+
+#### Gelişmiş şablonlar
+
+`instructions` frontmatter'ı da gövde de eksiksiz birer [LiquidJS](https://liquidjs.com/tags/overview.html) şablonudur: koşullar, döngüler ve [filtreler](https://liquidjs.com/filters/overview.html) tümüyle çalışır.
+Tek bir eylem, kopyanın geldiği yere göre uyum sağlayabilir:
+
+```markdown
+---
+id: context-aware
+label: Bağlama duyarlı
+---
+
+{% if url contains "github.com" %}
+Bu kodu incele ve en büyük tek riski belirt:
+{% elsif app_name == "Slack" %}
+Bu sohbet dizisini 2 satırda özetle:
+{% else %}
+Bunu {{ locale }} dilinde açıkla:
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+## Günlükler
+
+Yapılandırılmış günlükler (gizli bilgiler ve kopyalanan içerik ayıklanmış hâlde) geliştirmede terminale, sürümde ise dönüşümlü bir dosyaya yazılır:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
+  <TabItem label="macOS">`~/Library/Logs/app.zencopy/`</TabItem>
+  <TabItem label="Linux">`~/.local/share/app.zencopy/logs`</TabItem>
+</Tabs>
