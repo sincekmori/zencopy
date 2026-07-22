@@ -113,7 +113,7 @@ export const ko: Messages = {
       "이 데스크톱 세션에서는 트리거를 감지할 수 없습니다. ZenCopy에는 Wayland의 GNOME 또는 X11이 필요합니다.",
     failed: "트리거를 시작하지 못했습니다. 자세한 내용은 로그를 확인해 주세요.",
     macosPermissions:
-      "한 단계 남았습니다. 복사가 두 번 눌렸음을 알아채려면 macOS의 권한이 필요합니다. 시스템 설정 → 개인정보 보호 및 보안에서 입력 모니터링과 손쉬운 사용 모두에서 ZenCopy를 허용한 뒤, ZenCopy를 종료하고 다시 실행해 주세요.",
+      "한 단계 남았습니다. 복사가 두 번 눌렸음을 알아채려면 macOS의 권한이 필요합니다. 시스템 설정 → 개인정보 보호 및 보안에서 입력 모니터링에서 ZenCopy를 허용한 뒤, ZenCopy를 종료하고 다시 실행해 주세요.",
   },
   actions: {
     builtinLabels: { translate: "번역", explain: "설명", polish: "다듬기" },

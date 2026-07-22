@@ -111,7 +111,7 @@ export const th: Messages = {
       "เซสชันเดสก์ท็อปนี้ไม่สามารถตรวจจับทริกเกอร์ได้ — ZenCopy ต้องใช้ GNOME บน Wayland หรือ X11",
     failed: "ไม่สามารถเริ่มทริกเกอร์ได้ ดูรายละเอียดในบันทึก",
     macosPermissions:
-      "เหลืออีกขั้นตอนเดียว: macOS ต้องการสิทธิ์จากคุณเพื่อให้สังเกตการคัดลอกสองครั้งได้ ไปที่ System Settings → Privacy & Security แล้วอนุญาต ZenCopy ทั้งใน Input Monitoring และ Accessibility จากนั้นปิด ZenCopy แล้วเปิดใหม่",
+      "เหลืออีกขั้นตอนเดียว: macOS ต้องการสิทธิ์จากคุณเพื่อให้สังเกตการคัดลอกสองครั้งได้ ไปที่ System Settings → Privacy & Security แล้วอนุญาต ZenCopy ใน Input Monitoring จากนั้นปิด ZenCopy แล้วเปิดใหม่",
   },
   actions: {
     builtinLabels: { translate: "แปล", explain: "อธิบาย", polish: "ขัดเกลา" },

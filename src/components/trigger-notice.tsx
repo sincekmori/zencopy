@@ -16,9 +16,8 @@ function noticeText(
       return t.trigger.unsupportedSession;
     }
     case "failed": {
-      // On macOS the listener failing to start means the Input Monitoring /
-      // Accessibility permissions are missing — say so instead of pointing at
-      // the log.
+      // On macOS the listener failing to start means the Input Monitoring
+      // permission is missing — say so instead of pointing at the log.
       return IS_MAC ? t.trigger.macosPermissions : t.trigger.failed;
     }
     default: {

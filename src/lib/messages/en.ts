@@ -114,7 +114,7 @@ export const en: Messages = {
       "This desktop session can't observe the trigger — ZenCopy needs GNOME on Wayland, or X11.",
     failed: "The trigger couldn't start. See the log for details.",
     macosPermissions:
-      "One step left: macOS needs your permission to notice the double copy. In System Settings → Privacy & Security, allow ZenCopy under both Input Monitoring and Accessibility, then quit and reopen ZenCopy.",
+      "One step left: macOS needs your permission to notice the double copy. In System Settings → Privacy & Security, allow ZenCopy under Input Monitoring, then quit and reopen ZenCopy.",
   },
   actions: {
     // The .md files are authored in English, so English needs no overrides.

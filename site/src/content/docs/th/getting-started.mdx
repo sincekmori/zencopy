@@ -94,13 +94,12 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 <Tabs syncKey="os">
   <TabItem label="Windows">ไม่มีอะไรต้องตั้งค่า ใช้งานได้ทันทีหลังเปิดแอป</TabItem>
   <TabItem label="macOS">
-    บน macOS แอปต้องการสิทธิ์สองอย่าง เพื่อให้สังเกตได้ว่ามีการกดคัดลอกสองครั้ง:
+    บน macOS แอปต้องการสิทธิ์หนึ่งอย่าง เพื่อให้สังเกตได้ว่ามีการกดคัดลอกสองครั้ง:
 
     - **System Settings → Privacy & Security → Input Monitoring** — อนุญาต ZenCopy
-    - **System Settings → Privacy & Security → Accessibility** — อนุญาต ZenCopy
 
-    ทั้งสองอย่างมีไว้เพื่อให้แอปสังเกต**สัญญาณ**ได้เท่านั้น — ไม่ใช่เพื่อให้อ่านหน้าจอของคุณได้
-    หลังอนุญาตครบทั้งสองแล้ว ให้ปิด ZenCopy หนึ่งครั้งแล้วเปิดใหม่
+    สิทธิ์นี้มีไว้เพื่อให้แอปสังเกต**สัญญาณ**ได้เท่านั้น — ไม่ใช่เพื่อให้อ่านหน้าจอของคุณได้
+    หลังอนุญาตแล้ว ให้ปิด ZenCopy หนึ่งครั้งแล้วเปิดใหม่
 
   </TabItem>
   <TabItem label="Linux">

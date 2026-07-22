@@ -115,7 +115,7 @@ export const tr: Messages = {
       "Bu masaüstü oturumunda tetikleyici izlenemiyor — ZenCopy için Wayland üzerinde GNOME veya X11 gerekir.",
     failed: "Tetikleyici başlatılamadı. Ayrıntılar için günlüğe bakın.",
     macosPermissions:
-      "Bir adım kaldı: macOS'in çift kopyalamayı fark edebilmesi için izniniz gerekiyor. Sistem Ayarları → Gizlilik ve Güvenlik altında hem Giriş İzleme hem de Erişilebilirlik için ZenCopy'ye izin verin, ardından ZenCopy'yi kapatıp yeniden başlatın.",
+      "Bir adım kaldı: macOS'in çift kopyalamayı fark edebilmesi için izniniz gerekiyor. Sistem Ayarları → Gizlilik ve Güvenlik altında Giriş İzleme için ZenCopy'ye izin verin, ardından ZenCopy'yi kapatıp yeniden başlatın.",
   },
   actions: {
     builtinLabels: { translate: "Çevir", explain: "Açıkla", polish: "İyileştir" },

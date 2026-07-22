@@ -114,7 +114,7 @@ export const id: Messages = {
       "Sesi desktop ini tidak dapat memantau pemicu — ZenCopy memerlukan GNOME di Wayland atau X11.",
     failed: "Pemicu gagal dimulai. Lihat log untuk detailnya.",
     macosPermissions:
-      "Tinggal satu langkah: macOS memerlukan izinmu agar aplikasi bisa menyadari bahwa salin ditekan dua kali. Di System Settings → Privacy & Security, izinkan ZenCopy di Input Monitoring dan juga Accessibility, lalu tutup dan buka kembali ZenCopy.",
+      "Tinggal satu langkah: macOS memerlukan izinmu agar aplikasi bisa menyadari bahwa salin ditekan dua kali. Di System Settings → Privacy & Security, izinkan ZenCopy di Input Monitoring, lalu tutup dan buka kembali ZenCopy.",
   },
   actions: {
     builtinLabels: { translate: "Terjemahkan", explain: "Jelaskan", polish: "Rapikan" },

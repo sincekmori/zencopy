@@ -127,9 +127,9 @@ export interface Messages {
     unsupportedSession: string;
     /** The trigger listener failed to start; details are in the log. */
     failed: string;
-    /** macOS: the listener could not start because Input Monitoring /
-     *  Accessibility are not granted — actionable guidance, shown instead of
-     *  `failed` (see TriggerNotice). */
+    /** macOS: the listener could not start because Input Monitoring is not
+     *  granted — actionable guidance, shown instead of `failed` (see
+     *  TriggerNotice). */
     macosPermissions: string;
   };
   actions: {
