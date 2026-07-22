@@ -50,7 +50,14 @@ jobs:
       # bundles and the updater artifacts (signed installers + latest.json) to
       # a draft release. Secrets: TAURI_SIGNING_PRIVATE_KEY holds the contents
       # of the updater private key, ..._PASSWORD its password ("" if none).
-      # OS code signing (notarization etc.) is a separate, later concern.
+      #
+      # macOS code signing + notarization: the APPLE_* secrets make
+      # tauri-action import the Developer ID Application certificate into a
+      # temporary keychain, sign the bundle, and notarize it (APPLE_ID +
+      # APPLE_PASSWORD + APPLE_TEAM_ID present = notarize). Without a stable
+      # signature, macOS ties the Input Monitoring / Accessibility grants to
+      # the ad-hoc cdhash, which changes every build — the trigger would
+      # silently break on each update. Ignored on the other runners.
       #
       # Windows ships NSIS only (bundle.targets excludes msi), the recommended
       # updater format for Tauri v2, so latest.json points at NSIS without
@@ -60,6 +67,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         with:
           tagName: ${{ github.ref_name }}
           releaseName: "ZenCopy ${{ github.ref_name }}"
