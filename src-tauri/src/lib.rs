@@ -909,7 +909,12 @@ fn decode_text(bytes: &[u8]) -> Option<String> {
 /// media types providers expect), else the text decoding above. `None` means
 /// a recognized-but-unsupported or opaque binary (zip, executable, …).
 fn sniff_attachment(bytes: &[u8]) -> Option<SniffedType> {
-    if let Some(kind) = infer::get(bytes) {
+    // infer's Text matchers (HTML, XML, shell scripts) are content heuristics,
+    // not binary signatures — an SVG's `<?xml` prolog matches text/xml, for
+    // example. Those files are text like any other: let decode_text decide.
+    if let Some(kind) =
+        infer::get(bytes).filter(|kind| kind.matcher_type() != infer::MatcherType::Text)
+    {
         let media_type = match kind.mime_type() {
             "audio/x-wav" => "audio/wav",
             "audio/x-flac" => "audio/flac",
@@ -2341,6 +2346,24 @@ mod attachment_tests {
 
         let opaque = b"\x01\x02\x00\xff random binary";
         assert!(sniff_attachment(opaque).is_none());
+    }
+
+    /// infer also has *text* matchers (HTML, XML, shell scripts); those hits
+    /// are text, not unsupported binaries. Regression: an SVG's `<?xml` prolog
+    /// used to be rejected as text/xml.
+    #[test]
+    fn infer_text_hits_stay_on_the_text_path() {
+        let svg = b"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\"/>\n";
+        assert!(matches!(sniff_attachment(svg), Some(SniffedType::Text(_))));
+
+        let html = b"<!DOCTYPE html>\n<p>hello</p>\n";
+        assert!(matches!(sniff_attachment(html), Some(SniffedType::Text(_))));
+
+        let script = b"#!/bin/sh\necho hello\n";
+        assert!(matches!(
+            sniff_attachment(script),
+            Some(SniffedType::Text(_))
+        ));
     }
 
     /// Japanese Windows realities: Shift_JIS files, UTF-16 with a BOM, and
