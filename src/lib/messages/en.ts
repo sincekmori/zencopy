@@ -56,7 +56,7 @@ export const en: Messages = {
     placeholder: "Copy something to see it here.",
     devVars: "Template variables",
     noAction:
-      "No action is assigned to this type of capture yet — assign one in Settings → Actions.",
+      "No action runs automatically for this capture — pick one below or press 1–4 to run it.",
     routingDocs: "How routing works",
     confirmSend: "Send this capture to your AI provider? Images and files can cost more than text.",
     send: "Send",
@@ -161,7 +161,7 @@ export const en: Messages = {
     kindRichText: "Rich text",
     kindImage: "Image",
     kindFiles: "Files",
-    none: "None",
+    none: "Don't run automatically",
     overridesTitle: "Rules",
     overridesHint: "Route by app, window, or length — checked first, top to bottom.",
     overridesDocs: "How rules work",

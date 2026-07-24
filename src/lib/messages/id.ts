@@ -55,7 +55,8 @@ export const id: Messages = {
   popup: {
     placeholder: "Salin sesuatu untuk melihatnya di sini.",
     devVars: "Variabel templat",
-    noAction: "Jenis tangkapan ini belum punya aksi — tetapkan di Pengaturan → Aksi.",
+    noAction:
+      "Tangkapan ini tidak menjalankan aksi secara otomatis — pilih satu di bawah atau tekan 1–4 untuk menjalankannya.",
     routingDocs: "Cara kerja perutean",
     confirmSend:
       "Kirim tangkapan ini ke penyedia AI kamu? Gambar dan berkas bisa lebih mahal daripada teks.",
@@ -161,7 +162,7 @@ export const id: Messages = {
     kindRichText: "Teks kaya",
     kindImage: "Gambar",
     kindFiles: "Berkas",
-    none: "Tidak ada",
+    none: "Jangan jalankan otomatis",
     overridesTitle: "Aturan",
     overridesHint:
       "Rutekan berdasarkan aplikasi, jendela, atau panjang — diperiksa lebih dulu, dari atas ke bawah.",

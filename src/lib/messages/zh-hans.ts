@@ -52,7 +52,7 @@ export const zhHans: Messages = {
   popup: {
     placeholder: "复制一些内容，就会显示在这里。",
     devVars: "模板变量",
-    noAction: "这类捕获还没有分配动作 — 请在“设置 → 动作”中分配。",
+    noAction: "这次捕获不会自动执行动作 — 在下方选择一个，或按数字键 1–4 执行。",
     routingDocs: "了解路由机制",
     confirmSend: "要把这次捕获发送给你的 AI 提供商吗？图片和文件可能比文本花费更多。",
     send: "发送",
@@ -152,7 +152,7 @@ export const zhHans: Messages = {
     kindRichText: "富文本",
     kindImage: "图片",
     kindFiles: "文件",
-    none: "无",
+    none: "不自动执行",
     overridesTitle: "规则",
     overridesHint: "按应用、窗口或长度分流 — 自上而下优先匹配。",
     overridesDocs: "了解规则机制",

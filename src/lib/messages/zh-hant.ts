@@ -53,7 +53,7 @@ export const zhHant: Messages = {
   popup: {
     placeholder: "複製一些內容，就會顯示在這裡。",
     devVars: "範本變數",
-    noAction: "這類擷取尚未指派動作 — 請在「設定 → 動作」中指派。",
+    noAction: "這次擷取不會自動執行動作 — 請在下方選擇一個，或按數字鍵 1–4 執行。",
     routingDocs: "了解路由機制",
     confirmSend: "要把這次擷取傳送給你的 AI 供應商嗎？圖片和檔案可能比文字花費更多。",
     send: "傳送",
@@ -153,7 +153,7 @@ export const zhHant: Messages = {
     kindRichText: "RTF 文字",
     kindImage: "圖片",
     kindFiles: "檔案",
-    none: "無",
+    none: "不自動執行",
     overridesTitle: "規則",
     overridesHint: "依應用程式、視窗或長度分流 — 由上而下優先比對。",
     overridesDocs: "了解規則機制",

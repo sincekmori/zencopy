@@ -57,7 +57,7 @@ export const ja: Messages = {
     placeholder: "コピーすると、ここに表示されます。",
     devVars: "テンプレート変数",
     noAction:
-      "このタイプのキャプチャにはまだアクションが割り当てられていません。設定の「アクション」タブから割り当てられます。",
+      "このキャプチャは自動では実行されません。下のアクションを選ぶか、数字キー 1–4 で実行できます。",
     routingDocs: "ルーティングの仕組みを見る",
     confirmSend:
       "このキャプチャを AI プロバイダーに送信しますか？画像やファイルはテキストより料金がかかることがあります。",
@@ -167,7 +167,7 @@ export const ja: Messages = {
     kindRichText: "リッチテキスト",
     kindImage: "画像",
     kindFiles: "ファイル",
-    none: "なし",
+    none: "自動実行しない",
     overridesTitle: "ルール",
     overridesHint:
       "アプリ・ウィンドウ・文字数で振り分け。上から順に先勝ちで、種類別の割り当てより優先されます。",

@@ -57,7 +57,7 @@ export const pl: Messages = {
     placeholder: "Skopiuj coś, a pojawi się tutaj.",
     devVars: "Zmienne szablonu",
     noAction:
-      "Do tego typu przechwycenia nie przypisano jeszcze akcji — przypisz ją w Ustawieniach → Akcje.",
+      "To przechwycenie nie uruchamia akcji automatycznie — wybierz jedną poniżej albo naciśnij 1–4, aby ją uruchomić.",
     routingDocs: "Jak działa routing",
     confirmSend:
       "Wysłać to przechwycenie do twojego dostawcy AI? Obrazy i pliki mogą kosztować więcej niż tekst.",
@@ -163,7 +163,7 @@ export const pl: Messages = {
     kindRichText: "Tekst sformatowany",
     kindImage: "Obraz",
     kindFiles: "Pliki",
-    none: "Brak",
+    none: "Nie uruchamiaj automatycznie",
     overridesTitle: "Reguły",
     overridesHint:
       "Kieruj według aplikacji, okna lub długości — sprawdzane najpierw, od góry do dołu.",

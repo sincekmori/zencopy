@@ -58,7 +58,7 @@ export const de: Messages = {
     placeholder: "Kopiere etwas, um es hier zu sehen.",
     devVars: "Template-Variablen",
     noAction:
-      "Diesem Erfassungstyp ist noch keine Aktion zugewiesen — weise eine unter Einstellungen → Aktionen zu.",
+      "Für diese Erfassung läuft keine Aktion automatisch — wähle unten eine aus oder drücke 1–4, um sie auszuführen.",
     routingDocs: "So funktioniert das Routing",
     confirmSend:
       "Diese Erfassung an deinen KI-Anbieter senden? Bilder und Dateien können mehr kosten als Text.",
@@ -167,7 +167,7 @@ export const de: Messages = {
     kindRichText: "Formatierter Text",
     kindImage: "Bild",
     kindFiles: "Dateien",
-    none: "Keine",
+    none: "Nicht automatisch ausführen",
     overridesTitle: "Regeln",
     overridesHint:
       "Nach App, Fenster oder Länge routen — werden zuerst geprüft, von oben nach unten.",

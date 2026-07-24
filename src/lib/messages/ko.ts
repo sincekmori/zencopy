@@ -54,7 +54,8 @@ export const ko: Messages = {
   popup: {
     placeholder: "무언가를 복사하면 여기에 표시됩니다.",
     devVars: "템플릿 변수",
-    noAction: "이 유형의 캡처에는 아직 액션이 지정되지 않았습니다. 설정 → 액션에서 지정하세요.",
+    noAction:
+      "이 캡처는 자동으로 실행되지 않습니다. 아래에서 액션을 선택하거나 숫자 키 1–4로 실행할 수 있습니다.",
     routingDocs: "라우팅 동작 방식 보기",
     confirmSend:
       "이 캡처를 AI 제공업체로 보낼까요? 이미지와 파일은 텍스트보다 비용이 더 들 수 있습니다.",
@@ -160,7 +161,7 @@ export const ko: Messages = {
     kindRichText: "서식 있는 텍스트",
     kindImage: "이미지",
     kindFiles: "파일",
-    none: "없음",
+    none: "자동 실행 안 함",
     overridesTitle: "규칙",
     overridesHint: "앱·창·길이로 분기합니다. 위에서부터 순서대로 먼저 일치하는 규칙이 적용됩니다.",
     overridesDocs: "규칙 동작 방식 보기",

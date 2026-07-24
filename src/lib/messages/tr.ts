@@ -56,7 +56,8 @@ export const tr: Messages = {
   popup: {
     placeholder: "Bir şey kopyala, burada görünsün.",
     devVars: "Şablon değişkenleri",
-    noAction: "Bu yakalama türüne henüz bir eylem atanmadı — Ayarlar → Eylemler'den ata.",
+    noAction:
+      "Bu yakalama otomatik olarak bir eylem çalıştırmaz — aşağıdan birini seç veya çalıştırmak için 1–4'e bas.",
     routingDocs: "Yönlendirme nasıl çalışır",
     confirmSend:
       "Bu yakalama AI sağlayıcına gönderilsin mi? Görseller ve dosyalar metinden pahalı olabilir.",
@@ -162,7 +163,7 @@ export const tr: Messages = {
     kindRichText: "Zengin metin",
     kindImage: "Görsel",
     kindFiles: "Dosyalar",
-    none: "Yok",
+    none: "Otomatik çalıştırma",
     overridesTitle: "Kurallar",
     overridesHint:
       "Uygulamaya, pencereye veya uzunluğa göre yönlendir — önce, yukarıdan aşağıya denetlenir.",

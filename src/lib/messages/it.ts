@@ -57,7 +57,7 @@ export const it: Messages = {
     placeholder: "Copia qualcosa per vederlo qui.",
     devVars: "Variabili di template",
     noAction:
-      "A questo tipo di cattura non è ancora assegnata un'azione — assegnala in Impostazioni → Azioni.",
+      "Questa cattura non esegue alcuna azione automaticamente — scegline una qui sotto o premi 1–4 per eseguirla.",
     routingDocs: "Come funziona il routing",
     confirmSend:
       "Inviare questa cattura al tuo provider di IA? Immagini e file possono costare più del testo.",
@@ -165,7 +165,7 @@ export const it: Messages = {
     kindRichText: "Testo formattato",
     kindImage: "Immagine",
     kindFiles: "File",
-    none: "Nessuna",
+    none: "Non eseguire automaticamente",
     overridesTitle: "Regole",
     overridesHint:
       "Instrada per app, finestra o lunghezza — controllate per prime, dall'alto in basso.",

@@ -57,7 +57,7 @@ export const es: Messages = {
     placeholder: "Copia algo y aparecerá aquí.",
     devVars: "Variables de plantilla",
     noAction:
-      "Este tipo de captura aún no tiene una acción asignada — asígnala en Ajustes → Acciones.",
+      "Esta captura no ejecuta ninguna acción automáticamente — elige una abajo o pulsa 1–4 para ejecutarla.",
     routingDocs: "Cómo funciona el enrutamiento",
     confirmSend:
       "¿Enviar esta captura a tu proveedor de IA? Las imágenes y archivos pueden costar más que el texto.",
@@ -165,7 +165,7 @@ export const es: Messages = {
     kindRichText: "Texto enriquecido",
     kindImage: "Imagen",
     kindFiles: "Archivos",
-    none: "Ninguna",
+    none: "No ejecutar automáticamente",
     overridesTitle: "Reglas",
     overridesHint:
       "Enruta por aplicación, ventana o longitud — se comprueban primero, de arriba abajo.",

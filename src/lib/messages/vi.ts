@@ -55,7 +55,8 @@ export const vi: Messages = {
   popup: {
     placeholder: "Sao chép gì đó để thấy nó ở đây.",
     devVars: "Biến mẫu",
-    noAction: "Loại nội dung này chưa được gán hành động — hãy gán trong Cài đặt → Hành động.",
+    noAction:
+      "Nội dung này không tự động chạy hành động nào — hãy chọn một hành động bên dưới hoặc nhấn 1–4 để chạy.",
     routingDocs: "Cách định tuyến hoạt động",
     confirmSend:
       "Gửi nội dung này đến nhà cung cấp AI của bạn? Hình ảnh và tệp có thể tốn kém hơn văn bản.",
@@ -161,7 +162,7 @@ export const vi: Messages = {
     kindRichText: "Văn bản định dạng",
     kindImage: "Hình ảnh",
     kindFiles: "Tệp",
-    none: "Không",
+    none: "Không tự động chạy",
     overridesTitle: "Quy tắc",
     overridesHint:
       "Định tuyến theo ứng dụng, cửa sổ hoặc độ dài — được kiểm tra trước, từ trên xuống.",

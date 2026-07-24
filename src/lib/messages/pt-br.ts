@@ -57,7 +57,7 @@ export const ptBR: Messages = {
     placeholder: "Copie algo para vê-lo aqui.",
     devVars: "Variáveis de template",
     noAction:
-      "Este tipo de captura ainda não tem uma ação atribuída — atribua em Configurações → Ações.",
+      "Esta captura não executa nenhuma ação automaticamente — escolha uma abaixo ou pressione 1–4 para executar.",
     routingDocs: "Como funciona o roteamento",
     confirmSend:
       "Enviar esta captura ao seu provedor de IA? Imagens e arquivos podem custar mais que texto.",
@@ -162,7 +162,7 @@ export const ptBR: Messages = {
     kindRichText: "Texto formatado",
     kindImage: "Imagem",
     kindFiles: "Arquivos",
-    none: "Nenhuma",
+    none: "Não executar automaticamente",
     overridesTitle: "Regras",
     overridesHint:
       "Roteie por aplicativo, janela ou tamanho — verificadas primeiro, de cima para baixo.",

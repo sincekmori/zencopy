@@ -57,7 +57,7 @@ export const fr: Messages = {
     placeholder: "Copiez quelque chose pour le voir ici.",
     devVars: "Variables de gabarit",
     noAction:
-      "Aucune action n'est encore assignée à ce type de capture — assignez-en une dans Réglages → Actions.",
+      "Aucune action ne s'exécute automatiquement pour cette capture — choisissez-en une ci-dessous ou appuyez sur 1–4 pour l'exécuter.",
     routingDocs: "Comment fonctionne le routage",
     confirmSend:
       "Envoyer cette capture à votre fournisseur d'IA ? Les images et fichiers peuvent coûter plus cher que le texte.",
@@ -168,7 +168,7 @@ export const fr: Messages = {
     kindRichText: "Texte enrichi",
     kindImage: "Image",
     kindFiles: "Fichiers",
-    none: "Aucune",
+    none: "Ne pas exécuter automatiquement",
     overridesTitle: "Règles",
     overridesHint:
       "Routez par application, fenêtre ou longueur — vérifiées en premier, de haut en bas.",
