@@ -115,7 +115,7 @@ export const vi: Messages = {
       "Phiên desktop này không thể theo dõi thao tác kích hoạt — ZenCopy cần GNOME trên Wayland hoặc X11.",
     failed: "Không thể khởi động trình kích hoạt. Xem log để biết chi tiết.",
     macosPermissions:
-      "Còn một bước: macOS cần bạn cấp quyền để nhận biết thao tác sao chép hai lần. Trong System Settings → Privacy & Security, hãy cho phép ZenCopy ở Input Monitoring, sau đó thoát ZenCopy rồi mở lại.",
+      "Còn một bước: macOS cần bạn cấp quyền để nhận biết thao tác sao chép hai lần. Trong Cài đặt hệ thống → Quyền riêng tư & Bảo mật, hãy cho phép ZenCopy ở Giám sát đầu vào, sau đó thoát ZenCopy rồi mở lại.",
   },
   actions: {
     builtinLabels: { translate: "Dịch", explain: "Giải thích", polish: "Trau chuốt" },

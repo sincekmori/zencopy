@@ -116,7 +116,7 @@ export const pl: Messages = {
       "W tej sesji pulpitu nie można monitorować wyzwalacza — ZenCopy wymaga GNOME na Waylandzie lub X11.",
     failed: "Nie udało się uruchomić wyzwalacza. Szczegóły znajdziesz w dzienniku.",
     macosPermissions:
-      "Został jeden krok: macOS potrzebuje Twojej zgody, aby zauważyć podwójne kopiowanie. W Ustawienia systemowe → Prywatność i ochrona zezwól ZenCopy w sekcji Monitorowanie wprowadzania danych, a następnie zamknij i uruchom ZenCopy ponownie.",
+      "Został jeden krok: macOS potrzebuje Twojej zgody, aby zauważyć podwójne kopiowanie. W Ustawieniach systemowych → Prywatność i ochrona zezwól ZenCopy w sekcji Monitorowanie wprowadzania, a następnie zamknij i uruchom ZenCopy ponownie.",
   },
   actions: {
     builtinLabels: { translate: "Przetłumacz", explain: "Wyjaśnij", polish: "Dopracuj" },

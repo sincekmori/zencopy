@@ -113,7 +113,7 @@ export const ar: Messages = {
       "لا يمكن رصد المشغّل في جلسة سطح المكتب هذه — يتطلب ZenCopy تشغيل GNOME على Wayland أو X11.",
     failed: "تعذّر بدء المشغّل. راجع السجل لمعرفة التفاصيل.",
     macosPermissions:
-      "بقيت خطوة واحدة: يحتاج macOS إلى إذنك حتى يلاحظ النسخ المزدوج. في System Settings ← Privacy & Security، اسمح لـ ZenCopy ضمن Input Monitoring، ثم أغلق ZenCopy وشغّله من جديد.",
+      "بقيت خطوة واحدة: يحتاج macOS إلى إذنك حتى يلاحظ النسخ المزدوج. في إعدادات النظام ← الخصوصية والأمن، اسمح لـ ZenCopy ضمن مراقبة الإدخال، ثم أغلق ZenCopy وشغّله من جديد.",
   },
   actions: {
     builtinLabels: { translate: "ترجمة", explain: "شرح", polish: "تنقيح" },

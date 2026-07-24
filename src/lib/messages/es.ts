@@ -117,7 +117,7 @@ export const es: Messages = {
       "Esta sesión de escritorio no permite detectar el disparador: ZenCopy necesita GNOME en Wayland o X11.",
     failed: "No se pudo iniciar el disparador. Consulta el registro para más detalles.",
     macosPermissions:
-      "Falta un paso: macOS necesita tu permiso para detectar el doble copiado. En Ajustes del Sistema → Privacidad y seguridad, permite ZenCopy en Monitoreo de entrada, luego cierra ZenCopy y vuelve a abrirlo.",
+      "Falta un paso: macOS necesita tu permiso para detectar el doble copiado. En Ajustes del Sistema → Privacidad y seguridad, permite ZenCopy en Monitorización de entrada, luego cierra ZenCopy y vuelve a abrirlo.",
   },
   actions: {
     builtinLabels: { translate: "Traducir", explain: "Explicar", polish: "Pulir" },
