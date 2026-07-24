@@ -101,6 +101,7 @@ Condições de `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (t
 Para capturas de `image` e `files`, o próprio conteúdo é enviado ao modelo (até 10 MB no total por captura).
 Os tipos de arquivo são detectados pelo **conteúdo**, não pelo nome:
 imagens, PDFs e áudio são anexados como estão, enquanto arquivos de texto (Markdown, código-fonte, CSV, …) viram o texto da captura (`{{ text }}`) e se comportam exatamente como se você tivesse copiado o conteúdo deles.
+Documentos do Office (Word, Excel, PowerPoint) também se tornam texto: seu conteúdo é extraído e enviado, mas seu layout e imagens não.
 As codificações de caracteres são detectadas automaticamente, com conversão de formatos antigos como Shift_JIS e UTF-16.
 Qualquer outra coisa é recusada com uma mensagem clara.
 Os caminhos completos acompanham o conteúdo, para que o modelo distinga os arquivos e saiba onde eles estão.

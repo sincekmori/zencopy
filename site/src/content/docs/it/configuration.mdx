@@ -101,6 +101,7 @@ Condizioni di `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tu
 Per le catture `image` e `files`, il contenuto stesso viene inviato al modello (fino a 10 MB totali per cattura).
 I tipi di file sono rilevati dal **contenuto**, non dai nomi:
 immagini, PDF e audio vengono allegati così come sono, mentre i file di testo (Markdown, codice sorgente, CSV, …) diventano il testo della cattura (`{{ text }}`) e si comportano esattamente come se ne avessi copiato il contenuto.
+Anche i documenti di Office (Word, Excel, PowerPoint) diventano testo: il loro contenuto viene estratto e inviato, ma non il layout e le immagini.
 Le codifiche dei caratteri vengono rilevate automaticamente, convertendo formati datati come Shift_JIS e UTF-16.
 Tutto il resto viene rifiutato con un messaggio chiaro.
 I percorsi completi viaggiano insieme ai contenuti, così il modello può distinguere i file e sa dove si trovano.

@@ -101,6 +101,7 @@ Düz eşleme uygulama içinden düzenlenebilir (Ayarlar → Eylemler → Yönlen
 `image` ve `files` yakalamalarında modele içeriğin kendisi gönderilir (yakalama başına toplam 10 MB'a kadar).
 Dosya türleri adlarından değil **içerikten** algılanır:
 görseller, PDF'ler ve ses olduğu gibi eklenir; metin dosyaları (Markdown, kaynak kodu, CSV, …) yakalamanın metni (`{{ text }}`) olur ve tıpkı içeriklerini kopyalamışsın gibi davranır.
+Office belgeleri (Word, Excel, PowerPoint) de metne dönüşür: içerikleri ayıklanır ve gönderilir, ancak düzenleri ve görselleri gönderilmez.
 Karakter kodlamaları otomatik algılanır; Shift_JIS ve UTF-16 gibi eski biçimler dönüştürülür.
 Bunların dışındaki her şey net bir mesajla geri çevrilir.
 Modelin dosyaları ayırt edebilmesi ve nerede olduklarını bilmesi için içerikle birlikte tam yollar da gönderilir.

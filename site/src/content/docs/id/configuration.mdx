@@ -101,6 +101,7 @@ Kondisi `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (semuanya
 Untuk tangkapan `image` dan `files`, kontennya sendiri dikirim ke model (total hingga 10 MB per tangkapan).
 Jenis berkas dideteksi dari **isinya**, bukan namanya:
 gambar, PDF, dan audio dilampirkan apa adanya, sedangkan berkas teks (Markdown, kode sumber, CSV, …) menjadi teks tangkapan (`{{ text }}`) dan berperilaku persis seperti saat kamu menyalin isinya.
+Dokumen Office (Word, Excel, PowerPoint) juga menjadi teks: kontennya diekstrak dan dikirim, tetapi tata letak dan gambarnya tidak.
 Pengodean karakter dideteksi otomatis, dan format lawas seperti Shift_JIS serta UTF-16 dikonversi.
 Berkas jenis lain ditolak dengan pesan yang jelas.
 Jalur lengkap ikut terkirim bersama isinya agar model bisa membedakan berkas dan tahu di mana letaknya.

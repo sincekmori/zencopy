@@ -101,6 +101,7 @@ Bốn loại là `text`, `rich_text`, `image` và `files`; theo mặc định, v
 Với nội dung bắt được loại `image` và `files`, bản thân nội dung được gửi đến mô hình (tổng cộng tối đa 10 MB cho mỗi lần bắt).
 Loại tệp được nhận diện từ **nội dung**, không phải tên tệp:
 hình ảnh, PDF và âm thanh được đính kèm nguyên trạng, còn tệp văn bản (Markdown, mã nguồn, CSV, …) trở thành phần văn bản của lần bắt (`{{ text }}`) và hoạt động y như thể bạn đã sao chép nội dung bên trong.
+Các tài liệu Office (Word, Excel, PowerPoint) cũng trở thành văn bản: nội dung của chúng được trích xuất và gửi đi, còn bố cục và hình ảnh thì không.
 Bảng mã ký tự được tự động nhận diện, chuyển đổi cả các định dạng cũ như Shift_JIS và UTF-16.
 Mọi thứ khác đều bị từ chối kèm thông báo rõ ràng.
 Đường dẫn đầy đủ đi kèm nội dung để mô hình phân biệt được các tệp và biết chúng nằm ở đâu.

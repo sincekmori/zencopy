@@ -101,6 +101,7 @@ Die flache Zuordnung ist in der App bearbeitbar (Einstellungen → Aktionen → 
 Bei `image`- und `files`-Erfassungen wird der Inhalt selbst an das Modell gesendet (bis zu 10 MB insgesamt pro Erfassung).
 Dateitypen werden am **Inhalt** erkannt, nicht am Namen:
 Bilder, PDFs und Audio werden unverändert angehängt, während Textdateien (Markdown, Quellcode, CSV, …) zum Text der Erfassung werden (`{{ text }}`) und sich genau so verhalten, als hättest du ihren Inhalt kopiert.
+Office-Dokumente (Word, Excel, PowerPoint) werden ebenfalls zu Text: Ihr Inhalt wird extrahiert und gesendet, ihr Layout und Bilder jedoch nicht.
 Zeichenkodierungen werden automatisch erkannt; ältere Formate wie Shift_JIS und UTF-16 werden konvertiert.
 Alles andere wird mit einer klaren Meldung abgelehnt.
 Die vollständigen Pfade reisen mit den Inhalten mit, damit das Modell Dateien auseinanderhalten kann und weiß, wo sie liegen.

@@ -52,6 +52,13 @@ chardetng = "1.0"
 # Rich (HTML) copies become Markdown for {{ text }} — the popup renders
 # Markdown, so inline code, bold, and links survive the round trip.
 htmd = "0.5"
+# Office attachments (docx/pptx/xlsx) are sent as extracted text, not binary —
+# providers don't take OOXML, and text is far cheaper. zip + quick-xml unpack
+# docx/pptx (a shallow XML walk collects the text runs); calamine reads xlsx
+# (it brings the same zip/quick-xml, so the marginal cost is calamine itself).
+zip = { version = "8.6", default-features = false, features = ["deflate"] }
+quick-xml = "0.41"
+calamine = { version = "0.36", default-features = false }
 
 # The engine: detects the global Ctrl/Cmd+C+C trigger and hands us a
 # CaptureEvent. Windows, macOS, and Linux (GNOME Wayland via a bundled Shell

@@ -4,6 +4,9 @@ use tauri::{
     tray::TrayIconBuilder,
 };
 
+/// OOXML (docx/pptx/xlsx) text extraction for attachments.
+mod office;
+
 /// Log-and-continue for fallible calls whose failure must not break the flow
 /// (window operations on a resident HUD degrade, they don't crash). Prefer this
 /// over `let _ =`, which silently discards the reason something didn't happen —
@@ -906,8 +909,9 @@ fn decode_text(bytes: &[u8]) -> Option<String> {
 }
 
 /// Sniff a file: magic bytes first (images, PDF, audio — normalized to the
-/// media types providers expect), else the text decoding above. `None` means
-/// a recognized-but-unsupported or opaque binary (zip, executable, …).
+/// media types providers expect; office files become their extracted text),
+/// else the text decoding above. `None` means a recognized-but-unsupported or
+/// opaque binary (zip, executable, …).
 fn sniff_attachment(bytes: &[u8]) -> Option<SniffedType> {
     // infer's Text matchers (HTML, XML, shell scripts) are content heuristics,
     // not binary signatures — an SVG's `<?xml` prolog matches text/xml, for
@@ -926,6 +930,14 @@ fn sniff_attachment(bytes: &[u8]) -> Option<SniffedType> {
             || media_type == "application/pdf"
         {
             return Some(SniffedType::Binary(media_type));
+        }
+        // docx/pptx/xlsx: providers don't take the binary, but the text
+        // inside is exactly what the model needs. Checked whenever the bytes
+        // are zip-shaped — infer's OOXML detection is entry-order-dependent
+        // and misses files from producers other than Microsoft Office, which
+        // sniff as plain application/zip.
+        if let Some(text) = office::extract_text(bytes) {
+            return Some(SniffedType::Text(text));
         }
         return None; // a known binary format the model can't take
     }
@@ -965,17 +977,25 @@ fn read_capture_files(paths: Vec<String>) -> Result<Vec<FileAttachment>, String>
         let bytes = std::fs::read(path).map_err(|e| unreadable(&e))?;
         // Re-check with the actual byte count — the file may have grown
         // between the metadata call and the read.
-        total += bytes.len() as u64;
+        if total.saturating_add(bytes.len() as u64) > MAX_ATTACHMENT_BYTES {
+            return Err("attachment-too-large".to_string());
+        }
+        let (media_type, data, outgoing) = match sniff_attachment(&bytes) {
+            Some(SniffedType::Binary(media_type)) => {
+                (media_type.to_string(), STANDARD.encode(&bytes), bytes.len())
+            }
+            // Count the text, not the file: extracted office text (and decoded
+            // legacy encodings) can outgrow their on-disk container.
+            Some(SniffedType::Text(text)) => {
+                let size = text.len();
+                ("text/plain".to_string(), text, size)
+            }
+            None => return Err(format!("unsupported-file:{name}")),
+        };
+        total += outgoing as u64;
         if total > MAX_ATTACHMENT_BYTES {
             return Err("attachment-too-large".to_string());
         }
-        let (media_type, data) = match sniff_attachment(&bytes) {
-            Some(SniffedType::Binary(media_type)) => {
-                (media_type.to_string(), STANDARD.encode(&bytes))
-            }
-            Some(SniffedType::Text(text)) => ("text/plain".to_string(), text),
-            None => return Err(format!("unsupported-file:{name}")),
-        };
         files.push(FileAttachment {
             name,
             path: original.clone(),
@@ -2346,6 +2366,40 @@ mod attachment_tests {
 
         let opaque = b"\x01\x02\x00\xff random binary";
         assert!(sniff_attachment(opaque).is_none());
+    }
+
+    /// End to end through infer: a docx-shaped zip must be *detected* as docx
+    /// (infer's msooxml matcher keys on `[Content_Types].xml` being the first
+    /// entry) and come out as its extracted text — while a plain zip stays
+    /// rejected. Guards the office-extraction wiring, not just the extractor.
+    #[test]
+    fn office_files_sniff_to_their_text() {
+        use std::io::Write;
+        let mut cursor = std::io::Cursor::new(Vec::new());
+        let mut writer = zip::ZipWriter::new(&mut cursor);
+        let options = zip::write::SimpleFileOptions::default()
+            .compression_method(zip::CompressionMethod::Stored);
+        // The real Word entry order: infer's msooxml matcher types the file
+        // by the 3rd/4th entry names, so `word/…` must sit at those slots.
+        for (name, content) in [
+            ("[Content_Types].xml", "<Types/>"),
+            ("_rels/.rels", "<Relationships/>"),
+            ("word/_rels/document.xml.rels", "<Relationships/>"),
+            (
+                "word/document.xml",
+                r#"<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:p><w:r><w:t>議事録の本文</w:t></w:r></w:p></w:body></w:document>"#,
+            ),
+        ] {
+            writer.start_file(name, options).unwrap();
+            writer.write_all(content.as_bytes()).unwrap();
+        }
+        writer.finish().unwrap();
+        let docx = cursor.into_inner();
+
+        let Some(SniffedType::Text(text)) = sniff_attachment(&docx) else {
+            panic!("docx must sniff to its extracted text");
+        };
+        assert_eq!(text, "議事録の本文\n");
     }
 
     /// infer also has *text* matchers (HTML, XML, shell scripts); those hits

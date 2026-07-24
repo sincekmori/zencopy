@@ -101,6 +101,7 @@ The flat map is editable in-app (Settings → Actions → Routing), so you only 
 For `image` and `files` captures, the content itself is sent to the model (up to 10 MB total per capture).
 File types are detected from **content**, not names:
 images, PDFs, and audio are attached as-is, while text files (Markdown, source code, CSV, …) become the capture's text (`{{ text }}`) and behave exactly as if you had copied their contents.
+Office documents (Word, Excel, PowerPoint) also become text: what they say is extracted and sent, their layout and images are not.
 Character encodings are auto-detected, converting legacy formats like Shift_JIS and UTF-16.
 Anything else is declined with a clear message.
 Full paths ride along with the contents so the model can tell files apart and knows where they live.

@@ -101,6 +101,7 @@ Warunki `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (wszystki
 Dla przechwyceń `image` i `files` do modelu wysyłana jest sama treść (łącznie do 10 MB na jedno przechwycenie).
 Typy plików są rozpoznawane po **zawartości**, nie po nazwach:
 obrazy, PDF-y i audio są dołączane bez zmian, a pliki tekstowe (Markdown, kod źródłowy, CSV, …) stają się tekstem przechwycenia (`{{ text }}`) i zachowują się dokładnie tak, jakby ich zawartość została skopiowana.
+Dokumenty Office (Word, Excel, PowerPoint) również stają się tekstem: ich treść jest wyodrębniana i wysyłana, ale układ i obrazy już nie.
 Kodowania znaków są wykrywane automatycznie, z konwersją starszych formatów takich jak Shift_JIS i UTF-16.
 Wszystko inne jest odrzucane z czytelnym komunikatem.
 Razem z zawartością wysyłane są pełne ścieżki, aby model mógł odróżnić pliki od siebie i wiedział, gdzie się znajdują.
