@@ -28,7 +28,10 @@ use crate::config::{STORE_FILE, config_base, read_catalog, reset_all_settings, w
 use crate::routing::{
     get_routing_ui, load_routing, resolve_action, set_kind_action, set_overrides,
 };
-use crate::tray::{app_locale, build_app_menu, build_tray_menu, locale_from_tag};
+// The app menu exists only on macOS (tray.rs gates the builder the same way).
+#[cfg(target_os = "macos")]
+use crate::tray::build_app_menu;
+use crate::tray::{app_locale, build_tray_menu, locale_from_tag};
 use crate::windows::{
     current_corner, open_about, open_settings, reveal_popup, reveal_window, show_popup_in_corner,
 };
