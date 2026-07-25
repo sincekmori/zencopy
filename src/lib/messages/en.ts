@@ -66,8 +66,6 @@ export const en: Messages = {
     fileUnreadable: (name) => `Couldn't read "${name}".`,
     switchAction: "Switch action",
     chooseAction: "Choose an action",
-    defaultTag: "default",
-    setDefault: (label) => `Make "${label}" the default`,
     failed: (reason) => `Failed: ${reason}`,
     timedOut: "No response from the model. Check your network and provider, then retry.",
     emptyResult: "The model returned an empty response.",
@@ -140,9 +138,6 @@ export const en: Messages = {
     view: "View",
     edit: "Edit",
     remove: "Delete",
-    setDefault: "Make default",
-    cannotDeleteDefault:
-      "The default action can't be deleted — make another action the default first.",
     failed: (reason) => `Failed: ${reason}`,
     importNotAnAction: "Not an action: expected `---` YAML frontmatter, then the prompt body.",
     importNoLabel: "The action has no label.",

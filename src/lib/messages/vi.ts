@@ -67,8 +67,6 @@ export const vi: Messages = {
     fileUnreadable: (name) => `Không đọc được "${name}".`,
     switchAction: "Đổi hành động",
     chooseAction: "Chọn hành động",
-    defaultTag: "mặc định",
-    setDefault: (label) => `Đặt "${label}" làm mặc định`,
     failed: (reason) => `Thất bại: ${reason}`,
     timedOut: "Mô hình không phản hồi. Kiểm tra mạng và nhà cung cấp, rồi thử lại.",
     emptyResult: "Mô hình trả về phản hồi trống.",
@@ -140,9 +138,6 @@ export const vi: Messages = {
     view: "Xem",
     edit: "Sửa",
     remove: "Xóa",
-    setDefault: "Đặt làm mặc định",
-    cannotDeleteDefault:
-      "Không thể xóa hành động mặc định — hãy đặt hành động khác làm mặc định trước.",
     failed: (reason) => `Thất bại: ${reason}`,
     importNotAnAction:
       "Không phải hành động: cần frontmatter YAML `---`, sau đó là nội dung prompt.",

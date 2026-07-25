@@ -68,8 +68,6 @@ export const pl: Messages = {
     fileUnreadable: (name) => `Nie udało się odczytać „${name}”.`,
     switchAction: "Zmień akcję",
     chooseAction: "Wybierz akcję",
-    defaultTag: "domyślna",
-    setDefault: (label) => `Ustaw „${label}” jako domyślną`,
     failed: (reason) => `Niepowodzenie: ${reason}`,
     timedOut: "Brak odpowiedzi modelu. Sprawdź sieć i dostawcę, potem spróbuj ponownie.",
     emptyResult: "Model zwrócił pustą odpowiedź.",
@@ -142,8 +140,6 @@ export const pl: Messages = {
     view: "Podgląd",
     edit: "Edytuj",
     remove: "Usuń",
-    setDefault: "Ustaw jako domyślną",
-    cannotDeleteDefault: "Domyślnej akcji nie można usunąć — najpierw ustaw inną jako domyślną.",
     failed: (reason) => `Niepowodzenie: ${reason}`,
     importNotAnAction:
       "To nie jest akcja: oczekiwano frontmattera YAML `---`, a po nim treści promptu.",

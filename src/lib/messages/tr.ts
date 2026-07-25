@@ -68,8 +68,6 @@ export const tr: Messages = {
     fileUnreadable: (name) => `"${name}" okunamadı.`,
     switchAction: "Eylemi değiştir",
     chooseAction: "Bir eylem seç",
-    defaultTag: "varsayılan",
-    setDefault: (label) => `"${label}" eylemini varsayılan yap`,
     failed: (reason) => `Başarısız: ${reason}`,
     timedOut: "Modelden yanıt yok. Ağını ve sağlayıcını kontrol edip yeniden dene.",
     emptyResult: "Model boş bir yanıt döndürdü.",
@@ -142,8 +140,6 @@ export const tr: Messages = {
     view: "Görüntüle",
     edit: "Düzenle",
     remove: "Sil",
-    setDefault: "Varsayılan yap",
-    cannotDeleteDefault: "Varsayılan eylem silinemez — önce başka bir eylemi varsayılan yap.",
     failed: (reason) => `Başarısız: ${reason}`,
     importNotAnAction:
       "Bu bir eylem değil: `---` YAML frontmatter ve ardından prompt gövdesi bekleniyor.",

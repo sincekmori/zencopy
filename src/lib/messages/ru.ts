@@ -68,8 +68,6 @@ export const ru: Messages = {
     fileUnreadable: (name) => `Не удалось прочитать «${name}».`,
     switchAction: "Сменить действие",
     chooseAction: "Выбрать действие",
-    defaultTag: "по умолчанию",
-    setDefault: (label) => `Сделать «${label}» действием по умолчанию`,
     failed: (reason) => `Ошибка: ${reason}`,
     timedOut: "Модель не ответила. Проверьте сеть и провайдера, затем повторите.",
     emptyResult: "Модель вернула пустой ответ.",
@@ -142,9 +140,6 @@ export const ru: Messages = {
     view: "Просмотр",
     edit: "Изменить",
     remove: "Удалить",
-    setDefault: "Сделать по умолчанию",
-    cannotDeleteDefault:
-      "Действие по умолчанию нельзя удалить — сначала назначьте другое по умолчанию.",
     failed: (reason) => `Ошибка: ${reason}`,
     importNotAnAction: "Это не действие: ожидается YAML-frontmatter `---`, затем текст промпта.",
     importNoLabel: "У действия нет поля label.",

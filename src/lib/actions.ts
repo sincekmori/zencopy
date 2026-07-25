@@ -12,8 +12,7 @@ const log = createLogger("actions");
 /** An action as listed by Rust (`list_actions_ui`), sorted by label.
  *  `instructions` is the system prompt and `prompt` the user prompt body
  *  (both Liquid templates); "builtin" ships with the app and is immutable,
- *  "custom" is a local file; `is_default` marks the action plain-text
- *  captures currently route to. */
+ *  "custom" is a local file. */
 const ActionInfoSchema = z.object({
   id: z.string(),
   label: z.string(),
@@ -21,7 +20,6 @@ const ActionInfoSchema = z.object({
   instructions: z.string(),
   prompt: z.string(),
   origin: z.enum(["builtin", "custom"]),
-  is_default: z.boolean(),
 });
 export type ActionInfo = z.infer<typeof ActionInfoSchema>;
 
@@ -73,11 +71,6 @@ export function importAction(text: string): Promise<string> {
  *  resolves to the id, or null when the user cancels the picker. */
 export function importActionFromFile(): Promise<string | null> {
   return invoke<string | null>("import_action_from_file");
-}
-
-/** Route plain-text captures to this action from now on. */
-export function setDefaultAction(id: string): Promise<void> {
-  return invoke("set_default_action", { id });
 }
 
 /** The capture kinds routing can assign (mirrors Rust's ROUTABLE_KINDS). */

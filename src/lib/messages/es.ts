@@ -69,8 +69,6 @@ export const es: Messages = {
     fileUnreadable: (name) => `No se pudo leer "${name}".`,
     switchAction: "Cambiar de acción",
     chooseAction: "Elegir una acción",
-    defaultTag: "predeterminada",
-    setDefault: (label) => `Hacer de "${label}" la predeterminada`,
     failed: (reason) => `Error: ${reason}`,
     timedOut: "El modelo no respondió. Comprueba tu red y tu proveedor, y vuelve a intentarlo.",
     emptyResult: "El modelo devolvió una respuesta vacía.",
@@ -143,9 +141,6 @@ export const es: Messages = {
     view: "Ver",
     edit: "Editar",
     remove: "Eliminar",
-    setDefault: "Hacer predeterminada",
-    cannotDeleteDefault:
-      "La acción predeterminada no se puede eliminar; primero haz predeterminada otra.",
     failed: (reason) => `Error: ${reason}`,
     importNotAnAction:
       "No es una acción: se espera frontmatter YAML `---` seguido del cuerpo del prompt.",

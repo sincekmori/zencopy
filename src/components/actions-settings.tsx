@@ -11,7 +11,6 @@ import {
   Pencil,
   Plus,
   Sparkles,
-  Star,
   Trash2,
   Upload,
 } from "lucide-react";
@@ -35,7 +34,6 @@ import {
   type RoutingInfo,
   type RoutingOverride,
   saveAction,
-  setDefaultAction,
   setKindAction,
   setOverrides,
   type WhenCondition,
@@ -141,7 +139,7 @@ export function ActionsSettings(): React.JSX.Element {
   // The ✨ button: the configured model is rewriting the instruction field.
   const [drafting, setDrafting] = useState(false);
   // The effective kind → action assignments, kept in the same reload path as
-  // the list so the star (text default) and the selects never disagree.
+  // the list so the selects and the action list never disagree.
   const [routing, setRouting] = useState<RoutingInfo>({ by_kind: {}, overrides: [] });
   const [routingError, setRoutingError] = useState<string | undefined>(undefined);
   // The override rule being added or edited, if any.
@@ -317,19 +315,6 @@ export function ActionsSettings(): React.JSX.Element {
         reload();
       } catch (error) {
         log.error("deleting action failed", error);
-        setFormError(t.actions.failed(errorMessage(error).slice(0, 200)));
-      }
-    })();
-  };
-
-  const makeDefault = (action: ActionInfo): void => {
-    setFormError(undefined);
-    void (async () => {
-      try {
-        await setDefaultAction(action.id);
-        reload();
-      } catch (error) {
-        log.error("setting the default action failed", error);
         setFormError(t.actions.failed(errorMessage(error).slice(0, 200)));
       }
     })();
@@ -644,22 +629,6 @@ export function ActionsSettings(): React.JSX.Element {
         <ul className="flex flex-col divide-y rounded-lg border">
           {actions.map((action) => (
             <li key={action.id} className="flex items-center gap-2 px-3 py-2">
-              <button
-                type="button"
-                aria-label={t.actions.setDefault}
-                title={t.actions.setDefault}
-                onClick={() => {
-                  makeDefault(action);
-                }}
-                className={cn(
-                  "shrink-0 rounded-md p-1 transition-colors",
-                  action.is_default
-                    ? "text-foreground"
-                    : "text-muted-foreground/40 hover:text-muted-foreground",
-                )}
-              >
-                <Star className={cn("size-3.5", action.is_default && "fill-current")} />
-              </button>
               <span className="min-w-0 truncate text-sm">
                 {actionLabel(action.id, action.label)}
               </span>
@@ -705,26 +674,17 @@ export function ActionsSettings(): React.JSX.Element {
                     >
                       <Pencil className="size-3.5" />
                     </Button>
-                    {/* The title rides on a wrapper: a disabled button
-                        swallows pointer events, so its own tooltip would
-                        never show — exactly when the user needs the "why". */}
-                    <span
-                      title={action.is_default ? t.actions.cannotDeleteDefault : t.actions.remove}
+                    <Button
+                      variant="ghost"
+                      size="icon-xs"
+                      aria-label={t.actions.remove}
+                      title={t.actions.remove}
+                      onClick={() => {
+                        remove(action);
+                      }}
                     >
-                      <Button
-                        variant="ghost"
-                        size="icon-xs"
-                        aria-label={
-                          action.is_default ? t.actions.cannotDeleteDefault : t.actions.remove
-                        }
-                        disabled={action.is_default}
-                        onClick={() => {
-                          remove(action);
-                        }}
-                      >
-                        <Trash2 className="size-3.5" />
-                      </Button>
-                    </span>
+                      <Trash2 className="size-3.5" />
+                    </Button>
                   </>
                 )}
               </span>

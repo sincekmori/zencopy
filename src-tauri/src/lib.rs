@@ -1039,20 +1039,15 @@ struct ActionInfo {
     instructions: String,
     prompt: String,
     origin: &'static str,
-    /// Whether routing currently sends plain-text captures to this action.
-    is_default: bool,
 }
 
 /// Every action: pre-installed first, in their DEFAULT_ACTIONS order (Zen
 /// leads by construction), then the user's actions sorted by label.
 #[tauri::command]
 fn list_actions_ui(app: tauri::AppHandle) -> Vec<ActionInfo> {
-    let default_id = load_routing(&app).by_kind.get("text").cloned();
-
     let mut infos: Vec<ActionInfo> = load_actions(&app)
         .into_iter()
         .map(|action| ActionInfo {
-            is_default: default_id.as_deref() == Some(action.id.as_str()),
             origin: if is_builtin_action(&action.id) {
                 "builtin"
             } else {
@@ -1427,16 +1422,6 @@ fn update_routing(app: &tauri::AppHandle, kinds: &[&str], id: Option<&str>) -> R
             }
         }
     })
-}
-
-/// Point text captures at `id` — the settings list's star. Only the flat
-/// text/rich_text mappings are touched.
-#[tauri::command]
-fn set_default_action(app: tauri::AppHandle, id: String) -> Result<(), String> {
-    let id = checked_action_id(&id)?;
-    update_routing(&app, &["text", "rich_text"], Some(id))?;
-    log::info!("routing: text/rich_text now default to action '{id}'");
-    Ok(())
 }
 
 /// Route captures of `kind` to action `id` (`None` clears the mapping) — the
@@ -2085,7 +2070,6 @@ pub fn run() {
             list_actions_ui,
             save_action,
             delete_action,
-            set_default_action,
             set_kind_action,
             set_overrides,
             get_routing_ui,

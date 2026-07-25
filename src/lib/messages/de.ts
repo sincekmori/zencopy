@@ -70,8 +70,6 @@ export const de: Messages = {
     fileUnreadable: (name) => `„${name}“ konnte nicht gelesen werden.`,
     switchAction: "Aktion wechseln",
     chooseAction: "Aktion wählen",
-    defaultTag: "Standard",
-    setDefault: (label) => `„${label}“ als Standard festlegen`,
     failed: (reason) => `Fehlgeschlagen: ${reason}`,
     timedOut: "Keine Antwort vom Modell. Prüfe Netzwerk und Anbieter, dann versuche es erneut.",
     emptyResult: "Das Modell hat eine leere Antwort zurückgegeben.",
@@ -144,9 +142,6 @@ export const de: Messages = {
     view: "Ansehen",
     edit: "Bearbeiten",
     remove: "Löschen",
-    setDefault: "Als Standard festlegen",
-    cannotDeleteDefault:
-      "Die Standard-Aktion kann nicht gelöscht werden — mach zuerst eine andere zur Standard-Aktion.",
     failed: (reason) => `Fehlgeschlagen: ${reason}`,
     importNotAnAction:
       "Keine Aktion: erwartet wird `---`-YAML-Frontmatter, gefolgt vom Prompt-Text.",

@@ -67,8 +67,6 @@ export const id: Messages = {
     fileUnreadable: (name) => `Tidak bisa membaca "${name}".`,
     switchAction: "Ganti aksi",
     chooseAction: "Pilih aksi",
-    defaultTag: "bawaan",
-    setDefault: (label) => `Jadikan "${label}" bawaan`,
     failed: (reason) => `Gagal: ${reason}`,
     timedOut: "Tidak ada respons dari model. Periksa jaringan dan penyedia, lalu coba lagi.",
     emptyResult: "Model mengembalikan respons kosong.",
@@ -141,9 +139,6 @@ export const id: Messages = {
     view: "Lihat",
     edit: "Sunting",
     remove: "Hapus",
-    setDefault: "Jadikan bawaan",
-    cannotDeleteDefault:
-      "Aksi default tidak bisa dihapus — jadikan aksi lain sebagai default dulu.",
     failed: (reason) => `Gagal: ${reason}`,
     importNotAnAction: "Bukan aksi: diharapkan frontmatter YAML `---` diikuti isi prompt.",
     importNoLabel: "Aksi ini tidak punya label.",

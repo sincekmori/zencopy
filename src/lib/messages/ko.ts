@@ -66,8 +66,6 @@ export const ko: Messages = {
     fileUnreadable: (name) => `"${name}"을(를) 읽을 수 없습니다.`,
     switchAction: "액션 전환",
     chooseAction: "액션 선택",
-    defaultTag: "기본",
-    setDefault: (label) => `"${label}"을(를) 기본으로 설정`,
     failed: (reason) => `실패: ${reason}`,
     timedOut: "모델에서 응답이 없습니다. 네트워크와 제공업체 설정을 확인한 뒤 다시 시도하세요.",
     emptyResult: "모델이 빈 응답을 반환했습니다.",
@@ -139,8 +137,6 @@ export const ko: Messages = {
     view: "보기",
     edit: "편집",
     remove: "삭제",
-    setDefault: "기본으로 설정",
-    cannotDeleteDefault: "기본 액션은 삭제할 수 없습니다. 먼저 다른 액션을 기본으로 지정하세요.",
     failed: (reason) => `실패: ${reason}`,
     importNotAnAction:
       "액션이 아닙니다. `---` YAML frontmatter와 그 뒤의 프롬프트 본문이 필요합니다.",

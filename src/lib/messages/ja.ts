@@ -69,8 +69,6 @@ export const ja: Messages = {
     fileUnreadable: (name) => `「${name}」を読み込めませんでした。`,
     switchAction: "アクションを切り替える",
     chooseAction: "アクションを選ぶ",
-    defaultTag: "デフォルト",
-    setDefault: (label) => `「${label}」をデフォルトにする`,
     failed: (reason) => `失敗しました: ${reason}`,
     timedOut:
       "モデルから応答がありませんでした。ネットワークとプロバイダー設定を確認して、やり直してください。",
@@ -144,9 +142,6 @@ export const ja: Messages = {
     view: "内容を見る",
     edit: "編集",
     remove: "削除",
-    setDefault: "デフォルトにする",
-    cannotDeleteDefault:
-      "デフォルトのアクションは削除できません。先に別のアクションをデフォルトにしてください。",
     failed: (reason) => `失敗しました: ${reason}`,
     importNotAnAction:
       "アクションではありません。`---` の YAML frontmatter と、その後にプロンプト本文が必要です。",

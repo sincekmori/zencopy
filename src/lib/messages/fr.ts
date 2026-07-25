@@ -70,8 +70,6 @@ export const fr: Messages = {
     fileUnreadable: (name) => `Impossible de lire « ${name} ».`,
     switchAction: "Changer d'action",
     chooseAction: "Choisir une action",
-    defaultTag: "par défaut",
-    setDefault: (label) => `Faire de « ${label} » l'action par défaut`,
     failed: (reason) => `Échec : ${reason}`,
     timedOut:
       "Aucune réponse du modèle. Vérifiez votre réseau et votre fournisseur, puis réessayez.",
@@ -146,9 +144,6 @@ export const fr: Messages = {
     view: "Voir",
     edit: "Modifier",
     remove: "Supprimer",
-    setDefault: "Définir par défaut",
-    cannotDeleteDefault:
-      "L'action par défaut ne peut pas être supprimée — définissez-en d'abord une autre par défaut.",
     failed: (reason) => `Échec : ${reason}`,
     importNotAnAction:
       "Ce n'est pas une action : frontmatter YAML `---` attendu, suivi du corps du prompt.",

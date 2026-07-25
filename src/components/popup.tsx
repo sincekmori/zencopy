@@ -11,7 +11,6 @@ import {
   RotateCcw,
   Settings,
   Square,
-  Star,
   Trash2,
   TriangleAlert,
   X,
@@ -21,7 +20,7 @@ import { Markdown } from "@/components/markdown.tsx";
 import { SourceView } from "@/components/source-view.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
-import { type ActionInfo, listActions, setDefaultAction } from "@/lib/actions.ts";
+import { type ActionInfo, listActions } from "@/lib/actions.ts";
 import {
   ATTACHMENT_TOO_LARGE,
   buildAttachments,
@@ -475,29 +474,10 @@ export function Popup(): React.JSX.Element {
     };
   }, []);
 
-  const makeDefault = (): void => {
-    setMenuOpen(false);
-    const id = payload?.action_id;
-    if (!id) {
-      return;
-    }
-    void (async () => {
-      try {
-        await setDefaultAction(id);
-        // Reflect it immediately — the filled star is the confirmation.
-        setActions((prev) => prev.map((a) => ({ ...a, is_default: a.id === id })));
-      } catch (error) {
-        log.error("setting the default action failed", error);
-      }
-    })();
-  };
-
   const running = result?.phase === "running";
   const done = result?.phase === "done";
   const setup = result?.phase === "done" && result.setup === true;
   const failed = result?.phase === "done" && !result.ok && !result.setup;
-  const currentIsDefault =
-    payload !== undefined && actions.some((a) => a.id === payload.action_id && a.is_default);
   // The one host the result may load remote images from: where the capture
   // came from (see Markdown's isAllowedImage for the threat model).
   const imageHost = (() => {
@@ -553,27 +533,6 @@ export function Popup(): React.JSX.Element {
           {actionLabel(payload.action_id, payload.label) || t.popup.chooseAction}
           {running ? "…" : ""}
         </span>
-        {payload.action_id && !running ? (
-          <button
-            type="button"
-            disabled={currentIsDefault}
-            aria-label={t.popup.setDefault(actionLabel(payload.action_id, payload.label))}
-            onClick={makeDefault}
-            className={cn(
-              "group relative ms-1 rounded-md p-0.5 transition-colors",
-              currentIsDefault
-                ? "text-foreground"
-                : "text-muted-foreground/40 hover:text-muted-foreground",
-            )}
-          >
-            <Star className={cn("size-3.5", currentIsDefault && "fill-current")} />
-            <span className="pointer-events-none absolute inset-e-0 top-full z-20 mt-1 hidden max-w-56 truncate rounded-md border bg-popover px-2 py-1 text-[11px] font-normal text-popover-foreground shadow-md group-hover:block">
-              {currentIsDefault
-                ? t.popup.defaultTag
-                : t.popup.setDefault(actionLabel(payload.action_id, payload.label))}
-            </span>
-          </button>
-        ) : undefined}
       </div>
 
       {/* Quick slots: numbered chips (1–4). The active one is highlighted; a
@@ -668,11 +627,6 @@ export function Popup(): React.JSX.Element {
                       )}
                     />
                     <span className="truncate">{actionLabel(action.id, action.label)}</span>
-                    {action.is_default ? (
-                      <span className="ms-auto shrink-0 text-[10px] text-muted-foreground/70">
-                        {t.popup.defaultTag}
-                      </span>
-                    ) : undefined}
                   </button>
                 ))}
             </div>

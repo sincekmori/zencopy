@@ -65,8 +65,6 @@ export interface Messages {
     fileUnreadable: (name: string) => string;
     switchAction: string;
     chooseAction: string;
-    defaultTag: string;
-    setDefault: (label: string) => string;
     failed: (reason: string) => string;
     timedOut: string;
     emptyResult: string;
@@ -160,9 +158,6 @@ export interface Messages {
     view: string;
     edit: string;
     remove: string;
-    setDefault: string;
-    /** Tooltip on the disabled delete button of the current default action. */
-    cannotDeleteDefault: string;
     failed: (reason: string) => string;
     /** Import failures, mapped from the structured error codes import_action
      *  (src-tauri) rejects with; `id` is the offending action id. `label` and

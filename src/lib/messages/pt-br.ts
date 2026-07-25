@@ -68,8 +68,6 @@ export const ptBR: Messages = {
     fileUnreadable: (name) => `Não foi possível ler "${name}".`,
     switchAction: "Trocar ação",
     chooseAction: "Escolher uma ação",
-    defaultTag: "padrão",
-    setDefault: (label) => `Tornar "${label}" o padrão`,
     failed: (reason) => `Falhou: ${reason}`,
     timedOut: "O modelo não respondeu. Verifique sua rede e seu provedor e tente de novo.",
     emptyResult: "O modelo retornou uma resposta vazia.",
@@ -141,8 +139,6 @@ export const ptBR: Messages = {
     view: "Ver",
     edit: "Editar",
     remove: "Excluir",
-    setDefault: "Tornar padrão",
-    cannotDeleteDefault: "A ação padrão não pode ser excluída — defina outra como padrão primeiro.",
     failed: (reason) => `Falhou: ${reason}`,
     importNotAnAction:
       "Não é uma ação: espera-se frontmatter YAML `---` seguido do corpo do prompt.",
