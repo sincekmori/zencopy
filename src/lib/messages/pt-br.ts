@@ -57,7 +57,7 @@ export const ptBR: Messages = {
     placeholder: "Copie algo para vê-lo aqui.",
     devVars: "Variáveis de template",
     noAction:
-      "Esta captura não executa nenhuma ação automaticamente — escolha uma abaixo ou pressione 1–4 para executar.",
+      "Esta captura não executa nenhuma ação automaticamente — escolha uma abaixo ou pressione 1–4 para executá-la.",
     routingDocs: "Como funciona o roteamento",
     confirmSend:
       "Enviar esta captura ao seu provedor de IA? Imagens e arquivos podem custar mais que texto.",
