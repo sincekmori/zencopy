@@ -99,11 +99,7 @@ fn collect_text_runs(
                     }
                 }
             }
-            Event::Text(text) => {
-                if in_run {
-                    out.push_str(&text.xml10_content()?);
-                }
-            }
+            Event::Text(text) if in_run => out.push_str(&text.xml10_content()?),
             Event::Eof => break,
             _ => {}
         }

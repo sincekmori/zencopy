@@ -77,7 +77,7 @@ Both sides share the same sinks (tauri-plugin-log): stdout in dev, a rotating fi
 - All user-visible strings live in [src/lib/messages/](src/lib/messages/) — one file per locale (19 languages), each annotated with the `Messages` interface from `types.ts`, so the compiler forces every locale to provide every key.
 - Access via `useT()` from [src/lib/i18n.tsx](src/lib/i18n.tsx).
   Do not hard-code English (or Japanese) into components.
-- Adding a language = one new locale file plus `messages` / `LOCALES` entries in [src/lib/messages/index.ts](src/lib/messages/index.ts); extend `locale_from_tag` in [src-tauri/src/lib.rs](src-tauri/src/lib.rs) (tray menu) to match.
+- Adding a language = one new locale file plus `messages` / `LOCALES` entries in [src/lib/messages/index.ts](src/lib/messages/index.ts); extend `locale_from_tag` in [src-tauri/src/tray.rs](src-tauri/src/tray.rs) (tray menu) to match.
 - RTL locales (ar, fa, he) flip the layout via `<html dir>` — use logical Tailwind utilities (`ms-*`, `me-*`, `text-start`, …), never physical ones (`ml-*`, `text-left`), except for screen-physical UI like the popup-corner picker.
 - Changing a `Messages` key means updating all 19 locale files in the same commit — the build fails otherwise, by design.
 
@@ -86,7 +86,8 @@ Both sides share the same sinks (tauri-plugin-log): stdout in dev, a rotating fi
 - Formatter: `rustfmt` (default settings).
 - Linter: `clippy` with `-D warnings` in CI.
   Fix, do not silence, unless suppression is deliberate and commented.
-- The tray/window/menu wiring lives in [src-tauri/src/lib.rs](src-tauri/src/lib.rs).
+- The Rust side is split by domain: [src-tauri/src/lib.rs](src-tauri/src/lib.rs) holds the `run()` wiring (trigger, setup, invoke handler) plus cross-cutting state; the domains live in sibling modules — `actions.rs`, `routing.rs`, `capture.rs`, `attachments.rs` (+ `office.rs`), `config.rs`, `windows.rs`, `tray.rs`.
+  New code goes into the module owning its domain, not into lib.rs.
 
 ## TOML
 
@@ -125,12 +126,12 @@ Keep the summary line short and factual; put the "why" and any surprising contex
 
 ## Where to look first
 
-| You want to change…           | Start here                                                                                                                                      |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| The popup (copy → AI result)  | [src/components/popup.tsx](src/components/popup.tsx)                                                                                            |
-| Settings window               | [src/components/settings.tsx](src/components/settings.tsx)                                                                                      |
-| About window                  | [src/components/about.tsx](src/components/about.tsx)                                                                                            |
-| AI provider / catalog         | [src/lib/llm.ts](src/lib/llm.ts); `ai-sdk-catalog.json` lives in the app config dir                                                             |
-| Global trigger, tray, windows | [src-tauri/src/lib.rs](src-tauri/src/lib.rs)                                                                                                    |
-| Action templates              | [src-tauri/actions/](src-tauri/actions/) (pre-installed, embedded at build time, immutable at runtime); user actions live in the app config dir |
-| Homepage / docs (zencopy.app) | [site/](site/) — Astro + Starlight, deployed via Cloudflare Workers                                                                             |
+| You want to change…           | Start here                                                                                                                                                  |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The popup (copy → AI result)  | [src/components/popup.tsx](src/components/popup.tsx)                                                                                                        |
+| Settings window               | [src/components/settings.tsx](src/components/settings.tsx)                                                                                                  |
+| About window                  | [src/components/about.tsx](src/components/about.tsx)                                                                                                        |
+| AI provider / catalog         | [src/lib/llm.ts](src/lib/llm.ts); `ai-sdk-catalog.json` lives in the app config dir                                                                         |
+| Global trigger, tray, windows | [src-tauri/src/lib.rs](src-tauri/src/lib.rs) (wiring), [src-tauri/src/tray.rs](src-tauri/src/tray.rs), [src-tauri/src/windows.rs](src-tauri/src/windows.rs) |
+| Action templates              | [src-tauri/actions/](src-tauri/actions/) (pre-installed, embedded at build time, immutable at runtime); user actions live in the app config dir             |
+| Homepage / docs (zencopy.app) | [site/](site/) — Astro + Starlight, deployed via Cloudflare Workers                                                                                         |

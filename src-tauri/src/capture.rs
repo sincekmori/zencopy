@@ -1,0 +1,294 @@
+//! Turning a copycopy capture into the payload the popup receives:
+//! source previews, template variables, and markup-to-text conversion.
+
+use crate::actions::Action;
+
+/// The captured content, prepared for display in the popup ("what is being acted
+/// on"). Serialized with a `kind` tag matching `CapturePayload.kind`.
+#[derive(Clone, serde::Serialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub(crate) enum SourcePreview {
+    Text {
+        text: String,
+    },
+    RichText {
+        format: String,
+        markup: String,
+        plain: String,
+    },
+    Image {
+        width: u32,
+        height: u32,
+        /// `data:image/png;base64,...` so the webview can render it directly.
+        data_url: String,
+    },
+    Files {
+        paths: Vec<String>,
+    },
+    Empty,
+}
+
+/// A capture, prepared for the UI. The popup shows `source` ("what is being acted
+/// on") and runs `role`/`instructions`/`prompt` when `runnable`.
+#[derive(Clone, serde::Serialize)]
+pub(crate) struct CapturePayload {
+    pub(crate) kind: &'static str,
+    /// The captured content itself, for the popup to display.
+    pub(crate) source: SourcePreview,
+    /// The matched action's id (empty if none). Lets the popup's switcher know
+    /// what is selected and what "set as default" refers to.
+    pub(crate) action_id: String,
+    /// The matched action's label (empty if none).
+    pub(crate) label: String,
+    /// Catalog role to run with (already resolved to "default" when omitted).
+    pub(crate) role: String,
+    /// The action's system prompt as a Liquid template (the frontend renders it).
+    pub(crate) instructions: String,
+    /// The action body (user prompt) as a Liquid template (the frontend renders it).
+    pub(crate) prompt: String,
+    /// Template variables (from the capture + now) for the frontend to render with.
+    pub(crate) vars: std::collections::HashMap<&'static str, String>,
+    /// Whether an action applies to this capture and is ready to run.
+    pub(crate) runnable: bool,
+    /// Whether the popup is pinned to a bottom corner (card hugs the bottom edge).
+    pub(crate) align_bottom: bool,
+}
+
+/// An HTML copy's `{{ text }}`: the markup converted to Markdown, so its
+/// formatting survives the model round trip — the popup renders Markdown, so
+/// inline code, bold, and links come back as themselves instead of degrading
+/// to plain text. Falls back to the app-provided plain text on a conversion
+/// error.
+pub(crate) fn html_to_markdown(markup: &str, plain: &str) -> String {
+    htmd::convert(markup).unwrap_or_else(|error| {
+        log::warn!("rich capture: HTML to Markdown failed ({error}), using plain text");
+        plain.to_string()
+    })
+}
+
+/// Template variables available to action prompts, from the capture plus now.
+/// Rendered by the frontend with Liquid; here we just collect the values.
+pub(crate) fn template_vars(
+    event: &copycopy::CaptureEvent,
+) -> std::collections::HashMap<&'static str, String> {
+    use copycopy::{Captured, RichFormat};
+
+    let (text, markup, format) = match &event.content {
+        Captured::Text { text } => (text.clone(), String::new(), String::new()),
+        Captured::RichText {
+            plain,
+            markup,
+            format,
+        } => (
+            match format {
+                RichFormat::Html => html_to_markdown(markup, plain),
+                RichFormat::Rtf => plain.clone(),
+            },
+            markup.clone(),
+            match format {
+                RichFormat::Html => "html".to_string(),
+                RichFormat::Rtf => "rtf".to_string(),
+            },
+        ),
+        _ => (String::new(), String::new(), String::new()),
+    };
+
+    std::collections::HashMap::from([
+        ("text", text),
+        ("markup", markup),
+        ("format", format),
+        ("app_name", event.app_name.clone()),
+        ("exec_name", event.exec_name.clone()),
+        ("exec_path", event.exec_path.clone()),
+        ("window_title", event.window_title.clone()),
+        ("url", event.url.clone().unwrap_or_default()),
+        ("process_id", event.process_id.to_string()),
+        (
+            "now",
+            chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
+        ),
+    ])
+}
+
+/// The captured content, shaped for display in the popup. Images are PNG, encoded
+/// as a base64 data URL so the webview can render them with a plain `<img>`.
+pub(crate) fn source_preview(event: &copycopy::CaptureEvent) -> SourcePreview {
+    use base64::{Engine, engine::general_purpose::STANDARD};
+    use copycopy::{Captured, RichFormat};
+
+    match &event.content {
+        Captured::Text { text } => SourcePreview::Text { text: text.clone() },
+        Captured::RichText {
+            format,
+            markup,
+            plain,
+        } => SourcePreview::RichText {
+            format: match format {
+                RichFormat::Html => "html",
+                RichFormat::Rtf => "rtf",
+            }
+            .to_string(),
+            markup: markup.clone(),
+            plain: plain.clone(),
+        },
+        Captured::Image { width, height, png } => SourcePreview::Image {
+            width: *width,
+            height: *height,
+            data_url: format!("data:image/png;base64,{}", STANDARD.encode(png)),
+        },
+        Captured::Files { paths } => SourcePreview::Files {
+            paths: paths.clone(),
+        },
+        Captured::Empty => SourcePreview::Empty,
+    }
+}
+
+/// The capture's content kind, used for routing and shown in the payload.
+pub(crate) fn capture_kind(event: &copycopy::CaptureEvent) -> &'static str {
+    use copycopy::Captured;
+    match &event.content {
+        Captured::Text { .. } => "text",
+        Captured::RichText { .. } => "rich_text",
+        Captured::Image { .. } => "image",
+        Captured::Files { .. } => "files",
+        Captured::Empty => "empty",
+    }
+}
+
+/// With no routed action the action fields stay empty but the template vars
+/// are still collected, so an action picked manually from the popup's
+/// switcher can run on this capture.
+pub(crate) fn build_capture_payload(
+    event: &copycopy::CaptureEvent,
+    action: Option<&Action>,
+) -> CapturePayload {
+    CapturePayload {
+        kind: capture_kind(event),
+        source: source_preview(event),
+        action_id: action.map(|a| a.id.clone()).unwrap_or_default(),
+        label: action.map(|a| a.label.clone()).unwrap_or_default(),
+        role: action
+            .and_then(|a| a.role.clone())
+            .unwrap_or_else(|| "default".to_string()),
+        instructions: action.map(|a| a.instructions.clone()).unwrap_or_default(),
+        prompt: action.map(|a| a.body.clone()).unwrap_or_default(),
+        vars: template_vars(event),
+        runnable: action.is_some(),
+        align_bottom: false,
+    }
+}
+
+/// Visible text inside HTML markup (tags removed, `&nbsp;` treated as space).
+/// Good enough to tell whether rich content is effectively empty.
+pub(crate) fn html_visible_text(html: &str) -> String {
+    let mut out = String::new();
+    let mut in_tag = false;
+    for ch in html.chars() {
+        match ch {
+            '<' => in_tag = true,
+            '>' => in_tag = false,
+            _ if !in_tag => out.push(ch),
+            _ => {}
+        }
+    }
+    out.replace("&nbsp;", " ")
+        .replace("&#160;", " ")
+        .replace("&#xa0;", " ")
+        .replace("&#xA0;", " ")
+}
+
+/// Visible text inside RTF markup (groups and control words removed). Errs toward
+/// keeping text, so real content is never mistaken for blank.
+pub(crate) fn rtf_visible_text(rtf: &str) -> String {
+    let mut out = String::new();
+    let mut chars = rtf.chars().peekable();
+    while let Some(ch) = chars.next() {
+        match ch {
+            '{' | '}' => {}
+            '\\' => match chars.peek().copied() {
+                Some(c) if c.is_ascii_alphabetic() => {
+                    // Control word: letters, an optional -number, one optional space.
+                    while chars.next_if(|c| c.is_ascii_alphabetic()).is_some() {}
+                    chars.next_if_eq(&'-');
+                    while chars.next_if(|c| c.is_ascii_digit()).is_some() {}
+                    chars.next_if_eq(&' ');
+                }
+                Some('\'') => {
+                    // \'hh — a single (visible) byte. Mark it without decoding.
+                    chars.next();
+                    chars.next();
+                    chars.next();
+                    out.push('x');
+                }
+                Some(_) => {
+                    // Control symbol (\\, \{, \}) — a literal character.
+                    if let Some(c) = chars.next() {
+                        out.push(c);
+                    }
+                }
+                None => {}
+            },
+            _ => out.push(ch),
+        }
+    }
+    out
+}
+
+/// Whether a capture has nothing worth acting on — empty clipboard, or text /
+/// rich text whose *visible* content is only whitespace. Such captures are ignored
+/// entirely (no popup, no action). Images and files are never considered blank.
+///
+/// For rich text we can't trust `plain` alone: it comes from the clipboard's
+/// plain-text format, which some apps omit (leaving it empty though the markup has
+/// real text). So we fall back to the markup's visible text when `plain` is empty.
+pub(crate) fn is_blank(event: &copycopy::CaptureEvent) -> bool {
+    use copycopy::{Captured, RichFormat};
+    match &event.content {
+        Captured::Empty => true,
+        Captured::Text { text } => text.trim().is_empty(),
+        Captured::RichText {
+            plain,
+            markup,
+            format,
+        } => {
+            if !plain.trim().is_empty() {
+                return false;
+            }
+            let visible = match format {
+                RichFormat::Html => html_visible_text(markup),
+                RichFormat::Rtf => rtf_visible_text(markup),
+            };
+            visible.trim().is_empty()
+        }
+        Captured::Image { .. } | Captured::Files { .. } => false,
+    }
+}
+
+/// The plain text of a capture (for the min/max-chars conditions).
+pub(crate) fn capture_text(event: &copycopy::CaptureEvent) -> &str {
+    use copycopy::Captured;
+    match &event.content {
+        Captured::Text { text } => text,
+        Captured::RichText { plain, .. } => plain,
+        _ => "",
+    }
+}
+
+#[cfg(test)]
+mod markup_tests {
+    use super::html_to_markdown;
+
+    /// The formatting of an HTML copy must survive as Markdown — that is what
+    /// the popup renders and what the model is asked to preserve.
+    #[test]
+    fn html_copies_become_markdown() {
+        let html = r#"<p>use <code>foo</code>, <strong>bold</strong>, and <a href="https://example.com">a link</a></p>"#;
+        let markdown = html_to_markdown(html, "fallback");
+        assert!(markdown.contains("`foo`"), "got: {markdown}");
+        assert!(markdown.contains("**bold**"), "got: {markdown}");
+        assert!(
+            markdown.contains("[a link](https://example.com)"),
+            "got: {markdown}"
+        );
+    }
+}
