@@ -4,6 +4,7 @@ description: 從安裝、準備免費 AI 金鑰，到第一次「複製兩次」
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 只要會複製，就會用 ZenCopy。
 要學的只有一件事——**把平常的複製，快速按兩次**。
@@ -33,16 +34,20 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    下載並執行 `.exe` 安裝程式。你可能會看到「Windows 已保護您的電腦」的畫面。這是 Windows
+    下載並執行 <DownloadLink kind="windows" />
+    。你可能會看到「Windows 已保護您的電腦」的畫面。這是 Windows
     對還不認識的新應用程式所做的一次性檢查——請選擇**其他資訊 → 仍要執行**。
   </TabItem>
   <TabItem label="macOS">
-    打開 `.dmg`，把 ZenCopy 拖進**應用程式**資料夾。第一次啟動時，macOS 會詢問一次
+    打開 <DownloadLink kind="dmg" />
+    ，把 ZenCopy 拖進**應用程式**資料夾。第一次啟動時，macOS 會詢問一次
     是否打開從網路下載的應用程式——請選擇**打開**。
   </TabItem>
   <TabItem label="Linux">
-    下載 `.AppImage`，加上執行權限（`chmod +x`）後執行。這是支援應用程式內更新的格式。 也提供 `.deb`
-    與 `.rpm` 套件，但那兩種格式的更新方式是重新安裝新版本。
+    下載 <DownloadLink kind="appimage" />
+    ，加上執行權限（`chmod +x`）後執行。這是支援應用程式內更新的格式。 也提供{" "}
+    <DownloadLink kind="deb" />
+    與 <DownloadLink kind="rpm" /> 套件，但那兩種格式的更新方式是重新安裝新版本。
   </TabItem>
 </Tabs>
 

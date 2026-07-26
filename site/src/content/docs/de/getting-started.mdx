@@ -4,6 +4,7 @@ description: Von der Installation über einen kostenlosen KI-Schlüssel bis zum 
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 Wenn du kopieren kannst, kannst du ZenCopy benutzen.
 Es gibt genau eine Sache zu lernen — **dein gewohntes Kopieren, zweimal gedrückt, schnell hintereinander**.
@@ -33,18 +34,21 @@ Lade das Installationsprogramm für dein Betriebssystem von [GitHub Releases](ht
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Lade den `.exe`-Installer herunter und führe ihn aus. Möglicherweise erscheint der Hinweis „Der
-    Computer wurde durch Windows geschützt“. Das ist eine einmalige Prüfung, die Windows bei neuen,
-    noch unbekannten Apps anzeigt — wähle **Weitere Informationen → Trotzdem ausführen**.
+    Lade <DownloadLink kind="windows" /> herunter und führe die Datei aus. Möglicherweise erscheint
+    der Hinweis „Der Computer wurde durch Windows geschützt“. Das ist eine einmalige Prüfung, die
+    Windows bei neuen, noch unbekannten Apps anzeigt — wähle **Weitere Informationen → Trotzdem
+    ausführen**.
   </TabItem>
   <TabItem label="macOS">
-    Öffne die `.dmg`-Datei und ziehe ZenCopy in deinen **Programme**-Ordner. Beim ersten Start fragt
-    macOS einmalig, ob eine aus dem Internet geladene App geöffnet werden soll — wähle **Öffnen**.
+    Öffne <DownloadLink kind="dmg" /> und ziehe ZenCopy in deinen **Programme**-Ordner. Beim ersten
+    Start fragt macOS einmalig, ob eine aus dem Internet geladene App geöffnet werden soll — wähle
+    **Öffnen**.
   </TabItem>
   <TabItem label="Linux">
-    Lade das `.AppImage` herunter, mache es ausführbar (`chmod +x`) und starte es. Dieses Format
-    bringt In-App-Updates mit. `.deb`- und `.rpm`-Pakete gibt es auch, aber ein Update bedeutet
-    dort, eine neue Version zu installieren.
+    Lade <DownloadLink kind="appimage" /> herunter, mache die Datei ausführbar (`chmod +x`) und
+    starte sie. Dieses Format bringt In-App-Updates mit. <DownloadLink kind="deb" /> und{" "}
+    <DownloadLink kind="rpm" /> gibt es auch, aber ein Update bedeutet dort, eine neue Version zu
+    installieren.
   </TabItem>
 </Tabs>
 

@@ -4,6 +4,7 @@ description: Od instalacji, przez przygotowanie darmowego klucza AI, po pierwsze
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 Jeśli umiesz kopiować, umiesz też korzystać z ZenCopy.
 Do nauczenia jest dokładnie jedna rzecz — **zwykły skrót kopiowania, naciśnięty szybko dwa razy**.
@@ -33,18 +34,20 @@ Pobierz instalator dla swojego systemu z [GitHub Releases](https://github.com/si
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Pobierz i uruchom instalator `.exe`. Może pojawić się ekran „System Windows ochronił ten
-    komputer”. To jednorazowe sprawdzenie, które Windows pokazuje przy nowych, nieznanych mu jeszcze
-    aplikacjach — wybierz **Więcej informacji → Uruchom mimo to**.
+    Pobierz i uruchom instalator <DownloadLink kind="windows" />. Może pojawić się ekran „System
+    Windows ochronił ten komputer”. To jednorazowe sprawdzenie, które Windows pokazuje przy nowych,
+    nieznanych mu jeszcze aplikacjach — wybierz **Więcej informacji → Uruchom mimo to**.
   </TabItem>
   <TabItem label="macOS">
-    Otwórz plik `.dmg` i przeciągnij ZenCopy do folderu **Aplikacje**. Przy pierwszym uruchomieniu
-    macOS pyta jednorazowo, czy otworzyć aplikację pobraną z internetu — wybierz **Otwórz**.
+    Otwórz plik <DownloadLink kind="dmg" /> i przeciągnij ZenCopy do folderu **Aplikacje**. Przy
+    pierwszym uruchomieniu macOS pyta jednorazowo, czy otworzyć aplikację pobraną z internetu —
+    wybierz **Otwórz**.
   </TabItem>
   <TabItem label="Linux">
-    Pobierz plik `.AppImage`, nadaj mu prawo uruchamiania (`chmod +x`) i uruchom go. To format z
-    aktualizacjami wewnątrz aplikacji. Istnieją też pakiety `.deb` i `.rpm`, ale ich aktualizacja
-    oznacza ponowną instalację nowego wydania.
+    Pobierz plik <DownloadLink kind="appimage" />, nadaj mu prawo uruchamiania (`chmod +x`) i
+    uruchom go. To format z aktualizacjami wewnątrz aplikacji. Istnieją też pakiety{" "}
+    <DownloadLink kind="deb" /> i <DownloadLink kind="rpm" />, ale ich aktualizacja oznacza ponowną
+    instalację nowego wydania.
   </TabItem>
 </Tabs>
 

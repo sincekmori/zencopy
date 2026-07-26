@@ -4,6 +4,7 @@ description: من التثبيت إلى تجهيز مفتاح ذكاء اصطن�
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 إن كنت تعرف كيف تنسخ، فبإمكانك استخدام ZenCopy.
 هناك شيء واحد فقط عليك تعلّمه — **النسخ المعتاد نفسه، مضغوطًا مرتين بسرعة**.
@@ -33,17 +34,18 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    نزِّل مثبّت `.exe` وشغّله. قد تظهر لك شاشة "Windows protected your PC". هذا فحص يعرضه Windows
-    مرة واحدة للتطبيقات الجديدة التي لا يعرفها بعد — اختر **More info ← Run anyway**.
+    نزِّل مثبّت <DownloadLink kind="windows" /> وشغّله. قد تظهر لك شاشة "Windows protected your PC".
+    هذا فحص يعرضه Windows مرة واحدة للتطبيقات الجديدة التي لا يعرفها بعد — اختر **More info ← Run
+    anyway**.
   </TabItem>
   <TabItem label="macOS">
-    افتح ملف `.dmg` واسحب ZenCopy إلى مجلد **Applications**. عند التشغيل الأول، يسأل macOS مرة واحدة
-    عمّا إذا كنت تريد فتح تطبيق تم تنزيله من الإنترنت — اختر **Open**.
+    افتح ملف <DownloadLink kind="dmg" /> واسحب ZenCopy إلى مجلد **Applications**. عند التشغيل الأول،
+    يسأل macOS مرة واحدة عمّا إذا كنت تريد فتح تطبيق تم تنزيله من الإنترنت — اختر **Open**.
   </TabItem>
   <TabItem label="Linux">
-    نزِّل ملف `.AppImage` واجعله قابلًا للتنفيذ (`chmod +x`) ثم شغّله. هذه هي الصيغة التي تدعم
-    التحديثات من داخل التطبيق. تتوفر أيضًا حزم `.deb` و`.rpm`، لكن تحديثها يعني إعادة تثبيت إصدار
-    جديد.
+    نزِّل ملف <DownloadLink kind="appimage" /> واجعله قابلًا للتنفيذ (`chmod +x`) ثم شغّله. هذه هي
+    الصيغة التي تدعم التحديثات من داخل التطبيق. تتوفر أيضًا حزم <DownloadLink kind="deb" /> و
+    <DownloadLink kind="rpm" />، لكن تحديثها يعني إعادة تثبيت إصدار جديد.
   </TabItem>
 </Tabs>
 

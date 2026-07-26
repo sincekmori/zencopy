@@ -4,6 +4,7 @@ description: インストールから、無料の AI キーの準備、最初の
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 コピーの操作さえ知っていれば、ZenCopy は使えます。
 覚えることは 1 つだけ — **いつものコピーを、すばやく 2 回**。
@@ -33,18 +34,19 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    `.exe` ファイルをダウンロードして実行します。
+    <DownloadLink kind="windows" /> をダウンロードして実行します。
     「WindowsによってPCが保護されました」という画面が出ることがあります。 これは Windows
     がまだ知らない新しいアプリに対して一度だけ出す確認で、「詳細情報」→「実行」で進めます。
   </TabItem>
   <TabItem label="macOS">
-    `.dmg` を開き、ZenCopy を**アプリケーション**フォルダへドラッグします。 初回起動時、macOS
-    がインターネットからダウンロードしたアプリを開くかどうかを一度だけ確認します。
+    <DownloadLink kind="dmg" /> を開き、ZenCopy を**アプリケーション**フォルダへドラッグします。
+    初回起動時、macOS がインターネットからダウンロードしたアプリを開くかどうかを一度だけ確認します。
     「開く」を選択してください。
   </TabItem>
   <TabItem label="Linux">
-    `.AppImage` をダウンロードし、実行権限を付けて（`chmod +x`）起動します。
-    アプリ内アップデートが使えるのはこの形式です。 `.deb` と `.rpm`
+    <DownloadLink kind="appimage" /> をダウンロードし、実行権限を付けて（`chmod +x`）起動します。
+    アプリ内アップデートが使えるのはこの形式です。 <DownloadLink kind="deb" /> と{" "}
+    <DownloadLink kind="rpm" />
     も用意していますが、こちらの更新は新リリースの再インストールになります。
   </TabItem>
 </Tabs>

@@ -4,6 +4,7 @@ description: از نصب تا آماده‌سازی کلید رایگان هوش
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 اگر کپی کردن را بلد باشید، می‌توانید از ZenCopy استفاده کنید.
 فقط یک چیز برای یاد گرفتن هست — **همان کپی همیشگی، دو بار پشت سر هم و سریع**.
@@ -33,18 +34,19 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    نصب‌کنندهٔ `.exe` را دانلود و اجرا کنید. ممکن است صفحهٔ «Windows protected your PC» را ببینید.
-    این بررسی یک‌باره‌ای است که Windows برای برنامه‌های تازه‌ای که هنوز نمی‌شناسد نشان می‌دهد —
-    گزینهٔ **More info → Run anyway** را انتخاب کنید.
+    نصب‌کنندهٔ <DownloadLink kind="windows" /> را دانلود و اجرا کنید. ممکن است صفحهٔ «Windows
+    protected your PC» را ببینید. این بررسی یک‌باره‌ای است که Windows برای برنامه‌های تازه‌ای که
+    هنوز نمی‌شناسد نشان می‌دهد — گزینهٔ **More info → Run anyway** را انتخاب کنید.
   </TabItem>
   <TabItem label="macOS">
-    فایل `.dmg` را باز کنید و ZenCopy را به پوشهٔ **Applications** بکشید. در نخستین اجرا، macOS فقط
-    یک بار می‌پرسد که آیا برنامه‌ای دانلودشده از اینترنت باز شود — **Open** را انتخاب کنید.
+    فایل <DownloadLink kind="dmg" /> را باز کنید و ZenCopy را به پوشهٔ **Applications** بکشید. در
+    نخستین اجرا، macOS فقط یک بار می‌پرسد که آیا برنامه‌ای دانلودشده از اینترنت باز شود — **Open**
+    را انتخاب کنید.
   </TabItem>
   <TabItem label="Linux">
-    فایل `.AppImage` را دانلود کنید، آن را اجرایی کنید (`chmod +x`) و اجرایش کنید. این همان قالبی
-    است که به‌روزرسانی داخل برنامه دارد. بسته‌های `.deb` و `.rpm` هم موجودند، اما به‌روزرسانی آن‌ها
-    یعنی نصب دوبارهٔ نسخهٔ جدید.
+    فایل <DownloadLink kind="appimage" /> را دانلود کنید، آن را اجرایی کنید (`chmod +x`) و اجرایش
+    کنید. این همان قالبی است که به‌روزرسانی داخل برنامه دارد. بسته‌های <DownloadLink kind="deb" /> و{" "}
+    <DownloadLink kind="rpm" /> هم موجودند، اما به‌روزرسانی آن‌ها یعنی نصب دوبارهٔ نسخهٔ جدید.
   </TabItem>
 </Tabs>
 

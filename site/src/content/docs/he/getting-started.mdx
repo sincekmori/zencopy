@@ -4,6 +4,7 @@ description: מהתקנה, דרך הכנת מפתח AI חינמי, ועד להע
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 אם אתם יודעים להעתיק, אתם יודעים להשתמש ב‑ZenCopy.
 יש בדיוק דבר אחד ללמוד — **ההעתקה הרגילה שלכם, פעמיים, במהירות**.
@@ -33,16 +34,20 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    הורידו והריצו את קובץ ההתקנה `.exe`. ייתכן שיופיע מסך "Windows protected your PC". זו בדיקה
-    חד־פעמית ש‑Windows מציג לאפליקציות חדשות שהוא עדיין לא מכיר — בחרו **More info ← Run anyway**.
+    הורידו והריצו את קובץ ההתקנה <DownloadLink kind="windows" />. ייתכן שיופיע מסך "Windows
+    protected your PC". זו בדיקה חד־פעמית ש‑Windows מציג לאפליקציות חדשות שהוא עדיין לא מכיר — בחרו
+    **More info ← Run anyway**.
   </TabItem>
   <TabItem label="macOS">
-    פתחו את קובץ ה‑`.dmg` וגררו את ZenCopy אל תיקיית **Applications**. בהפעלה הראשונה macOS שואל פעם
-    אחת אם לפתוח אפליקציה שהורדה מהאינטרנט — בחרו **Open**.
+    פתחו את קובץ ה‑
+    <DownloadLink kind="dmg" /> וגררו את ZenCopy אל תיקיית **Applications**. בהפעלה הראשונה macOS
+    שואל פעם אחת אם לפתוח אפליקציה שהורדה מהאינטרנט — בחרו **Open**.
   </TabItem>
   <TabItem label="Linux">
-    הורידו את קובץ ה‑`.AppImage`, הפכו אותו לבר־הרצה (`chmod +x`) והריצו אותו. זה הפורמט עם עדכונים
-    מתוך האפליקציה. קיימות גם חבילות `.deb` ו‑`.rpm`, אבל עדכון שלהן פירושו התקנת גרסה חדשה מחדש.
+    הורידו את קובץ ה‑
+    <DownloadLink kind="appimage" />, הפכו אותו לבר־הרצה (`chmod +x`) והריצו אותו. זה הפורמט עם
+    עדכונים מתוך האפליקציה. קיימות גם חבילות <DownloadLink kind="deb" /> ו‑
+    <DownloadLink kind="rpm" />, אבל עדכון שלהן פירושו התקנת גרסה חדשה מחדש.
   </TabItem>
 </Tabs>
 

@@ -1,0 +1,24 @@
+---
+// A direct-download link for one asset of the current release, labelled with
+// the exact file name GitHub serves. The version is the root package.json's —
+// the same value the app and its installers are built from — so a release
+// bump updates every docs page at the next site build, with no doc edits.
+import { version } from "../../../package.json";
+
+interface Props {
+  kind: "windows" | "dmg" | "appimage" | "deb" | "rpm";
+}
+
+const { kind } = Astro.props;
+const names: Record<Props["kind"], string> = {
+  windows: `ZenCopy_${version}_x64-setup.exe`,
+  dmg: `ZenCopy_${version}_universal.dmg`,
+  appimage: `ZenCopy_${version}_amd64.AppImage`,
+  deb: `ZenCopy_${version}_amd64.deb`,
+  rpm: `ZenCopy-${version}-1.x86_64.rpm`,
+};
+const name = names[kind];
+const href = `https://github.com/sincekmori/zencopy/releases/download/v${version}/${name}`;
+---
+
+<a href={href}>{name}</a>

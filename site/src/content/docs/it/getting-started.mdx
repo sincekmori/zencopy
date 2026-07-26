@@ -4,6 +4,7 @@ description: Dall'installazione alla preparazione di una chiave IA gratuita fino
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 Se sai copiare, sai usare ZenCopy.
 C'è esattamente una cosa da imparare — **il tuo solito comando di copia, premuto due volte rapidamente**.
@@ -33,18 +34,19 @@ Scarica il programma di installazione per il tuo sistema operativo da [GitHub Re
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Scarica ed esegui l'installer `.exe`. Potresti vedere una schermata "PC protetto da Windows". È
-    un controllo una tantum che Windows mostra per le nuove app che ancora non conosce — scegli
-    **Ulteriori informazioni → Esegui comunque**.
+    Scarica ed esegui l'installer <DownloadLink kind="windows" />. Potresti vedere una schermata "PC
+    protetto da Windows". È un controllo una tantum che Windows mostra per le nuove app che ancora
+    non conosce — scegli **Ulteriori informazioni → Esegui comunque**.
   </TabItem>
   <TabItem label="macOS">
-    Apri il `.dmg` e trascina ZenCopy nella cartella **Applicazioni**. Al primo avvio, macOS chiede
-    una sola volta se aprire un'app scaricata da internet — scegli **Apri**.
+    Apri il <DownloadLink kind="dmg" /> e trascina ZenCopy nella cartella **Applicazioni**. Al primo
+    avvio, macOS chiede una sola volta se aprire un'app scaricata da internet — scegli **Apri**.
   </TabItem>
   <TabItem label="Linux">
-    Scarica l'`.AppImage`, rendilo eseguibile (`chmod +x`) ed eseguilo. È il formato con gli
-    aggiornamenti integrati nell'app. Esistono anche i pacchetti `.deb` e `.rpm`, ma aggiornarli
-    significa reinstallare una nuova versione.
+    Scarica l'
+    <DownloadLink kind="appimage" />, rendilo eseguibile (`chmod +x`) ed eseguilo. È il formato con
+    gli aggiornamenti integrati nell'app. Esistono anche i pacchetti <DownloadLink kind="deb" /> e{" "}
+    <DownloadLink kind="rpm" />, ma aggiornarli significa reinstallare una nuova versione.
   </TabItem>
 </Tabs>
 

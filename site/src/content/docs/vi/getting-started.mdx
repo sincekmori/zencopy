@@ -4,6 +4,7 @@ description: Từ cài đặt ứng dụng, chuẩn bị khóa AI miễn phí, �
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 Nếu bạn biết sao chép, bạn dùng được ZenCopy.
 Chỉ có đúng một điều cần học — **thao tác sao chép quen thuộc của bạn, nhấn hai lần, thật nhanh**.
@@ -33,18 +34,19 @@ Tải bộ cài cho hệ điều hành của bạn từ [GitHub Releases](https:
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Tải về và chạy tệp cài đặt `.exe`. Bạn có thể thấy màn hình "Windows protected your PC". Đó là
-    bước kiểm tra một lần mà Windows hiển thị với ứng dụng mới nó chưa biết — chọn **More info → Run
-    anyway**.
+    Tải về và chạy tệp cài đặt <DownloadLink kind="windows" />. Bạn có thể thấy màn hình "Windows
+    protected your PC". Đó là bước kiểm tra một lần mà Windows hiển thị với ứng dụng mới nó chưa
+    biết — chọn **More info → Run anyway**.
   </TabItem>
   <TabItem label="macOS">
-    Mở tệp `.dmg` và kéo ZenCopy vào thư mục **Applications**. Ở lần khởi động đầu tiên, macOS chỉ
-    hỏi một lần rằng có mở ứng dụng tải về từ internet hay không — hãy chọn **Open**.
+    Mở tệp <DownloadLink kind="dmg" /> và kéo ZenCopy vào thư mục **Applications**. Ở lần khởi động
+    đầu tiên, macOS chỉ hỏi một lần rằng có mở ứng dụng tải về từ internet hay không — hãy chọn
+    **Open**.
   </TabItem>
   <TabItem label="Linux">
-    Tải tệp `.AppImage`, cấp quyền thực thi (`chmod +x`) rồi chạy. Đây là định dạng có tính năng cập
-    nhật ngay trong ứng dụng. Cũng có gói `.deb` và `.rpm`, nhưng muốn cập nhật chúng thì phải cài
-    lại bản phát hành mới.
+    Tải tệp <DownloadLink kind="appimage" />, cấp quyền thực thi (`chmod +x`) rồi chạy. Đây là định
+    dạng có tính năng cập nhật ngay trong ứng dụng. Cũng có gói <DownloadLink kind="deb" /> và{" "}
+    <DownloadLink kind="rpm" />, nhưng muốn cập nhật chúng thì phải cài lại bản phát hành mới.
   </TabItem>
 </Tabs>
 

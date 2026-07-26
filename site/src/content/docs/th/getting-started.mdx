@@ -4,6 +4,7 @@ description: ตั้งแต่การติดตั้ง การเต
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 ถ้าคุณคัดลอกเป็น คุณก็ใช้ ZenCopy เป็น
 มีสิ่งที่ต้องเรียนรู้เพียงอย่างเดียว — **การคัดลอกแบบที่คุณทำอยู่ทุกวัน แต่กดสองครั้งติดกันอย่างรวดเร็ว**
@@ -33,18 +34,19 @@ import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    ดาวน์โหลดตัวติดตั้ง `.exe` แล้วเรียกใช้ คุณอาจเห็นหน้าจอ "Windows protected your PC"
-    ซึ่งเป็นการตรวจสอบครั้งเดียวที่ Windows แสดงกับแอปใหม่ที่ยังไม่รู้จัก — เลือก **More info → Run
-    anyway**
+    ดาวน์โหลดตัวติดตั้ง <DownloadLink kind="windows" /> แล้วเรียกใช้ คุณอาจเห็นหน้าจอ "Windows
+    protected your PC" ซึ่งเป็นการตรวจสอบครั้งเดียวที่ Windows แสดงกับแอปใหม่ที่ยังไม่รู้จัก — เลือก
+    **More info → Run anyway**
   </TabItem>
   <TabItem label="macOS">
-    เปิดไฟล์ `.dmg` แล้วลาก ZenCopy ไปไว้ในโฟลเดอร์ **Applications** เมื่อเปิดครั้งแรก macOS
-    จะถามเพียงครั้งเดียวว่าจะเปิดแอปที่ดาวน์โหลดจากอินเทอร์เน็ตหรือไม่ — ให้เลือก **Open**
+    เปิดไฟล์ <DownloadLink kind="dmg" /> แล้วลาก ZenCopy ไปไว้ในโฟลเดอร์ **Applications**
+    เมื่อเปิดครั้งแรก macOS จะถามเพียงครั้งเดียวว่าจะเปิดแอปที่ดาวน์โหลดจากอินเทอร์เน็ตหรือไม่ —
+    ให้เลือก **Open**
   </TabItem>
   <TabItem label="Linux">
-    ดาวน์โหลด `.AppImage` ทำให้เรียกใช้ได้ (`chmod +x`) แล้วเรียกใช้ รูปแบบนี้มีการอัปเดตจากในแอปให้
-    ส่วนแพ็กเกจ `.deb` และ `.rpm` ก็มีเช่นกัน
-    แต่การอัปเดตแบบนั้นหมายถึงต้องติดตั้งรุ่นใหม่เองอีกครั้ง
+    ดาวน์โหลด <DownloadLink kind="appimage" /> ทำให้เรียกใช้ได้ (`chmod +x`) แล้วเรียกใช้
+    รูปแบบนี้มีการอัปเดตจากในแอปให้ ส่วนแพ็กเกจ <DownloadLink kind="deb" /> และ{" "}
+    <DownloadLink kind="rpm" /> ก็มีเช่นกัน แต่การอัปเดตแบบนั้นหมายถึงต้องติดตั้งรุ่นใหม่เองอีกครั้ง
   </TabItem>
 </Tabs>
 

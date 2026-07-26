@@ -4,6 +4,7 @@ description: From installing to preparing a free AI key to your first copy-twice
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 If you know how to copy, you can use ZenCopy.
 There is exactly one thing to learn — **your usual copy, pressed twice, quickly**.
@@ -33,18 +34,18 @@ Download the installer for your OS from [GitHub Releases](https://github.com/sin
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Download and run the `.exe` installer. You may see a "Windows protected your PC" screen. That is
-    a one-time check Windows shows for new apps it does not know yet — choose **More info → Run
-    anyway**.
+    Download and run <DownloadLink kind="windows" />. You may see a "Windows protected your PC"
+    screen. That is a one-time check Windows shows for new apps it does not know yet — choose **More
+    info → Run anyway**.
   </TabItem>
   <TabItem label="macOS">
-    Open the `.dmg` and drag ZenCopy into your **Applications** folder. On first launch, macOS asks
-    once whether to open an app downloaded from the internet — choose **Open**.
+    Open <DownloadLink kind="dmg" /> and drag ZenCopy into your **Applications** folder. On first
+    launch, macOS asks once whether to open an app downloaded from the internet — choose **Open**.
   </TabItem>
   <TabItem label="Linux">
-    Download the `.AppImage`, make it executable (`chmod +x`), and run it. This is the format with
-    in-app updates. `.deb` and `.rpm` packages exist too, but updating those means reinstalling a
-    new release.
+    Download <DownloadLink kind="appimage" />, make it executable (`chmod +x`), and run it. This is
+    the format with in-app updates. <DownloadLink kind="deb" /> and <DownloadLink kind="rpm" />{" "}
+    packages exist too, but updating those means reinstalling a new release.
   </TabItem>
 </Tabs>
 

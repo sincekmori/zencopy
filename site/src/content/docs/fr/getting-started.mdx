@@ -4,6 +4,7 @@ description: De l'installation à la préparation d'une clé d'IA gratuite, jusq
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 Si vous savez copier, vous savez utiliser ZenCopy.
 Il n'y a qu'une seule chose à apprendre — **votre copier habituel, effectué deux fois de suite rapidement**.
@@ -33,20 +34,22 @@ Téléchargez l'installateur pour votre système depuis [GitHub Releases](https:
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Téléchargez et lancez l'installateur `.exe`. Un écran « Windows a protégé votre ordinateur »
-    peut apparaître. C'est une vérification que Windows affiche une seule fois pour les nouvelles
-    applications qu'il ne connaît pas encore — choisissez **Informations complémentaires → Exécuter
-    quand même**.
+    Téléchargez et lancez l'installateur <DownloadLink kind="windows" />. Un écran « Windows a
+    protégé votre ordinateur » peut apparaître. C'est une vérification que Windows affiche une seule
+    fois pour les nouvelles applications qu'il ne connaît pas encore — choisissez **Informations
+    complémentaires → Exécuter quand même**.
   </TabItem>
   <TabItem label="macOS">
-    Ouvrez le `.dmg` et glissez ZenCopy dans votre dossier **Applications**. Au premier lancement,
-    macOS demande une seule fois s'il faut ouvrir une application téléchargée depuis Internet —
-    choisissez **Ouvrir**.
+    Ouvrez le <DownloadLink kind="dmg" /> et glissez ZenCopy dans votre dossier **Applications**. Au
+    premier lancement, macOS demande une seule fois s'il faut ouvrir une application téléchargée
+    depuis Internet — choisissez **Ouvrir**.
   </TabItem>
   <TabItem label="Linux">
-    Téléchargez l'`.AppImage`, rendez-le exécutable (`chmod +x`) et lancez-le. C'est le format qui
-    propose les mises à jour intégrées. Des paquets `.deb` et `.rpm` existent aussi, mais les mettre
-    à jour revient à réinstaller une nouvelle version.
+    Téléchargez l'
+    <DownloadLink kind="appimage" />, rendez-le exécutable (`chmod +x`) et lancez-le. C'est le
+    format qui propose les mises à jour intégrées. Des paquets <DownloadLink kind="deb" /> et{" "}
+    <DownloadLink kind="rpm" /> existent aussi, mais les mettre à jour revient à réinstaller une
+    nouvelle version.
   </TabItem>
 </Tabs>
 

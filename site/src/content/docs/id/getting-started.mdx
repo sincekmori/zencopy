@@ -4,6 +4,7 @@ description: Dari memasang, menyiapkan kunci AI gratis, hingga salin-dua-kali pe
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 Kalau kamu bisa menyalin, kamu bisa memakai ZenCopy.
 Hanya ada satu hal yang perlu dipelajari — **perintah salin biasamu, ditekan dua kali dengan cepat**.
@@ -33,19 +34,20 @@ Unduh installer untuk sistem operasimu dari [GitHub Releases](https://github.com
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Unduh dan jalankan installer `.exe`. Kamu mungkin melihat layar "Windows protected your PC". Itu
-    pemeriksaan satu kali yang ditampilkan Windows untuk aplikasi baru yang belum dikenalnya — pilih
-    **More info → Run anyway**.
+    Unduh dan jalankan installer <DownloadLink kind="windows" />. Kamu mungkin melihat layar
+    "Windows protected your PC". Itu pemeriksaan satu kali yang ditampilkan Windows untuk aplikasi
+    baru yang belum dikenalnya — pilih **More info → Run anyway**.
   </TabItem>
   <TabItem label="macOS">
-    Buka berkas `.dmg` dan seret ZenCopy ke folder **Applications**. Saat pertama kali dijalankan,
-    macOS bertanya satu kali apakah aplikasi yang diunduh dari internet boleh dibuka — pilih
-    **Open**.
+    Buka berkas <DownloadLink kind="dmg" /> dan seret ZenCopy ke folder **Applications**. Saat
+    pertama kali dijalankan, macOS bertanya satu kali apakah aplikasi yang diunduh dari internet
+    boleh dibuka — pilih **Open**.
   </TabItem>
   <TabItem label="Linux">
-    Unduh berkas `.AppImage`, jadikan dapat dieksekusi (`chmod +x`), lalu jalankan. Inilah format
-    yang mendukung pembaruan dari dalam aplikasi. Paket `.deb` dan `.rpm` juga tersedia, tetapi
-    memperbaruinya berarti memasang ulang rilis baru.
+    Unduh berkas <DownloadLink kind="appimage" />, jadikan dapat dieksekusi (`chmod +x`), lalu
+    jalankan. Inilah format yang mendukung pembaruan dari dalam aplikasi. Paket{" "}
+    <DownloadLink kind="deb" /> dan <DownloadLink kind="rpm" /> juga tersedia, tetapi memperbaruinya
+    berarti memasang ulang rilis baru.
   </TabItem>
 </Tabs>
 

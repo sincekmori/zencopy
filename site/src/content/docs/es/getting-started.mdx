@@ -4,6 +4,7 @@ description: De la instalación a preparar una clave de IA gratuita y tu primer 
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import DownloadLink from "../../../components/DownloadLink.astro";
 
 Si sabes copiar, sabes usar ZenCopy.
 Hay exactamente una cosa que aprender: **copiar como siempre, pero dos veces seguidas rápidamente**.
@@ -33,18 +34,20 @@ Descarga el instalador para tu sistema operativo desde [GitHub Releases](https:/
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
-    Descarga y ejecuta el instalador `.exe`. Puede que veas una pantalla que dice "Windows protegió
-    su PC". Es una comprobación que Windows muestra una sola vez con aplicaciones nuevas que aún no
-    conoce — elige **Más información → Ejecutar de todas formas**.
+    Descarga y ejecuta el instalador <DownloadLink kind="windows" />. Puede que veas una pantalla
+    que dice "Windows protegió su PC". Es una comprobación que Windows muestra una sola vez con
+    aplicaciones nuevas que aún no conoce — elige **Más información → Ejecutar de todas formas**.
   </TabItem>
   <TabItem label="macOS">
-    Abre el `.dmg` y arrastra ZenCopy a tu carpeta **Aplicaciones**. En el primer inicio, macOS
-    pregunta una sola vez si quieres abrir una aplicación descargada de internet — elige **Abrir**.
+    Abre el <DownloadLink kind="dmg" /> y arrastra ZenCopy a tu carpeta **Aplicaciones**. En el
+    primer inicio, macOS pregunta una sola vez si quieres abrir una aplicación descargada de
+    internet — elige **Abrir**.
   </TabItem>
   <TabItem label="Linux">
-    Descarga el `.AppImage`, hazlo ejecutable (`chmod +x`) y ejecútalo. Es el formato con
-    actualizaciones dentro de la aplicación. También hay paquetes `.deb` y `.rpm`, pero
-    actualizarlos implica reinstalar cada nueva versión.
+    Descarga el <DownloadLink kind="appimage" />, hazlo ejecutable (`chmod +x`) y ejecútalo. Es el
+    formato con actualizaciones dentro de la aplicación. También hay paquetes{" "}
+    <DownloadLink kind="deb" /> y <DownloadLink kind="rpm" />, pero actualizarlos implica reinstalar
+    cada nueva versión.
   </TabItem>
 </Tabs>
 
