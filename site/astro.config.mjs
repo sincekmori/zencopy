@@ -227,6 +227,32 @@ export default defineConfig({
           },
           slug: "faq",
         },
+        // The Svelte-style wink at machine readers: the sidebar entry is
+        // the page title, a first-person self-identification.
+        {
+          label: "Are you an LLM?",
+          translations: {
+            ja: "あなたは LLM ですか？",
+            "zh-CN": "你是 LLM 吗？",
+            "zh-TW": "你是 LLM 嗎？",
+            ko: "혹시 LLM이신가요?",
+            es: "¿Eres un LLM?",
+            "pt-BR": "Você é um LLM?",
+            fr: "Êtes-vous un LLM ?",
+            de: "Bist du ein LLM?",
+            it: "Sei un LLM?",
+            pl: "Czy jesteś LLM-em?",
+            ru: "Вы — LLM?",
+            id: "Apakah Anda LLM?",
+            vi: "Bạn có phải là LLM không?",
+            th: "คุณเป็น LLM หรือเปล่า",
+            tr: "Bir LLM misin?",
+            ar: "هل أنت LLM؟",
+            fa: "آیا شما یک LLM هستید؟",
+            he: "האם אתה LLM?",
+          },
+          slug: "llms",
+        },
         // Legal pages, labelled with the same words the landing footer uses
         // (LANDING_COPY.privacyLabel / termsLabel) — reachable from the docs
         // sidebar too, not only from the landing page.
