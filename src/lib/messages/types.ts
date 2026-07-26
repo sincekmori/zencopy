@@ -95,7 +95,6 @@ export interface Messages {
     open: string;
   };
   about: {
-    version: string;
     tagline: string;
     /** The update button before the download finished (rare: a failed or
      *  still-running background download) — clicking downloads and installs.
@@ -105,6 +104,14 @@ export interface Messages {
      *  restarting the app is all that is left to do. */
     updateRestart: (version: string) => string;
     updating: string;
+    /** The manual check button (idle, and retry after a failed check). */
+    checkUpdates: string;
+    /** Status row while a check is in flight. */
+    checkingUpdates: string;
+    /** The answer when a check finds nothing newer. */
+    upToDate: string;
+    /** A check that errored (offline, no release yet) — shown above retry. */
+    updateCheckFailed: string;
     privacy: string;
     terms: string;
   };

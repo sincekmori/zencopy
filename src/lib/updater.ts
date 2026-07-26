@@ -23,6 +23,11 @@ export type UpdateState =
   | { phase: "ready"; version: string } // downloaded; an app restart applies it
   | { phase: "installing"; version: string };
 
+/** The last check's visible outcome: `idle` before any manual
+ *  interest, `upToDate`/`failed` as the answer to "is there an update?".
+ *  Orthogonal to UpdateState — a found update takes over the UI instead. */
+export type CheckStatus = "idle" | "checking" | "upToDate" | "failed";
+
 /** The slice of the plugin's `Update` object the manager relies on, so a
  *  dev-mode fake can stand in for the real thing. */
 interface UpdateHandle {
@@ -53,13 +58,23 @@ function fakeUpdate(version: string): UpdateHandle {
 // is never destroyed, only hidden) and useSyncExternalStore keeps the
 // component in step without effect-dependency gymnastics.
 let state: UpdateState = { phase: "none" };
+let checkStatus: CheckStatus = "idle";
 const listeners = new Set<() => void>();
 
-function setState(next: UpdateState): void {
-  state = next;
+function notify(): void {
   for (const listener of listeners) {
     listener();
   }
+}
+
+function setState(next: UpdateState): void {
+  state = next;
+  notify();
+}
+
+function setCheckStatus(next: CheckStatus): void {
+  checkStatus = next;
+  notify();
 }
 
 function subscribe(listener: () => void): () => void {
@@ -71,6 +86,10 @@ function subscribe(listener: () => void): () => void {
 
 function getSnapshot(): UpdateState {
   return state;
+}
+
+function getCheckSnapshot(): CheckStatus {
+  return checkStatus;
 }
 
 /** The update currently on offer. Replaced wholesale when a check finds a
@@ -111,10 +130,24 @@ function ensureDownloaded(update: UpdateHandle): Promise<void> {
   return pending;
 }
 
+/** Guards against overlapping checks (focus events, the 24h timer, and the
+ *  manual button can all fire close together). */
+let checking = false;
+
 async function checkOnce(): Promise<void> {
-  if (state.phase === "installing") {
+  if (checking || state.phase === "installing") {
     return;
   }
+  checking = true;
+  try {
+    await runCheck();
+  } finally {
+    checking = false;
+  }
+}
+
+async function runCheck(): Promise<void> {
+  setCheckStatus("checking");
   let found: UpdateHandle | undefined;
   if (FAKE_VERSION) {
     found = fakeUpdate(FAKE_VERSION);
@@ -124,12 +157,16 @@ async function checkOnce(): Promise<void> {
     } catch (error) {
       // Expected offline or before the first release — stays in the log.
       log.warn("update check failed", error);
+      setCheckStatus("failed");
       return;
     }
   }
   if (!found) {
+    setCheckStatus("upToDate");
     return;
   }
+  // A found update takes over the About surface; the check row steps aside.
+  setCheckStatus("idle");
   if (offered?.version === found.version) {
     // Same version still on offer: keep the object whose download may already
     // be done, and let ensureDownloaded retry if a past attempt failed.
@@ -199,13 +236,25 @@ function install(): void {
   })();
 }
 
+/** Ask "is there an update?" right now — the About window's manual check
+ *  (and its focus-triggered auto-check). A no-op while a check is running. */
+function checkNow(): void {
+  void checkOnce();
+}
+
 /** The About window's view of the manager (and its only control surface). */
-export function useUpdateManager(): { update: UpdateState; install: () => void } {
+export function useUpdateManager(): {
+  update: UpdateState;
+  checkStatus: CheckStatus;
+  install: () => void;
+  check: () => void;
+} {
   const update = useSyncExternalStore(subscribe, getSnapshot);
+  const status = useSyncExternalStore(subscribe, getCheckSnapshot);
   useEffect(() => {
     start();
   }, []);
-  return { update, install };
+  return { update, checkStatus: status, install, check: checkNow };
 }
 
 /** The pending update's version for read-only surfaces (the popup's footer
