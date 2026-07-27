@@ -86,7 +86,7 @@ Both sides share the same sinks (tauri-plugin-log): stdout in dev, a rotating fi
 - Formatter: `rustfmt` (default settings).
 - Linter: `clippy` with `-D warnings` in CI.
   Fix, do not silence, unless suppression is deliberate and commented.
-- The Rust side is split by domain: [src-tauri/src/lib.rs](src-tauri/src/lib.rs) holds the `run()` wiring (trigger, setup, invoke handler) plus cross-cutting state; the domains live in sibling modules — `actions.rs`, `routing.rs`, `capture.rs`, `attachments.rs` (+ `office.rs`), `config.rs`, `windows.rs`, `tray.rs`.
+- The Rust side is split by domain: [src-tauri/src/lib.rs](src-tauri/src/lib.rs) holds the `run()` wiring (trigger, setup, invoke handler) plus cross-cutting state; the domains live in sibling modules — `actions.rs`, `routing.rs`, `capture.rs`, `attachments.rs` (+ `office.rs`), `config.rs`, `shell.rs`, `windows.rs`, `tray.rs`.
   New code goes into the module owning its domain, not into lib.rs.
 
 ## TOML

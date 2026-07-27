@@ -13,6 +13,8 @@ mod capture;
 mod config;
 /// Capture → action routing.
 mod routing;
+/// Handing URLs and folders to the OS shell.
+mod shell;
 /// The locale-aware tray and app menus.
 mod tray;
 /// Window placement and reveal helpers.
@@ -28,6 +30,7 @@ use crate::config::{STORE_FILE, config_base, read_catalog, reset_all_settings, w
 use crate::routing::{
     get_routing_ui, load_routing, resolve_action, set_kind_action, set_overrides,
 };
+use crate::shell::{open_log_dir, open_url};
 // The app menu exists only on macOS (tray.rs gates the builder the same way).
 #[cfg(target_os = "macos")]
 use crate::tray::build_app_menu;
@@ -131,38 +134,6 @@ struct AppInfo {
     name: String,
     version: String,
     copyright: String,
-}
-
-/// Open an https URL in the default browser. Called with literal URLs from our
-/// own frontend (repository, docs) and with links the model emitted in Markdown
-/// results; anything not https is ignored.
-#[tauri::command]
-fn open_url(app: tauri::AppHandle, url: String) {
-    use tauri_plugin_opener::OpenerExt;
-    if url.starts_with("https://") {
-        app.opener()
-            .open_url(url, None::<&str>)
-            .or_log("open url in the default browser");
-    }
-}
-
-/// Open the log directory in the system file browser — About's "Logs" link.
-/// Exists so a support conversation can be "click Logs, send me the file"
-/// instead of walking someone through hidden platform paths. The directory is
-/// created first: a fresh install may not have logged anything yet, and some
-/// file browsers silently do nothing on a missing path.
-#[tauri::command]
-fn open_log_dir(app: tauri::AppHandle) {
-    use tauri_plugin_opener::OpenerExt;
-    match app.path().app_log_dir() {
-        Ok(dir) => {
-            std::fs::create_dir_all(&dir).or_log("create the log directory");
-            app.opener()
-                .open_path(dir.to_string_lossy(), None::<&str>)
-                .or_log("open the log directory");
-        }
-        Err(error) => log::warn!("log directory unavailable: {error}"),
-    }
 }
 
 /// `bundle.copyright` from tauri.conf.json, read at compile time.
