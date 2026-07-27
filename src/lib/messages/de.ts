@@ -178,6 +178,7 @@ export const de: Messages = {
     fieldExec: "Programmdatei",
     fieldTitle: "Fenstertitel",
     fieldUrl: "URL",
+    fieldFile: "Dateiname",
     fieldMinChars: "Min. Zeichen",
     fieldMaxChars: "Max. Zeichen",
     ruleAction: "Aktion ausführen",

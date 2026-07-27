@@ -170,6 +170,7 @@ export const fa: Messages = {
     fieldExec: "فایل اجرایی",
     fieldTitle: "عنوان پنجره",
     fieldUrl: "URL",
+    fieldFile: "نام فایل",
     fieldMinChars: "حداقل نویسه",
     fieldMaxChars: "حداکثر نویسه",
     ruleAction: "اجرای اکشن",

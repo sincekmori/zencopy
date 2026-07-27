@@ -95,7 +95,7 @@ Peta datarnya bisa disunting di dalam aplikasi (Pengaturan → Aksi → Perutean
 }
 ```
 
-Kondisi `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (semuanya mendukung wildcard `*`), plus `min_chars` / `max_chars`.
+Kondisi `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (semuanya mendukung wildcard `*`), `file_name` (wildcard yang harus dicocokkan oleh nama setiap file yang disalin, tidak peka huruf besar-kecil — contohnya `*.pdf`), plus `min_chars` / `max_chars`.
 
 Untuk tangkapan `image` dan `files`, kontennya sendiri dikirim ke model (total hingga 10 MB per tangkapan).
 Jenis berkas dideteksi dari **isinya**, bukan namanya:
@@ -138,6 +138,9 @@ Variabel templat, dengan contoh nilai untuk paragraf yang disalin di browser:
 | `{{ text }}`         | Teks yang disalin (salinan HTML kaya menjadi Markdown) |
 | `{{ markup }}`       | Sumber HTML/RTF dari salinan kaya                      |
 | `{{ format }}`       | `html` (atau `rtf`; kosong untuk salinan polos)        |
+| `{{ file_name }}`    | `report.pdf` (nama file pertama yang disalin)          |
+| `{{ file_names }}`   | Nama setiap file yang disalin, satu per baris          |
+| `{{ file_paths }}`   | Jalur lengkap setiap file yang disalin, satu per baris |
 | `{{ app_name }}`     | `Safari`                                               |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`       |

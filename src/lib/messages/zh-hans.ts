@@ -163,6 +163,7 @@ export const zhHans: Messages = {
     fieldExec: "可执行文件",
     fieldTitle: "窗口标题",
     fieldUrl: "URL",
+    fieldFile: "文件名",
     fieldMinChars: "最少字符数",
     fieldMaxChars: "最多字符数",
     ruleAction: "运行动作",

@@ -164,6 +164,7 @@ export const zhHant: Messages = {
     fieldExec: "執行檔",
     fieldTitle: "視窗標題",
     fieldUrl: "URL",
+    fieldFile: "檔案名稱",
     fieldMinChars: "最少字元數",
     fieldMaxChars: "最多字元數",
     ruleAction: "執行動作",

@@ -95,7 +95,7 @@ API 키는 이 로컬 파일에 그대로 들어갑니다(설정 UI도 같은 �
 }
 ```
 
-`when` 조건: `kind`, `app_name`, `exec_name`, `window_title`, `url`(모두 `*` 와일드카드 사용 가능)과 `min_chars` / `max_chars`.
+`when` 조건: `kind`, `app_name`, `exec_name`, `window_title`, `url` (모두 `*` 와일드카드 사용 가능), `file_name` (복사된 모든 파일 이름이 대소문자 구분 없이 일치해야 하는 와일드카드 — 예: `*.pdf`), 그리고 `min_chars` / `max_chars`.
 
 `image`와 `files` 캡처에서는 내용 자체가 모델로 전송됩니다(캡처당 총 10 MB까지).
 파일 형식은 이름이 아니라 **내용**으로 판별합니다.
@@ -138,6 +138,9 @@ instructions: 당신은 간결한 어시스턴트입니다.
 | `{{ text }}`         | 복사한 텍스트(HTML 리치 복사는 Markdown으로 변환) |
 | `{{ markup }}`       | 리치 복사의 HTML/RTF 원본                         |
 | `{{ format }}`       | `html`(또는 `rtf`, 일반 복사에서는 비어 있음)     |
+| `{{ file_name }}`    | `report.pdf` (첫 번째로 복사된 파일의 이름)       |
+| `{{ file_names }}`   | 복사된 모든 파일의 이름, 줄당 하나씩              |
+| `{{ file_paths }}`   | 복사된 모든 파일의 전체 경로, 줄당 하나씩         |
 | `{{ app_name }}`     | `Safari`                                          |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                           |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`  |

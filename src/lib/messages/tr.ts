@@ -175,6 +175,7 @@ export const tr: Messages = {
     fieldExec: "Çalıştırılabilir dosya",
     fieldTitle: "Pencere başlığı",
     fieldUrl: "URL",
+    fieldFile: "Dosya adı",
     fieldMinChars: "En az karakter",
     fieldMaxChars: "En çok karakter",
     ruleAction: "Eylemi çalıştır",

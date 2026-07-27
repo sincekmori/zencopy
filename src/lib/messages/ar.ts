@@ -168,6 +168,7 @@ export const ar: Messages = {
     fieldExec: "الملف التنفيذي",
     fieldTitle: "عنوان النافذة",
     fieldUrl: "URL",
+    fieldFile: "اسم الملف",
     fieldMinChars: "الحد الأدنى للأحرف",
     fieldMaxChars: "الحد الأقصى للأحرف",
     ruleAction: "تشغيل الإجراء",

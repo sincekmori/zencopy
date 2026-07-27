@@ -95,7 +95,7 @@ La mappa piatta è modificabile nell'app (Impostazioni → Azioni → Routing), 
 }
 ```
 
-Condizioni di `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tutte con wildcard `*`), più `min_chars` / `max_chars`.
+Condizioni di `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tutte con wildcard `*`), `file_name` (una wildcard a cui deve corrispondere il nome di ogni file copiato, senza distinzione tra maiuscole e minuscole — ad es. `*.pdf`), più `min_chars` / `max_chars`.
 
 Per le catture `image` e `files`, il contenuto stesso viene inviato al modello (fino a 10 MB totali per cattura).
 I tipi di file sono rilevati dal **contenuto**, non dai nomi:
@@ -138,6 +138,9 @@ Variabili di template, con valori d'esempio per un paragrafo copiato in un brows
 | `{{ text }}`         | Il testo copiato (le copie HTML formattate diventano Markdown) |
 | `{{ markup }}`       | Il sorgente HTML/RTF di una copia formattata                   |
 | `{{ format }}`       | `html` (o `rtf`; vuoto per le copie semplici)                  |
+| `{{ file_name }}`    | `report.pdf` (il nome del primo file copiato)                  |
+| `{{ file_names }}`   | Il nome di ogni file copiato, uno per riga                     |
+| `{{ file_paths }}`   | Il percorso completo di ogni file copiato, uno per riga        |
 | `{{ app_name }}`     | `Safari`                                                       |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                        |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`               |

@@ -173,6 +173,7 @@ export const vi: Messages = {
     fieldExec: "Tệp thực thi",
     fieldTitle: "Tiêu đề cửa sổ",
     fieldUrl: "URL",
+    fieldFile: "Tên tệp",
     fieldMinChars: "Ký tự tối thiểu",
     fieldMaxChars: "Ký tự tối đa",
     ruleAction: "Chạy hành động",

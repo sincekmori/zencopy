@@ -95,7 +95,7 @@ ZenCopy עובד מהקופסה בלי להגדיר דבר.
 }
 ```
 
-תנאי `when`‏: `kind`‏, `app_name`‏, `exec_name`‏, `window_title`‏, `url` (כולם עם תווים כלליים `*`), ובנוסף `min_chars` / `max_chars`.
+תנאי `when`‏: `kind`‏, `app_name`‏, `exec_name`‏, `window_title`‏, `url` (כולם עם תווים כלליים `*`), `file_name` (תו כללי שכל שם של קובץ שהועתק חייב להתאים לו, ללא תלות ברישיות — למשל `*.pdf`), ובנוסף `min_chars` / `max_chars`.
 
 בלכידות `image` ו‑`files`, התוכן עצמו נשלח למודל (עד 10 מ״ב בסך הכול ללכידה).
 סוגי קבצים מזוהים לפי **התוכן**, לא לפי השמות:
@@ -138,6 +138,9 @@ instructions: אתה עוזר תמציתי.
 | `{{ text }}`         | הטקסט שהועתק (העתקות HTML עשירות הופכות ל‑Markdown) |
 | `{{ markup }}`       | מקור ה‑HTML/RTF של העתקה עשירה                      |
 | `{{ format }}`       | `html` (או `rtf`; ריק בהעתקות רגילות)               |
+| `{{ file_name }}`    | `report.pdf` (שמו של הקובץ הראשון שהועתק)           |
+| `{{ file_names }}`   | שמו של כל קובץ שהועתק, אחד בכל שורה                 |
+| `{{ file_paths }}`   | הנתיב המלא של כל קובץ שהועתק, אחד בכל שורה          |
 | `{{ app_name }}`     | `Safari`                                            |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                             |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`    |

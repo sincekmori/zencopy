@@ -95,7 +95,7 @@ The flat map is editable in-app (Settings → Actions → Routing), so you only 
 }
 ```
 
-`when` conditions: `kind`, `app_name`, `exec_name`, `window_title`, `url` (all with `*` wildcards), plus `min_chars` / `max_chars`.
+`when` conditions: `kind`, `app_name`, `exec_name`, `window_title`, `url` (all with `*` wildcards), `file_name` (a wildcard every copied file's name must match, case-insensitively — e.g. `*.pdf`), plus `min_chars` / `max_chars`.
 
 For `image` and `files` captures, the content itself is sent to the model (up to 10 MB total per capture).
 File types are detected from **content**, not names:
@@ -138,6 +138,9 @@ Template variables, with example values for a paragraph copied in a browser:
 | `{{ text }}`         | The copied text (rich HTML copies become Markdown) |
 | `{{ markup }}`       | The HTML/RTF source of a rich copy                 |
 | `{{ format }}`       | `html` (or `rtf`; empty for plain copies)          |
+| `{{ file_name }}`    | `report.pdf` (the first copied file's name)        |
+| `{{ file_names }}`   | Every copied file's name, one per line             |
+| `{{ file_paths }}`   | Every copied file's full path, one per line        |
 | `{{ app_name }}`     | `Safari`                                           |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                            |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`   |

@@ -95,7 +95,7 @@ ZenCopy از همان روز اول بدون هیچ پیکربندی‌ای کا
 }
 ```
 
-شرط‌های `when`: ‏`kind`، ‏`app_name`، ‏`exec_name`، ‏`window_title`، ‏`url` (همگی با پشتیبانی wildcard یعنی `*`)، به‌علاوهٔ `min_chars` / `max_chars`.
+شرط‌های `when`: ‏`kind`، ‏`app_name`، ‏`exec_name`، ‏`window_title`، ‏`url` (همگی با پشتیبانی wildcard یعنی `*`)، ‏`file_name` (یک الگو با wildcard که نام هر فایل کپی‌شده باید با آن مطابقت داشته باشد، بدون حساسیت به بزرگی و کوچکی حروف — مثلاً `*.pdf`)، به‌علاوهٔ `min_chars` / `max_chars`.
 
 در برداشت‌های `image` و `files`، خود محتوا به مدل فرستاده می‌شود (در هر برداشت جمعاً تا ۱۰ مگابایت).
 نوع فایل از **محتوا** تشخیص داده می‌شود، نه از نام:
@@ -138,6 +138,9 @@ instructions: تو دستیاری موجز هستی.
 | `{{ text }}`         | متن کپی‌شده (کپی‌های قالب‌دار HTML به Markdown تبدیل می‌شوند) |
 | `{{ markup }}`       | منبع HTML/RTF یک کپی قالب‌دار                                 |
 | `{{ format }}`       | `html` (یا `rtf`؛ برای کپی ساده خالی است)                     |
+| `{{ file_name }}`    | `report.pdf` (نام اولین فایل کپی‌شده)                         |
+| `{{ file_names }}`   | نام تمامی فایل‌های کپی‌شده، هر کدام در یک سطر                 |
+| `{{ file_paths }}`   | مسیر کامل تمامی فایل‌های کپی‌شده، هر کدام در یک سطر           |
 | `{{ app_name }}`     | `Safari`                                                      |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                       |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`              |

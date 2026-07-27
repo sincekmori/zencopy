@@ -95,7 +95,7 @@ La table plate est modifiable dans l'application (Réglages → Actions → Rout
 }
 ```
 
-Conditions de `when` : `kind`, `app_name`, `exec_name`, `window_title`, `url` (toutes avec le joker `*`), plus `min_chars` / `max_chars`.
+Conditions de `when` : `kind`, `app_name`, `exec_name`, `window_title`, `url` (toutes avec le joker `*`), `file_name` (un joker auquel le nom de chaque fichier copié doit correspondre, insensible à la casse — ex. `*.pdf`), plus `min_chars` / `max_chars`.
 
 Pour les captures `image` et `files`, le contenu lui-même est envoyé au modèle (jusqu'à 10 Mo au total par capture).
 Les types de fichiers sont détectés d'après le **contenu**, pas d'après le nom :
@@ -138,6 +138,9 @@ Les variables de gabarit, avec des valeurs d'exemple pour un paragraphe copié d
 | `{{ text }}`         | Le texte copié (les copies HTML enrichies deviennent du Markdown) |
 | `{{ markup }}`       | La source HTML/RTF d'une copie enrichie                           |
 | `{{ format }}`       | `html` (ou `rtf` ; vide pour une copie simple)                    |
+| `{{ file_name }}`    | `report.pdf` (le nom du premier fichier copié)                    |
+| `{{ file_names }}`   | Le nom de chaque fichier copié, un par ligne                      |
+| `{{ file_paths }}`   | Le chemin complet de chaque fichier copié, un par ligne           |
 | `{{ app_name }}`     | `Safari`                                                          |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                           |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`                  |

@@ -95,7 +95,7 @@ Płaską mapę można edytować w aplikacji (Ustawienia → Akcje → Routing), 
 }
 ```
 
-Warunki `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (wszystkie z wieloznacznikiem `*`), plus `min_chars` / `max_chars`.
+Warunki `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (wszystkie z wieloznacznikiem `*`), `file_name` (wieloznacznik, do którego musi pasować nazwa każdego kopiowanego pliku, bez uwzględniania wielkości liter — np. `*.pdf`), plus `min_chars` / `max_chars`.
 
 Dla przechwyceń `image` i `files` do modelu wysyłana jest sama treść (łącznie do 10 MB na jedno przechwycenie).
 Typy plików są rozpoznawane po **zawartości**, nie po nazwach:
@@ -133,19 +133,22 @@ Streść w 3 linijkach, w języku {{ locale }}:
 
 Zmienne szablonu, z przykładowymi wartościami dla akapitu skopiowanego w przeglądarce:
 
-| Zmienna              | Przykład                                           |
-| -------------------- | -------------------------------------------------- |
-| `{{ text }}`         | Skopiowany tekst (kopie HTML stają się Markdownem) |
-| `{{ markup }}`       | Źródło HTML/RTF kopii sformatowanej                |
-| `{{ format }}`       | `html` (lub `rtf`; puste dla zwykłych kopii)       |
-| `{{ app_name }}`     | `Safari`                                           |
-| `{{ exec_name }}`    | `Safari` / `chrome.exe`                            |
-| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`   |
-| `{{ window_title }}` | `Cennik – Example`                                 |
-| `{{ url }}`          | `https://example.com/pricing` (tylko przeglądarki) |
-| `{{ process_id }}`   | `8123`                                             |
-| `{{ now }}`          | `2026-07-08 20:15:00`                              |
-| `{{ locale }}`       | `pl`                                               |
+| Zmienna              | Przykład                                                  |
+| -------------------- | --------------------------------------------------------- |
+| `{{ text }}`         | Skopiowany tekst (kopie HTML stają się Markdownem)        |
+| `{{ markup }}`       | Źródło HTML/RTF kopii sformatowanej                       |
+| `{{ format }}`       | `html` (lub `rtf`; puste dla zwykłych kopii)              |
+| `{{ file_name }}`    | `report.pdf` (nazwa pierwszego kopiowanego pliku)         |
+| `{{ file_names }}`   | Nazwa każdego kopiowanego pliku, jedna w linii            |
+| `{{ file_paths }}`   | Pełna ścieżka do każdego kopiowanego pliku, jedna w linii |
+| `{{ app_name }}`     | `Safari`                                                  |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                   |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`          |
+| `{{ window_title }}` | `Cennik – Example`                                        |
+| `{{ url }}`          | `https://example.com/pricing` (tylko przeglądarki)        |
+| `{{ process_id }}`   | `8123`                                                    |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                     |
+| `{{ locale }}`       | `pl`                                                      |
 
 Jest też specyficzny dla ZenCopy filtr `language_name`: `{{ locale | language_name }}` rozwija się do „Polish” zamiast „pl”, co brzmi naturalnie w promptcie.
 Aby zobaczyć rzeczywiste wartości, włącz w Ustawieniach **Tryb deweloperski** — zmienne szablonu każdego przechwycenia pojawiają się w okienku jako JSON.

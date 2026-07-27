@@ -172,6 +172,7 @@ export const ko: Messages = {
     fieldExec: "실행 파일",
     fieldTitle: "창 제목",
     fieldUrl: "URL",
+    fieldFile: "파일명",
     fieldMinChars: "최소 글자 수",
     fieldMaxChars: "최대 글자 수",
     ruleAction: "실행할 액션",

@@ -95,7 +95,7 @@ El mapa plano se puede editar dentro de la aplicación (Ajustes → Acciones →
 }
 ```
 
-Condiciones de `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (todas con comodines `*`), más `min_chars` / `max_chars`.
+Condiciones de `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (todas con comodines `*`), `file_name` (un comodín que el nombre de cada archivo copiado debe coincidir, sin distinguir entre mayúsculas y minúsculas — p. ej. `*.pdf`), más `min_chars` / `max_chars`.
 
 Con las capturas `image` y `files`, el contenido en sí se envía al modelo (hasta 10 MB en total por captura).
 Los tipos de archivo se detectan por el **contenido**, no por el nombre:
@@ -138,6 +138,9 @@ Variables de plantilla, con valores de ejemplo para un párrafo copiado en un na
 | `{{ text }}`         | El texto copiado (las copias HTML enriquecidas se convierten en Markdown) |
 | `{{ markup }}`       | El código HTML/RTF de una copia enriquecida                               |
 | `{{ format }}`       | `html` (o `rtf`; vacío en las copias simples)                             |
+| `{{ file_name }}`    | `report.pdf` (el nombre del primer archivo copiado)                       |
+| `{{ file_names }}`   | El nombre de cada archivo copiado, uno por línea                          |
+| `{{ file_paths }}`   | La ruta completa de cada archivo copiado, una por línea                   |
 | `{{ app_name }}`     | `Safari`                                                                  |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                                   |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`                          |

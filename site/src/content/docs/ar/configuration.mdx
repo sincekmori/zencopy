@@ -95,7 +95,7 @@ import { TabItem, Tabs } from "@astrojs/starlight/components";
 }
 ```
 
-شروط `when`: هي `kind` و`app_name` و`exec_name` و`window_title` و`url` (وكلها تدعم البدل `*`)، إضافة إلى `min_chars` / `max_chars`.
+شروط `when`: هي `kind` و`app_name` و`exec_name` و`window_title` و`url` (وكلها تدعم البدل `*`)، و`file_name` (بدل يجب أن يطابق اسم كل ملف منسوخ، دون اعتبار لحالة الأحرف — مثل `*.pdf`)، إضافة إلى `min_chars` / `max_chars`.
 
 في التقاطات `image` و`files`، يُرسل المحتوى نفسه إلى النموذج (حتى 10 م.ب. إجمالًا لكل التقاط).
 أنواع الملفات تُكتشف من **المحتوى** لا من الأسماء:
@@ -138,6 +138,9 @@ instructions: أنت مساعد موجز.
 | `{{ text }}`         | النص المنسوخ (نسخ HTML المنسّقة تصبح Markdown)   |
 | `{{ markup }}`       | مصدر HTML/RTF لنسخة منسّقة                       |
 | `{{ format }}`       | `html` (أو `rtf`؛ فارغ للنسخ العادية)            |
+| `{{ file_name }}`    | `report.pdf` (اسم أول ملف منسوخ)                 |
+| `{{ file_names }}`   | اسم كل ملف منسوخ، كل اسم في سطر                  |
+| `{{ file_paths }}`   | المسار الكامل لكل ملف منسوخ، كل مسار في سطر      |
 | `{{ app_name }}`     | `Safari`                                         |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                          |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari` |

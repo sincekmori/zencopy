@@ -95,7 +95,7 @@ Düz eşleme uygulama içinden düzenlenebilir (Ayarlar → Eylemler → Yönlen
 }
 ```
 
-`when` koşulları: `kind`, `app_name`, `exec_name`, `window_title`, `url` (hepsi `*` joker karakteriyle), ayrıca `min_chars` / `max_chars`.
+`when` koşulları: `kind`, `app_name`, `exec_name`, `window_title`, `url` (hepsi `*` joker karakteriyle), `file_name` (kopyalanan her dosya adının büyük/küçük harf duyarsız olarak eşleşmesi gereken bir joker karakter — örn. `*.pdf`), ayrıca `min_chars` / `max_chars`.
 
 `image` ve `files` yakalamalarında modele içeriğin kendisi gönderilir (yakalama başına toplam 10 MB'a kadar).
 Dosya türleri adlarından değil **içerikten** algılanır:
@@ -138,6 +138,9 @@ instructions: Özlü bir asistansın.
 | `{{ text }}`         | Kopyalanan metin (zengin HTML kopyaları Markdown'a dönüşür) |
 | `{{ markup }}`       | Zengin kopyanın HTML/RTF kaynağı                            |
 | `{{ format }}`       | `html` (ya da `rtf`; düz kopyalarda boş)                    |
+| `{{ file_name }}`    | `report.pdf` (kopyalanan ilk dosyanın adı)                  |
+| `{{ file_names }}`   | Kopyalanan her dosyanın adı, satır başına bir tane          |
+| `{{ file_paths }}`   | Kopyalanan her dosyanın tam yolu, satır başına bir tane     |
 | `{{ app_name }}`     | `Safari`                                                    |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                     |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`            |

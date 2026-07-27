@@ -93,10 +93,29 @@ pub(crate) fn template_vars(
         _ => (String::new(), String::new(), String::new()),
     };
 
+    // File copies: the names (and paths) as variables, so a prompt can say
+    // "rename {{ file_name }}" without fishing them out of the attachment
+    // list. Multi-file values are newline-joined — Liquid's `split` turns
+    // them back into an array. Empty for every other capture kind.
+    let (file_name, file_names, file_paths) = match &event.content {
+        Captured::Files { paths } => {
+            let names: Vec<String> = paths.iter().map(|path| file_basename(path)).collect();
+            (
+                names.first().cloned().unwrap_or_default(),
+                names.join("\n"),
+                paths.join("\n"),
+            )
+        }
+        _ => (String::new(), String::new(), String::new()),
+    };
+
     std::collections::HashMap::from([
         ("text", text),
         ("markup", markup),
         ("format", format),
+        ("file_name", file_name),
+        ("file_names", file_names),
+        ("file_paths", file_paths),
         ("app_name", event.app_name.clone()),
         ("exec_name", event.exec_name.clone()),
         ("exec_path", event.exec_path.clone()),
@@ -108,6 +127,16 @@ pub(crate) fn template_vars(
             chrono::Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
         ),
     ])
+}
+
+/// A path's final component, for the `file_name(s)` template variables and
+/// the `file_name` routing condition. Falls back to the whole string when the
+/// path has no name component (which real copied-file paths always have).
+pub(crate) fn file_basename(path: &str) -> String {
+    std::path::Path::new(path).file_name().map_or_else(
+        || path.to_string(),
+        |name| name.to_string_lossy().into_owned(),
+    )
 }
 
 /// The captured content, shaped for display in the popup. Images are PNG, encoded

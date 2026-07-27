@@ -175,6 +175,7 @@ export const pl: Messages = {
     fieldExec: "Plik wykonywalny",
     fieldTitle: "Tytuł okna",
     fieldUrl: "URL",
+    fieldFile: "Nazwa pliku",
     fieldMinChars: "Min. znaków",
     fieldMaxChars: "Maks. znaków",
     ruleAction: "Uruchom akcję",

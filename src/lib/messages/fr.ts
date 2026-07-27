@@ -179,6 +179,7 @@ export const fr: Messages = {
     fieldExec: "Exécutable",
     fieldTitle: "Titre de fenêtre",
     fieldUrl: "URL",
+    fieldFile: "Nom de fichier",
     fieldMinChars: "Caractères min.",
     fieldMaxChars: "Caractères max.",
     ruleAction: "Exécuter l'action",

@@ -95,7 +95,7 @@ API 密钥直接写进这个本地文件（设置界面写出的也是同样的�
 }
 ```
 
-`when` 的条件：`kind`、`app_name`、`exec_name`、`window_title`、`url`（都支持 `*` 通配符），以及 `min_chars` / `max_chars`。
+`when` 的条件：`kind`、`app_name`、`exec_name`、`window_title`、`url`（都支持 `*` 通配符），`file_name`（一个每个被复制文件的名称必须匹配的通配符，不区分大小写 — 例如 `*.pdf`），以及 `min_chars` / `max_chars`。
 
 对于 `image` 和 `files` 类型的捕获，内容本身会发送给模型（每次捕获合计上限 10 MB）。
 文件类型按**内容**判断，而不是按文件名：
@@ -138,6 +138,9 @@ instructions: 你是一位简洁的助手。
 | `{{ text }}`         | 复制的文本（HTML 富文本复制会转换为 Markdown）   |
 | `{{ markup }}`       | 富文本复制的 HTML/RTF 源码                       |
 | `{{ format }}`       | `html`（或 `rtf`；纯文本复制时为空）             |
+| `{{ file_name }}`    | `report.pdf`（第一个被复制文件的名称）           |
+| `{{ file_names }}`   | 每个被复制文件的名称，每行一个                   |
+| `{{ file_paths }}`   | 每个被复制文件的完整路径，每行一个               |
 | `{{ app_name }}`     | `Safari`                                         |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                          |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari` |

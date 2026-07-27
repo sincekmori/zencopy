@@ -167,6 +167,7 @@ export const he: Messages = {
     fieldExec: "קובץ הפעלה",
     fieldTitle: "כותרת חלון",
     fieldUrl: "URL",
+    fieldFile: "שם קובץ",
     fieldMinChars: "מינימום תווים",
     fieldMaxChars: "מקסימום תווים",
     ruleAction: "הפעלת פעולה",

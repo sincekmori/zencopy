@@ -171,6 +171,7 @@ export const en: Messages = {
     fieldExec: "Executable",
     fieldTitle: "Window title",
     fieldUrl: "URL",
+    fieldFile: "File name",
     fieldMinChars: "Min characters",
     fieldMaxChars: "Max characters",
     ruleAction: "Run action",

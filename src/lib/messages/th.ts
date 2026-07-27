@@ -165,6 +165,7 @@ export const th: Messages = {
     fieldExec: "ไฟล์เรียกทำงาน",
     fieldTitle: "ชื่อหน้าต่าง",
     fieldUrl: "URL",
+    fieldFile: "ชื่อไฟล์",
     fieldMinChars: "อักขระต่ำสุด",
     fieldMaxChars: "อักขระสูงสุด",
     ruleAction: "เรียกใช้แอ็กชัน",

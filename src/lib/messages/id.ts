@@ -173,6 +173,7 @@ export const id: Messages = {
     fieldExec: "Berkas eksekusi",
     fieldTitle: "Judul jendela",
     fieldUrl: "URL",
+    fieldFile: "Nama file",
     fieldMinChars: "Karakter min.",
     fieldMaxChars: "Karakter maks.",
     ruleAction: "Jalankan aksi",

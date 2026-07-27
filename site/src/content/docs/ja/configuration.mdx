@@ -98,7 +98,7 @@ kind は `text`、`rich_text`、`image`、`files` の 4 種類で、初期状態
 }
 ```
 
-`when` の条件: `kind`、`app_name`、`exec_name`、`window_title`、`url`（いずれも `*` ワイルドカード対応）、および `min_chars` / `max_chars`。
+`when` の条件: `kind`、`app_name`、`exec_name`、`window_title`、`url`（いずれも `*` ワイルドカード対応）、`file_name`（コピーしたすべてのファイル名がマッチするワイルドカード。大文字小文字は区別しません — 例: `*.pdf`）、および `min_chars` / `max_chars`。
 
 `image` と `files` のキャプチャでは、内容そのものがモデルに送信されます（1 回あたり合計 10 MB まで）。
 ファイルの種類は名前ではなく**中身**から判定されます:
@@ -142,6 +142,9 @@ instructions: あなたは簡潔なアシスタントです。
 | `{{ text }}`         | コピーした本文（HTML のリッチコピーは Markdown に変換） |
 | `{{ markup }}`       | リッチコピー時の HTML/RTF ソース                        |
 | `{{ format }}`       | `html`（または `rtf`。プレーンコピーでは空）            |
+| `{{ file_name }}`    | `report.pdf`（コピーした最初のファイル名）              |
+| `{{ file_names }}`   | コピーしたすべてのファイル名（1 行に 1 つ）             |
+| `{{ file_paths }}`   | コピーしたすべてのファイルのフルパス（1 行に 1 つ）     |
 | `{{ app_name }}`     | `Safari`                                                |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                 |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`        |

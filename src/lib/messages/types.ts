@@ -201,6 +201,9 @@ export interface Messages {
     fieldExec: string;
     fieldTitle: string;
     fieldUrl: string;
+    /** Rule field for `files` copies: a wildcard every copied file's name
+     *  must match (case-insensitive), e.g. `*.pdf`. */
+    fieldFile: string;
     fieldMinChars: string;
     fieldMaxChars: string;
     ruleAction: string;

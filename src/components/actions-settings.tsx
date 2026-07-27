@@ -113,6 +113,7 @@ interface RuleDraft {
   execName: string;
   windowTitle: string;
   url: string;
+  fileName: string;
   minChars: string;
   maxChars: string;
   action: string;
@@ -124,6 +125,7 @@ const NEW_RULE: RuleDraft = {
   execName: "",
   windowTitle: "",
   url: "",
+  fileName: "",
   minChars: "",
   maxChars: "",
   action: "",
@@ -450,6 +452,7 @@ export function ActionsSettings(): React.JSX.Element {
       execName: existing.when.exec_name ?? "",
       windowTitle: existing.when.window_title ?? "",
       url: existing.when.url ?? "",
+      fileName: existing.when.file_name ?? "",
       minChars: existing.when.min_chars?.toString() ?? "",
       maxChars: existing.when.max_chars?.toString() ?? "",
       action: existing.action,
@@ -475,6 +478,9 @@ export function ActionsSettings(): React.JSX.Element {
     }
     if (rule.url.trim()) {
       when.url = rule.url.trim();
+    }
+    if (rule.fileName.trim()) {
+      when.file_name = rule.fileName.trim();
     }
     if (rule.minChars.trim() !== "") {
       when.min_chars = Number(rule.minChars);
@@ -533,6 +539,9 @@ export function ActionsSettings(): React.JSX.Element {
     }
     if (when.url) {
       chips.push({ label: t.routing.fieldUrl, value: when.url });
+    }
+    if (when.file_name) {
+      chips.push({ label: t.routing.fieldFile, value: when.file_name });
     }
     if (when.min_chars !== undefined) {
       chips.push({ value: `≥ ${when.min_chars}` });
@@ -1072,6 +1081,22 @@ export function ActionsSettings(): React.JSX.Element {
                   value={rule.execName}
                   onChange={(event) => {
                     setRule({ ...rule, execName: event.target.value });
+                  }}
+                />
+              </label>
+              {/* File-copy rules: every copied file's name must match, so a
+                  PDF action never fires on a mixed selection. Matching is
+                  case-insensitive — `*.pdf` catches `Scan.PDF`. */}
+              <label className="flex flex-col gap-1.5">
+                <span className="text-xs font-medium text-muted-foreground">
+                  {t.routing.fieldFile}
+                </span>
+                <input
+                  className={FIELD}
+                  placeholder="*.pdf"
+                  value={rule.fileName}
+                  onChange={(event) => {
+                    setRule({ ...rule, fileName: event.target.value });
                   }}
                 />
               </label>

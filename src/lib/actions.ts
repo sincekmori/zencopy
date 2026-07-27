@@ -78,13 +78,16 @@ export const ROUTABLE_KINDS = ["text", "rich_text", "image", "files"] as const;
 export type RoutableKind = (typeof ROUTABLE_KINDS)[number];
 
 /** An override's `when` condition: every present field must match (AND).
- *  String fields support `*` wildcards; names mirror the template variables. */
+ *  String fields support `*` wildcards; names mirror the template variables.
+ *  `file_name` matches every copied file's base name, case-insensitively
+ *  (`*.pdf`), and only ever matches `files` captures. */
 const WhenConditionSchema = z.object({
   kind: z.string().optional(),
   app_name: z.string().optional(),
   exec_name: z.string().optional(),
   window_title: z.string().optional(),
   url: z.string().optional(),
+  file_name: z.string().optional(),
   min_chars: z.int().nonnegative().optional(),
   max_chars: z.int().nonnegative().optional(),
 });

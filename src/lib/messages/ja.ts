@@ -178,6 +178,7 @@ export const ja: Messages = {
     fieldExec: "実行ファイル",
     fieldTitle: "ウィンドウタイトル",
     fieldUrl: "URL",
+    fieldFile: "ファイル名",
     fieldMinChars: "最小文字数",
     fieldMaxChars: "最大文字数",
     ruleAction: "実行するアクション",

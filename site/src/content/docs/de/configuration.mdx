@@ -95,7 +95,7 @@ Die flache Zuordnung ist in der App bearbeitbar (Einstellungen → Aktionen → 
 }
 ```
 
-`when`-Bedingungen: `kind`, `app_name`, `exec_name`, `window_title`, `url` (alle mit `*`-Wildcards), dazu `min_chars` / `max_chars`.
+`when`-Bedingungen: `kind`, `app_name`, `exec_name`, `window_title`, `url` (alle mit `*`-Wildcards), `file_name` (ein Wildcard, dem der Name jeder kopierten Datei unabhängig von der Groß-/Kleinschreibung entsprechen muss — z. B. `*.pdf`), dazu `min_chars` / `max_chars`.
 
 Bei `image`- und `files`-Erfassungen wird der Inhalt selbst an das Modell gesendet (bis zu 10 MB insgesamt pro Erfassung).
 Dateitypen werden am **Inhalt** erkannt, nicht am Namen:
@@ -138,6 +138,9 @@ Die Template-Variablen, mit Beispielwerten für einen im Browser kopierten Absat
 | `{{ text }}`         | Der kopierte Text (formatierte HTML-Kopien werden zu Markdown) |
 | `{{ markup }}`       | Die HTML/RTF-Quelle einer formatierten Kopie                   |
 | `{{ format }}`       | `html` (oder `rtf`; leer bei einfachen Kopien)                 |
+| `{{ file_name }}`    | `report.pdf` (der Name der ersten kopierten Datei)             |
+| `{{ file_names }}`   | Der Name jeder kopierten Datei, einer pro Zeile                |
+| `{{ file_paths }}`   | Der vollständige Pfad jeder kopierten Datei, einer pro Zeile   |
 | `{{ app_name }}`     | `Safari`                                                       |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                                        |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`               |

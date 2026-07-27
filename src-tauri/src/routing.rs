@@ -5,9 +5,11 @@ use crate::actions::{Action, checked_action_id};
 use crate::capture::{capture_kind, capture_text};
 use crate::config::config_base;
 /// A routing override's `when` condition. Every present field must match (AND).
-/// String fields support `*` wildcards and match case-sensitively. Field names
-/// mirror the template variables (e.g. `app_name`). Serialized for the settings
-/// UI and back into routing.json, so absent fields must stay absent.
+/// String fields support `*` wildcards and match case-sensitively — except
+/// `file_name`, which matches case-insensitively (file systems mostly do, and
+/// `*.pdf` should catch `Scan.PDF`). Field names mirror the template variables
+/// (e.g. `app_name`). Serialized for the settings UI and back into
+/// routing.json, so absent fields must stay absent.
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub(crate) struct WhenCondition {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -20,6 +22,10 @@ pub(crate) struct WhenCondition {
     window_title: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     url: Option<String>,
+    /// Matches a `files` capture by name: every copied file's base name must
+    /// match the pattern (`*.pdf`, `IMG_*`, …). Other capture kinds never match.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    file_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     min_chars: Option<usize>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -116,6 +122,21 @@ pub(crate) fn glob_match(pattern: &str, value: &str) -> bool {
     true
 }
 
+/// Whether every copied file's base name matches the pattern, case-insensitively.
+/// All-files semantics: an action written for PDFs should not fire on a mixed
+/// selection just because one PDF is in it — an unmatched rule falls through
+/// to the next rule or the kind map.
+fn all_file_names_match(pattern: &str, paths: &[String]) -> bool {
+    let pattern = pattern.to_lowercase();
+    !paths.is_empty()
+        && paths.iter().all(|path| {
+            glob_match(
+                &pattern,
+                &crate::capture::file_basename(path).to_lowercase(),
+            )
+        })
+}
+
 /// Whether an override's `when` matches the capture (all present fields, AND).
 pub(crate) fn when_matches(
     when: &WhenCondition,
@@ -146,6 +167,14 @@ pub(crate) fn when_matches(
         && !glob_match(pattern, event.url.as_deref().unwrap_or(""))
     {
         return false;
+    }
+    if let Some(pattern) = &when.file_name {
+        let copycopy::Captured::Files { paths } = &event.content else {
+            return false;
+        };
+        if !all_file_names_match(pattern, paths) {
+            return false;
+        }
     }
     if when.min_chars.is_some() || when.max_chars.is_some() {
         let count = capture_text(event).chars().count();
@@ -312,5 +341,35 @@ pub(crate) fn get_routing_ui(app: tauri::AppHandle) -> RoutingInfo {
     RoutingInfo {
         by_kind: routing.by_kind,
         overrides: routing.overrides,
+    }
+}
+
+#[cfg(test)]
+mod file_rule_tests {
+    use super::all_file_names_match;
+
+    /// `*.pdf` must catch every copied PDF regardless of case — file systems
+    /// are mostly case-insensitive and users type lowercase patterns.
+    #[test]
+    fn extension_pattern_matches_case_insensitively() {
+        let paths = vec!["/tmp/report.pdf".to_string(), "/tmp/Scan.PDF".to_string()];
+        assert!(all_file_names_match("*.pdf", &paths));
+    }
+
+    /// A mixed selection must not match: the routed action was written for
+    /// the pattern's kind of file, not for whatever rode along with it.
+    #[test]
+    fn mixed_selection_does_not_match() {
+        let paths = vec!["/tmp/report.pdf".to_string(), "/tmp/notes.txt".to_string()];
+        assert!(!all_file_names_match("*.pdf", &paths));
+        assert!(!all_file_names_match("*.pdf", &[]));
+    }
+
+    /// The pattern matches base names, never the directory part of the path.
+    #[test]
+    fn matches_the_base_name_not_the_path() {
+        let paths = vec!["/pdf/archive/notes.txt".to_string()];
+        assert!(!all_file_names_match("*pdf*", &paths));
+        assert!(all_file_names_match("notes.*", &paths));
     }
 }

@@ -174,6 +174,7 @@ export const ru: Messages = {
     fieldExec: "Исполняемый файл",
     fieldTitle: "Заголовок окна",
     fieldUrl: "URL",
+    fieldFile: "Имя файла",
     fieldMinChars: "Мин. символов",
     fieldMaxChars: "Макс. символов",
     ruleAction: "Выполнить действие",

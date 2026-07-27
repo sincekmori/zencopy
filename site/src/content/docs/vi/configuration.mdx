@@ -95,7 +95,7 @@ Bốn loại là `text`, `rich_text`, `image` và `files`; theo mặc định, v
 }
 ```
 
-Điều kiện trong `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tất cả hỗ trợ ký tự đại diện `*`), cộng với `min_chars` / `max_chars`.
+Điều kiện trong `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tất cả hỗ trợ ký tự đại diện `*`), `file_name` (một ký tự đại diện mà tên của mọi tệp đã sao chép phải khớp, không phân biệt chữ hoa chữ thường — ví dụ: `*.pdf`), cộng với `min_chars` / `max_chars`.
 
 Với nội dung bắt được loại `image` và `files`, bản thân nội dung được gửi đến mô hình (tổng cộng tối đa 10 MB cho mỗi lần bắt).
 Loại tệp được nhận diện từ **nội dung**, không phải tên tệp:
@@ -133,19 +133,22 @@ Tóm tắt trong 3 dòng, bằng {{ locale }}:
 
 Các biến mẫu, kèm giá trị ví dụ cho một đoạn văn sao chép trong trình duyệt:
 
-| Biến                 | Ví dụ                                                           |
-| -------------------- | --------------------------------------------------------------- |
-| `{{ text }}`         | Văn bản đã sao chép (bản sao HTML định dạng trở thành Markdown) |
-| `{{ markup }}`       | Mã nguồn HTML/RTF của một bản sao định dạng                     |
-| `{{ format }}`       | `html` (hoặc `rtf`; để trống với bản sao thuần)                 |
-| `{{ app_name }}`     | `Safari`                                                        |
-| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                         |
-| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`                |
-| `{{ window_title }}` | `Bảng giá – Example`                                            |
-| `{{ url }}`          | `https://example.com/pricing` (chỉ với trình duyệt)             |
-| `{{ process_id }}`   | `8123`                                                          |
-| `{{ now }}`          | `2026-07-08 20:15:00`                                           |
-| `{{ locale }}`       | `vi`                                                            |
+| Biến                 | Ví dụ                                                                 |
+| -------------------- | --------------------------------------------------------------------- |
+| `{{ text }}`         | Văn bản đã sao chép (bản sao HTML định dạng trở thành Markdown)       |
+| `{{ markup }}`       | Mã nguồn HTML/RTF của một bản sao định dạng                           |
+| `{{ format }}`       | `html` (hoặc `rtf`; để trống với bản sao thuần)                       |
+| `{{ file_name }}`    | `report.pdf` (tên của tệp đã sao chép đầu tiên)                       |
+| `{{ file_names }}`   | Tên của mọi tệp đã sao chép, mỗi tệp trên một dòng                    |
+| `{{ file_paths }}`   | Đường dẫn đầy đủ của mọi tệp đã sao chép, mỗi đường dẫn trên một dòng |
+| `{{ app_name }}`     | `Safari`                                                              |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                               |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`                      |
+| `{{ window_title }}` | `Bảng giá – Example`                                                  |
+| `{{ url }}`          | `https://example.com/pricing` (chỉ với trình duyệt)                   |
+| `{{ process_id }}`   | `8123`                                                                |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                                 |
+| `{{ locale }}`       | `vi`                                                                  |
 
 Còn có bộ lọc `language_name` riêng của ZenCopy: `{{ locale | language_name }}` khai triển thành "Vietnamese" thay vì "vi", đọc tự nhiên hơn trong một prompt.
 Để xem giá trị thật, hãy bật **chế độ nhà phát triển** trong Cài đặt — các biến mẫu của mỗi lần bắt sẽ hiện trong cửa sổ nổi dưới dạng JSON.

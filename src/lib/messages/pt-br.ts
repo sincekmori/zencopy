@@ -174,6 +174,7 @@ export const ptBR: Messages = {
     fieldExec: "Executável",
     fieldTitle: "Título da janela",
     fieldUrl: "URL",
+    fieldFile: "Nome do arquivo",
     fieldMinChars: "Mín. de caracteres",
     fieldMaxChars: "Máx. de caracteres",
     ruleAction: "Executar ação",

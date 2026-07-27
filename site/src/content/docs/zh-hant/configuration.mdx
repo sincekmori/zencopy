@@ -95,7 +95,7 @@ API 金鑰直接寫進這個本機檔案（設定 UI 寫的也是同一種格式
 }
 ```
 
-`when` 的條件：`kind`、`app_name`、`exec_name`、`window_title`、`url`（都支援 `*` 萬用字元），加上 `min_chars` / `max_chars`。
+`when` 的條件：`kind`、`app_name`、`exec_name`、`window_title`、`url`（都支援 `*` 萬用字元）、`file_name`（每個複製檔案名稱皆須符合的萬用字元，不區分大小寫 — 例如 `*.pdf`），加上 `min_chars` / `max_chars`。
 
 對 `image` 和 `files` 的擷取，內容本身會傳送給模型（每次擷取合計上限 10 MB）。
 檔案類型是依**內容**而非檔名判斷的：
@@ -138,6 +138,9 @@ instructions: 你是一位簡潔的助理。
 | `{{ text }}`         | 複製的文字（HTML 的 RTF 複製會轉換為 Markdown）  |
 | `{{ markup }}`       | RTF 複製時的 HTML/RTF 原始內容                   |
 | `{{ format }}`       | `html`（或 `rtf`；純文字複製時為空）             |
+| `{{ file_name }}`    | `report.pdf`（第一個複製檔案的名稱）             |
+| `{{ file_names }}`   | 每個複製檔案的名稱，每行一個                     |
+| `{{ file_paths }}`   | 每個複製檔案的完整路徑，每行一個                 |
 | `{{ app_name }}`     | `Safari`                                         |
 | `{{ exec_name }}`    | `Safari` / `chrome.exe`                          |
 | `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari` |
