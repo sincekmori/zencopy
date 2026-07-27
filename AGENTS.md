@@ -116,13 +116,10 @@ Keep the summary line short and factual; put the "why" and any surprising contex
 
 - **The `gh` CLI may be used** for GitHub operations (Actions, API queries, releases, PRs).
   Outward-facing or hard-to-reverse operations (merging, publishing a release, changing repo settings) still happen at the user's direction, not on the agent's own initiative.
-- **Do not commit until the user has verified the change.**
-  Keep commit messages neutral and centered on what changed.
 - **Linux support has boundaries.** The global trigger (copycopy) covers GNOME on Wayland (via a bundled GNOME Shell extension, auto-installed on first run) and X11 (key listener).
   On other Wayland compositors (KDE, wlroots, …) the app runs but the trigger stays inert — copycopy logs a warning to stderr.
   Don't claim broader Linux coverage than that in docs or UI.
 - **macOS main-thread constraint.** `copycopy` installs `CGEventTap`, which must run on the main run loop; keep the Tauri `setup` hook path intact.
-- **Corporate proxy quirks (local dev only):** if TLS revocation checks fail behind a corporate proxy, set `CARGO_HTTP_CHECK_REVOKE=false` for cargo and pass `--ssl-no-revoke` to curl.
 
 ## Where to look first
 
