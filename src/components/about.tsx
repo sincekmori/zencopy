@@ -174,25 +174,43 @@ export function About(): React.JSX.Element {
         {updateRow}
       </div>
 
+      {/* Five links don't fit one 360px row in every language, so the nav
+          wraps — but only between items: each link rides in a no-wrap span
+          with its trailing dot, so labels never break mid-word (プライバ/シー)
+          and a wrapped line never starts with an orphaned separator. */}
       <footer className="flex flex-col items-center gap-2">
-        <nav className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          {footerLink("zencopy.app", openHomepage)}
-          {DOT}
-          {footerLink("GitHub", openRepo)}
-          {DOT}
-          {/* Support flow: "open About, click Logs, send me the newest file" —
-              opens the log folder in the system file browser. */}
-          {footerLink(t.about.logs, () => {
-            void invoke("open_log_dir");
-          })}
-          {DOT}
-          {footerLink(t.about.privacy, () => {
-            openSitePage("privacy");
-          })}
-          {DOT}
-          {footerLink(t.about.terms, () => {
-            openSitePage("terms");
-          })}
+        <nav className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground">
+          {(
+            [
+              ["zencopy.app", openHomepage],
+              ["GitHub", openRepo],
+              // Support flow: "open About, click Logs, send me the newest
+              // file" — opens the log folder in the system file browser.
+              [
+                t.about.logs,
+                () => {
+                  void invoke("open_log_dir");
+                },
+              ],
+              [
+                t.about.privacy,
+                () => {
+                  openSitePage("privacy");
+                },
+              ],
+              [
+                t.about.terms,
+                () => {
+                  openSitePage("terms");
+                },
+              ],
+            ] as const
+          ).map(([label, action], index, links) => (
+            <span key={label} className="flex items-center gap-1.5 whitespace-nowrap">
+              {footerLink(label, action)}
+              {index < links.length - 1 ? DOT : undefined}
+            </span>
+          ))}
         </nav>
         {info?.copyright ? (
           <p className="text-[11px] text-muted-foreground/70">{info.copyright}</p>
