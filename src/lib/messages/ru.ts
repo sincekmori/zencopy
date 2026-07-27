@@ -102,6 +102,7 @@ export const ru: Messages = {
     updateCheckFailed: "Не удалось проверить обновления.",
     privacy: "Конфиденциальность",
     terms: "Условия",
+    logs: "Логи",
   },
   welcome: {
     title: "Добро пожаловать в ZenCopy",

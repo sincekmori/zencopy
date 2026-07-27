@@ -100,6 +100,7 @@ export const en: Messages = {
     updateCheckFailed: "Couldn't check for updates.",
     privacy: "Privacy",
     terms: "Terms",
+    logs: "Logs",
   },
   welcome: {
     title: "Welcome to ZenCopy",

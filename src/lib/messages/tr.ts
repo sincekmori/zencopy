@@ -102,6 +102,7 @@ export const tr: Messages = {
     updateCheckFailed: "Güncellemeler denetlenemedi.",
     privacy: "Gizlilik",
     terms: "Koşullar",
+    logs: "Günlükler",
   },
   welcome: {
     title: "ZenCopy'ye hoş geldin",

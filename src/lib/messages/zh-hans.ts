@@ -96,6 +96,7 @@ export const zhHans: Messages = {
     updateCheckFailed: "无法检查更新。",
     privacy: "隐私",
     terms: "条款",
+    logs: "日志",
   },
   welcome: {
     title: "欢迎使用 ZenCopy",

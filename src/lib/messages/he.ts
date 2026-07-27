@@ -98,6 +98,7 @@ export const he: Messages = {
     updateCheckFailed: "לא ניתן היה לבדוק עדכונים.",
     privacy: "פרטיות",
     terms: "תנאים",
+    logs: "יומנים",
   },
   welcome: {
     title: "ברוכים הבאים ל‑ZenCopy",

@@ -97,6 +97,7 @@ export const zhHant: Messages = {
     updateCheckFailed: "無法檢查更新。",
     privacy: "隱私權",
     terms: "條款",
+    logs: "日誌",
   },
   welcome: {
     title: "歡迎使用 ZenCopy",

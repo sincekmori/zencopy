@@ -102,6 +102,7 @@ export const pl: Messages = {
     updateCheckFailed: "Nie udało się sprawdzić aktualizacji.",
     privacy: "Prywatność",
     terms: "Warunki",
+    logs: "Logi",
   },
   welcome: {
     title: "Witaj w ZenCopy",

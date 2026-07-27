@@ -101,6 +101,7 @@ export const id: Messages = {
     updateCheckFailed: "Tidak dapat memeriksa pembaruan.",
     privacy: "Privasi",
     terms: "Ketentuan",
+    logs: "Log",
   },
   welcome: {
     title: "Selamat datang di ZenCopy",

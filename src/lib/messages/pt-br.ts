@@ -102,6 +102,7 @@ export const ptBR: Messages = {
     updateCheckFailed: "Não foi possível verificar as atualizações.",
     privacy: "Privacidade",
     terms: "Termos",
+    logs: "Logs",
   },
   welcome: {
     title: "Boas-vindas ao ZenCopy",

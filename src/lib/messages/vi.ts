@@ -101,6 +101,7 @@ export const vi: Messages = {
     updateCheckFailed: "Không thể kiểm tra bản cập nhật.",
     privacy: "Quyền riêng tư",
     terms: "Điều khoản",
+    logs: "Nhật ký",
   },
   welcome: {
     title: "Chào mừng đến với ZenCopy",

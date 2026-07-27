@@ -104,6 +104,7 @@ export const ja: Messages = {
     updateCheckFailed: "アップデートを確認できませんでした。",
     privacy: "プライバシー",
     terms: "利用条件",
+    logs: "ログ",
   },
   welcome: {
     title: "ZenCopy へようこそ",

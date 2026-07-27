@@ -99,6 +99,7 @@ export const ar: Messages = {
     updateCheckFailed: "تعذر التحقق من التحديثات.",
     privacy: "الخصوصية",
     terms: "الشروط",
+    logs: "السجلات",
   },
   welcome: {
     title: "مرحبًا بك في ZenCopy",

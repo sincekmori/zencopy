@@ -100,6 +100,7 @@ export const ko: Messages = {
     updateCheckFailed: "업데이트를 확인할 수 없습니다.",
     privacy: "개인정보",
     terms: "약관",
+    logs: "로그",
   },
   welcome: {
     title: "ZenCopy에 오신 것을 환영합니다",

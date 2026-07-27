@@ -100,6 +100,7 @@ export const fa: Messages = {
     updateCheckFailed: "بررسی به‌روزرسانی‌ها ممکن نشد.",
     privacy: "حریم خصوصی",
     terms: "شرایط",
+    logs: "گزارش‌ها",
   },
   welcome: {
     title: "به ZenCopy خوش آمدید",

@@ -105,6 +105,7 @@ export const fr: Messages = {
     updateCheckFailed: "Impossible de vérifier les mises à jour.",
     privacy: "Confidentialité",
     terms: "Conditions",
+    logs: "Journaux",
   },
   welcome: {
     title: "Bienvenue dans ZenCopy",

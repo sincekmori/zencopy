@@ -103,6 +103,7 @@ export const es: Messages = {
     updateCheckFailed: "No se pudieron comprobar las actualizaciones.",
     privacy: "Privacidad",
     terms: "Términos",
+    logs: "Registros",
   },
   welcome: {
     title: "Bienvenido a ZenCopy",

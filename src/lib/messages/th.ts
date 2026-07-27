@@ -97,6 +97,7 @@ export const th: Messages = {
     updateCheckFailed: "ไม่สามารถตรวจหาอัปเดตได้",
     privacy: "ความเป็นส่วนตัว",
     terms: "ข้อกำหนด",
+    logs: "บันทึก",
   },
   welcome: {
     title: "ยินดีต้อนรับสู่ ZenCopy",

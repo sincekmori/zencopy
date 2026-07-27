@@ -114,6 +114,9 @@ export interface Messages {
     updateCheckFailed: string;
     privacy: string;
     terms: string;
+    /** Footer link that opens the log folder — support asks users to click
+     *  this and send the newest file when something unexpected happened. */
+    logs: string;
   };
   welcome: {
     title: string;

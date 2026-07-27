@@ -146,6 +146,25 @@ fn open_url(app: tauri::AppHandle, url: String) {
     }
 }
 
+/// Open the log directory in the system file browser — About's "Logs" link.
+/// Exists so a support conversation can be "click Logs, send me the file"
+/// instead of walking someone through hidden platform paths. The directory is
+/// created first: a fresh install may not have logged anything yet, and some
+/// file browsers silently do nothing on a missing path.
+#[tauri::command]
+fn open_log_dir(app: tauri::AppHandle) {
+    use tauri_plugin_opener::OpenerExt;
+    match app.path().app_log_dir() {
+        Ok(dir) => {
+            std::fs::create_dir_all(&dir).or_log("create the log directory");
+            app.opener()
+                .open_path(dir.to_string_lossy(), None::<&str>)
+                .or_log("open the log directory");
+        }
+        Err(error) => log::warn!("log directory unavailable: {error}"),
+    }
+}
+
 /// `bundle.copyright` from tauri.conf.json, read at compile time.
 ///
 /// Tauri's `generate_context!` hard-codes `bundle.copyright` to `None` in the
@@ -288,6 +307,7 @@ pub fn run() {
             open_about,
             app_info,
             open_url,
+            open_log_dir,
             trigger_status,
             update_state,
             set_update_state

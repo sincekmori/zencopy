@@ -180,6 +180,12 @@ export function About(): React.JSX.Element {
           {DOT}
           {footerLink("GitHub", openRepo)}
           {DOT}
+          {/* Support flow: "open About, click Logs, send me the newest file" —
+              opens the log folder in the system file browser. */}
+          {footerLink(t.about.logs, () => {
+            void invoke("open_log_dir");
+          })}
+          {DOT}
           {footerLink(t.about.privacy, () => {
             openSitePage("privacy");
           })}
