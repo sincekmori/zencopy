@@ -90,8 +90,11 @@ const VISIBLE_ELSEWHERE = new Set(["text", "markup"]);
 
 export function Popup(): React.JSX.Element {
   const [payload, setPayload] = useState<CapturePayload | undefined>(undefined);
-  // The action's output. Undefined when there's no runnable action for the capture.
-  const [result, setResult] = useState<Result | undefined>(undefined);
+  // Every action's output for the current capture, keyed by action id —
+  // running entries stream in place, finished ones stay until the next
+  // capture. Actions run in parallel: switching away never cancels a stream,
+  // and switching back shows whatever it has produced so far.
+  const [results, setResults] = useState<ReadonlyMap<string, Result>>(new Map());
   // Hug the card to the same vertical edge as the pinned corner (Rust decides it).
   const [alignBottom, setAlignBottom] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -120,15 +123,13 @@ export function Popup(): React.JSX.Element {
   const actionLabel = useActionLabel();
   const updateVersion = useUpdateVersion();
 
-  const abortRef = useRef<AbortController | undefined>(undefined);
-  const requestId = useRef(0);
-  // Signature of the capture currently being processed, for de-duplication —
-  // and, non-undefined, the "a run is in flight" signal dismiss checks.
-  const runningSig = useRef<string | undefined>(undefined);
-  // Completed results per action for the current capture, so switching back to
-  // an action shows what it already produced instead of running it again.
-  // Only an explicit Retry re-executes. Cleared when a new capture arrives.
-  const resultCache = useRef(new Map<string, Result>());
+  // The in-flight run per action id (current capture only). A run's identity
+  // is its controller: stale callbacks compare against this map before
+  // touching state, so a Retry or a new capture cleanly orphans old streams.
+  const runsRef = useRef(new Map<string, AbortController>());
+  // Signature of the capture the runs and results belong to; a different
+  // signature aborts everything and starts a clean slate.
+  const captureSig = useRef<string | undefined>(undefined);
   // Signature of the capture whose attachments the user approved sending, so
   // Retry and action switches on the same content don't ask again.
   const approvedSig = useRef<string | undefined>(undefined);
@@ -142,34 +143,63 @@ export function Popup(): React.JSX.Element {
   // The palette's filter field, focused when the palette opens.
   const filterRef = useRef<HTMLInputElement>(null);
 
-  const run = (next: CapturePayload): void => {
-    const sig = sourceSignature(next.source);
-    // Ignore a duplicate trigger only while the same content is being
-    // processed by the same action. Same content under a *different* action
-    // must still run: a fresh C+C after a number-key switch restarts with the
-    // routed action (and re-syncs the highlighted chip), and a number-key
-    // switch during a run aborts and re-runs instead of being swallowed.
-    if (runningSig.current === sig && next.action_id === payload?.action_id) {
-      return;
+  // What the popup shows: the current action's entry (live or kept).
+  const result = payload ? results.get(payload.action_id) : undefined;
+
+  const putResult = (actionId: string, entry: Result | undefined): void => {
+    setResults((prev) => {
+      const next = new Map(prev);
+      if (entry) {
+        next.set(actionId, entry);
+      } else {
+        next.delete(actionId);
+      }
+      return next;
+    });
+  };
+
+  const abortAll = (): void => {
+    for (const controller of runsRef.current.values()) {
+      controller.abort();
     }
-    abortRef.current?.abort();
-    requestId.current += 1;
-    const id = requestId.current;
+    runsRef.current.clear();
+  };
+
+  const run = (next: CapturePayload, force = false): void => {
+    const sig = sourceSignature(next.source);
+    // A different capture orphans everything: streams are aborted, kept
+    // results dropped. The same capture keeps both — actions run in parallel
+    // and every action's result stays valid for identical content.
+    if (captureSig.current !== sig) {
+      abortAll();
+      captureSig.current = sig;
+      setResults(new Map());
+    }
     setPayload(next);
     setCopied(false);
 
     if (!next.runnable) {
-      runningSig.current = undefined;
-      setResult(undefined);
       return;
     }
 
     setAwaitingSend(false);
 
+    const actionId = next.action_id;
+    const existing = runsRef.current.get(actionId);
+    if (existing && !force) {
+      // Already streaming this action for this content — the view follows it.
+      return;
+    }
+    existing?.abort();
+
     const controller = new AbortController();
-    abortRef.current = controller;
-    runningSig.current = sig;
-    setResult({ phase: "running", text: "" });
+    runsRef.current.set(actionId, controller);
+    // A callback owns its entry only while the capture is current AND its
+    // controller is still the registered run — a Retry or a new capture takes
+    // the slot over and orphans the old stream mid-flight.
+    const owns = (): boolean =>
+      captureSig.current === sig && runsRef.current.get(actionId) === controller;
+    putResult(actionId, { phase: "running", text: "" });
 
     void (async () => {
       try {
@@ -179,10 +209,11 @@ export function Popup(): React.JSX.Element {
         // Known only after reading the files, hence the gate sits here.
         const expensive = attachments?.some((file) => !file.media_type.startsWith("text/"));
         if (expensive && confirmSend && approvedSig.current !== sig) {
-          if (id === requestId.current) {
+          if (owns()) {
+            runsRef.current.delete(actionId);
+            putResult(actionId, undefined);
             setDontAsk(false);
             setAwaitingSend(true);
-            setResult(undefined);
           }
           return;
         }
@@ -190,23 +221,19 @@ export function Popup(): React.JSX.Element {
           // Expose the user's locale to action templates ({{ locale }}).
           { ...next, vars: { ...next.vars, locale }, ...(attachments ? { attachments } : {}) },
           (chunk) => {
-            if (id === requestId.current) {
-              setResult({ phase: "running", text: chunk });
+            if (owns()) {
+              putResult(actionId, { phase: "running", text: chunk });
             }
           },
           controller.signal,
         );
-        if (id === requestId.current) {
+        if (owns()) {
           if (controller.signal.aborted && !text) {
             // Stopped before anything arrived — back to the source-only view.
             // A check mark next to an empty body would read as a result.
-            setResult(undefined);
+            putResult(actionId, undefined);
           } else {
-            const done: Result = { phase: "done", text, ok: true };
-            if (!controller.signal.aborted) {
-              resultCache.current.set(next.action_id, done); // complete, keep it
-            }
-            setResult(done);
+            putResult(actionId, { phase: "done", text, ok: true });
           }
         }
       } catch (error) {
@@ -214,20 +241,30 @@ export function Popup(): React.JSX.Element {
         if (reason === NOT_CONFIGURED) {
           // No provider set up yet. Stay put and offer a way into settings —
           // auto-opening it would steal focus and blur-dismiss this popup.
-          if (id === requestId.current) {
-            setResult({ phase: "done", text: t.ai.notConfigured, ok: false, setup: true });
+          if (owns()) {
+            putResult(actionId, {
+              phase: "done",
+              text: t.ai.notConfigured,
+              ok: false,
+              setup: true,
+            });
           }
         } else if (reason === INVALID_CONFIG) {
           // The catalog file exists but fails the schema. Same treatment as
           // "not configured" — a human sentence plus a way into settings; the
           // zod detail is already in the log.
           log.error("action failed: invalid ai-sdk-catalog.json", error);
-          if (id === requestId.current) {
-            setResult({ phase: "done", text: t.ai.invalidConfig, ok: false, setup: true });
+          if (owns()) {
+            putResult(actionId, {
+              phase: "done",
+              text: t.ai.invalidConfig,
+              ok: false,
+              setup: true,
+            });
           }
         } else {
           log.error("action failed", error);
-          if (id === requestId.current) {
+          if (owns()) {
             let text: string;
             if (reason === TIMED_OUT) {
               text = t.popup.timedOut;
@@ -242,12 +279,12 @@ export function Popup(): React.JSX.Element {
             } else {
               text = t.popup.failed(reason);
             }
-            setResult({ phase: "done", text, ok: false });
+            putResult(actionId, { phase: "done", text, ok: false });
           }
         }
       } finally {
-        if (id === requestId.current) {
-          runningSig.current = undefined; // free the slot for a later re-run
+        if (owns()) {
+          runsRef.current.delete(actionId); // free the slot for a later re-run
         }
       }
     })();
@@ -264,9 +301,10 @@ export function Popup(): React.JSX.Element {
     }
     const incoming = checked.success ? checked.data : raw;
     setAlignBottom(incoming.align_bottom);
-    resultCache.current.clear(); // new content — kept results no longer apply
-    // Refresh the action list so the default-star reflects reality without
-    // the menu ever being opened.
+    // run() drops kept results itself when the content actually changed; a
+    // re-copy of identical content keeps every action's result valid.
+    // Refresh the action list so edits on disk show up without the menu
+    // ever being opened.
     void (async () => {
       try {
         setActions(await listActions());
@@ -277,8 +315,15 @@ export function Popup(): React.JSX.Element {
     run(incoming);
   });
 
-  // Abort the in-flight run if the popup ever unmounts.
-  useEffect(() => () => abortRef.current?.abort(), []);
+  // Abort every in-flight run if the popup ever unmounts.
+  useEffect(
+    () => () => {
+      for (const controller of runsRef.current.values()) {
+        controller.abort();
+      }
+    },
+    [],
+  );
 
   // Warm the lazy LLM machinery off the first paint, so the first C+C never
   // pays the module load.
@@ -323,12 +368,15 @@ export function Popup(): React.JSX.Element {
     }
   }, [menuOpen]);
 
+  // Stop cancels only the action on screen; other actions keep streaming.
   const stop = (): void => {
-    abortRef.current?.abort();
+    if (payload) {
+      runsRef.current.get(payload.action_id)?.abort();
+    }
   };
   const retry = (): void => {
     if (payload) {
-      run(payload);
+      run(payload, true);
     }
   };
 
@@ -347,23 +395,21 @@ export function Popup(): React.JSX.Element {
     setAwaitingSend(false);
     run(payload);
   };
-  // Abort any in-flight run, invalidate it (so its partial isn't shown), and clear
-  // the kept result. Used when cancelling and when clearing the in-memory history.
+  // Abort every in-flight run, invalidate them (so partials aren't shown),
+  // and clear the kept results — the "clear the in-memory history" button.
   const reset = (): void => {
-    abortRef.current?.abort();
-    requestId.current += 1;
-    runningSig.current = undefined;
-    resultCache.current.clear();
+    abortAll();
+    captureSig.current = undefined;
     approvedSig.current = undefined;
     setAwaitingSend(false);
     setPayload(undefined);
-    setResult(undefined);
+    setResults(new Map());
   };
 
   const dismiss = (): void => {
-    // Ignore dismiss while a run is in flight — only the explicit Stop button
-    // can cancel. A finished result is kept so the tray can bring it back.
-    if (runningSig.current !== undefined) {
+    // Ignore dismiss while any run is in flight — only the explicit Stop
+    // button cancels. Finished results are kept so the tray can bring them back.
+    if (runsRef.current.size > 0) {
       return;
     }
     hidePopup();
@@ -416,12 +462,11 @@ export function Popup(): React.JSX.Element {
       prompt: action.prompt,
       runnable: true,
     };
-    // Switching back to an action that already ran shows its kept result —
-    // no silent re-execution; Retry is the explicit way to run again.
-    const kept = resultCache.current.get(action.id);
-    if (kept) {
+    // An action that already ran (or is still streaming) just becomes the
+    // view: the derived result shows its kept text or its live stream — no
+    // cancellation, no silent re-execution; Retry is the explicit re-run.
+    if (results.has(action.id)) {
       setPayload(next);
-      setResult(kept);
       setCopied(false);
       return;
     }
@@ -587,6 +632,11 @@ export function Popup(): React.JSX.Element {
                 {index + 1}
               </kbd>
               <span className="max-w-32 truncate">{actionLabel(action.id, action.label)}</span>
+              {/* A background action still streaming announces itself, so
+                  "switch away and come back later" is a visible affordance. */}
+              {results.get(action.id)?.phase === "running" ? (
+                <LoaderCircle className="size-3 shrink-0 animate-spin" />
+              ) : undefined}
             </button>
           ) : undefined,
         )}
