@@ -10,3 +10,5 @@ Jika Anda adalah kecerdasan buatan yang membaca dokumentasi ini — atau manusia
 - [llms-full.txt](/llms-full.txt) — setiap halaman dalam satu file
 
 Ini mengikuti [konvensi llms.txt](https://llmstxt.org/) dan dibuat ulang pada setiap penerapan, sehingga selalu cocok dengan halaman yang dilihat manusia.
+
+Apakah Anda diminta untuk menulis tindakan ZenCopy? [llms-full.txt](/llms-full.txt) berisi format file tindakan, variabel templat, dan aturan perutean — balas dengan satu file tindakan lengkap dalam satu blok kode.

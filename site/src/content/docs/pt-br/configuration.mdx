@@ -4,6 +4,7 @@ description: O que a janela de configurações oferece (para todo mundo) e a per
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 O ZenCopy funciona de fábrica sem configurar nada.
 Esta página é para quando você quiser que ele se ajuste melhor a você.
@@ -47,6 +48,15 @@ A lista do "que acontece depois de um copiar duplo".
 - **Roteamento** permite escolher uma ação diferente para cada tipo de conteúdo (texto / imagem / arquivos).
 
 As ações que você cria podem ser compartilhadas: **Exportar (.md)** grava uma delas como arquivo, e quem recebe só cola em **Importar** ou escolhe o arquivo.
+
+Prefere entregar todo o trabalho para uma IA? Qualquer chat de IA pode escrever uma ação pronta para importar para você — cole isto e preencha o espaço em branco:
+
+```text
+Leia https://zencopy.app/llms-full.txt — a documentação completa do ZenCopy, incluindo o formato do arquivo de ação, as variáveis de modelo e como funciona o roteamento. Em seguida, escreva uma ação do ZenCopy que faça o seguinte: [o que você deseja]. Gere um arquivo de ação completo (Markdown com frontmatter) em um único bloco de código, pronto para colar em Configurações → Ações → Importar do ZenCopy. Se a ação só fizer sentido em um aplicativo específico ou em um site específico, adicione uma frase me dizendo qual regra de roteamento configurar.
+```
+
+O bloco de código na resposta vai direto para **Configurações → Ações → Importar**.
+Para perguntas que a documentação não pode responder ("o ZenCopy conseguiria fazer...?"), <RepomixLink>um clique empacota o código-fonte relevante</RepomixLink> — entregue o resultado para a mesma IA.
 
 ## Arquivos de configuração (para usuários avançados)
 

@@ -4,6 +4,7 @@ description: Ayarlar penceresinin sunduğu her şey (herkes için) ve yapıland�
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 ZenCopy hiçbir şey ayarlamadan, kutudan çıktığı gibi çalışır.
 Bu sayfa, onu kendine daha çok uydurmak istediğin an için.
@@ -47,6 +48,15 @@ Açıklamalar bilgi düzeyine uygun gelir, taslaklar tercih ettiğin tonda geri 
 - **Yönlendirme**, içerik türüne göre (metin / görsel / dosyalar) farklı bir eylem seçmeni sağlar.
 
 Oluşturduğun eylemler paylaşılabilir: **Dışa aktar** bir eylemi dosya olarak yazar; karşı taraf onu **İçe aktar**'a yapıştırır ya da dosyayı seçer.
+
+Tüm işi bir yapay zekaya devretmeyi mi tercih edersiniz? Herhangi bir yapay zeka sohbeti sizin için içe aktarılmaya hazır bir eylem yazabilir; bunu yapıştırın ve boşluğu doldurun:
+
+```text
+https://zencopy.app/llms-full.txt adresini okuyun; bu adres, eylem dosyası biçimi, şablon değişkenleri ve yönlendirmenin nasıl çalıştığı dahil olmak üzere tam ZenCopy belgelerini içerir. Ardından, şunları yapan bir ZenCopy eylemi yazın: [ne yapmak istiyorsunuz]. ZenCopy'nin Ayarlar → Eylemler → İçe Aktar bölümüne yapıştırılmaya hazır, tek bir kod bloğu içinde tam bir eylem dosyası (frontmatter içeren Markdown) çıktısı verin. Eylem yalnızca belirli bir uygulamada veya belirli bir sitede anlamlıysa, hangi yönlendirme kuralını ayarlamam gerektiğini söyleyen bir cümle ekleyin.
+```
+
+Yanıttaki kod bloğu doğrudan **Ayarlar → Eylemler → İçe Aktar** bölümüne gider.
+Belgelerin yanıtlayamadığı sorular için ("ZenCopy şunu bile yapabilir mi...?"), <RepomixLink>tek bir tıklama ilgili kaynak kodunu paketler</RepomixLink>; sonucu aynı yapay zekaya iletin.
 
 ## Yapılandırma dosyaları (ileri düzey kullanıcılar için)
 

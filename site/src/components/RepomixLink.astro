@@ -1,0 +1,27 @@
+---
+// The one place the "pack the source for an AI" link is defined — every
+// locale's configuration page renders it via this component, so the pattern
+// set below is the single source of truth (the DownloadLink idiom).
+//
+// The include/ignore choice: everything an AI needs to answer "could ZenCopy
+// do…?" and "where do I click?" (full Rust side, full frontend incl. the
+// settings UI, the English docs), minus the two pure-noise sinks — Cargo.lock
+// and the 19-locale message files. removeComments shaves roughly another 17%
+// off the token count. Verified against repomix.com's URL-parameter handling
+// (repo / format / include / ignore / removeComments all prefill the form).
+const params = new URLSearchParams({
+  repo: "sincekmori/zencopy",
+  format: "markdown",
+  removeComments: "true",
+  include: [
+    "src-tauri/**",
+    "src/**",
+    "site/src/content/docs/en/**",
+    "README.md",
+  ].join(","),
+  ignore: ["**/Cargo.lock", "src/lib/messages/**"].join(","),
+});
+const href = `https://repomix.com/?${params.toString()}`;
+---
+
+<a href={href}><slot /></a>

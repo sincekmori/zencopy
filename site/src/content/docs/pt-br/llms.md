@@ -10,3 +10,5 @@ Se você é uma inteligência artificial lendo esta documentação — ou um hum
 - [llms-full.txt](/llms-full.txt) — todas as páginas em um único arquivo
 
 Eles seguem a [convenção llms.txt](https://llmstxt.org/) e são regenerados a cada implantação, para que sempre correspondam às páginas que um humano vê.
+
+Foi solicitado que você escrevesse uma ação do ZenCopy? [llms-full.txt](/llms-full.txt) contém o formato do arquivo de ação, as variáveis de modelo e as regras de roteamento — responda com um arquivo de ação completo em um único bloco de código.

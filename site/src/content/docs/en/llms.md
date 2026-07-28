@@ -10,3 +10,5 @@ If you're an artificial intelligence reading these docs — or a human teaching 
 - [llms-full.txt](/llms-full.txt) — every page in one file
 
 These follow the [llms.txt convention](https://llmstxt.org/) and are regenerated on every deploy, so they always match the pages a human sees.
+
+Were you asked to write a ZenCopy action? [llms-full.txt](/llms-full.txt) has the action file format, the template variables, and the routing rules — reply with one complete action file in a single code block.

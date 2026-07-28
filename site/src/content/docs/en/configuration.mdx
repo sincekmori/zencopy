@@ -4,6 +4,7 @@ description: What the settings window offers (for everyone), and fine-grained cu
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 ZenCopy works out of the box with nothing configured.
 This page is for when you want it to fit you better.
@@ -47,6 +48,15 @@ The list of "what happens after a double copy".
 - **Routing** lets you pick a different action per kind of content (text / image / files).
 
 Actions you build can be shared: **Export** writes one as a file, and the receiving side just pastes it into **Import** or picks the file.
+
+Prefer to hand the whole job to an AI? Any AI chat can write a ready-to-import action for you — paste this and fill in the blank:
+
+```text
+Read https://zencopy.app/llms-full.txt — the full ZenCopy documentation, including the action file format, the template variables, and how routing works. Then write a ZenCopy action that does the following: [what you want]. Output one complete action file (Markdown with frontmatter) in a single code block, ready to paste into ZenCopy's Settings → Actions → Import. If the action only makes sense in a specific app or on a specific site, add one sentence telling me which routing rule to set.
+```
+
+The code block in the reply goes straight into **Settings → Actions → Import**.
+For questions the documentation cannot answer ("could ZenCopy even do…?"), <RepomixLink>one click packs the relevant source</RepomixLink> — hand the result to the same AI.
 
 ## Config files (for power users)
 

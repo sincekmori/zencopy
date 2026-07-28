@@ -4,6 +4,7 @@ description: 设置窗口能做什么（面向所有人），以及通过配置�
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 ZenCopy 开箱即用，什么都不用配置。
 本页是当你想让它更贴合自己时的指南。
@@ -47,6 +48,15 @@ ZenCopy 开箱即用，什么都不用配置。
 - **路由**可以按内容类型（文本 / 图片 / 文件）分别指定不同的动作。
 
 你创建的动作可以分享：**导出**会把它写成一个文件，接收方只需粘贴到**导入**里，或直接选择文件。
+
+宁愿把所有工作都交给 AI 吗？任何 AI 对话助手都可以为您编写一个随时可导入的操作——粘贴此内容并填空：
+
+```text
+阅读 https://zencopy.app/llms-full.txt —— 完整的 ZenCopy 文档，包括操作文件格式、模板变量以及路由的工作原理。然后编写一个执行以下操作的 ZenCopy 操作：[您想要实现的功能]。在单个代码块中输出一个完整的操作文件（带有 frontmatter 的 Markdown），以便直接粘贴到 ZenCopy 的 设置 → 操作 → 导入 中。如果该操作仅在特定应用或特定网站上有效，请添加一句话告诉我需要设置哪条路由规则。
+```
+
+回复中的代码块可以直接放入**设置 → 操作 → 导入**。
+对于文档无法回答的问题（例如“ZenCopy 到底能不能做……”），<RepomixLink>只需一键即可打包相关源码</RepomixLink>——然后将结果交给同一个 AI。
 
 ## 配置文件（进阶用户）
 

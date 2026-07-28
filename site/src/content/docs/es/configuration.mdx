@@ -4,6 +4,7 @@ description: Lo que ofrece la ventana de ajustes (para todos) y la personalizaci
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 ZenCopy funciona desde el primer momento sin configurar nada.
 Esta página es para cuando quieres que se adapte mejor a ti.
@@ -47,6 +48,15 @@ La lista de "qué pasa después de un doble copiado".
 - **Enrutamiento** te permite elegir una acción distinta según el tipo de contenido (texto / imagen / archivos).
 
 Las acciones que creas se pueden compartir: **Exportar (.md)** escribe una como archivo, y quien la recibe solo tiene que pegarla en **Importar** o elegir el archivo.
+
+¿Prefieres dejar todo el trabajo en manos de una IA? Cualquier chat de IA puede escribir una acción lista para importar por ti: pega esto y rellena el espacio en blanco:
+
+```text
+Lee https://zencopy.app/llms-full.txt, la documentación completa de ZenCopy, incluido el formato del archivo de acción, las variables de plantilla y cómo funciona el enrutamiento. Luego, escribe una acción de ZenCopy que haga lo siguiente: [lo que quieras]. Genera un archivo de acción completo (Markdown con frontmatter) en un solo bloque de código, listo para pegar en Configuración → Acciones → Importar de ZenCopy. Si la acción solo tiene sentido en una aplicación específica o en un sitio específico, añade una frase que me indique qué regla de enrutamiento configurar.
+```
+
+El bloque de código de la respuesta va directo a **Configuración → Acciones → Importar**.
+Para preguntas que la documentación no puede responder («¿podría ZenCopy siquiera hacer...?»), <RepomixLink>un clic empaqueta el código fuente relevante</RepomixLink>; entrega el resultado a la misma IA.
 
 ## Archivos de configuración (para usuarios avanzados)
 

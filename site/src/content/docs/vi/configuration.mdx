@@ -4,6 +4,7 @@ description: Cửa sổ cài đặt có những gì (dành cho mọi người), 
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 ZenCopy hoạt động ngay mà không cần cấu hình gì.
 Trang này dành cho lúc bạn muốn ứng dụng hợp với mình hơn.
@@ -47,6 +48,15 @@ Danh sách "điều gì xảy ra sau khi sao chép hai lần".
 - **Định tuyến** cho phép chọn hành động khác nhau theo từng loại nội dung (văn bản / hình ảnh / tệp).
 
 Hành động bạn tạo có thể chia sẻ: **Xuất (.md)** ghi nó thành một tệp, và phía nhận chỉ cần dán vào **Nhập** hoặc chọn tệp.
+
+Bạn muốn giao toàn bộ công việc cho AI? Bất kỳ cuộc trò chuyện AI nào cũng có thể viết một hành động sẵn sàng nhập cho bạn — hãy dán nội dung này và điền vào chỗ trống:
+
+```text
+Đọc https://zencopy.app/llms-full.txt — tài liệu đầy đủ về ZenCopy, bao gồm định dạng tệp hành động, các biến mẫu và cách hoạt động của định tuyến. Sau đó, viết một hành động ZenCopy thực hiện công việc sau: [những gì bạn muốn]. Xuất một tệp hành động hoàn chỉnh (Markdown có frontmatter) trong một khối mã duy nhất, sẵn sàng để dán vào Cài đặt → Hành động → Nhập của ZenCopy. Nếu hành động này chỉ có ý nghĩa trong một ứng dụng cụ thể hoặc trên một trang web cụ thể, hãy thêm một câu cho tôi biết quy tắc định tuyến nào cần thiết lập.
+```
+
+Khối mã trong câu trả lời sẽ được đưa trực tiếp vào **Cài đặt → Hành động → Nhập**.
+Đối với những câu hỏi mà tài liệu không thể trả lời ("liệu ZenCopy có thể làm được... không?"), <RepomixLink>một cú nhấp chuột sẽ đóng gói mã nguồn liên quan</RepomixLink> — hãy chuyển kết quả cho chính AI đó.
 
 ## Tệp cấu hình (dành cho người dùng thành thạo)
 

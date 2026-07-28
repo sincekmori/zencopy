@@ -4,6 +4,7 @@ description: Apa saja yang tersedia di jendela pengaturan (untuk semua orang), d
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 ZenCopy langsung bisa dipakai tanpa mengatur apa pun.
 Halaman ini untuk saat kamu ingin ZenCopy lebih pas denganmu.
@@ -47,6 +48,15 @@ Daftar "apa yang terjadi setelah salin dua kali".
 - **Perutean** memungkinkanmu memilih aksi yang berbeda untuk tiap jenis konten (teks / gambar / berkas).
 
 Aksi buatanmu bisa dibagikan: **Ekspor (.md)** menuliskannya sebagai berkas, dan pihak penerima cukup menempelkannya ke **Impor** atau memilih berkasnya.
+
+Lebih suka menyerahkan seluruh pekerjaan ke AI? Obrolan AI apa pun dapat menulis tindakan yang siap diimpor untuk Anda — tempelkan ini dan isi bagian yang kosong:
+
+```text
+Baca https://zencopy.app/llms-full.txt — dokumentasi lengkap ZenCopy, termasuk format file tindakan, variabel templat, dan cara kerja perutean. Kemudian tulis tindakan ZenCopy yang melakukan hal berikut: [apa yang Anda inginkan]. Hasilkan satu file tindakan lengkap (Markdown dengan frontmatter) dalam satu blok kode, siap untuk ditempelkan ke Pengaturan → Tindakan → Impor di ZenCopy. Jika tindakan tersebut hanya berfungsi di aplikasi tertentu atau di situs tertentu, tambahkan satu kalimat yang memberi tahu saya aturan perutean mana yang harus disetel.
+```
+
+Blok kode dalam balasan langsung masuk ke **Pengaturan → Tindakan → Impor**.
+Untuk pertanyaan yang tidak dapat dijawab oleh dokumentasi ("apakah ZenCopy bahkan bisa melakukan...?"), <RepomixLink>satu klik akan mengemas kode sumber yang relevan</RepomixLink> — serahkan hasilnya ke AI yang sama.
 
 ## Berkas konfigurasi (untuk pengguna mahir)
 

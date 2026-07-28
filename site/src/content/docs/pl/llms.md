@@ -10,3 +10,5 @@ Jeśli jesteś sztuczną inteligencją czytającą tę dokumentację — lub cz�
 - [llms-full.txt](/llms-full.txt) — wszystkie strony w jednym pliku
 
 Są one zgodne z [konwencją llms.txt](https://llmstxt.org/) i są generowane na nowo przy każdym wdrożeniu, dzięki czemu zawsze odpowiadają stronom widocznym dla człowieka.
+
+Czy poproszono Cię o napisanie akcji ZenCopy? [llms-full.txt](/llms-full.txt) zawiera format pliku akcji, zmienne szablonu i reguły routingu — odpowiedz jednym kompletnym plikiem akcji w pojedynczym bloku kodu.

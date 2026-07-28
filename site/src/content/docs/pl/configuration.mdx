@@ -4,6 +4,7 @@ description: Co oferuje okno ustawień (dla wszystkich) i szczegółowe dostosow
 ---
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
+import RepomixLink from "../../../components/RepomixLink.astro";
 
 ZenCopy działa od razu, bez żadnej konfiguracji.
 Ta strona przyda się, gdy zechcesz lepiej dopasować go do siebie.
@@ -47,6 +48,15 @@ Lista tego, „co dzieje się po podwójnym kopiowaniu”.
 - **Routing** pozwala wybrać inną akcję dla każdego rodzaju treści (tekst / obraz / pliki).
 
 Zbudowane przez Ciebie akcje można udostępniać: **Eksportuj (.md)** zapisuje akcję jako plik, a odbiorca po prostu wkleja ją w **Importuj** albo wybiera plik.
+
+Wolisz powierzyć całe zadanie sztucznej inteligencji? Każdy czat AI może napisać dla Ciebie gotową do zaimportowania akcję — wklej to i uzupełnij puste miejsce:
+
+```text
+Przeczytaj https://zencopy.app/llms-full.txt — pełną dokumentację ZenCopy, w tym format pliku akcji, zmienne szablonu oraz sposób działania routingu. Następnie napisz akcję ZenCopy, która robi następujące rzeczy: [co chcesz osiągnąć]. Wygeneruj jeden kompletny plik akcji (Markdown z frontmatterem) w pojedynczym bloku kodu, gotowy do wklejenia w ZenCopy w Ustawienia → Akcje → Importuj. Jeśli akcja ma sens tylko w konkretnej aplikacji lub na określonej stronie, dodaj jedno zdanie informujące mnie, którą regułę routingu należy ustawić.
+```
+
+Blok kodu w odpowiedzi trafia bezpośrednio do **Ustawienia → Akcje → Importuj**.
+W przypadku pytań, na które dokumentacja nie odpowiada („czy ZenCopy w ogóle potrafi…?”), <RepomixLink>jedno kliknięcie pakuje odpowiedni kod źródłowy</RepomixLink> — przekaż wynik tej samej sztucznej inteligencji.
 
 ## Pliki konfiguracyjne (dla zaawansowanych użytkowników)
 

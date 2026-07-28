@@ -10,3 +10,5 @@ description: "为 AI 读者提供的纯 Markdown 格式 ZenCopy 文档：llms.tx
 - [llms-full.txt](/llms-full.txt) — 单文件包含所有页面
 
 这些文件遵循 [llms.txt 规范](https://llmstxt.org/)，并在每次部署时重新生成，因此它们始终与人类看到的页面保持一致。
+
+您被要求编写 ZenCopy 操作吗？[llms-full.txt](/llms-full.txt) 包含了操作文件格式、模板变量和路由规则——请在单个代码块中回复一个完整的操作文件。
