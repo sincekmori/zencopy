@@ -133,6 +133,12 @@ export function Popup(): React.JSX.Element {
   // Retry and action switches on the same content don't ask again.
   const approvedSig = useRef<string | undefined>(undefined);
   const bodyRef = useRef<HTMLDivElement>(null);
+  // Whether the view is glued to the streaming output's bottom edge. "At the
+  // bottom" is the single source of truth: our own scrollTo lands there (stays
+  // pinned), a user scrolling up to read leaves it (auto-scroll stops), and
+  // scrolling back down re-engages it — the usual AI-chat pattern, with no
+  // flag juggling to tell user scrolls from programmatic ones.
+  const pinnedRef = useRef(true);
   // The palette's filter field, focused when the palette opens.
   const filterRef = useRef<HTMLInputElement>(null);
 
@@ -280,12 +286,35 @@ export function Popup(): React.JSX.Element {
     warmUp();
   }, []);
 
-  // Follow the streaming output to the bottom.
+  // Track whether the user is at the bottom. A threshold absorbs sub-pixel
+  // scroll positions and the last few pixels of a fling.
   useEffect(() => {
-    if (result?.phase === "running" && bodyRef.current) {
+    const body = bodyRef.current;
+    if (!body) {
+      return;
+    }
+    const onScroll = (): void => {
+      pinnedRef.current = body.scrollTop + body.clientHeight >= body.scrollHeight - 40;
+    };
+    body.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      body.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  // Follow the streaming output to the bottom — unless the user scrolled up
+  // to read; scrolling back to the bottom resumes following.
+  useEffect(() => {
+    if (result?.phase === "running" && pinnedRef.current && bodyRef.current) {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
   }, [result]);
+
+  // A different view (new capture or a switched action) starts back at the
+  // top with fresh content — follow its stream until the user says otherwise.
+  useEffect(() => {
+    pinnedRef.current = true;
+  }, [payload?.action_id, payload?.source]);
 
   // A palette that opens for typing should receive the caret immediately.
   useEffect(() => {
