@@ -6,9 +6,27 @@
 // The include/ignore choice: everything an AI needs to answer "could ZenCopy
 // do…?" and "where do I click?" (full Rust side, full frontend incl. the
 // settings UI, the English docs), minus the two pure-noise sinks — Cargo.lock
-// and the 19-locale message files. removeComments shaves roughly another 17%
-// off the token count. Verified against repomix.com's URL-parameter handling
+// and the message files of the OTHER languages. The reader's own locale (and
+// English, the canonical) stays in, so the AI can name UI labels in the
+// user's display language. removeComments shaves roughly another 17% off the
+// token count. Verified against repomix.com's URL-parameter handling
 // (repo / format / include / ignore / removeComments all prefill the form).
+import { LANDING_LOCALES } from "./landing-copy.ts";
+
+// starlight-llms-txt renders docs pages outside a Starlight route to build
+// llms-full.txt, where `starlightRoute` does not exist — fall back to English
+// there (the generator packs the English docs anyway).
+let locale = "en";
+try {
+  locale = Astro.locals.starlightRoute.locale ?? "en";
+} catch {
+  // Non-Starlight render: keep the English default.
+}
+const keep = new Set(["en", locale]);
+const otherLocales = LANDING_LOCALES.map((entry) => entry.code).filter(
+  (code) => !keep.has(code),
+);
+
 const params = new URLSearchParams({
   repo: "sincekmori/zencopy",
   format: "markdown",
@@ -19,7 +37,10 @@ const params = new URLSearchParams({
     "site/src/content/docs/en/**",
     "README.md",
   ].join(","),
-  ignore: ["**/Cargo.lock", "src/lib/messages/**"].join(","),
+  ignore: [
+    "**/Cargo.lock",
+    ...otherLocales.map((code) => `src/lib/messages/${code}.ts`),
+  ].join(","),
 });
 const href = `https://repomix.com/?${params.toString()}`;
 ---
