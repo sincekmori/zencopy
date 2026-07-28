@@ -27,6 +27,12 @@ export const zhHant: Messages = {
       "要把圖片等二進位檔案傳送給供應商時，彈出視窗會先詢問；文字檔案無需確認直接執行",
     devMode: "開發者模式",
     devModeHint: "在彈出視窗中以 JSON 顯示每次擷取的範本變數（用於撰寫動作）",
+    stats: "使用統計",
+    statsHint: "記錄哪個動作用於哪類擷取，以及模型與 token 數 — 存於本機，絕不包含複製的內容。",
+    statsOpen: "開啟資料夾",
+    statsReset: "重設統計",
+    statsResetConfirm: "刪除所有已記錄的統計？",
+    statsResetDone: "統計已重設。",
     userContext: "關於你",
     userContextHint: "希望 AI 了解的資訊——職務、擅長領域、偏好。會附加到每個動作。",
     userContextPlaceholders: [

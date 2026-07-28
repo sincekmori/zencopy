@@ -28,6 +28,13 @@ export const fr: Messages = {
     devMode: "Mode développeur",
     devModeHint:
       "Affiche les variables de gabarit de chaque capture dans le popup, en JSON — pour écrire des actions",
+    stats: "Statistiques d'utilisation",
+    statsHint:
+      "Enregistre quelle action s'exécute pour quel type de capture, avec le modèle et le nombre de tokens — conservés sur cet appareil ; jamais le contenu copié.",
+    statsOpen: "Ouvrir le dossier",
+    statsReset: "Réinitialiser les statistiques",
+    statsResetConfirm: "Supprimer toutes les statistiques enregistrées ?",
+    statsResetDone: "Statistiques réinitialisées.",
     userContext: "À propos de vous",
     userContextHint:
       "Ce que l'IA devrait savoir de vous : rôle, expertise, préférences. Ajouté à chaque action.",

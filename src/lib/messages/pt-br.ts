@@ -28,6 +28,13 @@ export const ptBR: Messages = {
     devMode: "Modo desenvolvedor",
     devModeHint:
       "Mostra as variáveis de template de cada captura no popup, como JSON — para escrever ações",
+    stats: "Estatísticas de uso",
+    statsHint:
+      "Registra qual ação é executada em cada tipo de captura, com o modelo e a contagem de tokens — guardados neste dispositivo; nunca o conteúdo copiado.",
+    statsOpen: "Abrir pasta",
+    statsReset: "Redefinir estatísticas",
+    statsResetConfirm: "Excluir todas as estatísticas registradas?",
+    statsResetDone: "Estatísticas redefinidas.",
     userContext: "Sobre você",
     userContextHint:
       "O que a IA deve saber sobre você — cargo, especialidade, preferências. Adicionado a toda ação.",

@@ -72,7 +72,7 @@ function targetsFor(platform: NodeJS.Platform): Target[] {
     case "darwin": {
       const library = join(home, "Library");
       return [
-        pathTarget(join(library, "Application Support", IDENTIFIER)), // config + data + settings store
+        pathTarget(join(library, "Application Support", IDENTIFIER)), // config + data + settings store + stats
         pathTarget(join(library, "Logs", IDENTIFIER)),
         pathTarget(join(library, "Caches", IDENTIFIER)),
         pathTarget(join(library, "WebKit", IDENTIFIER)), // WKWebView storage (localStorage, …)
@@ -86,7 +86,7 @@ function targetsFor(platform: NodeJS.Platform): Target[] {
       const cache = process.env["XDG_CACHE_HOME"] ?? join(home, ".cache");
       return [
         pathTarget(join(config, IDENTIFIER)), // config (catalog, routing, actions/)
-        pathTarget(join(data, IDENTIFIER)), // data dir (settings store, logs/, webview data)
+        pathTarget(join(data, IDENTIFIER)), // data dir (settings store, stats/, logs/, webview data)
         pathTarget(join(cache, IDENTIFIER)),
         pathTarget(join(config, "autostart", `${PRODUCT}.desktop`)), // autostart
         pathTarget(join(data, "gnome-shell", "extensions", GNOME_EXT_UUID)), // copycopy extension

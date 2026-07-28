@@ -28,6 +28,13 @@ export const tr: Messages = {
     devMode: "Geliştirici modu",
     devModeHint:
       "Her yakalamanın şablon değişkenlerini açılır pencerede JSON olarak gösterir — eylem yazmak için",
+    stats: "Kullanım istatistikleri",
+    statsHint:
+      "Hangi eylemin hangi tür kopyada uygulandığını, model ve token sayılarıyla birlikte bu cihazda kaydeder; kopyalanan içerik asla kaydedilmez.",
+    statsOpen: "Klasörü aç",
+    statsReset: "İstatistikleri sıfırla",
+    statsResetConfirm: "Kaydedilen tüm istatistikler silinsin mi?",
+    statsResetDone: "İstatistikler sıfırlandı.",
     userContext: "Senin hakkında",
     userContextHint:
       "Yapay zekânın senin hakkında bilmesi gerekenler — rol, uzmanlık, tercihler. Her eyleme eklenir.",

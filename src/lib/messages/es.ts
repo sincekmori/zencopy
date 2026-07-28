@@ -28,6 +28,13 @@ export const es: Messages = {
     devMode: "Modo desarrollador",
     devModeHint:
       "Muestra las variables de plantilla de cada captura en el popup, como JSON — para escribir acciones",
+    stats: "Estadísticas de uso",
+    statsHint:
+      "Registra qué acción se ejecuta con cada tipo de captura, junto con el modelo y el número de tokens — guardados en este dispositivo; nunca el contenido copiado.",
+    statsOpen: "Abrir carpeta",
+    statsReset: "Restablecer estadísticas",
+    statsResetConfirm: "¿Eliminar todas las estadísticas registradas?",
+    statsResetDone: "Estadísticas restablecidas.",
     userContext: "Sobre ti",
     userContextHint:
       "Lo que la IA debería saber de ti: rol, especialidad, gustos. Se añade a cada acción.",

@@ -112,6 +112,19 @@ export async function setDevMode(enabled: boolean): Promise<void> {
   await writeSetting(DEV_MODE_KEY, enabled);
 }
 
+const STATS_ENABLED_KEY = "statsEnabled";
+
+/** Whether action invocations are appended to the local usage statistics
+ *  (stats/usage.jsonl in the app data dir). On by default: the record is
+ *  ids, kinds, and timestamps only, and it never leaves the machine. */
+export function isStatsEnabled(): Promise<boolean> {
+  return readSetting(STATS_ENABLED_KEY, z.boolean(), true);
+}
+
+export async function setStatsEnabled(enabled: boolean): Promise<void> {
+  await writeSetting(STATS_ENABLED_KEY, enabled);
+}
+
 const CONFIRM_ATTACHMENTS_KEY = "confirmAttachments";
 
 /** Whether the popup asks before sending an image or files to the provider.

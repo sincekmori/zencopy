@@ -28,6 +28,13 @@ export const de: Messages = {
     devMode: "Entwicklermodus",
     devModeHint:
       "Zeigt die Template-Variablen jeder Erfassung als JSON im Popup — zum Schreiben von Aktionen",
+    stats: "Nutzungsstatistik",
+    statsHint:
+      "Zeichnet auf, welche Aktion für welche Art von Kopie ausgeführt wurde, samt Modell und Tokenzahlen — gespeichert auf diesem Gerät; nie der kopierte Inhalt.",
+    statsOpen: "Ordner öffnen",
+    statsReset: "Statistik zurücksetzen",
+    statsResetConfirm: "Alle aufgezeichneten Statistiken löschen?",
+    statsResetDone: "Statistik zurückgesetzt.",
     userContext: "Über dich",
     userContextHint:
       "Was die KI über dich wissen sollte — Rolle, Fachgebiete, Vorlieben. Wird jeder Aktion mitgegeben.",

@@ -25,6 +25,7 @@ import {
   getTheme,
   isConfirmAttachments,
   isDevMode,
+  isStatsEnabled,
   isWelcomeSeen,
   type LocalePreference,
   markWelcomeSeen,
@@ -32,6 +33,7 @@ import {
   setConfirmAttachments as saveConfirmSend,
   setCorner as saveCorner,
   setDevMode as saveDevMode,
+  setStatsEnabled as saveStatsEnabled,
   setLocalePreference as saveLocale,
   setTheme as saveTheme,
   type Theme,
@@ -68,6 +70,10 @@ export function Settings(): React.JSX.Element {
   // Factory reset: the destructive path is a two-step inline confirmation.
   const [confirmingReset, setConfirmingReset] = useState(false);
   const [resetting, setResetting] = useState(false);
+  const [statsOn, setStatsOn] = useState(true);
+  // The quiet stats-reset link's inline confirm, and its transient "done".
+  const [confirmingStatsReset, setConfirmingStatsReset] = useState(false);
+  const [statsResetDone, setStatsResetDone] = useState(false);
   const [resetError, setResetError] = useState<string | undefined>(undefined);
   // The window's tab. AI first: it's the one thing that must be set up.
   const [tab, setTab] = useState<"ai" | "actions" | "general">("ai");
@@ -75,16 +81,25 @@ export function Settings(): React.JSX.Element {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
-      const [savedCorner, savedTheme, savedLocale, autostartOn, welcomeSeen, devModeOn, confirmOn] =
-        await Promise.all([
-          getCorner(),
-          getTheme(),
-          getLocalePreference(),
-          isEnabled(),
-          isWelcomeSeen(),
-          isDevMode(),
-          isConfirmAttachments(),
-        ]);
+      const [
+        savedCorner,
+        savedTheme,
+        savedLocale,
+        autostartOn,
+        welcomeSeen,
+        devModeOn,
+        confirmOn,
+        statsEnabled,
+      ] = await Promise.all([
+        getCorner(),
+        getTheme(),
+        getLocalePreference(),
+        isEnabled(),
+        isWelcomeSeen(),
+        isDevMode(),
+        isConfirmAttachments(),
+        isStatsEnabled(),
+      ]);
       if (!cancelled) {
         setCorner(savedCorner);
         setTheme(savedTheme);
@@ -93,6 +108,7 @@ export function Settings(): React.JSX.Element {
         setWelcomed(welcomeSeen);
         setDevMode(devModeOn);
         setConfirmSend(confirmOn);
+        setStatsOn(statsEnabled);
       }
     })();
     return () => {
@@ -127,6 +143,67 @@ export function Settings(): React.JSX.Element {
     void saveDevMode(next);
     void emit("dev-mode-changed", next); // live-update the popup
   };
+
+  const toggleStats = (next: boolean): void => {
+    setStatsOn(next);
+    void saveStatsEnabled(next);
+    void emit("stats-enabled-changed", next); // live-update the popup
+  };
+
+  const resetStats = (): void => {
+    setConfirmingStatsReset(false);
+    void (async () => {
+      try {
+        await invoke("reset_usage_stats");
+        setStatsResetDone(true);
+        setTimeout(() => {
+          setStatsResetDone(false);
+        }, 2500);
+      } catch (error) {
+        log.error("resetting usage statistics failed", error);
+      }
+    })();
+  };
+
+  // The reset link's three faces: idle link, inline confirm, transient done.
+  let statsResetRow: React.JSX.Element;
+  if (confirmingStatsReset) {
+    statsResetRow = (
+      <span className="flex items-center gap-2">
+        {t.settings.statsResetConfirm}
+        <button
+          type="button"
+          className="text-destructive underline-offset-2 hover:underline"
+          onClick={resetStats}
+        >
+          {t.settings.statsReset}
+        </button>
+        <button
+          type="button"
+          className="underline-offset-2 hover:text-foreground hover:underline"
+          onClick={() => {
+            setConfirmingStatsReset(false);
+          }}
+        >
+          {t.common.cancel}
+        </button>
+      </span>
+    );
+  } else if (statsResetDone) {
+    statsResetRow = <span>{t.settings.statsResetDone}</span>;
+  } else {
+    statsResetRow = (
+      <button
+        type="button"
+        className="underline-offset-2 hover:text-foreground hover:underline"
+        onClick={() => {
+          setConfirmingStatsReset(true);
+        }}
+      >
+        {t.settings.statsReset}
+      </button>
+    );
+  }
 
   const toggleConfirmSend = (next: boolean): void => {
     setConfirmSend(next);
@@ -365,6 +442,35 @@ export function Settings(): React.JSX.Element {
               onCheckedChange={toggleDevMode}
               aria-label={t.settings.devMode}
             />
+          </section>
+
+          <section className="flex flex-col gap-3 rounded-xl border bg-card p-6">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-sm font-medium">{t.settings.stats}</h2>
+                <p className="mt-1 text-xs text-muted-foreground">{t.settings.statsHint}</p>
+              </div>
+              <Switch
+                checked={statsOn}
+                onCheckedChange={toggleStats}
+                aria-label={t.settings.stats}
+              />
+            </div>
+            {/* Deliberately quiet utilities (small print, gray): the record is
+                a background fact, not a feature to advertise. Reset confirms
+                inline instead of raising a dialog — same register, one line. */}
+            <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+              <button
+                type="button"
+                className="underline-offset-2 hover:text-foreground hover:underline"
+                onClick={() => {
+                  void invoke("open_stats_dir");
+                }}
+              >
+                {t.settings.statsOpen}
+              </button>
+              {statsResetRow}
+            </div>
           </section>
 
           <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">

@@ -27,6 +27,26 @@ export interface ActionInput {
   attachments?: Attachment[] | undefined;
 }
 
+/** Exactly what accurate cost math needs, in our own stable vocabulary —
+ *  decoupled from the AI SDK's usage shape (which has renamed and regrown
+ *  fields across majors): the totals plus the cache split that changes the
+ *  unit price. Absent keys mean zero or unknown. */
+export interface TokenUsage {
+  in?: number;
+  out?: number;
+  cacheRead?: number;
+  cacheWrite?: number;
+}
+
+/** A finished (or stopped) run: the text, plus the settled facts the usage
+ *  statistics record — which catalog model ("provider:model") served it and
+ *  what it cost in tokens. Both absent when the run never reached a model. */
+export interface StreamOutcome {
+  text: string;
+  model?: string | undefined;
+  tokens?: TokenUsage | undefined;
+}
+
 // This module is a thin facade: the AI SDK with its eleven providers, Liquid,
 // and franc together dominate the bundle (~half of it), yet they are needed
 // only at these user-initiated, network-bound moments. Loading them behind a
@@ -36,14 +56,15 @@ export interface ActionInput {
 /**
  * Stream an action: render its Liquid templates, then stream the model's text,
  * revealing only the text between the result tags. `onChunk` receives the
- * text-so-far; the returned promise resolves with the final text (or what
- * streamed before `signal` aborted).
+ * text-so-far; the returned promise resolves with the outcome — the final
+ * text (or what streamed before `signal` aborted) plus the model and token
+ * facts for the usage statistics.
  */
 export async function streamAction(
   action: ActionInput,
   onChunk: (text: string) => void,
   signal: AbortSignal,
-): Promise<string> {
+): Promise<StreamOutcome> {
   const impl = await import("@/lib/llm-impl.ts");
   return impl.streamAction(action, onChunk, signal);
 }

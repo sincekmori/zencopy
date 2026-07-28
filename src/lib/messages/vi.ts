@@ -28,6 +28,13 @@ export const vi: Messages = {
     devMode: "Chế độ nhà phát triển",
     devModeHint:
       "Hiển thị các biến mẫu của mỗi lần bắt trong cửa sổ nổi, dạng JSON — dùng khi viết hành động",
+    stats: "Thống kê sử dụng",
+    statsHint:
+      "Ghi lại hành động nào được thực hiện với loại nội dung nào, kèm mô hình và số token — lưu trên thiết bị này; không bao giờ gồm nội dung đã sao chép.",
+    statsOpen: "Mở thư mục",
+    statsReset: "Đặt lại thống kê",
+    statsResetConfirm: "Xóa toàn bộ thống kê đã ghi?",
+    statsResetDone: "Đã đặt lại thống kê.",
     userContext: "Về bạn",
     userContextHint:
       "Những điều AI nên biết về bạn — vai trò, chuyên môn, sở thích. Được thêm vào mọi hành động.",

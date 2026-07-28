@@ -28,6 +28,13 @@ export const it: Messages = {
     devMode: "Modalità sviluppatore",
     devModeHint:
       "Mostra le variabili di template di ogni cattura nel popup, come JSON — per scrivere azioni",
+    stats: "Statistiche di utilizzo",
+    statsHint:
+      "Registra quale azione viene eseguita per ogni tipo di cattura, insieme al modello e al numero di token — salvati su questo dispositivo; mai il contenuto copiato.",
+    statsOpen: "Apri cartella",
+    statsReset: "Azzera statistiche",
+    statsResetConfirm: "Eliminare tutte le statistiche registrate?",
+    statsResetDone: "Statistiche azzerate.",
     userContext: "Su di te",
     userContextHint:
       "Cosa dovrebbe sapere l'IA di te: ruolo, competenze, preferenze. Aggiunto a ogni azione.",

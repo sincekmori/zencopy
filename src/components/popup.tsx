@@ -40,6 +40,7 @@ import {
   INVALID_CONFIG,
   NOT_CONFIGURED,
   streamAction,
+  type StreamOutcome,
   TIMED_OUT,
   warmUp,
 } from "@/lib/llm.ts";
@@ -48,6 +49,7 @@ import {
   getQuickActions,
   isConfirmAttachments,
   isDevMode,
+  isStatsEnabled,
   QUICK_SLOT_COUNT,
   setConfirmAttachments,
 } from "@/lib/settings.ts";
@@ -109,6 +111,8 @@ export function Popup(): React.JSX.Element {
   const [quickIds] = useLiveValue<string[]>(getQuickActions, "quick-actions-changed", []);
   // Developer mode (settings toggle): show the capture's template variables.
   const [devMode] = useLiveValue(isDevMode, "dev-mode-changed", false);
+  // Usage statistics (settings toggle, default on): append invocation events.
+  const [statsEnabled] = useLiveValue(isStatsEnabled, "stats-enabled-changed", true);
   // Ask before sending an image/files to the provider (settings toggle, or
   // this popup's own "don't ask again").
   const [confirmSend, setConfirmSend] = useLiveValue(
@@ -168,6 +172,29 @@ export function Popup(): React.JSX.Element {
     });
   };
 
+  // The usage trail: one line per invocation, uniform across fresh runs,
+  // retries, and kept results being shown — prose for the human reading the
+  // log (statistics live in their own store, not here). Ids and kinds only,
+  // never content.
+  const logUsage = (actionId: string, kind: string): void => {
+    log.info(`action run: ${actionId} (${kind})`);
+  };
+
+  // The statistics append — at settlement, so a real run carries the facts
+  // cost math needs (model, token counts) and a reuse carries none, which is
+  // itself the fact: it cost nothing. Fire-and-forget; a failed append is
+  // logged Rust-side and never blocks anything.
+  const recordUsage = (actionId: string, kind: string, outcome?: StreamOutcome): void => {
+    if (statsEnabled) {
+      void invoke("record_usage", {
+        action: actionId,
+        kind,
+        model: outcome?.model,
+        tokens: outcome?.tokens,
+      });
+    }
+  };
+
   const abortAll = (): void => {
     for (const controller of runsRef.current.values()) {
       controller.abort();
@@ -213,6 +240,8 @@ export function Popup(): React.JSX.Element {
       next.source.kind !== "files" &&
       ranDefinition.current.get(actionId) === definition
     ) {
+      logUsage(actionId, next.source.kind);
+      recordUsage(actionId, next.source.kind);
       return;
     }
     const existing = runsRef.current.get(actionId);
@@ -221,6 +250,8 @@ export function Popup(): React.JSX.Element {
       return;
     }
     existing?.abort();
+
+    logUsage(actionId, next.source.kind);
 
     const controller = new AbortController();
     runsRef.current.set(actionId, controller);
@@ -233,6 +264,10 @@ export function Popup(): React.JSX.Element {
     putResult(actionId, { phase: "running", text: "" });
 
     void (async () => {
+      // The outcome once the stream settles — undefined when the run never
+      // reached a model (gate, config errors), so the recorded event carries
+      // exactly the facts that exist.
+      let settled: StreamOutcome | undefined;
       try {
         const attachments = await buildAttachments(next.source);
         // Only binary attachments (image, PDF, audio) are the expensive path
@@ -248,7 +283,7 @@ export function Popup(): React.JSX.Element {
           }
           return;
         }
-        const text = await streamAction(
+        const outcome = await streamAction(
           // Expose the user's locale to action templates ({{ locale }}).
           { ...next, vars: { ...next.vars, locale }, ...(attachments ? { attachments } : {}) },
           (chunk) => {
@@ -258,6 +293,8 @@ export function Popup(): React.JSX.Element {
           },
           controller.signal,
         );
+        settled = outcome;
+        const { text } = outcome;
         if (owns()) {
           if (controller.signal.aborted && !text) {
             // Stopped before anything arrived — back to the source-only view.
@@ -316,6 +353,7 @@ export function Popup(): React.JSX.Element {
       } finally {
         if (owns()) {
           runsRef.current.delete(actionId); // free the slot for a later re-run
+          recordUsage(actionId, next.source.kind, settled);
         }
       }
     })();
@@ -494,7 +532,7 @@ export function Popup(): React.JSX.Element {
 
   const switchAction = (action: ActionInfo): void => {
     setMenuOpen(false);
-    if (!payload) {
+    if (!payload || action.id === payload.action_id) {
       return;
     }
     const next: CapturePayload = {
@@ -510,6 +548,7 @@ export function Popup(): React.JSX.Element {
     // view: the derived result shows its kept text or its live stream — no
     // cancellation, no silent re-execution; Retry is the explicit re-run.
     if (results.has(action.id)) {
+      logUsage(action.id, next.source.kind);
       setPayload(next);
       setCopied(false);
       return;

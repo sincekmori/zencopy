@@ -26,6 +26,12 @@ export const zhHans: Messages = {
     confirmSendHint: "当要把图片等二进制文件发送给提供商时，弹窗会先询问；文本文件无需确认直接执行",
     devMode: "开发者模式",
     devModeHint: "在弹窗中以 JSON 显示每次捕获的模板变量（用于编写动作）",
+    stats: "使用统计",
+    statsHint: "记录哪个动作用于哪类捕获，以及模型和 token 数 — 存于本机，绝不包含复制的内容。",
+    statsOpen: "打开文件夹",
+    statsReset: "重置统计",
+    statsResetConfirm: "删除所有已记录的统计？",
+    statsResetDone: "统计已重置。",
     userContext: "关于你",
     userContextHint: "希望 AI 了解的信息——职责、擅长领域、偏好。会附加到每个动作。",
     userContextPlaceholders: [

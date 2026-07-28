@@ -19,6 +19,8 @@ import {
   INVALID_CONFIG,
   NOT_CONFIGURED,
   TIMED_OUT,
+  type StreamOutcome,
+  type TokenUsage,
 } from "@/lib/llm.ts";
 import { createLogger } from "@/lib/log.ts";
 // The system-prompt assembly and the <result> streaming protocol (pure, no
@@ -215,7 +217,7 @@ export async function streamAction(
   action: ActionInput,
   onChunk: (text: string) => void,
   signal: AbortSignal,
-): Promise<string> {
+): Promise<StreamOutcome> {
   const attachments = action.attachments ?? [];
   const binaries = attachments.filter((file) => !file.media_type.startsWith("text/"));
   const texts = attachments.filter((file) => file.media_type.startsWith("text/"));
@@ -291,7 +293,7 @@ export async function streamAction(
   // others (API errors) go to `onError` and the stream just ends. Capture them
   // so we surface the real reason instead of silently rendering nothing.
   let streamError: unknown;
-  const { textStream } = streamText({
+  const stream = streamText({
     model: resolved.modelForRole(action.role),
     instructions: composeInstructions(instructions, userContext),
     ...request,
@@ -300,6 +302,44 @@ export async function streamAction(
       streamError = error;
     },
   });
+  const { textStream } = stream;
+  // The catalog address that serves this run — the fact cost math needs
+  // (roles are indirection; the statistics record what they resolved to).
+  const modelRef = (resolved.roles[action.role] ?? resolved.roles["default"])?.key;
+  // The SDK settles `usage` when the stream ends; an aborted stream may
+  // reject it or leave it hanging, so cap the wait and settle for "unknown".
+  // The mapping to our own field names is the schema firewall: when the SDK
+  // renames usage fields again, only these lines change.
+  const harvestTokens = async (): Promise<TokenUsage | undefined> => {
+    try {
+      // oxlint-disable-next-line promise/avoid-new -- a timer has no promise form
+      const deadline = new Promise<undefined>((resolve) => {
+        setTimeout(() => {
+          resolve(undefined);
+        }, 2000);
+      });
+      const usage = await Promise.race([stream.usage, deadline]);
+      if (!usage) {
+        return undefined;
+      }
+      const tokens: TokenUsage = {};
+      if (usage.inputTokens !== undefined) {
+        tokens.in = usage.inputTokens;
+      }
+      if (usage.outputTokens !== undefined) {
+        tokens.out = usage.outputTokens;
+      }
+      if (usage.inputTokenDetails.cacheReadTokens) {
+        tokens.cacheRead = usage.inputTokenDetails.cacheReadTokens;
+      }
+      if (usage.inputTokenDetails.cacheWriteTokens) {
+        tokens.cacheWrite = usage.inputTokenDetails.cacheWriteTokens;
+      }
+      return tokens.in === undefined && tokens.out === undefined ? undefined : tokens;
+    } catch {
+      return undefined; // aborted or failed stream — the cost stays unknown
+    }
+  };
 
   let raw = "";
   let iteratorError: unknown;
@@ -328,7 +368,12 @@ export async function streamAction(
   const elapsed = `${Date.now() - startedAt}ms`;
   if (signal.aborted) {
     log.debug(`run stopped by the user after ${elapsed} (role=${action.role})`);
-    return extractResult(raw, true) ?? raw.trim(); // stopped — keep what we have
+    // Stopped — keep what we have (and whatever tokens the provider reported).
+    return {
+      text: extractResult(raw, true) ?? raw.trim(),
+      model: modelRef,
+      tokens: await harvestTokens(),
+    };
   }
   if (streamError) {
     throw streamError instanceof Error
@@ -362,5 +407,5 @@ export async function streamAction(
   }
   log.debug(`run finished in ${elapsed} (role=${action.role}, ${result.length} chars)`);
   onChunk(result);
-  return result;
+  return { text: result, model: modelRef, tokens: await harvestTokens() };
 }

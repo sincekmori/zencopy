@@ -31,6 +31,17 @@ export interface Messages {
     confirmSendHint: string;
     devMode: string;
     devModeHint: string;
+    /** Usage statistics: a local JSONL of action invocations (ids, kinds,
+     *  timestamps — never content). Toggle default is ON. */
+    stats: string;
+    statsHint: string;
+    /** Quiet small-print links under the toggle. */
+    statsOpen: string;
+    statsReset: string;
+    /** Inline confirm shown after clicking reset. */
+    statsResetConfirm: string;
+    /** Transient confirmation after the file was deleted. */
+    statsResetDone: string;
     /** "About you": one free-form multiline self-description, added to every
      *  action run so results fit the person asking. The placeholders are
      *  example personas the field rotates through; Tab inserts the one

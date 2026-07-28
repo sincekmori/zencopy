@@ -28,6 +28,13 @@ export const ja: Messages = {
     devMode: "開発者モード",
     devModeHint:
       "キャプチャごとのテンプレート変数をポップアップに JSON で表示します（アクション開発用）",
+    stats: "利用統計",
+    statsHint:
+      "どのアクションをどの種類のコピーに使ったかを、モデル名・トークン数とともにこの端末内に記録します。コピーした内容は含まれません。",
+    statsOpen: "フォルダを開く",
+    statsReset: "統計をリセット",
+    statsResetConfirm: "記録した統計をすべて削除しますか？",
+    statsResetDone: "統計をリセットしました。",
     userContext: "あなたについて",
     userContextHint:
       "AI に知っておいてほしいこと(役割・得意分野・好みなど)。すべてのアクションに添えられます。",

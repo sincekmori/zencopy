@@ -27,6 +27,13 @@ export const ko: Messages = {
       "이미지 등 바이너리 파일을 제공업체로 보내기 전에 팝업에서 확인합니다. 텍스트 파일은 확인 없이 실행됩니다",
     devMode: "개발자 모드",
     devModeHint: "캡처마다 템플릿 변수를 팝업에 JSON으로 표시합니다 (액션 작성용)",
+    stats: "사용 통계",
+    statsHint:
+      "어떤 액션을 어떤 종류의 캡처에 사용했는지 모델명과 토큰 수와 함께 이 기기에 기록합니다. 복사한 내용은 포함되지 않습니다.",
+    statsOpen: "폴더 열기",
+    statsReset: "통계 재설정",
+    statsResetConfirm: "기록된 통계를 모두 삭제할까요?",
+    statsResetDone: "통계를 재설정했습니다.",
     userContext: "나에 대하여",
     userContextHint:
       "AI가 알아 두면 좋은 정보(역할, 전문 분야, 취향 등). 모든 액션에 함께 전달됩니다.",

@@ -28,6 +28,13 @@ export const id: Messages = {
     devMode: "Mode pengembang",
     devModeHint:
       "Menampilkan variabel templat setiap tangkapan di popup sebagai JSON — untuk menulis aksi",
+    stats: "Statistik penggunaan",
+    statsHint:
+      "Mencatat aksi mana yang dijalankan pada jenis salinan apa, beserta model dan jumlah token — disimpan di perangkat ini; tidak pernah menyertakan konten yang disalin.",
+    statsOpen: "Buka folder",
+    statsReset: "Reset statistik",
+    statsResetConfirm: "Hapus semua statistik yang tercatat?",
+    statsResetDone: "Statistik direset.",
     userContext: "Tentang kamu",
     userContextHint:
       "Hal yang perlu diketahui AI tentang kamu — peran, keahlian, preferensi. Ditambahkan ke setiap aksi.",

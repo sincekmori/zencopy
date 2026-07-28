@@ -28,6 +28,13 @@ export const en: Messages = {
     devMode: "Developer mode",
     devModeHint:
       "Show each capture's template variables in the popup, as JSON — for writing actions",
+    stats: "Usage statistics",
+    statsHint:
+      "Record which action runs on which kind of capture, plus the model and token counts — kept on this device; never the copied content.",
+    statsOpen: "Open folder",
+    statsReset: "Reset statistics",
+    statsResetConfirm: "Delete all recorded statistics?",
+    statsResetDone: "Statistics reset.",
     userContext: "About you",
     userContextHint:
       "Anything the AI should know about you — role, expertise, taste. Added to every action.",

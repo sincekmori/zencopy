@@ -28,6 +28,13 @@ export const pl: Messages = {
     devMode: "Tryb deweloperski",
     devModeHint:
       "Pokazuje zmienne szablonu każdego przechwycenia w okienku, jako JSON — do pisania akcji",
+    stats: "Statystyki użycia",
+    statsHint:
+      "Zapisuje, która akcja jest wykonywana dla jakiego rodzaju kopii, wraz z modelem i liczbą tokenów — przechowywane na tym urządzeniu; nigdy kopiowana treść.",
+    statsOpen: "Otwórz folder",
+    statsReset: "Zresetuj statystyki",
+    statsResetConfirm: "Usunąć wszystkie zapisane statystyki?",
+    statsResetDone: "Statystyki zresetowane.",
     userContext: "O Tobie",
     userContextHint:
       "Co AI powinno o Tobie wiedzieć — rola, specjalizacja, preferencje. Dołączane do każdej akcji.",
