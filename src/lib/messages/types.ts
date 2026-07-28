@@ -74,6 +74,9 @@ export interface Messages {
     copied: string;
     clear: string;
     close: string;
+    /** Header toggle: grow the popup to a reading pane / back to the card. */
+    expand: string;
+    collapse: string;
     openSettings: string;
     /** Whisper-level footer line while an update is pending ("update
      *  available" phrasing, not restart mechanics); clicking opens About. */

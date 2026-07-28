@@ -36,7 +36,8 @@ use crate::shell::{open_log_dir, open_url};
 use crate::tray::build_app_menu;
 use crate::tray::{app_locale, build_tray_menu, locale_from_tag};
 use crate::windows::{
-    current_corner, open_about, open_settings, reveal_popup, reveal_window, show_popup_in_corner,
+    current_corner, open_about, open_settings, reveal_popup, reveal_window, set_popup_expanded,
+    show_popup_in_corner,
 };
 
 /// Log-and-continue for fallible calls whose failure must not break the flow
@@ -275,6 +276,7 @@ pub fn run() {
             import_action,
             import_action_from_file,
             open_settings,
+            set_popup_expanded,
             open_about,
             app_info,
             open_url,

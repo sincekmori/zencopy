@@ -74,6 +74,8 @@ export const ar: Messages = {
     copied: "نُسخ",
     clear: "مسح",
     close: "إغلاق",
+    expand: "توسيع",
+    collapse: "الحجم الأصلي",
     openSettings: "فتح الإعدادات",
     updateHint: (version) => `يتوفر تحديث (v${version})`,
   },

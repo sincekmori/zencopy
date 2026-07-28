@@ -76,6 +76,8 @@ export const vi: Messages = {
     copied: "Đã sao chép",
     clear: "Xóa",
     close: "Đóng",
+    expand: "Mở rộng",
+    collapse: "Kích thước ban đầu",
     openSettings: "Mở cài đặt",
     updateHint: (version) => `Có bản cập nhật (v${version})`,
   },

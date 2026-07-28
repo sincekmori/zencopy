@@ -76,6 +76,8 @@ export const id: Messages = {
     copied: "Tersalin",
     clear: "Bersihkan",
     close: "Tutup",
+    expand: "Perbesar",
+    collapse: "Ukuran semula",
     openSettings: "Buka pengaturan",
     updateHint: (version) => `Pembaruan tersedia (v${version})`,
   },

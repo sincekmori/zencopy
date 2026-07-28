@@ -42,6 +42,12 @@ pub(crate) const POPUP_WIDTH: f64 = 380.0;
 pub(crate) const POPUP_MIN_HEIGHT: f64 = 360.0;
 pub(crate) const POPUP_MAX_HEIGHT: f64 = 720.0;
 
+/// Whether the popup is in its expanded shape (half the work area's width,
+/// nearly its full height) instead of the compact card. Session-scoped by
+/// design: a fresh launch starts compact — the expanded shape is a reading
+/// mode, not a layout preference worth persisting.
+static POPUP_EXPANDED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+
 /// Show `window` on the desktop (macOS Space) the user is on right now, focused,
 /// and pin it there. A hidden window keeps its previous Space assignment, so a
 /// plain `show` could surface it on the wrong desktop; joining all Spaces just
@@ -145,19 +151,34 @@ pub(crate) fn show_popup_in_corner(
     // Derive the popup's physical size from its logical size: `outer_size` is
     // unreliable for a window that has not been shown yet (notably on macOS).
     let scale = monitor.scale_factor();
-    let w = (POPUP_WIDTH * scale) as i32;
-    let margin = (16.0 * scale) as i32;
+    let margin_logical = 16.0;
+    let margin = (margin_logical * scale) as i32;
 
     // Pin within the work area (excludes Dock / taskbar / menu bar).
     let area = monitor.work_area();
+    let area_width_logical = f64::from(area.size.width) / scale;
+    let area_height_logical = f64::from(area.size.height) / scale;
 
-    // Height: half the work area, clamped — adapts to the display instead of
-    // hardcoding one laptop's idea of "enough".
-    let height_logical =
-        (f64::from(area.size.height) / scale / 2.0).clamp(POPUP_MIN_HEIGHT, POPUP_MAX_HEIGHT);
+    // Compact: the card (fixed width, half the work area's height, clamped —
+    // adapts to the display instead of hardcoding one laptop's idea of
+    // "enough"). Expanded: a reading pane — half the work area's width and
+    // nearly its full height, never smaller than the card.
+    let (width_logical, height_logical) =
+        if POPUP_EXPANDED.load(std::sync::atomic::Ordering::Relaxed) {
+            (
+                (area_width_logical / 2.0 - margin_logical * 1.5).max(POPUP_WIDTH),
+                (area_height_logical - margin_logical * 2.0).max(POPUP_MIN_HEIGHT),
+            )
+        } else {
+            (
+                POPUP_WIDTH,
+                (area_height_logical / 2.0).clamp(POPUP_MIN_HEIGHT, POPUP_MAX_HEIGHT),
+            )
+        };
     popup
-        .set_size(tauri::LogicalSize::new(POPUP_WIDTH, height_logical))
+        .set_size(tauri::LogicalSize::new(width_logical, height_logical))
         .or_log("popup: set size");
+    let w = (width_logical * scale) as i32;
     let h = (height_logical * scale) as i32;
     let left = area.position.x + margin;
     let right = area.position.x + area.size.width as i32 - w - margin;
@@ -184,6 +205,20 @@ pub(crate) fn reveal_popup(handle: &tauri::AppHandle) {
     if let Some(popup) = handle.get_webview_window("popup") {
         let corner = current_corner(handle);
         show_popup_in_corner(handle, &popup, corner);
+    }
+}
+
+/// Toggle the popup between its compact card and the expanded reading pane —
+/// the header's expand button. Applies immediately when the popup is visible
+/// (same corner, new size); a hidden popup picks the shape up on its next show.
+#[tauri::command]
+pub(crate) fn set_popup_expanded(app: tauri::AppHandle, expanded: bool) {
+    POPUP_EXPANDED.store(expanded, std::sync::atomic::Ordering::Relaxed);
+    if let Some(popup) = app.get_webview_window("popup")
+        && popup.is_visible().unwrap_or(false)
+    {
+        let corner = current_corner(&app);
+        show_popup_in_corner(&app, &popup, corner);
     }
 }
 

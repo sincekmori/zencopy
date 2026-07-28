@@ -73,6 +73,8 @@ export const he: Messages = {
     copied: "הועתק",
     clear: "ניקוי",
     close: "סגירה",
+    expand: "הרחבה",
+    collapse: "גודל מקורי",
     openSettings: "פתיחת ההגדרות",
     updateHint: (version) => `עדכון זמין (v${version})`,
   },

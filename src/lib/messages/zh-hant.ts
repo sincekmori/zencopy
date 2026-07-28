@@ -72,6 +72,8 @@ export const zhHant: Messages = {
     copied: "已複製",
     clear: "清除",
     close: "關閉",
+    expand: "放大",
+    collapse: "還原大小",
     openSettings: "開啟設定",
     updateHint: (version) => `有可用的更新 (v${version})`,
   },

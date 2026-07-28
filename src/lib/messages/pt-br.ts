@@ -77,6 +77,8 @@ export const ptBR: Messages = {
     copied: "Copiado",
     clear: "Limpar",
     close: "Fechar",
+    expand: "Ampliar",
+    collapse: "Tamanho original",
     openSettings: "Abrir configurações",
     updateHint: (version) => `Atualização disponível (v${version})`,
   },

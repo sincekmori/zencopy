@@ -78,6 +78,8 @@ export const es: Messages = {
     copied: "Copiado",
     clear: "Limpiar",
     close: "Cerrar",
+    expand: "Ampliar",
+    collapse: "Tamaño original",
     openSettings: "Abrir ajustes",
     updateHint: (version) => `Actualización disponible (v${version})`,
   },

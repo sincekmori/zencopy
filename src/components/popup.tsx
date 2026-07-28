@@ -8,6 +8,8 @@ import {
   ExternalLink,
   LayoutGrid,
   LoaderCircle,
+  Maximize2,
+  Minimize2,
   RotateCcw,
   Settings,
   Square,
@@ -114,6 +116,9 @@ export function Popup(): React.JSX.Element {
     "confirm-attachments-changed",
     true,
   );
+  // Reading-pane mode: the window grows to half the screen's width (Rust owns
+  // the geometry; this mirrors it for the toggle button's icon and labels).
+  const [expanded, setExpanded] = useState(false);
   // Waiting for the user's go-ahead on the current capture's attachments.
   const [awaitingSend, setAwaitingSend] = useState(false);
   // The "don't ask again" checkbox inside the confirmation card.
@@ -413,6 +418,18 @@ export function Popup(): React.JSX.Element {
       return;
     }
     hidePopup();
+  };
+
+  const toggleExpanded = (): void => {
+    const next = !expanded;
+    setExpanded(next);
+    void (async () => {
+      try {
+        await invoke("set_popup_expanded", { expanded: next });
+      } catch (error) {
+        log.error("resizing the popup failed", error);
+      }
+    })();
   };
 
   const copyResult = (): void => {
@@ -841,6 +858,17 @@ export function Popup(): React.JSX.Element {
           <ZenCopyMark className="size-4" />
           <span className="text-xs font-medium">ZenCopy</span>
           <div className="ms-auto flex items-center gap-0.5 text-muted-foreground">
+            {/* Reading pane toggle: half the screen's width for long results,
+                one click back to the compact card. Rust owns the geometry. */}
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              onClick={toggleExpanded}
+              aria-label={expanded ? t.popup.collapse : t.popup.expand}
+              title={expanded ? t.popup.collapse : t.popup.expand}
+            >
+              {expanded ? <Minimize2 className="size-3.5" /> : <Maximize2 className="size-3.5" />}
+            </Button>
             <Button
               variant="ghost"
               size="icon-xs"
