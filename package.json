@@ -67,6 +67,6 @@
   },
   "overrides": {
     "@ai-sdk/provider": "4.0.3",
-    "@ai-sdk/provider-utils": "5.0.9"
+    "@ai-sdk/provider-utils": "5.0.11"
   }
 }
