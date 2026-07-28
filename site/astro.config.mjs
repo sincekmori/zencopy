@@ -1,11 +1,17 @@
 // @ts-check
 import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
+import rehypeExternalLinks from "rehype-external-links";
 import starlightLlmsTxt from "starlight-llms-txt";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://zencopy.app",
+  markdown: {
+    // External links leave the docs in a new tab; in-site navigation stays in
+    // the same tab. rel guards the opener even where browsers don't imply it.
+    rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]],
+  },
   integrations: [
     starlight({
       title: "ZenCopy",

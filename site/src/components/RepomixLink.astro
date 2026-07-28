@@ -45,4 +45,4 @@ const params = new URLSearchParams({
 const href = `https://repomix.com/?${params.toString()}`;
 ---
 
-<a href={href}><slot /></a>
+<a href={href} rel="noopener noreferrer" target="_blank"><slot /></a>
