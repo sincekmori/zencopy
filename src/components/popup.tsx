@@ -138,6 +138,11 @@ export function Popup(): React.JSX.Element {
   // Signature of the capture whose attachments the user approved sending, so
   // Retry and action switches on the same content don't ask again.
   const approvedSig = useRef<string | undefined>(undefined);
+  // What each kept result was produced WITH (role + instructions + prompt at
+  // run time): editing an action and re-copying the same test text must run
+  // the new definition, not parrot the old result — that edit-and-retry loop
+  // is exactly how actions get written.
+  const ranDefinition = useRef(new Map<string, string>());
   const bodyRef = useRef<HTMLDivElement>(null);
   // Whether the view is glued to the streaming output's bottom edge. "At the
   // bottom" is the single source of truth: our own scrollTo lands there (stays
@@ -178,6 +183,7 @@ export function Popup(): React.JSX.Element {
     if (captureSig.current !== sig) {
       abortAll();
       captureSig.current = sig;
+      ranDefinition.current.clear();
       setResults(new Map());
     }
     setPayload(next);
@@ -190,6 +196,25 @@ export function Popup(): React.JSX.Element {
     setAwaitingSend(false);
 
     const actionId = next.action_id;
+    // Same content, same action, same definition, and a finished good result:
+    // show it again instead of re-running — Esc-then-recopy means "let me see
+    // that once more", not "spend tokens again". Retry stays the explicit
+    // regenerate. Deliberately NOT reused: failures (a fresh C+C retries an
+    // errored run instead of parroting the error), runs of an edited action
+    // (the definition fingerprint differs), and `files` captures (their
+    // signature is the paths, so the files' contents may have changed).
+    const definition = `${next.role}\n${next.instructions}\n${next.prompt}`;
+    const kept = results.get(actionId);
+    if (
+      !force &&
+      kept?.phase === "done" &&
+      kept.ok &&
+      !kept.setup &&
+      next.source.kind !== "files" &&
+      ranDefinition.current.get(actionId) === definition
+    ) {
+      return;
+    }
     const existing = runsRef.current.get(actionId);
     if (existing && !force) {
       // Already streaming this action for this content — the view follows it.
@@ -199,6 +224,7 @@ export function Popup(): React.JSX.Element {
 
     const controller = new AbortController();
     runsRef.current.set(actionId, controller);
+    ranDefinition.current.set(actionId, definition);
     // A callback owns its entry only while the capture is current AND its
     // controller is still the registered run — a Retry or a new capture takes
     // the slot over and orphans the old stream mid-flight.
@@ -406,6 +432,7 @@ export function Popup(): React.JSX.Element {
     abortAll();
     captureSig.current = undefined;
     approvedSig.current = undefined;
+    ranDefinition.current.clear();
     setAwaitingSend(false);
     setPayload(undefined);
     setResults(new Map());
