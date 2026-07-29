@@ -28,7 +28,8 @@ export const zhHant: Messages = {
     devMode: "開發者模式",
     devModeHint: "在彈出視窗中以 JSON 顯示每次擷取的範本變數（用於撰寫動作）",
     stats: "使用統計",
-    statsHint: "記錄哪個動作用於哪類擷取，以及模型與 token 數 — 存於本機，絕不包含複製的內容。",
+    statsHint:
+      "每次執行模型都會在本機記錄中新增一行，可用於計算費用。所有記錄只保存在本裝置上，絕不會傳送到任何地方；複製的內容也絕不會被記錄。",
     statsOpen: "開啟資料夾",
     statsReset: "重設統計",
     statsResetConfirm: "刪除所有已記錄的統計？",

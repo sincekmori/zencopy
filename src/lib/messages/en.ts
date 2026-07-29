@@ -30,7 +30,7 @@ export const en: Messages = {
       "Show each capture's template variables in the popup, as JSON — for writing actions",
     stats: "Usage statistics",
     statsHint:
-      "Record which action runs on which kind of capture, plus the model and token counts — kept on this device; never the copied content.",
+      "Each model run adds a line to a local record you can total your costs from. It all stays on this device and is never sent anywhere; the copied content is never included.",
     statsOpen: "Open folder",
     statsReset: "Reset statistics",
     statsResetConfirm: "Delete all recorded statistics?",

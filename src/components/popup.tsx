@@ -180,17 +180,17 @@ export function Popup(): React.JSX.Element {
     log.info(`action run: ${actionId} (${kind})`);
   };
 
-  // The statistics append — at settlement, so a real run carries the facts
-  // cost math needs (model, token counts) and a reuse carries none, which is
-  // itself the fact: it cost nothing. Fire-and-forget; a failed append is
-  // logged Rust-side and never blocks anything.
-  const recordUsage = (actionId: string, kind: string, outcome?: StreamOutcome): void => {
+  // The statistics append — a BILLING ledger, not an invocation counter:
+  // only runs that actually reached a model are written (reuses, gates, and
+  // config errors cost nothing and stay out). Fire-and-forget; a failed
+  // append is logged Rust-side and never blocks anything.
+  const recordUsage = (actionId: string, kind: string, outcome: StreamOutcome): void => {
     if (statsEnabled) {
       void invoke("record_usage", {
         action: actionId,
         kind,
-        model: outcome?.model,
-        tokens: outcome?.tokens,
+        model: outcome.model,
+        tokens: outcome.tokens,
       });
     }
   };
@@ -241,7 +241,6 @@ export function Popup(): React.JSX.Element {
       ranDefinition.current.get(actionId) === definition
     ) {
       logUsage(actionId, next.source.kind);
-      recordUsage(actionId, next.source.kind);
       return;
     }
     const existing = runsRef.current.get(actionId);
@@ -353,7 +352,9 @@ export function Popup(): React.JSX.Element {
       } finally {
         if (owns()) {
           runsRef.current.delete(actionId); // free the slot for a later re-run
-          recordUsage(actionId, next.source.kind, settled);
+          if (settled) {
+            recordUsage(actionId, next.source.kind, settled);
+          }
         }
       }
     })();

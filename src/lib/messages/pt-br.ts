@@ -30,7 +30,7 @@ export const ptBR: Messages = {
       "Mostra as variáveis de template de cada captura no popup, como JSON — para escrever ações",
     stats: "Estatísticas de uso",
     statsHint:
-      "Registra qual ação é executada em cada tipo de captura, com o modelo e a contagem de tokens — guardados neste dispositivo; nunca o conteúdo copiado.",
+      "Cada execução do modelo adiciona uma linha a um registro local que permite calcular os custos. Tudo fica somente neste dispositivo e nunca é enviado a lugar nenhum; o conteúdo copiado nunca é incluído.",
     statsOpen: "Abrir pasta",
     statsReset: "Redefinir estatísticas",
     statsResetConfirm: "Excluir todas as estatísticas registradas?",

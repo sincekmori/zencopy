@@ -27,7 +27,8 @@ export const zhHans: Messages = {
     devMode: "开发者模式",
     devModeHint: "在弹窗中以 JSON 显示每次捕获的模板变量（用于编写动作）",
     stats: "使用统计",
-    statsHint: "记录哪个动作用于哪类捕获，以及模型和 token 数 — 存于本机，绝不包含复制的内容。",
+    statsHint:
+      "每次运行模型都会在本地记录中添加一行，可用于计算费用。所有记录只保存在本设备上，绝不会发送到任何地方；复制的内容也绝不会被记录。",
     statsOpen: "打开文件夹",
     statsReset: "重置统计",
     statsResetConfirm: "删除所有已记录的统计？",

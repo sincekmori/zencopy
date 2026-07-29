@@ -30,7 +30,7 @@ export const tr: Messages = {
       "Her yakalamanın şablon değişkenlerini açılır pencerede JSON olarak gösterir — eylem yazmak için",
     stats: "Kullanım istatistikleri",
     statsHint:
-      "Hangi eylemin hangi tür kopyada uygulandığını, model ve token sayılarıyla birlikte bu cihazda kaydeder; kopyalanan içerik asla kaydedilmez.",
+      "Her model çalıştırması, maliyetleri hesaplayabileceğiniz yerel bir kayda bir satır ekler. Her şey bu cihazda kalır ve asla hiçbir yere gönderilmez; kopyalanan içerik asla kayda dahil edilmez.",
     statsOpen: "Klasörü aç",
     statsReset: "İstatistikleri sıfırla",
     statsResetConfirm: "Kaydedilen tüm istatistikler silinsin mi?",

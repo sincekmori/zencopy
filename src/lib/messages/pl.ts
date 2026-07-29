@@ -30,7 +30,7 @@ export const pl: Messages = {
       "Pokazuje zmienne szablonu każdego przechwycenia w okienku, jako JSON — do pisania akcji",
     stats: "Statystyki użycia",
     statsHint:
-      "Zapisuje, która akcja jest wykonywana dla jakiego rodzaju kopii, wraz z modelem i liczbą tokenów — przechowywane na tym urządzeniu; nigdy kopiowana treść.",
+      "Każde uruchomienie modelu dodaje wiersz do lokalnego rejestru, z którego można policzyć koszty. Wszystko pozostaje na tym urządzeniu i nigdy nie jest nigdzie wysyłane; skopiowana treść nigdy nie jest zapisywana.",
     statsOpen: "Otwórz folder",
     statsReset: "Zresetuj statystyki",
     statsResetConfirm: "Usunąć wszystkie zapisane statystyki?",

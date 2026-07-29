@@ -30,7 +30,7 @@ export const id: Messages = {
       "Menampilkan variabel templat setiap tangkapan di popup sebagai JSON — untuk menulis aksi",
     stats: "Statistik penggunaan",
     statsHint:
-      "Mencatat aksi mana yang dijalankan pada jenis salinan apa, beserta model dan jumlah token — disimpan di perangkat ini; tidak pernah menyertakan konten yang disalin.",
+      "Setiap kali model dijalankan, satu baris ditambahkan ke catatan lokal yang bisa dipakai menghitung biaya. Semuanya hanya tersimpan di perangkat ini dan tidak pernah dikirim ke mana pun; konten yang disalin tidak pernah dicatat.",
     statsOpen: "Buka folder",
     statsReset: "Reset statistik",
     statsResetConfirm: "Hapus semua statistik yang tercatat?",

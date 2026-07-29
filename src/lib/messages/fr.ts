@@ -30,7 +30,7 @@ export const fr: Messages = {
       "Affiche les variables de gabarit de chaque capture dans le popup, en JSON — pour écrire des actions",
     stats: "Statistiques d'utilisation",
     statsHint:
-      "Enregistre quelle action s'exécute pour quel type de capture, avec le modèle et le nombre de tokens — conservés sur cet appareil ; jamais le contenu copié.",
+      "Chaque exécution de modèle ajoute une ligne à un enregistrement local qui permet de calculer les coûts. Tout reste sur cet appareil et n'est jamais envoyé nulle part ; le contenu copié n'est jamais enregistré.",
     statsOpen: "Ouvrir le dossier",
     statsReset: "Réinitialiser les statistiques",
     statsResetConfirm: "Supprimer toutes les statistiques enregistrées ?",

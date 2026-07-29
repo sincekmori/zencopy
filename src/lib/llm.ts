@@ -27,15 +27,19 @@ export interface ActionInput {
   attachments?: Attachment[] | undefined;
 }
 
-/** Exactly what accurate cost math needs, in our own stable vocabulary —
- *  decoupled from the AI SDK's usage shape (which has renamed and regrown
- *  fields across majors): the totals plus the cache split that changes the
- *  unit price. Absent keys mean zero or unknown. */
+/** Token counts as BILLING BUCKETS, named exactly like models.dev's cost
+ *  fields (input/output/cache_read/cache_write, the community model-price
+ *  database) — so cost is the plain dot product of this object with a price
+ *  entry. `input` is therefore the NON-cached input (each token lands in
+ *  exactly one bucket); OTel's inclusive `gen_ai.usage.input_tokens` stays
+ *  derivable as input + cache_read + cache_write. Mapped once here at the
+ *  edge from the AI SDK's evolving usage shape (which has renamed fields
+ *  across majors). Absent keys mean zero or unknown. */
 export interface TokenUsage {
-  in?: number;
-  out?: number;
-  cacheRead?: number;
-  cacheWrite?: number;
+  input?: number;
+  output?: number;
+  cache_read?: number;
+  cache_write?: number;
 }
 
 /** A finished (or stopped) run: the text, plus the settled facts the usage

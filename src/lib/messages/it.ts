@@ -30,7 +30,7 @@ export const it: Messages = {
       "Mostra le variabili di template di ogni cattura nel popup, come JSON — per scrivere azioni",
     stats: "Statistiche di utilizzo",
     statsHint:
-      "Registra quale azione viene eseguita per ogni tipo di cattura, insieme al modello e al numero di token — salvati su questo dispositivo; mai il contenuto copiato.",
+      "Ogni esecuzione del modello aggiunge una riga a un registro locale da cui calcolare i costi. Tutto resta su questo dispositivo e non viene mai inviato da nessuna parte; il contenuto copiato non viene mai incluso.",
     statsOpen: "Apri cartella",
     statsReset: "Azzera statistiche",
     statsResetConfirm: "Eliminare tutte le statistiche registrate?",

@@ -1,9 +1,9 @@
-//! Usage statistics: an append-only JSONL of action invocations. Events, not
-//! aggregates — today's questions (counts) and tomorrow's (per-kind, per-hour,
-//! cost) all stay derivable from the same file. Ids, kinds, timestamps, the
-//! serving model, and token counts (the minimum for exact cost math); never
-//! the copied content. A reused result records no model or tokens — the
-//! absence IS the fact: it cost nothing.
+//! Usage statistics: an append-only JSONL, one line per model run — a local
+//! BILLING ledger. Only runs that reached a model are written (a reused
+//! result costs nothing and leaves no line); the human-facing invocation
+//! trail lives in the ordinary log instead. Events, not aggregates — counts,
+//! per-kind, per-hour, and cost all stay derivable. Ids, kinds, timestamps,
+//! the serving model, and token counts; never the copied content.
 //!
 //! The file lives under the platform DATA dir (`stats/usage.jsonl`), not the
 //! config dir (statistics are accumulated user data, which XDG puts in
@@ -18,6 +18,11 @@
 //!   colon (model ids may contain colons, e.g. `local:gemma4:e4b`). The
 //!   provider half is the user's own alias — it is what identifies local
 //!   endpoints, whose runs cost nothing.
+//! - `tokens` keys are BILLING BUCKETS named after models.dev's cost fields
+//!   (input/output/cache_read/cache_write, per-bucket prices in USD per 1M):
+//!   cost is the dot product of a line's tokens with the model's price entry.
+//!   `input` is therefore the non-cached input; OTel's inclusive
+//!   `gen_ai.usage.input_tokens` derives as input + cache_read + cache_write.
 //! - Known, accepted cost-accuracy limits (within a few percent): providers
 //!   that omit usage reporting, and audio-token premium rates (no split in
 //!   the standard usage shape today; add `tokens.audioIn` if that changes).
@@ -32,17 +37,13 @@ fn stats_file(app: &tauri::AppHandle) -> Option<std::path::PathBuf> {
         .map(|dir| dir.join("stats").join("usage.jsonl"))
 }
 
-/// The cost-relevant token counts, in the app's own stable vocabulary —
-/// mapped once at the frontend edge (llm-impl) from the AI SDK's evolving
-/// usage shape: the totals plus the cache split that changes the unit price.
+/// Token counts as billing buckets (see the module doc) — mapped once at
+/// the frontend edge (llm-impl) from the AI SDK's evolving usage shape.
 #[derive(serde::Deserialize)]
 pub(crate) struct TokenUsage {
-    #[serde(rename = "in")]
     input: Option<u64>,
-    out: Option<u64>,
-    #[serde(rename = "cacheRead")]
+    output: Option<u64>,
     cache_read: Option<u64>,
-    #[serde(rename = "cacheWrite")]
     cache_write: Option<u64>,
 }
 
@@ -85,10 +86,10 @@ pub(crate) fn record_usage(
         if let Some(tokens) = &tokens {
             let mut counts = serde_json::Map::new();
             for (key, value) in [
-                ("in", tokens.input),
-                ("out", tokens.out),
-                ("cacheRead", tokens.cache_read),
-                ("cacheWrite", tokens.cache_write),
+                ("input", tokens.input),
+                ("output", tokens.output),
+                ("cache_read", tokens.cache_read),
+                ("cache_write", tokens.cache_write),
             ] {
                 if let Some(value) = value {
                     counts.insert(key.to_string(), serde_json::json!(value));

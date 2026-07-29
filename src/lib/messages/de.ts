@@ -30,7 +30,7 @@ export const de: Messages = {
       "Zeigt die Template-Variablen jeder Erfassung als JSON im Popup — zum Schreiben von Aktionen",
     stats: "Nutzungsstatistik",
     statsHint:
-      "Zeichnet auf, welche Aktion für welche Art von Kopie ausgeführt wurde, samt Modell und Tokenzahlen — gespeichert auf diesem Gerät; nie der kopierte Inhalt.",
+      "Jede Modellausführung fügt einer lokalen Aufzeichnung eine Zeile hinzu, aus der sich die Kosten berechnen lassen. Alles bleibt auf diesem Gerät und wird niemals irgendwohin gesendet; der kopierte Inhalt wird nie aufgezeichnet.",
     statsOpen: "Ordner öffnen",
     statsReset: "Statistik zurücksetzen",
     statsResetConfirm: "Alle aufgezeichneten Statistiken löschen?",

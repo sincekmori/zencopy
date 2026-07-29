@@ -322,20 +322,32 @@ export async function streamAction(
       if (!usage) {
         return undefined;
       }
+      // Billing buckets: `input` is the non-cached input, so every token
+      // lands in exactly one priced bucket. The SDK reports that directly
+      // (noCacheTokens); the subtraction is the fallback for providers that
+      // only report the inclusive total.
+      const details = usage.inputTokenDetails;
+      const cacheRead = details.cacheReadTokens ?? 0;
+      const cacheWrite = details.cacheWriteTokens ?? 0;
       const tokens: TokenUsage = {};
-      if (usage.inputTokens !== undefined) {
-        tokens.in = usage.inputTokens;
+      const nonCached =
+        details.noCacheTokens ??
+        (usage.inputTokens === undefined
+          ? undefined
+          : Math.max(0, usage.inputTokens - cacheRead - cacheWrite));
+      if (nonCached !== undefined) {
+        tokens.input = nonCached;
       }
       if (usage.outputTokens !== undefined) {
-        tokens.out = usage.outputTokens;
+        tokens.output = usage.outputTokens;
       }
-      if (usage.inputTokenDetails.cacheReadTokens) {
-        tokens.cacheRead = usage.inputTokenDetails.cacheReadTokens;
+      if (cacheRead) {
+        tokens.cache_read = cacheRead;
       }
-      if (usage.inputTokenDetails.cacheWriteTokens) {
-        tokens.cacheWrite = usage.inputTokenDetails.cacheWriteTokens;
+      if (cacheWrite) {
+        tokens.cache_write = cacheWrite;
       }
-      return tokens.in === undefined && tokens.out === undefined ? undefined : tokens;
+      return tokens.input === undefined && tokens.output === undefined ? undefined : tokens;
     } catch {
       return undefined; // aborted or failed stream — the cost stays unknown
     }

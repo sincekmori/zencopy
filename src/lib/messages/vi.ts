@@ -30,7 +30,7 @@ export const vi: Messages = {
       "Hiển thị các biến mẫu của mỗi lần bắt trong cửa sổ nổi, dạng JSON — dùng khi viết hành động",
     stats: "Thống kê sử dụng",
     statsHint:
-      "Ghi lại hành động nào được thực hiện với loại nội dung nào, kèm mô hình và số token — lưu trên thiết bị này; không bao giờ gồm nội dung đã sao chép.",
+      "Mỗi lần chạy mô hình sẽ thêm một dòng vào nhật ký cục bộ, dùng để tính chi phí. Mọi thứ chỉ nằm trên thiết bị này và không bao giờ được gửi đi bất cứ đâu; nội dung đã sao chép không bao giờ được ghi lại.",
     statsOpen: "Mở thư mục",
     statsReset: "Đặt lại thống kê",
     statsResetConfirm: "Xóa toàn bộ thống kê đã ghi?",
