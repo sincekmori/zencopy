@@ -83,6 +83,9 @@ Anbieter plus eine Zuordnung **Rolle → Modell**.
 Das Zuhause des Dateiformats ist [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — dort ist jedes Feld dokumentiert (inklusive eines `$schema` für Validierung und Vervollständigung im Editor), und [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) enthält Konfigurationen in drei Größen.
 ZenCopy-typische Ausgangspunkte (was die Einstellungs-UI schreibt, lokales Ollama, Rollen für Aktionen) findest du unter [Rezepte](/de/recipes/).
 
+Eine Anforderung stammt von ZenCopy selbst, nicht vom Dateiformat: `roles` muss immer **`default`** enthalten.
+Jede Aktion läuft damit, sofern ihr Frontmatter keine andere role nennt, und der Verbindungstest in den Einstellungen pingt sie an.
+
 API-Schlüssel wandern direkt in diese lokale Datei (die Einstellungs-UI schreibt dasselbe Format); sie verlassen dein Gerät nie.
 Umgebungsvariablen werden nicht gelesen — GUI-Apps werden vom Betriebssystem gestartet, nicht von deiner Shell, sodass in `.zshrc` und Co. exportierte Variablen sie nie erreichen.
 Die Datei wird bei jedem Lesen gegen das Schema validiert.

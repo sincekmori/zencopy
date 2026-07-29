@@ -83,6 +83,9 @@ ZenCopy 安裝完就能直接使用，什麼都不必設定。
 這個檔案格式的本家是 [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme)——所有欄位的說明都在那裡（包括可讓編輯器驗證與自動完成的 `$schema`），[`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) 也備有三種規模的設定範例。
 ZenCopy 專屬的起手式（設定 UI 寫出的格式、本機 Ollama、給動作用的 role）請見[設定範例](/zh-hant/recipes/)。
 
+有一條要求來自 ZenCopy 本身而非檔案格式：`roles` 中必須始終包含 **`default`**。
+凡是 frontmatter 中未指定其他 role 的動作都用它執行，設定畫面的連線測試也是對它執行 ping。
+
 API 金鑰直接寫進這個本機檔案（設定 UI 寫的也是同一種格式）；金鑰絕不會離開你的電腦。
 環境變數不會被讀取——GUI 應用程式是由作業系統啟動的，不是由你的 shell 啟動，所以在 `.zshrc` 之類的檔案裡 export 的變數根本到不了它們那裡。
 這個檔案每次讀取時都會做結構驗證。

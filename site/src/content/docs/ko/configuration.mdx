@@ -83,6 +83,9 @@ https://zencopy.app/llms-full.txt 를 읽어보세요. 여기에는 액션 파�
 이 파일 형식의 본가는 [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme)입니다 — 모든 필드가 그곳에 문서화되어 있고(에디터의 검증·자동 완성을 위한 `$schema` 포함), [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples)에는 세 가지 규모의 설정이 있습니다.
 ZenCopy에 맞춘 출발점(설정 UI가 저장하는 내용, 로컬 Ollama, 액션용 역할)은 [레시피](/ko/recipes/)를 참고하세요.
 
+한 가지 요건은 파일 형식이 아니라 ZenCopy 자체의 것입니다: `roles`에는 반드시 **`default`**가 있어야 합니다.
+frontmatter에서 다른 role을 지정하지 않은 모든 액션이 이 role로 실행되며, 설정 화면의 연결 테스트도 이 role에 ping을 보냅니다.
+
 API 키는 이 로컬 파일에 그대로 들어갑니다(설정 UI도 같은 형식으로 저장합니다). 키는 절대 이 컴퓨터를 떠나지 않습니다.
 환경 변수는 읽지 않습니다 — GUI 앱은 셸이 아니라 OS가 실행하므로, `.zshrc` 등에서 내보낸 변수는 앱에 전달되지 않습니다.
 파일은 읽을 때마다 스키마 검증을 거칩니다.

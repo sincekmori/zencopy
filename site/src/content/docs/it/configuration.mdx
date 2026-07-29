@@ -83,6 +83,9 @@ I provider più una mappatura **role → model**.
 La casa del formato di file è [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — ogni campo è documentato lì (incluso uno `$schema` per la validazione e il completamento nell'editor), e [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) contiene configurazioni in tre taglie.
 Per punti di partenza in stile ZenCopy (ciò che scrive l'interfaccia delle impostazioni, Ollama in locale, role per le azioni), vedi le [Ricette](/it/recipes/).
 
+Un requisito è di ZenCopy, non del formato: `roles` deve sempre includere **`default`**.
+Ogni azione viene eseguita con esso a meno che il suo frontmatter non nomini un altro role, e il test di connessione nelle impostazioni lo usa per il ping.
+
 Le chiavi API vanno direttamente in questo file locale (l'interfaccia delle impostazioni scrive lo stesso formato); non lasciano mai la tua macchina.
 Le variabili d'ambiente non vengono lette — le app con interfaccia grafica sono avviate dal sistema operativo, non dalla tua shell, quindi le variabili esportate in `.zshrc` e simili non le raggiungono mai.
 Il file viene validato con lo schema a ogni lettura.

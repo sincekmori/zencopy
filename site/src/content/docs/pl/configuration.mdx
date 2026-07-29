@@ -83,6 +83,9 @@ Dostawcy plus mapowanie **rola → model**.
 Format pliku ma swój dom w [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — każde pole jest tam udokumentowane (łącznie z `$schema` do walidacji i podpowiedzi w edytorze), a w [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) znajdują się konfiguracje w trzech rozmiarach.
 Punkty startowe w stylu ZenCopy (to, co zapisuje interfejs ustawień, lokalny Ollama, role dla akcji) znajdziesz w [Przepisach](/pl/recipes/).
 
+Jedno wymaganie pochodzi od samego ZenCopy, nie od formatu: `roles` musi zawsze zawierać **`default`**.
+Każda akcja działa z tym role, o ile jej frontmatter nie wskazuje innego role, a test połączenia w ustawieniach pinguje właśnie to role.
+
 Klucze API trafiają wprost do tego lokalnego pliku (interfejs ustawień zapisuje ten sam format); nigdy nie opuszczają Twojego komputera.
 Zmienne środowiskowe nie są odczytywane — aplikacje z interfejsem graficznym uruchamia system, a nie Twoja powłoka, więc zmienne wyeksportowane w `.zshrc` i podobnych nigdy do nich nie docierają.
 Plik jest walidowany schematem przy każdym odczycie.

@@ -83,6 +83,9 @@ Proveedores más una correspondencia **rol → modelo**.
 La casa del formato de archivo es [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — cada campo está documentado allí (incluido un `$schema` para validación y autocompletado en el editor), y [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) tiene configuraciones en tres tamaños.
 Para puntos de partida al estilo de ZenCopy (lo que escribe la interfaz de ajustes, Ollama local, roles para acciones), consulta las [Recetas](/es/recipes/).
 
+Hay un requisito propio de ZenCopy, no del formato: `roles` siempre debe incluir **`default`**.
+Toda acción se ejecuta con él salvo que su frontmatter nombre otro role, y la prueba de conexión de los ajustes le hace ping.
+
 Las claves de API van directamente en este archivo local (la interfaz de ajustes escribe el mismo formato); nunca salen de tu máquina.
 Las variables de entorno no se leen — las aplicaciones gráficas las inicia el sistema operativo, no tu shell, así que las variables exportadas en `.zshrc` y similares nunca les llegan.
 El archivo se valida contra el esquema en cada lectura.

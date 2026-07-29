@@ -83,6 +83,9 @@ Sağlayıcılar ve bir **role → model** eşlemesi.
 Dosya biçiminin ana yurdu [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — her alan orada belgelenmiştir (düzenleyicide doğrulama ve tamamlama sağlayan `$schema` dahil) ve [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) içinde üç boyda hazır yapılandırma vardır.
 ZenCopy'ye özgü başlangıç noktaları için (ayarlar arayüzünün yazdığı biçim, yerel Ollama, eylemler için role'ler) [Tarifler](/tr/recipes/) sayfasına bak.
 
+Bir gereklilik dosya formatından değil ZenCopy'nin kendisinden gelir: `roles` her zaman **`default`** içermelidir.
+Frontmatter'ında başka bir role belirtmeyen her eylem onunla çalışır ve ayarlardaki bağlantı testi ona ping atar.
+
 API anahtarları doğrudan bu yerel dosyaya yazılır (ayarlar arayüzü de aynı biçimi yazar); makinenden asla çıkmazlar.
 Ortam değişkenleri okunmaz — grafik arayüzlü uygulamaları kabuk değil işletim sistemi başlatır; bu yüzden `.zshrc` ve benzerlerinde export edilen değişkenler onlara hiç ulaşmaz.
 Dosya her okunuşta şemaya göre doğrulanır.

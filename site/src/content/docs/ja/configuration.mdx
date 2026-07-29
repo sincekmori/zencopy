@@ -86,6 +86,9 @@ https://zencopy.app/llms-full.txt を読んでください。これは、アク�
 全フィールドの説明（エディタで検証・補完が効く `$schema` を含む）はそちらにあり、[`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) には 3 サイズの設定例が揃っています。
 ZenCopy 向けの出発点（設定 UI が書く形、ローカル Ollama、アクション用の role）は[レシピ集](/ja/recipes/)を見てください。
 
+1 点だけ、ファイル形式ではなく ZenCopy 側の要件があります: `roles` には必ず **`default`** を含めてください。
+frontmatter で別の role を指定しないアクションはすべて `default` で実行され、設定画面の接続テストも `default` に ping します。
+
 API キーはこのローカルファイルに直接書きます（設定 UI が書くのもこの形式）。キーが端末の外に出ることはありません。
 環境変数は読み込みません。GUI アプリはシェルではなく OS から起動されるため、`.zshrc` などで export した変数はそもそも届かないからです。
 このファイルは読み込みのたびにスキーマ検証されます。

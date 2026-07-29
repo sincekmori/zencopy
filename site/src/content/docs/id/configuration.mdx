@@ -83,6 +83,9 @@ Penyedia plus pemetaan **role → model**.
 Rumah format berkas ini adalah [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — setiap field didokumentasikan di sana (termasuk `$schema` untuk validasi dan pelengkapan otomatis di editor), dan [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) memuat contoh konfigurasi dalam tiga ukuran.
 Untuk titik awal bergaya ZenCopy (apa yang ditulis UI pengaturan, Ollama lokal, role untuk aksi), lihat [Resep](/id/recipes/).
 
+Satu persyaratan berasal dari ZenCopy sendiri, bukan dari format berkas: `roles` harus selalu memuat **`default`**.
+Setiap aksi berjalan dengannya kecuali frontmatter-nya menyebut role lain, dan uji koneksi di pengaturan mengirim ping ke role ini.
+
 Kunci API ditulis langsung ke berkas lokal ini (UI pengaturan menulis format yang sama); kunci tidak pernah meninggalkan perangkatmu.
 Variabel lingkungan tidak dibaca — aplikasi GUI dijalankan oleh OS, bukan oleh shell-mu, sehingga variabel yang di-export di `.zshrc` dan sejenisnya tidak pernah sampai ke sana.
 Berkas ini divalidasi terhadap skema pada setiap pembacaan.

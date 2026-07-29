@@ -83,6 +83,9 @@ import RepomixLink from "../../../components/RepomixLink.astro";
 موطن صيغة الملف هو [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — كل حقل موثّق هناك (بما في ذلك `$schema` للتحقق والإكمال التلقائي في المحرر)، ويضم [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) إعدادات بثلاثة أحجام.
 ولنقاط انطلاق بنكهة ZenCopy (ما تكتبه واجهة الإعدادات، وOllama المحلي، والأدوار للإجراءات)، راجع [الوصفات](/ar/recipes/).
 
+هناك متطلب واحد يخص ZenCopy نفسه وليس تنسيق الملف: يجب أن يحتوي `roles` دائمًا على **`default`**.
+كل إجراء يعمل به ما لم يسمِّ الـ frontmatter الخاص به role آخر، واختبار الاتصال في الإعدادات يرسل ping إليه.
+
 تُوضع مفاتيح API مباشرة في هذا الملف المحلي (واجهة الإعدادات تكتب الصيغة نفسها)؛ ولا تغادر جهازك أبدًا.
 متغيرات البيئة لا تُقرأ — فتطبيقات الواجهة الرسومية يشغّلها نظام التشغيل لا الـ shell الخاص بك، لذا لا تصلها المتغيرات المصدَّرة في `.zshrc` وأشباهه.
 يُتحقق من الملف وفق المخطط عند كل قراءة.

@@ -83,6 +83,9 @@ Les fournisseurs, plus une correspondance **role → modèle**.
 Le format du fichier est défini par [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — chaque champ y est documenté (y compris un `$schema` pour la validation et la complétion dans l'éditeur), et [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) propose des configurations en trois tailles.
 Pour des points de départ propres à ZenCopy (ce que l'interface des réglages écrit, Ollama en local, des roles pour les actions), voir les [Recettes](/fr/recipes/).
 
+Une exigence vient de ZenCopy lui-même, pas du format : `roles` doit toujours contenir **`default`**.
+Chaque action s'exécute avec ce role sauf si son frontmatter en nomme un autre, et le test de connexion des réglages lui envoie un ping.
+
 Les clés d'API vont directement dans ce fichier local (l'interface des réglages écrit le même format) ; elles ne quittent jamais votre machine.
 Les variables d'environnement ne sont pas lues — les applications graphiques sont lancées par le système, pas par votre shell, donc les variables exportées dans `.zshrc` et consorts ne leur parviennent jamais.
 Le fichier est validé par schéma à chaque lecture.

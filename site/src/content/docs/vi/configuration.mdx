@@ -83,6 +83,9 @@ Các nhà cung cấp cùng một ánh xạ **vai trò → mô hình**.
 Nhà gốc của định dạng tệp là [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — mọi trường đều được mô tả ở đó (kèm `$schema` để trình soạn thảo kiểm tra và tự hoàn thành), và [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) có cấu hình ở ba kích cỡ.
 Về các điểm khởi đầu dành riêng cho ZenCopy (những gì giao diện cài đặt ghi ra, Ollama chạy tại máy, vai trò cho hành động), xem [Cấu hình mẫu](/vi/recipes/).
 
+Có một yêu cầu đến từ chính ZenCopy chứ không phải từ định dạng tệp: `roles` phải luôn chứa **`default`**.
+Mọi hành động đều chạy với role này trừ khi frontmatter của nó nêu một role khác, và bài kiểm tra kết nối trong phần cài đặt cũng ping role này.
+
 Khóa API được ghi thẳng vào tệp cục bộ này (giao diện cài đặt ghi cùng định dạng); chúng không bao giờ rời khỏi máy bạn.
 Biến môi trường không được đọc — ứng dụng đồ họa do hệ điều hành khởi chạy, không phải shell của bạn, nên các biến export trong `.zshrc` và những tệp tương tự không bao giờ đến được chúng.
 Tệp được kiểm tra theo schema ở mỗi lần đọc.
