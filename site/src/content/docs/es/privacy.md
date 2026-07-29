@@ -20,12 +20,17 @@ Qué se envía exactamente depende de la acción que se ejecuta:
 Un copiado normal, uno solo, nunca se captura ni se envía.
 El contenido del portapapeles que otras aplicaciones marcan como sensible (p. ej., los gestores de contraseñas) se ignora.
 
+Al margen de las capturas, la comprobación de actualizaciones solo pide a GitHub los metadatos de la versión — nunca tu contenido.
+
 ## Qué se queda en tu dispositivo
 
 - Tus claves de API (`ai-sdk-catalog.json` en el directorio de configuración de la aplicación — nunca se empaquetan, nunca se suben).
 - Tus ajustes (tema, idioma, posición del popup, …).
 - Los archivos de log.
   Los logs ocultan los secretos y nunca incluyen contenido copiado ni claves de API.
+
+- Estadísticas de uso (un interruptor en los ajustes, activado por defecto): qué acción se ejecutó sobre qué tipo de captura, junto con el modelo y el número de tokens, para que tus costos sigan siendo calculables.
+  Solo un archivo local — nunca el contenido copiado, nunca se envía a ninguna parte.
 
 ## Terceros
 

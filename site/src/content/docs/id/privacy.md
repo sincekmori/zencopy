@@ -20,12 +20,17 @@ Apa persisnya yang dikirim bergantung pada aksi yang berjalan:
 Salinan tunggal biasa tidak pernah ditangkap dan tidak pernah dikirim.
 Konten papan klip yang ditandai sensitif oleh aplikasi lain (mis. pengelola kata sandi) diabaikan.
 
+Terpisah dari tangkapan, pemeriksaan pembaruan hanya meminta metadata rilis ke GitHub — tidak pernah konten kamu.
+
 ## Apa yang tetap di perangkatmu
 
 - Kunci API kamu (`ai-sdk-catalog.json` di direktori konfigurasi aplikasi — tidak pernah dibundel, tidak pernah diunggah).
 - Pengaturanmu (tema, bahasa, posisi popup, …).
 - Berkas log.
   Log menyamarkan rahasia dan tidak pernah menyertakan konten yang disalin maupun kunci API.
+
+- Statistik penggunaan (sakelar di pengaturan, aktif secara bawaan): aksi mana yang berjalan pada jenis tangkapan mana, beserta model dan jumlah token, agar biayamu tetap bisa dihitung.
+  Hanya berkas lokal — tidak pernah berisi konten yang disalin, tidak pernah dikirim ke mana pun.
 
 ## Pihak ketiga
 

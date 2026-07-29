@@ -20,12 +20,17 @@ Chính xác những gì được gửi phụ thuộc vào hành động được
 Một lần sao chép bình thường không bao giờ bị bắt và không bao giờ bị gửi đi.
 Nội dung bộ nhớ tạm được các ứng dụng khác đánh dấu là nhạy cảm (ví dụ trình quản lý mật khẩu) sẽ bị bỏ qua.
 
+Tách biệt với các lần bắt nội dung, việc kiểm tra cập nhật chỉ hỏi GitHub về siêu dữ liệu bản phát hành — không bao giờ gửi nội dung của bạn.
+
 ## Những gì ở lại trên thiết bị của bạn
 
 - Khóa API của bạn (`ai-sdk-catalog.json` trong thư mục cấu hình ứng dụng — không bao giờ được đóng gói kèm, không bao giờ được tải lên).
 - Cài đặt của bạn (giao diện, ngôn ngữ, vị trí cửa sổ nổi, …).
 - Các tệp nhật ký.
   Nhật ký che thông tin bí mật và không bao giờ chứa nội dung sao chép hay khóa API.
+
+- Thống kê sử dụng (công tắc trong cài đặt, bật mặc định): hành động nào chạy trên loại bắt nội dung nào, cùng mô hình và số token, để chi phí luôn tính được.
+  Chỉ là một tệp cục bộ — không bao giờ chứa nội dung đã sao chép, không bao giờ được gửi đi đâu.
 
 ## Bên thứ ba
 

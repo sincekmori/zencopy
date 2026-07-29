@@ -20,12 +20,17 @@ Ce qui est envoyé exactement dépend de l'action qui s'exécute :
 Un simple copier ordinaire n'est jamais capturé ni envoyé.
 Le contenu du presse-papiers que d'autres applications marquent comme sensible (les gestionnaires de mots de passe, par exemple) est ignoré.
 
+Indépendamment des captures, la vérification des mises à jour ne demande à GitHub que les métadonnées de version — jamais vos contenus.
+
 ## Ce qui reste sur votre appareil
 
 - Vos clés d'API (`ai-sdk-catalog.json` dans le répertoire de configuration de l'application — jamais embarquées, jamais téléversées).
 - Vos réglages (thème, langue, position du popup, …).
 - Les fichiers journaux.
   Les journaux masquent les secrets et ne contiennent jamais le contenu copié ni les clés d'API.
+
+- Les statistiques d'utilisation (interrupteur dans les réglages, activé par défaut) : quelle action a traité quel type de capture, avec le modèle et le nombre de tokens, pour que vos coûts restent calculables.
+  Un simple fichier local — jamais le contenu copié, jamais envoyé nulle part.
 
 ## Tiers
 

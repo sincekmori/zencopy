@@ -20,12 +20,17 @@ What exactly is sent depends on the action that runs:
 A single normal copy is never captured and never sent.
 Clipboard content that other apps mark as sensitive (e.g. password managers) is ignored.
 
+Separately from captures, checking for updates asks GitHub for release metadata — never any of your content.
+
 ## What stays on your device
 
 - Your API keys (`ai-sdk-catalog.json` in the app config dir — never bundled, never uploaded).
 - Your settings (theme, language, popup position, …).
 - Log files.
   Logs redact secrets and never include copied content or API keys.
+
+- Usage statistics (a settings toggle, on by default): which action ran on which kind of capture, plus the model and token counts, so your costs stay computable.
+  Kept in a local file only — never the copied content, never sent anywhere.
 
 ## Third parties
 

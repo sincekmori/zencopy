@@ -20,12 +20,17 @@ Tam olarak neyin gönderileceği, çalışan eyleme bağlıdır:
 Tek bir normal kopyalama asla yakalanmaz ve asla gönderilmez.
 Başka uygulamaların hassas olarak işaretlediği pano içeriği (örn. parola yöneticileri) yok sayılır.
 
+Yakalamalardan ayrı olarak, güncelleme denetimi GitHub'dan yalnızca sürüm meta verilerini ister — içeriğini asla.
+
 ## Cihazında neler kalır
 
 - API anahtarların (uygulama yapılandırma dizinindeki `ai-sdk-catalog.json` — asla pakete dahil edilmez, asla yüklenmez).
 - Ayarların (tema, dil, açılır pencere konumu, …).
 - Günlük dosyaları.
   Günlükler gizli bilgileri ayıklar; kopyalanan içeriği ya da API anahtarlarını asla içermez.
+
+- Kullanım istatistikleri (ayarlarda bir anahtar, varsayılan olarak açık): hangi eylemin hangi tür yakalamada çalıştığı, model ve token sayılarıyla birlikte; böylece maliyetlerin hesaplanabilir kalır.
+  Yalnızca yerel bir dosya — asla kopyalanan içerik değil, asla hiçbir yere gönderilmez.
 
 ## Üçüncü taraflar
 

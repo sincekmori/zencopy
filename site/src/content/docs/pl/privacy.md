@@ -20,12 +20,17 @@ Co dokładnie jest wysyłane, zależy od uruchamianej akcji:
 Pojedyncze zwykłe kopiowanie nigdy nie jest przechwytywane ani wysyłane.
 Treść schowka, którą inne aplikacje oznaczają jako wrażliwą (np. menedżery haseł), jest ignorowana.
 
+Niezależnie od przechwyceń sprawdzanie aktualizacji pyta GitHub wyłącznie o metadane wydania — nigdy o twoje treści.
+
 ## Co zostaje na Twoim urządzeniu
 
 - Twoje klucze API (`ai-sdk-catalog.json` w katalogu konfiguracyjnym aplikacji — nigdy nie są dołączane do aplikacji ani nigdzie przesyłane).
 - Twoje ustawienia (motyw, język, pozycja okienka, …).
 - Pliki logów.
   Logi mają usuwane sekrety i nigdy nie zawierają skopiowanej treści ani kluczy API.
+
+- Statystyki użycia (przełącznik w ustawieniach, domyślnie włączony): która akcja działała na jakim typie przechwycenia, wraz z modelem i liczbą tokenów, aby koszty pozostały policzalne.
+  Tylko lokalny plik — nigdy skopiowana treść, nigdy nigdzie nie wysyłany.
 
 ## Strony trzecie
 

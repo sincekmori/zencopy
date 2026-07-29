@@ -20,12 +20,17 @@ Cosa venga inviato esattamente dipende dall'azione eseguita:
 Un singolo copia normale non viene mai catturato né inviato.
 Il contenuto degli appunti che altre app contrassegnano come riservato (es. i gestori di password) viene ignorato.
 
+A parte le catture, il controllo degli aggiornamenti chiede a GitHub solo i metadati della release — mai i tuoi contenuti.
+
 ## Cosa resta sul tuo dispositivo
 
 - Le tue chiavi API (`ai-sdk-catalog.json` nella directory di configurazione dell'app — mai incluse nel pacchetto, mai caricate).
 - Le tue impostazioni (tema, lingua, posizione del popup, …).
 - I file di log.
   I log oscurano i segreti e non includono mai i contenuti copiati né le chiavi API.
+
+- Statistiche d'uso (un interruttore nelle impostazioni, attivo per impostazione predefinita): quale azione è stata eseguita su quale tipo di cattura, con il modello e il numero di token, così i costi restano calcolabili.
+  Solo un file locale — mai il contenuto copiato, mai inviato da nessuna parte.
 
 ## Terze parti
 

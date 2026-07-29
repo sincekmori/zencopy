@@ -20,12 +20,17 @@ Was genau gesendet wird, hängt von der ausgeführten Aktion ab:
 Ein einzelnes normales Kopieren wird nie erfasst und nie gesendet.
 Zwischenablage-Inhalte, die andere Apps als sensibel markieren (z. B. Passwort-Manager), werden ignoriert.
 
+Unabhängig von Captures fragt die Update-Prüfung bei GitHub nur Release-Metadaten ab — nie deine Inhalte.
+
 ## Was auf deinem Gerät bleibt
 
 - Deine API-Schlüssel (`ai-sdk-catalog.json` im App-Konfigurationsverzeichnis — nie mitgeliefert, nie hochgeladen).
 - Deine Einstellungen (Design, Sprache, Popup-Position, …).
 - Log-Dateien.
   Logs schwärzen Geheimnisse und enthalten nie kopierte Inhalte oder API-Schlüssel.
+
+- Nutzungsstatistik (Schalter in den Einstellungen, standardmäßig an): welche Aktion auf welcher Art von Capture lief, dazu Modell und Tokenzahlen, damit sich deine Kosten berechnen lassen.
+  Nur eine lokale Datei — nie der kopierte Inhalt, nie irgendwohin gesendet.
 
 ## Dritte
 
