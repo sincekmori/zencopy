@@ -33,7 +33,7 @@ const gettingStartedHref = `/${lang}/getting-started/`;
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>ZenCopy</title>
+    <title>{copy.metaTitle}</title>
     <meta content={copy.description} name="description" />
     <link href={canonical} rel="canonical" />
     {
@@ -49,7 +49,8 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
     <link href="/sitemap-index.xml" rel="sitemap" />
-    <meta content="ZenCopy" property="og:title" />
+    <meta content="ZenCopy" property="og:site_name" />
+    <meta content={copy.metaTitle} property="og:title" />
     <meta content={copy.description} property="og:description" />
     <meta content="website" property="og:type" />
     <meta content={canonical} property="og:url" />
