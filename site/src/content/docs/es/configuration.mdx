@@ -100,10 +100,10 @@ El mapa plano se puede editar dentro de la aplicación (Ajustes → Acciones →
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Resume lo siguiente en 3 líneas, en {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Significado                                                                       |
-| -------------- | --------------------------------------------------------------------------------- |
-| `id`           | Nombre al que hace referencia `routing.json` (por defecto: el nombre del archivo) |
-| `label`        | Se muestra en el popup                                                            |
-| `role`         | Rol del catálogo con el que se ejecuta (por defecto: `default`)                   |
-| `instructions` | Prompt de sistema (plantilla Liquid)                                              |
+| Frontmatter    | Significado                                                                                                                                           |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nombre al que hace referencia `routing.json` (por defecto: el nombre del archivo) — el prefijo `zencopy-` está reservado a las acciones preinstaladas |
+| `label`        | Se muestra en el popup                                                                                                                                |
+| `role`         | Rol del catálogo con el que se ejecuta (por defecto: `default`)                                                                                       |
+| `instructions` | Prompt de sistema (plantilla Liquid)                                                                                                                  |
 
 Variables de plantilla, con valores de ejemplo para un párrafo copiado en un navegador:
 

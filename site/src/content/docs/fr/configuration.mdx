@@ -100,10 +100,10 @@ La table plate est modifiable dans l'application (Réglages → Actions → Rout
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Résumez en 3 lignes, en {{ locale }} :
 {{ text }}
 ```
 
-| Frontmatter    | Signification                                                        |
-| -------------- | -------------------------------------------------------------------- |
-| `id`           | Nom référencé depuis `routing.json` (par défaut : le nom du fichier) |
-| `label`        | Affiché dans le popup                                                |
-| `role`         | Role du catalog utilisé pour l'exécution (par défaut : `default`)    |
-| `instructions` | Prompt système (gabarit Liquid)                                      |
+| Frontmatter    | Signification                                                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nom référencé depuis `routing.json` (par défaut : le nom du fichier) — le préfixe `zencopy-` est réservé aux actions préinstallées |
+| `label`        | Affiché dans le popup                                                                                                              |
+| `role`         | Role du catalog utilisé pour l'exécution (par défaut : `default`)                                                                  |
+| `instructions` | Prompt système (gabarit Liquid)                                                                                                    |
 
 Les variables de gabarit, avec des valeurs d'exemple pour un paragraphe copié dans un navigateur :
 

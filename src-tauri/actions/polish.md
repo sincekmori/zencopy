@@ -1,5 +1,5 @@
 ---
-id: polish
+id: zencopy-polish
 label: Polish
 instructions: |-
   The input is a draft the user wrote. Return the polished, properly written version they would be comfortable sending or publishing — in its own language, never translate.

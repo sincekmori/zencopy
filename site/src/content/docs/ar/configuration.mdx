@@ -100,10 +100,10 @@ import RepomixLink from "../../../components/RepomixLink.astro";
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ instructions: أنت مساعد موجز.
 {{ text }}
 ```
 
-| الـ frontmatter | المعنى                                                      |
-| --------------- | ----------------------------------------------------------- |
-| `id`            | الاسم المُشار إليه من `routing.json` (افتراضيًا: اسم الملف) |
-| `label`         | يُعرض في النافذة المنبثقة                                   |
-| `role`          | دور الـ catalog الذي يُشغَّل به (افتراضيًا: `default`)      |
-| `instructions`  | موجّه النظام (قالب Liquid)                                  |
+| الـ frontmatter | المعنى                                                                                                           |
+| --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `id`            | الاسم المُشار إليه من `routing.json` (افتراضيًا: اسم الملف) — البادئة `zencopy-` محجوزة للإجراءات المثبتة مسبقًا |
+| `label`         | يُعرض في النافذة المنبثقة                                                                                        |
+| `role`          | دور الـ catalog الذي يُشغَّل به (افتراضيًا: `default`)                                                           |
+| `instructions`  | موجّه النظام (قالب Liquid)                                                                                       |
 
 متغيرات القالب، مع أمثلة قيمها لفقرة نُسخت في متصفح:
 

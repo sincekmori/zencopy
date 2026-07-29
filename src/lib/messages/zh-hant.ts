@@ -124,7 +124,11 @@ export const zhHant: Messages = {
       "還差一步。macOS 需要你的許可才能察覺兩次複製。請在「系統設定 → 隱私權與安全性」的「輸入監控」中允許 ZenCopy，然後將 ZenCopy 結束一次再重新啟動。",
   },
   actions: {
-    builtinLabels: { translate: "翻譯", explain: "解說", polish: "潤飾" },
+    builtinLabels: {
+      "zencopy-translate": "翻譯",
+      "zencopy-explain": "解說",
+      "zencopy-polish": "潤飾",
+    },
     title: "動作",
     hint: (keys) => `${keys} 能做什麼。也可以從彈出視窗的結果標籤切換。`,
     add: "新增動作",
@@ -151,6 +155,7 @@ export const zhHant: Messages = {
     importNoLabel: "此動作沒有 label。",
     importInvalidId: (id) => `動作 id「${id}」無效。`,
     importBuiltinId: (id) => `「${id}」是內建動作的 id——請修改檔案中的 id 後重試。`,
+    importReservedId: (id) => `「${id}」以「zencopy-」開頭——該 id 前綴專用於預裝動作。`,
     importIdExists: (id) => `id 為「${id}」的動作已存在——請先刪除，或修改檔案中的 id。`,
     importTooLarge: "檔案過大，無法作為動作匯入。",
     labelExists: (label) => `已存在名為「${label}」的動作——請改用其他名稱。`,

@@ -100,10 +100,10 @@ Bốn loại là `text`, `rich_text`, `image` và `files`; theo mặc định, v
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Tóm tắt trong 3 dòng, bằng {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Ý nghĩa                                                   |
-| -------------- | --------------------------------------------------------- |
-| `id`           | Tên được tham chiếu từ `routing.json` (mặc định: tên tệp) |
-| `label`        | Hiển thị trên cửa sổ nổi                                  |
-| `role`         | Vai trò trong catalog dùng để chạy (mặc định: `default`)  |
-| `instructions` | System prompt (mẫu Liquid)                                |
+| Frontmatter    | Ý nghĩa                                                                                                             |
+| -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Tên được tham chiếu từ `routing.json` (mặc định: tên tệp) — tiền tố `zencopy-` dành riêng cho các hành động cài sẵn |
+| `label`        | Hiển thị trên cửa sổ nổi                                                                                            |
+| `role`         | Vai trò trong catalog dùng để chạy (mặc định: `default`)                                                            |
+| `instructions` | System prompt (mẫu Liquid)                                                                                          |
 
 Các biến mẫu, kèm giá trị ví dụ cho một đoạn văn sao chép trong trình duyệt:
 

@@ -145,7 +145,12 @@ export const QUICK_SLOT_COUNT = 4;
 
 /** The pre-installed actions, in slot order — the zero-config default.
  *  Mirrors DEFAULT_ACTIONS in src-tauri/src/lib.rs (same ids, same order). */
-const DEFAULT_QUICK_ACTIONS = ["zen", "explain", "translate", "polish"];
+const DEFAULT_QUICK_ACTIONS = [
+  "zencopy-zen",
+  "zencopy-explain",
+  "zencopy-translate",
+  "zencopy-polish",
+];
 
 const QUICK_ACTIONS_KEY = "quickActions";
 

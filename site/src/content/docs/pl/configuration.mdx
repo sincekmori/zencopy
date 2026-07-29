@@ -100,10 +100,10 @@ Płaską mapę można edytować w aplikacji (Ustawienia → Akcje → Routing), 
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Streść w 3 linijkach, w języku {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Znaczenie                                                             |
-| -------------- | --------------------------------------------------------------------- |
-| `id`           | Nazwa, do której odwołuje się `routing.json` (domyślnie: nazwa pliku) |
-| `label`        | Wyświetlana w okienku                                                 |
-| `role`         | Rola z katalogu użyta do uruchomienia (domyślnie: `default`)          |
-| `instructions` | Prompt systemowy (szablon Liquid)                                     |
+| Frontmatter    | Znaczenie                                                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nazwa, do której odwołuje się `routing.json` (domyślnie: nazwa pliku) — prefiks `zencopy-` jest zarezerwowany dla akcji preinstalowanych |
+| `label`        | Wyświetlana w okienku                                                                                                                    |
+| `role`         | Rola z katalogu użyta do uruchomienia (domyślnie: `default`)                                                                             |
+| `instructions` | Prompt systemowy (szablon Liquid)                                                                                                        |
 
 Zmienne szablonu, z przykładowymi wartościami dla akapitu skopiowanego w przeglądarce:
 

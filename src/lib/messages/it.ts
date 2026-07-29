@@ -130,7 +130,11 @@ export const it: Messages = {
       "Manca un passaggio: macOS ha bisogno della tua autorizzazione per accorgersi della doppia copia. In Impostazioni di Sistema → Privacy e Sicurezza, consenti ZenCopy in Monitoraggio input, poi chiudi e riapri ZenCopy.",
   },
   actions: {
-    builtinLabels: { translate: "Traduci", explain: "Spiega", polish: "Rifinisci" },
+    builtinLabels: {
+      "zencopy-translate": "Traduci",
+      "zencopy-explain": "Spiega",
+      "zencopy-polish": "Rifinisci",
+    },
     title: "Azioni",
     hint: (keys) =>
       `Cosa può fare ${keys}. Si cambia anche dall'etichetta del risultato nel popup.`,
@@ -161,6 +165,8 @@ export const it: Messages = {
     importInvalidId: (id) => `Id azione non valido: '${id}'.`,
     importBuiltinId: (id) =>
       `'${id}' è l'id di un'azione integrata — modifica l'id nel file e riprova.`,
+    importReservedId: (id) =>
+      `'${id}' inizia con 'zencopy-': questo prefisso di id è riservato alle azioni preinstallate.`,
     importIdExists: (id) =>
       `Esiste già un'azione con l'id '${id}' — eliminala prima, oppure modifica l'id nel file.`,
     importTooLarge: "Il file è troppo grande per essere un'azione.",

@@ -125,7 +125,11 @@ export const th: Messages = {
       "เหลืออีกขั้นตอนเดียว: macOS ต้องการสิทธิ์จากคุณเพื่อให้สังเกตการคัดลอกสองครั้งได้ ไปที่ การตั้งค่าระบบ → ความเป็นส่วนตัวและความปลอดภัย แล้วอนุญาต ZenCopy ใน การตรวจสอบสัญญาณเข้า จากนั้นปิด ZenCopy แล้วเปิดใหม่",
   },
   actions: {
-    builtinLabels: { translate: "แปล", explain: "อธิบาย", polish: "ขัดเกลา" },
+    builtinLabels: {
+      "zencopy-translate": "แปล",
+      "zencopy-explain": "อธิบาย",
+      "zencopy-polish": "ขัดเกลา",
+    },
     title: "แอ็กชัน",
     hint: (keys) => `สิ่งที่ ${keys} ทำได้ สลับจากป้ายผลลัพธ์บนป๊อปอัปก็ได้เช่นกัน`,
     add: "แอ็กชันใหม่",
@@ -152,6 +156,7 @@ export const th: Messages = {
     importNoLabel: "แอ็กชันนี้ไม่มี label",
     importInvalidId: (id) => `id ของแอ็กชันไม่ถูกต้อง: '${id}'`,
     importBuiltinId: (id) => `'${id}' เป็น id ของแอ็กชันในตัว — แก้ไข id ในไฟล์แล้วลองอีกครั้ง`,
+    importReservedId: (id) => `'${id}' ขึ้นต้นด้วย 'zencopy-' — คำนำหน้า id นี้สงวนไว้สำหรับแอ็กชันที่ติดตั้งมาให้`,
     importIdExists: (id) => `มีแอ็กชันที่ใช้ id '${id}' อยู่แล้ว — ลบออกก่อน หรือแก้ไข id ในไฟล์`,
     importTooLarge: "ไฟล์ใหญ่เกินไปที่จะเป็นแอ็กชัน",
     labelExists: (label) => `มีแอ็กชันชื่อ '${label}' อยู่แล้ว — โปรดใช้ชื่ออื่น`,

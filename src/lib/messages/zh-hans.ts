@@ -123,7 +123,11 @@ export const zhHans: Messages = {
       "还差一步：macOS 需要你的许可才能察觉两次复制。请在“系统设置 → 隐私与安全性”中的“输入监控”里允许 ZenCopy，然后退出 ZenCopy 再重新启动。",
   },
   actions: {
-    builtinLabels: { translate: "翻译", explain: "解释", polish: "润色" },
+    builtinLabels: {
+      "zencopy-translate": "翻译",
+      "zencopy-explain": "解释",
+      "zencopy-polish": "润色",
+    },
     title: "动作",
     hint: (keys) => `${keys} 能做什么。也可以从弹窗的结果标签切换。`,
     add: "新建动作",
@@ -150,6 +154,7 @@ export const zhHans: Messages = {
     importNoLabel: "该动作没有 label。",
     importInvalidId: (id) => `动作 id“${id}”无效。`,
     importBuiltinId: (id) => `“${id}”是内置动作的 id——请修改文件中的 id 后重试。`,
+    importReservedId: (id) => `“${id}”以“zencopy-”开头——该 id 前缀专用于预装动作。`,
     importIdExists: (id) => `id 为“${id}”的动作已存在——请先删除，或修改文件中的 id。`,
     importTooLarge: "文件过大，无法作为动作导入。",
     labelExists: (label) => `已存在名为“${label}”的动作——请换一个名称。`,

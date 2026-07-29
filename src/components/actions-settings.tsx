@@ -75,6 +75,9 @@ function actionErrorText(t: Messages, error: unknown): string {
     case "builtin-id": {
       return t.actions.importBuiltinId(detail);
     }
+    case "reserved-id": {
+      return t.actions.importReservedId(detail);
+    }
     case "id-exists": {
       return t.actions.importIdExists(detail);
     }

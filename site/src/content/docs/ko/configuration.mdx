@@ -100,10 +100,10 @@ API 키는 이 로컬 파일에 그대로 들어갑니다(설정 UI도 같은 �
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ instructions: 당신은 간결한 어시스턴트입니다.
 {{ text }}
 ```
 
-| Frontmatter    | 의미                                                |
-| -------------- | --------------------------------------------------- |
-| `id`           | `routing.json`에서 참조하는 이름(기본값: 파일 이름) |
-| `label`        | 팝업에 표시되는 이름                                |
-| `role`         | 실행에 사용할 카탈로그 역할(기본값: `default`)      |
-| `instructions` | 시스템 프롬프트(Liquid 템플릿)                      |
+| Frontmatter    | 의미                                                                                          |
+| -------------- | --------------------------------------------------------------------------------------------- |
+| `id`           | `routing.json`에서 참조하는 이름(기본값: 파일 이름) — 접두사 `zencopy-`는 사전 설치 액션 전용 |
+| `label`        | 팝업에 표시되는 이름                                                                          |
+| `role`         | 실행에 사용할 카탈로그 역할(기본값: `default`)                                                |
+| `instructions` | 시스템 프롬프트(Liquid 템플릿)                                                                |
 
 템플릿 변수와, 브라우저에서 문단을 복사했을 때의 값 예시:
 

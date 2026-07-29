@@ -100,10 +100,10 @@ Die flache Zuordnung ist in der App bearbeitbar (Einstellungen → Aktionen → 
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Fasse das in 3 Zeilen zusammen, auf {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Bedeutung                                                       |
-| -------------- | --------------------------------------------------------------- |
-| `id`           | Name, auf den `routing.json` verweist (Standard: der Dateiname) |
-| `label`        | Wird im Popup angezeigt                                         |
-| `role`         | Katalog-Rolle, mit der ausgeführt wird (Standard: `default`)    |
-| `instructions` | System-Prompt (Liquid-Template)                                 |
+| Frontmatter    | Bedeutung                                                                                                                             |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Name, auf den `routing.json` verweist (Standard: der Dateiname) — das Präfix `zencopy-` ist den vorinstallierten Aktionen vorbehalten |
+| `label`        | Wird im Popup angezeigt                                                                                                               |
+| `role`         | Katalog-Rolle, mit der ausgeführt wird (Standard: `default`)                                                                          |
+| `instructions` | System-Prompt (Liquid-Template)                                                                                                       |
 
 Die Template-Variablen, mit Beispielwerten für einen im Browser kopierten Absatz:
 

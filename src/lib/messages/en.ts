@@ -157,6 +157,8 @@ export const en: Messages = {
     importInvalidId: (id) => `Invalid action id: '${id}'.`,
     importBuiltinId: (id) =>
       `'${id}' is a built-in action's id — change the id in the file and retry.`,
+    importReservedId: (id) =>
+      `'${id}' starts with 'zencopy-' — that id prefix is reserved for the pre-installed actions.`,
     importIdExists: (id) =>
       `An action with the id '${id}' already exists — delete it first, or change the id in the file.`,
     importTooLarge: "The file is too large to be an action.",

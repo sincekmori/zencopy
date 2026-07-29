@@ -100,10 +100,10 @@ ZenCopy עובד מהקופסה בלי להגדיר דבר.
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ instructions: אתה עוזר תמציתי.
 {{ text }}
 ```
 
-| Frontmatter    | משמעות                                                 |
-| -------------- | ------------------------------------------------------ |
-| `id`           | השם שאליו מפנה `routing.json` (ברירת מחדל: שם הקובץ)   |
-| `label`        | מוצג בחלון הקופץ                                       |
-| `role`         | ה‑role בקטלוג שאיתו הפעולה רצה (ברירת מחדל: `default`) |
-| `instructions` | פרומפט מערכת (תבנית Liquid)                            |
+| Frontmatter    | משמעות                                                                                                |
+| -------------- | ----------------------------------------------------------------------------------------------------- |
+| `id`           | השם שאליו מפנה `routing.json` (ברירת מחדל: שם הקובץ) — הקידומת `zencopy-` שמורה לפעולות המותקנות מראש |
+| `label`        | מוצג בחלון הקופץ                                                                                      |
+| `role`         | ה‑role בקטלוג שאיתו הפעולה רצה (ברירת מחדל: `default`)                                                |
+| `instructions` | פרומפט מערכת (תבנית Liquid)                                                                           |
 
 משתני התבנית, עם ערכי דוגמה לפסקה שהועתקה בדפדפן:
 

@@ -100,10 +100,10 @@ The flat map is editable in-app (Settings → Actions → Routing), so you only 
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Summarize in 3 lines, in {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Meaning                                                  |
-| -------------- | -------------------------------------------------------- |
-| `id`           | Name referenced from `routing.json` (default: file name) |
-| `label`        | Shown in the popup                                       |
-| `role`         | Catalog role to run with (default: `default`)            |
-| `instructions` | System prompt (Liquid template)                          |
+| Frontmatter    | Meaning                                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Name referenced from `routing.json` (default: file name) — the `zencopy-` prefix is reserved for pre-installed actions |
+| `label`        | Shown in the popup                                                                                                     |
+| `role`         | Catalog role to run with (default: `default`)                                                                          |
+| `instructions` | System prompt (Liquid template)                                                                                        |
 
 Template variables, with example values for a paragraph copied in a browser:
 

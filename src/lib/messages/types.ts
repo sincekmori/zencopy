@@ -190,6 +190,8 @@ export interface Messages {
     importNoLabel: string;
     importInvalidId: (id: string) => string;
     importBuiltinId: (id: string) => string;
+    /** A save or import whose id claims the reserved `zencopy-` prefix. */
+    importReservedId: (id: string) => string;
     importIdExists: (id: string) => string;
     importTooLarge: string;
     /** Rejection for a save or import whose label duplicates an existing

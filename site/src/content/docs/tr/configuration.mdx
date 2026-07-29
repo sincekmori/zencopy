@@ -100,10 +100,10 @@ Düz eşleme uygulama içinden düzenlenebilir (Ayarlar → Eylemler → Yönlen
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ instructions: Özlü bir asistansın.
 {{ text }}
 ```
 
-| Frontmatter    | Anlamı                                                           |
-| -------------- | ---------------------------------------------------------------- |
-| `id`           | `routing.json` içinden başvurulan ad (varsayılan: dosya adı)     |
-| `label`        | Açılır pencerede gösterilir                                      |
-| `role`         | Çalıştırmada kullanılacak katalog role'ü (varsayılan: `default`) |
-| `instructions` | Sistem prompt'u (Liquid şablonu)                                 |
+| Frontmatter    | Anlamı                                                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `id`           | `routing.json` içinden başvurulan ad (varsayılan: dosya adı) — `zencopy-` öneki önceden yüklü eylemlere ayrılmıştır |
+| `label`        | Açılır pencerede gösterilir                                                                                         |
+| `role`         | Çalıştırmada kullanılacak katalog role'ü (varsayılan: `default`)                                                    |
+| `instructions` | Sistem prompt'u (Liquid şablonu)                                                                                    |
 
 Şablon değişkenleri ve tarayıcıda kopyalanan bir paragraf için örnek değerler:
 

@@ -1,5 +1,5 @@
 ---
-id: explain
+id: zencopy-explain
 label: Explain
 instructions: |-
   Explain the input in {{ locale | language_name }}, in the spirit of "explain like I'm five": the plainest words the language has, built up from everyday experience.

@@ -100,10 +100,10 @@ Peta datarnya bisa disunting di dalam aplikasi (Pengaturan → Aksi → Perutean
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Ringkas dalam 3 baris, dalam {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Arti                                                        |
-| -------------- | ----------------------------------------------------------- |
-| `id`           | Nama yang dirujuk dari `routing.json` (bawaan: nama berkas) |
-| `label`        | Ditampilkan di popup                                        |
-| `role`         | Role catalog yang dipakai saat berjalan (bawaan: `default`) |
-| `instructions` | Prompt sistem (templat Liquid)                              |
+| Frontmatter    | Arti                                                                                                              |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nama yang dirujuk dari `routing.json` (bawaan: nama berkas) — prefiks `zencopy-` dikhususkan untuk aksi prainstal |
+| `label`        | Ditampilkan di popup                                                                                              |
+| `role`         | Role catalog yang dipakai saat berjalan (bawaan: `default`)                                                       |
+| `instructions` | Prompt sistem (templat Liquid)                                                                                    |
 
 Variabel templat, dengan contoh nilai untuk paragraf yang disalin di browser:
 

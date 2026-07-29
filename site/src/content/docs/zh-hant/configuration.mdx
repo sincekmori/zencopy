@@ -100,10 +100,10 @@ API 金鑰直接寫進這個本機檔案（設定 UI 寫的也是同一種格式
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ instructions: 你是一位簡潔的助理。
 {{ text }}
 ```
 
-| Frontmatter    | 意義                                         |
-| -------------- | -------------------------------------------- |
-| `id`           | 從 `routing.json` 引用的名稱（預設：檔名）   |
-| `label`        | 顯示在彈出視窗中                             |
-| `role`         | 執行時使用的 catalog role（預設：`default`） |
-| `instructions` | 系統提示詞（Liquid 範本）                    |
+| Frontmatter    | 意義                                                                       |
+| -------------- | -------------------------------------------------------------------------- |
+| `id`           | 從 `routing.json` 引用的名稱（預設：檔名）——前綴 `zencopy-` 專用於預裝動作 |
+| `label`        | 顯示在彈出視窗中                                                           |
+| `role`         | 執行時使用的 catalog role（預設：`default`）                               |
+| `instructions` | 系統提示詞（Liquid 範本）                                                  |
 
 範本變數，以及在瀏覽器中複製一個段落時的範例值：
 

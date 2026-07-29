@@ -65,11 +65,17 @@ pub(crate) fn parse_action(raw: &str, default_id: &str) -> Option<Action> {
 }
 
 pub(crate) const DEFAULT_ACTIONS: &[(&str, &str)] = &[
-    ("zen", include_str!("../actions/zen.md")),
-    ("explain", include_str!("../actions/explain.md")),
-    ("translate", include_str!("../actions/translate.md")),
-    ("polish", include_str!("../actions/polish.md")),
+    ("zencopy-zen", include_str!("../actions/zen.md")),
+    ("zencopy-explain", include_str!("../actions/explain.md")),
+    ("zencopy-translate", include_str!("../actions/translate.md")),
+    ("zencopy-polish", include_str!("../actions/polish.md")),
 ];
+
+/// Every pre-installed action id carries this prefix — it marks an action as
+/// official, and reserving it keeps user actions from colliding with future
+/// built-ins. User-supplied ids with this prefix are rejected everywhere ids
+/// enter (editor save, import, files in the config dir).
+pub(crate) const RESERVED_ID_PREFIX: &str = "zencopy-";
 
 /// Whether `id` names a built-in (immutable) action.
 pub(crate) fn is_builtin_action(id: &str) -> bool {
@@ -133,6 +139,13 @@ pub(crate) fn load_actions(handle: &tauri::AppHandle) -> Vec<Action> {
         if is_builtin_action(&action.id) {
             log::warn!(
                 "action '{}': shadows a built-in and is ignored (built-ins are immutable)",
+                action.id
+            );
+            continue;
+        }
+        if action.id.starts_with(RESERVED_ID_PREFIX) {
+            log::warn!(
+                "action '{}': the '{RESERVED_ID_PREFIX}' id prefix is reserved for pre-installed actions; ignored",
                 action.id
             );
             continue;
@@ -268,6 +281,9 @@ pub(crate) fn save_action(
                     "built-in actions cannot be edited",
                 ));
             }
+            if id.starts_with(RESERVED_ID_PREFIX) {
+                return Err(ActionError::with("reserved-id", id));
+            }
             id.to_string()
         }
         _ => new_action_id(),
@@ -391,6 +407,9 @@ pub(crate) fn import_action(app: tauri::AppHandle, text: String) -> Result<Strin
     if is_builtin_action(&id) {
         return Err(ActionError::with("builtin-id", id));
     }
+    if id.starts_with(RESERVED_ID_PREFIX) {
+        return Err(ActionError::with("reserved-id", id));
+    }
     let existing = config_base(&app)
         .ok_or_else(|| ActionError::with("failed", "config dir unavailable"))?
         .join("actions")
@@ -481,6 +500,10 @@ mod tests {
             let action = parse_action(raw, id)
                 .unwrap_or_else(|| panic!("built-in action '{id}' failed to parse"));
             assert_eq!(&action.id, id, "built-in action id must match its key");
+            assert!(
+                action.id.starts_with(RESERVED_ID_PREFIX),
+                "'{id}' must carry the '{RESERVED_ID_PREFIX}' prefix that marks pre-installed actions"
+            );
             assert!(!action.label.is_empty(), "'{id}' must have a label");
             assert!(!action.body.is_empty(), "'{id}' must have a prompt body");
         }
@@ -494,11 +517,11 @@ mod tests {
         let mut object = serde_json::json!({
             "text": "my-custom",
             "rich_text": "my-custom",
-            "image": "explain",
+            "image": "zencopy-explain",
             "future_kind": "my-custom",
             "overrides": [
                 { "when": { "app_name": "Mail" }, "action": "my-custom" },
-                { "when": { "app_name": "Code" }, "action": "zen" }
+                { "when": { "app_name": "Code" }, "action": "zencopy-zen" }
             ]
         })
         .as_object()
@@ -506,12 +529,12 @@ mod tests {
         .clone();
         purge_action_from_routing_object(&mut object, "my-custom");
         assert_eq!(
-            object["text"], "zen",
+            object["text"], "zencopy-zen",
             "kind returns to the embedded default"
         );
-        assert_eq!(object["rich_text"], "zen");
+        assert_eq!(object["rich_text"], "zencopy-zen");
         assert_eq!(
-            object["image"], "explain",
+            object["image"], "zencopy-explain",
             "other assignments stay verbatim"
         );
         assert!(
@@ -526,7 +549,7 @@ mod tests {
             1,
             "rules running the deleted action are dropped"
         );
-        assert_eq!(rules[0]["action"], "zen");
+        assert_eq!(rules[0]["action"], "zencopy-zen");
     }
 
     /// The action format's compatibility contract (see ActionMeta): shared

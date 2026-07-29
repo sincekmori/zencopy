@@ -126,7 +126,11 @@ export const he: Messages = {
       "נותר צעד אחד: macOS זקוק לאישור שלכם כדי לזהות את ההעתקה הכפולה. בהגדרות המערכת ← פרטיות ואבטחה, אשרו את ZenCopy תחת ניטור קלט, ואז סגרו את ZenCopy והפעילו אותו מחדש.",
   },
   actions: {
-    builtinLabels: { translate: "תרגום", explain: "הסבר", polish: "ליטוש" },
+    builtinLabels: {
+      "zencopy-translate": "תרגום",
+      "zencopy-explain": "הסבר",
+      "zencopy-polish": "ליטוש",
+    },
     title: "פעולות",
     hint: (keys) => `מה ${keys} יודעת לעשות. אפשר להחליף גם מתווית התוצאה בחלון.`,
     add: "פעולה חדשה",
@@ -153,6 +157,8 @@ export const he: Messages = {
     importNoLabel: "לפעולה אין label.",
     importInvalidId: (id) => `ה‑id של הפעולה אינו תקין: '${id}'`,
     importBuiltinId: (id) => `'${id}' הוא id של פעולה מובנית — שנו את ה‑id בקובץ ונסו שוב.`,
+    importReservedId: (id) =>
+      `'${id}' מתחיל ב-'zencopy-' — קידומת id זו שמורה לפעולות המותקנות מראש.`,
     importIdExists: (id) =>
       `פעולה עם ה‑id '${id}' כבר קיימת — מחקו אותה קודם, או שנו את ה‑id בקובץ.`,
     importTooLarge: "הקובץ גדול מדי בשביל פעולה.",

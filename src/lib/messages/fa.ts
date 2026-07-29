@@ -128,7 +128,11 @@ export const fa: Messages = {
       "یک قدم مانده است: macOS برای تشخیص کپی دوباره به اجازهٔ شما نیاز دارد. در System Settings → Privacy & Security، به ZenCopy در بخش Input Monitoring اجازه دهید، سپس از ZenCopy خارج شوید و دوباره اجرایش کنید.",
   },
   actions: {
-    builtinLabels: { translate: "ترجمه", explain: "توضیح", polish: "ویرایش" },
+    builtinLabels: {
+      "zencopy-translate": "ترجمه",
+      "zencopy-explain": "توضیح",
+      "zencopy-polish": "ویرایش",
+    },
     title: "اکشن‌ها",
     hint: (keys) => `کاری که ${keys} انجام می‌دهد. از برچسب نتیجه در پنجره هم قابل تعویض است.`,
     add: "اکشن جدید",
@@ -156,6 +160,8 @@ export const fa: Messages = {
     importInvalidId: (id) => `id اکشن نامعتبر است: '${id}'`,
     importBuiltinId: (id) =>
       `'${id}' id یک اکشن داخلی است — id را در فایل تغییر دهید و دوباره تلاش کنید.`,
+    importReservedId: (id) =>
+      `'${id}' با 'zencopy-' شروع می‌شود — این پیشوند id مخصوص اکشن‌های ازپیش‌نصب‌شده است.`,
     importIdExists: (id) =>
       `اکشنی با id '${id}' از قبل وجود دارد — ابتدا آن را حذف کنید یا id را در فایل تغییر دهید.`,
     importTooLarge: "فایل بزرگ‌تر از آن است که یک اکشن باشد.",

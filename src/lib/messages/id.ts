@@ -129,7 +129,11 @@ export const id: Messages = {
       "Tinggal satu langkah: macOS memerlukan izinmu agar aplikasi bisa menyadari bahwa salin ditekan dua kali. Di Pengaturan Sistem → Privasi & Keamanan, izinkan ZenCopy di Pengawasan Input, lalu tutup dan buka kembali ZenCopy.",
   },
   actions: {
-    builtinLabels: { translate: "Terjemahkan", explain: "Jelaskan", polish: "Rapikan" },
+    builtinLabels: {
+      "zencopy-translate": "Terjemahkan",
+      "zencopy-explain": "Jelaskan",
+      "zencopy-polish": "Rapikan",
+    },
     title: "Aksi",
     hint: (keys) => `Apa yang bisa dilakukan ${keys}. Bisa juga diganti dari label hasil di popup.`,
     add: "Aksi baru",
@@ -158,6 +162,8 @@ export const id: Messages = {
     importInvalidId: (actionId) => `Id aksi tidak valid: '${actionId}'.`,
     importBuiltinId: (actionId) =>
       `'${actionId}' adalah id aksi bawaan — ubah id di dalam berkas lalu coba lagi.`,
+    importReservedId: (actionId) =>
+      `'${actionId}' diawali 'zencopy-' — prefiks id ini dikhususkan untuk aksi prainstal.`,
     importIdExists: (actionId) =>
       `Aksi dengan id '${actionId}' sudah ada — hapus dulu, atau ubah id di dalam berkas.`,
     importTooLarge: "Berkas terlalu besar untuk menjadi aksi.",

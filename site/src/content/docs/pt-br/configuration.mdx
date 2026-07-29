@@ -100,10 +100,10 @@ O mapa simples pode ser editado no próprio aplicativo (Configurações → Aç�
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Resuma em 3 linhas, em {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Significado                                                            |
-| -------------- | ---------------------------------------------------------------------- |
-| `id`           | Nome referenciado a partir do `routing.json` (padrão: nome do arquivo) |
-| `label`        | Exibido no popup                                                       |
-| `role`         | Role do catálogo com o qual executar (padrão: `default`)               |
-| `instructions` | Prompt de sistema (template Liquid)                                    |
+| Frontmatter    | Significado                                                                                                                       |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nome referenciado a partir do `routing.json` (padrão: nome do arquivo) — o prefixo `zencopy-` é reservado às ações pré-instaladas |
+| `label`        | Exibido no popup                                                                                                                  |
+| `role`         | Role do catálogo com o qual executar (padrão: `default`)                                                                          |
+| `instructions` | Prompt de sistema (template Liquid)                                                                                               |
 
 Variáveis de template, com valores de exemplo para um parágrafo copiado em um navegador:
 

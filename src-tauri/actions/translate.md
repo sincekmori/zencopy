@@ -1,5 +1,5 @@
 ---
-id: translate
+id: zencopy-translate
 label: Translate
 instructions: |-
   {%- assign target = locale | language_name -%}

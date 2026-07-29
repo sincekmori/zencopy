@@ -129,7 +129,11 @@ export const vi: Messages = {
       "Còn một bước: macOS cần bạn cấp quyền để nhận biết thao tác sao chép hai lần. Trong Cài đặt hệ thống → Quyền riêng tư & Bảo mật, hãy cho phép ZenCopy ở Giám sát đầu vào, sau đó thoát ZenCopy rồi mở lại.",
   },
   actions: {
-    builtinLabels: { translate: "Dịch", explain: "Giải thích", polish: "Trau chuốt" },
+    builtinLabels: {
+      "zencopy-translate": "Dịch",
+      "zencopy-explain": "Giải thích",
+      "zencopy-polish": "Trau chuốt",
+    },
     title: "Hành động",
     hint: (keys) => `Những gì ${keys} làm được. Cũng đổi được từ nhãn kết quả trên cửa sổ nổi.`,
     add: "Hành động mới",
@@ -158,6 +162,8 @@ export const vi: Messages = {
     importInvalidId: (id) => `Id hành động không hợp lệ: '${id}'.`,
     importBuiltinId: (id) =>
       `'${id}' là id của hành động dựng sẵn — hãy đổi id trong tệp rồi thử lại.`,
+    importReservedId: (id) =>
+      `'${id}' bắt đầu bằng 'zencopy-' — tiền tố id này được dành riêng cho các hành động cài sẵn.`,
     importIdExists: (id) =>
       `Đã có hành động với id '${id}' — hãy xóa nó trước, hoặc đổi id trong tệp.`,
     importTooLarge: "Tệp quá lớn để là một hành động.",

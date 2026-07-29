@@ -130,7 +130,11 @@ export const tr: Messages = {
       "Bir adım kaldı: macOS'in çift kopyalamayı fark edebilmesi için izniniz gerekiyor. Sistem Ayarları → Gizlilik ve Güvenlik altında Giriş İzleme için ZenCopy'ye izin verin, ardından ZenCopy'yi kapatıp yeniden başlatın.",
   },
   actions: {
-    builtinLabels: { translate: "Çevir", explain: "Açıkla", polish: "İyileştir" },
+    builtinLabels: {
+      "zencopy-translate": "Çevir",
+      "zencopy-explain": "Açıkla",
+      "zencopy-polish": "İyileştir",
+    },
     title: "Eylemler",
     hint: (keys) =>
       `${keys} ile ne yapılabileceği. Açılır penceredeki sonuç etiketinden de değiştirilebilir.`,
@@ -160,6 +164,8 @@ export const tr: Messages = {
     importInvalidId: (id) => `Geçersiz eylem id'si: '${id}'.`,
     importBuiltinId: (id) =>
       `'${id}' yerleşik bir eylemin id'si — dosyadaki id'yi değiştirip yeniden dene.`,
+    importReservedId: (id) =>
+      `'${id}', 'zencopy-' ile başlıyor — bu id öneki önceden yüklü eylemlere ayrılmıştır.`,
     importIdExists: (id) =>
       `'${id}' id'sine sahip bir eylem zaten var — önce onu sil ya da dosyadaki id'yi değiştir.`,
     importTooLarge: "Dosya bir eylem olamayacak kadar büyük.",

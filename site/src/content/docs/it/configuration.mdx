@@ -100,10 +100,10 @@ La mappa piatta è modificabile nell'app (Impostazioni → Azioni → Routing), 
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ Riassumi in 3 righe, in {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Significato                                                      |
-| -------------- | ---------------------------------------------------------------- |
-| `id`           | Nome referenziato da `routing.json` (predefinito: nome del file) |
-| `label`        | Mostrato nel popup                                               |
-| `role`         | Role del catalog con cui eseguire (predefinito: `default`)       |
-| `instructions` | Prompt di sistema (template Liquid)                              |
+| Frontmatter    | Significato                                                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nome referenziato da `routing.json` (predefinito: nome del file) — il prefisso `zencopy-` è riservato alle azioni preinstallate |
+| `label`        | Mostrato nel popup                                                                                                              |
+| `role`         | Role del catalog con cui eseguire (predefinito: `default`)                                                                      |
+| `instructions` | Prompt di sistema (template Liquid)                                                                                             |
 
 Variabili di template, con valori d'esempio per un paragrafo copiato in un browser:
 

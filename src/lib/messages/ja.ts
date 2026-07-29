@@ -133,7 +133,11 @@ export const ja: Messages = {
   },
   actions: {
     // Zen stays "Zen" everywhere (intentionally omitted).
-    builtinLabels: { translate: "翻訳", explain: "解説", polish: "清書" },
+    builtinLabels: {
+      "zencopy-translate": "翻訳",
+      "zencopy-explain": "解説",
+      "zencopy-polish": "清書",
+    },
     title: "アクション",
     hint: (keys) => `${keys} で実行する処理。ポップアップの結果ラベルからも切り替えられます。`,
     add: "新しいアクション",
@@ -162,6 +166,8 @@ export const ja: Messages = {
     importInvalidId: (id) => `アクション id「${id}」は使用できません。`,
     importBuiltinId: (id) =>
       `「${id}」はビルトインアクションの id です。ファイル内の id を変更してからやり直してください。`,
+    importReservedId: (id) =>
+      `id「${id}」は「zencopy-」で始まっています。この接頭辞はプリインストールアクション専用です。`,
     importIdExists: (id) =>
       `id「${id}」のアクションは既に存在します。先に削除するか、ファイル内の id を変更してください。`,
     importTooLarge: "ファイルが大きすぎるため、アクションとして読み込めません。",

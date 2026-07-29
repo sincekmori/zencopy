@@ -130,7 +130,11 @@ export const pl: Messages = {
       "Został jeden krok: macOS potrzebuje Twojej zgody, aby zauważyć podwójne kopiowanie. W Ustawieniach systemowych → Prywatność i ochrona zezwól ZenCopy w sekcji Monitorowanie wprowadzania, a następnie zamknij i uruchom ZenCopy ponownie.",
   },
   actions: {
-    builtinLabels: { translate: "Przetłumacz", explain: "Wyjaśnij", polish: "Dopracuj" },
+    builtinLabels: {
+      "zencopy-translate": "Przetłumacz",
+      "zencopy-explain": "Wyjaśnij",
+      "zencopy-polish": "Dopracuj",
+    },
     title: "Akcje",
     hint: (keys) =>
       `Co potrafi ${keys}. Można je też przełączać z poziomu etykiety wyniku w okienku.`,
@@ -160,6 +164,8 @@ export const pl: Messages = {
     importInvalidId: (id) => `Nieprawidłowe id akcji: '${id}'.`,
     importBuiltinId: (id) =>
       `'${id}' to id wbudowanej akcji — zmień id w pliku i spróbuj ponownie.`,
+    importReservedId: (id) =>
+      `'${id}' zaczyna się od 'zencopy-' — ten prefiks id jest zarezerwowany dla akcji preinstalowanych.`,
     importIdExists: (id) =>
       `Akcja o id '${id}' już istnieje — najpierw ją usuń albo zmień id w pliku.`,
     importTooLarge: "Plik jest za duży jak na akcję.",

@@ -100,10 +100,10 @@ API 密钥直接写进这个本地文件（设置界面写出的也是同样的�
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -137,12 +137,12 @@ instructions: 你是一位简洁的助手。
 {{ text }}
 ```
 
-| Frontmatter    | 含义                                          |
-| -------------- | --------------------------------------------- |
-| `id`           | 供 `routing.json` 引用的名称（默认为文件名）  |
-| `label`        | 显示在弹窗中                                  |
-| `role`         | 运行时使用的 catalog role（默认为 `default`） |
-| `instructions` | 系统提示词（Liquid 模板）                     |
+| Frontmatter    | 含义                                                                         |
+| -------------- | ---------------------------------------------------------------------------- |
+| `id`           | 供 `routing.json` 引用的名称（默认为文件名）——前缀 `zencopy-` 专用于预装动作 |
+| `label`        | 显示在弹窗中                                                                 |
+| `role`         | 运行时使用的 catalog role（默认为 `default`）                                |
+| `instructions` | 系统提示词（Liquid 模板）                                                    |
 
 模板变量，以及在浏览器中复制一个段落时的示例值：
 

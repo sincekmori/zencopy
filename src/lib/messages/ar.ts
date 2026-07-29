@@ -127,7 +127,11 @@ export const ar: Messages = {
       "بقيت خطوة واحدة: يحتاج macOS إلى إذنك حتى يلاحظ النسخ المزدوج. في إعدادات النظام ← الخصوصية والأمن، اسمح لـ ZenCopy ضمن مراقبة الإدخال، ثم أغلق ZenCopy وشغّله من جديد.",
   },
   actions: {
-    builtinLabels: { translate: "ترجمة", explain: "شرح", polish: "تنقيح" },
+    builtinLabels: {
+      "zencopy-translate": "ترجمة",
+      "zencopy-explain": "شرح",
+      "zencopy-polish": "تنقيح",
+    },
     title: "الإجراءات",
     hint: (keys) =>
       `ما يمكن لـ ${keys} فعله. يمكن التبديل أيضًا من تسمية النتيجة في النافذة المنبثقة.`,
@@ -155,6 +159,8 @@ export const ar: Messages = {
     importNoLabel: "لا يحتوي الإجراء على label.",
     importInvalidId: (id) => `قيمة id غير صالحة للإجراء: '${id}'.`,
     importBuiltinId: (id) => `'${id}' هو id لإجراء مضمّن — غيّر الـ id في الملف ثم أعد المحاولة.`,
+    importReservedId: (id) =>
+      `'${id}' يبدأ بـ 'zencopy-' — بادئة الـ id هذه محجوزة للإجراءات المثبتة مسبقًا.`,
     importIdExists: (id) => `يوجد بالفعل إجراء بالـ id '${id}' — احذفه أولًا أو غيّر الـ id في الملف.`,
     importTooLarge: "الملف أكبر من أن يكون إجراءً.",
     labelExists: (label) => `يوجد بالفعل إجراء باسم '${label}' — اختر اسمًا آخر.`,

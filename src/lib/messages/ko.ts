@@ -128,7 +128,11 @@ export const ko: Messages = {
       "한 단계 남았습니다. 복사가 두 번 눌렸음을 알아채려면 macOS의 권한이 필요합니다. 시스템 설정 → 개인정보 보호 및 보안에서 입력 모니터링에서 ZenCopy를 허용한 뒤, ZenCopy를 종료하고 다시 실행해 주세요.",
   },
   actions: {
-    builtinLabels: { translate: "번역", explain: "설명", polish: "다듬기" },
+    builtinLabels: {
+      "zencopy-translate": "번역",
+      "zencopy-explain": "설명",
+      "zencopy-polish": "다듬기",
+    },
     title: "액션",
     hint: (keys) => `${keys}로 실행할 액션. 팝업의 결과 라벨에서도 전환할 수 있습니다.`,
     add: "새 액션",
@@ -157,6 +161,8 @@ export const ko: Messages = {
     importInvalidId: (id) => `유효하지 않은 액션 id입니다: '${id}'`,
     importBuiltinId: (id) =>
       `'${id}'은(는) 기본 제공 액션의 id입니다. 파일의 id를 변경한 뒤 다시 시도하세요.`,
+    importReservedId: (id) =>
+      `'${id}'은(는) 'zencopy-'로 시작합니다. 이 id 접두사는 사전 설치 액션 전용입니다.`,
     importIdExists: (id) =>
       `id가 '${id}'인 액션이 이미 있습니다. 먼저 삭제하거나 파일의 id를 변경하세요.`,
     importTooLarge: "파일이 너무 커서 액션으로 가져올 수 없습니다.",

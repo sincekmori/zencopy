@@ -103,10 +103,10 @@ kind は `text`、`rich_text`、`image`、`files` の 4 種類で、初期状態
 
 ```json
 {
-  "text": "zen",
-  "rich_text": "zen",
-  "image": "explain",
-  "files": "explain",
+  "text": "zencopy-zen",
+  "rich_text": "zencopy-zen",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
@@ -141,12 +141,12 @@ instructions: あなたは簡潔なアシスタントです。
 {{ text }}
 ```
 
-| フロントマター | 意味                                                    |
-| -------------- | ------------------------------------------------------- |
-| `id`           | `routing.json` から参照される名前（省略時はファイル名） |
-| `label`        | ポップアップに表示                                      |
-| `role`         | 実行に使う catalog の role（省略時は `default`）        |
-| `instructions` | システムプロンプト（Liquid テンプレート）               |
+| フロントマター | 意味                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `id`           | `routing.json` から参照される名前（省略時はファイル名） — 接頭辞 `zencopy-` はプリインストールアクション専用 |
+| `label`        | ポップアップに表示                                                                                           |
+| `role`         | 実行に使う catalog の role（省略時は `default`）                                                             |
+| `instructions` | システムプロンプト（Liquid テンプレート）                                                                    |
 
 テンプレート変数と、ブラウザで段落をコピーした場合の値の例:
 
