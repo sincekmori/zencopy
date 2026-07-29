@@ -6,7 +6,30 @@ on:
     tags: ["v*"]
 
 jobs:
+  # The draft is created exactly once, before any build starts. Without this,
+  # each platform job's tauri-action would "create the release if missing" —
+  # and simultaneous job starts have raced that into duplicate drafts, with
+  # the assets (and latest.json's platform entries) split between them.
+  draft:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    outputs:
+      release_id: ${{ steps.create.outputs.release_id }}
+    steps:
+      - name: Create the draft release
+        id: create
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          release_id=$(gh api -X POST "repos/$GITHUB_REPOSITORY/releases" \
+            -f tag_name="$GITHUB_REF_NAME" \
+            -f name="ZenCopy $GITHUB_REF_NAME" \
+            -F draft=true -F generate_release_notes=true --jq .id)
+          echo "release_id=$release_id" >> "$GITHUB_OUTPUT"
+
   release:
+    needs: draft
     permissions:
       contents: write
     strategy:
@@ -74,10 +97,8 @@ jobs:
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: "ZenCopy ${{ github.ref_name }}"
-          releaseDraft: true
-          prerelease: false
-          generateReleaseNotes: true
+          # Upload into the draft the `draft` job created — never create one
+          # here (that's the duplicate-drafts race this id exists to prevent).
+          releaseId: ${{ needs.draft.outputs.release_id }}
           retryAttempts: 2
           args: ${{ matrix.args }}
