@@ -12,6 +12,7 @@
     "tauri": "tauri",
     "brand": "tauri icon src/assets/zencopy-icon.svg -o src-tauri/icons && rm -rf src-tauri/icons/android src-tauri/icons/ios && bun run --cwd site brand",
     "dev-reset": "bun scripts/dev-reset.ts",
+    "dev-usage": "bun scripts/dev-usage.ts",
     "lint": "oxlint --deny-warnings && bun run --cwd site lint",
     "lint:fix": "oxlint --fix",
     "lint:dead": "knip",
