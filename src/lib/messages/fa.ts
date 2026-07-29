@@ -35,6 +35,10 @@ export const fa: Messages = {
     statsReset: "بازنشانی آمار",
     statsResetConfirm: "همه آمار ثبت‌شده حذف شود؟",
     statsResetDone: "آمار بازنشانی شد.",
+    costsEmpty: "هنوز چیزی ثبت نشده است.",
+    costsExport: "خروجی خلاصهٔ هزینه‌ها",
+    costsError: (models) =>
+      `محاسبهٔ هزینه برای ${models} ممکن نشد. یک بلوک cost در این فایل اضافه کنید:`,
     userContext: "دربارهٔ شما",
     userContextHint:
       "آنچه هوش مصنوعی باید دربارهٔ شما بداند — نقش، تخصص، سلیقه. به همهٔ اکشن‌ها افزوده می‌شود.",

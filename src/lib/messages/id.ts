@@ -36,6 +36,10 @@ export const id: Messages = {
     statsReset: "Reset statistik",
     statsResetConfirm: "Hapus semua statistik yang tercatat?",
     statsResetDone: "Statistik direset.",
+    costsEmpty: "Belum ada yang tercatat.",
+    costsExport: "Ekspor ringkasan biaya",
+    costsError: (models) =>
+      `Biaya tidak dapat dihitung untuk: ${models}. Tambahkan blok cost di berkas ini:`,
     userContext: "Tentang kamu",
     userContextHint:
       "Hal yang perlu diketahui AI tentang kamu — peran, keahlian, preferensi. Ditambahkan ke setiap aksi.",

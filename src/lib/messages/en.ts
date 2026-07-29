@@ -36,6 +36,10 @@ export const en: Messages = {
     statsReset: "Reset statistics",
     statsResetConfirm: "Delete all recorded statistics?",
     statsResetDone: "Statistics reset.",
+    costsEmpty: "Nothing recorded yet.",
+    costsExport: "Export cost summary",
+    costsError: (models) =>
+      `Costs could not be computed for: ${models}. Add a cost block to this file:`,
     userContext: "About you",
     userContextHint:
       "Anything the AI should know about you — role, expertise, taste. Added to every action.",

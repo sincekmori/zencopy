@@ -36,6 +36,10 @@ export const ru: Messages = {
     statsReset: "Сбросить статистику",
     statsResetConfirm: "Удалить всю записанную статистику?",
     statsResetDone: "Статистика сброшена.",
+    costsEmpty: "Пока ничего не записано.",
+    costsExport: "Экспортировать сводку расходов",
+    costsError: (models) =>
+      `Не удалось рассчитать расходы для: ${models}. Добавьте блок cost в этот файл:`,
     userContext: "О вас",
     userContextHint:
       "Что ИИ стоит знать о вас: роль, экспертиза, предпочтения. Добавляется к каждому действию.",

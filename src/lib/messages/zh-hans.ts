@@ -33,6 +33,9 @@ export const zhHans: Messages = {
     statsReset: "重置统计",
     statsResetConfirm: "删除所有已记录的统计？",
     statsResetDone: "统计已重置。",
+    costsEmpty: "还没有任何记录。",
+    costsExport: "导出费用汇总",
+    costsError: (models) => `无法计算以下模型的费用：${models}。请在此文件中添加 cost 块：`,
     userContext: "关于你",
     userContextHint: "希望 AI 了解的信息——职责、擅长领域、偏好。会附加到每个动作。",
     userContextPlaceholders: [

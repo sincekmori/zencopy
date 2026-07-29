@@ -14,6 +14,7 @@ import { Welcome } from "@/components/welcome.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { useT } from "@/lib/i18n.tsx";
 import { createLogger, errorMessage } from "@/lib/log.ts";
+import { modelCosts, type TokenUsage } from "@/lib/llm.ts";
 import { LOCALES } from "@/lib/messages/index.ts";
 import {
   type Corner,
@@ -53,6 +54,45 @@ const CORNER_POSITION: Record<Corner, string> = {
   "bottom-right": "bottom-3 right-3",
 };
 
+// One recorded model run, as read back from usage.jsonl. Lenient by design:
+// any field may be absent (absence means unknown) — the reader must accept
+// every line the ledger's frozen contract allows.
+interface UsageEvent {
+  at?: string;
+  model?: string;
+  tokens?: Record<string, number>;
+}
+
+// The ledger's billing buckets. Tokens and prices share this vocabulary, so
+// pricing a run is a plain dot product over these keys.
+const COST_BUCKETS = ["input", "output", "cache_read", "cache_write"] as const;
+
+/** Fold one priced run into its month × model row. */
+function addToGroup(
+  groups: Map<string, { month: string; model: string; cost: number }>,
+  row: { month: string; model: string },
+  cost: number,
+): void {
+  const key = `${row.month}\u0000${row.model}`;
+  const group = groups.get(key) ?? { ...row, cost: 0 };
+  group.cost += cost;
+  groups.set(key, group);
+}
+
+/** RFC 4180 quoting, only when the value needs it. */
+function csvCell(value: string): string {
+  return /[",\n]/u.test(value) ? `"${value.replaceAll('"', '""')}"` : value;
+}
+
+/** One run's cost in USD: Σ tokens[bucket] × price[bucket] / 1M. */
+function runCost(tokens: Record<string, number>, price: TokenUsage): number {
+  let sum = 0;
+  for (const bucket of COST_BUCKETS) {
+    sum += (tokens[bucket] ?? 0) * (price[bucket] ?? 0);
+  }
+  return sum / 1e6;
+}
+
 export function Settings(): React.JSX.Element {
   const t = useT();
   const [corner, setCorner] = useState<Corner>(DEFAULT_CORNER);
@@ -74,6 +114,9 @@ export function Settings(): React.JSX.Element {
   // The quiet stats-reset link's inline confirm, and its transient "done".
   const [confirmingStatsReset, setConfirmingStatsReset] = useState(false);
   const [statsResetDone, setStatsResetDone] = useState(false);
+  // The CSV export's inline complaint: models it could not price, or the
+  // nothing-recorded notice. Cleared on the next attempt.
+  const [exportIssue, setExportIssue] = useState<"empty" | string[] | undefined>(undefined);
   const [resetError, setResetError] = useState<string | undefined>(undefined);
   // The window's tab. AI first: it's the one thing that must be set up.
   const [tab, setTab] = useState<"ai" | "actions" | "general">("ai");
@@ -152,6 +195,8 @@ export function Settings(): React.JSX.Element {
 
   const resetStats = (): void => {
     setConfirmingStatsReset(false);
+    setExportIssue(undefined); // its data just went away
+
     void (async () => {
       try {
         await invoke("reset_usage_stats");
@@ -164,6 +209,76 @@ export function Settings(): React.JSX.Element {
       }
     })();
   };
+
+  // Download the all-time cost table as CSV: one row per month × model, cost
+  // in plain USD decimals. Models the catalog can't price block the export
+  // and are named inline — that hole has a fix (a cost block in the config),
+  // and a report with silent holes would read as cheaper than reality. A
+  // completed run whose provider reported no usage (the schema allows absent
+  // tokens) must not block forever — nothing can ever supply the counts — so
+  // it stays in its model's row, contributing the tokens it reported: none.
+  const exportCosts = (): void => {
+    setExportIssue(undefined);
+    void (async () => {
+      try {
+        const [events, prices] = await Promise.all([
+          invoke<UsageEvent[]>("read_usage_stats"),
+          modelCosts(),
+        ]);
+        if (events.length === 0) {
+          setExportIssue("empty");
+          return;
+        }
+        const groups = new Map<string, { month: string; model: string; cost: number }>();
+        const unpriced = new Set<string>();
+        for (const event of events) {
+          const month = (event.at ?? "").slice(0, 7);
+          if (month) {
+            const model = event.model ?? "?";
+            const price = event.model === undefined ? undefined : prices[event.model];
+            if (price) {
+              addToGroup(groups, { month, model }, event.tokens ? runCost(event.tokens, price) : 0);
+            } else {
+              unpriced.add(model);
+            }
+          }
+        }
+        if (unpriced.size > 0) {
+          setExportIssue([...unpriced].toSorted());
+          return;
+        }
+        const lines = [...groups.values()]
+          .toSorted((a, b) => a.month.localeCompare(b.month) || a.model.localeCompare(b.model))
+          .map((group) => `${group.month},${csvCell(group.model)},${group.cost.toFixed(6)}`);
+        const csv = ["month,model,cost_usd", ...lines, ""].join("\n");
+        await invoke("export_usage_csv", { csv });
+      } catch (error) {
+        log.error("exporting the cost CSV failed", error);
+      }
+    })();
+  };
+
+  // What the export has to say, if anything: nothing recorded yet (calm), or
+  // the models it cannot price (an error, with the fix one click away).
+  let exportIssueRow: React.JSX.Element | undefined;
+  if (exportIssue === "empty") {
+    exportIssueRow = <p className="text-xs text-muted-foreground">{t.settings.costsEmpty}</p>;
+  } else if (exportIssue) {
+    exportIssueRow = (
+      <p className="text-xs text-destructive">
+        {t.settings.costsError(exportIssue.join(", "))}{" "}
+        <button
+          type="button"
+          className="font-mono underline underline-offset-2"
+          onClick={() => {
+            void invoke("open_catalog_file");
+          }}
+        >
+          ai-sdk-catalog.json
+        </button>
+      </p>
+    );
+  }
 
   // The reset link's three faces: idle link, inline confirm, transient done.
   let statsResetRow: React.JSX.Element;
@@ -463,6 +578,13 @@ export function Settings(): React.JSX.Element {
               <button
                 type="button"
                 className="underline-offset-2 hover:text-foreground hover:underline"
+                onClick={exportCosts}
+              >
+                {t.settings.costsExport}
+              </button>
+              <button
+                type="button"
+                className="underline-offset-2 hover:text-foreground hover:underline"
                 onClick={() => {
                   void invoke("open_stats_dir");
                 }}
@@ -471,6 +593,7 @@ export function Settings(): React.JSX.Element {
               </button>
               {statsResetRow}
             </div>
+            {exportIssueRow}
           </section>
 
           <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">

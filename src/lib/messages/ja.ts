@@ -36,6 +36,10 @@ export const ja: Messages = {
     statsReset: "統計をリセット",
     statsResetConfirm: "記録した統計をすべて削除しますか？",
     statsResetDone: "統計をリセットしました。",
+    costsEmpty: "まだ記録がありません。",
+    costsExport: "コスト集計をエクスポート",
+    costsError: (models) =>
+      `コストを計算できないモデルがあります: ${models}。cost をこのファイルに書いてください:`,
     userContext: "あなたについて",
     userContextHint:
       "AI に知っておいてほしいこと(役割・得意分野・好みなど)。すべてのアクションに添えられます。",

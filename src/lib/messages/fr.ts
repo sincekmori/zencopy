@@ -36,6 +36,10 @@ export const fr: Messages = {
     statsReset: "Réinitialiser les statistiques",
     statsResetConfirm: "Supprimer toutes les statistiques enregistrées ?",
     statsResetDone: "Statistiques réinitialisées.",
+    costsEmpty: "Rien d'enregistré pour l'instant.",
+    costsExport: "Exporter le récapitulatif des coûts",
+    costsError: (models) =>
+      `Impossible de calculer les coûts pour : ${models}. Ajoutez un bloc cost dans ce fichier :`,
     userContext: "À propos de vous",
     userContextHint:
       "Ce que l'IA devrait savoir de vous : rôle, expertise, préférences. Ajouté à chaque action.",

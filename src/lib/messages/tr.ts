@@ -36,6 +36,10 @@ export const tr: Messages = {
     statsReset: "İstatistikleri sıfırla",
     statsResetConfirm: "Kaydedilen tüm istatistikler silinsin mi?",
     statsResetDone: "İstatistikler sıfırlandı.",
+    costsEmpty: "Henüz kayıt yok.",
+    costsExport: "Maliyet özetini dışa aktar",
+    costsError: (models) =>
+      `Şu modeller için maliyet hesaplanamadı: ${models}. Bu dosyaya bir cost bloğu ekle:`,
     userContext: "Senin hakkında",
     userContextHint:
       "Yapay zekânın senin hakkında bilmesi gerekenler — rol, uzmanlık, tercihler. Her eyleme eklenir.",

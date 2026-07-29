@@ -78,6 +78,13 @@ export async function streamAction(
  * the `default` role. Config errors (missing file, bad JSON, unknown role)
  * throw with their real reason; an unreachable model throws "unreachable".
  */
+/** Price per 1M tokens for every cataloged model ("provider:model" -> buckets
+ *  matching {@link TokenUsage}); empty when the config is missing or broken. */
+export async function modelCosts(): Promise<Record<string, TokenUsage>> {
+  const impl = await import("@/lib/llm-impl.ts");
+  return impl.modelCosts();
+}
+
 export async function testConnection(): Promise<void> {
   const impl = await import("@/lib/llm-impl.ts");
   return impl.testConnection();

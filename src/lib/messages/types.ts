@@ -42,6 +42,16 @@ export interface Messages {
     statsResetConfirm: string;
     /** Transient confirmation after the file was deleted. */
     statsResetDone: string;
+    /** Quiet link that saves the cost summary (the raw ledger aggregated
+     *  into all-time month × model USD totals) — named for the content, not
+     *  the CSV format the save dialog reveals anyway. */
+    costsExport: string;
+    /** Shown when there are no recorded runs to export yet. */
+    costsEmpty: string;
+    /** Export refusal naming the provider:model addresses whose cost could
+     *  not be computed; the clickable literal file name is appended by the
+     *  component, so the sentence ends mid-air on a colon. */
+    costsError: (models: string) => string;
     /** "About you": one free-form multiline self-description, added to every
      *  action run so results fit the person asking. The placeholders are
      *  example personas the field rotates through; Tab inserts the one

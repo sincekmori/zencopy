@@ -36,6 +36,10 @@ export const ptBR: Messages = {
     statsReset: "Redefinir estatísticas",
     statsResetConfirm: "Excluir todas as estatísticas registradas?",
     statsResetDone: "Estatísticas redefinidas.",
+    costsEmpty: "Nada registrado ainda.",
+    costsExport: "Exportar o resumo de custos",
+    costsError: (models) =>
+      `Não foi possível calcular os custos de: ${models}. Adicione um bloco cost neste arquivo:`,
     userContext: "Sobre você",
     userContextHint:
       "O que a IA deve saber sobre você — cargo, especialidade, preferências. Adicionado a toda ação.",

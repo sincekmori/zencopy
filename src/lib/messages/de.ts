@@ -36,6 +36,10 @@ export const de: Messages = {
     statsReset: "Statistik zurücksetzen",
     statsResetConfirm: "Alle aufgezeichneten Statistiken löschen?",
     statsResetDone: "Statistik zurückgesetzt.",
+    costsEmpty: "Noch nichts aufgezeichnet.",
+    costsExport: "Kostenübersicht exportieren",
+    costsError: (models) =>
+      `Für folgende Modelle ließen sich keine Kosten berechnen: ${models}. Füge einen cost-Block in diese Datei ein:`,
     userContext: "Über dich",
     userContextHint:
       "Was die KI über dich wissen sollte — Rolle, Fachgebiete, Vorlieben. Wird jeder Aktion mitgegeben.",

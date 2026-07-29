@@ -34,6 +34,9 @@ export const th: Messages = {
     statsReset: "รีเซ็ตสถิติ",
     statsResetConfirm: "ลบสถิติที่บันทึกไว้ทั้งหมดหรือไม่",
     statsResetDone: "รีเซ็ตสถิติแล้ว",
+    costsEmpty: "ยังไม่มีการบันทึก",
+    costsExport: "ส่งออกสรุปค่าใช้จ่าย",
+    costsError: (models) => `ไม่สามารถคำนวณค่าใช้จ่ายของ: ${models} ได้ — เพิ่มบล็อก cost ในไฟล์นี้:`,
     userContext: "เกี่ยวกับคุณ",
     userContextHint: "สิ่งที่อยากให้ AI รู้เกี่ยวกับคุณ เช่น บทบาท ความถนัด ความชอบ จะแนบไปกับทุกแอ็กชัน",
     userContextPlaceholders: [

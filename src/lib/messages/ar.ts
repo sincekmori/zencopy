@@ -35,6 +35,9 @@ export const ar: Messages = {
     statsReset: "إعادة تعيين الإحصاءات",
     statsResetConfirm: "حذف جميع الإحصاءات المسجلة؟",
     statsResetDone: "تمت إعادة تعيين الإحصاءات.",
+    costsEmpty: "لا توجد سجلات بعد.",
+    costsExport: "تصدير ملخص التكاليف",
+    costsError: (models) => `تعذّر حساب التكاليف لـ: ${models}. أضف كتلة cost في هذا الملف:`,
     userContext: "نبذة عنك",
     userContextHint:
       "ما ينبغي للذكاء الاصطناعي معرفته عنك — دورك وخبرتك وتفضيلاتك. يُضاف إلى كل إجراء.",

@@ -35,6 +35,10 @@ export const ko: Messages = {
     statsReset: "통계 재설정",
     statsResetConfirm: "기록된 통계를 모두 삭제할까요?",
     statsResetDone: "통계를 재설정했습니다.",
+    costsEmpty: "아직 기록이 없습니다.",
+    costsExport: "비용 집계 내보내기",
+    costsError: (models) =>
+      `다음 모델의 비용을 계산할 수 없습니다: ${models}. 이 파일에 cost 블록을 추가하세요:`,
     userContext: "나에 대하여",
     userContextHint:
       "AI가 알아 두면 좋은 정보(역할, 전문 분야, 취향 등). 모든 액션에 함께 전달됩니다.",

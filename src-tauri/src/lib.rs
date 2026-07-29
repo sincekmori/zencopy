@@ -33,7 +33,10 @@ use crate::routing::{
     get_routing_ui, load_routing, resolve_action, set_kind_action, set_overrides,
 };
 use crate::shell::{open_log_dir, open_url};
-use crate::stats::{open_stats_dir, record_usage, reset_usage_stats};
+use crate::stats::{
+    export_usage_csv, open_catalog_file, open_stats_dir, read_usage_stats, record_usage,
+    reset_usage_stats,
+};
 // The app menu exists only on macOS (tray.rs gates the builder the same way).
 #[cfg(target_os = "macos")]
 use crate::tray::build_app_menu;
@@ -273,7 +276,10 @@ pub fn run() {
             delete_action,
             set_kind_action,
             record_usage,
+            read_usage_stats,
             reset_usage_stats,
+            open_catalog_file,
+            export_usage_csv,
             open_stats_dir,
             set_overrides,
             get_routing_ui,

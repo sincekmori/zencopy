@@ -101,6 +101,45 @@ const TEST_TIMEOUT_MS = 30_000;
  * unknown role) throw with their real reason; an unreachable model throws
  * UNREACHABLE — ping reports reachability only, not why.
  */
+/**
+ * Price sheets for every cataloged model, keyed by the same "provider:model"
+ * address the usage ledger records, with the prices renamed into the ledger's
+ * own snake_case buckets — so a run's cost is the dot product of an event's
+ * `tokens` with this map's entry, no further translation anywhere. Models the
+ * catalog has no price for (local endpoints, unlisted ids) are simply absent;
+ * an unreadable config yields an empty map, never an error — the cost viewer
+ * degrades to "unknown" instead of failing.
+ */
+export async function modelCosts(): Promise<Record<string, TokenUsage>> {
+  let resolved: Awaited<ReturnType<typeof catalog>>;
+  try {
+    resolved = await catalog();
+  } catch {
+    return {};
+  }
+  const prices: Record<string, TokenUsage> = {};
+  for (const [key, entry] of resolved.meta) {
+    const cost = entry.cost;
+    if (cost) {
+      const price: TokenUsage = {};
+      if (cost.input !== undefined) {
+        price.input = cost.input;
+      }
+      if (cost.output !== undefined) {
+        price.output = cost.output;
+      }
+      if (cost.cacheRead !== undefined) {
+        price.cache_read = cost.cacheRead;
+      }
+      if (cost.cacheWrite !== undefined) {
+        price.cache_write = cost.cacheWrite;
+      }
+      prices[key] = price;
+    }
+  }
+  return prices;
+}
+
 export async function testConnection(): Promise<void> {
   catalogPromise = undefined; // test what is on disk right now, not a cache
   const resolved = await catalog();

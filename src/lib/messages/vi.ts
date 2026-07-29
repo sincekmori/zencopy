@@ -36,6 +36,9 @@ export const vi: Messages = {
     statsReset: "Đặt lại thống kê",
     statsResetConfirm: "Xóa toàn bộ thống kê đã ghi?",
     statsResetDone: "Đã đặt lại thống kê.",
+    costsEmpty: "Chưa có gì được ghi lại.",
+    costsExport: "Xuất tóm tắt chi phí",
+    costsError: (models) => `Không thể tính chi phí cho: ${models}. Thêm khối cost vào tệp này:`,
     userContext: "Về bạn",
     userContextHint:
       "Những điều AI nên biết về bạn — vai trò, chuyên môn, sở thích. Được thêm vào mọi hành động.",

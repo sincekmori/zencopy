@@ -180,10 +180,10 @@ export function Popup(): React.JSX.Element {
     log.info(`action run: ${actionId} (${kind})`);
   };
 
-  // The statistics append — a BILLING ledger, not an invocation counter:
-  // only runs that actually reached a model are written (reuses, gates, and
-  // config errors cost nothing and stay out). Fire-and-forget; a failed
-  // append is logged Rust-side and never blocks anything.
+  // The statistics append — a ledger of COMPLETED runs only: reuses, gates,
+  // config errors, user stops, timeouts, and error responses all leave no
+  // line. Fire-and-forget; a failed append is logged Rust-side and never
+  // blocks anything.
   const recordUsage = (actionId: string, kind: string, outcome: StreamOutcome): void => {
     if (statsEnabled) {
       void invoke("record_usage", {
@@ -352,7 +352,7 @@ export function Popup(): React.JSX.Element {
       } finally {
         if (owns()) {
           runsRef.current.delete(actionId); // free the slot for a later re-run
-          if (settled) {
+          if (settled && !controller.signal.aborted) {
             recordUsage(actionId, next.source.kind, settled);
           }
         }

@@ -35,6 +35,9 @@ export const he: Messages = {
     statsReset: "איפוס סטטיסטיקה",
     statsResetConfirm: "למחוק את כל הסטטיסטיקה שנרשמה?",
     statsResetDone: "הסטטיסטיקה אופסה.",
+    costsEmpty: "עדיין לא נרשם דבר.",
+    costsExport: "ייצוא סיכום עלויות",
+    costsError: (models) => `לא ניתן היה לחשב עלויות עבור: ${models}. הוסיפו בלוק cost בקובץ זה:`,
     userContext: "עליך",
     userContextHint: "מה שכדאי שה‑AI יידע עליך — תפקיד, תחומי מומחיות, העדפות. מצורף לכל פעולה.",
     userContextPlaceholders: [

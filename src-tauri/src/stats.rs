@@ -1,9 +1,11 @@
-//! Usage statistics: an append-only JSONL, one line per model run — a local
-//! BILLING ledger. Only runs that reached a model are written (a reused
-//! result costs nothing and leaves no line); the human-facing invocation
-//! trail lives in the ordinary log instead. Events, not aggregates — counts,
-//! per-kind, per-hour, and cost all stay derivable. Ids, kinds, timestamps,
-//! the serving model, and token counts; never the copied content.
+//! Usage statistics: an append-only JSONL, one line per COMPLETED model run
+//! — a local billing ledger. Reused results, user stops, timeouts, and error
+//! responses all leave no line (a stopped run may still have consumed some
+//! tokens; going unrecorded is the accepted trade for a ledger of clean
+//! completions). The human-facing invocation trail lives in the ordinary log
+//! instead. Events, not aggregates — counts, per-kind, per-hour, and cost
+//! all stay derivable. Ids, kinds, timestamps, the serving model, and token
+//! counts; never the copied content.
 //!
 //! The file lives under the platform DATA dir (`stats/usage.jsonl`), not the
 //! config dir (statistics are accumulated user data, which XDG puts in
@@ -110,6 +112,23 @@ pub(crate) fn record_usage(
     append().or_log("stats: append usage event");
 }
 
+/// The recorded events, one JSON value per line, parsed leniently: a torn or
+/// foreign line is skipped, never fatal — the reader must not be the thing
+/// that breaks an append-only ledger. Powers the cost viewer in settings.
+#[tauri::command]
+pub(crate) fn read_usage_stats(app: tauri::AppHandle) -> Result<Vec<serde_json::Value>, String> {
+    let path = stats_file(&app).ok_or("stats dir unavailable")?;
+    let text = match std::fs::read_to_string(&path) {
+        Ok(text) => text,
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(Vec::new()),
+        Err(error) => return Err(error.to_string()),
+    };
+    Ok(text
+        .lines()
+        .filter_map(|line| serde_json::from_str(line).ok())
+        .collect())
+}
+
 /// Delete the recorded statistics — the settings section's quiet reset link.
 /// The folder itself stays; future files may live beside usage.jsonl.
 #[tauri::command]
@@ -125,6 +144,58 @@ pub(crate) fn reset_usage_stats(app: tauri::AppHandle) -> Result<(), String> {
         Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
         Err(error) => Err(error.to_string()),
     }
+}
+
+/// Reveal the user's catalog config in the file manager — the cost export's
+/// "write a cost block here" pointer. Reveal, deliberately not open: opening
+/// a .json can launch whatever heavyweight editor claims the extension,
+/// while the file manager is already running. A config that does not exist
+/// yet falls back to opening the config directory.
+#[tauri::command]
+pub(crate) fn open_catalog_file(app: tauri::AppHandle) {
+    use tauri_plugin_opener::OpenerExt;
+    let Some(path) = crate::config::catalog_path(&app) else {
+        log::warn!("stats: config dir unavailable");
+        return;
+    };
+    if path.exists() {
+        app.opener()
+            .reveal_item_in_dir(&path)
+            .or_log("reveal the catalog config");
+    } else {
+        let dir = path.parent().expect("catalog file has a parent");
+        app.opener()
+            .open_path(dir.to_string_lossy(), None::<&str>)
+            .or_log("open the config directory");
+    }
+}
+
+/// Save the cost table as a CSV the frontend already assembled — a native
+/// save dialog, then one write. Returns false when the user cancels.
+/// The suggested name carries the export date (the summary is a snapshot,
+/// so the file says "as of when" by itself and repeated exports sort
+/// chronologically); date only — sub-day uniqueness is the dialog's job,
+/// and Windows forbids the colons a readable time would want.
+/// `(async)`: the blocking dialog must stay off the main thread.
+#[tauri::command(async)]
+pub(crate) fn export_usage_csv(app: tauri::AppHandle, csv: String) -> Result<bool, String> {
+    use tauri_plugin_dialog::DialogExt;
+    let file_name = format!(
+        "zencopy-cost-summary-{}.csv",
+        chrono::Local::now().format("%Y-%m-%d")
+    );
+    let Some(picked) = app
+        .dialog()
+        .file()
+        .set_file_name(&file_name)
+        .add_filter("CSV", &["csv"])
+        .blocking_save_file()
+    else {
+        return Ok(false);
+    };
+    let path = picked.into_path().map_err(|e| e.to_string())?;
+    std::fs::write(&path, csv).map_err(|e| e.to_string())?;
+    Ok(true)
 }
 
 /// Open the stats folder in the system file browser — the mirror of

@@ -34,6 +34,9 @@ export const zhHant: Messages = {
     statsReset: "重設統計",
     statsResetConfirm: "刪除所有已記錄的統計？",
     statsResetDone: "統計已重設。",
+    costsEmpty: "還沒有任何記錄。",
+    costsExport: "匯出費用彙總",
+    costsError: (models) => `無法計算以下模型的費用：${models}。請在此檔案中加入 cost 區塊：`,
     userContext: "關於你",
     userContextHint: "希望 AI 了解的資訊——職務、擅長領域、偏好。會附加到每個動作。",
     userContextPlaceholders: [

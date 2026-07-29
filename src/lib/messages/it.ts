@@ -36,6 +36,10 @@ export const it: Messages = {
     statsReset: "Azzera statistiche",
     statsResetConfirm: "Eliminare tutte le statistiche registrate?",
     statsResetDone: "Statistiche azzerate.",
+    costsEmpty: "Ancora nessuna registrazione.",
+    costsExport: "Esporta il riepilogo dei costi",
+    costsError: (models) =>
+      `Impossibile calcolare i costi per: ${models}. Aggiungi un blocco cost in questo file:`,
     userContext: "Su di te",
     userContextHint:
       "Cosa dovrebbe sapere l'IA di te: ruolo, competenze, preferenze. Aggiunto a ogni azione.",
