@@ -36,8 +36,3 @@ ZenCopy non aggiunge intermediari: il tuo contenuto va solo al provider che conf
 
 ZenCopy è open source (Apache-2.0).
 Ogni affermazione di questa pagina può essere verificata sul [codice sorgente](https://github.com/sincekmori/zencopy).
-
-## Questo sito web
-
-zencopy.app è un sito statico.
-Non imposta cookie e non esegue analisi statistiche.

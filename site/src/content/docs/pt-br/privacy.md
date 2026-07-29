@@ -36,8 +36,3 @@ O ZenCopy não adiciona nenhum intermediário: seu conteúdo vai apenas para o p
 
 O ZenCopy é de código aberto (Apache-2.0).
 Toda afirmação desta página pode ser verificada no [código-fonte](https://github.com/sincekmori/zencopy).
-
-## Este site
-
-zencopy.app é um site estático.
-Ele não define cookies e não executa nenhuma análise de uso.

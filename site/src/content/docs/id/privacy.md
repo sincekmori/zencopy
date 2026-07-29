@@ -36,8 +36,3 @@ ZenCopy tidak menambahkan perantara apa pun: kontenmu hanya pergi ke penyedia ya
 
 ZenCopy bersifat open source (Apache-2.0).
 Setiap klaim di halaman ini dapat diverifikasi terhadap [kode sumbernya](https://github.com/sincekmori/zencopy).
-
-## Situs web ini
-
-zencopy.app adalah situs statis.
-Tidak memasang cookie dan tidak menjalankan analitik.

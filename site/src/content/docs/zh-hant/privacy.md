@@ -36,8 +36,3 @@ ZenCopy 不加入任何中介：你的內容只會送到你設定的供應商，
 
 ZenCopy 是開放原始碼軟體（Apache-2.0）。
 本頁的每一項聲明，都可以對照[原始碼](https://github.com/sincekmori/zencopy)驗證。
-
-## 這個網站
-
-zencopy.app 是靜態網站。
-它不設定任何 cookie，也不執行任何分析工具。

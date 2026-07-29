@@ -36,8 +36,3 @@ ZenCopy は仲介者を挟みません: 内容は設定したプロバイダー�
 
 ZenCopy はオープンソースです（Apache-2.0）。
 このページのすべての主張は、[ソースコード](https://github.com/sincekmori/zencopy)と突き合わせて検証できます。
-
-## この Web サイトについて
-
-zencopy.app は静的サイトです。
-Cookie を設定せず、アクセス解析も行いません。

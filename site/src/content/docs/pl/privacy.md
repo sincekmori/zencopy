@@ -36,8 +36,3 @@ ZenCopy nie dodaje żadnego pośrednika: Twoja treść trafia wyłącznie do sko
 
 ZenCopy jest oprogramowaniem open source (Apache-2.0).
 Każde stwierdzenie na tej stronie można zweryfikować w [kodzie źródłowym](https://github.com/sincekmori/zencopy).
-
-## Ta strona internetowa
-
-zencopy.app to strona statyczna.
-Nie ustawia plików cookie i nie prowadzi żadnej analityki.

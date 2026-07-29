@@ -36,8 +36,3 @@ ZenCopy 不加入任何中间环节：你的内容只发送给你配置的提供
 
 ZenCopy 是开源软件（Apache-2.0）。
 本页的每一条声明都可以对照[源代码](https://github.com/sincekmori/zencopy)验证。
-
-## 本网站
-
-zencopy.app 是一个静态网站。
-它不设置任何 Cookie，也不运行任何分析统计。

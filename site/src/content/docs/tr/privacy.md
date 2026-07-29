@@ -36,8 +36,3 @@ ZenCopy araya hiçbir aracı katmaz: içeriğin yalnızca yapılandırdığın s
 
 ZenCopy açık kaynaktır (Apache-2.0).
 Bu sayfadaki her iddia [kaynak kodla](https://github.com/sincekmori/zencopy) doğrulanabilir.
-
-## Bu web sitesi
-
-zencopy.app statik bir sitedir.
-Çerez kullanmaz ve analiz aracı çalıştırmaz.

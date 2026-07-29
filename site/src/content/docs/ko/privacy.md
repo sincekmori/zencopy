@@ -36,8 +36,3 @@ ZenCopy는 중간자를 더하지 않습니다. 내용은 사용자가 설정한
 
 ZenCopy는 오픈 소스(Apache-2.0)입니다.
 이 페이지의 모든 내용은 [소스 코드](https://github.com/sincekmori/zencopy)로 직접 확인할 수 있습니다.
-
-## 이 웹사이트
-
-zencopy.app은 정적 사이트입니다.
-쿠키를 설정하지 않고, 분석 도구도 실행하지 않습니다.

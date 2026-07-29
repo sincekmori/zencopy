@@ -36,8 +36,3 @@ ZenCopy không thêm bên trung gian nào: nội dung của bạn chỉ đi đ�
 
 ZenCopy là mã nguồn mở (Apache-2.0).
 Mọi tuyên bố trên trang này đều có thể kiểm chứng bằng [mã nguồn](https://github.com/sincekmori/zencopy).
-
-## Trang web này
-
-zencopy.app là một trang web tĩnh.
-Nó không đặt cookie và không chạy công cụ phân tích nào.

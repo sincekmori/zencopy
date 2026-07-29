@@ -36,8 +36,3 @@ ZenCopy fügt keinen Vermittler hinzu: Deine Inhalte gehen nur an den Anbieter, 
 
 ZenCopy ist Open Source (Apache-2.0).
 Jede Aussage auf dieser Seite lässt sich am [Quellcode](https://github.com/sincekmori/zencopy) überprüfen.
-
-## Diese Website
-
-zencopy.app ist eine statische Website.
-Sie setzt keine Cookies und verwendet keine Analysedienste.
