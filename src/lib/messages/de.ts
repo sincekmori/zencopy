@@ -8,7 +8,8 @@ export const de: Messages = {
   },
   settings: {
     title: "ZenCopy-Einstellungen",
-    tagline: (keys) => `Drücke ${keys}, um mit dem Kopierten zu arbeiten.`,
+    tagline: (keys) =>
+      `Drücke ${keys}, um mit dem Kopierten zu arbeiten — zweimal C, schnell wie ein Doppelklick.`,
     tabGeneral: "Allgemein",
     position: "Popup-Position",
     positionHint: "In welcher Bildschirmecke das Popup erscheint",
@@ -62,7 +63,8 @@ export const de: Messages = {
     optionDark: "Dunkel",
   },
   popup: {
-    placeholder: "Kopiere etwas, um es hier zu sehen.",
+    placeholder:
+      "Zweimal schnell kopieren — wie ein Doppelklick — und das Ergebnis erscheint hier.",
     devVars: "Template-Variablen",
     noAction:
       "Für diese Erfassung läuft keine Aktion automatisch — wähle unten eine aus oder drücke 1–4, um sie auszuführen.",

@@ -8,7 +8,8 @@ export const he: Messages = {
   },
   settings: {
     title: "הגדרות ZenCopy",
-    tagline: (keys) => `הקישו ${keys} כדי לפעול על מה שהעתקתם.`,
+    tagline: (keys) =>
+      `הקישו ${keys} כדי לפעול על מה שהעתקתם — שתי הקשות C מהירות, כמו לחיצה כפולה.`,
     tabGeneral: "כללי",
     position: "מיקום החלון הקופץ",
     positionHint: "באיזו פינה של המסך יופיע החלון",
@@ -58,7 +59,7 @@ export const he: Messages = {
     optionDark: "כהה",
   },
   popup: {
-    placeholder: "העתיקו משהו כדי לראות אותו כאן.",
+    placeholder: "העתיקו פעמיים, מהר — כמו לחיצה כפולה — והתוצאה תופיע כאן.",
     devVars: "משתני תבנית",
     noAction:
       "שום פעולה אינה מופעלת באופן אוטומטי עבור הלכידה הזו — בחרו אחת למטה או הקישו 1–4 להפעלתה.",

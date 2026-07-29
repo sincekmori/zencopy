@@ -8,7 +8,8 @@ export const vi: Messages = {
   },
   settings: {
     title: "Cài đặt ZenCopy",
-    tagline: (keys) => `Nhấn ${keys} để thực hiện hành động với nội dung đã sao chép.`,
+    tagline: (keys) =>
+      `Nhấn ${keys} để thực hiện hành động với nội dung đã sao chép — hai lần C thật nhanh, như nhấp đúp chuột.`,
     tabGeneral: "Chung",
     position: "Vị trí cửa sổ nổi",
     positionHint: "Cửa sổ nổi xuất hiện ở góc màn hình nào",
@@ -60,7 +61,7 @@ export const vi: Messages = {
     optionDark: "Tối",
   },
   popup: {
-    placeholder: "Sao chép gì đó để thấy nó ở đây.",
+    placeholder: "Sao chép hai lần thật nhanh — như nhấp đúp chuột — và kết quả sẽ hiện ở đây.",
     devVars: "Biến mẫu",
     noAction:
       "Nội dung này không tự động chạy hành động nào — hãy chọn một hành động bên dưới hoặc nhấn 1–4 để chạy.",

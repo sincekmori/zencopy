@@ -8,7 +8,8 @@ export const ko: Messages = {
   },
   settings: {
     title: "ZenCopy 설정",
-    tagline: (keys) => `${keys}를 누르면 복사한 내용을 바로 처리합니다.`,
+    tagline: (keys) =>
+      `${keys}를 누르면 복사한 내용을 바로 처리합니다 — C는 더블 클릭하듯 빠르게 두 번.`,
     tabGeneral: "일반",
     position: "팝업 위치",
     positionHint: "결과를 화면의 어느 모서리에 표시할지",
@@ -59,7 +60,7 @@ export const ko: Messages = {
     optionDark: "다크",
   },
   popup: {
-    placeholder: "무언가를 복사하면 여기에 표시됩니다.",
+    placeholder: "더블 클릭하듯 빠르게 두 번 복사하면 결과가 여기에 표시됩니다.",
     devVars: "템플릿 변수",
     noAction:
       "이 캡처는 자동으로 실행되지 않습니다. 아래에서 액션을 선택하거나 숫자 키 1–4로 실행할 수 있습니다.",

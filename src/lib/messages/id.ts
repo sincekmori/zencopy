@@ -8,7 +8,8 @@ export const id: Messages = {
   },
   settings: {
     title: "Pengaturan ZenCopy",
-    tagline: (keys) => `Tekan ${keys} untuk melakukan aksi pada apa yang kamu salin.`,
+    tagline: (keys) =>
+      `Tekan ${keys} untuk melakukan aksi pada apa yang kamu salin — dua ketukan C yang cepat, seperti klik ganda.`,
     tabGeneral: "Umum",
     position: "Posisi popup",
     positionHint: "Di sudut layar mana popup muncul",
@@ -60,7 +61,7 @@ export const id: Messages = {
     optionDark: "Gelap",
   },
   popup: {
-    placeholder: "Salin sesuatu untuk melihatnya di sini.",
+    placeholder: "Salin dua kali dengan cepat — seperti klik ganda — dan hasilnya muncul di sini.",
     devVars: "Variabel templat",
     noAction:
       "Tangkapan ini tidak menjalankan aksi secara otomatis — pilih satu di bawah atau tekan 1–4 untuk menjalankannya.",

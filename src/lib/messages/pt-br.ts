@@ -8,7 +8,8 @@ export const ptBR: Messages = {
   },
   settings: {
     title: "Configurações do ZenCopy",
-    tagline: (keys) => `Pressione ${keys} para agir sobre o que você copiou.`,
+    tagline: (keys) =>
+      `Pressione ${keys} para agir sobre o que você copiou — dois C rápidos, como um clique duplo.`,
     tabGeneral: "Geral",
     position: "Posição do popup",
     positionHint: "Em qual canto da tela o popup aparece",
@@ -61,7 +62,7 @@ export const ptBR: Messages = {
     optionDark: "Escuro",
   },
   popup: {
-    placeholder: "Copie algo para vê-lo aqui.",
+    placeholder: "Copie duas vezes, rápido — como um clique duplo — e o resultado aparece aqui.",
     devVars: "Variáveis de template",
     noAction:
       "Esta captura não executa nenhuma ação automaticamente — escolha uma abaixo ou pressione 1–4 para executá-la.",

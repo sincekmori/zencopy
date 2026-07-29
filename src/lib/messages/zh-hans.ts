@@ -8,7 +8,7 @@ export const zhHans: Messages = {
   },
   settings: {
     title: "ZenCopy 设置",
-    tagline: (keys) => `按 ${keys}，立即处理你复制的内容。`,
+    tagline: (keys) => `按 ${keys}，立即处理你复制的内容——C 要像双击一样快速按两次。`,
     tabGeneral: "通用",
     position: "弹窗位置",
     positionHint: "结果显示在屏幕的哪个角落",
@@ -57,7 +57,7 @@ export const zhHans: Messages = {
     optionDark: "深色",
   },
   popup: {
-    placeholder: "复制一些内容，就会显示在这里。",
+    placeholder: "像双击一样快速复制两次，结果就会显示在这里。",
     devVars: "模板变量",
     noAction: "这次捕获不会自动执行动作 — 在下方选择一个，或按数字键 1–4 执行。",
     routingDocs: "了解路由机制",

@@ -8,7 +8,8 @@ export const tr: Messages = {
   },
   settings: {
     title: "ZenCopy Ayarları",
-    tagline: (keys) => `Kopyaladığın içeriği işlemek için ${keys} tuşlarına bas.`,
+    tagline: (keys) =>
+      `Kopyaladığın içeriği işlemek için ${keys} tuşlarına bas — çift tıklama gibi hızlıca iki kez C.`,
     tabGeneral: "Genel",
     position: "Açılır pencere konumu",
     positionHint: "Açılır pencerenin ekranın hangi köşesinde görüneceği",
@@ -61,7 +62,7 @@ export const tr: Messages = {
     optionDark: "Koyu",
   },
   popup: {
-    placeholder: "Bir şey kopyala, burada görünsün.",
+    placeholder: "Hızlıca iki kez kopyala — çift tıklama gibi — sonuç burada görünür.",
     devVars: "Şablon değişkenleri",
     noAction:
       "Bu yakalama otomatik olarak bir eylem çalıştırmaz — aşağıdan birini seç veya çalıştırmak için 1–4'e bas.",

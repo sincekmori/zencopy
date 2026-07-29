@@ -8,7 +8,7 @@ export const zhHant: Messages = {
   },
   settings: {
     title: "ZenCopy 設定",
-    tagline: (keys) => `按 ${keys}，立即處理你複製的內容。`,
+    tagline: (keys) => `按 ${keys}，立即處理你複製的內容——C 要像連按兩下一樣快速按兩次。`,
     tabGeneral: "一般",
     position: "彈出視窗位置",
     positionHint: "彈出視窗顯示在螢幕的哪個角落",
@@ -58,7 +58,7 @@ export const zhHant: Messages = {
     optionDark: "深色",
   },
   popup: {
-    placeholder: "複製一些內容，就會顯示在這裡。",
+    placeholder: "像連按兩下一樣快速複製兩次，結果就會顯示在這裡。",
     devVars: "範本變數",
     noAction: "這次擷取不會自動執行動作 — 請在下方選擇一個，或按數字鍵 1–4 執行。",
     routingDocs: "了解路由機制",

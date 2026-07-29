@@ -8,7 +8,8 @@ export const pl: Messages = {
   },
   settings: {
     title: "Ustawienia ZenCopy",
-    tagline: (keys) => `Naciśnij ${keys}, aby przetworzyć to, co skopiujesz.`,
+    tagline: (keys) =>
+      `Naciśnij ${keys}, aby przetworzyć to, co skopiujesz — dwa szybkie C, jak podwójne kliknięcie.`,
     tabGeneral: "Ogólne",
     position: "Pozycja okienka",
     positionHint: "W którym rogu ekranu pojawia się okienko",
@@ -61,7 +62,7 @@ export const pl: Messages = {
     optionDark: "Ciemny",
   },
   popup: {
-    placeholder: "Skopiuj coś, a pojawi się tutaj.",
+    placeholder: "Skopiuj dwa razy, szybko — jak podwójne kliknięcie — a wynik pojawi się tutaj.",
     devVars: "Zmienne szablonu",
     noAction:
       "To przechwycenie nie uruchamia akcji automatycznie — wybierz jedną poniżej albo naciśnij 1–4, aby ją uruchomić.",

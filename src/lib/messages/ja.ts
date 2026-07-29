@@ -8,7 +8,8 @@ export const ja: Messages = {
   },
   settings: {
     title: "ZenCopy 設定",
-    tagline: (keys) => `${keys} で、コピーした内容を処理します。`,
+    tagline: (keys) =>
+      `${keys} で、コピーした内容を処理します — C はダブルクリックの要領で素早く 2 回。`,
     tabGeneral: "一般",
     position: "ポップアップの表示位置",
     positionHint: "結果を画面のどの隅に表示するか",
@@ -61,7 +62,7 @@ export const ja: Messages = {
     optionDark: "ダーク",
   },
   popup: {
-    placeholder: "コピーすると、ここに表示されます。",
+    placeholder: "ダブルクリックの要領で素早く 2 回コピー — 結果がここに表示されます。",
     devVars: "テンプレート変数",
     noAction:
       "このキャプチャは自動では実行されません。下のアクションを選ぶか、数字キー 1–4 で実行できます。",

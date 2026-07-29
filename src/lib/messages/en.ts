@@ -8,7 +8,8 @@ export const en: Messages = {
   },
   settings: {
     title: "ZenCopy Settings",
-    tagline: (keys) => `Press ${keys} to act on what you copied.`,
+    tagline: (keys) =>
+      `Press ${keys} to act on what you copied — two quick taps of C, like a double-click.`,
     tabGeneral: "General",
     position: "Popup position",
     positionHint: "Which corner of the screen the popup appears in",
@@ -60,7 +61,7 @@ export const en: Messages = {
     optionDark: "Dark",
   },
   popup: {
-    placeholder: "Copy something to see it here.",
+    placeholder: "Copy twice, quickly — like a double-click — and the result appears here.",
     devVars: "Template variables",
     noAction:
       "No action runs automatically for this capture — pick one below or press 1–4 to run it.",

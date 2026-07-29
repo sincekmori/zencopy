@@ -8,7 +8,8 @@ export const ar: Messages = {
   },
   settings: {
     title: "إعدادات ZenCopy",
-    tagline: (keys) => `اضغط ${keys} للتصرف بناءً على ما نسخته.`,
+    tagline: (keys) =>
+      `اضغط ${keys} للتصرف بناءً على ما نسخته — ضغطتان سريعتان على C، مثل النقر المزدوج.`,
     tabGeneral: "عام",
     position: "موضع النافذة المنبثقة",
     positionHint: "في أي زاوية من الشاشة تظهر النافذة",
@@ -59,7 +60,7 @@ export const ar: Messages = {
     optionDark: "داكن",
   },
   popup: {
-    placeholder: "انسخ شيئًا ليظهر هنا.",
+    placeholder: "انسخ مرتين بسرعة — مثل النقر المزدوج — وستظهر النتيجة هنا.",
     devVars: "متغيرات القالب",
     noAction: "لا يعمل أي إجراء تلقائيًا لهذا الالتقاط — اختر واحدًا أدناه أو اضغط 1–4 لتشغيله.",
     routingDocs: "كيف يعمل التوجيه",
