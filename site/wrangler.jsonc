@@ -7,9 +7,19 @@
   "name": "zencopy",
   "compatibility_date": "2026-07-21",
   "routes": [{ "pattern": "zencopy.app", "custom_domain": true }],
+  // "/" is answered by the Worker (Accept-Language 302, see worker.ts);
+  // every path that matches a built asset is served without invoking it.
+  "main": "worker.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     // Serve Starlight's 404.html for unknown paths.
     "not_found_handling": "404-page",
+    // Required for the "/" redirect to work in real browsers: for NAVIGATION
+    // requests (Sec-Fetch-Mode: navigate) that match no asset, the assets
+    // layer serves the 404 page itself without ever invoking the Worker —
+    // curl gets the 302 while a browser gets 404. Routing "/" worker-first
+    // bypasses that; every other path keeps the fast asset-only serving.
+    "run_worker_first": ["/"],
   },
 }
