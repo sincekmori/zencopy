@@ -28,7 +28,7 @@
     "@tauri-apps/plugin-store": "^2.4.4",
     "@tauri-apps/plugin-updater": "^2.10.1",
     "ai": "^7.0.31",
-    "ai-sdk-catalog": "^0.7.0",
+    "ai-sdk-catalog": "^0.8.0",
     "ai-sdk-ping": "^0.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
