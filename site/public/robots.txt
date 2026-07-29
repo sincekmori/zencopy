@@ -1,0 +1,10 @@
+# Everything here is meant to be found — by people and by AI assistants alike
+# (the docs even ship llms.txt / llms-full.txt for the latter), so all three
+# content signals are an explicit yes. Cloudflare's managed robots.txt
+# prepends its preamble explaining the signal vocabulary.
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+Sitemap: https://zencopy.app/sitemap-index.xml
