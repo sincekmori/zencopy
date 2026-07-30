@@ -68,7 +68,7 @@ Settings split into two layers:
 - **Files (power users)** — read from the per-user app config dir (macOS: `~/Library/Application Support/app.zencopy/`; the exact path is logged at startup). Defaults for routing and actions are embedded in the app, so these files only ever override:
   - `ai-sdk-catalog.json` — providers and **role → model** mapping. API keys live inline in this local file (what the settings UI writes) and never leave your machine.
   - `routing.json` — `kind → action`, plus higher-priority `overrides`.
-  - `actions/*.md` — action definitions: YAML frontmatter (`id`, `label`, optional `role`, `instructions`) + a Liquid prompt body. Template variables include `{{ text }}`, `{{ markup }}`, `{{ app_name }}`, `{{ window_title }}`, `{{ url }}`, `{{ now }}`, and `{{ locale }}`.
+  - `actions/*.md` — action definitions: YAML frontmatter (`id`, `label`, optional `role`, `instructions`) + a Liquid prompt body. Template variables like `{{ text }}` embed the capture's context — the full table lives in the [configuration docs](https://zencopy.app/en/configuration/#actionsmd).
 
 The Settings window covers the common setups (OpenAI / Google / Anthropic / any OpenAI-compatible endpoint such as Ollama); editing `ai-sdk-catalog.json` unlocks the rest — multiple providers, corporate gateways, per-role models.
 
