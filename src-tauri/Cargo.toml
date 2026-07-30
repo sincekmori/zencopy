@@ -44,7 +44,7 @@ sys-locale = "0.3"
 # OS name/version for the startup log banner (issue-report context).
 os_info = { version = "3", default-features = false }
 # Detect attachment types from magic bytes — file contents, not extensions.
-infer = { version = "0.19", default-features = false }
+infer = { version = "0.22", default-features = false }
 # Text-file decoding, browser-grade: chardetng guesses the legacy encoding
 # (Shift_JIS on Japanese Windows, …), encoding_rs decodes it to UTF-8.
 encoding_rs = "0.8"
