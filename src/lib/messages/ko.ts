@@ -39,6 +39,14 @@ export const ko: Messages = {
     costsExport: "비용 집계 내보내기",
     costsError: (models) =>
       `다음 모델의 비용을 계산할 수 없습니다: ${models}. 이 파일에 cost 블록을 추가하세요:`,
+    popupCost: "팝업에 이번 달 비용 표시",
+    popupCostHint:
+      "팝업 헤더에 작은 실시간 추정치를 표시합니다. 사용 통계가 켜져 있을 때 동작합니다.",
+    costLimit: "월 비용 상한(USD)",
+    costLimitHint:
+      "이번 달 추정치가 상한에 도달하면 새 실행을 멈춥니다. 비워 두면 무제한이며, 사용 통계가 켜져 있을 때 동작합니다.",
+    costsApproxHint:
+      "여기의 비용은 어디까지나 추정치입니다. 실패하거나 중단된 실행은 집계되지 않으며 모델 판별이 실제와 다를 수 있습니다. 정확한 금액은 프로바이더의 청구 페이지에서 확인하세요.",
     userContext: "나에 대하여",
     userContextHint:
       "AI가 알아 두면 좋은 정보(역할, 전문 분야, 취향 등). 모든 액션에 함께 전달됩니다.",
@@ -81,6 +89,9 @@ export const ko: Messages = {
     failed: (reason) => `실패: ${reason}`,
     timedOut: "모델에서 응답이 없습니다. 네트워크와 제공업체 설정을 확인한 뒤 다시 시도하세요.",
     emptyResult: "모델이 빈 응답을 반환했습니다.",
+    costLimitReached: (limit) =>
+      `이번 달 비용 상한(${limit})에 도달했습니다. 설정에서 변경할 수 있습니다.`,
+    monthCost: "이번 달 비용",
     stop: "중지",
     retry: "다시 시도",
     copy: "복사",

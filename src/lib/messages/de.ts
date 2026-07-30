@@ -40,6 +40,14 @@ export const de: Messages = {
     costsExport: "Kostenübersicht exportieren",
     costsError: (models) =>
       `Für folgende Modelle ließen sich keine Kosten berechnen: ${models}. Füge einen cost-Block in diese Datei ein:`,
+    popupCost: "Kosten dieses Monats im Popup anzeigen",
+    popupCostHint:
+      "Eine kleine Live-Schätzung in der Kopfzeile des Popups. Funktioniert, solange die Nutzungsstatistik an ist.",
+    costLimit: "Monatliches Kostenlimit (USD)",
+    costLimitHint:
+      "Neue Ausführungen stoppen, sobald die Schätzung dieses Monats das Limit erreicht. Leer bedeutet kein Limit; funktioniert, solange die Nutzungsstatistik an ist.",
+    costsApproxHint:
+      "Die Kosten hier sind Schätzungen: fehlgeschlagene und abgebrochene Ausführungen zählen nicht mit, und die Modellerkennung kann danebenliegen. Die exakten Zahlen stehen auf der Abrechnungsseite deines Anbieters.",
     userContext: "Über dich",
     userContextHint:
       "Was die KI über dich wissen sollte — Rolle, Fachgebiete, Vorlieben. Wird jeder Aktion mitgegeben.",
@@ -86,6 +94,9 @@ export const de: Messages = {
     failed: (reason) => `Fehlgeschlagen: ${reason}`,
     timedOut: "Keine Antwort vom Modell. Prüfe Netzwerk und Anbieter, dann versuche es erneut.",
     emptyResult: "Das Modell hat eine leere Antwort zurückgegeben.",
+    costLimitReached: (limit) =>
+      `Monatliches Kostenlimit erreicht (${limit}). Passe es in den Einstellungen an.`,
+    monthCost: "Kosten dieses Monats",
     stop: "Stopp",
     retry: "Erneut versuchen",
     copy: "Kopieren",

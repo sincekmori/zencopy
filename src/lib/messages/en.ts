@@ -40,6 +40,14 @@ export const en: Messages = {
     costsExport: "Export cost summary",
     costsError: (models) =>
       `Costs could not be computed for: ${models}. Add a cost block to this file:`,
+    popupCost: "Show this month's cost in the popup",
+    popupCostHint:
+      "A small live estimate in the popup's header. Works while usage statistics are on.",
+    costLimit: "Monthly cost limit (USD)",
+    costLimitHint:
+      "New runs stop once this month's estimate reaches the limit. Empty means no limit; works while usage statistics are on.",
+    costsApproxHint:
+      "Costs here are estimates: failed and stopped runs are not counted, and model detection can be off. Your provider's billing page has the exact numbers.",
     userContext: "About you",
     userContextHint:
       "Anything the AI should know about you — role, expertise, taste. Added to every action.",
@@ -81,6 +89,8 @@ export const en: Messages = {
     failed: (reason) => `Failed: ${reason}`,
     timedOut: "No response from the model. Check your network and provider, then retry.",
     emptyResult: "The model returned an empty response.",
+    costLimitReached: (limit) => `Monthly cost limit reached (${limit}). Adjust it in Settings.`,
+    monthCost: "This month's cost",
     stop: "Stop",
     retry: "Retry",
     copy: "Copy",

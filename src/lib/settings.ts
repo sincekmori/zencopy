@@ -125,6 +125,34 @@ export async function setStatsEnabled(enabled: boolean): Promise<void> {
   await writeSetting(STATS_ENABLED_KEY, enabled);
 }
 
+const POPUP_COST_KEY = "popupCostShown";
+
+/** Whether the popup header shows this month's estimated cost, live. Off by
+ *  default — a running total is a power feature, not ambient pressure. Only
+ *  meaningful while usage statistics are on (no ledger, no number). */
+export function isPopupCostShown(): Promise<boolean> {
+  return readSetting(POPUP_COST_KEY, z.boolean(), false);
+}
+
+export async function setPopupCostShown(shown: boolean): Promise<void> {
+  await writeSetting(POPUP_COST_KEY, shown);
+}
+
+const COST_LIMIT_KEY = "costLimitUsd";
+
+/** The monthly cost cap in USD; 0 means no cap (the default — the store has
+ *  no clean "absent" write, so zero is the sentinel and a zero cap would be
+ *  meaningless anyway). When this month's estimate reaches the cap, new runs
+ *  are refused before anything is sent. Enforced only while usage statistics
+ *  are on. */
+export function getCostLimit(): Promise<number> {
+  return readSetting(COST_LIMIT_KEY, z.number().nonnegative(), 0);
+}
+
+export async function setCostLimit(limit: number): Promise<void> {
+  await writeSetting(COST_LIMIT_KEY, limit);
+}
+
 const CONFIRM_ATTACHMENTS_KEY = "confirmAttachments";
 
 /** Whether the popup asks before sending an image or files to the provider.

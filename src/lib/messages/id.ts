@@ -40,6 +40,14 @@ export const id: Messages = {
     costsExport: "Ekspor ringkasan biaya",
     costsError: (models) =>
       `Biaya tidak dapat dihitung untuk: ${models}. Tambahkan blok cost di berkas ini:`,
+    popupCost: "Tampilkan biaya bulan ini di popup",
+    popupCostHint:
+      "Perkiraan kecil yang diperbarui langsung di kepala popup. Berfungsi selama statistik penggunaan aktif.",
+    costLimit: "Batas biaya bulanan (USD)",
+    costLimitHint:
+      "Eksekusi baru berhenti saat perkiraan bulan ini mencapai batas. Kosong berarti tanpa batas; berfungsi selama statistik penggunaan aktif.",
+    costsApproxHint:
+      "Biaya di sini hanyalah perkiraan: eksekusi yang gagal atau dihentikan tidak dihitung, dan deteksi model bisa meleset. Angka pastinya ada di halaman tagihan penyedia kamu.",
     userContext: "Tentang kamu",
     userContextHint:
       "Hal yang perlu diketahui AI tentang kamu — peran, keahlian, preferensi. Ditambahkan ke setiap aksi.",
@@ -82,6 +90,8 @@ export const id: Messages = {
     failed: (reason) => `Gagal: ${reason}`,
     timedOut: "Tidak ada respons dari model. Periksa jaringan dan penyedia, lalu coba lagi.",
     emptyResult: "Model mengembalikan respons kosong.",
+    costLimitReached: (limit) => `Batas biaya bulanan (${limit}) tercapai. Ubah di pengaturan.`,
+    monthCost: "Biaya bulan ini",
     stop: "Hentikan",
     retry: "Coba lagi",
     copy: "Salin",

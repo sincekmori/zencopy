@@ -52,6 +52,15 @@ export interface Messages {
      *  not be computed; the clickable literal file name is appended by the
      *  component, so the sentence ends mid-air on a colon. */
     costsError: (models: string) => string;
+    /** Toggle: show this month's estimated cost live in the popup header. */
+    popupCost: string;
+    popupCostHint: string;
+    /** The monthly cap input (USD); empty means no cap. */
+    costLimit: string;
+    costLimitHint: string;
+    /** The always-visible footnote under the cost controls: every number is
+     *  an estimate — the provider's billing page has the exact figures. */
+    costsApproxHint: string;
     /** "About you": one free-form multiline self-description, added to every
      *  action run so results fit the person asking. The placeholders are
      *  example personas the field rotates through; Tab inserts the one
@@ -95,6 +104,11 @@ export interface Messages {
     copied: string;
     clear: string;
     close: string;
+    /** Refusal shown instead of a run when the monthly cap is reached;
+     *  receives the formatted cap (e.g. "$5.00"). */
+    costLimitReached: (limit: string) => string;
+    /** Tooltip on the header's live month-cost readout. */
+    monthCost: string;
     /** Header toggle: grow the popup to a reading pane / back to the card. */
     expand: string;
     collapse: string;

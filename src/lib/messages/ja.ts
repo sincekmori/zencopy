@@ -40,6 +40,14 @@ export const ja: Messages = {
     costsExport: "コスト集計をエクスポート",
     costsError: (models) =>
       `コストを計算できないモデルがあります: ${models}。cost をこのファイルに書いてください:`,
+    popupCost: "ポップアップに今月のコストを表示",
+    popupCostHint:
+      "ポップアップのヘッダに概算を小さくリアルタイム表示します。利用統計が有効なときに動作します。",
+    costLimit: "月のコスト上限 (USD)",
+    costLimitHint:
+      "今月の概算が上限に達すると、新しい実行を止めます。空欄なら無制限。利用統計が有効なときに動作します。",
+    costsApproxHint:
+      "ここでのコストはあくまで概算です。エラーや中断した実行は集計されず、モデルの判定が実際と異なることもあります。正確な金額はプロバイダーの請求ページで確認してください。",
     userContext: "あなたについて",
     userContextHint:
       "AI に知っておいてほしいこと(役割・得意分野・好みなど)。すべてのアクションに添えられます。",
@@ -85,6 +93,8 @@ export const ja: Messages = {
     timedOut:
       "モデルから応答がありませんでした。ネットワークとプロバイダー設定を確認して、やり直してください。",
     emptyResult: "モデルの応答が空でした。",
+    costLimitReached: (limit) => `今月のコスト上限(${limit})に達しました。設定から変更できます。`,
+    monthCost: "今月のコスト",
     stop: "停止",
     retry: "やり直す",
     copy: "コピー",

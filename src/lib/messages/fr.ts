@@ -40,6 +40,14 @@ export const fr: Messages = {
     costsExport: "Exporter le récapitulatif des coûts",
     costsError: (models) =>
       `Impossible de calculer les coûts pour : ${models}. Ajoutez un bloc cost dans ce fichier :`,
+    popupCost: "Afficher le coût du mois dans la popup",
+    popupCostHint:
+      "Une petite estimation en direct dans l'en-tête de la popup. Fonctionne tant que les statistiques d'utilisation sont actives.",
+    costLimit: "Plafond de coût mensuel (USD)",
+    costLimitHint:
+      "Les nouvelles exécutions s'arrêtent dès que l'estimation du mois atteint le plafond. Vide signifie aucun plafond ; fonctionne tant que les statistiques d'utilisation sont actives.",
+    costsApproxHint:
+      "Les coûts affichés sont des estimations : les exécutions échouées ou interrompues ne sont pas comptées, et la détection du modèle peut se tromper. La page de facturation de votre fournisseur a les chiffres exacts.",
     userContext: "À propos de vous",
     userContextHint:
       "Ce que l'IA devrait savoir de vous : rôle, expertise, préférences. Ajouté à chaque action.",
@@ -86,6 +94,9 @@ export const fr: Messages = {
     timedOut:
       "Aucune réponse du modèle. Vérifiez votre réseau et votre fournisseur, puis réessayez.",
     emptyResult: "Le modèle a renvoyé une réponse vide.",
+    costLimitReached: (limit) =>
+      `Plafond de coût mensuel atteint (${limit}). Ajustez-le dans les réglages.`,
+    monthCost: "Coût de ce mois-ci",
     stop: "Arrêter",
     retry: "Réessayer",
     copy: "Copier",

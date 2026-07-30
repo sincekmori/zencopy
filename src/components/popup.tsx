@@ -33,6 +33,7 @@ import {
   sourceSignature,
   UNSUPPORTED_FILE_PREFIX,
 } from "@/lib/capture.ts";
+import { formatUsd, monthCostUsd } from "@/lib/costs.ts";
 import { useActionLabel, useLocale, useT } from "@/lib/i18n.tsx";
 import { createLogger, errorMessage } from "@/lib/log.ts";
 import {
@@ -46,9 +47,11 @@ import {
 } from "@/lib/llm.ts";
 import { TRIGGER_MODIFIER } from "@/lib/platform.ts";
 import {
+  getCostLimit,
   getQuickActions,
   isConfirmAttachments,
   isDevMode,
+  isPopupCostShown,
   isStatsEnabled,
   QUICK_SLOT_COUNT,
   setConfirmAttachments,
@@ -113,6 +116,13 @@ export function Popup(): React.JSX.Element {
   const [devMode] = useLiveValue(isDevMode, "dev-mode-changed", false);
   // Usage statistics (settings toggle, default on): append invocation events.
   const [statsEnabled] = useLiveValue(isStatsEnabled, "stats-enabled-changed", true);
+  // The live month-cost readout (settings toggle, default off) and the
+  // monthly cap — both estimates from the same local ledger.
+  const [costShown] = useLiveValue(isPopupCostShown, "popup-cost-changed", false);
+  const [costLimit] = useLiveValue<number>(getCostLimit, "cost-limit-changed", 0); // 0 = no cap
+  // This month's estimate, refreshed when a capture arrives and after every
+  // recorded run — "live" at the moments the number can actually change.
+  const [monthCost, setMonthCost] = useState<number | undefined>(undefined);
   // Ask before sending an image/files to the provider (settings toggle, or
   // this popup's own "don't ask again").
   const [confirmSend, setConfirmSend] = useLiveValue(
@@ -179,6 +189,30 @@ export function Popup(): React.JSX.Element {
   const logUsage = (actionId: string, kind: string): void => {
     log.info(`action run: ${actionId} (${kind})`);
   };
+
+  // Refresh the header's month estimate; a failure hides the number rather
+  // than surfacing an error (it is a courtesy readout, not a feature gate).
+  const refreshMonthCost = (): void => {
+    if (!costShown || !statsEnabled) {
+      return;
+    }
+    void (async () => {
+      try {
+        setMonthCost(await monthCostUsd());
+      } catch {
+        setMonthCost(undefined); // a courtesy readout never surfaces errors
+      }
+    })();
+  };
+
+  useEffect(() => {
+    if (costShown && statsEnabled) {
+      refreshMonthCost();
+    } else {
+      setMonthCost(undefined);
+    }
+    // oxlint-disable-next-line react-hooks/exhaustive-deps -- refreshMonthCost reads the same two flags this effect keys on
+  }, [costShown, statsEnabled]);
 
   // The statistics append — a ledger of COMPLETED runs only: reuses, gates,
   // config errors, user stops, timeouts, and error responses all leave no
@@ -268,6 +302,25 @@ export function Popup(): React.JSX.Element {
       // exactly the facts that exist.
       let settled: StreamOutcome | undefined;
       try {
+        // The monthly cost cap: when this month's estimate has reached the
+        // user's limit, refuse before anything is sent. Fail-open on purpose
+        // — a cap that cannot be computed must not stop the user's work.
+        if (costLimit > 0 && statsEnabled) {
+          let spent: number | undefined;
+          try {
+            spent = await monthCostUsd();
+          } catch {
+            spent = undefined; // fail-open: an uncomputable cap must not stop work
+          }
+          if (owns() && spent !== undefined && spent >= costLimit) {
+            putResult(actionId, {
+              phase: "done",
+              text: t.popup.costLimitReached(formatUsd(locale, costLimit)),
+              ok: false,
+            });
+            return;
+          }
+        }
         const attachments = await buildAttachments(next.source);
         // Only binary attachments (image, PDF, audio) are the expensive path
         // worth a gate — text files ride like copied text and run right away.
@@ -354,6 +407,7 @@ export function Popup(): React.JSX.Element {
           runsRef.current.delete(actionId); // free the slot for a later re-run
           if (settled && !controller.signal.aborted) {
             recordUsage(actionId, next.source.kind, settled);
+            refreshMonthCost(); // the number just changed (fire-and-forget race is fine)
           }
         }
       }
@@ -924,6 +978,14 @@ export function Popup(): React.JSX.Element {
         <div className="flex items-center gap-2 border-b px-3 py-2">
           <ZenCopyMark className="size-4" />
           <span className="text-xs font-medium">ZenCopy</span>
+          {costShown && statsEnabled && monthCost !== undefined ? (
+            <span
+              className="ms-2 text-[10px] text-muted-foreground tabular-nums"
+              title={t.popup.monthCost}
+            >
+              {formatUsd(locale, monthCost)}
+            </span>
+          ) : undefined}
           <div className="ms-auto flex items-center gap-0.5 text-muted-foreground">
             {/* Reading pane toggle: half the screen's width for long results,
                 one click back to the compact card. Rust owns the geometry. */}

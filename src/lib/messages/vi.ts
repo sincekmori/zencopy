@@ -39,6 +39,14 @@ export const vi: Messages = {
     costsEmpty: "Chưa có gì được ghi lại.",
     costsExport: "Xuất tóm tắt chi phí",
     costsError: (models) => `Không thể tính chi phí cho: ${models}. Thêm khối cost vào tệp này:`,
+    popupCost: "Hiện chi phí tháng này trong popup",
+    popupCostHint:
+      "Một ước tính nhỏ, cập nhật trực tiếp ở đầu popup. Hoạt động khi thống kê sử dụng đang bật.",
+    costLimit: "Hạn mức chi phí hằng tháng (USD)",
+    costLimitHint:
+      "Các lần chạy mới sẽ dừng khi ước tính của tháng này chạm hạn mức. Để trống nghĩa là không giới hạn; hoạt động khi thống kê sử dụng đang bật.",
+    costsApproxHint:
+      "Chi phí ở đây chỉ là ước tính: các lần chạy lỗi hoặc bị dừng không được tính, và việc nhận diện mô hình có thể sai. Con số chính xác nằm ở trang thanh toán của nhà cung cấp.",
     userContext: "Về bạn",
     userContextHint:
       "Những điều AI nên biết về bạn — vai trò, chuyên môn, sở thích. Được thêm vào mọi hành động.",
@@ -81,6 +89,9 @@ export const vi: Messages = {
     failed: (reason) => `Thất bại: ${reason}`,
     timedOut: "Mô hình không phản hồi. Kiểm tra mạng và nhà cung cấp, rồi thử lại.",
     emptyResult: "Mô hình trả về phản hồi trống.",
+    costLimitReached: (limit) =>
+      `Đã chạm hạn mức chi phí hằng tháng (${limit}). Điều chỉnh trong phần cài đặt.`,
+    monthCost: "Chi phí tháng này",
     stop: "Dừng",
     retry: "Thử lại",
     copy: "Sao chép",

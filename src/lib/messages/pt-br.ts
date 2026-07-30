@@ -40,6 +40,14 @@ export const ptBR: Messages = {
     costsExport: "Exportar o resumo de custos",
     costsError: (models) =>
       `Não foi possível calcular os custos de: ${models}. Adicione um bloco cost neste arquivo:`,
+    popupCost: "Mostrar o custo do mês no popup",
+    popupCostHint:
+      "Uma pequena estimativa ao vivo no cabeçalho do popup. Funciona enquanto as estatísticas de uso estiverem ativas.",
+    costLimit: "Limite de custo mensal (USD)",
+    costLimitHint:
+      "Novas execuções param quando a estimativa do mês atinge o limite. Vazio significa sem limite; funciona enquanto as estatísticas de uso estiverem ativas.",
+    costsApproxHint:
+      "Os custos aqui são estimativas: execuções com erro ou interrompidas não são contadas, e a detecção do modelo pode errar. A página de cobrança do seu provedor tem os números exatos.",
     userContext: "Sobre você",
     userContextHint:
       "O que a IA deve saber sobre você — cargo, especialidade, preferências. Adicionado a toda ação.",
@@ -83,6 +91,9 @@ export const ptBR: Messages = {
     failed: (reason) => `Falhou: ${reason}`,
     timedOut: "O modelo não respondeu. Verifique sua rede e seu provedor e tente de novo.",
     emptyResult: "O modelo retornou uma resposta vazia.",
+    costLimitReached: (limit) =>
+      `Limite de custo mensal atingido (${limit}). Ajuste nas configurações.`,
+    monthCost: "Custo deste mês",
     stop: "Parar",
     retry: "Tentar de novo",
     copy: "Copiar",

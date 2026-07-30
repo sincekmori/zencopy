@@ -8,13 +8,15 @@ import { AiSettings } from "@/components/ai-settings.tsx";
 import { TriggerNotice } from "@/components/trigger-notice.tsx";
 import { UserContextSettings } from "@/components/user-context-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
+import { FIELD } from "@/components/ui/field.ts";
 import { Select } from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import { Welcome } from "@/components/welcome.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { useT } from "@/lib/i18n.tsx";
 import { createLogger, errorMessage } from "@/lib/log.ts";
-import { modelCosts, type TokenUsage } from "@/lib/llm.ts";
+import { eventMonth, runCost, type UsageEvent } from "@/lib/costs.ts";
+import { modelCosts } from "@/lib/llm.ts";
 import { LOCALES } from "@/lib/messages/index.ts";
 import {
   type Corner,
@@ -24,10 +26,14 @@ import {
   getCorner,
   getLocalePreference,
   getTheme,
+  getCostLimit,
   isConfirmAttachments,
   isDevMode,
+  isPopupCostShown,
   isStatsEnabled,
   isWelcomeSeen,
+  setCostLimit as saveCostLimit,
+  setPopupCostShown as savePopupCostShown,
   type LocalePreference,
   markWelcomeSeen,
   resolveLocale,
@@ -54,19 +60,6 @@ const CORNER_POSITION: Record<Corner, string> = {
   "bottom-right": "bottom-3 right-3",
 };
 
-// One recorded model run, as read back from usage.jsonl. Lenient by design:
-// any field may be absent (absence means unknown) — the reader must accept
-// every line the ledger's frozen contract allows.
-interface UsageEvent {
-  at?: string;
-  model?: string;
-  tokens?: Record<string, number>;
-}
-
-// The ledger's billing buckets. Tokens and prices share this vocabulary, so
-// pricing a run is a plain dot product over these keys.
-const COST_BUCKETS = ["input", "output", "cache_read", "cache_write"] as const;
-
 /** Fold one priced run into its month × model row. */
 function addToGroup(
   groups: Map<string, { month: string; model: string; cost: number }>,
@@ -82,15 +75,6 @@ function addToGroup(
 /** RFC 4180 quoting, only when the value needs it. */
 function csvCell(value: string): string {
   return /[",\n]/u.test(value) ? `"${value.replaceAll('"', '""')}"` : value;
-}
-
-/** One run's cost in USD: Σ tokens[bucket] × price[bucket] / 1M. */
-function runCost(tokens: Record<string, number>, price: TokenUsage): number {
-  let sum = 0;
-  for (const bucket of COST_BUCKETS) {
-    sum += (tokens[bucket] ?? 0) * (price[bucket] ?? 0);
-  }
-  return sum / 1e6;
 }
 
 export function Settings(): React.JSX.Element {
@@ -111,6 +95,11 @@ export function Settings(): React.JSX.Element {
   const [confirmingReset, setConfirmingReset] = useState(false);
   const [resetting, setResetting] = useState(false);
   const [statsOn, setStatsOn] = useState(true);
+  // The popup's live month-cost readout (off by default) and the monthly cap
+  // (the input holds the raw text; empty = no cap). Both need the ledger, so
+  // both are disabled while statistics are off.
+  const [popupCost, setPopupCost] = useState(false);
+  const [costLimitText, setCostLimitText] = useState("");
   // The quiet stats-reset link's inline confirm, and its transient "done".
   const [confirmingStatsReset, setConfirmingStatsReset] = useState(false);
   const [statsResetDone, setStatsResetDone] = useState(false);
@@ -133,6 +122,8 @@ export function Settings(): React.JSX.Element {
         devModeOn,
         confirmOn,
         statsEnabled,
+        popupCostOn,
+        costLimit,
       ] = await Promise.all([
         getCorner(),
         getTheme(),
@@ -142,6 +133,8 @@ export function Settings(): React.JSX.Element {
         isDevMode(),
         isConfirmAttachments(),
         isStatsEnabled(),
+        isPopupCostShown(),
+        getCostLimit(),
       ]);
       if (!cancelled) {
         setCorner(savedCorner);
@@ -152,6 +145,8 @@ export function Settings(): React.JSX.Element {
         setDevMode(devModeOn);
         setConfirmSend(confirmOn);
         setStatsOn(statsEnabled);
+        setPopupCost(popupCostOn);
+        setCostLimitText(costLimit === 0 ? "" : String(costLimit));
       }
     })();
     return () => {
@@ -193,6 +188,23 @@ export function Settings(): React.JSX.Element {
     void emit("stats-enabled-changed", next); // live-update the popup
   };
 
+  const togglePopupCost = (next: boolean): void => {
+    setPopupCost(next);
+    void savePopupCostShown(next);
+    void emit("popup-cost-changed", next); // live-update the popup
+  };
+
+  // The cap input: digits and one dot only, persisted as it settles. An
+  // empty (or unparsable) value stores the 0 sentinel: no cap.
+  const changeCostLimit = (raw: string): void => {
+    const text = raw.replaceAll(/[^0-9.]/gu, "").replaceAll(/\.(?=.*\.)/gu, "");
+    setCostLimitText(text);
+    const value = Number(text);
+    const limit = text !== "" && Number.isFinite(value) && value > 0 ? value : 0;
+    void saveCostLimit(limit);
+    void emit("cost-limit-changed", limit); // live-update the popup
+  };
+
   const resetStats = (): void => {
     setConfirmingStatsReset(false);
     setExportIssue(undefined); // its data just went away
@@ -232,7 +244,7 @@ export function Settings(): React.JSX.Element {
         const groups = new Map<string, { month: string; model: string; cost: number }>();
         const unpriced = new Set<string>();
         for (const event of events) {
-          const month = (event.at ?? "").slice(0, 7);
+          const month = eventMonth(event);
           if (month) {
             const model = event.model ?? "?";
             const price = event.model === undefined ? undefined : prices[event.model];
@@ -594,6 +606,36 @@ export function Settings(): React.JSX.Element {
               {statsResetRow}
             </div>
             {exportIssueRow}
+            <div className="flex items-center justify-between gap-4 border-t pt-3">
+              <div>
+                <h3 className="text-sm font-medium">{t.settings.popupCost}</h3>
+                <p className="mt-1 text-xs text-muted-foreground">{t.settings.popupCostHint}</p>
+              </div>
+              <Switch
+                checked={popupCost && statsOn}
+                disabled={!statsOn}
+                onCheckedChange={togglePopupCost}
+                aria-label={t.settings.popupCost}
+              />
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-medium">{t.settings.costLimit}</h3>
+                <p className="mt-1 text-xs text-muted-foreground">{t.settings.costLimitHint}</p>
+              </div>
+              <input
+                className={cn(FIELD, "w-24 text-end tabular-nums")}
+                inputMode="decimal"
+                disabled={!statsOn}
+                value={costLimitText}
+                aria-label={t.settings.costLimit}
+                onChange={(event) => {
+                  changeCostLimit(event.target.value);
+                }}
+              />
+            </div>
+            {/* The honesty footnote: everything above is an estimate. */}
+            <p className="text-xs text-muted-foreground">{t.settings.costsApproxHint}</p>
           </section>
 
           <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">

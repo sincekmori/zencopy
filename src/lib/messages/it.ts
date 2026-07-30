@@ -40,6 +40,14 @@ export const it: Messages = {
     costsExport: "Esporta il riepilogo dei costi",
     costsError: (models) =>
       `Impossibile calcolare i costi per: ${models}. Aggiungi un blocco cost in questo file:`,
+    popupCost: "Mostra il costo del mese nel popup",
+    popupCostHint:
+      "Una piccola stima in tempo reale nell'intestazione del popup. Funziona finché le statistiche d'uso sono attive.",
+    costLimit: "Limite di costo mensile (USD)",
+    costLimitHint:
+      "Le nuove esecuzioni si fermano quando la stima del mese raggiunge il limite. Vuoto significa nessun limite; funziona finché le statistiche d'uso sono attive.",
+    costsApproxHint:
+      "I costi qui sono stime: le esecuzioni fallite o interrotte non vengono contate, e il rilevamento del modello può sbagliare. La pagina di fatturazione del tuo provider ha le cifre esatte.",
     userContext: "Su di te",
     userContextHint:
       "Cosa dovrebbe sapere l'IA di te: ruolo, competenze, preferenze. Aggiunto a ogni azione.",
@@ -83,6 +91,9 @@ export const it: Messages = {
     failed: (reason) => `Errore: ${reason}`,
     timedOut: "Nessuna risposta dal modello. Controlla rete e provider, poi riprova.",
     emptyResult: "Il modello ha restituito una risposta vuota.",
+    costLimitReached: (limit) =>
+      `Limite di costo mensile raggiunto (${limit}). Modificalo nelle impostazioni.`,
+    monthCost: "Costo di questo mese",
     stop: "Ferma",
     retry: "Riprova",
     copy: "Copia",

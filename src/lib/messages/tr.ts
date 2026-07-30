@@ -40,6 +40,14 @@ export const tr: Messages = {
     costsExport: "Maliyet özetini dışa aktar",
     costsError: (models) =>
       `Şu modeller için maliyet hesaplanamadı: ${models}. Bu dosyaya bir cost bloğu ekle:`,
+    popupCost: "Bu ayın maliyetini açılır pencerede göster",
+    popupCostHint:
+      "Açılır pencerenin başlığında küçük, canlı bir tahmin. Kullanım istatistikleri açıkken çalışır.",
+    costLimit: "Aylık maliyet sınırı (USD)",
+    costLimitHint:
+      "Bu ayın tahmini sınıra ulaştığında yeni çalıştırmalar durur. Boş bırakılırsa sınır yok; kullanım istatistikleri açıkken çalışır.",
+    costsApproxHint:
+      "Buradaki maliyetler tahminidir: başarısız ve durdurulan çalıştırmalar sayılmaz, model tespiti de yanılabilir. Kesin rakamlar sağlayıcının faturalandırma sayfasındadır.",
     userContext: "Senin hakkında",
     userContextHint:
       "Yapay zekânın senin hakkında bilmesi gerekenler — rol, uzmanlık, tercihler. Her eyleme eklenir.",
@@ -83,6 +91,9 @@ export const tr: Messages = {
     failed: (reason) => `Başarısız: ${reason}`,
     timedOut: "Modelden yanıt yok. Ağını ve sağlayıcını kontrol edip yeniden dene.",
     emptyResult: "Model boş bir yanıt döndürdü.",
+    costLimitReached: (limit) =>
+      `Aylık maliyet sınırına ulaşıldı (${limit}). Ayarlardan değiştirebilirsin.`,
+    monthCost: "Bu ayın maliyeti",
     stop: "Durdur",
     retry: "Yeniden dene",
     copy: "Kopyala",

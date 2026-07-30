@@ -37,6 +37,12 @@ export const zhHant: Messages = {
     costsEmpty: "還沒有任何記錄。",
     costsExport: "匯出費用彙總",
     costsError: (models) => `無法計算以下模型的費用：${models}。請在此檔案中加入 cost 區塊：`,
+    popupCost: "在彈出視窗顯示本月費用",
+    popupCostHint: "在彈出視窗標題列即時顯示一個小的估算值。使用統計開啟時生效。",
+    costLimit: "每月費用上限（USD）",
+    costLimitHint: "本月估算達到上限後將停止新的執行。留空表示不限；使用統計開啟時生效。",
+    costsApproxHint:
+      "這裡的費用只是估算：失敗與中斷的執行不列入計算，模型判定也可能有誤。準確金額請查看供應商的帳單頁面。",
     userContext: "關於你",
     userContextHint: "希望 AI 了解的資訊——職務、擅長領域、偏好。會附加到每個動作。",
     userContextPlaceholders: [
@@ -76,6 +82,8 @@ export const zhHant: Messages = {
     failed: (reason) => `失敗：${reason}`,
     timedOut: "模型沒有回應。請檢查網路與供應商設定後重試。",
     emptyResult: "模型傳回了空回應。",
+    costLimitReached: (limit) => `已達到每月費用上限（${limit}）。可在設定中調整。`,
+    monthCost: "本月費用",
     stop: "停止",
     retry: "重試",
     copy: "複製",

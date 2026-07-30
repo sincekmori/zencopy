@@ -36,6 +36,12 @@ export const zhHans: Messages = {
     costsEmpty: "还没有任何记录。",
     costsExport: "导出费用汇总",
     costsError: (models) => `无法计算以下模型的费用：${models}。请在此文件中添加 cost 块：`,
+    popupCost: "在弹窗中显示本月费用",
+    popupCostHint: "在弹窗标题栏实时显示一个小的估算值。使用统计开启时生效。",
+    costLimit: "每月费用上限（USD）",
+    costLimitHint: "本月估算达到上限后将停止新的运行。留空表示不限；使用统计开启时生效。",
+    costsApproxHint:
+      "这里的费用只是估算：失败和中断的运行不计入，模型识别也可能有误。准确金额请查看提供商的账单页面。",
     userContext: "关于你",
     userContextHint: "希望 AI 了解的信息——职责、擅长领域、偏好。会附加到每个动作。",
     userContextPlaceholders: [
@@ -75,6 +81,8 @@ export const zhHans: Messages = {
     failed: (reason) => `失败：${reason}`,
     timedOut: "模型没有响应。请检查网络和提供商设置后重试。",
     emptyResult: "模型返回了空响应。",
+    costLimitReached: (limit) => `已达到每月费用上限（${limit}）。可在设置中调整。`,
+    monthCost: "本月费用",
     stop: "停止",
     retry: "重试",
     copy: "复制",
