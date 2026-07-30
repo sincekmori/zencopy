@@ -1,4 +1,5 @@
 // @ts-check
+import { unified } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
@@ -8,9 +9,15 @@ import starlightLlmsTxt from "starlight-llms-txt";
 export default defineConfig({
   site: "https://zencopy.app",
   markdown: {
-    // External links leave the docs in a new tab; in-site navigation stays in
-    // the same tab. rel guards the opener even where browsers don't imply it.
-    rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]],
+    // rehype plugins only run on the unified pipeline, so it is selected
+    // explicitly (the top-level rehypePlugins shorthand is deprecated, and
+    // Astro's default Sätteri pipeline cannot host rehype).
+    processor: unified({
+      // External links leave the docs in a new tab; in-site navigation stays
+      // in the same tab. rel guards the opener even where browsers don't
+      // imply it.
+      rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]],
+    }),
   },
   integrations: [
     starlight({
