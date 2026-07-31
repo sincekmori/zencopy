@@ -128,6 +128,7 @@ export const fr: Messages = {
     checkingUpdates: "Recherche de mises à jour…",
     upToDate: "ZenCopy est à jour.",
     updateCheckFailed: "Impossible de vérifier les mises à jour.",
+    support: "Assistance",
     privacy: "Confidentialité",
     terms: "Conditions",
     logs: "Journaux",

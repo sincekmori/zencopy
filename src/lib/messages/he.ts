@@ -118,6 +118,7 @@ export const he: Messages = {
     checkingUpdates: "בודק עדכונים…",
     upToDate: "ZenCopy מעודכן לגרסה האחרונה.",
     updateCheckFailed: "לא ניתן היה לבדוק עדכונים.",
+    support: "תמיכה",
     privacy: "פרטיות",
     terms: "תנאים",
     logs: "יומנים",

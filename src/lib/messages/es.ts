@@ -126,6 +126,7 @@ export const es: Messages = {
     checkingUpdates: "Buscando actualizaciones…",
     upToDate: "ZenCopy está actualizado.",
     updateCheckFailed: "No se pudieron comprobar las actualizaciones.",
+    support: "Soporte",
     privacy: "Privacidad",
     terms: "Términos",
     logs: "Registros",

@@ -122,6 +122,7 @@ export const en: Messages = {
     checkingUpdates: "Checking for updates…",
     upToDate: "ZenCopy is up to date.",
     updateCheckFailed: "Couldn't check for updates.",
+    support: "Support",
     privacy: "Privacy",
     terms: "Terms",
     logs: "Logs",

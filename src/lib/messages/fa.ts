@@ -122,6 +122,7 @@ export const fa: Messages = {
     checkingUpdates: "در حال بررسی به‌روزرسانی‌ها…",
     upToDate: "ZenCopy به‌روز است.",
     updateCheckFailed: "بررسی به‌روزرسانی‌ها ممکن نشد.",
+    support: "پشتیبانی",
     privacy: "حریم خصوصی",
     terms: "شرایط",
     logs: "لاگ‌ها",

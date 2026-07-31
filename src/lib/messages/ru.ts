@@ -125,6 +125,7 @@ export const ru: Messages = {
     checkingUpdates: "Проверка обновлений…",
     upToDate: "У вас последняя версия ZenCopy.",
     updateCheckFailed: "Не удалось проверить обновления.",
+    support: "Поддержка",
     privacy: "Конфиденциальность",
     terms: "Условия",
     logs: "Логи",

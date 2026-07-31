@@ -123,6 +123,7 @@ export const vi: Messages = {
     checkingUpdates: "Đang kiểm tra bản cập nhật…",
     upToDate: "ZenCopy đã là phiên bản mới nhất.",
     updateCheckFailed: "Không thể kiểm tra bản cập nhật.",
+    support: "Hỗ trợ",
     privacy: "Quyền riêng tư",
     terms: "Điều khoản",
     logs: "Nhật ký",

@@ -1,0 +1,20 @@
+---
+// The support page's email link, shared by every locale. When the About
+// window opens this page it appends ?v=<version>&os=<os>; the inline script
+// folds them into the mailto subject, so a non-engineer's first email
+// already carries the two facts support always needs — without making them
+// find or type either one. Plain visits keep a plain subject, and the
+// address stays visible as text either way: mailto is a silent dead end on
+// machines with no mail client configured, so the copyable address is the
+// real fallback.
+---
+
+<p>
+  <strong
+    ><a data-support-email href="mailto:sincekmori@gmail.com"
+      >sincekmori@gmail.com</a
+    ></strong
+  >
+</p>
+
+<script src="../scripts/support-email.ts"></script>

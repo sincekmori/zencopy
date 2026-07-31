@@ -123,6 +123,7 @@ export const ko: Messages = {
     checkingUpdates: "업데이트를 확인하는 중…",
     upToDate: "ZenCopy는 최신 버전입니다.",
     updateCheckFailed: "업데이트를 확인할 수 없습니다.",
+    support: "지원",
     privacy: "개인정보",
     terms: "약관",
     logs: "로그",

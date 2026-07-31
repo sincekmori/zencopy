@@ -120,6 +120,7 @@ export const ar: Messages = {
     checkingUpdates: "جارٍ التحقق من التحديثات…",
     upToDate: "ZenCopy محدَّث بالفعل.",
     updateCheckFailed: "تعذر التحقق من التحديثات.",
+    support: "الدعم",
     privacy: "الخصوصية",
     terms: "الشروط",
     logs: "السجلات",

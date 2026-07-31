@@ -114,6 +114,7 @@ export const zhHans: Messages = {
     checkingUpdates: "正在检查更新…",
     upToDate: "ZenCopy 已是最新版本。",
     updateCheckFailed: "无法检查更新。",
+    support: "支持",
     privacy: "隐私",
     terms: "条款",
     logs: "日志",

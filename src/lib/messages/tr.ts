@@ -125,6 +125,7 @@ export const tr: Messages = {
     checkingUpdates: "Güncellemeler denetleniyor…",
     upToDate: "ZenCopy güncel.",
     updateCheckFailed: "Güncellemeler denetlenemedi.",
+    support: "Destek",
     privacy: "Gizlilik",
     terms: "Koşullar",
     logs: "Günlükler",

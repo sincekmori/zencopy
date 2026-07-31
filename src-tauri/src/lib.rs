@@ -140,6 +140,7 @@ fn log_trigger_status(status: &copycopy::TriggerStatus) {
 struct AppInfo {
     name: String,
     version: String,
+    os: String,
     copyright: String,
 }
 
@@ -168,9 +169,17 @@ fn config_copyright() -> String {
 
 #[tauri::command]
 fn app_info(app: tauri::AppHandle) -> AppInfo {
+    let os = os_info::get();
+    // Architecture included because it is the triage fork nobody can answer
+    // when asked ("is your Mac Intel or Apple Silicon?").
+    let os = match os.architecture() {
+        Some(arch) => format!("{} {} ({arch})", os.os_type(), os.version()),
+        None => format!("{} {}", os.os_type(), os.version()),
+    };
     AppInfo {
         name: "ZenCopy".to_string(),
         version: app.package_info().version.to_string(),
+        os,
         copyright: config_copyright(),
     }
 }

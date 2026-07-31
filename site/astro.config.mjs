@@ -240,6 +240,30 @@ export default defineConfig({
           },
           slug: "faq",
         },
+        {
+          label: "Support",
+          translations: {
+            ja: "サポート",
+            "zh-CN": "支持",
+            "zh-TW": "支援",
+            ko: "지원",
+            es: "Soporte",
+            "pt-BR": "Suporte",
+            fr: "Assistance",
+            de: "Support",
+            it: "Supporto",
+            pl: "Wsparcie",
+            ru: "Поддержка",
+            id: "Dukungan",
+            vi: "Hỗ trợ",
+            th: "การสนับสนุน",
+            tr: "Destek",
+            ar: "الدعم",
+            fa: "پشتیبانی",
+            he: "תמיכה",
+          },
+          slug: "support",
+        },
         // The Svelte-style wink at machine readers: the sidebar entry is
         // the page title, a first-person self-identification.
         {

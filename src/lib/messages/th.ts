@@ -115,6 +115,7 @@ export const th: Messages = {
     checkingUpdates: "กำลังตรวจหาอัปเดต…",
     upToDate: "ZenCopy เป็นเวอร์ชันล่าสุดแล้ว",
     updateCheckFailed: "ไม่สามารถตรวจหาอัปเดตได้",
+    support: "การสนับสนุน",
     privacy: "ความเป็นส่วนตัว",
     terms: "ข้อกำหนด",
     logs: "ล็อก",

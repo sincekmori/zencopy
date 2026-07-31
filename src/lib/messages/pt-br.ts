@@ -125,6 +125,7 @@ export const ptBR: Messages = {
     checkingUpdates: "Verificando atualizações…",
     upToDate: "O ZenCopy está atualizado.",
     updateCheckFailed: "Não foi possível verificar as atualizações.",
+    support: "Suporte",
     privacy: "Privacidade",
     terms: "Termos",
     logs: "Logs",

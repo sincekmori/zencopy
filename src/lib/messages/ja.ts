@@ -126,6 +126,7 @@ export const ja: Messages = {
     checkingUpdates: "アップデートを確認しています…",
     upToDate: "ZenCopy は最新の状態です。",
     updateCheckFailed: "アップデートを確認できませんでした。",
+    support: "サポート",
     privacy: "プライバシー",
     terms: "利用条件",
     logs: "ログ",

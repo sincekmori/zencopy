@@ -150,6 +150,8 @@ export interface Messages {
     upToDate: string;
     /** A check that errored (offline, no release yet) — shown above retry. */
     updateCheckFailed: string;
+    /** Footer link to the site's support page. */
+    support: string;
     privacy: string;
     terms: string;
     /** Footer link that opens the log folder — support asks users to click

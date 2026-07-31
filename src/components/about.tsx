@@ -15,6 +15,7 @@ const log = createLogger("about");
 const AppInfoSchema = z.object({
   name: z.string(),
   version: z.string(),
+  os: z.string(),
   copyright: z.string(),
 });
 type AppInfo = z.infer<typeof AppInfoSchema>;
@@ -190,6 +191,17 @@ export function About(): React.JSX.Element {
                 t.about.logs,
                 () => {
                   void invoke("open_log_dir");
+                },
+              ],
+              [
+                t.about.support,
+                () => {
+                  // Carry the two facts every support mail needs; the page's
+                  // mailto folds them into the subject (see SupportEmail.astro).
+                  const query = info
+                    ? `?app_version=${encodeURIComponent(info.version)}&os=${encodeURIComponent(info.os)}&locale=${encodeURIComponent(locale)}`
+                    : "";
+                  void invoke("open_url", { url: siteUrl(locale, "support/") + query });
                 },
               ],
               [

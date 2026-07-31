@@ -4,6 +4,8 @@
     ".": {
       "ignore": ["src-tauri/**"]
     },
-    "site": {}
+    "site": {
+      "entry": ["src/scripts/*.ts"]
+    }
   }
 }

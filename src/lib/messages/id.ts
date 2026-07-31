@@ -123,6 +123,7 @@ export const id: Messages = {
     checkingUpdates: "Memeriksa pembaruan…",
     upToDate: "ZenCopy sudah versi terbaru.",
     updateCheckFailed: "Tidak dapat memeriksa pembaruan.",
+    support: "Dukungan",
     privacy: "Privasi",
     terms: "Ketentuan",
     logs: "Log",
