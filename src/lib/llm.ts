@@ -18,6 +18,13 @@ export const TIMED_OUT = "timed-out";
  *  empty body would read as "success with no output". */
 export const EMPTY_RESULT = "empty-result";
 
+/** The catalog roles ZenCopy itself depends on: every action without a
+ *  frontmatter role runs as `default`, and the connection test pings it.
+ *  The single definition feeds both the runtime catalog (createCatalog's
+ *  `requiredRoles`) and the settings editor's validation, so "valid in the
+ *  editor" and "valid at run time" can never disagree. */
+export const REQUIRED_ROLES = ["default"] as const;
+
 export interface ActionInput {
   role: string;
   instructions: string;

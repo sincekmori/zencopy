@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { generateText, streamText } from "ai";
-import { Config, createCatalog } from "ai-sdk-catalog";
+import { type Catalog, type Config, createCatalog, type RoleEntry } from "ai-sdk-catalog";
 import { ping } from "ai-sdk-ping";
 import { franc } from "franc-min";
 import { Liquid } from "liquidjs";
@@ -21,6 +21,7 @@ import {
   TIMED_OUT,
   type StreamOutcome,
   type TokenUsage,
+  REQUIRED_ROLES,
 } from "@/lib/llm.ts";
 import { createLogger } from "@/lib/log.ts";
 // The system-prompt assembly and the <result> streaming protocol (pure, no
@@ -36,14 +37,19 @@ const log = createLogger("llm");
  *  connection can never spin the popup forever. */
 const INACTIVITY_TIMEOUT_MS = 90_000;
 
-/** Parse raw ai-sdk-catalog.json text and validate it against the package's
- *  zod schema. A thrown error is for the log only — the user always sees an
- *  i18n sentence, never the raw issues. */
-function parseCatalog(text: string): Config {
-  return Config.parse(JSON.parse(text));
+/** The catalog with ZenCopy's {@link REQUIRED_ROLES} proven present — a
+ *  config missing them fails validation up front, and these typed lookups
+ *  can't miss. */
+type ZenCatalog = Catalog<(typeof REQUIRED_ROLES)[number]>;
+
+/** A role by name, for the roles ACTIONS declare — anything beyond the
+ *  required ones is the user's own vocabulary, so the typed record widens
+ *  back to a dictionary and absence means "the config doesn't map it". */
+function roleFor(resolved: ZenCatalog, role: string): RoleEntry | undefined {
+  return (resolved.roles as Record<string, RoleEntry | undefined>)[role];
 }
 
-let catalogPromise: Promise<ReturnType<typeof createCatalog>> | undefined;
+let catalogPromise: Promise<ZenCatalog> | undefined;
 
 // Settings broadcasts this after writing the catalog; drop the cache so the next
 // run rebuilds with the new provider/model/key.
@@ -51,7 +57,7 @@ void listen("catalog-changed", () => {
   catalogPromise = undefined;
 });
 
-async function buildCatalog(): Promise<ReturnType<typeof createCatalog>> {
+async function buildCatalog(): Promise<ZenCatalog> {
   // Rust is IO only (read text); all parsing and validation happens here, in
   // one zod-checked pass. API keys are inline in the file — a GUI app never
   // sees shell environment variables (launchd, not the shell, is its parent),
@@ -61,17 +67,19 @@ async function buildCatalog(): Promise<ReturnType<typeof createCatalog>> {
   if (!text.trim()) {
     throw new Error(NOT_CONFIGURED);
   }
-  let config: Config;
   try {
-    config = parseCatalog(text);
+    // One validating pass: createCatalog checks the parsed JSON against the
+    // package's zod schema (readable, path-annotated issues) AND that the
+    // roles ZenCopy requires are assigned. The thrown detail is for the log
+    // only — the user always sees an i18n sentence, never the raw issues.
+    return createCatalog(JSON.parse(text) as Config, { requiredRoles: REQUIRED_ROLES });
   } catch (error) {
     log.error("ai-sdk-catalog.json failed validation", error);
     throw new Error(INVALID_CONFIG, { cause: error });
   }
-  return createCatalog(config);
 }
 
-async function catalog(): Promise<ReturnType<typeof createCatalog>> {
+async function catalog(): Promise<ZenCatalog> {
   const pending = (catalogPromise ??= buildCatalog());
   try {
     return await pending;
@@ -332,8 +340,17 @@ export async function streamAction(
   // others (API errors) go to `onError` and the stream just ends. Capture them
   // so we surface the real reason instead of silently rendering nothing.
   let streamError: unknown;
+  // The action's role must be mapped in the config — an unmapped name is a
+  // config problem and deserves the config-problem message, not a raw throw
+  // from deep inside the model lookup. `default` itself is proven present.
+  const roleEntry = roleFor(resolved, action.role);
+  if (roleEntry === undefined) {
+    const detail = new Error(`the config's roles do not map "${action.role}"`);
+    log.error("ai-sdk-catalog.json failed validation", detail);
+    throw new Error(INVALID_CONFIG, { cause: detail });
+  }
   const stream = streamText({
-    model: resolved.modelForRole(action.role),
+    model: resolved.model(roleEntry.key),
     instructions: composeInstructions(instructions, userContext),
     ...request,
     abortSignal: aborter.signal,
@@ -344,7 +361,7 @@ export async function streamAction(
   const { textStream } = stream;
   // The catalog address that serves this run — the fact cost math needs
   // (roles are indirection; the statistics record what they resolved to).
-  const modelRef = (resolved.roles[action.role] ?? resolved.roles["default"])?.key;
+  const modelRef = roleEntry.key;
   // The SDK settles `usage` when the stream ends; an aborted stream may
   // reject it or leave it hanging, so cap the wait and settle for "unknown".
   // The mapping to our own field names is the schema firewall: when the SDK

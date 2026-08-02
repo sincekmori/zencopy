@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import { useLocale, useT } from "@/lib/i18n.tsx";
-import { INVALID_CONFIG, NOT_CONFIGURED, testConnection } from "@/lib/llm.ts";
+import { INVALID_CONFIG, NOT_CONFIGURED, REQUIRED_ROLES, testConnection } from "@/lib/llm.ts";
 import { createLogger, errorMessage } from "@/lib/log.ts";
 import { FREE_KEY_URL, GEMINI_DEFAULT_MODEL, SCHEMA_URL } from "@/lib/quickstart.ts";
 import { siteUrl } from "@/lib/site.ts";
@@ -112,12 +112,21 @@ async function checkCatalog(
     return { problem: "syntax" };
   }
   const { Config } = await import("ai-sdk-catalog");
+  let config: Config;
   try {
-    return { config: Config.parse(data) };
+    config = Config.parse(data);
   } catch (error) {
     log.warn("catalog JSON failed schema validation", error);
     return { problem: "schema" };
   }
+  // The same requirement the runtime declares to createCatalog — the editor
+  // must never bless a config the app will refuse.
+  const missing = REQUIRED_ROLES.filter((role) => config.roles[role] === undefined);
+  if (missing.length > 0) {
+    log.warn(`catalog JSON is missing the required role(s): ${missing.join(", ")}`);
+    return { problem: "schema" };
+  }
+  return { config };
 }
 
 type CatalogProvider = Config["providers"][number];
