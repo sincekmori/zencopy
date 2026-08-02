@@ -49,14 +49,14 @@ function emptyDrafts(): Drafts {
 // this list is a starting point, not a catalog.
 // First entry is the default (the fallback when the model field is left empty,
 // see buildJson): each provider's best speed/quality pick for a copy→popup.
-// Second is the step-up "smart on demand" model. Anthropic defaults to Sonnet 5,
-// not the lighter Haiku: Haiku 4.5 is a non-reasoning tier that gives up too
-// much quality, whereas Google's flash-lite and OpenAI's Luna stay sharp enough
-// at their light tier.
+// The rest are the current GA generation, ordered light to smart. Anthropic
+// defaults to Sonnet 5, not the lighter Haiku: Haiku 4.5 is a non-reasoning
+// tier that gives up too much quality, whereas Google's flash-lite and
+// OpenAI's Luna stay sharp enough at their light tier.
 const MODEL_SUGGESTIONS: Record<Provider, string[]> = {
-  openai: ["gpt-5.6-luna", "gpt-5.6-sol"],
-  google: [GEMINI_DEFAULT_MODEL, "gemini-3.5-flash"],
-  anthropic: ["claude-sonnet-5", "claude-opus-4-8"],
+  openai: ["gpt-5.6-luna", "gpt-5.6-terra", "gpt-5.6-sol"],
+  google: [GEMINI_DEFAULT_MODEL, "gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.6-flash"],
+  anthropic: ["claude-sonnet-5", "claude-opus-5"],
   "openai-compatible": ["gemma4:e4b", "gpt-oss:20b"],
 };
 
