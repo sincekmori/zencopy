@@ -181,62 +181,64 @@
 @keyframes hd-press-mod {
   0%,
   29.1%,
-  56%,
+  48.8%,
   100% {
     transform: none;
   }
   32.3%,
-  52.7% {
+  45.5% {
     transform: translateY(calc(1 * var(--u))) scale(0.94);
   }
 }
 @keyframes hd-glow-mod {
   0%,
   29.1%,
-  56%,
+  48.8%,
   100% {
     opacity: 0;
   }
   32.3%,
-  52.7% {
+  45.5% {
     opacity: 1;
   }
 }
 /* One C key, pressed twice while the modifier is held: the first press is a
-   tap (down then straight back up — a blink), a beat's gap, then the second
-   press lights and stays lit (held) until it releases with the modifier as
-   the popup appears. */
+   tap (down then straight back up — a blink), then the second lands at real
+   double-copy rhythm (peak to peak 3.6% of the 5.5s cycle ≈ 200 ms, the
+   tempo of an actual double-click) and stays lit (held) until it releases
+   with the modifier as the popup appears — about 150 ms after the second
+   tap lands, the way the real popup follows the real second copy. */
 @keyframes hd-press-c {
   0%,
-  36.4%,
+  37.3%,
+  40.5%,
   41.8%,
-  44.5%,
-  56%,
+  48.8%,
   100% {
     transform: none;
   }
   39.1% {
     transform: translateY(calc(1 * var(--u))) scale(0.93);
   }
-  47.3%,
-  52.7% {
+  42.7%,
+  45.5% {
     transform: translateY(calc(1 * var(--u))) scale(0.94);
   }
 }
 @keyframes hd-glow-c {
   0%,
-  36.4%,
+  37.3%,
+  40.5%,
   41.8%,
-  44.5%,
-  56%,
+  48.8%,
   100% {
     opacity: 0;
   }
   39.1% {
     opacity: 1;
   }
-  47.3%,
-  52.7% {
+  42.7%,
+  45.5% {
     opacity: 1;
   }
 }
@@ -256,11 +258,11 @@
 }
 @keyframes hd-pop {
   0%,
-  52.7% {
+  45.5% {
     opacity: 0;
     transform: translate(calc(12 * var(--u)), calc(-10 * var(--u))) scale(0.97);
   }
-  61.8%,
+  50.9%,
   81.8% {
     opacity: 1;
     transform: none;
@@ -290,11 +292,11 @@
 }
 @keyframes hd-b1 {
   0%,
-  61.8% {
+  51.8% {
     opacity: 0;
     transform: scaleX(0.3);
   }
-  68.2%,
+  58.2%,
   100% {
     opacity: 1;
     transform: scaleX(1);
@@ -302,11 +304,11 @@
 }
 @keyframes hd-b2 {
   0%,
-  67.3% {
+  57.3% {
     opacity: 0;
     transform: scaleX(0.3);
   }
-  73.6%,
+  63.6%,
   100% {
     opacity: 1;
     transform: scaleX(1);
@@ -322,11 +324,11 @@
 }
 @keyframes hd-check {
   0%,
-  73.6% {
+  63.6% {
     opacity: 0;
     transform: scale(0.8);
   }
-  79.1%,
+  69.1%,
   100% {
     opacity: 1;
     transform: none;
