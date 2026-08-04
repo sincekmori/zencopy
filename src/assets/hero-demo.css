@@ -48,6 +48,86 @@
   background: var(--hd-sweep);
   transform-origin: left center;
 }
+/* The I-beam cursor "doing" the selection, with real selection physics: a
+   short deliberate sweep into line 1 (stopping around 20%), then ONE straight
+   down-right diagonal to the paragraph's end (x 20 -> 46 -> 73 -> 100, equal
+   steps — constant slope). The highlights follow the cursor, not the other
+   way around: while the cursor is on a line it fills only up to the cursor,
+   and the moment the cursor passes below, the line completes to its own width
+   — which is exactly how real text selection renders. Vanishes as the
+   modifier goes down — hands moving to the keyboard, after a ~400 ms beat
+   at the selection's end (select, breathe, then the chord). Positioned
+   inside .hd-lines; statically invisible, so reduced motion shows no
+   cursor. */
+.hd-cursor {
+  position: absolute;
+  width: calc(7 * var(--u));
+  height: calc(12 * var(--u));
+  opacity: 0;
+  pointer-events: none;
+  animation: hd-cursor 5.5s linear infinite;
+}
+.hd-cursor::before {
+  content: "";
+  position: absolute;
+  left: calc(2.5 * var(--u));
+  top: 0;
+  width: calc(2 * var(--u));
+  height: 100%;
+  border-radius: 999px;
+  background: var(--hd-text);
+}
+.hd-cursor::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(2 * var(--u));
+  border-radius: 999px;
+  background: var(--hd-text);
+  box-shadow: 0 calc(10 * var(--u)) 0 var(--hd-text);
+}
+@keyframes hd-cursor {
+  0%,
+  1.8% {
+    left: -1%;
+    top: calc(14 * var(--u));
+    opacity: 0;
+  }
+  3.6% {
+    left: -1%;
+    top: calc(14 * var(--u));
+    opacity: 1;
+  }
+  9.1% {
+    left: 20%;
+    top: calc(14 * var(--u));
+    opacity: 1;
+  }
+  14.5% {
+    left: 46%;
+    top: calc(30 * var(--u));
+    opacity: 1;
+  }
+  20% {
+    left: 73%;
+    top: calc(46 * var(--u));
+    opacity: 1;
+  }
+  25.5%,
+  32.7% {
+    left: 100%;
+    top: calc(62 * var(--u));
+    opacity: 1;
+  }
+  35.9%,
+  100% {
+    left: 100%;
+    top: calc(62 * var(--u));
+    opacity: 0;
+  }
+}
 .hd-hla {
   animation: hd-hla 5.5s linear infinite;
 }
@@ -66,12 +146,16 @@
     transform: scaleX(0);
     opacity: 1;
   }
-  9.1%,
-  81.8% {
+  9.1% {
+    transform: scaleX(0.24);
+    opacity: 1;
+  }
+  11.5%,
+  89.1% {
     transform: scaleX(1);
     opacity: 1;
   }
-  90.9%,
+  94.5%,
   100% {
     transform: scaleX(1);
     opacity: 0;
@@ -79,16 +163,20 @@
 }
 @keyframes hd-hlb {
   0%,
-  9.1% {
+  11.5% {
     transform: scaleX(0);
     opacity: 1;
   }
-  14.5%,
-  81.8% {
+  14.5% {
+    transform: scaleX(0.5);
+    opacity: 1;
+  }
+  17%,
+  89.1% {
     transform: scaleX(1);
     opacity: 1;
   }
-  90.9%,
+  94.5%,
   100% {
     transform: scaleX(1);
     opacity: 0;
@@ -96,16 +184,16 @@
 }
 @keyframes hd-hlc {
   0%,
-  14.5% {
+  17% {
     transform: scaleX(0);
     opacity: 1;
   }
   20%,
-  81.8% {
+  89.1% {
     transform: scaleX(1);
     opacity: 1;
   }
-  90.9%,
+  94.5%,
   100% {
     transform: scaleX(1);
     opacity: 0;
@@ -118,11 +206,11 @@
     opacity: 1;
   }
   25.5%,
-  81.8% {
+  89.1% {
     transform: scaleX(1);
     opacity: 1;
   }
-  90.9%,
+  94.5%,
   100% {
     transform: scaleX(1);
     opacity: 0;
@@ -180,25 +268,25 @@
    as the popup appears. */
 @keyframes hd-press-mod {
   0%,
-  29.1%,
-  48.8%,
+  32.7%,
+  52.4%,
   100% {
     transform: none;
   }
-  32.3%,
-  45.5% {
+  35.9%,
+  49.1% {
     transform: translateY(calc(1 * var(--u))) scale(0.94);
   }
 }
 @keyframes hd-glow-mod {
   0%,
-  29.1%,
-  48.8%,
+  32.7%,
+  52.4%,
   100% {
     opacity: 0;
   }
-  32.3%,
-  45.5% {
+  35.9%,
+  49.1% {
     opacity: 1;
   }
 }
@@ -210,35 +298,35 @@
    tap lands, the way the real popup follows the real second copy. */
 @keyframes hd-press-c {
   0%,
-  37.3%,
-  40.5%,
-  41.8%,
-  48.8%,
+  40.9%,
+  44.1%,
+  45.4%,
+  52.4%,
   100% {
     transform: none;
   }
-  39.1% {
+  42.7% {
     transform: translateY(calc(1 * var(--u))) scale(0.93);
   }
-  42.7%,
-  45.5% {
+  46.3%,
+  49.1% {
     transform: translateY(calc(1 * var(--u))) scale(0.94);
   }
 }
 @keyframes hd-glow-c {
   0%,
-  37.3%,
-  40.5%,
-  41.8%,
-  48.8%,
+  40.9%,
+  44.1%,
+  45.4%,
+  52.4%,
   100% {
     opacity: 0;
   }
-  39.1% {
+  42.7% {
     opacity: 1;
   }
-  42.7%,
-  45.5% {
+  46.3%,
+  49.1% {
     opacity: 1;
   }
 }
@@ -256,18 +344,21 @@
   box-shadow: 0 calc(8 * var(--u)) calc(24 * var(--u)) rgb(0 0 0 / 0.08);
   animation: hd-pop 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
+/* The finished card holds still for ~900 ms before the outro — a long,
+   deliberate end frame, so the loop reads as a scene with an ending instead
+   of an unbroken carousel. */
 @keyframes hd-pop {
   0%,
-  45.5% {
+  49.1% {
     opacity: 0;
     transform: translate(calc(12 * var(--u)), calc(-10 * var(--u))) scale(0.97);
   }
-  50.9%,
-  81.8% {
+  54.5%,
+  89.1% {
     opacity: 1;
     transform: none;
   }
-  90.9%,
+  94.5%,
   100% {
     opacity: 0;
     transform: none;
@@ -292,11 +383,11 @@
 }
 @keyframes hd-b1 {
   0%,
-  51.8% {
+  55.4% {
     opacity: 0;
     transform: scaleX(0.3);
   }
-  58.2%,
+  61.8%,
   100% {
     opacity: 1;
     transform: scaleX(1);
@@ -304,11 +395,11 @@
 }
 @keyframes hd-b2 {
   0%,
-  57.3% {
+  60.9% {
     opacity: 0;
     transform: scaleX(0.3);
   }
-  63.6%,
+  67.2%,
   100% {
     opacity: 1;
     transform: scaleX(1);
@@ -324,11 +415,11 @@
 }
 @keyframes hd-check {
   0%,
-  63.6% {
+  67.2% {
     opacity: 0;
     transform: scale(0.8);
   }
-  69.1%,
+  72.7%,
   100% {
     opacity: 1;
     transform: none;

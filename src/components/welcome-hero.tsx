@@ -25,6 +25,7 @@ export function WelcomeHero({ modifier }: { modifier: string }): React.JSX.Eleme
               {line.sweep ? <div className={`hd-sweep ${line.sweep}`} /> : undefined}
             </div>
           ))}
+          <span className="hd-cursor" />
         </div>
         <div className="hd-keys">
           {heroKeycaps(modifier).map((cap) => (
