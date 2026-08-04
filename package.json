@@ -58,7 +58,7 @@
     "eslint-plugin-import-zod": "^1.2.1",
     "knip": "^6.29.0",
     "oxfmt": "^0.61.0",
-    "oxlint": "^1.75.0",
+    "oxlint": "^1.76.0",
     "oxlint-tailwindcss": "^1.6.0",
     "tailwindcss": "^4.3.3",
     "tombi": "^1.2.4",
