@@ -6,6 +6,7 @@
  * arcs, drawn like an enso stroke), and room to breathe. No boxes, no cards.
  * Theme state is shared with Starlight via the same localStorage key.
  */
+import { getEntry } from "astro:content";
 import HeroDemo from "./HeroDemo.astro";
 import { LANDING_COPY, LANDING_LOCALES, THEME_LABELS } from "./landing-copy.ts";
 
@@ -23,8 +24,16 @@ if (!locale || !copy || !theme) {
   throw new Error(`Landing: unknown locale "${lang}"`);
 }
 
+// The CTA is labeled with the getting-started guide's own frontmatter title,
+// read at build time — the button and the page it opens can never drift apart,
+// in any locale.
+const guide = await getEntry("docs", `${lang}/getting-started`);
+if (!guide) {
+  throw new Error(`Landing: no getting-started guide for "${lang}"`);
+}
+const getStarted = guide.data.title;
+
 const github = "https://github.com/sincekmori/zencopy";
-const downloadHref = `${github}/releases/latest`;
 const canonical = `https://zencopy.app/${lang}/`;
 const gettingStartedHref = `/${lang}/getting-started/`;
 ---
@@ -198,13 +207,16 @@ const gettingStartedHref = `/${lang}/getting-started/`;
               .map((line) => <span class="line">{line}</span>)
           }
         </h1>
+        {
+          /* One door for the one audience this page has — first-time
+            visitors (installed copies update themselves). The CTA carries
+            the guide's own name and opens it: the download lives there,
+            next to the steps that make sense of it. */
+        }
         <div class="actions">
-          <a class="primary" href={downloadHref}>{copy.download}</a>
-          <a class="quiet" href={gettingStartedHref}
-            >{copy.getStarted} {locale.dir === "rtl" ? "←" : "→"}</a
-          >
+          <a class="primary" href={gettingStartedHref}>{getStarted}</a>
         </div>
-        <p class="note">{copy.downloadNote}</p>
+        <p class="note">{copy.note}</p>
       </section>
 
       {/* The loop shows it; the caption says it — once, for the whole page. */}
@@ -515,16 +527,6 @@ const gettingStartedHref = `/${lang}/getting-started/`;
   .primary:hover {
     opacity: 0.85;
   }
-  .quiet {
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    border-bottom: 1px solid var(--hairline);
-    padding-bottom: 0.15rem;
-  }
-  .quiet:hover {
-    color: var(--ink);
-    border-color: var(--ink-soft);
-  }
   .note {
     margin: 1.75rem 0 0;
     font-size: 0.75rem;
@@ -635,10 +637,6 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     }
     .features article:nth-child(2) {
       border-top: 1px solid var(--hairline);
-    }
-    .actions {
-      flex-direction: column;
-      gap: 1.25rem;
     }
   }
 </style>

@@ -10,9 +10,7 @@ export interface LandingCopy {
   heroTitle: string;
   /** Document and OG title: brand + the hero sentence on one line. */
   metaTitle: string;
-  download: string;
-  downloadNote: string;
-  getStarted: string;
+  note: string;
   demoAria: string;
   demoCaption: string;
   features: { title: string; body: string }[];
@@ -60,9 +58,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Docs",
     heroTitle: "Copy twice,\nact instantly.",
     metaTitle: "ZenCopy — Copy twice, act instantly.",
-    download: "Download",
-    downloadNote: "Free · Apache-2.0 · Windows, macOS & Linux",
-    getStarted: "Get started",
+    note: "Free · Apache-2.0 · Windows, macOS & Linux",
     demoAria: "how it works",
     demoCaption: "Copy, then press C once more — what you copied becomes an AI result on the spot.",
     features: [
@@ -93,9 +89,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "ドキュメント",
     heroTitle: "二度コピーすれば、\nすぐに動く。",
     metaTitle: "ZenCopy — 二度コピーすれば、すぐに動く。",
-    download: "ダウンロード",
-    downloadNote: "無料 · Apache-2.0 · Windows, macOS & Linux",
-    getStarted: "はじめる",
+    note: "無料 · Apache-2.0 · Windows, macOS & Linux",
     demoAria: "しくみ",
     demoCaption: "コピーしたら、もう一度 C を押すだけ。その場で AI の結果になります。",
     features: [
@@ -125,9 +119,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "文档",
     heroTitle: "复制两次，\n立即处理。",
     metaTitle: "ZenCopy — 复制两次，立即处理。",
-    download: "下载",
-    downloadNote: "免费 · Apache-2.0 · Windows、macOS 和 Linux",
-    getStarted: "开始使用",
+    note: "免费 · Apache-2.0 · Windows、macOS 和 Linux",
     demoAria: "运作方式",
     demoCaption: "复制之后再按一次 C — 你复制的内容当场变成 AI 结果。",
     features: [
@@ -157,9 +149,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "文件",
     heroTitle: "複製兩次，\n立即處理。",
     metaTitle: "ZenCopy — 複製兩次，立即處理。",
-    download: "下載",
-    downloadNote: "免費 · Apache-2.0 · Windows、macOS 與 Linux",
-    getStarted: "開始使用",
+    note: "免費 · Apache-2.0 · Windows、macOS 與 Linux",
     demoAria: "運作方式",
     demoCaption: "複製之後再按一次 C——你複製的內容當場變成 AI 結果。",
     features: [
@@ -190,9 +180,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "문서",
     heroTitle: "두 번 복사하면,\n즉시 처리.",
     metaTitle: "ZenCopy — 두 번 복사하면, 즉시 처리.",
-    download: "다운로드",
-    downloadNote: "무료 · Apache-2.0 · Windows, macOS & Linux",
-    getStarted: "시작하기",
+    note: "무료 · Apache-2.0 · Windows, macOS & Linux",
     demoAria: "작동 방식",
     demoCaption: "복사한 다음 C를 한 번 더 누르면, 복사한 내용이 그 자리에서 AI 결과가 됩니다.",
     features: [
@@ -223,9 +211,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Documentación",
     heroTitle: "Copia dos veces,\nactúa al instante.",
     metaTitle: "ZenCopy — Copia dos veces, actúa al instante.",
-    download: "Descargar",
-    downloadNote: "Gratis · Apache-2.0 · Windows, macOS y Linux",
-    getStarted: "Empieza ahora",
+    note: "Gratis · Apache-2.0 · Windows, macOS y Linux",
     demoAria: "cómo funciona",
     demoCaption:
       "Copia y pulsa C una vez más — lo que copiaste se convierte en un resultado de IA al momento.",
@@ -257,9 +243,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Documentação",
     heroTitle: "Copie duas vezes,\naja na hora.",
     metaTitle: "ZenCopy — Copie duas vezes, aja na hora.",
-    download: "Baixar",
-    downloadNote: "Gratuito · Apache-2.0 · Windows, macOS e Linux",
-    getStarted: "Começar",
+    note: "Gratuito · Apache-2.0 · Windows, macOS e Linux",
     demoAria: "como funciona",
     demoCaption:
       "Copie e pressione C mais uma vez — o que você copiou vira um resultado de IA na hora.",
@@ -291,9 +275,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Documentation",
     heroTitle: "Copiez deux fois,\nagissez aussitôt.",
     metaTitle: "ZenCopy — Copiez deux fois, agissez aussitôt.",
-    download: "Télécharger",
-    downloadNote: "Gratuit · Apache-2.0 · Windows, macOS & Linux",
-    getStarted: "Commencer",
+    note: "Gratuit · Apache-2.0 · Windows, macOS & Linux",
     demoAria: "comment ça marche",
     demoCaption:
       "Copiez, puis appuyez une fois de plus sur C — ce que vous avez copié devient aussitôt un résultat d'IA.",
@@ -325,9 +307,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Doku",
     heroTitle: "Zweimal kopieren,\nsofort handeln.",
     metaTitle: "ZenCopy — Zweimal kopieren, sofort handeln.",
-    download: "Herunterladen",
-    downloadNote: "Kostenlos · Apache-2.0 · Windows, macOS & Linux",
-    getStarted: "Loslegen",
+    note: "Kostenlos · Apache-2.0 · Windows, macOS & Linux",
     demoAria: "So funktioniert es",
     demoCaption:
       "Kopiere etwas und drücke noch einmal C — was du kopiert hast, wird auf der Stelle zu einem KI-Ergebnis.",
@@ -359,9 +339,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Documentazione",
     heroTitle: "Copia due volte,\nagisci all'istante.",
     metaTitle: "ZenCopy — Copia due volte, agisci all'istante.",
-    download: "Scarica",
-    downloadNote: "Gratuito · Apache-2.0 · Windows, macOS e Linux",
-    getStarted: "Inizia",
+    note: "Gratuito · Apache-2.0 · Windows, macOS e Linux",
     demoAria: "come funziona",
     demoCaption:
       "Copia, poi premi C ancora una volta — ciò che hai copiato diventa un risultato IA sul momento.",
@@ -393,9 +371,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Dokumentacja",
     heroTitle: "Skopiuj dwa razy,\ndziałaj od razu.",
     metaTitle: "ZenCopy — Skopiuj dwa razy, działaj od razu.",
-    download: "Pobierz",
-    downloadNote: "Za darmo · Apache-2.0 · Windows, macOS i Linux",
-    getStarted: "Zacznij teraz",
+    note: "Za darmo · Apache-2.0 · Windows, macOS i Linux",
     demoAria: "jak to działa",
     demoCaption:
       "Skopiuj, a potem naciśnij C jeszcze raz — to, co skopiujesz, staje się na miejscu wynikiem AI.",
@@ -427,9 +403,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Документация",
     heroTitle: "Скопируйте дважды —\nдействуйте сразу.",
     metaTitle: "ZenCopy — Скопируйте дважды — действуйте сразу.",
-    download: "Скачать",
-    downloadNote: "Бесплатно · Apache-2.0 · Windows, macOS и Linux",
-    getStarted: "Начать",
+    note: "Бесплатно · Apache-2.0 · Windows, macOS и Linux",
     demoAria: "как это работает",
     demoCaption:
       "Скопируйте, затем нажмите C ещё раз — скопированное тут же превращается в результат ИИ.",
@@ -461,9 +435,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Dokumentasi",
     heroTitle: "Salin dua kali,\nlangsung beraksi.",
     metaTitle: "ZenCopy — Salin dua kali, langsung beraksi.",
-    download: "Unduh",
-    downloadNote: "Gratis · Apache-2.0 · Windows, macOS & Linux",
-    getStarted: "Mulai",
+    note: "Gratis · Apache-2.0 · Windows, macOS & Linux",
     demoAria: "cara kerjanya",
     demoCaption:
       "Salin, lalu tekan C sekali lagi — apa yang kamu salin menjadi hasil AI saat itu juga.",
@@ -495,9 +467,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Tài liệu",
     heroTitle: "Sao chép hai lần,\nxử lý tức thì.",
     metaTitle: "ZenCopy — Sao chép hai lần, xử lý tức thì.",
-    download: "Tải về",
-    downloadNote: "Miễn phí · Apache-2.0 · Windows, macOS & Linux",
-    getStarted: "Bắt đầu",
+    note: "Miễn phí · Apache-2.0 · Windows, macOS & Linux",
     demoAria: "cách hoạt động",
     demoCaption:
       "Sao chép, rồi nhấn C thêm một lần — nội dung bạn vừa sao chép trở thành kết quả AI ngay tại chỗ.",
@@ -528,9 +498,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "เอกสาร",
     heroTitle: "คัดลอกสองครั้ง\nจัดการทันที",
     metaTitle: "ZenCopy — คัดลอกสองครั้ง จัดการทันที",
-    download: "ดาวน์โหลด",
-    downloadNote: "ฟรี · Apache-2.0 · Windows, macOS และ Linux",
-    getStarted: "เริ่มต้นใช้งาน",
+    note: "ฟรี · Apache-2.0 · Windows, macOS และ Linux",
     demoAria: "วิธีการทำงาน",
     demoCaption: "คัดลอก แล้วกด C อีกครั้ง — สิ่งที่คุณคัดลอกกลายเป็นผลลัพธ์ AI ตรงนั้นทันที",
     features: [
@@ -561,9 +529,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "Belgeler",
     heroTitle: "İki kez kopyala,\nanında harekete geç.",
     metaTitle: "ZenCopy — İki kez kopyala, anında harekete geç.",
-    download: "İndir",
-    downloadNote: "Ücretsiz · Apache-2.0 · Windows, macOS ve Linux",
-    getStarted: "Başla",
+    note: "Ücretsiz · Apache-2.0 · Windows, macOS ve Linux",
     demoAria: "nasıl çalışır",
     demoCaption:
       "Kopyala, sonra C'ye bir kez daha bas — kopyaladığın şey olduğu yerde bir AI sonucuna dönüşür.",
@@ -595,9 +561,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "الوثائق",
     heroTitle: "انسخ مرتين،\nونفّذ فورًا.",
     metaTitle: "ZenCopy — انسخ مرتين، ونفّذ فورًا.",
-    download: "تنزيل",
-    downloadNote: "مجاني · Apache-2.0 · Windows وmacOS وLinux",
-    getStarted: "ابدأ الآن",
+    note: "مجاني · Apache-2.0 · Windows وmacOS وLinux",
     demoAria: "كيف يعمل",
     demoCaption: "انسخ ثم اضغط C مرة أخرى — يتحوّل ما نسخته إلى نتيجة ذكاء اصطناعي في الحال.",
     features: [
@@ -628,9 +592,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "مستندات",
     heroTitle: "دو بار کپی کنید،\nبی‌درنگ اقدام کنید.",
     metaTitle: "ZenCopy — دو بار کپی کنید، بی‌درنگ اقدام کنید.",
-    download: "دانلود",
-    downloadNote: "رایگان · Apache-2.0 · Windows، macOS و Linux",
-    getStarted: "شروع کنید",
+    note: "رایگان · Apache-2.0 · Windows، macOS و Linux",
     demoAria: "طرز کار",
     demoCaption:
       "کپی کنید و یک بار دیگر C را فشار دهید — آنچه کپی کرده‌اید همان‌جا به نتیجه‌ای از هوش مصنوعی تبدیل می‌شود.",
@@ -662,9 +624,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     docs: "תיעוד",
     heroTitle: "מעתיקים פעמיים,\nפועלים מיד.",
     metaTitle: "ZenCopy — מעתיקים פעמיים, פועלים מיד.",
-    download: "הורדה",
-    downloadNote: "חינם · Apache-2.0 · Windows‏, macOS ו‑Linux",
-    getStarted: "מתחילים",
+    note: "חינם · Apache-2.0 · Windows‏, macOS ו‑Linux",
     demoAria: "איך זה עובד",
     demoCaption: "מעתיקים, ואז מקישים C פעם אחת נוספת — מה שהעתקתם הופך לתוצאת AI בו במקום.",
     features: [
