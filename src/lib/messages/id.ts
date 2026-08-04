@@ -63,8 +63,9 @@ export const id: Messages = {
     quickTitle: "Aksi cepat",
     quickHint: "Empat aksi yang ditautkan popup ke tombol angka 1–4. Seret untuk menyusun ulang.",
     resetTitle: "Reset",
-    resetHint: "Menghapus semua pengaturan lokal dan mengembalikan ZenCopy ke kondisi awal",
-    resetButton: "Reset semua pengaturan",
+    resetHint:
+      "Mengembalikan ZenCopy ke kondisi tepat setelah dipasang — pengaturan, aksi, dan statistik penggunaan semuanya dihapus",
+    resetButton: "Reset",
     resetWarning:
       "Tindakan ini tidak bisa dibatalkan. Pengaturan AI (termasuk kunci API), aturan perutean, aksi buatan sendiri, dan preferensi jendela akan dihapus, lalu ZenCopy kembali ke kondisi awal seperti pertama kali dijalankan.",
     resetConfirm: "Hapus semua",

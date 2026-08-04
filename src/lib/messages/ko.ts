@@ -62,8 +62,8 @@ export const ko: Messages = {
     quickTitle: "빠른 액션",
     quickHint: "팝업에서 숫자 키 1–4에 연결되는 네 가지 액션. 드래그해 순서를 바꿀 수 있습니다.",
     resetTitle: "초기화",
-    resetHint: "모든 로컬 설정을 삭제하고 ZenCopy를 처음 상태로 되돌립니다",
-    resetButton: "설정 전체 초기화",
+    resetHint: "ZenCopy를 설치 직후 상태로 되돌립니다. 설정·액션·사용 통계가 모두 삭제됩니다",
+    resetButton: "초기화",
     resetWarning:
       "이 작업은 되돌릴 수 없습니다. AI 설정(API 키 포함), 라우팅 규칙, 사용자 액션, 창 설정이 모두 삭제되고 ZenCopy가 첫 실행 상태로 돌아갑니다.",
     resetConfirm: "모두 삭제하고 초기화",

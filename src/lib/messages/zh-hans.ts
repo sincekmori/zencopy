@@ -56,8 +56,8 @@ export const zhHans: Messages = {
     quickTitle: "快捷动作",
     quickHint: "弹窗中绑定到数字键 1–4 的四个动作。拖动可重新排序。",
     resetTitle: "重置",
-    resetHint: "删除所有本地设置，让 ZenCopy 回到初始状态",
-    resetButton: "重置所有设置",
+    resetHint: "将 ZenCopy 恢复到刚安装完成的状态——设置、动作和使用统计都会被删除",
+    resetButton: "初始化",
     resetWarning:
       "此操作无法撤销。AI 设置（包括 API 密钥）、路由规则、自定义动作和窗口偏好都将被删除，ZenCopy 将回到首次启动时的状态。",
     resetConfirm: "全部删除并初始化",

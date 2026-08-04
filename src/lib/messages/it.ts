@@ -64,8 +64,9 @@ export const it: Messages = {
     quickHint:
       "Le quattro azioni che il popup associa ai tasti numerici 1–4. Trascina per riordinare.",
     resetTitle: "Ripristino",
-    resetHint: "Elimina tutte le impostazioni locali e riporta ZenCopy allo stato iniziale",
-    resetButton: "Ripristina tutte le impostazioni",
+    resetHint:
+      "Riporta ZenCopy allo stato appena installato: impostazioni, azioni e statistiche d'uso vengono tutte eliminate",
+    resetButton: "Ripristina",
     resetWarning:
       "Questa operazione non è reversibile. Le impostazioni IA (chiavi API incluse), le regole di routing, le azioni personalizzate e le preferenze delle finestre vengono eliminate, e ZenCopy torna allo stato del primo avvio.",
     resetConfirm: "Elimina tutto",

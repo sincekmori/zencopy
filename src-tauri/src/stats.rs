@@ -10,7 +10,8 @@
 //! The file lives under the platform DATA dir (`stats/usage.jsonl`), not the
 //! config dir (statistics are accumulated user data, which XDG puts in
 //! `~/.local/share` on Linux) and not the log dir (logs rotate away;
-//! statistics must not). "Reset all settings" deliberately leaves it alone.
+//! statistics must not). The settings Reset ("just-installed state") deletes
+//! it along with everything else the app owns.
 //!
 //! THE SCHEMA IS A FROZEN CONTRACT — this file outlives every app version:
 //! - Evolution is additive only: new keys may appear, existing keys are

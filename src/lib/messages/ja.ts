@@ -64,8 +64,9 @@ export const ja: Messages = {
     quickHint:
       "ポップアップで数字キー(1〜4)に割り当てる4つのアクション。ドラッグで並び替えできます。",
     resetTitle: "初期化",
-    resetHint: "すべてのローカル設定を削除して、ZenCopy を初期状態に戻します",
-    resetButton: "設定をすべて初期化",
+    resetHint:
+      "ZenCopy をインストール直後の状態に戻します。設定・アクション・利用統計もすべて削除されます",
+    resetButton: "初期化",
     resetWarning:
       "この操作は元に戻せません。AI 設定（API キーを含む）・ルーティングルール・自作アクション・ウィンドウ設定がすべて削除され、ZenCopy は初回起動時の状態に戻ります。",
     resetConfirm: "すべて削除して初期化",

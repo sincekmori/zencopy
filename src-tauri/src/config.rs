@@ -31,7 +31,8 @@ pub(crate) fn catalog_path(app: &tauri::AppHandle) -> Option<std::path::PathBuf>
 
 /// Factory reset: delete the directories ZenCopy owns wholesale — the config
 /// dir (catalog with keys, routing, custom actions) and the data dir (the
-/// settings store), which are the same directory on macOS. Whole directories,
+/// settings store and the usage statistics), which are the same directory on
+/// macOS — the just-installed state the Reset button promises. Whole directories,
 /// not a file list, so the reset stays complete as future versions add or
 /// rename files. The log dir is deliberately spared: a reset should still be
 /// diagnosable afterwards. Every window is then reloaded in place — NOT the

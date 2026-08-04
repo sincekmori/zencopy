@@ -63,8 +63,9 @@ export const en: Messages = {
     quickTitle: "Quick actions",
     quickHint: "The four actions the popup binds to number keys 1–4. Drag to reorder.",
     resetTitle: "Reset",
-    resetHint: "Delete every local setting and start ZenCopy fresh",
-    resetButton: "Reset all settings",
+    resetHint:
+      "Return this ZenCopy to the just-installed state — settings, actions, and usage statistics are all deleted",
+    resetButton: "Reset",
     resetWarning:
       "This cannot be undone. AI settings (including API keys), routing rules, custom actions, and window preferences are all deleted, and ZenCopy returns to its first-run state.",
     resetConfirm: "Delete everything",

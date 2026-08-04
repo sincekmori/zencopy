@@ -64,8 +64,9 @@ export const tr: Messages = {
     quickHint:
       "Açılır pencerenin 1–4 sayı tuşlarına bağladığı dört eylem. Yeniden sıralamak için sürükle.",
     resetTitle: "Sıfırla",
-    resetHint: "Tüm yerel ayarları siler ve ZenCopy'yi ilk kurulum durumuna döndürür",
-    resetButton: "Tüm ayarları sıfırla",
+    resetHint:
+      "ZenCopy'yi kurulumdan hemen sonraki duruma döndürür — ayarlar, eylemler ve kullanım istatistikleri tümüyle silinir",
+    resetButton: "Sıfırla",
     resetWarning:
       "Bu işlem geri alınamaz. AI ayarları (API anahtarları dahil), yönlendirme kuralları, kendi eylemlerin ve pencere tercihleri silinir; ZenCopy ilk açılış durumuna döner.",
     resetConfirm: "Hepsini sil",

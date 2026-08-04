@@ -65,8 +65,8 @@ export const de: Messages = {
       "Die vier Aktionen, die das Popup den Zifferntasten 1–4 zuordnet. Zum Umsortieren ziehen.",
     resetTitle: "Zurücksetzen",
     resetHint:
-      "Löscht alle lokalen Einstellungen und setzt ZenCopy auf den Auslieferungszustand zurück",
-    resetButton: "Alle Einstellungen zurücksetzen",
+      "Versetzt ZenCopy in den Zustand direkt nach der Installation — Einstellungen, Aktionen und Nutzungsstatistik werden alle gelöscht",
+    resetButton: "Zurücksetzen",
     resetWarning:
       "Das lässt sich nicht rückgängig machen. KI-Einstellungen (inklusive API-Schlüssel), Routing-Regeln, eigene Aktionen und Fenstereinstellungen werden gelöscht, und ZenCopy kehrt in den Erststart-Zustand zurück.",
     resetConfirm: "Alles löschen",

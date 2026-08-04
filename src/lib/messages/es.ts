@@ -64,8 +64,9 @@ export const es: Messages = {
     quickHint:
       "Las cuatro acciones que el popup asigna a las teclas numéricas 1–4. Arrastra para reordenar.",
     resetTitle: "Restablecer",
-    resetHint: "Elimina todos los ajustes locales y deja ZenCopy como recién instalado",
-    resetButton: "Restablecer todos los ajustes",
+    resetHint:
+      "Devuelve ZenCopy al estado recién instalado: ajustes, acciones y estadísticas de uso se eliminan por completo",
+    resetButton: "Restablecer",
     resetWarning:
       "Esto no se puede deshacer. Se eliminan los ajustes de IA (incluidas las claves de API), las reglas de enrutamiento, las acciones propias y las preferencias de ventana, y ZenCopy vuelve a su estado de primer arranque.",
     resetConfirm: "Eliminar todo",

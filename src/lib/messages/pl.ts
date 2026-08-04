@@ -64,8 +64,9 @@ export const pl: Messages = {
     quickHint:
       "Cztery akcje przypisane w okienku do klawiszy 1–4. Przeciągnij, aby zmienić kolejność.",
     resetTitle: "Reset",
-    resetHint: "Usuwa wszystkie lokalne ustawienia i przywraca ZenCopy do stanu początkowego",
-    resetButton: "Zresetuj wszystkie ustawienia",
+    resetHint:
+      "Przywraca ZenCopy do stanu tuż po instalacji — ustawienia, akcje i statystyki użycia zostają w całości usunięte",
+    resetButton: "Zresetuj",
     resetWarning:
       "Tej operacji nie można cofnąć. Ustawienia AI (w tym klucze API), reguły routingu, własne akcje i preferencje okien zostaną usunięte, a ZenCopy wróci do stanu pierwszego uruchomienia.",
     resetConfirm: "Usuń wszystko",

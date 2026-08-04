@@ -64,8 +64,9 @@ export const ptBR: Messages = {
     quickHint:
       "As quatro ações que o popup vincula às teclas numéricas 1–4. Arraste para reordenar.",
     resetTitle: "Redefinir",
-    resetHint: "Exclui todas as configurações locais e deixa o ZenCopy como recém-instalado",
-    resetButton: "Redefinir todas as configurações",
+    resetHint:
+      "Retorna o ZenCopy ao estado recém-instalado — configurações, ações e estatísticas de uso são todas excluídas",
+    resetButton: "Redefinir",
     resetWarning:
       "Isso não pode ser desfeito. As configurações de IA (incluindo chaves de API), regras de roteamento, ações personalizadas e preferências de janela são excluídas, e o ZenCopy volta ao estado de primeira execução.",
     resetConfirm: "Excluir tudo",

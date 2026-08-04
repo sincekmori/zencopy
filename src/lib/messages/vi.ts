@@ -62,8 +62,9 @@ export const vi: Messages = {
     quickTitle: "Hành động nhanh",
     quickHint: "Bốn hành động mà cửa sổ nổi gán cho các phím số 1–4. Kéo để sắp xếp lại.",
     resetTitle: "Đặt lại",
-    resetHint: "Xóa mọi cài đặt cục bộ và đưa ZenCopy về trạng thái ban đầu",
-    resetButton: "Đặt lại toàn bộ cài đặt",
+    resetHint:
+      "Đưa ZenCopy về trạng thái ngay sau khi cài đặt — cài đặt, hành động và thống kê sử dụng đều bị xóa hết",
+    resetButton: "Đặt lại",
     resetWarning:
       "Thao tác này không thể hoàn tác. Cài đặt AI (gồm khóa API), quy tắc định tuyến, hành động tự tạo và tùy chọn cửa sổ sẽ bị xóa, và ZenCopy trở về trạng thái như lần chạy đầu tiên.",
     resetConfirm: "Xóa tất cả",
