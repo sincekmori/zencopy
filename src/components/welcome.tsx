@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { emit } from "@tauri-apps/api/event";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import { TriggerNotice } from "@/components/trigger-notice.tsx";
 import { Button } from "@/components/ui/button.tsx";
@@ -8,9 +8,11 @@ import { FIELD } from "@/components/ui/field.ts";
 import { WelcomeHero } from "@/components/welcome-hero.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { useT } from "@/lib/i18n.tsx";
+import { testConnection } from "@/lib/llm.ts";
 import { createLogger } from "@/lib/log.ts";
 import { TRIGGER_KEYS, TRIGGER_MODIFIER } from "@/lib/platform.ts";
 import { FREE_KEY_URL, geminiQuickCatalog } from "@/lib/quickstart.ts";
+import { cn } from "@/lib/utils.ts";
 
 const log = createLogger("welcome");
 
@@ -20,25 +22,43 @@ const log = createLogger("welcome");
 export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element {
   const t = useT();
   const [key, setKey] = useState("");
-  const [failed, setFailed] = useState(false);
+  // The one round trip between click and start: the pasted key is pinged for
+  // real before the welcome closes. Failures split by what the fix is —
+  // "save" means the write itself broke, "test" means the key (or the
+  // network) doesn't work and the field lights up red.
+  const [checking, setChecking] = useState(false);
+  const [failed, setFailed] = useState<"save" | "test" | undefined>(undefined);
 
-  // The quick path: save the pasted key as a ready-to-run Gemini catalog.
-  // The alternative path (the secondary button) skips straight to the full
+  // The quick path: save the pasted key as a ready-to-run Gemini catalog,
+  // then prove it works with one live ping — an invalid key must fail HERE,
+  // with the field in sight, not later as a broken first copy. The
+  // alternative path (the secondary button) skips straight to the full
   // provider settings — a key is one way in, never a requirement.
   const start = (): void => {
-    if (key.trim() === "") {
+    if (key.trim() === "" || checking) {
       return; // the button is disabled; belt and suspenders
     }
-    setFailed(false);
+    setFailed(undefined);
+    setChecking(true);
     void (async () => {
       try {
         await invoke("write_catalog", { json: geminiQuickCatalog(key) });
         await emit("catalog-changed");
-        onStart();
       } catch (error) {
         log.error("quick setup failed", error);
-        setFailed(true);
+        setChecking(false);
+        setFailed("save");
+        return;
       }
+      try {
+        await testConnection();
+      } catch (error) {
+        log.error("welcome key test failed", error);
+        setChecking(false);
+        setFailed("test");
+        return;
+      }
+      onStart();
     })();
   };
 
@@ -65,12 +85,12 @@ export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element
           </label>
           <input
             id="gemini-key"
-            className={FIELD}
+            className={cn(FIELD, failed === "test" && "border-destructive")}
             type="password"
             placeholder="AIza…"
             value={key}
             onChange={(event) => {
-              setFailed(false);
+              setFailed(undefined);
               setKey(event.target.value);
             }}
           />
@@ -91,15 +111,22 @@ export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element
 
         <p className="text-xs leading-relaxed text-muted-foreground">{t.ai.disclosure}</p>
         <div className="flex flex-col items-center gap-2">
-          <Button disabled={key.trim() === ""} onClick={start}>
-            {t.welcome.start}
+          {/* While checking, the label goes invisible (not away) and the
+              spinner overlays its center — the button keeps its exact size. */}
+          <Button className="relative" disabled={key.trim() === "" || checking} onClick={start}>
+            <span className={cn(checking && "invisible")}>{t.welcome.start}</span>
+            {checking && <LoaderCircle className="absolute inset-0 m-auto size-4 animate-spin" />}
           </Button>
           {/* The equal alternative, not fine print: opens the full provider
               settings (OpenAI, Anthropic, local models, …) — no key needed. */}
           <Button variant="ghost" className="text-muted-foreground" onClick={onStart}>
             {t.welcome.otherSetup}
           </Button>
-          {failed ? <p className="text-xs text-destructive">{t.ai.saveFailed}</p> : undefined}
+          {failed === undefined ? undefined : (
+            <p className="text-xs text-destructive">
+              {failed === "save" ? t.ai.saveFailed : t.ai.testUnreachable}
+            </p>
+          )}
         </div>
       </div>
     </main>
