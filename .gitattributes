@@ -6,3 +6,8 @@
 *.png binary
 *.ico binary
 *.icns binary
+
+# The 19-locale documentation dwarfs the app in file volume and made MDX the
+# repo's #1 language on GitHub. It IS documentation — mark it so, and the
+# language bar shows what the app is written in (TypeScript and Rust).
+site/src/content/docs/** linguist-documentation
