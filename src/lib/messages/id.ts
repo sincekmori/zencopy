@@ -18,9 +18,7 @@ export const id: Messages = {
     cornerBottomLeft: "Kiri bawah",
     cornerBottomRight: "Kanan bawah",
     theme: "Tema",
-    themeHint: "Skema warna",
-    language: "Bahasa",
-    languageHint: "Bahasa tampilan",
+    language: "Bahasa tampilan",
     textSize: "Ukuran teks",
     textSizeSmall: "Kecil",
     textSizeStandard: "Standar",
@@ -30,9 +28,9 @@ export const id: Messages = {
     confirmSend: "Konfirmasi sebelum mengirim gambar & berkas",
     confirmSendHint:
       "Popup bertanya dulu ketika tangkapan akan mengirim gambar atau berkas biner lain ke penyedia; berkas teks akan diproses tanpa bertanya",
-    devMode: "Mode pengembang",
+    devMode: "Tampilkan variabel templat",
     devModeHint:
-      "Menampilkan variabel templat setiap tangkapan di popup sebagai JSON — untuk menulis aksi",
+      "Untuk menulis aksi sendiri: popup menampilkan variabel setiap salinan beserta isinya",
     stats: "Statistik penggunaan",
     statsHint:
       "Setiap kali model dijalankan, satu baris ditambahkan ke catatan lokal yang bisa dipakai menghitung biaya. Semuanya hanya tersimpan di perangkat ini dan tidak pernah dikirim ke mana pun; konten yang disalin tidak pernah dicatat.",

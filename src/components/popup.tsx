@@ -110,7 +110,7 @@ export function Popup(): React.JSX.Element {
   const [actions, setActions] = useState<ActionInfo[]>([]);
   // The action ids bound to number keys 1–4 (settings), in slot order.
   const [quickIds] = useLiveValue<string[]>(getQuickActions, "quick-actions-changed", []);
-  // Developer mode (settings toggle): show the capture's template variables.
+  // The "Show template variables" toggle (stored as `devMode`).
   const [devMode] = useLiveValue(isDevMode, "dev-mode-changed", false);
   // Usage statistics (settings toggle, default on): append invocation events.
   const [statsEnabled] = useLiveValue(isStatsEnabled, "stats-enabled-changed", true);
@@ -815,7 +815,7 @@ export function Popup(): React.JSX.Element {
     </div>
   ) : undefined;
 
-  // Developer mode: exactly what the Liquid templates receive — locale
+  // Template variables: exactly what the Liquid templates receive — locale
   // included (it is injected at run time), text/markup omitted because the
   // source view above already shows them. A collapsed one-line summary, so it
   // is discoverable without scrolling and never dominates the popup.

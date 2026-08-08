@@ -19,7 +19,8 @@ Es hat drei Tabs: **Allgemein, KI und Aktionen**.
 
 - **Popup-Position** — in welcher Bildschirmecke Ergebnisse erscheinen.
 - **Design** — hell / dunkel / dem System folgen.
-- **Sprache** — die Anzeigesprache (folgt standardmäßig deinem Betriebssystem).
+- **Textgröße** — Klein / Standard / Groß.
+- **Anzeigesprache** — folgt standardmäßig deinem Betriebssystem.
 - **Bei Anmeldung starten** — ZenCopy wartet bereits, sobald dein Computer läuft.
 - **Nachfrage vor dem Senden** — ob einmal gefragt wird, bevor Bilder oder Dateien an die KI gehen.
 
@@ -164,7 +165,7 @@ Die Template-Variablen, mit Beispielwerten für einen im Browser kopierten Absat
 | `{{ locale }}`       | `de`                                                           |
 
 Es gibt außerdem einen ZenCopy-eigenen Filter `language_name`: `{{ locale | language_name }}` wird zu „German“ statt „de“ — das liest sich in einem Prompt natürlicher.
-Um die echten Werte zu sehen, aktiviere den **Entwicklermodus** in den Einstellungen — die Template-Variablen jeder Erfassung erscheinen dann als JSON im Popup.
+Um die echten Werte zu sehen, aktiviere **Template-Variablen anzeigen** in den Einstellungen — die Variablen jeder Erfassung erscheinen dann als JSON im Popup.
 
 Einfache Aktionen (ein Name und eine Anweisung) lassen sich auch im Einstellungsfenster anlegen; was es schreibt, ist genau dieses Dateiformat.
 

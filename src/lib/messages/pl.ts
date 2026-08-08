@@ -18,9 +18,7 @@ export const pl: Messages = {
     cornerBottomLeft: "Lewy dolny",
     cornerBottomRight: "Prawy dolny",
     theme: "Motyw",
-    themeHint: "Schemat kolorów",
-    language: "Język",
-    languageHint: "Język interfejsu",
+    language: "Język interfejsu",
     textSize: "Rozmiar tekstu",
     textSizeSmall: "Mały",
     textSizeStandard: "Standardowy",
@@ -30,9 +28,8 @@ export const pl: Messages = {
     confirmSend: "Potwierdzaj przed wysłaniem obrazów i plików",
     confirmSendHint:
       "Okienko pyta najpierw, gdy przechwycenie wymagałoby wysłania do dostawcy obrazu lub innego pliku binarnego; pliki tekstowe działają bez pytania",
-    devMode: "Tryb deweloperski",
-    devModeHint:
-      "Pokazuje zmienne szablonu każdego przechwycenia w okienku, jako JSON — do pisania akcji",
+    devMode: "Pokaż zmienne szablonu",
+    devModeHint: "Do pisania własnych akcji: okienko pokazuje zmienne każdej kopii i ich zawartość",
     stats: "Statystyki użycia",
     statsHint:
       "Każde uruchomienie modelu dodaje wiersz do lokalnego rejestru, z którego można policzyć koszty. Wszystko pozostaje na tym urządzeniu i nigdy nie jest nigdzie wysyłane; skopiowana treść nigdy nie jest zapisywana.",

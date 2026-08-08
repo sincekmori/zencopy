@@ -18,9 +18,7 @@ export const he: Messages = {
     cornerBottomLeft: "שמאל למטה",
     cornerBottomRight: "ימין למטה",
     theme: "ערכת נושא",
-    themeHint: "סכמת צבעים",
-    language: "שפה",
-    languageHint: "שפת הממשק",
+    language: "שפת הממשק",
     textSize: "גודל הטקסט",
     textSizeSmall: "קטן",
     textSizeStandard: "רגיל",
@@ -30,8 +28,8 @@ export const he: Messages = {
     confirmSend: "אישור לפני שליחת תמונות וקבצים",
     confirmSendHint:
       "החלון שואל קודם כשלכידה עומדת לשלוח תמונה או קובץ בינארי אחר לספק; קובצי טקסט נשלחים בלי לשאול",
-    devMode: "מצב מפתחים",
-    devModeHint: "הצגת משתני התבנית של כל לכידה בחלון, כ‑JSON — לכתיבת פעולות",
+    devMode: "הצגת משתני התבנית",
+    devModeHint: "לכתיבת פעולות משלך: החלון מציג את המשתנים של כל העתקה ואת תוכנם",
     stats: "סטטיסטיקת שימוש",
     statsHint:
       "כל הרצת מודל מוסיפה שורה לרישום מקומי שממנו אפשר לחשב עלויות. הכול נשאר במכשיר זה בלבד ולעולם אינו נשלח לשום מקום; התוכן שהועתק לעולם אינו נכלל.",

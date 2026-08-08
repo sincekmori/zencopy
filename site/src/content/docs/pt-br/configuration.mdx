@@ -19,7 +19,8 @@ Ela tem três abas: **Geral, IA e Ações**.
 
 - **Posição do popup** — em qual canto da tela os resultados aparecem.
 - **Tema** — claro / escuro / seguir o sistema.
-- **Idioma** — o idioma da interface (segue o do sistema por padrão).
+- **Tamanho do texto** — Pequeno / Padrão / Grande.
+- **Idioma da interface** — segue o do sistema por padrão.
 - **Iniciar ao fazer login** — deixar o ZenCopy sempre a postos quando o computador estiver ligado.
 - **Confirmar antes de enviar imagens e arquivos** — perguntar ou não uma vez antes de eles irem para a IA.
 
@@ -164,7 +165,7 @@ Variáveis de template, com valores de exemplo para um parágrafo copiado em um 
 | `{{ locale }}`       | `pt-br`                                                  |
 
 Há também um filtro `language_name` específico do ZenCopy: `{{ locale | language_name }}` se expande para "Brazilian Portuguese" em vez de "pt-br", o que soa mais natural em um prompt.
-Para ver os valores reais, ative o **Modo desenvolvedor** nas Configurações — as variáveis de template de cada captura aparecem no popup como JSON.
+Para ver os valores reais, ative **Mostrar variáveis de template** nas Configurações — as variáveis de cada captura aparecem no popup como JSON.
 
 Ações simples (um nome e uma instrução) também podem ser criadas pela janela de configurações; o que ela grava é exatamente este formato de arquivo.
 

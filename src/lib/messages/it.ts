@@ -18,9 +18,7 @@ export const it: Messages = {
     cornerBottomLeft: "In basso a sinistra",
     cornerBottomRight: "In basso a destra",
     theme: "Tema",
-    themeHint: "Schema di colori",
-    language: "Lingua",
-    languageHint: "Lingua dell'interfaccia",
+    language: "Lingua dell'interfaccia",
     textSize: "Dimensione del testo",
     textSizeSmall: "Piccola",
     textSizeStandard: "Standard",
@@ -30,9 +28,9 @@ export const it: Messages = {
     confirmSend: "Conferma prima di inviare immagini e file",
     confirmSendHint:
       "Il popup chiede prima quando una cattura invierebbe un'immagine o un altro file binario al provider; i file di testo vengono elaborati senza chiedere",
-    devMode: "Modalità sviluppatore",
+    devMode: "Mostra le variabili di template",
     devModeHint:
-      "Mostra le variabili di template di ogni cattura nel popup, come JSON — per scrivere azioni",
+      "Per scrivere le proprie azioni: il popup mostra le variabili di ogni copia e il loro contenuto",
     stats: "Statistiche di utilizzo",
     statsHint:
       "Ogni esecuzione del modello aggiunge una riga a un registro locale da cui calcolare i costi. Tutto resta su questo dispositivo e non viene mai inviato da nessuna parte; il contenuto copiato non viene mai incluso.",

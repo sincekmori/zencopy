@@ -17,9 +17,7 @@ export const zhHant: Messages = {
     cornerBottomLeft: "左下",
     cornerBottomRight: "右下",
     theme: "主題",
-    themeHint: "配色",
-    language: "語言",
-    languageHint: "介面語言",
+    language: "介面語言",
     textSize: "文字大小",
     textSizeSmall: "小",
     textSizeStandard: "標準",
@@ -29,8 +27,8 @@ export const zhHant: Messages = {
     confirmSend: "傳送圖片與檔案前確認",
     confirmSendHint:
       "要把圖片等二進位檔案傳送給供應商時，彈出視窗會先詢問；文字檔案無需確認直接執行",
-    devMode: "開發者模式",
-    devModeHint: "在彈出視窗中以 JSON 顯示每次擷取的範本變數（用於撰寫動作）",
+    devMode: "顯示範本變數",
+    devModeHint: "供自行撰寫動作時使用：彈出視窗會顯示每次複製的變數及其內容",
     stats: "使用統計",
     statsHint:
       "每次執行模型都會在本機記錄中新增一行，可用於計算費用。所有記錄只保存在本裝置上，絕不會傳送到任何地方；複製的內容也絕不會被記錄。",

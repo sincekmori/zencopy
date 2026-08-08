@@ -19,7 +19,8 @@ Tiene tres pestañas: **General, IA y Acciones**.
 
 - **Posición del popup** — en qué esquina de la pantalla aparecen los resultados.
 - **Tema** — claro / oscuro / seguir el sistema.
-- **Idioma** — el idioma de la interfaz (por defecto sigue el de tu sistema operativo).
+- **Tamaño del texto** — Pequeño / Estándar / Grande.
+- **Idioma de la interfaz** — por defecto sigue el de tu sistema operativo.
 - **Iniciar al iniciar sesión** — que ZenCopy esté esperando siempre que tu computadora esté encendida.
 - **Confirmar antes de enviar imágenes y archivos** — si se pregunta una vez antes de que vayan a la IA.
 
@@ -164,7 +165,7 @@ Variables de plantilla, con valores de ejemplo para un párrafo copiado en un na
 | `{{ locale }}`       | `es`                                                                      |
 
 También hay un filtro `language_name` propio de ZenCopy: `{{ locale | language_name }}` se expande a "Spanish" en lugar de "es", lo que se lee con naturalidad en un prompt.
-Para ver los valores reales, activa el **Modo desarrollador** en Ajustes — las variables de plantilla de cada captura aparecen en el popup como JSON.
+Para ver los valores reales, activa **Mostrar variables de plantilla** en Ajustes — las variables de cada captura aparecen en el popup como JSON.
 
 Las acciones simples (un nombre y una instrucción) también se pueden crear desde la ventana de ajustes; lo que esta escribe es exactamente este formato de archivo.
 

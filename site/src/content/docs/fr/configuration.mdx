@@ -19,7 +19,8 @@ Elle comporte trois onglets : **Général, IA et Actions**.
 
 - **Position du popup** — dans quel coin de l'écran les résultats apparaissent.
 - **Thème** — clair / sombre / suivre le système.
-- **Langue** — la langue de l'interface (celle de votre système par défaut).
+- **Taille du texte** — Petite / Standard / Grande.
+- **Langue de l'interface** — celle de votre système par défaut.
 - **Lancer à la connexion** — pour que ZenCopy soit prêt dès que votre ordinateur est allumé.
 - **Confirmation avant l'envoi** — demander ou non une confirmation avant qu'images ou fichiers ne partent vers l'IA.
 
@@ -164,7 +165,7 @@ Les variables de gabarit, avec des valeurs d'exemple pour un paragraphe copié d
 | `{{ locale }}`       | `fr`                                                              |
 
 Il existe aussi un filtre `language_name` propre à ZenCopy : `{{ locale | language_name }}` se développe en « French » plutôt qu'en « fr », ce qui se lit naturellement dans un prompt.
-Pour voir les valeurs réelles, activez le **Mode développeur** dans les réglages — les variables de gabarit de chaque capture apparaissent dans le popup, en JSON.
+Pour voir les valeurs réelles, activez **Afficher les variables de gabarit** dans les réglages — les variables de chaque capture apparaissent dans le popup, en JSON.
 
 Les actions simples (un nom et une instruction) peuvent aussi être créées depuis la fenêtre des réglages ; ce qu'elle écrit est exactement ce format de fichier.
 

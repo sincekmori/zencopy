@@ -18,9 +18,7 @@ export const ptBR: Messages = {
     cornerBottomLeft: "Inferior esquerdo",
     cornerBottomRight: "Inferior direito",
     theme: "Tema",
-    themeHint: "Esquema de cores",
-    language: "Idioma",
-    languageHint: "Idioma da interface",
+    language: "Idioma da interface",
     textSize: "Tamanho do texto",
     textSizeSmall: "Pequeno",
     textSizeStandard: "Padrão",
@@ -30,9 +28,9 @@ export const ptBR: Messages = {
     confirmSend: "Confirmar antes de enviar imagens e arquivos",
     confirmSendHint:
       "O popup pergunta antes de enviar uma imagem ou outro arquivo binário ao provedor; arquivos de texto são enviados sem perguntar",
-    devMode: "Modo desenvolvedor",
+    devMode: "Mostrar variáveis de template",
     devModeHint:
-      "Mostra as variáveis de template de cada captura no popup, como JSON — para escrever ações",
+      "Para escrever suas próprias ações: o popup mostra as variáveis de cada cópia e seu conteúdo",
     stats: "Estatísticas de uso",
     statsHint:
       "Cada execução do modelo adiciona uma linha a um registro local que permite calcular os custos. Tudo fica somente neste dispositivo e nunca é enviado a lugar nenhum; o conteúdo copiado nunca é incluído.",

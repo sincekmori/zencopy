@@ -22,9 +22,7 @@ export interface Messages {
     cornerBottomLeft: string;
     cornerBottomRight: string;
     theme: string;
-    themeHint: string;
     language: string;
-    languageHint: string;
     /** Whole-interface scale (applied as webview zoom). Own keys, not the
      *  shared option* pool: these adjectives inflect to agree with "size" in
      *  several locales, so they must not be reused for another control. */
@@ -36,6 +34,9 @@ export interface Messages {
     startupHint: string;
     confirmSend: string;
     confirmSendHint: string;
+    /** Visible label: "Show template variables" (the key name is frozen to
+     *  the persisted `devMode` store key in settings.ts — translate the
+     *  label's meaning, not the key). */
     devMode: string;
     devModeHint: string;
     /** Usage statistics: a local JSONL of action invocations (ids, kinds,

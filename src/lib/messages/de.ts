@@ -18,9 +18,7 @@ export const de: Messages = {
     cornerBottomLeft: "Unten links",
     cornerBottomRight: "Unten rechts",
     theme: "Design",
-    themeHint: "Farbschema",
-    language: "Sprache",
-    languageHint: "Anzeigesprache",
+    language: "Anzeigesprache",
     textSize: "Textgröße",
     textSizeSmall: "Klein",
     textSizeStandard: "Standard",
@@ -30,9 +28,9 @@ export const de: Messages = {
     confirmSend: "Vor dem Senden von Bildern & Dateien nachfragen",
     confirmSendHint:
       "Das Popup fragt zuerst, wenn eine Erfassung ein Bild oder eine andere Binärdatei an den Anbieter senden würde; Textdateien laufen ohne Nachfrage",
-    devMode: "Entwicklermodus",
+    devMode: "Template-Variablen anzeigen",
     devModeHint:
-      "Zeigt die Template-Variablen jeder Erfassung als JSON im Popup — zum Schreiben von Aktionen",
+      "Zum Schreiben eigener Aktionen: Das Popup zeigt die Variablen jeder Kopie und ihren Inhalt",
     stats: "Nutzungsstatistik",
     statsHint:
       "Jede Modellausführung fügt einer lokalen Aufzeichnung eine Zeile hinzu, aus der sich die Kosten berechnen lassen. Alles bleibt auf diesem Gerät und wird niemals irgendwohin gesendet; der kopierte Inhalt wird nie aufgezeichnet.",

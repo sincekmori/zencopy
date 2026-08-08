@@ -92,7 +92,6 @@ export function Settings(): React.JSX.Element {
   // Autostart state lives in the OS (login item / Run key), so it's the source of
   // truth — we just mirror it here rather than persisting our own copy.
   const [autostart, setAutostart] = useState(false);
-  // Developer mode: the popup shows each capture's template variables as JSON.
   const [devMode, setDevMode] = useState(false);
   // Ask before an image/files capture is sent to the provider.
   const [confirmSend, setConfirmSend] = useState(true);
@@ -475,6 +474,8 @@ export function Settings(): React.JSX.Element {
         </div>
 
         <div className={cn("flex-col gap-8", tab === "general" ? "flex" : "hidden")}>
+          {/* Section order: descending by how likely a user is to act on it
+              early on; the destructive reset dead last. */}
           <section className="flex flex-col gap-5 rounded-xl border bg-card p-6">
             <div>
               <h2 className="text-sm font-medium">{t.settings.position}</h2>
@@ -515,62 +516,6 @@ export function Settings(): React.JSX.Element {
               onCheckedChange={toggleAutostart}
               aria-label={t.settings.startup}
             />
-          </section>
-
-          <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">
-            <div>
-              <h2 className="text-sm font-medium">{t.settings.confirmSend}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">{t.settings.confirmSendHint}</p>
-            </div>
-            <Switch
-              checked={confirmSend}
-              onCheckedChange={toggleConfirmSend}
-              aria-label={t.settings.confirmSend}
-            />
-          </section>
-
-          <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
-            <div>
-              <h2 className="text-sm font-medium">{t.settings.theme}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">{t.settings.themeHint}</p>
-            </div>
-            <SegmentedControl
-              value={theme}
-              options={themes}
-              onChange={changeTheme}
-              className="w-fit"
-            />
-          </section>
-
-          <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
-            <h2 className="text-sm font-medium">{t.settings.textSize}</h2>
-            <SegmentedControl
-              value={textSize}
-              options={textSizes}
-              onChange={changeTextSize}
-              className="w-fit"
-            />
-          </section>
-
-          <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">
-            <div>
-              <h2 className="text-sm font-medium">{t.settings.language}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">{t.settings.languageHint}</p>
-            </div>
-            <Select
-              className="w-48 shrink-0"
-              aria-label={t.settings.language}
-              value={language}
-              onChange={(event) => {
-                changeLanguage(event.target.value as LocalePreference);
-              }}
-            >
-              {languages.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Select>
           </section>
 
           <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">
@@ -650,6 +595,58 @@ export function Settings(): React.JSX.Element {
             </div>
             {/* The honesty footnote: everything above is an estimate. */}
             <p className="text-xs text-muted-foreground">{t.settings.costsApproxHint}</p>
+          </section>
+
+          <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">
+            <div>
+              <h2 className="text-sm font-medium">{t.settings.confirmSend}</h2>
+              <p className="mt-1 text-xs text-muted-foreground">{t.settings.confirmSendHint}</p>
+            </div>
+            <Switch
+              checked={confirmSend}
+              onCheckedChange={toggleConfirmSend}
+              aria-label={t.settings.confirmSend}
+            />
+          </section>
+
+          <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
+            <h2 className="text-sm font-medium">{t.settings.textSize}</h2>
+            <SegmentedControl
+              value={textSize}
+              options={textSizes}
+              onChange={changeTextSize}
+              className="w-fit"
+            />
+          </section>
+
+          <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
+            <h2 className="text-sm font-medium">{t.settings.theme}</h2>
+            <SegmentedControl
+              value={theme}
+              options={themes}
+              onChange={changeTheme}
+              className="w-fit"
+            />
+          </section>
+
+          <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
+            <h2 className="text-sm font-medium">
+              <label htmlFor="language-select">{t.settings.language}</label>
+            </h2>
+            <Select
+              className="w-48"
+              id="language-select"
+              value={language}
+              onChange={(event) => {
+                changeLanguage(event.target.value as LocalePreference);
+              }}
+            >
+              {languages.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </Select>
           </section>
 
           <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">

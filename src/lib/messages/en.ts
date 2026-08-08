@@ -18,9 +18,7 @@ export const en: Messages = {
     cornerBottomLeft: "Bottom left",
     cornerBottomRight: "Bottom right",
     theme: "Theme",
-    themeHint: "Color scheme",
-    language: "Language",
-    languageHint: "Display language",
+    language: "Display language",
     textSize: "Text size",
     textSizeSmall: "Small",
     textSizeStandard: "Standard",
@@ -30,9 +28,9 @@ export const en: Messages = {
     confirmSend: "Confirm before sending images & files",
     confirmSendHint:
       "The popup asks first when a capture would send an image or other binary file to the provider; text files run without asking",
-    devMode: "Developer mode",
+    devMode: "Show template variables",
     devModeHint:
-      "Show each capture's template variables in the popup, as JSON — for writing actions",
+      "For writing your own actions: the popup shows each copy's variables and what they contain",
     stats: "Usage statistics",
     statsHint:
       "Each model run adds a line to a local record you can total your costs from. It all stays on this device and is never sent anywhere; the copied content is never included.",

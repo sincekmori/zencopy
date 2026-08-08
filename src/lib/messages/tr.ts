@@ -18,9 +18,7 @@ export const tr: Messages = {
     cornerBottomLeft: "Sol alt",
     cornerBottomRight: "Sağ alt",
     theme: "Tema",
-    themeHint: "Renk düzeni",
-    language: "Dil",
-    languageHint: "Arayüz dili",
+    language: "Arayüz dili",
     textSize: "Metin boyutu",
     textSizeSmall: "Küçük",
     textSizeStandard: "Standart",
@@ -30,9 +28,9 @@ export const tr: Messages = {
     confirmSend: "Görsel ve dosya göndermeden önce onayla",
     confirmSendHint:
       "Bir yakalama sağlayıcıya görsel ya da başka bir ikili dosya gönderecekse açılır pencere önce sorar; metin dosyaları sormadan çalışır",
-    devMode: "Geliştirici modu",
+    devMode: "Şablon değişkenlerini göster",
     devModeHint:
-      "Her yakalamanın şablon değişkenlerini açılır pencerede JSON olarak gösterir — eylem yazmak için",
+      "Kendi eylemlerini yazmak için: açılır pencere her kopyanın değişkenlerini ve içeriğini gösterir",
     stats: "Kullanım istatistikleri",
     statsHint:
       "Her model çalıştırması, maliyetleri hesaplayabileceğiniz yerel bir kayda bir satır ekler. Her şey bu cihazda kalır ve asla hiçbir yere gönderilmez; kopyalanan içerik asla kayda dahil edilmez.",

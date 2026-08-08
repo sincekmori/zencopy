@@ -19,7 +19,8 @@ It has three tabs: **General, AI, and Actions**.
 
 - **Popup position** — which corner of the screen results appear in.
 - **Theme** — light / dark / follow the system.
-- **Language** — the display language (follows your OS by default).
+- **Text size** — Small / Standard / Large.
+- **Display language** — follows your OS by default.
 - **Launch at login** — have ZenCopy waiting whenever your computer is on.
 - **Confirmation before sending** — whether to ask once before images or files go to the AI.
 
@@ -164,7 +165,7 @@ Template variables, with example values for a paragraph copied in a browser:
 | `{{ locale }}`       | `en`                                               |
 
 There is also a ZenCopy-specific `language_name` filter: `{{ locale | language_name }}` expands to "English" rather than "en", which reads naturally in a prompt.
-To see the real values, enable **developer mode** in Settings — each capture's template variables appear in the popup as JSON.
+To see the real values, turn on **Show template variables** in Settings — each capture's variables appear in the popup as JSON.
 
 Simple actions (a name and an instruction) can also be created from the settings window; what it writes is exactly this file format.
 

@@ -119,7 +119,8 @@ export async function setLocalePreference(preference: LocalePreference): Promise
 
 const DEV_MODE_KEY = "devMode";
 
-/** Developer mode: the popup shows each capture's template variables as JSON,
+/** The "Show template variables" toggle (stored as `devMode`, its original
+ *  name): the popup shows each capture's template variables as JSON,
  *  so action authors can see exactly what their Liquid templates receive. */
 export function isDevMode(): Promise<boolean> {
   return readSetting(DEV_MODE_KEY, z.boolean(), false);

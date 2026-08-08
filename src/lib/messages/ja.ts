@@ -18,9 +18,7 @@ export const ja: Messages = {
     cornerBottomLeft: "左下",
     cornerBottomRight: "右下",
     theme: "テーマ",
-    themeHint: "画面の配色",
-    language: "言語",
-    languageHint: "表示言語",
+    language: "表示言語",
     textSize: "文字サイズ",
     textSizeSmall: "小",
     textSizeStandard: "標準",
@@ -30,9 +28,9 @@ export const ja: Messages = {
     confirmSend: "画像・ファイルの送信前に確認",
     confirmSendHint:
       "画像などのバイナリファイルを送信する前に、ポップアップで確認します（テキストファイルは確認なしで実行）",
-    devMode: "開発者モード",
+    devMode: "テンプレート変数を表示",
     devModeHint:
-      "キャプチャごとのテンプレート変数をポップアップに JSON で表示します（アクション開発用）",
+      "アクションを自作するときに使います。コピーごとの変数と中身をポップアップで確認できます",
     stats: "利用統計",
     statsHint:
       "モデルを実行するたびに、コストの計算に使える記録をこの端末の中だけに残します。外部に送信されることは一切ありません。コピーした内容も記録されません。",

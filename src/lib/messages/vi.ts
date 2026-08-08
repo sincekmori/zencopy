@@ -18,9 +18,7 @@ export const vi: Messages = {
     cornerBottomLeft: "Dưới trái",
     cornerBottomRight: "Dưới phải",
     theme: "Giao diện",
-    themeHint: "Bảng màu",
-    language: "Ngôn ngữ",
-    languageHint: "Ngôn ngữ hiển thị",
+    language: "Ngôn ngữ hiển thị",
     textSize: "Cỡ chữ",
     textSizeSmall: "Nhỏ",
     textSizeStandard: "Chuẩn",
@@ -30,9 +28,9 @@ export const vi: Messages = {
     confirmSend: "Xác nhận trước khi gửi hình ảnh & tệp",
     confirmSendHint:
       "Cửa sổ nổi sẽ hỏi trước khi gửi hình ảnh hoặc tệp nhị phân khác đến nhà cung cấp; tệp văn bản sẽ được gửi mà không cần hỏi.",
-    devMode: "Chế độ nhà phát triển",
+    devMode: "Hiển thị biến mẫu",
     devModeHint:
-      "Hiển thị các biến mẫu của mỗi lần bắt trong cửa sổ nổi, dạng JSON — dùng khi viết hành động",
+      "Dùng khi viết hành động của riêng bạn: cửa sổ nổi hiển thị các biến của mỗi lần sao chép và nội dung của chúng",
     stats: "Thống kê sử dụng",
     statsHint:
       "Mỗi lần chạy mô hình sẽ thêm một dòng vào nhật ký cục bộ, dùng để tính chi phí. Mọi thứ chỉ nằm trên thiết bị này và không bao giờ được gửi đi bất cứ đâu; nội dung đã sao chép không bao giờ được ghi lại.",

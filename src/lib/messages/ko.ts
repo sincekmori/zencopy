@@ -18,9 +18,7 @@ export const ko: Messages = {
     cornerBottomLeft: "왼쪽 아래",
     cornerBottomRight: "오른쪽 아래",
     theme: "테마",
-    themeHint: "색상 구성",
-    language: "언어",
-    languageHint: "표시 언어",
+    language: "표시 언어",
     textSize: "글자 크기",
     textSizeSmall: "작음",
     textSizeStandard: "표준",
@@ -30,8 +28,9 @@ export const ko: Messages = {
     confirmSend: "이미지·파일 전송 전 확인",
     confirmSendHint:
       "이미지 등 바이너리 파일을 제공업체로 보내기 전에 팝업에서 확인합니다. 텍스트 파일은 확인 없이 실행됩니다",
-    devMode: "개발자 모드",
-    devModeHint: "캡처마다 템플릿 변수를 팝업에 JSON으로 표시합니다 (액션 작성용)",
+    devMode: "템플릿 변수 표시",
+    devModeHint:
+      "직접 액션을 만들 때 사용합니다. 복사할 때마다 변수와 그 내용을 팝업에서 확인할 수 있습니다",
     stats: "사용 통계",
     statsHint:
       "모델을 실행할 때마다 비용 계산에 쓸 수 있는 기록을 이 기기 안에만 남깁니다. 외부로 전송되는 일은 절대 없으며, 복사한 내용도 기록되지 않습니다.",
