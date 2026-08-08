@@ -2,13 +2,14 @@ import { invoke } from "@tauri-apps/api/core";
 import { emit } from "@tauri-apps/api/event";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { LoaderCircle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ActionsSettings } from "@/components/actions-settings.tsx";
 import { AiSettings } from "@/components/ai-settings.tsx";
 import { TriggerNotice } from "@/components/trigger-notice.tsx";
 import { UserContextSettings } from "@/components/user-context-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { FIELD } from "@/components/ui/field.ts";
+import { SegmentedControl } from "@/components/ui/segmented-control.tsx";
 import { Select } from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import { Welcome } from "@/components/welcome.tsx";
@@ -22,9 +23,11 @@ import {
   type Corner,
   DEFAULT_CORNER,
   DEFAULT_LOCALE_PREFERENCE,
+  DEFAULT_TEXT_SIZE,
   DEFAULT_THEME,
   getCorner,
   getLocalePreference,
+  getTextSize,
   getTheme,
   getCostLimit,
   isConfirmAttachments,
@@ -42,10 +45,13 @@ import {
   setDevMode as saveDevMode,
   setStatsEnabled as saveStatsEnabled,
   setLocalePreference as saveLocale,
+  setTextSize as saveTextSize,
   setTheme as saveTheme,
+  type TextSize,
   type Theme,
 } from "@/lib/settings.ts";
 import { TRIGGER_KEYS } from "@/lib/platform.ts";
+import { applyTextSize } from "@/lib/text-size.ts";
 import { applyTheme } from "@/lib/theme.ts";
 import { cn } from "@/lib/utils.ts";
 import { useTauriEvent } from "@/lib/use-tauri-event.ts";
@@ -81,6 +87,7 @@ export function Settings(): React.JSX.Element {
   const t = useT();
   const [corner, setCorner] = useState<Corner>(DEFAULT_CORNER);
   const [theme, setTheme] = useState<Theme>(DEFAULT_THEME);
+  const [textSize, setTextSize] = useState<TextSize>(DEFAULT_TEXT_SIZE);
   const [language, setLanguage] = useState<LocalePreference>(DEFAULT_LOCALE_PREFERENCE);
   // Autostart state lives in the OS (login item / Run key), so it's the source of
   // truth — we just mirror it here rather than persisting our own copy.
@@ -116,6 +123,7 @@ export function Settings(): React.JSX.Element {
       const [
         savedCorner,
         savedTheme,
+        savedTextSize,
         savedLocale,
         autostartOn,
         welcomeSeen,
@@ -127,6 +135,7 @@ export function Settings(): React.JSX.Element {
       ] = await Promise.all([
         getCorner(),
         getTheme(),
+        getTextSize(),
         getLocalePreference(),
         isEnabled(),
         isWelcomeSeen(),
@@ -139,6 +148,7 @@ export function Settings(): React.JSX.Element {
       if (!cancelled) {
         setCorner(savedCorner);
         setTheme(savedTheme);
+        setTextSize(savedTextSize);
         setLanguage(savedLocale);
         setAutostart(autostartOn);
         setWelcomed(welcomeSeen);
@@ -168,6 +178,13 @@ export function Settings(): React.JSX.Element {
     void saveTheme(value);
     applyTheme(value); // instant in this window
     void emit("theme-changed", value); // live-update the other windows (popup)
+  };
+
+  const changeTextSize = (value: TextSize): void => {
+    setTextSize(value);
+    void saveTextSize(value);
+    applyTextSize(value); // instant in this window
+    void emit("text-size-changed", value); // live-update the other windows
   };
 
   const changeLanguage = (value: LocalePreference): void => {
@@ -370,11 +387,18 @@ export function Settings(): React.JSX.Element {
     })();
   };
 
-  const tabs: { value: "ai" | "actions" | "general"; label: string }[] = [
-    { value: "ai", label: t.ai.title },
-    { value: "actions", label: t.actions.title },
-    { value: "general", label: t.settings.tabGeneral },
-  ];
+  // The three arrays handed to SegmentedControl are memoized because
+  // react-perf/jsx-no-new-array-as-prop can't see the compiler doing the
+  // same thing; the inline-mapped arrays below (corners, languages) are not
+  // props and stay plain.
+  const tabs = useMemo(
+    (): { value: "ai" | "actions" | "general"; label: string }[] => [
+      { value: "ai", label: t.ai.title },
+      { value: "actions", label: t.actions.title },
+      { value: "general", label: t.settings.tabGeneral },
+    ],
+    [t],
+  );
 
   const corners: { value: Corner; label: string }[] = [
     { value: "top-left", label: t.settings.cornerTopLeft },
@@ -382,11 +406,22 @@ export function Settings(): React.JSX.Element {
     { value: "bottom-left", label: t.settings.cornerBottomLeft },
     { value: "bottom-right", label: t.settings.cornerBottomRight },
   ];
-  const themes: { value: Theme; label: string }[] = [
-    { value: "system", label: t.settings.optionSystem },
-    { value: "light", label: t.settings.optionLight },
-    { value: "dark", label: t.settings.optionDark },
-  ];
+  const themes = useMemo(
+    (): { value: Theme; label: string }[] => [
+      { value: "system", label: t.settings.optionSystem },
+      { value: "light", label: t.settings.optionLight },
+      { value: "dark", label: t.settings.optionDark },
+    ],
+    [t],
+  );
+  const textSizes = useMemo(
+    (): { value: TextSize; label: string }[] => [
+      { value: "small", label: t.settings.textSizeSmall },
+      { value: "standard", label: t.settings.textSizeStandard },
+      { value: "large", label: t.settings.textSizeLarge },
+    ],
+    [t],
+  );
   const languages: { value: LocalePreference; label: string }[] = [
     { value: "system", label: t.settings.optionSystem },
     ...LOCALES.map((locale) => ({ value: locale.value, label: locale.label })),
@@ -427,25 +462,7 @@ export function Settings(): React.JSX.Element {
             unmounting, so unsaved edits (the AI JSON, an action draft) survive
             a tab switch. */}
         <nav className="flex justify-center">
-          <div className="inline-flex rounded-lg border bg-muted/40 p-1">
-            {tabs.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => {
-                  setTab(option.value);
-                }}
-                className={cn(
-                  "rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
-                  tab === option.value
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
+          <SegmentedControl value={tab} options={tabs} onChange={setTab} />
         </nav>
 
         <div className={cn("flex-col gap-8", tab === "ai" ? "flex" : "hidden")}>
@@ -517,25 +534,22 @@ export function Settings(): React.JSX.Element {
               <h2 className="text-sm font-medium">{t.settings.theme}</h2>
               <p className="mt-1 text-xs text-muted-foreground">{t.settings.themeHint}</p>
             </div>
-            <div className="inline-flex w-fit rounded-lg border bg-muted/40 p-1">
-              {themes.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => {
-                    changeTheme(option.value);
-                  }}
-                  className={cn(
-                    "rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
-                    theme === option.value
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground",
-                  )}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
+            <SegmentedControl
+              value={theme}
+              options={themes}
+              onChange={changeTheme}
+              className="w-fit"
+            />
+          </section>
+
+          <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
+            <h2 className="text-sm font-medium">{t.settings.textSize}</h2>
+            <SegmentedControl
+              value={textSize}
+              options={textSizes}
+              onChange={changeTextSize}
+              className="w-fit"
+            />
           </section>
 
           <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">

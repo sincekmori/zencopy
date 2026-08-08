@@ -25,6 +25,13 @@ export interface Messages {
     themeHint: string;
     language: string;
     languageHint: string;
+    /** Whole-interface scale (applied as webview zoom). Own keys, not the
+     *  shared option* pool: these adjectives inflect to agree with "size" in
+     *  several locales, so they must not be reused for another control. */
+    textSize: string;
+    textSizeSmall: string;
+    textSizeStandard: string;
+    textSizeLarge: string;
     startup: string;
     startupHint: string;
     confirmSend: string;

@@ -7,6 +7,7 @@
     "core:default",
     "core:window:allow-hide",
     "core:window:allow-start-dragging",
+    "core:webview:allow-set-webview-zoom",
     "store:default",
     "log:default",
     "clipboard-manager:allow-write-text",

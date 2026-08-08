@@ -22,6 +22,14 @@ export type Theme = z.infer<typeof ThemeSchema>;
 
 export const DEFAULT_THEME: Theme = "system";
 
+/** The UI text size, applied as webview zoom so every window scales as a
+ *  whole — text, spacing, and the hero animation alike. Exported for the
+ *  windows that validate the `text-size-changed` broadcast at the boundary. */
+export const TextSizeSchema = z.enum(["small", "standard", "large"]);
+export type TextSize = z.infer<typeof TextSizeSchema>;
+
+export const DEFAULT_TEXT_SIZE: TextSize = "standard";
+
 /** A concrete supported locale — the wire shape of `locale-changed`. */
 export const LocaleSchema = z.enum(Object.keys(messages) as Locale[]);
 
@@ -35,6 +43,7 @@ export const DEFAULT_LOCALE_PREFERENCE: LocalePreference = "system";
 const STORE_FILE = "settings.json";
 const CORNER_KEY = "popupCorner";
 const THEME_KEY = "theme";
+const TEXT_SIZE_KEY = "textSize";
 const LOCALE_KEY = "locale";
 
 // Loaded on first access, then cached for the window's lifetime. A factory
@@ -80,6 +89,14 @@ export function getTheme(): Promise<Theme> {
 
 export async function setTheme(theme: Theme): Promise<void> {
   await writeSetting(THEME_KEY, theme);
+}
+
+export function getTextSize(): Promise<TextSize> {
+  return readSetting(TEXT_SIZE_KEY, TextSizeSchema, DEFAULT_TEXT_SIZE);
+}
+
+export async function setTextSize(size: TextSize): Promise<void> {
+  await writeSetting(TEXT_SIZE_KEY, size);
 }
 
 /** Resolve a preference (which may be "system") to a concrete locale. */

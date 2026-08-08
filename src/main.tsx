@@ -5,7 +5,9 @@ import { createRoot } from "react-dom/client";
 import App from "@/App.tsx";
 import { I18nProvider } from "@/lib/i18n.tsx";
 import { createLogger, installGlobalErrorLogging } from "@/lib/log.ts";
-import { getTheme, type Theme, ThemeSchema } from "@/lib/settings.ts";
+import type * as z from "zod";
+import { getTextSize, getTheme, TextSizeSchema, ThemeSchema } from "@/lib/settings.ts";
+import { applyTextSize } from "@/lib/text-size.ts";
 import { applyTheme } from "@/lib/theme.ts";
 import "@/index.css";
 
@@ -13,22 +15,47 @@ import "@/index.css";
 // console — uncaught errors and rejections all land in the app log.
 installGlobalErrorLogging();
 
-// Apply a baseline immediately, then the saved theme, then follow live changes
-// (settings broadcasts `theme-changed` to every window).
-applyTheme("system");
-void (async () => {
-  applyTheme(await getTheme());
-})();
-void (async () => {
-  await listen<Theme>("theme-changed", (event) => {
-    const theme = ThemeSchema.safeParse(event.payload);
-    if (theme.success) {
-      applyTheme(theme.data);
+const log = createLogger("main");
+
+// The wiring every live setting shares: apply the saved value, then follow
+// the settings window's broadcasts, validating each payload at the boundary.
+function followSetting<Value>({
+  event,
+  schema,
+  load,
+  apply,
+}: {
+  event: string;
+  schema: z.ZodType<Value>;
+  load: () => Promise<Value>;
+  apply: (value: Value) => void;
+}): void {
+  void (async () => {
+    apply(await load());
+  })();
+  void listen<Value>(event, (received) => {
+    const parsed = schema.safeParse(received.payload);
+    if (parsed.success) {
+      apply(parsed.data);
     } else {
-      createLogger("main").warn("ignoring theme-changed with an invalid payload", theme.error);
+      log.warn(`ignoring ${event} with an invalid payload`, parsed.error);
     }
   });
-})();
+}
+
+// Theme gets a baseline before the async load so the first paint is never
+// unstyled. The text-size load is unconditional on purpose: webview zoom
+// survives a reload, so this call is what un-zooms a factory-reset window.
+applyTheme("system");
+followSetting({ event: "theme-changed", schema: ThemeSchema, load: getTheme, apply: applyTheme });
+followSetting({
+  event: "text-size-changed",
+  schema: TextSizeSchema,
+  load: getTextSize,
+  apply: (size) => {
+    void applyTextSize(size);
+  },
+});
 
 // The popup is a frameless, transparent floating card — drop the page background.
 if (getCurrentWindow().label === "popup") {
