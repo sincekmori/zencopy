@@ -450,8 +450,7 @@ pub fn run() {
                         let routing = load_routing(&handle);
                         let action = resolve_action(&routing, &actions, &event);
                         let corner = current_corner(&handle);
-                        let mut payload = build_capture_payload(&event, action);
-                        payload.align_bottom = corner.is_bottom();
+                        let payload = build_capture_payload(&event, action);
                         log::debug!(
                             "capture: kind={} runnable={}",
                             payload.kind,

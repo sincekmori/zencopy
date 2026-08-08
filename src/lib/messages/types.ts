@@ -108,9 +108,10 @@ export interface Messages {
     emptyResult: string;
     stop: string;
     retry: string;
+    /** Placeholder of the field that continues the thread under a result. */
+    followUp: string;
     copy: string;
     copied: string;
-    clear: string;
     close: string;
     /** Refusal shown instead of a run when the monthly cap is reached;
      *  receives the formatted cap (e.g. "$5.00"). */

@@ -39,8 +39,7 @@ export type Source = z.infer<typeof SourceSchema>;
  *  - `role`: catalog role to run with (already resolved to "default").
  *  - `instructions` / `prompt`: the action's system prompt and body, as
  *    Liquid templates rendered on the frontend with `vars`.
- *  - `runnable`: whether an action applies and is ready to run.
- *  - `align_bottom`: popup pinned to a bottom corner (card hugs that edge). */
+ *  - `runnable`: whether an action applies and is ready to run. */
 export const CapturePayloadSchema = z.object({
   kind: z.enum([...ROUTABLE_KINDS, "empty"]),
   source: SourceSchema,
@@ -51,7 +50,6 @@ export const CapturePayloadSchema = z.object({
   prompt: z.string(),
   vars: z.record(z.string(), z.string()),
   runnable: z.boolean(),
-  align_bottom: z.boolean(),
 });
 export type CapturePayload = z.infer<typeof CapturePayloadSchema>;
 

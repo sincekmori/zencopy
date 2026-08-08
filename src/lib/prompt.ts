@@ -58,6 +58,30 @@ export function composeUserText(prompt: string, attachedPaths: string[]): string
   return sections.filter(Boolean).join("\n\n");
 }
 
+/**
+ * The inverse of {@link extractResult}, for replaying a thread: a stored
+ * reply re-wrapped in the result tags, so the transcript the model sees
+ * practices the protocol its instructions preach — an untagged history would
+ * teach it, by example, to skip the tags (breaking streaming and preamble
+ * stripping on the next reply). Sound only because {@link stripResultTags}
+ * keeps stored replies tag-free by construction.
+ */
+export function wrapResult(text: string): string {
+  return `${OPEN_TAG}\n${text}\n${CLOSE_TAG}`;
+}
+
+/**
+ * Remove any residual result tags from a finished reply. Extraction normally
+ * leaves none, but a model that re-opens a tag mid-stream, or ignores the
+ * protocol entirely (the raw-fallback path), can leave strays — and a stray
+ * tag replayed into the next request's history would teach the model a
+ * broken protocol. Applied at the outcome boundary so the stored text is
+ * tag-free by construction, making {@link wrapResult} a true inverse.
+ */
+export function stripResultTags(text: string): string {
+  return text.replaceAll(OPEN_TAG, "").replaceAll(CLOSE_TAG, "").trim();
+}
+
 /** Length of the longest tail of `body` that is a prefix of the closing tag. */
 function pendingCloseLength(body: string): number {
   const max = Math.min(CLOSE_TAG.length - 1, body.length);

@@ -40,7 +40,7 @@ Plenty of tools put an AI popup near your selection — most are macOS-only, tex
 ## Highlights
 
 - **One global trigger** — Ctrl/Cmd + C + C, anywhere. Powered by the [`copycopy`](https://crates.io/crates/copycopy) crate.
-- **Streaming, calm popup** — the copied content on top, the operation in the middle, the result below. Stop / retry / copy / clear.
+- **Streaming, calm popup** — the copied content on top, the operation in the middle, the result below; reply under any result to continue the conversation, with copy and retry beneath every answer.
 - **Provider-agnostic LLM** — built on the Vercel AI SDK + [`ai-sdk-catalog`](https://www.npmjs.com/package/ai-sdk-catalog). Roles map to models in a single config file; swap providers without touching actions.
 - **Not just text** — rich text arrives as Markdown; images and files attach as-is, with the type decided by contents, never by file extension.
 - **Resident & unobtrusive** — tray icon, frameless always-on-top popup you can drag and resize, launch-at-login (toggleable), recall the last result from the tray, dismiss with Esc or the close button.

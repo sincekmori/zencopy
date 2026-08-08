@@ -13,12 +13,6 @@ pub(crate) enum Corner {
     BottomLeft,
 }
 
-impl Corner {
-    pub(crate) fn is_bottom(self) -> bool {
-        matches!(self, Corner::BottomRight | Corner::BottomLeft)
-    }
-}
-
 /// Read the user's chosen popup corner from the settings store (default top-right).
 pub(crate) fn current_corner(handle: &tauri::AppHandle) -> Corner {
     use tauri_plugin_store::StoreExt;

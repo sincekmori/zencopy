@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
-import { generateText, streamText } from "ai";
+import { generateText, type ModelMessage, streamText } from "ai";
 import { type Catalog, type Config, createCatalog, type RoleEntry } from "ai-sdk-catalog";
 import { ping } from "ai-sdk-ping";
 import { franc } from "franc-min";
@@ -26,7 +26,13 @@ import {
 import { createLogger } from "@/lib/log.ts";
 // The system-prompt assembly and the <result> streaming protocol (pure, no
 // Tauri imports — see prompt.ts for the section layout and its rationale).
-import { composeInstructions, composeUserText, extractResult } from "@/lib/prompt.ts";
+import {
+  composeInstructions,
+  composeUserText,
+  extractResult,
+  stripResultTags,
+  wrapResult,
+} from "@/lib/prompt.ts";
 
 const log = createLogger("llm");
 
@@ -316,25 +322,37 @@ export async function streamAction(
   const attachedPaths = attachments
     .map((file) => file.path)
     .filter((path): path is string => typeof path === "string");
-  const request =
-    attachments.length > 0
-      ? {
-          messages: [
-            {
-              role: "user" as const,
-              content: [
-                { type: "text" as const, text: composeUserText(prompt, attachedPaths) },
-                ...binaries.map((file) => ({
-                  type: "file" as const,
-                  data: file.data,
-                  mediaType: file.media_type,
-                  filename: file.name,
-                })),
-              ],
-            },
-          ],
-        }
-      : { prompt };
+  // The first user message — what the first run sends, and what every
+  // follow-up replays verbatim at the head of its thread.
+  const firstUser: ModelMessage = {
+    role: "user",
+    content:
+      attachments.length > 0
+        ? [
+            { type: "text" as const, text: composeUserText(prompt, attachedPaths) },
+            ...binaries.map((file) => ({
+              type: "file" as const,
+              data: file.data,
+              mediaType: file.media_type,
+              filename: file.name,
+            })),
+          ]
+        : prompt,
+  };
+  const messages: ModelMessage[] = [firstUser];
+  if (action.followUp) {
+    // Replay the thread. Stored replies are the extracted tag bodies, so
+    // wrapResult puts the tags back: the transcript must demonstrate the
+    // protocol the instructions demand, or the model learns by example to
+    // skip the tags — and an untagged reply never streams.
+    for (const turn of action.followUp.turns) {
+      if (turn.question !== undefined) {
+        messages.push({ role: "user", content: turn.question });
+      }
+      messages.push({ role: "assistant", content: wrapResult(turn.text) });
+    }
+    messages.push({ role: "user", content: action.followUp.question });
+  }
 
   // AI SDK only throws stream-stopping errors (e.g. network) from the iterator;
   // others (API errors) go to `onError` and the stream just ends. Capture them
@@ -352,7 +370,7 @@ export async function streamAction(
   const stream = streamText({
     model: resolved.model(roleEntry.key),
     instructions: composeInstructions(instructions, userContext),
-    ...request,
+    messages,
     abortSignal: aborter.signal,
     onError: ({ error }) => {
       streamError = error;
@@ -438,7 +456,7 @@ export async function streamAction(
     log.debug(`run stopped by the user after ${elapsed} (role=${action.role})`);
     // Stopped — keep what we have (and whatever tokens the provider reported).
     return {
-      text: extractResult(raw, true) ?? raw.trim(),
+      text: stripResultTags(extractResult(raw, true) ?? raw),
       model: modelRef,
       tokens: await harvestTokens(),
     };
@@ -469,7 +487,7 @@ export async function streamAction(
       `model ignored the result-tag protocol; falling back to the full output (role=${action.role})`,
     );
   }
-  const result = tagged ?? raw.trim();
+  const result = stripResultTags(tagged ?? raw);
   if (!result) {
     throw new Error(EMPTY_RESULT);
   }

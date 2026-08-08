@@ -25,6 +25,16 @@ export const EMPTY_RESULT = "empty-result";
  *  editor" and "valid at run time" can never disagree. */
 export const REQUIRED_ROLES = ["default"] as const;
 
+/** One turn of an action thread: the follow-up question that produced the
+ *  reply (`text` is partial while the turn still streams). The first turn
+ *  has no `question` — its question is the action's rendered prompt itself.
+ *  Shared with the popup, whose thread state is exactly this shape. */
+export interface Exchange {
+  question?: string | undefined;
+  /** The assistant's extracted reply (the result-tag body). */
+  text: string;
+}
+
 export interface ActionInput {
   role: string;
   instructions: string;
@@ -32,6 +42,11 @@ export interface ActionInput {
   vars: Record<string, string>;
   /** Image/file contents to send alongside the prompt (AI SDK file parts). */
   attachments?: Attachment[] | undefined;
+  /** Continue the thread instead of starting one: the completed exchanges so
+   *  far plus the new question. The first user message is rebuilt from
+   *  `prompt`/`attachments` exactly as on the first run, so the model sees
+   *  the whole conversation. */
+  followUp?: { turns: Exchange[]; question: string } | undefined;
 }
 
 /** Token counts as BILLING BUCKETS, named exactly like models.dev's cost

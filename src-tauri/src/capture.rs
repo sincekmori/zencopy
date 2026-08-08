@@ -51,8 +51,6 @@ pub(crate) struct CapturePayload {
     pub(crate) vars: std::collections::HashMap<&'static str, String>,
     /// Whether an action applies to this capture and is ready to run.
     pub(crate) runnable: bool,
-    /// Whether the popup is pinned to a bottom corner (card hugs the bottom edge).
-    pub(crate) align_bottom: bool,
 }
 
 /// An HTML copy's `{{ text }}`: the markup converted to Markdown, so its
@@ -208,7 +206,6 @@ pub(crate) fn build_capture_payload(
         prompt: action.map(|a| a.body.clone()).unwrap_or_default(),
         vars: template_vars(event),
         runnable: action.is_some(),
-        align_bottom: false,
     }
 }
 
