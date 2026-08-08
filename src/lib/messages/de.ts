@@ -103,8 +103,6 @@ export const de: Messages = {
     copied: "Kopiert",
     clear: "Leeren",
     close: "Schließen",
-    expand: "Vergrößern",
-    collapse: "Ursprüngliche Größe",
     openSettings: "Einstellungen öffnen",
     updateHint: (version) => `Update verfügbar (v${version})`,
   },

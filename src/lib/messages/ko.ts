@@ -98,8 +98,6 @@ export const ko: Messages = {
     copied: "복사됨",
     clear: "지우기",
     close: "닫기",
-    expand: "확대",
-    collapse: "원래 크기로",
     openSettings: "설정 열기",
     updateHint: (version) => `업데이트 가능 (v${version})`,
   },

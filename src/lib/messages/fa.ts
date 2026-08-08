@@ -98,8 +98,6 @@ export const fa: Messages = {
     copied: "کپی شد",
     clear: "پاک کردن",
     close: "بستن",
-    expand: "گسترش",
-    collapse: "اندازه اصلی",
     openSettings: "باز کردن تنظیمات",
     updateHint: (version) => `به‌روزرسانی موجود است (v${version})`,
   },

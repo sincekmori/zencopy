@@ -116,6 +116,14 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* The popup's card-vs-window threshold: at or below this width the result
+   floats as a padded card, above it the panel goes edge-to-edge (popup.tsx).
+   Must stay above the popup's home width (POPUP_WIDTH in
+   src-tauri/src/windows.rs) or the home shape loses its card look. */
+@theme {
+  --breakpoint-compact: 480px;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

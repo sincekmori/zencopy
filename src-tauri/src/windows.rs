@@ -35,18 +35,15 @@ pub(crate) fn current_corner(handle: &tauri::AppHandle) -> Corner {
     }
 }
 
-/// The popup's logical width (matches the `popup` window in tauri.conf.json)
-/// and its height bounds: on show it takes half the work area's height,
-/// clamped — tall enough to read a real result, never a full-screen slab.
+/// The popup's HOME shape: the width (matches the `popup` window's `width` in
+/// tauri.conf.json) and the height bounds — on show it takes half the work
+/// area's height, clamped. The conf's `minWidth`/`minHeight` are a different
+/// thing: the manual-resize floor, deliberately below this home shape. The
+/// home width must stay under the webview's `compact` breakpoint (index.css)
+/// or the home card loses its padded look.
 pub(crate) const POPUP_WIDTH: f64 = 380.0;
 pub(crate) const POPUP_MIN_HEIGHT: f64 = 360.0;
 pub(crate) const POPUP_MAX_HEIGHT: f64 = 720.0;
-
-/// Whether the popup is in its expanded shape (half the work area's width,
-/// nearly its full height) instead of the compact card. Session-scoped by
-/// design: a fresh launch starts compact — the expanded shape is a reading
-/// mode, not a layout preference worth persisting.
-static POPUP_EXPANDED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 
 /// Show `window` on the desktop (macOS Space) the user is on right now, focused,
 /// and pin it there. A hidden window keeps its previous Space assignment, so a
@@ -62,7 +59,7 @@ pub(crate) fn show_on_active_space(window: &WebviewWindow) {
         .set_visible_on_all_workspaces(true)
         .or_log(&format!("{label}: joining all Spaces for show"));
     window.show().or_log(&format!("{label}: show"));
-    // Focused, so the popup's Escape / click-outside (blur) dismissal works.
+    // Focused, so Escape and the popup's number-key slots work right away.
     #[cfg(target_os = "linux")]
     focus_with_server_time(window);
     #[cfg(not(target_os = "linux"))]
@@ -85,8 +82,7 @@ pub(crate) fn show_on_active_space(window: &WebviewWindow) {
 /// number-key slots and Escape work at best for the brief map-time window
 /// before Mutter re-asserts the previous focus. A timestamp read from the X
 /// server *now* always wins that comparison, so the popup reliably gets — and
-/// keeps — keyboard focus (which also makes blur-dismissal work: a real
-/// FocusOut now arrives when the user clicks elsewhere).
+/// keeps — keyboard focus.
 ///
 /// Under a native-Wayland GDK backend (no X window to timestamp) this falls
 /// back to plain `set_focus`. GTK calls must happen on the main thread; the
@@ -134,11 +130,7 @@ pub(crate) fn monitor_at_cursor(handle: &tauri::AppHandle) -> Option<tauri::Moni
 /// Show the popup pinned to the user's chosen corner of the active monitor's work
 /// area. A fixed corner is predictable and never clipped — a calmer fit than
 /// chasing the pointer or the (not-yet-reliable) text selection.
-pub(crate) fn show_popup_in_corner(
-    handle: &tauri::AppHandle,
-    popup: &WebviewWindow,
-    corner: Corner,
-) {
+fn show_popup_in_corner(handle: &tauri::AppHandle, popup: &WebviewWindow, corner: Corner) {
     use tauri::PhysicalPosition;
 
     // The monitor the user is working on (where the cursor is), else the primary.
@@ -151,39 +143,28 @@ pub(crate) fn show_popup_in_corner(
     // Derive the popup's physical size from its logical size: `outer_size` is
     // unreliable for a window that has not been shown yet (notably on macOS).
     let scale = monitor.scale_factor();
-    let margin_logical = 16.0;
-    let margin = (margin_logical * scale) as i32;
 
     // Pin within the work area (excludes Dock / taskbar / menu bar).
     let area = monitor.work_area();
-    let area_width_logical = f64::from(area.size.width) / scale;
     let area_height_logical = f64::from(area.size.height) / scale;
 
-    // Compact: the card (fixed width, half the work area's height, clamped —
+    // The home shape: fixed width, half the work area's height, clamped —
     // adapts to the display instead of hardcoding one laptop's idea of
-    // "enough"). Expanded: a reading pane — half the work area's width and
-    // nearly its full height, never smaller than the card.
-    let (width_logical, height_logical) =
-        if POPUP_EXPANDED.load(std::sync::atomic::Ordering::Relaxed) {
-            (
-                (area_width_logical / 2.0 - margin_logical * 1.5).max(POPUP_WIDTH),
-                (area_height_logical - margin_logical * 2.0).max(POPUP_MIN_HEIGHT),
-            )
-        } else {
-            (
-                POPUP_WIDTH,
-                (area_height_logical / 2.0).clamp(POPUP_MIN_HEIGHT, POPUP_MAX_HEIGHT),
-            )
-        };
+    // "enough". Reading bigger is the user's own move: drag an edge, and the
+    // panel keeps that size for as long as it stays visible.
+    let height_logical = (area_height_logical / 2.0).clamp(POPUP_MIN_HEIGHT, POPUP_MAX_HEIGHT);
     popup
-        .set_size(tauri::LogicalSize::new(width_logical, height_logical))
+        .set_size(tauri::LogicalSize::new(POPUP_WIDTH, height_logical))
         .or_log("popup: set size");
-    let w = (width_logical * scale) as i32;
+    // Flush against the work area: the webview's own compact-size padding
+    // (popup.tsx's `max-compact:p-2`) is the only visible gap — exactly where
+    // the OS would stop the panel if the user dragged it into the corner.
+    let w = (POPUP_WIDTH * scale) as i32;
     let h = (height_logical * scale) as i32;
-    let left = area.position.x + margin;
-    let right = area.position.x + area.size.width as i32 - w - margin;
-    let top = area.position.y + margin;
-    let bottom = area.position.y + area.size.height as i32 - h - margin;
+    let left = area.position.x;
+    let right = area.position.x + area.size.width as i32 - w;
+    let top = area.position.y;
+    let bottom = area.position.y + area.size.height as i32 - h;
 
     let (x, y) = match corner {
         Corner::TopRight => (right, top),
@@ -198,28 +179,27 @@ pub(crate) fn show_popup_in_corner(
     show_on_active_space(popup);
 }
 
-/// Re-show the popup (the last result is still in the frontend's memory) in its
-/// corner. Lets the user bring back a closed result from the tray menu without
-/// copying again; if it's already visible, this just re-focuses it.
-pub(crate) fn reveal_popup(handle: &tauri::AppHandle) {
-    if let Some(popup) = handle.get_webview_window("popup") {
-        let corner = current_corner(handle);
+/// Bring the popup to the user. A hidden popup opens fresh at its home corner
+/// (and home shape); a visible one is only raised and re-focused — wherever
+/// the user dragged or resized this PiP-style panel is where it stays, and a
+/// new capture must never yank it back.
+pub(crate) fn summon_popup(handle: &tauri::AppHandle, corner: Corner) {
+    let Some(popup) = handle.get_webview_window("popup") else {
+        log::warn!("popup window not found");
+        return;
+    };
+    if popup.is_visible().unwrap_or(false) {
+        show_on_active_space(&popup);
+    } else {
         show_popup_in_corner(handle, &popup, corner);
     }
 }
 
-/// Toggle the popup between its compact card and the expanded reading pane —
-/// the header's expand button. Applies immediately when the popup is visible
-/// (same corner, new size); a hidden popup picks the shape up on its next show.
-#[tauri::command]
-pub(crate) fn set_popup_expanded(app: tauri::AppHandle, expanded: bool) {
-    POPUP_EXPANDED.store(expanded, std::sync::atomic::Ordering::Relaxed);
-    if let Some(popup) = app.get_webview_window("popup")
-        && popup.is_visible().unwrap_or(false)
-    {
-        let corner = current_corner(&app);
-        show_popup_in_corner(&app, &popup, corner);
-    }
+/// Re-show the popup (the last result is still in the frontend's memory).
+/// Lets the user bring back a closed result from the tray menu without
+/// copying again; if it's already visible, this just re-focuses it.
+pub(crate) fn reveal_popup(handle: &tauri::AppHandle) {
+    summon_popup(handle, current_corner(handle));
 }
 
 /// Open (and focus) the About window. Invoked from the popup's update hint.
@@ -264,11 +244,34 @@ pub(crate) fn center_on_active_monitor(handle: &tauri::AppHandle, window: &Webvi
         .or_log(&format!("{label}: set centered position"));
 }
 
+/// ZenCopy's dialog windows. While any of them is visible, the popup's
+/// always-on-top is suspended so they can stack above it naturally.
+pub(crate) const DIALOG_LABELS: [&str; 2] = ["settings", "about"];
+
+/// One rule, one place: the popup floats above everything (a PiP panel)
+/// unless one of our own dialogs is on screen. Recomputed from what is
+/// actually visible — called after a dialog shows (reveal_window) and after
+/// one hides (lib.rs's CloseRequested handler).
+pub(crate) fn sync_popup_float(handle: &tauri::AppHandle) {
+    let dialog_open = DIALOG_LABELS.iter().any(|label| {
+        handle
+            .get_webview_window(label)
+            .is_some_and(|w| w.is_visible().unwrap_or(false))
+    });
+    if let Some(popup) = handle.get_webview_window("popup") {
+        popup
+            .set_always_on_top(!dialog_open)
+            .or_log("popup: set always-on-top");
+    }
+}
+
 /// Reveal a window on the active monitor and focus it (settings / about).
 pub(crate) fn reveal_window(handle: &tauri::AppHandle, label: &str) {
     if let Some(window) = handle.get_webview_window(label) {
         center_on_active_monitor(handle, &window);
         show_on_active_space(&window);
+        // A dialog must never sit underneath the floating popup.
+        sync_popup_float(handle);
     }
 }
 

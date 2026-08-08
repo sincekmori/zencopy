@@ -39,7 +39,7 @@ Plenty of tools put an AI popup near your selection — most are macOS-only, tex
 - **Streaming, calm popup** — the copied content on top, the operation in the middle, the result below. Stop / retry / copy / clear.
 - **Provider-agnostic LLM** — built on the Vercel AI SDK + [`ai-sdk-catalog`](https://www.npmjs.com/package/ai-sdk-catalog). Roles map to models in a single config file; swap providers without touching actions.
 - **Not just text** — rich text arrives as Markdown; images and files attach as-is, with the type decided by contents, never by file extension.
-- **Resident & unobtrusive** — tray icon, frameless popup, launch-at-login (toggleable), recall the last result from the tray, dismiss on Esc / click-away.
+- **Resident & unobtrusive** — tray icon, frameless always-on-top popup you can drag and resize, launch-at-login (toggleable), recall the last result from the tray, dismiss with Esc or the close button.
 - **Multi-display & multi-Space aware** — windows open where you are working.
 - **Privacy-aware** — clipboard content marked sensitive (passwords/secrets) is ignored.
 - **Theme & i18n** — light / dark / system; **19 languages** including RTL (Arabic, Persian, Hebrew), following the OS by default.

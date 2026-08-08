@@ -89,8 +89,6 @@ export const zhHans: Messages = {
     copied: "已复制",
     clear: "清除",
     close: "关闭",
-    expand: "放大",
-    collapse: "恢复原大小",
     openSettings: "打开设置",
     updateHint: (version) => `有可用更新 (v${version})`,
   },

@@ -42,8 +42,8 @@ use crate::stats::{
 use crate::tray::build_app_menu;
 use crate::tray::{app_locale, build_tray_menu, locale_from_tag};
 use crate::windows::{
-    current_corner, open_about, open_settings, reveal_popup, reveal_window, set_popup_expanded,
-    show_popup_in_corner,
+    DIALOG_LABELS, current_corner, open_about, open_settings, reveal_popup, reveal_window,
+    summon_popup, sync_popup_float,
 };
 
 /// Log-and-continue for fallible calls whose failure must not break the flow
@@ -297,7 +297,6 @@ pub fn run() {
             import_action,
             import_action_from_file,
             open_settings,
-            set_popup_expanded,
             open_about,
             app_info,
             open_url,
@@ -331,6 +330,12 @@ pub fn run() {
                 window
                     .emit_to(window.label(), "window-closed", ())
                     .or_log(&format!("{}: emit window-closed", window.label()));
+                // A dialog just left the screen — the popup's float may
+                // resume (the hide above has already landed, so the recompute
+                // sees the truth).
+                if DIALOG_LABELS.contains(&window.label()) {
+                    sync_popup_float(window.app_handle());
+                }
             }
         })
         .setup(|app| {
@@ -452,12 +457,10 @@ pub fn run() {
                             payload.kind,
                             payload.runnable
                         );
-                        if let Some(popup) = handle.get_webview_window("popup") {
-                            show_popup_in_corner(&handle, &popup, corner);
-                        } else {
-                            log::warn!("popup window not found on capture");
-                        }
+                        // Emit first: the webview starts rendering the new
+                        // capture while the window work happens, not after it.
                         handle.emit("capture", payload).or_log("emit capture");
+                        summon_popup(&handle, corner);
                     },
                     // States where the trigger is silently inactive (Linux: GNOME
                     // extension pending a relogin, unsupported compositor) must

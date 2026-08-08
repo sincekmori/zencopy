@@ -90,8 +90,6 @@ export const th: Messages = {
     copied: "คัดลอกแล้ว",
     clear: "ล้าง",
     close: "ปิด",
-    expand: "ขยาย",
-    collapse: "ขนาดเดิม",
     openSettings: "เปิดการตั้งค่า",
     updateHint: (version) => `มีอัปเดต (v${version})`,
   },

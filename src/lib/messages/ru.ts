@@ -101,8 +101,6 @@ export const ru: Messages = {
     copied: "Скопировано",
     clear: "Очистить",
     close: "Закрыть",
-    expand: "Развернуть",
-    collapse: "Исходный размер",
     openSettings: "Открыть настройки",
     updateHint: (version) => `Доступно обновление (v${version})`,
   },

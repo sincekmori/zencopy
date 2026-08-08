@@ -8,8 +8,6 @@ import {
   ExternalLink,
   LayoutGrid,
   LoaderCircle,
-  Maximize2,
-  Minimize2,
   RotateCcw,
   Settings,
   Square,
@@ -130,9 +128,6 @@ export function Popup(): React.JSX.Element {
     "confirm-attachments-changed",
     true,
   );
-  // Reading-pane mode: the window grows to half the screen's width (Rust owns
-  // the geometry; this mirrors it for the toggle button's icon and labels).
-  const [expanded, setExpanded] = useState(false);
   // Waiting for the user's go-ahead on the current capture's attachments.
   const [awaitingSend, setAwaitingSend] = useState(false);
   // The "don't ask again" checkbox inside the confirmation card.
@@ -360,7 +355,7 @@ export function Popup(): React.JSX.Element {
         const reason = errorMessage(error);
         if (reason === NOT_CONFIGURED) {
           // No provider set up yet. Stay put and offer a way into settings —
-          // auto-opening it would steal focus and blur-dismiss this popup.
+          // auto-opening it would steal focus from this popup.
           if (owns()) {
             putResult(actionId, {
               phase: "done",
@@ -540,18 +535,6 @@ export function Popup(): React.JSX.Element {
     hidePopup();
   };
 
-  const toggleExpanded = (): void => {
-    const next = !expanded;
-    setExpanded(next);
-    void (async () => {
-      try {
-        await invoke("set_popup_expanded", { expanded: next });
-      } catch (error) {
-        log.error("resizing the popup failed", error);
-      }
-    })();
-  };
-
   const copyResult = (): void => {
     if (result?.phase !== "done") {
       return;
@@ -653,36 +636,15 @@ export function Popup(): React.JSX.Element {
       switchToSlot(Number(event.key));
     }
   });
-  const onBlur = useEffectEvent(dismiss);
-
-  // Dismiss on Escape or when the window loses focus (a click outside). The popup
-  // is focused on show (Rust), so both reach us; the tray can bring it back.
-  // While the action menu is open, Escape closes the menu first. Registered
-  // once: re-subscribing onFocusChanged would leave a gap between the old
-  // unlisten and the new listen where a blur went unseen.
+  // Dismiss on Escape only. Losing focus is deliberately NOT a dismissal: the
+  // popup is a picture-in-picture panel whose content cost tokens and seconds
+  // to produce, so a stray click elsewhere must never destroy it — Esc (while
+  // focused) and the close button are the only ways out. While the action
+  // menu is open, Escape closes the menu first.
   useEffect(() => {
-    const onKey = (event: KeyboardEvent): void => {
-      onKeyDown(event);
-    };
-    globalThis.addEventListener("keydown", onKey);
-    let cancelled = false;
-    let unlisten: (() => void) | undefined;
-    void (async () => {
-      const un = await getCurrentWindow().onFocusChanged(({ payload: focused }) => {
-        if (!focused) {
-          onBlur();
-        }
-      });
-      if (cancelled) {
-        un();
-      } else {
-        unlisten = un;
-      }
-    })();
+    globalThis.addEventListener("keydown", onKeyDown);
     return () => {
-      cancelled = true;
-      globalThis.removeEventListener("keydown", onKey);
-      unlisten?.();
+      globalThis.removeEventListener("keydown", onKeyDown);
     };
   }, []);
 
@@ -972,10 +934,18 @@ export function Popup(): React.JSX.Element {
     );
   }
 
+  // Two looks, one stateless rule (the `compact` breakpoint in index.css): at
+  // the home size the result floats as a card with a breathing margin — the
+  // padding Rust counts on when it places the window flush against the work
+  // area — and dragged bigger it snaps edge-to-edge, a window instead of a
+  // sticker. The media query tracks the live window size; no state anywhere.
   return (
-    <div className={cn("flex min-h-svh p-2", alignBottom ? "items-end" : "items-start")}>
-      <div className="flex max-h-[calc(100svh-1rem)] w-full flex-col overflow-hidden rounded-xl border bg-popover text-popover-foreground shadow-xl">
-        <div className="flex items-center gap-2 border-b px-3 py-2">
+    <div className={cn("flex h-svh max-compact:p-2", alignBottom ? "items-end" : "items-start")}>
+      <div className="flex size-full flex-col overflow-hidden rounded-xl border bg-popover text-popover-foreground shadow-xl max-compact:h-auto max-compact:max-h-full">
+        {/* The header doubles as the drag handle (PiP-style): "deep" makes
+            the whole bar and everything in it draggable, while buttons keep
+            being buttons (Tauri's drag script exempts clickable elements). */}
+        <div className="flex items-center gap-2 border-b px-3 py-2" data-tauri-drag-region="deep">
           <ZenCopyMark className="size-4" />
           <span className="text-xs font-medium">ZenCopy</span>
           {costShown && statsEnabled && monthCost !== undefined ? (
@@ -987,17 +957,6 @@ export function Popup(): React.JSX.Element {
             </span>
           ) : undefined}
           <div className="ms-auto flex items-center gap-0.5 text-muted-foreground">
-            {/* Reading pane toggle: half the screen's width for long results,
-                one click back to the compact card. Rust owns the geometry. */}
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              onClick={toggleExpanded}
-              aria-label={expanded ? t.popup.collapse : t.popup.expand}
-              title={expanded ? t.popup.collapse : t.popup.expand}
-            >
-              {expanded ? <Minimize2 className="size-3.5" /> : <Maximize2 className="size-3.5" />}
-            </Button>
             <Button
               variant="ghost"
               size="icon-xs"

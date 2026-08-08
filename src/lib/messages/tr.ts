@@ -101,8 +101,6 @@ export const tr: Messages = {
     copied: "Kopyalandı",
     clear: "Temizle",
     close: "Kapat",
-    expand: "Genişlet",
-    collapse: "Özgün boyut",
     openSettings: "Ayarları aç",
     updateHint: (version) => `Güncelleme mevcut (v${version})`,
   },

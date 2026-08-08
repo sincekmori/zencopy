@@ -102,8 +102,6 @@ export const ja: Messages = {
     copied: "コピーしました",
     clear: "クリア",
     close: "閉じる",
-    expand: "拡大",
-    collapse: "元のサイズに戻す",
     openSettings: "設定を開く",
     updateHint: (version) => `アップデートがあります (v${version})`,
   },
