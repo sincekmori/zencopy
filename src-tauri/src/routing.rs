@@ -89,7 +89,22 @@ pub(crate) fn load_routing(handle: &tauri::AppHandle) -> RoutingConfig {
         }
         parsed
     });
-    user_routing.unwrap_or_else(|| DEFAULT_ROUTING.clone())
+    let routing = user_routing.unwrap_or_else(|| DEFAULT_ROUTING.clone());
+    // A rule naming a kind that doesn't exist (a typo, or a leftover from a
+    // removed kind) can never fire — silent config decay deserves a trace.
+    for kind in routing.by_kind.keys() {
+        if !ROUTABLE_KINDS.contains(&kind.as_str()) {
+            log::warn!("routing.json: unknown kind \"{kind}\" is never matched, ignored");
+        }
+    }
+    for rule in &routing.overrides {
+        if let Some(kind) = &rule.when.kind
+            && !ROUTABLE_KINDS.contains(&kind.as_str())
+        {
+            log::warn!("routing.json: override with unknown kind \"{kind}\" never matches");
+        }
+    }
+    routing
 }
 
 /// Case-sensitive glob match where `*` matches any (possibly empty) run.
@@ -242,7 +257,7 @@ pub(crate) fn purge_action_from_routing_object(
 
 /// The capture kinds the routing UI exposes (mirrors `capture_kind`; `empty`
 /// is deliberately not routable).
-pub(crate) const ROUTABLE_KINDS: [&str; 4] = ["text", "rich_text", "image", "files"];
+pub(crate) const ROUTABLE_KINDS: [&str; 3] = ["text", "image", "files"];
 
 /// Read-modify-write the user's routing.json as a JSON object (seeded from
 /// the embedded default when none exists). Everything the mutation doesn't

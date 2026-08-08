@@ -193,7 +193,6 @@ export const tr: Messages = {
     title: "Yönlendirme",
     hint: "Her yakalama türü için hangi eylemin çalışacağı.",
     kindText: "Metin",
-    kindRichText: "Zengin metin",
     kindImage: "Görsel",
     kindFiles: "Dosyalar",
     none: "Otomatik çalıştırma",

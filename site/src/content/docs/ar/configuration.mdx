@@ -96,20 +96,19 @@ import RepomixLink from "../../../components/RepomixLink.astro";
 
 أي إجراء يتولى أي نوع من الالتقاط:
 خريطة مسطّحة `kind ← action` إضافة إلى قائمة `overrides` اختيارية أعلى أولوية (أول تطابق يفوز).
-الأنواع الأربعة هي `text` و`rich_text` و`image` و`files`؛ وافتراضيًا يوجَّه النص إلى Zen، وتوجَّه الصور والملفات إلى «شرح».
+الأنواع الثلاثة هي `text` و`image` و`files` (تُعامل نسخة النص المنسّق على أنها `text`)؛ وافتراضيًا يوجَّه النص إلى Zen، وتوجَّه الصور والملفات إلى «شرح».
 الخريطة المسطّحة قابلة للتحرير داخل التطبيق (الإعدادات ← الإجراءات ← التوجيه)، فلا تحتاج إلى لمس هذا الملف إلا من أجل `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-شروط `when`: هي `kind` و`app_name` و`exec_name` و`window_title` و`url` (وكلها تدعم البدل `*`)، و`file_name` (بدل يجب أن يطابق اسم كل ملف منسوخ، دون اعتبار لحالة الأحرف — مثل `*.pdf`)، إضافة إلى `min_chars` / `max_chars`.
+شروط `when`: هي `kind` (أحد الأنواع الثلاثة، بمطابقة تامة) و`app_name` و`exec_name` و`window_title` و`url` (وكلها تدعم البدل `*`)، و`file_name` (بدل يجب أن يطابق اسم كل ملف منسوخ، دون اعتبار لحالة الأحرف — مثل `*.pdf`)، إضافة إلى `min_chars` / `max_chars`.
 
 في التقاطات `image` و`files`، يُرسل المحتوى نفسه إلى النموذج (حتى 10 م.ب. إجمالًا لكل التقاط).
 أنواع الملفات تُكتشف من **المحتوى** لا من الأسماء:

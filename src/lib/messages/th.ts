@@ -177,7 +177,6 @@ export const th: Messages = {
     title: "การกำหนดเส้นทาง",
     hint: "แอ็กชันใดทำงานกับข้อมูลแต่ละประเภท",
     kindText: "ข้อความ",
-    kindRichText: "ข้อความแบบมีรูปแบบ",
     kindImage: "รูปภาพ",
     kindFiles: "ไฟล์",
     none: "ไม่เรียกใช้อัตโนมัติ",

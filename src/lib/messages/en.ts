@@ -185,7 +185,6 @@ export const en: Messages = {
     title: "Routing",
     hint: "Which action runs for each type of capture.",
     kindText: "Text",
-    kindRichText: "Rich text",
     kindImage: "Image",
     kindFiles: "Files",
     none: "Don't run automatically",

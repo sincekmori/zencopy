@@ -96,20 +96,19 @@ Zepsuta edycja pokazuje się jako czytelny komunikat w okienku i w edytorze usta
 
 Która akcja obsługuje który rodzaj przechwycenia:
 płaska mapa `kind → action` plus opcjonalna lista `overrides` o wyższym priorytecie (wygrywa pierwsze dopasowanie).
-Cztery rodzaje to `text`, `rich_text`, `image` i `files`; fabrycznie tekst trafia do akcji Zen, a obrazy i pliki do akcji Wyjaśnij.
+Trzy rodzaje to `text`, `image` i `files` (kopia tekstu sformatowanego liczy się jako `text`); fabrycznie tekst trafia do akcji Zen, a obrazy i pliki do akcji Wyjaśnij.
 Płaską mapę można edytować w aplikacji (Ustawienia → Akcje → Routing), więc tego pliku potrzebujesz tylko dla `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-Warunki `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (wszystkie z wieloznacznikiem `*`), `file_name` (wieloznacznik, do którego musi pasować nazwa każdego kopiowanego pliku, bez uwzględniania wielkości liter — np. `*.pdf`), plus `min_chars` / `max_chars`.
+Warunki `when`: `kind` (jeden z trzech rodzajów, dopasowanie dokładne), `app_name`, `exec_name`, `window_title`, `url` (wszystkie z wieloznacznikiem `*`), `file_name` (wieloznacznik, do którego musi pasować nazwa każdego kopiowanego pliku, bez uwzględniania wielkości liter — np. `*.pdf`), plus `min_chars` / `max_chars`.
 
 Dla przechwyceń `image` i `files` do modelu wysyłana jest sama treść (łącznie do 10 MB na jedno przechwycenie).
 Typy plików są rozpoznawane po **zawartości**, nie po nazwach:

@@ -192,7 +192,6 @@ export const pl: Messages = {
     title: "Routing",
     hint: "Która akcja działa dla każdego typu przechwycenia.",
     kindText: "Tekst",
-    kindRichText: "Tekst sformatowany",
     kindImage: "Obraz",
     kindFiles: "Pliki",
     none: "Nie uruchamiaj automatycznie",

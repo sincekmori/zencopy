@@ -96,20 +96,19 @@ API 키는 이 로컬 파일에 그대로 들어갑니다(설정 UI도 같은 �
 
 어떤 종류의 캡처를 어떤 액션이 처리할지:
 평평한 `kind → action` 맵과, 우선순위가 더 높은 선택적 `overrides` 목록(먼저 일치하는 규칙이 적용)입니다.
-네 가지 종류는 `text`, `rich_text`, `image`, `files`이고, 기본값은 텍스트가 Zen으로, 이미지와 파일이 설명으로 라우팅됩니다.
+세 가지 종류는 `text`, `image`, `files`이고(서식 있는 텍스트 복사는 `text`로 취급됩니다), 기본값은 텍스트가 Zen으로, 이미지와 파일이 설명으로 라우팅됩니다.
 평평한 맵은 앱 안(설정 → 액션 → 라우팅)에서 편집할 수 있으므로, 이 파일을 직접 만질 일은 `overrides`뿐입니다.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-`when` 조건: `kind`, `app_name`, `exec_name`, `window_title`, `url` (모두 `*` 와일드카드 사용 가능), `file_name` (복사된 모든 파일 이름이 대소문자 구분 없이 일치해야 하는 와일드카드 — 예: `*.pdf`), 그리고 `min_chars` / `max_chars`.
+`when` 조건: `kind` (세 가지 종류 중 하나, 정확히 일치), `app_name`, `exec_name`, `window_title`, `url` (모두 `*` 와일드카드 사용 가능), `file_name` (복사된 모든 파일 이름이 대소문자 구분 없이 일치해야 하는 와일드카드 — 예: `*.pdf`), 그리고 `min_chars` / `max_chars`.
 
 `image`와 `files` 캡처에서는 내용 자체가 모델로 전송됩니다(캡처당 총 10 MB까지).
 파일 형식은 이름이 아니라 **내용**으로 판별합니다.

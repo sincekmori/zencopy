@@ -96,20 +96,19 @@ Una modifica errata appare come messaggio chiaro nel popup e nell'editor delle i
 
 Quale azione gestisce quale tipo di cattura:
 una mappa piatta `kind → action` più un elenco `overrides` opzionale e a priorità più alta (vince la prima corrispondenza).
-I quattro kind sono `text`, `rich_text`, `image` e `files`; in partenza il testo è instradato su Zen, immagini e file su Spiega.
+I tre kind sono `text`, `image` e `files` (una copia di testo formattato conta come `text`); in partenza il testo è instradato su Zen, immagini e file su Spiega.
 La mappa piatta è modificabile nell'app (Impostazioni → Azioni → Routing), quindi devi toccare questo file solo per gli `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-Condizioni di `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tutte con wildcard `*`), `file_name` (una wildcard a cui deve corrispondere il nome di ogni file copiato, senza distinzione tra maiuscole e minuscole — ad es. `*.pdf`), più `min_chars` / `max_chars`.
+Condizioni di `when`: `kind` (uno dei tre kind, corrispondenza esatta), `app_name`, `exec_name`, `window_title`, `url` (tutte con wildcard `*`), `file_name` (una wildcard a cui deve corrispondere il nome di ogni file copiato, senza distinzione tra maiuscole e minuscole — ad es. `*.pdf`), più `min_chars` / `max_chars`.
 
 Per le catture `image` e `files`, il contenuto stesso viene inviato al modello (fino a 10 MB totali per cattura).
 I tipi di file sono rilevati dal **contenuto**, non dai nomi:

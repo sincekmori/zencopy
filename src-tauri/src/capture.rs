@@ -4,7 +4,8 @@
 use crate::actions::Action;
 
 /// The captured content, prepared for display in the popup ("what is being acted
-/// on"). Serialized with a `kind` tag matching `CapturePayload.kind`.
+/// on"). Serialized with its own `kind` tag: rich text keeps a distinct tag
+/// here for rendering, even though the routing kind folds it into `text`.
 #[derive(Clone, serde::Serialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub(crate) enum SourcePreview {
@@ -173,11 +174,15 @@ pub(crate) fn source_preview(event: &copycopy::CaptureEvent) -> SourcePreview {
 }
 
 /// The capture's content kind, used for routing and shown in the payload.
+/// Rich text is deliberately just "text": which clipboard flavor a copy
+/// carries is the source app's habit, not the user's intent, so the kind
+/// vocabulary ignores it. The richness itself survives where it is useful —
+/// the source preview renders the markup, and templates still get
+/// `{{ markup }}` / `{{ format }}`.
 pub(crate) fn capture_kind(event: &copycopy::CaptureEvent) -> &'static str {
     use copycopy::Captured;
     match &event.content {
-        Captured::Text { .. } => "text",
-        Captured::RichText { .. } => "rich_text",
+        Captured::Text { .. } | Captured::RichText { .. } => "text",
         Captured::Image { .. } => "image",
         Captured::Files { .. } => "files",
         Captured::Empty => "empty",
@@ -293,13 +298,29 @@ pub(crate) fn is_blank(event: &copycopy::CaptureEvent) -> bool {
     }
 }
 
-/// The plain text of a capture (for the min/max-chars conditions).
-pub(crate) fn capture_text(event: &copycopy::CaptureEvent) -> &str {
-    use copycopy::Captured;
+/// The text of a capture, for the min/max-chars routing conditions. For rich
+/// captures `plain` comes from the clipboard's plain-text flavor, which some
+/// apps omit — fall back to the markup's visible text so a rich copy is
+/// measured by what the user sees, the same rule `is_blank` applies.
+pub(crate) fn capture_text(event: &copycopy::CaptureEvent) -> std::borrow::Cow<'_, str> {
+    use copycopy::{Captured, RichFormat};
     match &event.content {
-        Captured::Text { text } => text,
-        Captured::RichText { plain, .. } => plain,
-        _ => "",
+        Captured::Text { text } => std::borrow::Cow::Borrowed(text),
+        Captured::RichText {
+            plain,
+            markup,
+            format,
+        } => {
+            if plain.trim().is_empty() {
+                std::borrow::Cow::Owned(match format {
+                    RichFormat::Html => html_visible_text(markup),
+                    RichFormat::Rtf => rtf_visible_text(markup),
+                })
+            } else {
+                std::borrow::Cow::Borrowed(plain)
+            }
+        }
+        _ => std::borrow::Cow::Borrowed(""),
     }
 }
 

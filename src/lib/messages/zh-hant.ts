@@ -176,7 +176,6 @@ export const zhHant: Messages = {
     title: "路由",
     hint: "每種擷取類型分別執行哪個動作。",
     kindText: "文字",
-    kindRichText: "RTF 文字",
     kindImage: "圖片",
     kindFiles: "檔案",
     none: "不自動執行",

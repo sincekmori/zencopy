@@ -516,7 +516,6 @@ mod tests {
     fn deleting_a_routed_action_heals_the_routing() {
         let mut object = serde_json::json!({
             "text": "my-custom",
-            "rich_text": "my-custom",
             "image": "zencopy-explain",
             "future_kind": "my-custom",
             "overrides": [
@@ -532,7 +531,6 @@ mod tests {
             object["text"], "zencopy-zen",
             "kind returns to the embedded default"
         );
-        assert_eq!(object["rich_text"], "zencopy-zen");
         assert_eq!(
             object["image"], "zencopy-explain",
             "other assignments stay verbatim"

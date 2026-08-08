@@ -234,7 +234,6 @@ export interface Messages {
     title: string;
     hint: string;
     kindText: string;
-    kindRichText: string;
     kindImage: string;
     kindFiles: string;
     none: string;

@@ -96,20 +96,19 @@ Một chỉnh sửa hỏng sẽ hiện thành thông báo rõ ràng trong cửa 
 
 Hành động nào xử lý loại nội dung bắt được nào:
 một ánh xạ phẳng `kind → action` cộng với danh sách `overrides` tùy chọn có độ ưu tiên cao hơn (quy tắc khớp đầu tiên thắng).
-Bốn loại là `text`, `rich_text`, `image` và `files`; theo mặc định, văn bản được định tuyến đến Zen, còn hình ảnh và tệp đến Giải thích.
+Ba loại là `text`, `image` và `files` (bản sao văn bản có định dạng được tính là `text`); theo mặc định, văn bản được định tuyến đến Zen, còn hình ảnh và tệp đến Giải thích.
 Ánh xạ phẳng chỉnh được ngay trong ứng dụng (Cài đặt → Hành động → Định tuyến), nên bạn chỉ cần đụng đến tệp này khi dùng `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-Điều kiện trong `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (tất cả hỗ trợ ký tự đại diện `*`), `file_name` (một ký tự đại diện mà tên của mọi tệp đã sao chép phải khớp, không phân biệt chữ hoa chữ thường — ví dụ: `*.pdf`), cộng với `min_chars` / `max_chars`.
+Điều kiện trong `when`: `kind` (một trong ba loại, khớp chính xác), `app_name`, `exec_name`, `window_title`, `url` (tất cả hỗ trợ ký tự đại diện `*`), `file_name` (một ký tự đại diện mà tên của mọi tệp đã sao chép phải khớp, không phân biệt chữ hoa chữ thường — ví dụ: `*.pdf`), cộng với `min_chars` / `max_chars`.
 
 Với nội dung bắt được loại `image` và `files`, bản thân nội dung được gửi đến mô hình (tổng cộng tối đa 10 MB cho mỗi lần bắt).
 Loại tệp được nhận diện từ **nội dung**, không phải tên tệp:

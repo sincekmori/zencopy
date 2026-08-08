@@ -74,7 +74,7 @@ export function importActionFromFile(): Promise<string | null> {
 }
 
 /** The capture kinds routing can assign (mirrors Rust's ROUTABLE_KINDS). */
-export const ROUTABLE_KINDS = ["text", "rich_text", "image", "files"] as const;
+export const ROUTABLE_KINDS = ["text", "image", "files"] as const;
 export type RoutableKind = (typeof ROUTABLE_KINDS)[number];
 
 /** An override's `when` condition: every present field must match (AND).

@@ -189,7 +189,6 @@ export const fa: Messages = {
     title: "مسیریابی",
     hint: "برای هر نوع برداشت کدام اکشن اجرا شود.",
     kindText: "متن",
-    kindRichText: "متن قالب‌دار",
     kindImage: "تصویر",
     kindFiles: "فایل‌ها",
     none: "بدون اجرای خودکار",

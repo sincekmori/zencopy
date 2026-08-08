@@ -190,7 +190,6 @@ export const vi: Messages = {
     title: "Định tuyến",
     hint: "Hành động nào chạy cho từng loại nội dung.",
     kindText: "Văn bản",
-    kindRichText: "Văn bản định dạng",
     kindImage: "Hình ảnh",
     kindFiles: "Tệp",
     none: "Không tự động chạy",

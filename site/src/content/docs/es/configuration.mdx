@@ -96,20 +96,19 @@ Una edición rota aparece como un mensaje claro en el popup y en el editor de aj
 
 Qué acción atiende cada tipo de captura:
 un mapa plano `kind → action` más una lista opcional `overrides` de mayor prioridad (gana la primera coincidencia).
-Los cuatro tipos son `text`, `rich_text`, `image` y `files`; de fábrica, el texto se enruta a Zen, y las imágenes y los archivos a Explicar.
+Los tres tipos son `text`, `image` y `files` (una copia de texto enriquecido cuenta como `text`); de fábrica, el texto se enruta a Zen, y las imágenes y los archivos a Explicar.
 El mapa plano se puede editar dentro de la aplicación (Ajustes → Acciones → Enrutamiento), así que solo necesitas tocar este archivo para `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-Condiciones de `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (todas con comodines `*`), `file_name` (un comodín que el nombre de cada archivo copiado debe coincidir, sin distinguir entre mayúsculas y minúsculas — p. ej. `*.pdf`), más `min_chars` / `max_chars`.
+Condiciones de `when`: `kind` (uno de los tres tipos, coincidencia exacta), `app_name`, `exec_name`, `window_title`, `url` (todas con comodines `*`), `file_name` (un comodín que el nombre de cada archivo copiado debe coincidir, sin distinguir entre mayúsculas y minúsculas — p. ej. `*.pdf`), más `min_chars` / `max_chars`.
 
 Con las capturas `image` y `files`, el contenido en sí se envía al modelo (hasta 10 MB en total por captura).
 Los tipos de archivo se detectan por el **contenido**, no por el nombre:

@@ -194,7 +194,6 @@ export const es: Messages = {
     title: "Enrutamiento",
     hint: "Qué acción se ejecuta para cada tipo de captura.",
     kindText: "Texto",
-    kindRichText: "Texto enriquecido",
     kindImage: "Imagen",
     kindFiles: "Archivos",
     none: "No ejecutar automáticamente",

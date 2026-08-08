@@ -96,20 +96,19 @@ Suntingan yang rusak muncul sebagai pesan yang jelas di popup dan editor pengatu
 
 Aksi mana yang menangani jenis tangkapan mana:
 peta datar `kind → action` plus daftar `overrides` opsional dengan prioritas lebih tinggi (kecocokan pertama menang).
-Empat jenisnya adalah `text`, `rich_text`, `image`, dan `files`; sejak awal, teks dirutekan ke Zen sementara gambar dan berkas dirutekan ke Jelaskan.
+Tiga jenisnya adalah `text`, `image`, dan `files` (salinan teks kaya dihitung sebagai `text`); sejak awal, teks dirutekan ke Zen sementara gambar dan berkas dirutekan ke Jelaskan.
 Peta datarnya bisa disunting di dalam aplikasi (Pengaturan → Aksi → Perutean), jadi kamu hanya perlu menyentuh berkas ini untuk `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-Kondisi `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (semuanya mendukung wildcard `*`), `file_name` (wildcard yang harus dicocokkan oleh nama setiap file yang disalin, tidak peka huruf besar-kecil — contohnya `*.pdf`), plus `min_chars` / `max_chars`.
+Kondisi `when`: `kind` (salah satu dari tiga jenis, dicocokkan persis), `app_name`, `exec_name`, `window_title`, `url` (semuanya mendukung wildcard `*`), `file_name` (wildcard yang harus dicocokkan oleh nama setiap file yang disalin, tidak peka huruf besar-kecil — contohnya `*.pdf`), plus `min_chars` / `max_chars`.
 
 Untuk tangkapan `image` dan `files`, kontennya sendiri dikirim ke model (total hingga 10 MB per tangkapan).
 Jenis berkas dideteksi dari **isinya**, bukan namanya:

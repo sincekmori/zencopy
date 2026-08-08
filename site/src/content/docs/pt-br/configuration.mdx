@@ -96,20 +96,19 @@ Uma edição quebrada aparece como uma mensagem clara no popup e no editor de co
 
 Qual ação cuida de cada tipo de captura:
 um mapa simples `kind → action` mais uma lista `overrides` opcional e de prioridade maior (vence a primeira regra que corresponder).
-Os quatro tipos são `text`, `rich_text`, `image` e `files`; de fábrica, texto vai para Zen, e imagens e arquivos vão para Explicar.
+Os três tipos são `text`, `image` e `files` (uma cópia de texto formatado conta como `text`); de fábrica, texto vai para Zen, e imagens e arquivos vão para Explicar.
 O mapa simples pode ser editado no próprio aplicativo (Configurações → Ações → Roteamento), então você só precisa mexer neste arquivo para os `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-Condições de `when`: `kind`, `app_name`, `exec_name`, `window_title`, `url` (todas aceitam o curinga `*`), `file_name` (um curinga que todo nome de arquivo copiado deve corresponder, sem diferenciar maiúsculas de minúsculas — ex: `*.pdf`), mais `min_chars` / `max_chars`.
+Condições de `when`: `kind` (um dos três tipos, correspondência exata), `app_name`, `exec_name`, `window_title`, `url` (todas aceitam o curinga `*`), `file_name` (um curinga que todo nome de arquivo copiado deve corresponder, sem diferenciar maiúsculas de minúsculas — ex: `*.pdf`), mais `min_chars` / `max_chars`.
 
 Para capturas de `image` e `files`, o próprio conteúdo é enviado ao modelo (até 10 MB no total por captura).
 Os tipos de arquivo são detectados pelo **conteúdo**, não pelo nome:

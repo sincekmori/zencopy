@@ -99,20 +99,19 @@ API キーはこのローカルファイルに直接書きます（設定 UI が
 
 どの種類のキャプチャをどのアクションが処理するか:
 フラットな `kind → action` の対応と、より優先される任意の `overrides` リスト（先勝ち）。
-kind は `text`、`rich_text`、`image`、`files` の 4 種類で、初期状態ではテキストが Zen に、画像とファイルが解説にルーティングされます。
+kind は `text`、`image`、`files` の 3 種類で（リッチテキストのコピーは `text` として扱われます）、初期状態ではテキストが Zen に、画像とファイルが解説にルーティングされます。
 フラットな対応はアプリ内（設定 → アクション → ルーティング）から編集できるので、このファイルを直接編集する必要があるのは `overrides` を使うときだけです。
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-`when` の条件: `kind`、`app_name`、`exec_name`、`window_title`、`url`（いずれも `*` ワイルドカード対応）、`file_name`（コピーしたすべてのファイル名がマッチするワイルドカード。大文字小文字は区別しません — 例: `*.pdf`）、および `min_chars` / `max_chars`。
+`when` の条件: `kind`（3 種類のいずれかに完全一致）、`app_name`、`exec_name`、`window_title`、`url`（いずれも `*` ワイルドカード対応）、`file_name`（コピーしたすべてのファイル名がマッチするワイルドカード。大文字小文字は区別しません — 例: `*.pdf`）、および `min_chars` / `max_chars`。
 
 `image` と `files` のキャプチャでは、内容そのものがモデルに送信されます（1 回あたり合計 10 MB まで）。
 ファイルの種類は名前ではなく**中身**から判定されます:

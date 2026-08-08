@@ -96,20 +96,19 @@ Une modification cassée se manifeste par un message clair dans le popup et dans
 
 Quelle action traite quel type de capture :
 une table plate `kind → action`, plus une liste `overrides` optionnelle et prioritaire (la première correspondance gagne).
-Les quatre types sont `text`, `rich_text`, `image` et `files` ; par défaut, le texte est routé vers Zen, et les images et fichiers vers Expliquer.
+Les trois types sont `text`, `image` et `files` (une copie en texte enrichi compte comme `text`) ; par défaut, le texte est routé vers Zen, et les images et fichiers vers Expliquer.
 La table plate est modifiable dans l'application (Réglages → Actions → Routage), donc vous n'avez besoin de toucher ce fichier que pour `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-Conditions de `when` : `kind`, `app_name`, `exec_name`, `window_title`, `url` (toutes avec le joker `*`), `file_name` (un joker auquel le nom de chaque fichier copié doit correspondre, insensible à la casse — ex. `*.pdf`), plus `min_chars` / `max_chars`.
+Conditions de `when` : `kind` (l'un des trois types, correspondance exacte), `app_name`, `exec_name`, `window_title`, `url` (toutes avec le joker `*`), `file_name` (un joker auquel le nom de chaque fichier copié doit correspondre, insensible à la casse — ex. `*.pdf`), plus `min_chars` / `max_chars`.
 
 Pour les captures `image` et `files`, le contenu lui-même est envoyé au modèle (jusqu'à 10 Mo au total par capture).
 Les types de fichiers sont détectés d'après le **contenu**, pas d'après le nom :

@@ -194,7 +194,6 @@ export const it: Messages = {
     title: "Routing",
     hint: "Quale azione viene eseguita per ogni tipo di cattura.",
     kindText: "Testo",
-    kindRichText: "Testo formattato",
     kindImage: "Immagine",
     kindFiles: "File",
     none: "Non eseguire automaticamente",

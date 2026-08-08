@@ -192,7 +192,6 @@ export const ptBR: Messages = {
     title: "Roteamento",
     hint: "Qual ação é executada para cada tipo de captura.",
     kindText: "Texto",
-    kindRichText: "Texto formatado",
     kindImage: "Imagem",
     kindFiles: "Arquivos",
     none: "Não executar automaticamente",

@@ -190,7 +190,6 @@ export const id: Messages = {
     title: "Perutean",
     hint: "Aksi mana yang berjalan untuk tiap jenis tangkapan.",
     kindText: "Teks",
-    kindRichText: "Teks kaya",
     kindImage: "Gambar",
     kindFiles: "Berkas",
     none: "Jangan jalankan otomatis",

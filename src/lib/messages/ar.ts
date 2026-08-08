@@ -185,7 +185,6 @@ export const ar: Messages = {
     title: "التوجيه",
     hint: "أي إجراء يعمل مع كل نوع من الالتقاط.",
     kindText: "نص",
-    kindRichText: "نص منسّق",
     kindImage: "صورة",
     kindFiles: "ملفات",
     none: "بدون تشغيل تلقائي",

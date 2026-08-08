@@ -197,7 +197,6 @@ export const fr: Messages = {
     title: "Routage",
     hint: "Quelle action s'exécute pour chaque type de capture.",
     kindText: "Texte",
-    kindRichText: "Texte enrichi",
     kindImage: "Image",
     kindFiles: "Fichiers",
     none: "Ne pas exécuter automatiquement",

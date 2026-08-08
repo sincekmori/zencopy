@@ -175,7 +175,6 @@ export const zhHans: Messages = {
     title: "路由",
     hint: "每种捕获类型分别运行哪个动作。",
     kindText: "文本",
-    kindRichText: "富文本",
     kindImage: "图片",
     kindFiles: "文件",
     none: "不自动执行",

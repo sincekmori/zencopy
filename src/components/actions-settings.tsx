@@ -515,7 +515,6 @@ export function ActionsSettings(): React.JSX.Element {
 
   const kindLabels: Record<RoutableKind, string> = {
     text: t.routing.kindText,
-    rich_text: t.routing.kindRichText,
     image: t.routing.kindImage,
     files: t.routing.kindFiles,
   };
@@ -1028,6 +1027,12 @@ export function ActionsSettings(): React.JSX.Element {
                   }}
                 >
                   <option value="">{t.routing.anyKind}</option>
+                  {/* A rule carrying a kind we no longer know stays listed by
+                    its raw value, so the state is visible instead of silently
+                    showing as blank (same convention as the assignment list). */}
+                  {rule.kind && !(ROUTABLE_KINDS as readonly string[]).includes(rule.kind) ? (
+                    <option value={rule.kind}>{rule.kind}</option>
+                  ) : undefined}
                   {ROUTABLE_KINDS.map((kind) => (
                     <option key={kind} value={kind}>
                       {kindLabels[kind]}

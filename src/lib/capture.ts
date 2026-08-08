@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import * as z from "zod";
+import { ROUTABLE_KINDS } from "@/lib/actions.ts";
 import { createLogger } from "@/lib/log.ts";
 
 const log = createLogger("capture");
@@ -41,7 +42,7 @@ export type Source = z.infer<typeof SourceSchema>;
  *  - `runnable`: whether an action applies and is ready to run.
  *  - `align_bottom`: popup pinned to a bottom corner (card hugs that edge). */
 export const CapturePayloadSchema = z.object({
-  kind: z.enum(["text", "rich_text", "image", "files", "empty"]),
+  kind: z.enum([...ROUTABLE_KINDS, "empty"]),
   source: SourceSchema,
   action_id: z.string(),
   label: z.string(),

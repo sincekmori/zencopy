@@ -96,20 +96,19 @@ API 密钥直接写进这个本地文件（设置界面写出的也是同样的�
 
 哪种捕获由哪个动作处理：
 一个扁平的 `kind → action` 映射，加上一个可选的、优先级更高的 `overrides` 列表（先匹配者胜出）。
-四种 kind 是 `text`、`rich_text`、`image` 和 `files`；初始状态下，文本路由到 Zen，图片和文件路由到解释。
+三种 kind 是 `text`、`image` 和 `files`（富文本复制按 `text` 处理）；初始状态下，文本路由到 Zen，图片和文件路由到解释。
 扁平映射可以在应用内编辑（设置 → 动作 → 路由），所以只有用 `overrides` 时才需要碰这个文件。
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-`when` 的条件：`kind`、`app_name`、`exec_name`、`window_title`、`url`（都支持 `*` 通配符），`file_name`（一个每个被复制文件的名称必须匹配的通配符，不区分大小写 — 例如 `*.pdf`），以及 `min_chars` / `max_chars`。
+`when` 的条件：`kind`（三种 kind 之一，精确匹配）、`app_name`、`exec_name`、`window_title`、`url`（都支持 `*` 通配符），`file_name`（一个每个被复制文件的名称必须匹配的通配符，不区分大小写 — 例如 `*.pdf`），以及 `min_chars` / `max_chars`。
 
 对于 `image` 和 `files` 类型的捕获，内容本身会发送给模型（每次捕获合计上限 10 MB）。
 文件类型按**内容**判断，而不是按文件名：

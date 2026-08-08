@@ -33,7 +33,7 @@ function dataDir(): string {
 
 // The same shapes the app records: real ids, kinds, and catalog addresses.
 const ACTIONS = ["zencopy-zen", "zencopy-explain", "zencopy-translate", "zencopy-polish"];
-const KINDS = ["text", "rich_text", "image", "files"];
+const KINDS = ["text", "image", "files"];
 const MODELS = [
   { model: "google:gemini-3.1-flash-lite", weight: 8 }, // priced by the catalog
   { model: "local:gemma4:e4b", weight: 2 }, // no price sheet -> "*" row

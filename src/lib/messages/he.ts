@@ -183,7 +183,6 @@ export const he: Messages = {
     title: "ניתוב",
     hint: "איזו פעולה רצה עבור כל סוג לכידה.",
     kindText: "טקסט",
-    kindRichText: "טקסט עשיר",
     kindImage: "תמונה",
     kindFiles: "קבצים",
     none: "לא להריץ אוטומטית",

@@ -196,7 +196,6 @@ export const de: Messages = {
     title: "Routing",
     hint: "Welche Aktion für welchen Erfassungstyp läuft.",
     kindText: "Text",
-    kindRichText: "Formatierter Text",
     kindImage: "Bild",
     kindFiles: "Dateien",
     none: "Nicht automatisch ausführen",

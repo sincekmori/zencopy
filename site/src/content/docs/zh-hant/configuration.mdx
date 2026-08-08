@@ -96,20 +96,19 @@ API 金鑰直接寫進這個本機檔案（設定 UI 寫的也是同一種格式
 
 哪個動作處理哪種擷取：
 一個扁平的 `kind → action` 對應，加上一份選用、優先度更高的 `overrides` 清單（先符合者先贏）。
-四種 kind 是 `text`、`rich_text`、`image` 與 `files`；預設情況下，文字路由到 Zen，圖片和檔案路由到解說。
+三種 kind 是 `text`、`image` 與 `files`（帶格式的文字複製會視為 `text`）；預設情況下，文字路由到 Zen，圖片和檔案路由到解說。
 扁平對應可以在應用程式內編輯（設定 → 動作 → 路由），所以只有在需要 `overrides` 時才需要動這個檔案。
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-`when` 的條件：`kind`、`app_name`、`exec_name`、`window_title`、`url`（都支援 `*` 萬用字元）、`file_name`（每個複製檔案名稱皆須符合的萬用字元，不區分大小寫 — 例如 `*.pdf`），加上 `min_chars` / `max_chars`。
+`when` 的條件：`kind`（三種 kind 之一，需完全相符）、`app_name`、`exec_name`、`window_title`、`url`（都支援 `*` 萬用字元）、`file_name`（每個複製檔案名稱皆須符合的萬用字元，不區分大小寫 — 例如 `*.pdf`），加上 `min_chars` / `max_chars`。
 
 對 `image` 和 `files` 的擷取，內容本身會傳送給模型（每次擷取合計上限 10 MB）。
 檔案類型是依**內容**而非檔名判斷的：

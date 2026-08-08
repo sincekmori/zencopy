@@ -266,10 +266,10 @@ export function Popup(): React.JSX.Element {
       kept?.phase === "done" &&
       kept.ok &&
       !kept.setup &&
-      next.source.kind !== "files" &&
+      next.kind !== "files" &&
       ranDefinition.current.get(actionId) === definition
     ) {
-      logUsage(actionId, next.source.kind);
+      logUsage(actionId, next.kind);
       return;
     }
     const existing = runsRef.current.get(actionId);
@@ -279,7 +279,7 @@ export function Popup(): React.JSX.Element {
     }
     existing?.abort();
 
-    logUsage(actionId, next.source.kind);
+    logUsage(actionId, next.kind);
 
     const controller = new AbortController();
     runsRef.current.set(actionId, controller);
@@ -401,7 +401,7 @@ export function Popup(): React.JSX.Element {
         if (owns()) {
           runsRef.current.delete(actionId); // free the slot for a later re-run
           if (settled && !controller.signal.aborted) {
-            recordUsage(actionId, next.source.kind, settled);
+            recordUsage(actionId, next.kind, settled);
             refreshMonthCost(); // the number just changed (fire-and-forget race is fine)
           }
         }
@@ -586,7 +586,7 @@ export function Popup(): React.JSX.Element {
     // view: the derived result shows its kept text or its live stream — no
     // cancellation, no silent re-execution; Retry is the explicit re-run.
     if (results.has(action.id)) {
-      logUsage(action.id, next.source.kind);
+      logUsage(action.id, next.kind);
       setPayload(next);
       setCopied(false);
       return;

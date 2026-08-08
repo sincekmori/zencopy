@@ -195,7 +195,6 @@ export const ja: Messages = {
     title: "ルーティング",
     hint: "コピーの種類ごとに実行するアクション。",
     kindText: "テキスト",
-    kindRichText: "リッチテキスト",
     kindImage: "画像",
     kindFiles: "ファイル",
     none: "自動実行しない",

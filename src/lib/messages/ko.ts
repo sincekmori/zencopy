@@ -191,7 +191,6 @@ export const ko: Messages = {
     title: "라우팅",
     hint: "캡처 유형별로 실행할 액션.",
     kindText: "텍스트",
-    kindRichText: "서식 있는 텍스트",
     kindImage: "이미지",
     kindFiles: "파일",
     none: "자동 실행 안 함",

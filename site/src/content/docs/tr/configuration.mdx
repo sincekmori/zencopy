@@ -96,20 +96,19 @@ Bozuk bir düzenleme, açılır pencerede ve ayarlar düzenleyicisinde net bir m
 
 Hangi tür yakalamayı hangi eylemin işleyeceği:
 düz bir `kind → action` eşlemesi ve isteğe bağlı, daha öncelikli bir `overrides` listesi (ilk eşleşen kazanır).
-Dört tür şunlardır: `text`, `rich_text`, `image` ve `files`; başlangıçta metin Zen'e, görseller ve dosyalar Açıkla'ya yönlendirilir.
+Üç tür şunlardır: `text`, `image` ve `files` (zengin metin kopyası `text` sayılır); başlangıçta metin Zen'e, görseller ve dosyalar Açıkla'ya yönlendirilir.
 Düz eşleme uygulama içinden düzenlenebilir (Ayarlar → Eylemler → Yönlendirme); bu dosyaya yalnızca `overrides` için dokunman gerekir.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-`when` koşulları: `kind`, `app_name`, `exec_name`, `window_title`, `url` (hepsi `*` joker karakteriyle), `file_name` (kopyalanan her dosya adının büyük/küçük harf duyarsız olarak eşleşmesi gereken bir joker karakter — örn. `*.pdf`), ayrıca `min_chars` / `max_chars`.
+`when` koşulları: `kind` (üç türden biri, tam eşleşme), `app_name`, `exec_name`, `window_title`, `url` (hepsi `*` joker karakteriyle), `file_name` (kopyalanan her dosya adının büyük/küçük harf duyarsız olarak eşleşmesi gereken bir joker karakter — örn. `*.pdf`), ayrıca `min_chars` / `max_chars`.
 
 `image` ve `files` yakalamalarında modele içeriğin kendisi gönderilir (yakalama başına toplam 10 MB'a kadar).
 Dosya türleri adlarından değil **içerikten** algılanır:

@@ -96,20 +96,19 @@ A broken edit shows up as a clear message in the popup and the settings editor �
 
 Which action handles which kind of capture:
 a flat `kind → action` map plus an optional, higher-priority `overrides` list (first match wins).
-The four kinds are `text`, `rich_text`, `image`, and `files`; out of the box, text routes to Zen and images and files route to Explain.
+The three kinds are `text`, `image`, and `files` (a rich-text copy counts as `text`); out of the box, text routes to Zen and images and files route to Explain.
 The flat map is editable in-app (Settings → Actions → Routing), so you only need to touch this file for `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-`when` conditions: `kind`, `app_name`, `exec_name`, `window_title`, `url` (all with `*` wildcards), `file_name` (a wildcard every copied file's name must match, case-insensitively — e.g. `*.pdf`), plus `min_chars` / `max_chars`.
+`when` conditions: `kind` (one of the three kinds, matched exactly), `app_name`, `exec_name`, `window_title`, `url` (all with `*` wildcards), `file_name` (a wildcard every copied file's name must match, case-insensitively — e.g. `*.pdf`), plus `min_chars` / `max_chars`.
 
 For `image` and `files` captures, the content itself is sent to the model (up to 10 MB total per capture).
 File types are detected from **content**, not names:

@@ -96,20 +96,19 @@ Eine kaputte Änderung zeigt sich als klare Meldung im Popup und im Einstellungs
 
 Welche Aktion welche Art von Erfassung übernimmt:
 eine flache Zuordnung `kind → action` plus eine optionale, höher priorisierte `overrides`-Liste (der erste Treffer gewinnt).
-Die vier Arten sind `text`, `rich_text`, `image` und `files`; ab Werk geht Text an Zen, Bilder und Dateien gehen an Erklären.
+Die drei Arten sind `text`, `image` und `files` (eine Rich-Text-Kopie zählt als `text`); ab Werk geht Text an Zen, Bilder und Dateien gehen an Erklären.
 Die flache Zuordnung ist in der App bearbeitbar (Einstellungen → Aktionen → Routing), du brauchst diese Datei also nur für `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
-  "rich_text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
 }
 ```
 
-`when`-Bedingungen: `kind`, `app_name`, `exec_name`, `window_title`, `url` (alle mit `*`-Wildcards), `file_name` (ein Wildcard, dem der Name jeder kopierten Datei unabhängig von der Groß-/Kleinschreibung entsprechen muss — z. B. `*.pdf`), dazu `min_chars` / `max_chars`.
+`when`-Bedingungen: `kind` (eine der drei Arten, exakte Übereinstimmung), `app_name`, `exec_name`, `window_title`, `url` (alle mit `*`-Wildcards), `file_name` (ein Wildcard, dem der Name jeder kopierten Datei unabhängig von der Groß-/Kleinschreibung entsprechen muss — z. B. `*.pdf`), dazu `min_chars` / `max_chars`.
 
 Bei `image`- und `files`-Erfassungen wird der Inhalt selbst an das Modell gesendet (bis zu 10 MB insgesamt pro Erfassung).
 Dateitypen werden am **Inhalt** erkannt, nicht am Namen:
