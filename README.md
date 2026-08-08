@@ -12,6 +12,10 @@ A calm, resident desktop agent that turns whatever you copied into an instant AI
 [![Latest release](https://img.shields.io/github/v/release/sincekmori/zencopy)](https://github.com/sincekmori/zencopy/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/sincekmori/zencopy/total)](https://github.com/sincekmori/zencopy/releases)
 [![License](https://img.shields.io/github/license/sincekmori/zencopy)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/sincekmori/zencopy/ci.yml?branch=main&label=CI)](https://github.com/sincekmori/zencopy/actions/workflows/ci.yml)
+
+[![i18n](https://img.shields.io/badge/i18n-19_languages-blue)](https://zencopy.app/)
+[![Tauri](https://img.shields.io/badge/Tauri_2-24C8DB?logo=tauri&logoColor=fff)](https://tauri.app/)
 
 </div>
 
