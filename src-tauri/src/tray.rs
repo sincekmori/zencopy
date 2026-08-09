@@ -50,7 +50,7 @@ pub(crate) fn locale_from_tag(tag: &str) -> &'static str {
         return "pt-br";
     }
     [
-        "ja", "ko", "es", "fr", "de", "it", "pl", "ru", "id", "vi", "th", "tr", "ar", "fa", "he",
+        "ar", "de", "es", "fa", "fr", "he", "id", "it", "ja", "ko", "pl", "ru", "th", "tr", "vi",
     ]
     .into_iter()
     .find(|code| tag.starts_with(code))
