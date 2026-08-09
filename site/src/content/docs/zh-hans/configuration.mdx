@@ -96,7 +96,7 @@ API 密钥直接写进这个本地文件（设置界面写出的也是同样的�
 
 哪种捕获由哪个提示词处理：
 一个扁平的 `kind → prompt` 映射，加上一个可选的、优先级更高的 `overrides` 列表（先匹配者胜出）。
-三种 kind 是 `text`、`image` 和 `files`（富文本复制按 `text` 处理）；初始状态下，文本交给 Zen，图片和文件交给解释。
+三种 kind 是 `text`、`image` 和 `files`（带格式的复制按 `text` 处理）；初始状态下，文本交给 Zen，图片和文件交给解释。
 扁平映射可以在应用内编辑（设置 → 提示词 → 规则），所以只有用 `overrides` 时才需要碰这个文件。
 
 ```json
@@ -146,22 +146,22 @@ instructions: 你是一位简洁的助手。
 
 模板变量，以及在浏览器中复制一个段落时的示例值：
 
-| 变量                 | 示例                                             |
-| -------------------- | ------------------------------------------------ |
-| `{{ text }}`         | 复制的文本（HTML 富文本复制会转换为 Markdown）   |
-| `{{ markup }}`       | 富文本复制的 HTML/RTF 源码                       |
-| `{{ format }}`       | `html`（或 `rtf`；纯文本复制时为空）             |
-| `{{ file_name }}`    | `report.pdf`（第一个被复制文件的名称）           |
-| `{{ file_names }}`   | 每个被复制文件的名称，每行一个                   |
-| `{{ file_paths }}`   | 每个被复制文件的完整路径，每行一个               |
-| `{{ app_name }}`     | `Safari`                                         |
-| `{{ exec_name }}`    | `Safari` / `chrome.exe`                          |
-| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari` |
-| `{{ window_title }}` | `定价 – Example`                                 |
-| `{{ url }}`          | `https://example.com/pricing`（仅浏览器）        |
-| `{{ process_id }}`   | `8123`                                           |
-| `{{ now }}`          | `2026-07-08 20:15:00`                            |
-| `{{ locale }}`       | `zh-hans`                                        |
+| 变量                 | 示例                                              |
+| -------------------- | ------------------------------------------------- |
+| `{{ text }}`         | 复制的文本（带格式的 HTML 复制会转换为 Markdown） |
+| `{{ markup }}`       | 带格式复制的 HTML/RTF 源码                        |
+| `{{ format }}`       | `html`（或 `rtf`；纯文本复制时为空）              |
+| `{{ file_name }}`    | `report.pdf`（第一个被复制文件的名称）            |
+| `{{ file_names }}`   | 每个被复制文件的名称，每行一个                    |
+| `{{ file_paths }}`   | 每个被复制文件的完整路径，每行一个                |
+| `{{ app_name }}`     | `Safari`                                          |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                           |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`  |
+| `{{ window_title }}` | `定价 – Example`                                  |
+| `{{ url }}`          | `https://example.com/pricing`（仅浏览器）         |
+| `{{ process_id }}`   | `8123`                                            |
+| `{{ now }}`          | `2026-07-08 20:15:00`                             |
+| `{{ locale }}`       | `zh-hans`                                         |
 
 另外还有一个 ZenCopy 专有的 `language_name` 过滤器：`{{ locale | language_name }}` 会展开为“Simplified Chinese”而不是“zh-hans”，在提示词里读起来更自然。
 想看到实际的值，在设置里打开**显示模板变量** — 每次捕获的变量会以 JSON 的形式出现在弹窗中。

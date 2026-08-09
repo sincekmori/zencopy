@@ -1,14 +1,16 @@
 ---
 title: Bắt đầu sử dụng
-description: Từ cài đặt ứng dụng, chuẩn bị khóa AI miễn phí, đến lần sao chép hai lần đầu tiên. Chỉ cần biết dùng máy tính là bạn thiết lập được.
+description: Từ cài đặt ứng dụng, chuẩn bị khóa AI miễn phí, đến lần sao chép hai lần đầu tiên. Chỉ cần biết dùng máy tính là bạn bắt đầu trò chuyện được với AI.
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 import DownloadLink from "../../../components/DownloadLink.astro";
+import DemoVideo from "../../../components/DemoVideo.astro";
 
-Nếu bạn biết sao chép, bạn dùng được ZenCopy.
+ZenCopy là công cụ triệu hồi cuộc trò chuyện với AI ngay trên bất kỳ ứng dụng nào.
+Nếu bạn biết sao chép, bạn dùng được.
 Chỉ có đúng một điều cần học — **thao tác sao chép quen thuộc của bạn, nhấn hai lần, thật nhanh**.
-Chỉ vậy thôi, bản tóm tắt, bản dịch, lời giải thích hoặc bản viết lại trau chuốt của nội dung bạn vừa chọn sẽ hiện ra ở góc màn hình.
+Chỉ vậy thôi, câu trả lời của AI cho thứ bạn vừa chọn sẽ hiện ra ở góc màn hình, **và bạn tiếp tục được cuộc trò chuyện ngay từ ô nhập bên dưới câu trả lời**.
 Cách dùng giống hệt nhau trên mọi ứng dụng.
 
 ## ZenCopy giúp gì cho bạn mỗi ngày
@@ -17,9 +19,11 @@ Cách dùng giống hệt nhau trên mọi ứng dụng.
 - Biến trang web hay đoạn chat tiếng nước ngoài **thành ngôn ngữ của bạn, ngay tại chỗ**
 - Nhờ **giải thích bằng lời dễ hiểu** những thuật ngữ lạ, màn hình lỗi hay câu chữ hợp đồng
 - Đưa bản nháp email hay bài luận và nhận lại bản **đã được chỉnh sửa gọn gàng**
+- Rồi tiếp nối câu trả lời: **"chi tiết hơn nữa", "làm thành bảng", "tóm lại nghĩa là gì?"** — muốn hỏi bao nhiêu cứ hỏi
 
 Các bước luôn giống nhau: chọn, rồi sao chép hai lần.
-Không cần chuyển ứng dụng, không phải tìm chỗ để dán.
+Không cần mở trang chat, không phải tìm chỗ để dán.
+**Khi muốn hỏi AI, cứ sao chép hai lần đã** — đó là toàn bộ cách dùng ZenCopy.
 
 ## Bạn cần những gì
 
@@ -119,19 +123,9 @@ Thiết lập xong, bạn có thể thử ngay trên chính trang này.
 Chọn một đoạn văn bất kỳ và nhấn **<span data-os-modifier>Ctrl/⌘</span> + C + C** (sao chép, hai lần, thật nhanh).
 Video dưới đây cho thấy ứng dụng chạy trên văn bản của một trang web:
 
-<video
-  class="demo-video"
-  width="1748"
-  height="1130"
-  controls
-  muted
-  playsinline
-  preload="metadata"
-  poster="/demo/zen.en.jpg"
-  src="/demo/zen.en.mp4"
->
-  <a href="/demo/zen.en.mp4">Xem video demo</a>
-</video>
+<DemoVideo demo="zen" locale="vi">
+  Xem video demo
+</DemoVideo>
 
 ## Sử dụng hằng ngày
 

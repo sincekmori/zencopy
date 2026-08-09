@@ -32,10 +32,16 @@ if (!guide) {
   throw new Error(`Landing: no getting-started guide for "${lang}"`);
 }
 const getStarted = guide.data.title;
+const whyPage = await getEntry("docs", `${lang}/why`);
+if (!whyPage) {
+  throw new Error(`Landing: no why page for "${lang}"`);
+}
+const why = whyPage.data.title;
 
 const github = "https://github.com/sincekmori/zencopy";
 const canonical = `https://zencopy.app/${lang}/`;
 const gettingStartedHref = `/${lang}/getting-started/`;
+const whyHref = `/${lang}/why/`;
 ---
 
 <html dir={locale.dir} lang={locale.lang}>
@@ -215,6 +221,9 @@ const gettingStartedHref = `/${lang}/getting-started/`;
         }
         <div class="actions">
           <a class="primary" href={gettingStartedHref}>{getStarted}</a>
+          <a class="quiet" href={whyHref}
+            >{why} {locale.dir === "rtl" ? "←" : "→"}</a
+          >
         </div>
         <p class="note">{copy.note}</p>
       </section>
@@ -526,6 +535,16 @@ const gettingStartedHref = `/${lang}/getting-started/`;
   }
   .primary:hover {
     opacity: 0.85;
+  }
+  .quiet {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 0.15rem;
+  }
+  .quiet:hover {
+    color: var(--ink);
+    border-color: var(--ink-soft);
   }
   .note {
     margin: 1.75rem 0 0;

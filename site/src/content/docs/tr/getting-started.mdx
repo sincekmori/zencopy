@@ -1,14 +1,16 @@
 ---
 title: Başlarken
-description: Kurulumdan ücretsiz AI anahtarı hazırlamaya ve ilk çift kopyalamana kadar. Bilgisayar kullanabiliyorsan bunu da kurabilirsin.
+description: Kurulumdan ücretsiz AI anahtarı hazırlamaya ve ilk çift kopyalamana kadar. Bilgisayar kullanabiliyorsan bir AI ile konuşmaya da başlayabilirsin.
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 import DownloadLink from "../../../components/DownloadLink.astro";
+import DemoVideo from "../../../components/DemoVideo.astro";
 
-Kopyalamayı biliyorsan ZenCopy'yi kullanabilirsin.
+ZenCopy, herhangi bir uygulamanın üzerinde AI ile sohbeti çağıran bir araçtır.
+Kopyalamayı biliyorsan onu da kullanabilirsin.
 Öğrenmen gereken tam olarak tek bir şey var — **her zamanki kopyalaman, iki kez, hızlıca**.
-Yalnızca bu hareket, seçtiğin içeriğin özetini, çevirisini, açıklamasını ya da elden geçirilmiş bir hâlini ekranının köşesine getirir.
+Yalnızca bu hareket, seçtiğin şeye AI'ın yanıtını ekranının köşesine getirir — **ve altındaki alandan sohbete olduğun yerde devam edebilirsin**.
 Hangi uygulamanın üzerinde olursan ol, aynı şekilde çalışır.
 
 ## ZenCopy her gün senin için ne yapar
@@ -17,9 +19,11 @@ Hangi uygulamanın üzerinde olursan ol, aynı şekilde çalışır.
 - Yabancı dildeki bir sayfayı ya da yazışmayı **olduğun yerde kendi diline** çevir
 - Bilmediğin terimleri, hata ekranlarını ya da sözleşme dilini **sade sözcüklerle açıklat**
 - E-posta ya da yazı taslağını ver, **temizlenmiş hâlini** geri al
+- Ve yanıtın ardından sormayı sürdür: **"biraz daha ayrıntı", "tablo yap", "yani bu ne demek?"** — istediğin kadar
 
 Adımlar hep aynı: seç, sonra iki kez kopyala.
-Uygulama değiştirmek yok, yapıştıracak yer aramak yok.
+Sohbet sitesi açmak yok, yapıştıracak yer aramak yok.
+**AI'a soracağın olduğunda, iki kez kopyalaman yeter** — ZenCopy'nin kullanımının tamamı bu.
 
 ## Neye ihtiyacın var
 
@@ -120,19 +124,9 @@ Kurulumu bitirdiysen tam da bu sayfada deneyebilirsin.
 Herhangi bir paragrafı seç ve **<span data-os-modifier>Ctrl/⌘</span> + C + C** tuşlarına bas (kopyalama, iki kez, hızlıca).
 Videoda, bir web sayfasının metni üzerinde çalışırken görülüyor:
 
-<video
-  class="demo-video"
-  width="1748"
-  height="1130"
-  controls
-  muted
-  playsinline
-  preload="metadata"
-  poster="/demo/zen.en.jpg"
-  src="/demo/zen.en.mp4"
->
-  <a href="/demo/zen.en.mp4">Tanıtım videosunu izle</a>
-</video>
+<DemoVideo demo="zen" locale="tr">
+  Tanıtım videosunu izle
+</DemoVideo>
 
 ## Günlük kullanım
 

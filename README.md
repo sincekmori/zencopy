@@ -7,7 +7,7 @@
 
 **Copy twice, act instantly.**
 
-A calm, resident desktop agent that turns whatever you copied into an instant AI result — triggered by **Ctrl/Cmd + C + C**.
+Talk to an AI anywhere, the moment you want to — the answer to whatever you copied appears on the spot, and the conversation continues right there. A calm, resident desktop agent, summoned by **Ctrl/Cmd + C + C**.
 
 [![Latest release](https://img.shields.io/github/v/release/sincekmori/zencopy)](https://github.com/sincekmori/zencopy/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/sincekmori/zencopy/total)](https://github.com/sincekmori/zencopy/releases)
@@ -23,26 +23,37 @@ A calm, resident desktop agent that turns whatever you copied into an instant AI
 
 ## What it is
 
-ZenCopy lives quietly in your system tray. Press **Ctrl/Cmd + C + C** (copy twice in quick succession) on any selection, and a small popup appears with an AI result for what you copied. A single normal copy is never disturbed.
+ZenCopy is a resident agent that summons an AI conversation on top of any app. No chat site to open, no pasting — you ask about what you are looking at, right where you are.
 
-The default prompt is **Zen**: it distills the copied text to its essence in one short sentence, in your chosen language. Prompts are configurable, and you can add your own.
+The signal is **Ctrl/Cmd + C + C** — your ordinary copy, twice, quickly. From there, in order:
+
+1. what you had selected — text, image, or files — is captured,
+2. a small popup opens in the corner of your screen,
+3. the default prompt streams its answer immediately (out of the box that is **Zen**, which distills the copy to its essence in one sentence; switching to Explain, Translate, Polish, or your own prompts takes one click or one number key),
+4. and a message field waits under the answer — "more detail", "as a table", "in English?". The conversation continues in place, no window switch.
+
+A single normal copy is never disturbed.
+
+Use it for a while and a habit forms: **when you want to ask an AI, you just copy twice.** Opening a chat site, finding the tab, pasting — all of it disappears. The copy everyone already knows becomes the door to an AI.
 
 ## Why ZenCopy
 
 Plenty of tools put an AI popup near your selection — most are macOS-only, text-only, and tied to one vendor's models or a subscription. ZenCopy's combination is what's rare:
 
+- **The conversation comes to you** — no hunting for a chat window; the first answer is automatic, the rest is yours to steer.
 - **Windows, macOS, and Linux**, one behavior.
 - **Your model, your rules** — any provider (OpenAI / Google / Anthropic / a corporate gateway / local Ollama); keys never leave your machine, and a free Gemini API key is enough to start.
-- **Everything you copy** — text, rich text, images, and files, not just selected text.
+- **Everything you copy** — text, images, and files, not just selected text. You can even talk to a screenshot.
 - **Rules you control** — which prompt runs is decided by declarative rules (capture kind, plus app / window / URL / length overrides), edited in the GUI or as a file.
 - **Calm and honest** — no account, no subscription, no telemetry. Apache-2.0.
 
 ## Highlights
 
+- **Conversation in place** — reply under any answer with questions, instructions, or tangents; every reply carries copy and retry (retry rewinds the thread to that reply), Enter sends, Shift+Enter breaks a line, and an IME's confirming Enter never sends by accident.
 - **One global trigger** — Ctrl/Cmd + C + C, anywhere. Powered by the [`copycopy`](https://crates.io/crates/copycopy) crate.
-- **Streaming, calm popup** — the copied content on top, the operation in the middle, the result below; reply under any result to continue the conversation, with copy and retry beneath every answer.
+- **Streaming, calm popup** — the copied content on top, the operation in the middle, the result below.
 - **Provider-agnostic LLM** — built on the Vercel AI SDK + [`ai-sdk-catalog`](https://www.npmjs.com/package/ai-sdk-catalog). Roles map to models in a single config file; swap providers without touching prompts.
-- **Not just text** — rich text arrives as Markdown; images and files attach as-is, with the type decided by contents, never by file extension.
+- **Not just text** — formatted copies arrive as Markdown; images and files attach as-is, with the type decided by contents, never by file extension.
 - **Resident & unobtrusive** — tray icon, frameless always-on-top popup you can drag and resize, launch-at-login (toggleable), recall the last result from the tray, dismiss with Esc or the close button.
 - **Multi-display & multi-Space aware** — windows open where you are working.
 - **Privacy-aware** — clipboard content marked sensitive (passwords/secrets) is ignored.

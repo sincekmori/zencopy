@@ -1,14 +1,16 @@
 ---
 title: はじめる
-description: インストールから、無料の AI キーの準備、最初の「コピー 2 回」まで。パソコンが使えれば誰でも設定できます。
+description: インストールから、無料の AI キーの準備、最初の「コピー 2 回」まで。パソコンが使えれば誰でも AI と話し始められます。
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 import DownloadLink from "../../../components/DownloadLink.astro";
+import DemoVideo from "../../../components/DemoVideo.astro";
 
-コピーの操作さえ知っていれば、ZenCopy は使えます。
+ZenCopy は、どのアプリの上でも AI との会話を呼び出せる道具です。
+コピーの操作さえ知っていれば使えます。
 覚えることは 1 つだけ — **いつものコピーを、すばやく 2 回**。
-それだけで、いま選んでいた文章の要約・翻訳・解説・清書が画面の隅に現れます。
+それだけで、いま選んでいたものへの AI の答えが画面の隅に現れ、**その下の入力欄からそのまま会話を続けられます**。
 どのアプリの上でも同じように動きます。
 
 ## ZenCopy で毎日できること
@@ -17,9 +19,11 @@ import DownloadLink from "../../../components/DownloadLink.astro";
 - 外国語のページやチャットを、**その場で自分の言語に**する
 - わからない用語・エラー画面・契約の文章を、**かみ砕いて説明**してもらう
 - 書きかけのメールや文章を、**そのまま清書**してもらう
+- そして答えに続けて、**「もっと詳しく」「表にして」「つまりどういうこと？」** — 聞きたいだけ聞く
 
 やることは全部同じです。選んで、コピーを 2 回。
-アプリを切り替えたり、貼り付け先を探したりはしません。
+チャットのサイトを開いたり、貼り付け先を探したりはしません。
+**AI に聞きたくなったら、とりあえずコピー 2 回** — それが ZenCopy の使い方の全部です。
 
 ## 準備するもの
 
@@ -120,19 +124,9 @@ Google 以外の AI（OpenAI・Anthropic・社内ゲートウェイ・ローカ�
 どこかの段落を選択して、**<span data-os-modifier>Ctrl/⌘</span> + C + C**（コピーをすばやく 2 回）。
 動画は、あるウェブページの文章で実行した様子です:
 
-<video
-  class="demo-video"
-  width="1748"
-  height="1130"
-  controls
-  muted
-  playsinline
-  preload="metadata"
-  poster="/demo/zen.ja.jpg"
-  src="/demo/zen.ja.mp4"
->
-  <a href="/demo/zen.ja.mp4">デモ動画を見る</a>
-</video>
+<DemoVideo demo="zen" locale="ja">
+  デモ動画を見る
+</DemoVideo>
 
 ## 普段の使い方
 

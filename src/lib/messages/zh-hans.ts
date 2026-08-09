@@ -96,7 +96,7 @@ export const zhHans: Messages = {
   },
   source: {
     inputLabel: "复制的内容",
-    richText: "富文本",
+    richText: "带格式的文本",
     emptyClipboard: "剪贴板是空的。",
     imageAlt: "复制的图片",
     cannotPreview: "（无法预览）",

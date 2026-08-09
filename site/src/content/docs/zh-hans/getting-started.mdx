@@ -1,14 +1,16 @@
 ---
 title: 快速上手
-description: 从安装、准备免费的 AI 密钥，到第一次“复制两次”。只要会用电脑，就能完成设置。
+description: 从安装、准备免费的 AI 密钥，到第一次“复制两次”。只要会用电脑，就能开始和 AI 对话。
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 import DownloadLink from "../../../components/DownloadLink.astro";
+import DemoVideo from "../../../components/DemoVideo.astro";
 
-只要会复制，就会用 ZenCopy。
+ZenCopy 是一个能在任何应用之上唤出 AI 对话的工具。
+只要会复制，就会用。
 需要学的只有一件事 — **像平时一样复制，只需快速按两次**。
-仅此一下，你刚选中的内容的摘要、翻译、解释或润色稿就会出现在屏幕角落。
+仅此一下，AI 对你刚选中内容的回答就会出现在屏幕角落，**你还可以在它下方的输入框里就地继续对话**。
 在任何应用中，它的工作方式都完全一样。
 
 ## ZenCopy 每天能为你做什么
@@ -17,9 +19,11 @@ import DownloadLink from "../../../components/DownloadLink.astro";
 - 把外语页面或聊天内容**当场变成你的语言**
 - 让陌生的术语、错误提示、合同条文**用大白话解释清楚**
 - 把邮件或文章的粗略草稿交给它，**直接帮你理顺**
+- 然后接着回答继续问：**“再详细一点”“做成表格”“所以到底是什么意思？”** — 想问多少问多少
 
 步骤永远一样：选中，然后复制两次。
-不用切换应用，也不用找地方粘贴。
+不用打开聊天网站，也不用找地方粘贴。
+**想问 AI 的时候，先复制两次再说** — 这就是 ZenCopy 用法的全部。
 
 ## 你需要准备
 
@@ -120,19 +124,9 @@ ZenCopy 本身是免费的，但实际执行摘要和翻译的是外部 AI — �
 选中任意一段文字，按 **<span data-os-modifier>Ctrl/⌘</span> + C + C**（快速复制两次）。
 视频演示了它在网页文字上运行的样子：
 
-<video
-  class="demo-video"
-  width="1748"
-  height="1130"
-  controls
-  muted
-  playsinline
-  preload="metadata"
-  poster="/demo/zen.en.jpg"
-  src="/demo/zen.en.mp4"
->
-  <a href="/demo/zen.en.mp4">观看演示视频</a>
-</video>
+<DemoVideo demo="zen" locale="zh-hans">
+  观看演示视频
+</DemoVideo>
 
 ## 日常使用
 

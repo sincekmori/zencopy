@@ -96,7 +96,7 @@ API 키는 이 로컬 파일에 그대로 들어갑니다(설정 UI도 같은 �
 
 어떤 종류의 캡처를 어떤 프롬프트가 처리할지:
 평평한 `kind → prompt` 맵과, 우선순위가 더 높은 선택적 `overrides` 목록(먼저 일치하는 규칙이 적용)입니다.
-세 가지 종류는 `text`, `image`, `files`이고(서식 있는 텍스트 복사는 `text`로 취급됩니다), 기본값은 텍스트가 Zen으로, 이미지와 파일이 설명으로 갑니다.
+세 가지 종류는 `text`, `image`, `files`이고(서식 있는 복사는 `text`로 취급됩니다), 기본값은 텍스트가 Zen으로, 이미지와 파일이 설명으로 갑니다.
 평평한 맵은 앱 안(설정 → 프롬프트 → 규칙)에서 편집할 수 있으므로, 이 파일을 직접 만질 일은 `overrides`뿐입니다.
 
 ```json
@@ -146,22 +146,22 @@ instructions: 당신은 간결한 어시스턴트입니다.
 
 템플릿 변수와, 브라우저에서 문단을 복사했을 때의 값 예시:
 
-| 변수                 | 예                                                |
-| -------------------- | ------------------------------------------------- |
-| `{{ text }}`         | 복사한 텍스트(HTML 리치 복사는 Markdown으로 변환) |
-| `{{ markup }}`       | 리치 복사의 HTML/RTF 원본                         |
-| `{{ format }}`       | `html`(또는 `rtf`, 일반 복사에서는 비어 있음)     |
-| `{{ file_name }}`    | `report.pdf` (첫 번째로 복사된 파일의 이름)       |
-| `{{ file_names }}`   | 복사된 모든 파일의 이름, 줄당 하나씩              |
-| `{{ file_paths }}`   | 복사된 모든 파일의 전체 경로, 줄당 하나씩         |
-| `{{ app_name }}`     | `Safari`                                          |
-| `{{ exec_name }}`    | `Safari` / `chrome.exe`                           |
-| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`  |
-| `{{ window_title }}` | `요금 안내 – Example`                             |
-| `{{ url }}`          | `https://example.com/pricing`(브라우저에서만)     |
-| `{{ process_id }}`   | `8123`                                            |
-| `{{ now }}`          | `2026-07-08 20:15:00`                             |
-| `{{ locale }}`       | `ko`                                              |
+| 변수                 | 예                                                     |
+| -------------------- | ------------------------------------------------------ |
+| `{{ text }}`         | 복사한 텍스트(서식 있는 HTML 복사는 Markdown으로 변환) |
+| `{{ markup }}`       | 서식 있는 복사의 HTML/RTF 원본                         |
+| `{{ format }}`       | `html`(또는 `rtf`, 일반 복사에서는 비어 있음)          |
+| `{{ file_name }}`    | `report.pdf` (첫 번째로 복사된 파일의 이름)            |
+| `{{ file_names }}`   | 복사된 모든 파일의 이름, 줄당 하나씩                   |
+| `{{ file_paths }}`   | 복사된 모든 파일의 전체 경로, 줄당 하나씩              |
+| `{{ app_name }}`     | `Safari`                                               |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`       |
+| `{{ window_title }}` | `요금 안내 – Example`                                  |
+| `{{ url }}`          | `https://example.com/pricing`(브라우저에서만)          |
+| `{{ process_id }}`   | `8123`                                                 |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                  |
+| `{{ locale }}`       | `ko`                                                   |
 
 ZenCopy 전용 `language_name` 필터도 있습니다.
 `{{ locale | language_name }}`은 "ko"가 아니라 "Korean"으로 전개되어 프롬프트에서 자연스럽게 읽힙니다.

@@ -97,7 +97,7 @@ export const zhHant: Messages = {
   },
   source: {
     inputLabel: "複製的內容",
-    richText: "RTF 文字",
+    richText: "帶格式的文字",
     emptyClipboard: "剪貼簿是空的。",
     imageAlt: "複製的圖片",
     cannotPreview: "（無法預覽）",

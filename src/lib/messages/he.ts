@@ -101,7 +101,7 @@ export const he: Messages = {
   },
   source: {
     inputLabel: "התוכן שהועתק",
-    richText: "טקסט עשיר",
+    richText: "טקסט מעוצב",
     emptyClipboard: "הלוח ריק.",
     imageAlt: "תמונה שהועתקה",
     cannotPreview: "(אין תצוגה מקדימה)",

@@ -105,7 +105,7 @@ export const en: Messages = {
   },
   source: {
     inputLabel: "Copied content",
-    richText: "Rich text",
+    richText: "Formatted text",
     emptyClipboard: "The clipboard is empty.",
     imageAlt: "Copied image",
     cannotPreview: "(no preview)",

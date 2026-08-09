@@ -111,7 +111,7 @@ export const fr: Messages = {
   },
   source: {
     inputLabel: "Contenu copié",
-    richText: "Texte enrichi",
+    richText: "Texte mis en forme",
     emptyClipboard: "Le presse-papiers est vide.",
     imageAlt: "Image copiée",
     cannotPreview: "(pas d'aperçu)",

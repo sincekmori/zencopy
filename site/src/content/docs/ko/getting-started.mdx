@@ -1,14 +1,16 @@
 ---
 title: 시작하기
-description: 설치부터 무료 AI 키 준비, 처음으로 두 번 복사해 보기까지. 컴퓨터를 쓸 줄 안다면 누구나 설정할 수 있습니다.
+description: 설치부터 무료 AI 키 준비, 처음으로 두 번 복사해 보기까지. 컴퓨터를 쓸 줄 안다면 누구나 AI와 이야기를 시작할 수 있습니다.
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 import DownloadLink from "../../../components/DownloadLink.astro";
+import DemoVideo from "../../../components/DemoVideo.astro";
 
-복사할 줄 안다면 ZenCopy를 쓸 수 있습니다.
+ZenCopy는 어떤 앱 위에서든 AI와의 대화를 불러낼 수 있는 도구입니다.
+복사할 줄 안다면 쓸 수 있습니다.
 배울 것은 딱 하나 — **평소처럼 복사를 빠르게 두 번 하는 것**뿐입니다.
-그것만으로 선택한 내용의 요약, 번역, 설명, 다듬어진 글이 화면 구석에 나타납니다.
+그것만으로 방금 선택한 것에 대한 AI의 답이 화면 구석에 나타나고, **그 아래 입력란에서 그대로 대화를 이어 갈 수 있습니다**.
 어떤 앱 위에서든 똑같이 동작합니다.
 
 ## ZenCopy가 매일 해 주는 일
@@ -17,9 +19,11 @@ import DownloadLink from "../../../components/DownloadLink.astro";
 - 외국어 페이지나 채팅을 **그 자리에서 내 언어로** 변환
 - 낯선 용어, 오류 화면, 계약서 문구를 **쉬운 말로 설명**
 - 이메일이나 글의 초안을 건네면 **깔끔하게 정리**
+- 그리고 답에 이어서 **"더 자세히", "표로 만들어 줘", "그러니까 무슨 뜻이야?"** — 묻고 싶은 만큼 묻기
 
 순서는 언제나 같습니다. 선택하고, 두 번 복사하기.
-앱을 오갈 필요도, 붙여넣을 곳을 찾을 필요도 없습니다.
+채팅 사이트를 열 필요도, 붙여넣을 곳을 찾을 필요도 없습니다.
+**AI에게 묻고 싶어지면, 일단 복사 두 번** — 그것이 ZenCopy 사용법의 전부입니다.
 
 ## 필요한 것
 
@@ -118,19 +122,9 @@ Google 외의 AI(OpenAI, Anthropic, 사내 게이트웨이, 로컬 Ollama 등)�
 아무 문단이나 선택하고 **<span data-os-modifier>Ctrl/⌘</span> + C + C**(복사를 빠르게 두 번)를 누르세요.
 아래 영상은 웹 페이지의 텍스트에서 실행되는 모습입니다:
 
-<video
-  class="demo-video"
-  width="1748"
-  height="1130"
-  controls
-  muted
-  playsinline
-  preload="metadata"
-  poster="/demo/zen.en.jpg"
-  src="/demo/zen.en.mp4"
->
-  <a href="/demo/zen.en.mp4">데모 영상 보기</a>
-</video>
+<DemoVideo demo="zen" locale="ko">
+  데모 영상 보기
+</DemoVideo>
 
 ## 일상적인 사용
 

@@ -1,0 +1,89 @@
+---
+title: 为什么选 ZenCopy？
+description: 把找 AI 帮忙之前那些看不见的杂务，缩短到按两次 C — 这就是 ZenCopy 的想法。
+---
+
+import { Card, CardGrid, LinkCard, Steps } from "@astrojs/starlight/components";
+import DemoVideo from "../../../components/DemoVideo.astro";
+
+比如你面前有一篇很长的文章要读。
+硬着头皮和它对视是一种办法。
+但如今，把它交给 AI 做摘要的人也不少。
+
+## 平常的 8 个步骤
+
+是不是像这样？
+
+<Steps>
+
+1. 复制这篇长文
+2. 想起 AI 该怎么打开 — “呃，先开浏览器…好像收藏在哪里来着…”
+3. 打开 AI 的窗口
+4. 等它显示出来 — 往往比想象中更久
+5. 想清楚要问什么 — “文章太长了，那就…摘要吧”
+6. 把请求写成文字 — “请把下面的内容总结成三行”
+7. 粘贴刚才复制的文本
+8. 发送
+
+</Steps>
+
+每一步都不难。
+但排在一起看，这是你每次都在实实在在支付的成本。
+
+## 用 ZenCopy，只要 1 步
+
+<Steps>
+
+1. 复制这篇长文，然后**再按一次 C**
+
+</Steps>
+
+就这么多。
+**和普通复制的区别，只有一个 C。**
+不用回忆 AI 在哪里，不用组织提问，也不用粘贴。
+复制的那只手，就是唤出 AI 的那只手。
+
+<DemoVideo demo="zen" locale="zh-hans">
+  观看演示视频
+</DemoVideo>
+
+ZenCopy 在任何应用之上都能工作。
+在浏览器里、在 Slack 里、在 PDF 阅读器里 — 永远是同一个 <span data-os-modifier>Ctrl/⌘</span> + C + C。
+
+## 摘要只是开始
+
+内置了四个提示词。
+
+<CardGrid>
+  <Card title="Zen">把长文的本质，蒸馏成一句话。</Card>
+  <Card title="解释">把难懂的术语和文章，讲到你能听懂。</Card>
+  <Card title="翻译">外语变成你的语言，你自己语言的文章变成英语。</Card>
+  <Card title="润色">把草草写下的聊天回复或写到一半的邮件，变成可以直接发出的文字。</Card>
+</CardGrid>
+
+切换只在一瞬间：点击弹窗里的名字，或者按**一个数字键**。
+接着刚才的画面按下 **2**，就切换到了“解释”：
+
+<DemoVideo demo="explain" locale="zh-hans">
+  观看演示视频
+</DemoVideo>
+
+每种复制（文本、图片、文件）最先运行哪个提示词，也可以[事先决定](/zh-hans/configuration/#rulesjson)。
+
+## 添加你自己的提示词
+
+当然可以。
+写一句你想让它做的事，**草稿由 AI 替你起草**。
+用最小的力气，唤出你最好的提示词。
+
+## 然后，对话继续
+
+答案到来后，它下方的输入框可以就地继续与 AI 的对话。
+**想问 AI 的时候，复制两次。**
+方法的全部就是这些。
+
+<LinkCard
+  title="快速上手"
+  description="从安装到第一次复制两次，十分钟搞定。"
+  href="/zh-hans/getting-started/"
+/>

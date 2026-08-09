@@ -1,14 +1,16 @@
 ---
 title: Pierwsze kroki
-description: Od instalacji, przez przygotowanie darmowego klucza AI, po pierwsze podwójne kopiowanie. Jeśli umiesz obsługiwać komputer, poradzisz sobie z konfiguracją.
+description: Od instalacji, przez przygotowanie darmowego klucza AI, po pierwsze podwójne kopiowanie. Jeśli umiesz obsługiwać komputer, umiesz też zacząć rozmawiać z AI.
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 import DownloadLink from "../../../components/DownloadLink.astro";
+import DemoVideo from "../../../components/DemoVideo.astro";
 
-Jeśli umiesz kopiować, umiesz też korzystać z ZenCopy.
+ZenCopy to narzędzie, które przywołuje rozmowę z AI nad dowolną aplikacją.
+Jeśli umiesz kopiować, umiesz z niego korzystać.
 Do nauczenia jest dokładnie jedna rzecz — **zwykły skrót kopiowania, naciśnięty szybko dwa razy**.
-To wystarczy, aby w rogu ekranu pojawiło się streszczenie, tłumaczenie, wyjaśnienie albo dopracowana wersja tego, co zaznaczysz.
+To wystarczy, aby w rogu ekranu pojawiła się odpowiedź AI na to, co właśnie zaznaczysz — **a w polu pod nią możesz od razu kontynuować rozmowę**.
 Działa tak samo w każdej aplikacji.
 
 ## Co ZenCopy robi dla Ciebie na co dzień
@@ -17,9 +19,11 @@ Działa tak samo w każdej aplikacji.
 - Zamień stronę lub czat w obcym języku **na swój język, od razu**
 - Poproś o **wyjaśnienie prostymi słowami** nieznanych terminów, ekranów błędów czy języka umów
 - Przekaż wstępną wersję e-maila lub wypracowania i odbierz ją **dopracowaną**
+- A po odpowiedzi pytaj dalej: **„bardziej szczegółowo”, „zrób z tego tabelę”, „czyli co to znaczy?”** — ile tylko chcesz
 
 Kroki są zawsze takie same: zaznacz, potem skopiuj dwa razy.
-Bez przełączania aplikacji i bez szukania miejsca do wklejenia.
+Bez otwierania strony czatu i bez szukania miejsca do wklejenia.
+**Gdy chcesz o coś zapytać AI, po prostu skopiuj dwa razy** — to cała obsługa ZenCopy.
 
 ## Czego potrzebujesz
 
@@ -120,19 +124,9 @@ Po skonfigurowaniu możesz wypróbować ZenCopy na tej właśnie stronie.
 Zaznacz dowolny akapit i naciśnij **<span data-os-modifier>Ctrl/⌘</span> + C + C** (skopiuj szybko dwa razy).
 Film pokazuje działanie na tekście strony internetowej:
 
-<video
-  class="demo-video"
-  width="1748"
-  height="1130"
-  controls
-  muted
-  playsinline
-  preload="metadata"
-  poster="/demo/zen.en.jpg"
-  src="/demo/zen.en.mp4"
->
-  <a href="/demo/zen.en.mp4">Obejrzyj film demonstracyjny</a>
-</video>
+<DemoVideo demo="zen" locale="pl">
+  Obejrzyj film demonstracyjny
+</DemoVideo>
 
 ## Codzienne użycie
 

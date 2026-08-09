@@ -109,7 +109,7 @@ export const ja: Messages = {
   },
   source: {
     inputLabel: "コピーした内容",
-    richText: "リッチテキスト",
+    richText: "書式付きテキスト",
     emptyClipboard: "クリップボードは空です。",
     imageAlt: "コピーした画像",
     cannotPreview: "(プレビューできません)",
