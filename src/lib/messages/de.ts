@@ -30,7 +30,7 @@ export const de: Messages = {
       "Das Popup fragt zuerst, wenn eine Erfassung ein Bild oder eine andere Binärdatei an den Anbieter senden würde; Textdateien laufen ohne Nachfrage",
     devMode: "Template-Variablen anzeigen",
     devModeHint:
-      "Zum Schreiben eigener Aktionen: Das Popup zeigt die Variablen jeder Kopie und ihren Inhalt",
+      "Zum Schreiben eigener Prompts: Das Popup zeigt die Variablen jeder Kopie und ihren Inhalt",
     stats: "Nutzungsstatistik",
     statsHint:
       "Jede Modellausführung fügt einer lokalen Aufzeichnung eine Zeile hinzu, aus der sich die Kosten berechnen lassen. Alles bleibt auf diesem Gerät und wird niemals irgendwohin gesendet; der kopierte Inhalt wird nie aufgezeichnet.",
@@ -52,7 +52,7 @@ export const de: Messages = {
       "Die Kosten hier sind Schätzungen: fehlgeschlagene und abgebrochene Ausführungen zählen nicht mit, und die Modellerkennung kann danebenliegen. Die exakten Zahlen stehen auf der Abrechnungsseite deines Anbieters.",
     userContext: "Über dich",
     userContextHint:
-      "Was die KI über dich wissen sollte — Rolle, Fachgebiete, Vorlieben. Wird jeder Aktion mitgegeben.",
+      "Was die KI über dich wissen sollte — Rolle, Fachgebiete, Vorlieben. Wird jedem Prompt mitgegeben.",
     userContextPlaceholders: [
       "Angestellter. Meine E-Mails gehen meist nach außen, also höflich halten; sonst das Fazit zuerst und kurz.",
       "Führungskraft. Bei langen Texten will ich nur die Kernpunkte — zuerst das, was ich entscheiden muss, Zahlen mit Begründung.",
@@ -62,15 +62,15 @@ export const de: Messages = {
     ],
     userContextClear: "Leeren",
     userContextCleared: "Geleert",
-    quickTitle: "Schnellaktionen",
+    quickTitle: "Schnell-Prompts",
     quickHint:
-      "Die vier Aktionen, die das Popup den Zifferntasten 1–4 zuordnet. Zum Umsortieren ziehen.",
+      "Die vier Prompts, die das Popup den Zifferntasten 1–4 zuordnet. Zum Umsortieren ziehen.",
     resetTitle: "Zurücksetzen",
     resetHint:
-      "Versetzt ZenCopy in den Zustand direkt nach der Installation — Einstellungen, Aktionen und Nutzungsstatistik werden alle gelöscht",
+      "Versetzt ZenCopy in den Zustand direkt nach der Installation — Einstellungen, Prompts und Nutzungsstatistik werden alle gelöscht",
     resetButton: "Zurücksetzen",
     resetWarning:
-      "Das lässt sich nicht rückgängig machen. KI-Einstellungen (inklusive API-Schlüssel), Routing-Regeln, eigene Aktionen und Fenstereinstellungen werden gelöscht, und ZenCopy kehrt in den Erststart-Zustand zurück.",
+      "Das lässt sich nicht rückgängig machen. KI-Einstellungen (inklusive API-Schlüssel), Regeln, eigene Prompts und Fenstereinstellungen werden gelöscht, und ZenCopy kehrt in den Erststart-Zustand zurück.",
     resetConfirm: "Alles löschen",
     optionSystem: "System",
     optionLight: "Hell",
@@ -80,9 +80,9 @@ export const de: Messages = {
     placeholder:
       "Zweimal schnell kopieren — wie ein Doppelklick — und das Ergebnis erscheint hier.",
     devVars: "Template-Variablen",
-    noAction:
-      "Für diese Erfassung läuft keine Aktion automatisch — wähle unten eine aus oder drücke 1–4, um sie auszuführen.",
-    routingDocs: "So funktioniert das Routing",
+    noPrompt:
+      "Für diese Erfassung läuft kein Prompt automatisch — wähle unten einen aus oder drücke 1–4, um ihn auszuführen.",
+    rulesDocs: "So funktionieren Regeln",
     confirmSend:
       "Diese Erfassung an deinen KI-Anbieter senden? Bilder und Dateien können mehr kosten als Text.",
     send: "Senden",
@@ -91,8 +91,8 @@ export const de: Messages = {
     unsupportedFile: (name) =>
       `„${name}“ ist ein Dateityp, der nicht an das Modell gesendet werden kann.`,
     fileUnreadable: (name) => `„${name}“ konnte nicht gelesen werden.`,
-    switchAction: "Aktion wechseln",
-    chooseAction: "Aktion wählen",
+    switchPrompt: "Prompt wechseln",
+    choosePrompt: "Prompt wählen",
     failed: (reason) => `Fehlgeschlagen: ${reason}`,
     timedOut: "Keine Antwort vom Modell. Prüfe Netzwerk und Anbieter, dann versuche es erneut.",
     emptyResult: "Das Modell hat eine leere Antwort zurückgegeben.",
@@ -149,18 +149,18 @@ export const de: Messages = {
     macosPermissions:
       "Noch ein Schritt: macOS braucht deine Erlaubnis, um das doppelte Kopieren zu bemerken. Erlaube ZenCopy in den Systemeinstellungen → Datenschutz & Sicherheit unter Eingabeüberwachung, beende ZenCopy dann und starte es neu.",
   },
-  actions: {
+  prompts: {
     builtinLabels: {
       "zencopy-translate": "Übersetzen",
       "zencopy-explain": "Erklären",
       "zencopy-polish": "Überarbeiten",
     },
-    title: "Aktionen",
+    title: "Prompts",
     hint: (keys) => `Was ${keys} kann. Auch über das Ergebnis-Label im Popup umschaltbar.`,
-    add: "Neue Aktion",
+    add: "Neuer Prompt",
     export: "Exportieren (.md)",
     import: "Importieren",
-    importHint: "Füge das Markdown einer geteilten Aktion ein — oder wähle die Datei.",
+    importHint: "Füge das Markdown eines geteilten Prompts ein — oder wähle die Datei.",
     importFromFile: "Datei auswählen",
     name: "Name",
     instruction: "Anweisung",
@@ -178,23 +178,22 @@ export const de: Messages = {
     edit: "Bearbeiten",
     remove: "Löschen",
     failed: (reason) => `Fehlgeschlagen: ${reason}`,
-    importNotAnAction:
-      "Keine Aktion: erwartet wird `---`-YAML-Frontmatter, gefolgt vom Prompt-Text.",
-    importNoLabel: "Der Aktion fehlt das label.",
-    importInvalidId: (id) => `Ungültige Aktions-id: '${id}'.`,
+    importNotAPrompt: "Kein Prompt: erwartet wird `---`-YAML-Frontmatter, gefolgt vom Prompt-Text.",
+    importNoLabel: "Dem Prompt fehlt das label.",
+    importInvalidId: (id) => `Ungültige Prompt-id: '${id}'.`,
     importBuiltinId: (id) =>
-      `'${id}' ist die id einer eingebauten Aktion — ändere die id in der Datei und versuche es erneut.`,
+      `'${id}' ist die id eines eingebauten Prompts — ändere die id in der Datei und versuche es erneut.`,
     importReservedId: (id) =>
-      `'${id}' beginnt mit 'zencopy-' — dieses id-Präfix ist den vorinstallierten Aktionen vorbehalten.`,
+      `'${id}' beginnt mit 'zencopy-' — dieses id-Präfix ist den vorinstallierten Prompts vorbehalten.`,
     importIdExists: (id) =>
-      `Eine Aktion mit der id '${id}' existiert bereits — lösche sie zuerst oder ändere die id in der Datei.`,
-    importTooLarge: "Die Datei ist zu groß für eine Aktion.",
+      `Ein Prompt mit der id '${id}' existiert bereits — lösche ihn zuerst oder ändere die id in der Datei.`,
+    importTooLarge: "Die Datei ist zu groß für einen Prompt.",
     labelExists: (label) =>
-      `Eine Aktion namens '${label}' existiert bereits — wähle einen anderen Namen.`,
+      `Ein Prompt namens '${label}' existiert bereits — wähle einen anderen Namen.`,
   },
-  routing: {
-    title: "Routing",
-    hint: "Welche Aktion für welchen Erfassungstyp läuft.",
+  rules: {
+    title: "Regeln",
+    hint: "Welcher Prompt für welchen Erfassungstyp läuft.",
     kindText: "Text",
     kindImage: "Bild",
     kindFiles: "Dateien",
@@ -213,7 +212,7 @@ export const de: Messages = {
     fieldFile: "Dateiname",
     fieldMinChars: "Min. Zeichen",
     fieldMaxChars: "Max. Zeichen",
-    ruleAction: "Aktion ausführen",
+    rulePrompt: "Prompt ausführen",
     wildcardHint:
       "Bedingungen werden mit UND verknüpft; * steht für Beliebiges. Leere Felder werden ignoriert.",
     needsCondition: "Gib mindestens eine Bedingung an.",
@@ -223,7 +222,7 @@ export const de: Messages = {
   },
   ai: {
     title: "KI",
-    hint: "Der Anbieter und das Modell für Aktionen.",
+    hint: "Der Anbieter und das Modell für Prompts.",
     disclosure:
       "Was du kopierst, wird direkt an den von dir konfigurierten Anbieter gesendet — ZenCopy hat weder Relay-Server noch Telemetrie. API-Nutzung und Kosten trägst du selbst, und KI-Ausgaben können falsch sein.",
     provider: "Anbieter",
@@ -239,7 +238,7 @@ export const de: Messages = {
     testUnreachable:
       "Verbindung fehlgeschlagen. Prüfe Modellname, API-Schlüssel, Basis-URL und Netzwerk.",
     advancedHint:
-      "Schreib die Konfiguration direkt — für ein Firmen-Gateway, mehrere Anbieter zugleich oder ein Modell pro Aktion.",
+      "Schreib die Konfiguration direkt — für ein Firmen-Gateway, mehrere Anbieter zugleich oder ein Modell pro Prompt.",
     examplesLink: "Beispielkonfigurationen ansehen",
     invalidJson: "Ungültiges JSON.",
     invalidSchema: "Gültiges JSON, aber keine gültige Konfiguration. Details stehen im Log.",

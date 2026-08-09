@@ -13,7 +13,7 @@ Nửa đầu, về **cửa sổ cài đặt**, dành cho mọi người; nửa s
 ## Cửa sổ cài đặt
 
 Mở từ menu của biểu tượng khay hệ thống, hoặc biểu tượng bánh răng trên cửa sổ nổi.
-Cửa sổ có ba thẻ: **Chung, AI và Hành động**.
+Cửa sổ có ba thẻ: **Chung, AI và Prompt**.
 
 ### Chung
 
@@ -34,29 +34,29 @@ Thẻ này còn có ô **Về bạn**.
 
 > Ví dụ: "Nhân viên kinh doanh. Chủ yếu viết email cho khách hàng — lịch sự nhưng không cứng nhắc, kết luận trước."
 
-Điền vào đây rồi, mọi hành động sẽ điều chỉnh kết quả cho phù hợp với bạn.
+Điền vào đây rồi, mọi prompt sẽ điều chỉnh kết quả cho phù hợp với bạn.
 Lời giải thích đến đúng mức hiểu biết của bạn, và bản nháp trở về theo giọng văn bạn ưa thích.
 Nó không bao giờ ảnh hưởng đến những nhiệm vụ không liên quan, và bản thân đoạn văn đó không bao giờ xuất hiện trong kết quả.
 
-### Hành động
+### Prompt
 
 Danh sách "điều gì xảy ra sau khi sao chép hai lần".
 
-- Các hành động cài sẵn có thể mở ra xem — chúng đồng thời là ví dụ mẫu.
-- Một **hành động mới** chỉ cần một cái tên và điều bạn muốn làm.
+- Các prompt cài sẵn có thể mở ra xem — chúng đồng thời là ví dụ mẫu.
+- Một **prompt mới** chỉ cần một cái tên và điều bạn muốn làm.
   Ví dụ: tên "Tóm tắt 3 dòng", chỉ dẫn "Tóm tắt nội dung này trong 3 dòng".
 - Chưa tự tin viết chỉ dẫn? Ghi đại ý bạn muốn rồi nhấn **Soạn bằng AI** — AI bạn đã cấu hình sẽ biến nó thành một chỉ dẫn hoàn chỉnh.
-- **Định tuyến** cho phép chọn hành động khác nhau theo từng loại nội dung (văn bản / hình ảnh / tệp).
+- **Quy tắc** cho phép chọn prompt khác nhau theo từng loại nội dung (văn bản / hình ảnh / tệp).
 
-Hành động bạn tạo có thể chia sẻ: **Xuất (.md)** ghi nó thành một tệp, và phía nhận chỉ cần dán vào **Nhập** hoặc chọn tệp.
+Prompt bạn tạo có thể chia sẻ: **Xuất (.md)** ghi nó thành một tệp, và phía nhận chỉ cần dán vào **Nhập** hoặc chọn tệp.
 
-Bạn muốn giao toàn bộ công việc cho AI? Bất kỳ cuộc trò chuyện AI nào cũng có thể viết một hành động sẵn sàng nhập cho bạn — hãy dán nội dung này và điền vào chỗ trống:
+Bạn muốn giao toàn bộ công việc cho AI? Bất kỳ cuộc trò chuyện AI nào cũng có thể viết một prompt sẵn sàng nhập cho bạn — hãy dán nội dung này và điền vào chỗ trống:
 
 ```text
-Đọc https://zencopy.app/llms-full.txt — tài liệu đầy đủ về ZenCopy, bao gồm định dạng tệp hành động, các biến mẫu và cách hoạt động của định tuyến. Sau đó, viết một hành động ZenCopy thực hiện công việc sau: [những gì bạn muốn]. Xuất một tệp hành động hoàn chỉnh (Markdown có frontmatter) trong một khối mã duy nhất, sẵn sàng để dán vào Cài đặt → Hành động → Nhập của ZenCopy. Nếu hành động này chỉ có ý nghĩa trong một ứng dụng cụ thể hoặc trên một trang web cụ thể, hãy thêm một câu cho tôi biết quy tắc định tuyến nào cần thiết lập.
+Đọc https://zencopy.app/llms-full.txt — tài liệu đầy đủ về ZenCopy, bao gồm định dạng tệp prompt, các biến mẫu và cách hoạt động của quy tắc. Sau đó, viết một prompt ZenCopy thực hiện công việc sau: [những gì bạn muốn]. Xuất một tệp prompt hoàn chỉnh (Markdown có frontmatter) trong một khối mã duy nhất, sẵn sàng để dán vào Cài đặt → Prompt → Nhập của ZenCopy. Nếu prompt này chỉ có ý nghĩa trong một ứng dụng cụ thể hoặc trên một trang web cụ thể, hãy thêm một câu cho tôi biết quy tắc nào cần thiết lập.
 ```
 
-Khối mã trong câu trả lời sẽ được đưa trực tiếp vào **Cài đặt → Hành động → Nhập**.
+Khối mã trong câu trả lời sẽ được đưa trực tiếp vào **Cài đặt → Prompt → Nhập**.
 Đối với những câu hỏi mà tài liệu không thể trả lời ("liệu ZenCopy có thể làm được... không?"), <RepomixLink>một cú nhấp chuột sẽ đóng gói mã nguồn liên quan</RepomixLink> — hãy chuyển kết quả cho chính AI đó.
 
 ## Tệp cấu hình (dành cho người dùng thành thạo)
@@ -73,38 +73,38 @@ Các tệp được đọc từ thư mục cấu hình ứng dụng của từng
   <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
 </Tabs>
 
-Các giá trị định tuyến mặc định được nhúng sẵn trong ứng dụng; `routing.json` chỉ **ghi đè** lên chúng.
-Các tệp hành động mang tính **bổ sung**:
-chúng định nghĩa hành động mới, còn các hành động dựng sẵn là bất khả xâm phạm (tệp cục bộ nhận id của hành động dựng sẵn sẽ bị bỏ qua).
+Các quy tắc mặc định được nhúng sẵn trong ứng dụng; `rules.json` chỉ **ghi đè** lên chúng.
+Các tệp prompt mang tính **bổ sung**:
+chúng định nghĩa prompt mới, còn các prompt dựng sẵn là bất khả xâm phạm (tệp cục bộ nhận id của prompt dựng sẵn sẽ bị bỏ qua).
 Chỉnh sửa có hiệu lực ở lần kích hoạt kế tiếp — không cần khởi động lại.
 
 ### `ai-sdk-catalog.json`
 
 Các nhà cung cấp cùng một ánh xạ **vai trò → mô hình**.
 Nhà gốc của định dạng tệp là [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — mọi trường đều được mô tả ở đó (kèm `$schema` để trình soạn thảo kiểm tra và tự hoàn thành), và [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) có cấu hình ở ba kích cỡ.
-Về các điểm khởi đầu dành riêng cho ZenCopy (những gì giao diện cài đặt ghi ra, Ollama chạy tại máy, vai trò cho hành động), xem [Cấu hình mẫu](/vi/recipes/).
+Về các điểm khởi đầu dành riêng cho ZenCopy (những gì giao diện cài đặt ghi ra, Ollama chạy tại máy, vai trò cho prompt), xem [Cấu hình mẫu](/vi/recipes/).
 
 Có một yêu cầu đến từ chính ZenCopy chứ không phải từ định dạng tệp: `roles` phải luôn chứa **`default`**.
-Mọi hành động đều chạy với role này trừ khi frontmatter của nó nêu một role khác, và bài kiểm tra kết nối trong phần cài đặt cũng ping role này.
+Mọi prompt đều chạy với role này trừ khi frontmatter của nó nêu một role khác, và bài kiểm tra kết nối trong phần cài đặt cũng ping role này.
 
 Khóa API được ghi thẳng vào tệp cục bộ này (giao diện cài đặt ghi cùng định dạng); chúng không bao giờ rời khỏi máy bạn.
 Biến môi trường không được đọc — ứng dụng đồ họa do hệ điều hành khởi chạy, không phải shell của bạn, nên các biến export trong `.zshrc` và những tệp tương tự không bao giờ đến được chúng.
 Tệp được kiểm tra theo schema ở mỗi lần đọc.
 Một chỉnh sửa hỏng sẽ hiện thành thông báo rõ ràng trong cửa sổ nổi và trình soạn thảo cài đặt — không có gì thất bại trong im lặng.
 
-### `routing.json`
+### `rules.json`
 
-Hành động nào xử lý loại nội dung bắt được nào:
-một ánh xạ phẳng `kind → action` cộng với danh sách `overrides` tùy chọn có độ ưu tiên cao hơn (quy tắc khớp đầu tiên thắng).
-Ba loại là `text`, `image` và `files` (bản sao văn bản có định dạng được tính là `text`); theo mặc định, văn bản được định tuyến đến Zen, còn hình ảnh và tệp đến Giải thích.
-Ánh xạ phẳng chỉnh được ngay trong ứng dụng (Cài đặt → Hành động → Định tuyến), nên bạn chỉ cần đụng đến tệp này khi dùng `overrides`.
+Prompt nào xử lý loại nội dung bắt được nào:
+một ánh xạ phẳng `kind → prompt` cộng với danh sách `overrides` tùy chọn có độ ưu tiên cao hơn (quy tắc khớp đầu tiên thắng).
+Ba loại là `text`, `image` và `files` (bản sao văn bản có định dạng được tính là `text`); theo mặc định, văn bản được chuyển đến Zen, còn hình ảnh và tệp đến Giải thích.
+Ánh xạ phẳng chỉnh được ngay trong ứng dụng (Cài đặt → Prompt → Quy tắc), nên bạn chỉ cần đụng đến tệp này khi dùng `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
-  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
 }
 ```
 
@@ -119,10 +119,10 @@ Mọi thứ khác đều bị từ chối kèm thông báo rõ ràng.
 Đường dẫn đầy đủ đi kèm nội dung để mô hình phân biệt được các tệp và biết chúng nằm ở đâu.
 Vì tệp đính kèm nhị phân có thể tốn kém hơn văn bản, cửa sổ nổi sẽ hỏi trước khi gửi (tệp văn bản chạy không cần hỏi) — có thể tắt bước xác nhận ngay tại chỗ hoặc trong Cài đặt.
 
-### `actions/*.md`
+### `prompts/*.md`
 
-Một tệp = một hành động: frontmatter YAML + phần thân prompt viết bằng [Liquid](https://liquidjs.com).
-Chính tệp đơn này cũng là định dạng chia sẻ — Cài đặt → Hành động → Nhập chấp nhận nó dưới dạng văn bản dán vào hoặc tệp được chọn.
+Một tệp = một prompt: frontmatter YAML + phần thân viết bằng [Liquid](https://liquidjs.com).
+Chính tệp đơn này cũng là định dạng chia sẻ — Cài đặt → Prompt → Nhập chấp nhận nó dưới dạng văn bản dán vào hoặc tệp được chọn.
 
 ```markdown
 ---
@@ -137,12 +137,12 @@ Tóm tắt trong 3 dòng, bằng {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Ý nghĩa                                                                                                             |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `id`           | Tên được tham chiếu từ `routing.json` (mặc định: tên tệp) — tiền tố `zencopy-` dành riêng cho các hành động cài sẵn |
-| `label`        | Hiển thị trên cửa sổ nổi                                                                                            |
-| `role`         | Vai trò trong catalog dùng để chạy (mặc định: `default`)                                                            |
-| `instructions` | System prompt (mẫu Liquid)                                                                                          |
+| Frontmatter    | Ý nghĩa                                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------------------- |
+| `id`           | Tên được tham chiếu từ `rules.json` (mặc định: tên tệp) — tiền tố `zencopy-` dành riêng cho các prompt cài sẵn |
+| `label`        | Hiển thị trên cửa sổ nổi                                                                                       |
+| `role`         | Vai trò trong catalog dùng để chạy (mặc định: `default`)                                                       |
+| `instructions` | System prompt (mẫu Liquid)                                                                                     |
 
 Các biến mẫu, kèm giá trị ví dụ cho một đoạn văn sao chép trong trình duyệt:
 
@@ -166,12 +166,12 @@ Các biến mẫu, kèm giá trị ví dụ cho một đoạn văn sao chép tro
 Còn có bộ lọc `language_name` riêng của ZenCopy: `{{ locale | language_name }}` khai triển thành "Vietnamese" thay vì "vi", đọc tự nhiên hơn trong một prompt.
 Để xem giá trị thật, hãy bật **Hiển thị biến mẫu** trong Cài đặt — các biến của mỗi lần bắt sẽ hiện trong cửa sổ nổi dưới dạng JSON.
 
-Hành động đơn giản (một cái tên và một chỉ dẫn) cũng tạo được từ cửa sổ cài đặt; những gì nó ghi ra chính xác là định dạng tệp này.
+Prompt đơn giản (một cái tên và một chỉ dẫn) cũng tạo được từ cửa sổ cài đặt; những gì nó ghi ra chính xác là định dạng tệp này.
 
 #### Mẫu nâng cao
 
 Cả trường `instructions` trong frontmatter lẫn phần thân đều là mẫu [LiquidJS](https://liquidjs.com/tags/overview.html) đầy đủ: câu điều kiện, vòng lặp và [bộ lọc](https://liquidjs.com/filters/overview.html) đều hoạt động.
-Một hành động duy nhất có thể thích ứng theo nơi nội dung được sao chép:
+Một prompt duy nhất có thể thích ứng theo nơi nội dung được sao chép:
 
 ```markdown
 ---

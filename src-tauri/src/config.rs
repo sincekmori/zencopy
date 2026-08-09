@@ -2,19 +2,19 @@
 
 use crate::OrLog;
 use tauri::Manager;
-/// Where user config files (ai-sdk-catalog.json, routing.json, actions/) are read
+/// Where user config files (ai-sdk-catalog.json, rules.json, prompts/) are read
 /// from: the per-user app config dir, in dev and release alike — one
-/// predictable location (logged at startup). Defaults for routing and actions
+/// predictable location (logged at startup). Defaults for rules and prompts
 /// are embedded in the binary, so this dir only ever *overrides*.
 pub(crate) fn config_base(handle: &tauri::AppHandle) -> Option<std::path::PathBuf> {
     handle.path().app_config_dir().ok()
 }
 
-/// Pre-installed actions: authored as files in `src-tauri/actions/` (kept as
+/// Pre-installed prompts: authored as files in `src-tauri/prompts/` (kept as
 /// real .md so formatters and reviews see them), embedded into the binary at
 /// build time, and immutable at runtime — never shipped or seeded as files,
 /// local files with the same id are ignored, and the UI shows them read-only.
-/// Customization means adding *new* actions.
+/// Customization means adding *new* prompts.
 /// The tauri-plugin-store file; the frontend reads the same file via its own
 /// STORE_FILE constant in src/lib/settings.ts (kept in sync by a test below).
 pub(crate) const STORE_FILE: &str = "settings.json";
@@ -30,7 +30,7 @@ pub(crate) fn catalog_path(app: &tauri::AppHandle) -> Option<std::path::PathBuf>
 }
 
 /// Factory reset: delete the directories ZenCopy owns wholesale — the config
-/// dir (catalog with keys, routing, custom actions) and the data dir (the
+/// dir (catalog with keys, rules, custom prompts) and the data dir (the
 /// settings store and the usage statistics), which are the same directory on
 /// macOS — the just-installed state the Reset button promises. Whole directories,
 /// not a file list, so the reset stays complete as future versions add or

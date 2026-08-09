@@ -55,7 +55,7 @@ pub(crate) struct TokenUsage {
 #[tauri::command]
 pub(crate) fn record_usage(
     app: tauri::AppHandle,
-    action: String,
+    prompt: String,
     kind: String,
     model: Option<String>,
     tokens: Option<TokenUsage>,
@@ -81,7 +81,7 @@ pub(crate) fn record_usage(
                 chrono::Local::now().to_rfc3339_opts(chrono::SecondsFormat::Secs, true)
             ),
         );
-        event.insert("action".to_string(), serde_json::json!(action));
+        event.insert("prompt".to_string(), serde_json::json!(prompt));
         event.insert("kind".to_string(), serde_json::json!(kind));
         if let Some(model) = &model {
             event.insert("model".to_string(), serde_json::json!(model));
@@ -102,7 +102,7 @@ pub(crate) fn record_usage(
                 event.insert("tokens".to_string(), serde_json::Value::Object(counts));
             }
         }
-        // One write_all per line: the popup runs actions in parallel, and
+        // One write_all per line: the popup runs prompts in parallel, and
         // Tauri commands land on worker threads — a formatted multi-write
         // (writeln!) could interleave two events into one corrupt line. A
         // single small write to an O_APPEND file keeps every line whole.

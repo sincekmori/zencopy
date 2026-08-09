@@ -39,7 +39,7 @@ export interface Messages {
      *  label's meaning, not the key). */
     devMode: string;
     devModeHint: string;
-    /** Usage statistics: a local JSONL of action invocations (ids, kinds,
+    /** Usage statistics: a local JSONL of prompt invocations (ids, kinds,
      *  timestamps — never content). Toggle default is ON. */
     stats: string;
     statsHint: string;
@@ -70,7 +70,7 @@ export interface Messages {
      *  an estimate — the provider's billing page has the exact figures. */
     costsApproxHint: string;
     /** "About you": one free-form multiline self-description, added to every
-     *  action run so results fit the person asking. The placeholders are
+     *  prompt run so results fit the person asking. The placeholders are
      *  example personas the field rotates through; Tab inserts the one
      *  currently shown. */
     userContext: string;
@@ -93,16 +93,16 @@ export interface Messages {
   popup: {
     placeholder: string;
     devVars: string;
-    noAction: string;
-    routingDocs: string;
+    noPrompt: string;
+    rulesDocs: string;
     confirmSend: string;
     send: string;
     dontAskAgain: string;
     attachmentTooLarge: (mb: number) => string;
     unsupportedFile: (name: string) => string;
     fileUnreadable: (name: string) => string;
-    switchAction: string;
-    chooseAction: string;
+    switchPrompt: string;
+    choosePrompt: string;
     failed: (reason: string) => string;
     timedOut: string;
     emptyResult: string;
@@ -182,15 +182,15 @@ export interface Messages {
     /** The trigger listener failed to start; details are in the log. */
     failed: string;
     /** macOS: the listener could not start because Input Monitoring is not
-     *  granted — actionable guidance, shown instead of `failed` (see
+     *  granted — promptable guidance, shown instead of `failed` (see
      *  TriggerNotice). */
     macosPermissions: string;
   };
-  actions: {
-    /** Localized display labels for pre-installed actions, keyed by action id.
+  prompts: {
+    /** Localized display labels for pre-installed prompts, keyed by prompt id.
      *  The ids live in Rust (DEFAULT_ACTIONS), so this is an open map rather
-     *  than fixed keys; a missing id falls back to the action's own (English)
-     *  label from its .md file. User actions are always shown verbatim. */
+     *  than fixed keys; a missing id falls back to the prompt's own (English)
+     *  label from its .md file. User prompts are always shown verbatim. */
     builtinLabels: Record<string, string>;
     title: string;
     hint: (keys: string) => string;
@@ -215,10 +215,10 @@ export interface Messages {
     edit: string;
     remove: string;
     failed: (reason: string) => string;
-    /** Import failures, mapped from the structured error codes import_action
-     *  (src-tauri) rejects with; `id` is the offending action id. `label` and
-     *  `id` name literal fields of the action file — keep them untranslated. */
-    importNotAnAction: string;
+    /** Import failures, mapped from the structured error codes import_prompt
+     *  (src-tauri) rejects with; `id` is the offending prompt id. `label` and
+     *  `id` name literal fields of the prompt file — keep them untranslated. */
+    importNotAPrompt: string;
     importNoLabel: string;
     importInvalidId: (id: string) => string;
     importBuiltinId: (id: string) => string;
@@ -227,11 +227,11 @@ export interface Messages {
     importIdExists: (id: string) => string;
     importTooLarge: string;
     /** Rejection for a save or import whose label duplicates an existing
-     *  action's — labels are the only identity users see, so they must stay
+     *  prompt's — labels are the only identity users see, so they must stay
      *  unique. Used for both the frontend pre-check and the Rust backstop. */
     labelExists: (label: string) => string;
   };
-  routing: {
+  rules: {
     title: string;
     hint: string;
     kindText: string;
@@ -253,7 +253,7 @@ export interface Messages {
     fieldFile: string;
     fieldMinChars: string;
     fieldMaxChars: string;
-    ruleAction: string;
+    rulePrompt: string;
     wildcardHint: string;
     needsCondition: string;
     needsValidBounds: string;

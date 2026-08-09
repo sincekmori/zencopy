@@ -11,9 +11,9 @@ Ele não tem servidor, nem conta, nem telemetria.
 ## O que sai do seu dispositivo
 
 Quando você pressiona o gatilho (<span data-os-modifier>Ctrl/⌘</span> + C + C), o conteúdo capturado da área de transferência é enviado diretamente ao provedor de LLM que _você_ configurou — nada além disso, e para nenhum outro lugar.
-O que exatamente é enviado depende da ação executada:
+O que exatamente é enviado depende do prompt executado:
 
-- O prompt renderizado, que pode incorporar o contexto da captura como [variáveis de template](/pt-br/configuration/#actionsmd): o texto e o markup copiados, o nome do aplicativo de origem e o título da janela, a URL da página, a data e o seu idioma.
+- O prompt renderizado, que pode incorporar o contexto da captura como [variáveis de template](/pt-br/configuration/#promptsmd): o texto e o markup copiados, o nome do aplicativo de origem e o título da janela, a URL da página, a data e o seu idioma.
 - Para uma imagem ou arquivos copiados, o próprio conteúdo é anexado (até 10 MB por captura) — e, no caso de arquivos, seus caminhos completos.
   Por padrão, o popup pergunta antes de enviá-los.
 
@@ -29,7 +29,7 @@ Conteúdo da área de transferência que outros aplicativos marcam como sensíve
 - Arquivos de log.
   Os logs ocultam segredos e nunca incluem conteúdo copiado nem chaves de API.
 
-- Estatísticas de uso (um interruptor nas configurações, ativado por padrão): qual ação rodou em qual tipo de captura, com o modelo e a contagem de tokens, para que seus custos continuem calculáveis.
+- Estatísticas de uso (um interruptor nas configurações, ativado por padrão): qual prompt rodou em qual tipo de captura, com o modelo e a contagem de tokens, para que seus custos continuem calculáveis.
   Apenas um arquivo local — nunca o conteúdo copiado, nunca enviado a lugar nenhum.
 
 ## Terceiros

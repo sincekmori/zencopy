@@ -30,7 +30,7 @@ export const fr: Messages = {
       "Le popup demande confirmation avant d'envoyer une image ou un autre fichier binaire au fournisseur ; les fichiers texte sont traités sans confirmation.",
     devMode: "Afficher les variables de gabarit",
     devModeHint:
-      "Pour écrire vos propres actions : le popup affiche les variables de chaque copie et leur contenu",
+      "Pour écrire vos propres prompts : le popup affiche les variables de chaque copie et leur contenu",
     stats: "Statistiques d'utilisation",
     statsHint:
       "Chaque exécution de modèle ajoute une ligne à un enregistrement local qui permet de calculer les coûts. Tout reste sur cet appareil et n'est jamais envoyé nulle part ; le contenu copié n'est jamais enregistré.",
@@ -52,7 +52,7 @@ export const fr: Messages = {
       "Les coûts affichés sont des estimations : les exécutions échouées ou interrompues ne sont pas comptées, et la détection du modèle peut se tromper. La page de facturation de votre fournisseur a les chiffres exacts.",
     userContext: "À propos de vous",
     userContextHint:
-      "Ce que l'IA devrait savoir de vous : rôle, expertise, préférences. Ajouté à chaque action.",
+      "Ce que l'IA devrait savoir de vous : rôle, expertise, préférences. Ajouté à chaque prompt.",
     userContextPlaceholders: [
       "Employé de bureau. Mes e-mails partent surtout hors de l'entreprise, alors restez courtois ; sinon, commencez par la conclusion et faites court.",
       "Cadre dirigeant. Sur les longs documents, juste l'essentiel — commencez par ce que je dois décider, et étayez les chiffres.",
@@ -62,15 +62,15 @@ export const fr: Messages = {
     ],
     userContextClear: "Effacer",
     userContextCleared: "Effacé",
-    quickTitle: "Actions rapides",
+    quickTitle: "Prompts rapides",
     quickHint:
-      "Les quatre actions que le popup associe aux touches numériques 1–4. Glissez pour réordonner.",
+      "Les quatre prompts que le popup associe aux touches numériques 1–4. Glissez pour réordonner.",
     resetTitle: "Réinitialiser",
     resetHint:
-      "Remet ZenCopy dans l'état juste après l'installation — réglages, actions et statistiques d'utilisation sont tous supprimés",
+      "Remet ZenCopy dans l'état juste après l'installation — réglages, prompts et statistiques d'utilisation sont tous supprimés",
     resetButton: "Réinitialiser",
     resetWarning:
-      "Cette action est irréversible. Les réglages d'IA (clés d'API comprises), les règles de routage, les actions personnalisées et les préférences de fenêtre sont supprimés, et ZenCopy revient à son état de premier lancement.",
+      "Cette opération est irréversible. Les réglages d'IA (clés d'API comprises), les règles, les prompts personnalisés et les préférences de fenêtre sont supprimés, et ZenCopy revient à son état de premier lancement.",
     resetConfirm: "Tout supprimer",
     optionSystem: "Système",
     optionLight: "Clair",
@@ -79,9 +79,9 @@ export const fr: Messages = {
   popup: {
     placeholder: "Copiez deux fois, vite — comme un double-clic — et le résultat apparaît ici.",
     devVars: "Variables de gabarit",
-    noAction:
-      "Aucune action ne s'exécute automatiquement pour cette capture — choisissez-en une ci-dessous ou appuyez sur 1–4 pour l'exécuter.",
-    routingDocs: "Comment fonctionne le routage",
+    noPrompt:
+      "Aucun prompt ne s'exécute automatiquement pour cette capture — choisissez-en un ci-dessous ou appuyez sur 1–4 pour l'exécuter.",
+    rulesDocs: "Comment fonctionnent les règles",
     confirmSend:
       "Envoyer cette capture à votre fournisseur d'IA ? Les images et fichiers peuvent coûter plus cher que le texte.",
     send: "Envoyer",
@@ -91,8 +91,8 @@ export const fr: Messages = {
     unsupportedFile: (name) =>
       `« ${name} » est un type de fichier qui ne peut pas être envoyé au modèle.`,
     fileUnreadable: (name) => `Impossible de lire « ${name} ».`,
-    switchAction: "Changer d'action",
-    chooseAction: "Choisir une action",
+    switchPrompt: "Changer de prompt",
+    choosePrompt: "Choisir un prompt",
     failed: (reason) => `Échec : ${reason}`,
     timedOut:
       "Aucune réponse du modèle. Vérifiez votre réseau et votre fournisseur, puis réessayez.",
@@ -150,19 +150,19 @@ export const fr: Messages = {
     macosPermissions:
       "Encore une étape : macOS a besoin de votre autorisation pour remarquer le double copier. Dans Réglages Système → Confidentialité et sécurité, autorisez ZenCopy sous Surveillance de l'entrée, puis quittez ZenCopy et relancez-le.",
   },
-  actions: {
+  prompts: {
     builtinLabels: {
       "zencopy-translate": "Traduire",
       "zencopy-explain": "Expliquer",
       "zencopy-polish": "Peaufiner",
     },
-    title: "Actions",
+    title: "Prompts",
     hint: (keys) =>
       `Ce que ${keys} sait faire. Modifiable aussi depuis l'étiquette du résultat du popup.`,
-    add: "Nouvelle action",
+    add: "Nouveau prompt",
     export: "Exporter (.md)",
     import: "Importer",
-    importHint: "Collez le Markdown d'une action partagée, ou choisissez le fichier.",
+    importHint: "Collez le Markdown d'un prompt partagé, ou choisissez le fichier.",
     importFromFile: "Choisir un fichier",
     name: "Nom",
     instruction: "Instruction",
@@ -180,22 +180,22 @@ export const fr: Messages = {
     edit: "Modifier",
     remove: "Supprimer",
     failed: (reason) => `Échec : ${reason}`,
-    importNotAnAction:
-      "Ce n'est pas une action : frontmatter YAML `---` attendu, suivi du corps du prompt.",
-    importNoLabel: "L'action n'a pas de label.",
-    importInvalidId: (id) => `Id d'action non valide : '${id}'.`,
+    importNotAPrompt:
+      "Ce n'est pas un prompt : frontmatter YAML `---` attendu, suivi du corps du prompt.",
+    importNoLabel: "Le prompt n'a pas de label.",
+    importInvalidId: (id) => `Id de prompt non valide : '${id}'.`,
     importBuiltinId: (id) =>
-      `'${id}' est l'id d'une action intégrée — modifiez l'id dans le fichier et réessayez.`,
+      `'${id}' est l'id d'un prompt intégré — modifiez l'id dans le fichier et réessayez.`,
     importReservedId: (id) =>
-      `'${id}' commence par 'zencopy-' — ce préfixe d'id est réservé aux actions préinstallées.`,
+      `'${id}' commence par 'zencopy-' — ce préfixe d'id est réservé aux prompts préinstallés.`,
     importIdExists: (id) =>
-      `Une action avec l'id '${id}' existe déjà — supprimez-la d'abord, ou modifiez l'id dans le fichier.`,
-    importTooLarge: "Le fichier est trop volumineux pour être une action.",
-    labelExists: (label) => `Une action nommée '${label}' existe déjà — choisissez un autre nom.`,
+      `Un prompt avec l'id '${id}' existe déjà — supprimez-le d'abord, ou modifiez l'id dans le fichier.`,
+    importTooLarge: "Le fichier est trop volumineux pour être un prompt.",
+    labelExists: (label) => `Un prompt nommé '${label}' existe déjà — choisissez un autre nom.`,
   },
-  routing: {
-    title: "Routage",
-    hint: "Quelle action s'exécute pour chaque type de capture.",
+  rules: {
+    title: "Règles",
+    hint: "Quel prompt s'exécute pour chaque type de capture.",
     kindText: "Texte",
     kindImage: "Image",
     kindFiles: "Fichiers",
@@ -214,7 +214,7 @@ export const fr: Messages = {
     fieldFile: "Nom de fichier",
     fieldMinChars: "Caractères min.",
     fieldMaxChars: "Caractères max.",
-    ruleAction: "Exécuter l'action",
+    rulePrompt: "Exécuter le prompt",
     wildcardHint:
       "Les conditions se combinent par AND ; * correspond à n'importe quoi. Les champs vides sont ignorés.",
     needsCondition: "Ajoutez au moins une condition.",
@@ -224,7 +224,7 @@ export const fr: Messages = {
   },
   ai: {
     title: "IA",
-    hint: "Le fournisseur et le modèle utilisés par les actions.",
+    hint: "Le fournisseur et le modèle utilisés par les prompts.",
     disclosure:
       "Ce que vous copiez est envoyé directement au fournisseur que vous configurez — ZenCopy n'a ni serveur relais ni télémétrie. L'usage de l'API et ses coûts sont à votre charge, et la sortie de l'IA peut être erronée.",
     provider: "Fournisseur",
@@ -240,7 +240,7 @@ export const fr: Messages = {
     testUnreachable:
       "Échec de la connexion. Vérifiez le nom du modèle, la clé d'API, l'URL de base et le réseau.",
     advancedHint:
-      "Écrivez la configuration directement — pour une passerelle d'entreprise, plusieurs fournisseurs à la fois ou un modèle par action.",
+      "Écrivez la configuration directement — pour une passerelle d'entreprise, plusieurs fournisseurs à la fois ou un modèle par prompt.",
     examplesLink: "Voir des exemples de configuration",
     invalidJson: "JSON invalide.",
     invalidSchema:

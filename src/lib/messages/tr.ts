@@ -30,7 +30,7 @@ export const tr: Messages = {
       "Bir yakalama sağlayıcıya görsel ya da başka bir ikili dosya gönderecekse açılır pencere önce sorar; metin dosyaları sormadan çalışır",
     devMode: "Şablon değişkenlerini göster",
     devModeHint:
-      "Kendi eylemlerini yazmak için: açılır pencere her kopyanın değişkenlerini ve içeriğini gösterir",
+      "Kendi istemlerini yazmak için: açılır pencere her kopyanın değişkenlerini ve içeriğini gösterir",
     stats: "Kullanım istatistikleri",
     statsHint:
       "Her model çalıştırması, maliyetleri hesaplayabileceğiniz yerel bir kayda bir satır ekler. Her şey bu cihazda kalır ve asla hiçbir yere gönderilmez; kopyalanan içerik asla kayda dahil edilmez.",
@@ -52,7 +52,7 @@ export const tr: Messages = {
       "Buradaki maliyetler tahminidir: başarısız ve durdurulan çalıştırmalar sayılmaz, model tespiti de yanılabilir. Kesin rakamlar sağlayıcının faturalandırma sayfasındadır.",
     userContext: "Senin hakkında",
     userContextHint:
-      "Yapay zekânın senin hakkında bilmesi gerekenler — rol, uzmanlık, tercihler. Her eyleme eklenir.",
+      "Yapay zekânın senin hakkında bilmesi gerekenler — rol, uzmanlık, tercihler. Her isteme eklenir.",
     userContextPlaceholders: [
       "Ofis çalışanı. E-postalarım çoğunlukla şirket dışına gidiyor, o yüzden kibar olsun; diğer durumlarda önce sonucu belirt ve kısa tut.",
       "Üst düzey yönetici. Uzun metinlerde sadece ana noktaları istiyorum — önce karar vermem gerekenleri belirt, sayıları dayanaklarıyla destekle.",
@@ -62,15 +62,15 @@ export const tr: Messages = {
     ],
     userContextClear: "Temizle",
     userContextCleared: "Temizlendi",
-    quickTitle: "Hızlı eylemler",
+    quickTitle: "Hızlı istemler",
     quickHint:
-      "Açılır pencerenin 1–4 sayı tuşlarına bağladığı dört eylem. Yeniden sıralamak için sürükle.",
+      "Açılır pencerenin 1–4 sayı tuşlarına bağladığı dört istem. Yeniden sıralamak için sürükle.",
     resetTitle: "Sıfırla",
     resetHint:
-      "ZenCopy'yi kurulumdan hemen sonraki duruma döndürür — ayarlar, eylemler ve kullanım istatistikleri tümüyle silinir",
+      "ZenCopy'yi kurulumdan hemen sonraki duruma döndürür — ayarlar, istemler ve kullanım istatistikleri tümüyle silinir",
     resetButton: "Sıfırla",
     resetWarning:
-      "Bu işlem geri alınamaz. AI ayarları (API anahtarları dahil), yönlendirme kuralları, kendi eylemlerin ve pencere tercihleri silinir; ZenCopy ilk açılış durumuna döner.",
+      "Bu işlem geri alınamaz. AI ayarları (API anahtarları dahil), kurallar, kendi istemlerin ve pencere tercihleri silinir; ZenCopy ilk açılış durumuna döner.",
     resetConfirm: "Hepsini sil",
     optionSystem: "Sistem",
     optionLight: "Açık",
@@ -79,9 +79,9 @@ export const tr: Messages = {
   popup: {
     placeholder: "Hızlıca iki kez kopyala — çift tıklama gibi — sonuç burada görünür.",
     devVars: "Şablon değişkenleri",
-    noAction:
-      "Bu yakalama otomatik olarak bir eylem çalıştırmaz — aşağıdan birini seç veya çalıştırmak için 1–4'e bas.",
-    routingDocs: "Yönlendirme nasıl çalışır",
+    noPrompt:
+      "Bu yakalama otomatik olarak bir istem çalıştırmaz — aşağıdan birini seç veya çalıştırmak için 1–4'e bas.",
+    rulesDocs: "Kurallar nasıl çalışır",
     confirmSend:
       "Bu yakalama AI sağlayıcına gönderilsin mi? Görseller ve dosyalar metinden pahalı olabilir.",
     send: "Gönder",
@@ -89,8 +89,8 @@ export const tr: Messages = {
     attachmentTooLarge: (mb) => `Göndermek için çok büyük — sınır, yakalama başına ${mb} MB.`,
     unsupportedFile: (name) => `"${name}" modele gönderilemeyen bir dosya türü.`,
     fileUnreadable: (name) => `"${name}" okunamadı.`,
-    switchAction: "Eylemi değiştir",
-    chooseAction: "Bir eylem seç",
+    switchPrompt: "İstemi değiştir",
+    choosePrompt: "Bir istem seç",
     failed: (reason) => `Başarısız: ${reason}`,
     timedOut: "Modelden yanıt yok. Ağını ve sağlayıcını kontrol edip yeniden dene.",
     emptyResult: "Model boş bir yanıt döndürdü.",
@@ -147,19 +147,19 @@ export const tr: Messages = {
     macosPermissions:
       "Bir adım kaldı: macOS'in çift kopyalamayı fark edebilmesi için izniniz gerekiyor. Sistem Ayarları → Gizlilik ve Güvenlik altında Giriş İzleme için ZenCopy'ye izin verin, ardından ZenCopy'yi kapatıp yeniden başlatın.",
   },
-  actions: {
+  prompts: {
     builtinLabels: {
       "zencopy-translate": "Çevir",
       "zencopy-explain": "Açıkla",
       "zencopy-polish": "İyileştir",
     },
-    title: "Eylemler",
+    title: "İstemler",
     hint: (keys) =>
       `${keys} ile ne yapılabileceği. Açılır penceredeki sonuç etiketinden de değiştirilebilir.`,
-    add: "Yeni eylem",
+    add: "Yeni istem",
     export: "Dışa aktar (.md)",
     import: "İçe aktar",
-    importHint: "Paylaşılan eylemin Markdown'ını yapıştır veya dosyayı seç.",
+    importHint: "Paylaşılan istemin Markdown'ını yapıştır veya dosyayı seç.",
     importFromFile: "Dosya seç",
     name: "Ad",
     instruction: "Talimat",
@@ -176,22 +176,22 @@ export const tr: Messages = {
     edit: "Düzenle",
     remove: "Sil",
     failed: (reason) => `Başarısız: ${reason}`,
-    importNotAnAction:
-      "Bu bir eylem değil: `---` YAML frontmatter ve ardından prompt gövdesi bekleniyor.",
-    importNoLabel: "Eylemin label alanı yok.",
-    importInvalidId: (id) => `Geçersiz eylem id'si: '${id}'.`,
+    importNotAPrompt:
+      "Bu bir istem değil: `---` YAML frontmatter ve ardından istem gövdesi bekleniyor.",
+    importNoLabel: "İstemin label alanı yok.",
+    importInvalidId: (id) => `Geçersiz istem id'si: '${id}'.`,
     importBuiltinId: (id) =>
-      `'${id}' yerleşik bir eylemin id'si — dosyadaki id'yi değiştirip yeniden dene.`,
+      `'${id}' yerleşik bir istemin id'si — dosyadaki id'yi değiştirip yeniden dene.`,
     importReservedId: (id) =>
-      `'${id}', 'zencopy-' ile başlıyor — bu id öneki önceden yüklü eylemlere ayrılmıştır.`,
+      `'${id}', 'zencopy-' ile başlıyor — bu id öneki önceden yüklü istemlere ayrılmıştır.`,
     importIdExists: (id) =>
-      `'${id}' id'sine sahip bir eylem zaten var — önce onu sil ya da dosyadaki id'yi değiştir.`,
-    importTooLarge: "Dosya bir eylem olamayacak kadar büyük.",
-    labelExists: (label) => `'${label}' adında bir eylem zaten var — başka bir ad seç.`,
+      `'${id}' id'sine sahip bir istem zaten var — önce onu sil ya da dosyadaki id'yi değiştir.`,
+    importTooLarge: "Dosya bir istem olamayacak kadar büyük.",
+    labelExists: (label) => `'${label}' adında bir istem zaten var — başka bir ad seç.`,
   },
-  routing: {
-    title: "Yönlendirme",
-    hint: "Her yakalama türü için hangi eylemin çalışacağı.",
+  rules: {
+    title: "Kurallar",
+    hint: "Her yakalama türü için hangi istemin çalışacağı.",
     kindText: "Metin",
     kindImage: "Görsel",
     kindFiles: "Dosyalar",
@@ -210,7 +210,7 @@ export const tr: Messages = {
     fieldFile: "Dosya adı",
     fieldMinChars: "En az karakter",
     fieldMaxChars: "En çok karakter",
-    ruleAction: "Eylemi çalıştır",
+    rulePrompt: "İstemi çalıştır",
     wildcardHint: "Koşullar VE ile birleşir; * her şeyle eşleşir. Boş alanlar yok sayılır.",
     needsCondition: "En az bir koşul ekle.",
     needsValidBounds: "En az karakter, en çok karakteri aşamaz.",
@@ -219,7 +219,7 @@ export const tr: Messages = {
   },
   ai: {
     title: "AI",
-    hint: "Eylemlerin kullandığı sağlayıcı ve model.",
+    hint: "İstemlerin kullandığı sağlayıcı ve model.",
     disclosure:
       "Kopyaladığın her şey doğrudan yapılandırdığın sağlayıcıya gönderilir — ZenCopy'de aracı sunucu da telemetri de yok. API kullanımı ve maliyeti sana ait, AI çıktısı hatalı olabilir.",
     provider: "Sağlayıcı",
@@ -235,7 +235,7 @@ export const tr: Messages = {
     testUnreachable:
       "Bağlantı başarısız. Model adını, API anahtarını, taban URL'yi ve ağı kontrol et.",
     advancedHint:
-      "Yapılandırmayı doğrudan yaz — kurumsal ağ geçidi, aynı anda birden çok sağlayıcı veya eylem başına model için.",
+      "Yapılandırmayı doğrudan yaz — kurumsal ağ geçidi, aynı anda birden çok sağlayıcı veya istem başına model için.",
     examplesLink: "Örnek yapılandırmalara bak",
     invalidJson: "Geçersiz JSON.",
     invalidSchema: "JSON geçerli ama geçerli bir yapılandırma değil. Ayrıntılar günlükte.",

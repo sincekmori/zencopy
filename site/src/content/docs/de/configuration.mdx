@@ -13,7 +13,7 @@ Die erste Hälfte über das **Einstellungsfenster** ist für alle; die zweite H�
 ## Das Einstellungsfenster
 
 Öffne es über das Menü des Tray-Symbols oder das Zahnrad-Symbol im Popup.
-Es hat drei Tabs: **Allgemein, KI und Aktionen**.
+Es hat drei Tabs: **Allgemein, KI und Prompts**.
 
 ### Allgemein
 
@@ -34,29 +34,29 @@ Dort beschreibst du in ein paar einfachen Sätzen deine Rolle und Vorlieben, in 
 
 > Beispiel: „Vertrieb. Ich schreibe vor allem Kunden-E-Mails — höflich, aber nicht steif, das Ergebnis zuerst.“
 
-Ist das ausgefüllt, richtet jede Aktion ihre Ergebnisse nach dir.
+Ist das ausgefüllt, richtet jeder Prompt seine Ergebnisse nach dir.
 Erklärungen kommen auf deinem Wissensstand an, und Entwürfe kommen in deinem bevorzugten Ton zurück.
 Auf unpassende Aufgaben hat es nie Einfluss, und der Text selbst taucht nie in Ergebnissen auf.
 
-### Aktionen
+### Prompts
 
 Die Liste dessen, „was nach einem doppelten Kopieren passiert“.
 
-- Die vorinstallierten Aktionen lassen sich öffnen und lesen — sie dienen zugleich als ausgearbeitete Beispiele.
-- Eine **neue Aktion** braucht nur einen Namen und was passieren soll.
+- Die vorinstallierten Prompts lassen sich öffnen und lesen — sie dienen zugleich als ausgearbeitete Beispiele.
+- Ein **neuer Prompt** braucht nur einen Namen und was passieren soll.
   Zum Beispiel: Name „3-Zeilen-Zusammenfassung“, Anweisung „Fasse das in 3 Zeilen zusammen“.
 - Unsicher beim Formulieren von Anweisungen? Schreib grob auf, was du willst, und drücke **Mit KI entwerfen** — deine eingerichtete KI macht daraus eine sauber formulierte Anweisung.
-- Mit **Routing** wählst du je nach Inhaltsart (Text / Bild / Dateien) eine andere Aktion.
+- Mit **Regeln** wählst du je nach Inhaltsart (Text / Bild / Dateien) einen anderen Prompt.
 
-Selbst gebaute Aktionen lassen sich teilen: **Exportieren (.md)** schreibt eine als Datei, und die Gegenseite fügt sie einfach unter **Importieren** ein oder wählt die Datei aus.
+Selbst gebaute Prompts lassen sich teilen: **Exportieren (.md)** schreibt einen als Datei, und die Gegenseite fügt ihn einfach unter **Importieren** ein oder wählt die Datei aus.
 
-Möchten Sie die gesamte Arbeit lieber einer KI überlassen? Jeder KI-Chat kann eine importbereite Aktion für Sie schreiben – fügen Sie dies ein und füllen Sie die Lücke aus:
+Möchten Sie die gesamte Arbeit lieber einer KI überlassen? Jeder KI-Chat kann einen importbereiten Prompt für Sie schreiben – fügen Sie dies ein und füllen Sie die Lücke aus:
 
 ```text
-Lies https://zencopy.app/llms-full.txt – die vollständige ZenCopy-Dokumentation, einschließlich des Aktionsdateiformats, der Vorlagenvariablen und der Funktionsweise des Routings. Schreibe dann eine ZenCopy-Aktion, die Folgendes tut: [was Sie tun möchten]. Gib eine vollständige Aktionsdatei (Markdown mit Frontmatter) in einem einzigen Codeblock aus, die direkt in ZenCopy unter Einstellungen → Aktionen → Importieren eingefügt werden kann. Wenn die Aktion nur in einer bestimmten App oder auf einer bestimmten Website Sinn macht, füge einen Satz hinzu, der mir sagt, welche Routing-Regel festgelegt werden soll.
+Lies https://zencopy.app/llms-full.txt – die vollständige ZenCopy-Dokumentation, einschließlich des Prompt-Dateiformats, der Vorlagenvariablen und der Funktionsweise der Regeln. Schreibe dann einen ZenCopy-Prompt, der Folgendes tut: [was Sie tun möchten]. Gib eine vollständige Prompt-Datei (Markdown mit Frontmatter) in einem einzigen Codeblock aus, die direkt in ZenCopy unter Einstellungen → Prompts → Importieren eingefügt werden kann. Wenn der Prompt nur in einer bestimmten App oder auf einer bestimmten Website Sinn macht, füge einen Satz hinzu, der mir sagt, welche Regel festgelegt werden soll.
 ```
 
-Der Codeblock in der Antwort kann direkt in **Einstellungen → Aktionen → Importieren** eingefügt werden.
+Der Codeblock in der Antwort kann direkt in **Einstellungen → Prompts → Importieren** eingefügt werden.
 Bei Fragen, die die Dokumentation nicht beantworten kann („kann ZenCopy überhaupt…?“), <RepomixLink>packt ein Klick den relevanten Quellcode</RepomixLink> – übergeben Sie das Ergebnis derselben KI.
 
 ## Konfigurationsdateien (für Power-User)
@@ -73,38 +73,38 @@ Der genaue Pfad wird beim Start auch ins Log geschrieben:
   <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
 </Tabs>
 
-Die Routing-Standardwerte sind in die App eingebaut; `routing.json` **überschreibt** sie lediglich.
-Aktionsdateien sind **additiv**:
-Sie definieren neue Aktionen, und die eingebauten bleiben unantastbar (eine lokale Datei, die die id einer eingebauten Aktion beansprucht, wird ignoriert).
+Die Regel-Standardwerte sind in die App eingebaut; `rules.json` **überschreibt** sie lediglich.
+Prompt-Dateien sind **additiv**:
+Sie definieren neue Prompts, und die eingebauten bleiben unantastbar (eine lokale Datei, die die id eines eingebauten Prompts beansprucht, wird ignoriert).
 Änderungen gelten ab dem nächsten Auslösen — kein Neustart nötig.
 
 ### `ai-sdk-catalog.json`
 
 Anbieter plus eine Zuordnung **Rolle → Modell**.
 Das Zuhause des Dateiformats ist [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — dort ist jedes Feld dokumentiert (inklusive eines `$schema` für Validierung und Vervollständigung im Editor), und [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) enthält Konfigurationen in drei Größen.
-ZenCopy-typische Ausgangspunkte (was die Einstellungs-UI schreibt, lokales Ollama, Rollen für Aktionen) findest du unter [Rezepte](/de/recipes/).
+ZenCopy-typische Ausgangspunkte (was die Einstellungs-UI schreibt, lokales Ollama, Rollen für Prompts) findest du unter [Rezepte](/de/recipes/).
 
 Eine Anforderung stammt von ZenCopy selbst, nicht vom Dateiformat: `roles` muss immer **`default`** enthalten.
-Jede Aktion läuft damit, sofern ihr Frontmatter keine andere role nennt, und der Verbindungstest in den Einstellungen pingt sie an.
+Jeder Prompt läuft damit, sofern sein Frontmatter keine andere role nennt, und der Verbindungstest in den Einstellungen pingt sie an.
 
 API-Schlüssel wandern direkt in diese lokale Datei (die Einstellungs-UI schreibt dasselbe Format); sie verlassen dein Gerät nie.
 Umgebungsvariablen werden nicht gelesen — GUI-Apps werden vom Betriebssystem gestartet, nicht von deiner Shell, sodass in `.zshrc` und Co. exportierte Variablen sie nie erreichen.
 Die Datei wird bei jedem Lesen gegen das Schema validiert.
 Eine kaputte Änderung zeigt sich als klare Meldung im Popup und im Einstellungs-Editor — nichts schlägt still fehl.
 
-### `routing.json`
+### `rules.json`
 
-Welche Aktion welche Art von Erfassung übernimmt:
-eine flache Zuordnung `kind → action` plus eine optionale, höher priorisierte `overrides`-Liste (der erste Treffer gewinnt).
+Welcher Prompt welche Art von Erfassung übernimmt:
+eine flache Zuordnung `kind → prompt` plus eine optionale, höher priorisierte `overrides`-Liste (der erste Treffer gewinnt).
 Die drei Arten sind `text`, `image` und `files` (eine Rich-Text-Kopie zählt als `text`); ab Werk geht Text an Zen, Bilder und Dateien gehen an Erklären.
-Die flache Zuordnung ist in der App bearbeitbar (Einstellungen → Aktionen → Routing), du brauchst diese Datei also nur für `overrides`.
+Die flache Zuordnung ist in der App bearbeitbar (Einstellungen → Prompts → Regeln), du brauchst diese Datei also nur für `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
-  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
 }
 ```
 
@@ -119,10 +119,10 @@ Alles andere wird mit einer klaren Meldung abgelehnt.
 Die vollständigen Pfade reisen mit den Inhalten mit, damit das Modell Dateien auseinanderhalten kann und weiß, wo sie liegen.
 Weil binäre Anhänge mehr kosten können als Text, fragt das Popup vor dem Senden nach (Textdateien laufen ohne Nachfrage) — die Nachfrage lässt sich direkt dort oder in den Einstellungen abschalten.
 
-### `actions/*.md`
+### `prompts/*.md`
 
-Eine Datei = eine Aktion: YAML-Frontmatter + ein [Liquid](https://liquidjs.com)-Prompt-Text.
-Dieselbe einzelne Datei ist auch das Format zum Teilen — Einstellungen → Aktionen → Importieren nimmt sie als eingefügten Text oder als ausgewählte Datei an.
+Eine Datei = ein Prompt: YAML-Frontmatter + ein [Liquid](https://liquidjs.com)-Prompt-Text.
+Dieselbe einzelne Datei ist auch das Format zum Teilen — Einstellungen → Prompts → Importieren nimmt sie als eingefügten Text oder als ausgewählte Datei an.
 
 ```markdown
 ---
@@ -137,12 +137,12 @@ Fasse das in 3 Zeilen zusammen, auf {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Bedeutung                                                                                                                             |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`           | Name, auf den `routing.json` verweist (Standard: der Dateiname) — das Präfix `zencopy-` ist den vorinstallierten Aktionen vorbehalten |
-| `label`        | Wird im Popup angezeigt                                                                                                               |
-| `role`         | Katalog-Rolle, mit der ausgeführt wird (Standard: `default`)                                                                          |
-| `instructions` | System-Prompt (Liquid-Template)                                                                                                       |
+| Frontmatter    | Bedeutung                                                                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Name, auf den `rules.json` verweist (Standard: der Dateiname) — das Präfix `zencopy-` ist den vorinstallierten Prompts vorbehalten |
+| `label`        | Wird im Popup angezeigt                                                                                                            |
+| `role`         | Katalog-Rolle, mit der ausgeführt wird (Standard: `default`)                                                                       |
+| `instructions` | System-Prompt (Liquid-Template)                                                                                                    |
 
 Die Template-Variablen, mit Beispielwerten für einen im Browser kopierten Absatz:
 
@@ -166,12 +166,12 @@ Die Template-Variablen, mit Beispielwerten für einen im Browser kopierten Absat
 Es gibt außerdem einen ZenCopy-eigenen Filter `language_name`: `{{ locale | language_name }}` wird zu „German“ statt „de“ — das liest sich in einem Prompt natürlicher.
 Um die echten Werte zu sehen, aktiviere **Template-Variablen anzeigen** in den Einstellungen — die Variablen jeder Erfassung erscheinen dann als JSON im Popup.
 
-Einfache Aktionen (ein Name und eine Anweisung) lassen sich auch im Einstellungsfenster anlegen; was es schreibt, ist genau dieses Dateiformat.
+Einfache Prompts (ein Name und eine Anweisung) lassen sich auch im Einstellungsfenster anlegen; was es schreibt, ist genau dieses Dateiformat.
 
 #### Fortgeschrittene Templates
 
-Sowohl das `instructions`-Frontmatter als auch der Textkörper sind vollwertige [LiquidJS](https://liquidjs.com/tags/overview.html)-Templates: Bedingungen, Schleifen und [Filter](https://liquidjs.com/filters/overview.html) funktionieren alle.
-Eine einzige Aktion kann sich daran anpassen, woher die Kopie stammt:
+Sowohl das `instructions`-Frontmatter als auch der Prompt-Text sind vollwertige [LiquidJS](https://liquidjs.com/tags/overview.html)-Templates: Bedingungen, Schleifen und [Filter](https://liquidjs.com/filters/overview.html) funktionieren alle.
+Ein einziger Prompt kann sich daran anpassen, woher die Kopie stammt:
 
 ```markdown
 ---

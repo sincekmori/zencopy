@@ -11,7 +11,7 @@ Non ha server, né account, né telemetria.
 ## Cosa lascia il tuo dispositivo
 
 Quando premi il trigger (<span data-os-modifier>Ctrl/⌘</span> + C + C), il contenuto degli appunti catturato viene inviato direttamente al provider LLM che _tu_ hai configurato — nient'altro, e da nessun'altra parte.
-Cosa venga inviato esattamente dipende dall'azione eseguita:
+Cosa venga inviato esattamente dipende dal prompt eseguito:
 
 - Il prompt renderizzato, che può incorporare il contesto della cattura come [variabili di template](/it/configuration/): il testo e il markup copiati, il nome dell'app di origine e il titolo della finestra, l'URL della pagina, la data e la tua lingua.
 - Per un'immagine o dei file copiati, viene allegato il contenuto stesso (fino a 10 MB per cattura) — e per i file, i loro percorsi completi.
@@ -29,7 +29,7 @@ A parte le catture, il controllo degli aggiornamenti chiede a GitHub solo i meta
 - I file di log.
   I log oscurano i segreti e non includono mai i contenuti copiati né le chiavi API.
 
-- Statistiche d'uso (un interruttore nelle impostazioni, attivo per impostazione predefinita): quale azione è stata eseguita su quale tipo di cattura, con il modello e il numero di token, così i costi restano calcolabili.
+- Statistiche d'uso (un interruttore nelle impostazioni, attivo per impostazione predefinita): quale prompt è stato eseguito su quale tipo di cattura, con il modello e il numero di token, così i costi restano calcolabili.
   Solo un file locale — mai il contenuto copiato, mai inviato da nessuna parte.
 
 ## Terze parti

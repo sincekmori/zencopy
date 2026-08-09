@@ -10,11 +10,11 @@ const OPEN_TAG = "<result>";
 const CLOSE_TAG = "</result>";
 
 /**
- * The system prompt for one action run, assembled Claude-style: each part in
+ * The system prompt for one prompt run, assembled Claude-style: each part in
  * its own XML section, so the boundaries stay unambiguous no matter what the
- * (user-authored, arbitrary) action instructions contain.
+ * (user-authored, arbitrary) prompt instructions contain.
  *
- * - `<instructions>` — the action's own rendered instructions; the authority.
+ * - `<instructions>` — the prompt's own rendered instructions; the authority.
  * - `<user_context>` — the user's self-description from Settings, plus how to
  *   weigh it: background that tailors the result (depth, terminology,
  *   examples, tone), never a request, never mentioned in the output, and the
@@ -23,7 +23,7 @@ const CLOSE_TAG = "</result>";
  * - `<output_format>` — the result-tag contract, last, where format
  *   directives bind tightest.
  *
- * Deliberately NOT used by draftInstruction: drafted actions are reusable,
+ * Deliberately NOT used by draftInstruction: drafted prompts are reusable,
  * shareable text and must not bake personal facts in.
  */
 export function composeInstructions(instructions: string, userContext: string): string {
@@ -48,7 +48,7 @@ export function composeInstructions(instructions: string, userContext: string): 
  * attachments ride along — their full paths in an `<attached_files>` section,
  * so the model can tell the file parts apart (a file part's `filename` is not
  * reliably forwarded by every provider, and full paths carry context — folder,
- * project — an action may need). No files, no tag.
+ * project — an prompt may need). No files, no tag.
  */
 export function composeUserText(prompt: string, attachedPaths: string[]): string {
   const sections = [prompt];

@@ -30,7 +30,7 @@ export const ja: Messages = {
       "画像などのバイナリファイルを送信する前に、ポップアップで確認します（テキストファイルは確認なしで実行）",
     devMode: "テンプレート変数を表示",
     devModeHint:
-      "アクションを自作するときに使います。コピーごとの変数と中身をポップアップで確認できます",
+      "プロンプトを自作するときに使います。コピーごとの変数と中身をポップアップで確認できます",
     stats: "利用統計",
     statsHint:
       "モデルを実行するたびに、コストの計算に使える記録をこの端末の中だけに残します。外部に送信されることは一切ありません。コピーした内容も記録されません。",
@@ -52,7 +52,7 @@ export const ja: Messages = {
       "ここでのコストはあくまで概算です。エラーや中断した実行は集計されず、モデルの判定が実際と異なることもあります。正確な金額はプロバイダーの請求ページで確認してください。",
     userContext: "あなたについて",
     userContextHint:
-      "AI に知っておいてほしいこと(役割・得意分野・好みなど)。すべてのアクションに添えられます。",
+      "AI に知っておいてほしいこと(役割・得意分野・好みなど)。すべてのプロンプトに添えられます。",
     userContextPlaceholders: [
       "会社員。メールは社外とのやりとりが多いので丁寧めに、それ以外は結論から短く。",
       "幹部社員。長い文章は要点だけ知りたい。判断材料を先に、数字は根拠つきで。",
@@ -62,15 +62,15 @@ export const ja: Messages = {
     ],
     userContextClear: "クリア",
     userContextCleared: "クリアしました",
-    quickTitle: "クイックアクション",
+    quickTitle: "クイックプロンプト",
     quickHint:
-      "ポップアップで数字キー(1〜4)に割り当てる4つのアクション。ドラッグで並び替えできます。",
+      "ポップアップで数字キー(1〜4)に割り当てる4つのプロンプト。ドラッグで並び替えできます。",
     resetTitle: "初期化",
     resetHint:
-      "ZenCopy をインストール直後の状態に戻します。設定・アクション・利用統計もすべて削除されます",
+      "ZenCopy をインストール直後の状態に戻します。設定・プロンプト・利用統計もすべて削除されます",
     resetButton: "初期化",
     resetWarning:
-      "この操作は元に戻せません。AI 設定（API キーを含む）・ルーティングルール・自作アクション・ウィンドウ設定がすべて削除され、ZenCopy は初回起動時の状態に戻ります。",
+      "この操作は元に戻せません。AI 設定（API キーを含む）・振り分けルール・自作プロンプト・ウィンドウ設定がすべて削除され、ZenCopy は初回起動時の状態に戻ります。",
     resetConfirm: "すべて削除して初期化",
     optionSystem: "システム",
     optionLight: "ライト",
@@ -79,9 +79,9 @@ export const ja: Messages = {
   popup: {
     placeholder: "ダブルクリックの要領で素早く 2 回コピー — 結果がここに表示されます。",
     devVars: "テンプレート変数",
-    noAction:
-      "このキャプチャは自動では実行されません。下のアクションを選ぶか、数字キー 1–4 で実行できます。",
-    routingDocs: "ルーティングの仕組みを見る",
+    noPrompt:
+      "このキャプチャは自動では実行されません。下のプロンプトを選ぶか、数字キー 1–4 で実行できます。",
+    rulesDocs: "振り分けの仕組みを見る",
     confirmSend:
       "このキャプチャを AI プロバイダーに送信しますか？画像やファイルはテキストより料金がかかることがあります。",
     send: "送信",
@@ -90,8 +90,8 @@ export const ja: Messages = {
       `サイズが大きすぎて送信できません（上限は 1 回あたり ${mb} MB です）。`,
     unsupportedFile: (name) => `「${name}」はモデルに送信できない種類のファイルです。`,
     fileUnreadable: (name) => `「${name}」を読み込めませんでした。`,
-    switchAction: "アクションを切り替える",
-    chooseAction: "アクションを選ぶ",
+    switchPrompt: "プロンプトを切り替える",
+    choosePrompt: "プロンプトを選ぶ",
     failed: (reason) => `失敗しました: ${reason}`,
     timedOut:
       "モデルから応答がありませんでした。ネットワークとプロバイダー設定を確認して、やり直してください。",
@@ -148,19 +148,19 @@ export const ja: Messages = {
     macosPermissions:
       "あと一歩です。コピーの 2 連打を検知するには macOS の許可が必要です。システム設定 → プライバシーとセキュリティ の「入力監視」で ZenCopy を許可し、ZenCopy を起動し直してください。",
   },
-  actions: {
+  prompts: {
     // Zen stays "Zen" everywhere (intentionally omitted).
     builtinLabels: {
       "zencopy-translate": "翻訳",
       "zencopy-explain": "解説",
       "zencopy-polish": "清書",
     },
-    title: "アクション",
+    title: "プロンプト",
     hint: (keys) => `${keys} で実行する処理。ポップアップの結果ラベルからも切り替えられます。`,
-    add: "新しいアクション",
+    add: "新しいプロンプト",
     export: "エクスポート（.md）",
     import: "インポート",
-    importHint: "共有されたアクションの Markdown を貼り付けるか、ファイルを選択してください。",
+    importHint: "共有されたプロンプトの Markdown を貼り付けるか、ファイルを選択してください。",
     importFromFile: "ファイルを選択",
     name: "名前",
     instruction: "指示",
@@ -177,23 +177,23 @@ export const ja: Messages = {
     edit: "編集",
     remove: "削除",
     failed: (reason) => `失敗しました: ${reason}`,
-    importNotAnAction:
-      "アクションではありません。`---` の YAML frontmatter と、その後にプロンプト本文が必要です。",
-    importNoLabel: "アクションに label がありません。",
-    importInvalidId: (id) => `アクション id「${id}」は使用できません。`,
+    importNotAPrompt:
+      "プロンプトではありません。`---` の YAML frontmatter と、その後にプロンプト本文が必要です。",
+    importNoLabel: "プロンプトに label がありません。",
+    importInvalidId: (id) => `プロンプト id「${id}」は使用できません。`,
     importBuiltinId: (id) =>
-      `「${id}」はビルトインアクションの id です。ファイル内の id を変更してからやり直してください。`,
+      `「${id}」はビルトインプロンプトの id です。ファイル内の id を変更してからやり直してください。`,
     importReservedId: (id) =>
-      `id「${id}」は「zencopy-」で始まっています。この接頭辞はプリインストールアクション専用です。`,
+      `id「${id}」は「zencopy-」で始まっています。この接頭辞はプリインストールプロンプト専用です。`,
     importIdExists: (id) =>
-      `id「${id}」のアクションは既に存在します。先に削除するか、ファイル内の id を変更してください。`,
-    importTooLarge: "ファイルが大きすぎるため、アクションとして読み込めません。",
+      `id「${id}」のプロンプトは既に存在します。先に削除するか、ファイル内の id を変更してください。`,
+    importTooLarge: "ファイルが大きすぎるため、プロンプトとして読み込めません。",
     labelExists: (label) =>
-      `「${label}」という名前のアクションは既にあります。別の名前を付けてください。`,
+      `「${label}」という名前のプロンプトは既にあります。別の名前を付けてください。`,
   },
-  routing: {
-    title: "ルーティング",
-    hint: "コピーの種類ごとに実行するアクション。",
+  rules: {
+    title: "振り分け",
+    hint: "コピーの種類ごとに実行するプロンプト。",
     kindText: "テキスト",
     kindImage: "画像",
     kindFiles: "ファイル",
@@ -212,7 +212,7 @@ export const ja: Messages = {
     fieldFile: "ファイル名",
     fieldMinChars: "最小文字数",
     fieldMaxChars: "最大文字数",
-    ruleAction: "実行するアクション",
+    rulePrompt: "実行するプロンプト",
     wildcardHint: "条件は AND で結合され、* は任意の文字列に一致します。空欄の条件は無視されます。",
     needsCondition: "条件を 1 つ以上指定してください。",
     needsValidBounds: "最小文字数は最大文字数以下にしてください。",
@@ -221,7 +221,7 @@ export const ja: Messages = {
   },
   ai: {
     title: "AI",
-    hint: "アクションに使うプロバイダーとモデル。",
+    hint: "プロンプトに使うプロバイダーとモデル。",
     disclosure:
       "コピーした内容は、設定したプロバイダーへ直接送信されます。ZenCopy に中継サーバーやテレメトリはありません。API の利用料は自己負担で、AI の出力は誤りを含むことがあります。",
     provider: "プロバイダー",
@@ -237,7 +237,7 @@ export const ja: Messages = {
     testUnreachable:
       "接続できませんでした。モデル名・API キー・ベース URL・ネットワークを確認してください。",
     advancedHint:
-      "設定を直接記述します。社内ゲートウェイ、複数プロバイダーの併用、アクションごとのモデル指定はこちらから。",
+      "設定を直接記述します。社内ゲートウェイ、複数プロバイダーの併用、プロンプトごとのモデル指定はこちらから。",
     examplesLink: "設定例を見る",
     invalidJson: "JSON が不正です。",
     invalidSchema:

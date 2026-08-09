@@ -11,9 +11,9 @@ No tiene servidor, ni cuenta, ni telemetría.
 ## Qué sale de tu dispositivo
 
 Cuando pulsas el disparador (<span data-os-modifier>Ctrl/⌘</span> + C + C), el contenido capturado del portapapeles se envía directamente al proveedor de LLM que _tú_ configuraste — nada más, y a ningún otro sitio.
-Qué se envía exactamente depende de la acción que se ejecuta:
+Qué se envía exactamente depende del prompt que se ejecuta:
 
-- El prompt renderizado, que puede incorporar el contexto de la captura como [variables de plantilla](/es/configuration/#actionsmd): el texto y el markup copiados, el nombre de la aplicación de origen y el título de su ventana, la URL de la página, la fecha y tu idioma.
+- El prompt renderizado, que puede incorporar el contexto de la captura como [variables de plantilla](/es/configuration/#promptsmd): el texto y el markup copiados, el nombre de la aplicación de origen y el título de su ventana, la URL de la página, la fecha y tu idioma.
 - Con una imagen o archivos copiados, se adjunta el contenido en sí (hasta 10 MB por captura) — y, en el caso de los archivos, sus rutas completas.
   Por defecto, el popup pregunta antes de enviarlos.
 
@@ -29,7 +29,7 @@ Al margen de las capturas, la comprobación de actualizaciones solo pide a GitHu
 - Los archivos de log.
   Los logs ocultan los secretos y nunca incluyen contenido copiado ni claves de API.
 
-- Estadísticas de uso (un interruptor en los ajustes, activado por defecto): qué acción se ejecutó sobre qué tipo de captura, junto con el modelo y el número de tokens, para que tus costos sigan siendo calculables.
+- Estadísticas de uso (un interruptor en los ajustes, activado por defecto): qué prompt se ejecutó sobre qué tipo de captura, junto con el modelo y el número de tokens, para que tus costos sigan siendo calculables.
   Solo un archivo local — nunca el contenido copiado, nunca se envía a ninguna parte.
 
 ## Terceros

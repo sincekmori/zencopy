@@ -30,7 +30,7 @@ export const en: Messages = {
       "The popup asks first when a capture would send an image or other binary file to the provider; text files run without asking",
     devMode: "Show template variables",
     devModeHint:
-      "For writing your own actions: the popup shows each copy's variables and what they contain",
+      "For writing your own prompts: the popup shows each copy's variables and what they contain",
     stats: "Usage statistics",
     statsHint:
       "Each model run adds a line to a local record you can total your costs from. It all stays on this device and is never sent anywhere; the copied content is never included.",
@@ -52,7 +52,7 @@ export const en: Messages = {
       "Costs here are estimates: failed and stopped runs are not counted, and model detection can be off. Your provider's billing page has the exact numbers.",
     userContext: "About you",
     userContextHint:
-      "Anything the AI should know about you — role, expertise, taste. Added to every action.",
+      "Anything the AI should know about you — role, expertise, taste. Added to every prompt.",
     userContextPlaceholders: [
       "Office worker. Most of my email goes to people outside the company, so keep it polite; otherwise lead with the conclusion and keep it short.",
       "Executive. For long documents I just want the key points — lead with what I need to decide, and back the numbers with their basis.",
@@ -62,14 +62,14 @@ export const en: Messages = {
     ],
     userContextClear: "Clear",
     userContextCleared: "Cleared",
-    quickTitle: "Quick actions",
-    quickHint: "The four actions the popup binds to number keys 1–4. Drag to reorder.",
+    quickTitle: "Quick prompts",
+    quickHint: "The four prompts the popup binds to number keys 1–4. Drag to reorder.",
     resetTitle: "Reset",
     resetHint:
-      "Return this ZenCopy to the just-installed state — settings, actions, and usage statistics are all deleted",
+      "Return this ZenCopy to the just-installed state — settings, prompts, and usage statistics are all deleted",
     resetButton: "Reset",
     resetWarning:
-      "This cannot be undone. AI settings (including API keys), routing rules, custom actions, and window preferences are all deleted, and ZenCopy returns to its first-run state.",
+      "This cannot be undone. AI settings (including API keys), rules, custom prompts, and window preferences are all deleted, and ZenCopy returns to its first-run state.",
     resetConfirm: "Delete everything",
     optionSystem: "System",
     optionLight: "Light",
@@ -78,17 +78,17 @@ export const en: Messages = {
   popup: {
     placeholder: "Copy twice, quickly — like a double-click — and the result appears here.",
     devVars: "Template variables",
-    noAction:
-      "No action runs automatically for this capture — pick one below or press 1–4 to run it.",
-    routingDocs: "How routing works",
+    noPrompt:
+      "No prompt runs automatically for this capture — pick one below or press 1–4 to run it.",
+    rulesDocs: "How rules work",
     confirmSend: "Send this capture to your AI provider? Images and files can cost more than text.",
     send: "Send",
     dontAskAgain: "Don't ask again (changeable in Settings)",
     attachmentTooLarge: (mb) => `Too large to send — the limit is ${mb} MB per capture.`,
     unsupportedFile: (name) => `"${name}" is a file type that can't be sent to the model.`,
     fileUnreadable: (name) => `Couldn't read "${name}".`,
-    switchAction: "Switch action",
-    chooseAction: "Choose an action",
+    switchPrompt: "Switch prompt",
+    choosePrompt: "Choose a prompt",
     failed: (reason) => `Failed: ${reason}`,
     timedOut: "No response from the model. Check your network and provider, then retry.",
     emptyResult: "The model returned an empty response.",
@@ -144,15 +144,15 @@ export const en: Messages = {
     macosPermissions:
       "One step left: macOS needs your permission to notice the double copy. In System Settings → Privacy & Security, allow ZenCopy under Input Monitoring, then quit and reopen ZenCopy.",
   },
-  actions: {
+  prompts: {
     // The .md files are authored in English, so English needs no overrides.
     builtinLabels: {},
-    title: "Actions",
+    title: "Prompts",
     hint: (keys) => `What ${keys} can do. Switchable from the popup's result label, too.`,
-    add: "New action",
+    add: "New prompt",
     export: "Export (.md)",
     import: "Import",
-    importHint: "Paste a shared action's Markdown, or choose the file.",
+    importHint: "Paste a shared prompt's Markdown, or choose the file.",
     importFromFile: "Choose a file",
     name: "Name",
     instruction: "Instruction",
@@ -169,21 +169,21 @@ export const en: Messages = {
     edit: "Edit",
     remove: "Delete",
     failed: (reason) => `Failed: ${reason}`,
-    importNotAnAction: "Not an action: expected `---` YAML frontmatter, then the prompt body.",
-    importNoLabel: "The action has no label.",
-    importInvalidId: (id) => `Invalid action id: '${id}'.`,
+    importNotAPrompt: "Not a prompt: expected `---` YAML frontmatter, then the prompt body.",
+    importNoLabel: "The prompt has no label.",
+    importInvalidId: (id) => `Invalid prompt id: '${id}'.`,
     importBuiltinId: (id) =>
-      `'${id}' is a built-in action's id — change the id in the file and retry.`,
+      `'${id}' is a built-in prompt's id — change the id in the file and retry.`,
     importReservedId: (id) =>
-      `'${id}' starts with 'zencopy-' — that id prefix is reserved for the pre-installed actions.`,
+      `'${id}' starts with 'zencopy-' — that id prefix is reserved for the pre-installed prompts.`,
     importIdExists: (id) =>
-      `An action with the id '${id}' already exists — delete it first, or change the id in the file.`,
-    importTooLarge: "The file is too large to be an action.",
-    labelExists: (label) => `An action named '${label}' already exists — pick a different name.`,
+      `A prompt with the id '${id}' already exists — delete it first, or change the id in the file.`,
+    importTooLarge: "The file is too large to be a prompt.",
+    labelExists: (label) => `A prompt named '${label}' already exists — pick a different name.`,
   },
-  routing: {
-    title: "Routing",
-    hint: "Which action runs for each type of capture.",
+  rules: {
+    title: "Rules",
+    hint: "Which prompt runs for each type of capture.",
     kindText: "Text",
     kindImage: "Image",
     kindFiles: "Files",
@@ -201,7 +201,7 @@ export const en: Messages = {
     fieldFile: "File name",
     fieldMinChars: "Min characters",
     fieldMaxChars: "Max characters",
-    ruleAction: "Run action",
+    rulePrompt: "Run prompt",
     wildcardHint: "Conditions combine with AND; * matches anything. Empty fields are ignored.",
     needsCondition: "Add at least one condition.",
     needsValidBounds: "Min characters must not exceed max characters.",
@@ -210,7 +210,7 @@ export const en: Messages = {
   },
   ai: {
     title: "AI",
-    hint: "The provider and model used for actions.",
+    hint: "The provider and model used for prompts.",
     disclosure:
       "Whatever you copy is sent directly to the provider you configure — ZenCopy has no relay server and no telemetry. API usage and its costs are yours, and AI output can be wrong.",
     provider: "Provider",
@@ -225,7 +225,7 @@ export const en: Messages = {
     testOk: "Connected",
     testUnreachable: "Connection failed. Check the model name, API key, base URL, and network.",
     advancedHint:
-      "Write the configuration directly — for a corporate gateway, several providers side by side, or a model per action.",
+      "Write the configuration directly — for a corporate gateway, several providers side by side, or a model per prompt.",
     examplesLink: "See example configs",
     invalidJson: "Invalid JSON.",
     invalidSchema: "Valid JSON, but not a valid config. Details are in the log.",

@@ -36,7 +36,7 @@ It is genuinely useful for grasping the gist of a text, but for numbers, names, 
 
 Most tools in this space are macOS-only, work on selected text only, and are tied to one vendor's AI or a subscription.
 ZenCopy runs on **Windows, macOS, and Linux**, handles **text, rich text, images, and files**, and lets **you choose the AI service** (OpenAI / Google / Anthropic / a corporate gateway / local Ollama).
-[Which action runs is also yours to decide](/en/configuration/#routingjson).
+[Which prompt runs is also yours to decide](/en/configuration/#rulesjson).
 No account, no subscription, no telemetry — open-source software.
 
 ## Another app also reacts to Ctrl/⌘ + C + C (e.g. DeepL)
@@ -73,7 +73,7 @@ Logs never contain your copied content or API keys.
 <Tabs syncKey="os">
   <TabItem label="Windows">
     The uninstaller asks with a **Delete application data** checkbox — checking it removes
-    everything: settings, API keys, custom actions, logs, and the webview profile. (One harmless
+    everything: settings, API keys, custom prompts, logs, and the webview profile. (One harmless
     leftover whether or not you check it: if launch-at-login was enabled, a registry entry pointing
     at nothing may remain — Windows ignores entries whose target does not exist.)
   </TabItem>

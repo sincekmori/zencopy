@@ -61,18 +61,18 @@ export function useT(): Messages {
   return messages[useContext(LocaleContext)];
 }
 
-/** The active locale code (e.g. "en", "ja") — for passing to action templates. */
+/** The active locale code (e.g. "en", "ja") — for passing to prompt templates. */
 export function useLocale(): Locale {
   return useContext(LocaleContext);
 }
 
 /**
- * Returns a function that resolves an action's display label: a localized
- * override for a pre-installed action (keyed by id), else the action's own
+ * Returns a function that resolves an prompt's display label: a localized
+ * override for a pre-installed prompt (keyed by id), else the prompt's own
  * label. Use everywhere a label is shown, so built-ins follow the UI language
- * while user actions stay verbatim.
+ * while user prompts stay verbatim.
  */
-export function useActionLabel(): (id: string, fallback: string) => string {
+export function usePromptLabel(): (id: string, fallback: string) => string {
   const t = useT();
-  return (id, fallback) => t.actions.builtinLabels[id] ?? fallback;
+  return (id, fallback) => t.prompts.builtinLabels[id] ?? fallback;
 }

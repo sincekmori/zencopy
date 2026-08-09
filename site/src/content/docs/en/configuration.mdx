@@ -13,7 +13,7 @@ The first half, about the **settings window**, is for everyone; the second half,
 ## The settings window
 
 Open it from the tray icon's menu, or the gear icon on the popup.
-It has three tabs: **General, AI, and Actions**.
+It has three tabs: **General, AI, and Prompts**.
 
 ### General
 
@@ -34,29 +34,29 @@ It is a place to describe your role and preferences in a few plain sentences, in
 
 > Example: "Sales. I mostly write customer emails — polite but not stiff, conclusion first."
 
-With this filled in, every action tailors its results to you.
+With this filled in, every prompt tailors its results to you.
 Explanations arrive at your level of knowledge, and drafts come back in your preferred tone.
 It never affects unrelated tasks, and the text itself never shows up in results.
 
-### Actions
+### Prompts
 
 The list of "what happens after a double copy".
 
-- The pre-installed actions can be opened and read — they double as worked examples.
-- A **new action** takes nothing but a name and what you want done.
+- The pre-installed prompts can be opened and read — they double as worked examples.
+- A **new prompt** takes nothing but a name and what you want done.
   For example: name "3-line summary", instruction "Summarize this in 3 lines".
 - Not confident writing instructions? Jot down roughly what you want and press **Draft with AI** — your configured AI turns it into a well-formed instruction.
-- **Routing** lets you pick a different action per kind of content (text / image / files).
+- **Rules** lets you pick a different prompt per kind of content (text / image / files).
 
-Actions you build can be shared: **Export** writes one as a file, and the receiving side just pastes it into **Import** or picks the file.
+Prompts you build can be shared: **Export** writes one as a file, and the receiving side just pastes it into **Import** or picks the file.
 
-Prefer to hand the whole job to an AI? Any AI chat can write a ready-to-import action for you — paste this and fill in the blank:
+Prefer to hand the whole job to an AI? Any AI chat can write a ready-to-import prompt for you — paste this and fill in the blank:
 
 ```text
-Read https://zencopy.app/llms-full.txt — the full ZenCopy documentation, including the action file format, the template variables, and how routing works. Then write a ZenCopy action that does the following: [what you want]. Output one complete action file (Markdown with frontmatter) in a single code block, ready to paste into ZenCopy's Settings → Actions → Import. If the action only makes sense in a specific app or on a specific site, add one sentence telling me which routing rule to set.
+Read https://zencopy.app/llms-full.txt — the full ZenCopy documentation, including the prompt file format, the template variables, and how rules works. Then write a ZenCopy prompt that does the following: [what you want]. Output one complete prompt file (Markdown with frontmatter) in a single code block, ready to paste into ZenCopy's Settings → Prompts → Import. If the prompt only makes sense in a specific app or on a specific site, add one sentence telling me which rules rule to set.
 ```
 
-The code block in the reply goes straight into **Settings → Actions → Import**.
+The code block in the reply goes straight into **Settings → Prompts → Import**.
 For questions the documentation cannot answer ("could ZenCopy even do…?"), <RepomixLink>one click packs the relevant source</RepomixLink> — hand the result to the same AI.
 
 ## Config files (for power users)
@@ -73,38 +73,38 @@ The exact path is also printed to the log at startup:
   <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
 </Tabs>
 
-Routing defaults are embedded in the app; `routing.json` only ever **overrides** them.
-Action files are **additive**:
-they define new actions, and the built-ins are untouchable (a local file claiming a built-in id is ignored).
+Rules defaults are embedded in the app; `rules.json` only ever **overrides** them.
+Prompt files are **additive**:
+they define new prompts, and the built-ins are untouchable (a local file claiming a built-in id is ignored).
 Edits apply on the next trigger — no restart needed.
 
 ### `ai-sdk-catalog.json`
 
 Providers plus a **role → model** mapping.
 The file format's home is [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — every field is documented there (including a `$schema` for editor validation and completion), and [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) has configs in three sizes.
-For ZenCopy-flavored starting points (what the settings UI writes, local Ollama, roles for actions), see [Recipes](/en/recipes/).
+For ZenCopy-flavored starting points (what the settings UI writes, local Ollama, roles for prompts), see [Recipes](/en/recipes/).
 
 One requirement is ZenCopy's own, not the format's: `roles` must always include **`default`**.
-Every action runs with it unless the action's frontmatter names another role, and the connection test in the settings pings it.
+Every prompt runs with it unless the prompt's frontmatter names another role, and the connection test in the settings pings it.
 
 API keys go straight into this local file (the settings UI writes the same format); they never leave your machine.
 Environment variables are not read — GUI apps are launched by the OS, not by your shell, so variables exported in `.zshrc` and friends never reach them.
 The file is schema-validated on every read.
 A broken edit shows up as a clear message in the popup and the settings editor — nothing fails silently.
 
-### `routing.json`
+### `rules.json`
 
-Which action handles which kind of capture:
-a flat `kind → action` map plus an optional, higher-priority `overrides` list (first match wins).
+Which prompt handles which kind of capture:
+a flat `kind → prompt` map plus an optional, higher-priority `overrides` list (first match wins).
 The three kinds are `text`, `image`, and `files` (a rich-text copy counts as `text`); out of the box, text routes to Zen and images and files route to Explain.
-The flat map is editable in-app (Settings → Actions → Routing), so you only need to touch this file for `overrides`.
+The flat map is editable in-app (Settings → Prompts → Rules), so you only need to touch this file for `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
-  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
 }
 ```
 
@@ -119,10 +119,10 @@ Anything else is declined with a clear message.
 Full paths ride along with the contents so the model can tell files apart and knows where they live.
 Because binary attachments can cost more than text, the popup asks before sending them (text files run without a prompt) — the confirmation can be turned off in place or in Settings.
 
-### `actions/*.md`
+### `prompts/*.md`
 
-One file = one action: YAML frontmatter + a [Liquid](https://liquidjs.com) prompt body.
-The same single file is the sharing format — Settings → Actions → Import accepts it as pasted text or a picked file.
+One file = one prompt: YAML frontmatter + a [Liquid](https://liquidjs.com) prompt body.
+The same single file is the sharing format — Settings → Prompts → Import accepts it as pasted text or a picked file.
 
 ```markdown
 ---
@@ -137,12 +137,12 @@ Summarize in 3 lines, in {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Meaning                                                                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `id`           | Name referenced from `routing.json` (default: file name) — the `zencopy-` prefix is reserved for pre-installed actions |
-| `label`        | Shown in the popup                                                                                                     |
-| `role`         | Catalog role to run with (default: `default`)                                                                          |
-| `instructions` | System prompt (Liquid template)                                                                                        |
+| Frontmatter    | Meaning                                                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Name referenced from `rules.json` (default: file name) — the `zencopy-` prefix is reserved for pre-installed prompts |
+| `label`        | Shown in the popup                                                                                                   |
+| `role`         | Catalog role to run with (default: `default`)                                                                        |
+| `instructions` | System prompt (Liquid template)                                                                                      |
 
 Template variables, with example values for a paragraph copied in a browser:
 
@@ -166,12 +166,12 @@ Template variables, with example values for a paragraph copied in a browser:
 There is also a ZenCopy-specific `language_name` filter: `{{ locale | language_name }}` expands to "English" rather than "en", which reads naturally in a prompt.
 To see the real values, turn on **Show template variables** in Settings — each capture's variables appear in the popup as JSON.
 
-Simple actions (a name and an instruction) can also be created from the settings window; what it writes is exactly this file format.
+Simple prompts (a name and an instruction) can also be created from the settings window; what it writes is exactly this file format.
 
 #### Advanced templating
 
 Both the `instructions` frontmatter and the body are full [LiquidJS](https://liquidjs.com/tags/overview.html) templates: conditionals, loops, and [filters](https://liquidjs.com/filters/overview.html) all work.
-A single action can adapt to where the copy came from:
+A single prompt can adapt to where the copy came from:
 
 ```markdown
 ---

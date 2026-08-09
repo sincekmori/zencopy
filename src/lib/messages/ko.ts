@@ -30,7 +30,7 @@ export const ko: Messages = {
       "이미지 등 바이너리 파일을 제공업체로 보내기 전에 팝업에서 확인합니다. 텍스트 파일은 확인 없이 실행됩니다",
     devMode: "템플릿 변수 표시",
     devModeHint:
-      "직접 액션을 만들 때 사용합니다. 복사할 때마다 변수와 그 내용을 팝업에서 확인할 수 있습니다",
+      "직접 프롬프트를 만들 때 사용합니다. 복사할 때마다 변수와 그 내용을 팝업에서 확인할 수 있습니다",
     stats: "사용 통계",
     statsHint:
       "모델을 실행할 때마다 비용 계산에 쓸 수 있는 기록을 이 기기 안에만 남깁니다. 외부로 전송되는 일은 절대 없으며, 복사한 내용도 기록되지 않습니다.",
@@ -52,7 +52,7 @@ export const ko: Messages = {
       "여기의 비용은 어디까지나 추정치입니다. 실패하거나 중단된 실행은 집계되지 않으며 모델 판별이 실제와 다를 수 있습니다. 정확한 금액은 프로바이더의 청구 페이지에서 확인하세요.",
     userContext: "나에 대하여",
     userContextHint:
-      "AI가 알아 두면 좋은 정보(역할, 전문 분야, 취향 등). 모든 액션에 함께 전달됩니다.",
+      "AI가 알아 두면 좋은 정보(역할, 전문 분야, 취향 등). 모든 프롬프트에 함께 전달됩니다.",
     userContextPlaceholders: [
       "회사원. 이메일은 사외로 나가는 게 많아서 정중하게, 그 외엔 결론부터 짧게.",
       "임원. 긴 문서는 핵심만 알고 싶어요. 결정해야 할 사항부터, 숫자는 근거와 함께.",
@@ -62,13 +62,14 @@ export const ko: Messages = {
     ],
     userContextClear: "지우기",
     userContextCleared: "지웠습니다",
-    quickTitle: "빠른 액션",
-    quickHint: "팝업에서 숫자 키 1–4에 연결되는 네 가지 액션. 드래그해 순서를 바꿀 수 있습니다.",
+    quickTitle: "빠른 프롬프트",
+    quickHint:
+      "팝업에서 숫자 키 1–4에 연결되는 네 가지 프롬프트. 드래그해 순서를 바꿀 수 있습니다.",
     resetTitle: "초기화",
-    resetHint: "ZenCopy를 설치 직후 상태로 되돌립니다. 설정·액션·사용 통계가 모두 삭제됩니다",
+    resetHint: "ZenCopy를 설치 직후 상태로 되돌립니다. 설정·프롬프트·사용 통계가 모두 삭제됩니다",
     resetButton: "초기화",
     resetWarning:
-      "이 작업은 되돌릴 수 없습니다. AI 설정(API 키 포함), 라우팅 규칙, 사용자 액션, 창 설정이 모두 삭제되고 ZenCopy가 첫 실행 상태로 돌아갑니다.",
+      "이 작업은 되돌릴 수 없습니다. AI 설정(API 키 포함), 규칙, 사용자 프롬프트, 창 설정이 모두 삭제되고 ZenCopy가 첫 실행 상태로 돌아갑니다.",
     resetConfirm: "모두 삭제하고 초기화",
     optionSystem: "시스템",
     optionLight: "라이트",
@@ -77,9 +78,9 @@ export const ko: Messages = {
   popup: {
     placeholder: "더블 클릭하듯 빠르게 두 번 복사하면 결과가 여기에 표시됩니다.",
     devVars: "템플릿 변수",
-    noAction:
-      "이 캡처는 자동으로 실행되지 않습니다. 아래에서 액션을 선택하거나 숫자 키 1–4로 실행할 수 있습니다.",
-    routingDocs: "라우팅 동작 방식 보기",
+    noPrompt:
+      "이 캡처는 자동으로 실행되지 않습니다. 아래에서 프롬프트를 선택하거나 숫자 키 1–4로 실행할 수 있습니다.",
+    rulesDocs: "규칙 동작 방식 보기",
     confirmSend:
       "이 캡처를 AI 제공업체로 보낼까요? 이미지와 파일은 텍스트보다 비용이 더 들 수 있습니다.",
     send: "보내기",
@@ -87,8 +88,8 @@ export const ko: Messages = {
     attachmentTooLarge: (mb) => `너무 커서 보낼 수 없습니다. 캡처당 상한은 ${mb} MB입니다.`,
     unsupportedFile: (name) => `"${name}"은(는) 모델로 보낼 수 없는 파일 형식입니다.`,
     fileUnreadable: (name) => `"${name}"을(를) 읽을 수 없습니다.`,
-    switchAction: "액션 전환",
-    chooseAction: "액션 선택",
+    switchPrompt: "프롬프트 전환",
+    choosePrompt: "프롬프트 선택",
     failed: (reason) => `실패: ${reason}`,
     timedOut: "모델에서 응답이 없습니다. 네트워크와 제공업체 설정을 확인한 뒤 다시 시도하세요.",
     emptyResult: "모델이 빈 응답을 반환했습니다.",
@@ -145,18 +146,18 @@ export const ko: Messages = {
     macosPermissions:
       "한 단계 남았습니다. 복사가 두 번 눌렸음을 알아채려면 macOS의 권한이 필요합니다. 시스템 설정 → 개인정보 보호 및 보안에서 입력 모니터링에서 ZenCopy를 허용한 뒤, ZenCopy를 종료하고 다시 실행해 주세요.",
   },
-  actions: {
+  prompts: {
     builtinLabels: {
       "zencopy-translate": "번역",
       "zencopy-explain": "설명",
       "zencopy-polish": "다듬기",
     },
-    title: "액션",
-    hint: (keys) => `${keys}로 실행할 액션. 팝업의 결과 라벨에서도 전환할 수 있습니다.`,
-    add: "새 액션",
+    title: "프롬프트",
+    hint: (keys) => `${keys}로 실행할 프롬프트. 팝업의 결과 라벨에서도 전환할 수 있습니다.`,
+    add: "새 프롬프트",
     export: "내보내기(.md)",
     import: "가져오기",
-    importHint: "공유된 액션의 마크다운을 붙여넣거나 파일을 선택하세요.",
+    importHint: "공유된 프롬프트의 마크다운을 붙여넣거나 파일을 선택하세요.",
     importFromFile: "파일 선택",
     name: "이름",
     instruction: "지시",
@@ -173,23 +174,22 @@ export const ko: Messages = {
     edit: "편집",
     remove: "삭제",
     failed: (reason) => `실패: ${reason}`,
-    importNotAnAction:
-      "액션이 아닙니다. `---` YAML frontmatter와 그 뒤의 프롬프트 본문이 필요합니다.",
-    importNoLabel: "액션에 label이 없습니다.",
-    importInvalidId: (id) => `유효하지 않은 액션 id입니다: '${id}'`,
+    importNotAPrompt: "프롬프트가 아닙니다. `---` YAML frontmatter와 그 뒤의 본문이 필요합니다.",
+    importNoLabel: "프롬프트에 label이 없습니다.",
+    importInvalidId: (id) => `유효하지 않은 프롬프트 id입니다: '${id}'`,
     importBuiltinId: (id) =>
-      `'${id}'은(는) 기본 제공 액션의 id입니다. 파일의 id를 변경한 뒤 다시 시도하세요.`,
+      `'${id}'은(는) 기본 제공 프롬프트의 id입니다. 파일의 id를 변경한 뒤 다시 시도하세요.`,
     importReservedId: (id) =>
-      `'${id}'은(는) 'zencopy-'로 시작합니다. 이 id 접두사는 사전 설치 액션 전용입니다.`,
+      `'${id}'은(는) 'zencopy-'로 시작합니다. 이 id 접두사는 사전 설치 프롬프트 전용입니다.`,
     importIdExists: (id) =>
-      `id가 '${id}'인 액션이 이미 있습니다. 먼저 삭제하거나 파일의 id를 변경하세요.`,
-    importTooLarge: "파일이 너무 커서 액션으로 가져올 수 없습니다.",
+      `id가 '${id}'인 프롬프트가 이미 있습니다. 먼저 삭제하거나 파일의 id를 변경하세요.`,
+    importTooLarge: "파일이 너무 커서 프롬프트로 가져올 수 없습니다.",
     labelExists: (label) =>
-      `'${label}'(이)라는 이름의 액션이 이미 있습니다. 다른 이름을 사용하세요.`,
+      `'${label}'(이)라는 이름의 프롬프트가 이미 있습니다. 다른 이름을 사용하세요.`,
   },
-  routing: {
-    title: "라우팅",
-    hint: "캡처 유형별로 실행할 액션.",
+  rules: {
+    title: "규칙",
+    hint: "캡처 유형별로 실행할 프롬프트.",
     kindText: "텍스트",
     kindImage: "이미지",
     kindFiles: "파일",
@@ -207,7 +207,7 @@ export const ko: Messages = {
     fieldFile: "파일명",
     fieldMinChars: "최소 글자 수",
     fieldMaxChars: "최대 글자 수",
-    ruleAction: "실행할 액션",
+    rulePrompt: "실행할 프롬프트",
     wildcardHint: "조건은 AND로 결합되며 *는 임의의 문자열과 일치합니다. 빈 조건은 무시됩니다.",
     needsCondition: "조건을 하나 이상 지정하세요.",
     needsValidBounds: "최소 글자 수는 최대 글자 수보다 클 수 없습니다.",
@@ -216,7 +216,7 @@ export const ko: Messages = {
   },
   ai: {
     title: "AI",
-    hint: "액션에 사용할 제공업체와 모델.",
+    hint: "프롬프트에 사용할 제공업체와 모델.",
     disclosure:
       "복사한 내용은 설정한 제공업체로 직접 전송됩니다. ZenCopy에는 중계 서버도 텔레메트리도 없습니다. API 요금은 본인 부담이며, AI 출력은 틀릴 수 있습니다.",
     provider: "제공업체",
@@ -231,7 +231,7 @@ export const ko: Messages = {
     testOk: "연결됨",
     testUnreachable: "연결에 실패했습니다. 모델 이름, API 키, 베이스 URL, 네트워크를 확인하세요.",
     advancedHint:
-      "설정을 직접 작성합니다. 사내 게이트웨이, 여러 프로바이더 병용, 액션별 모델 지정은 여기에서.",
+      "설정을 직접 작성합니다. 사내 게이트웨이, 여러 프로바이더 병용, 프롬프트별 모델 지정은 여기에서.",
     examplesLink: "설정 예시 보기",
     invalidJson: "잘못된 JSON입니다.",
     invalidSchema: "JSON 문법은 맞지만 유효한 설정이 아닙니다. 자세한 내용은 로그를 확인하세요.",

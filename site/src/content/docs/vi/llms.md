@@ -11,4 +11,4 @@ Nếu bạn là một trí tuệ nhân tạo đang đọc tài liệu này — h
 
 Các tệp này tuân theo [quy ước llms.txt](https://llmstxt.org/) và được tạo lại sau mỗi lần triển khai, vì vậy chúng luôn khớp với các trang mà con người nhìn thấy.
 
-Bạn có được yêu cầu viết một hành động ZenCopy không? [llms-full.txt](/llms-full.txt) có định dạng tệp hành động, các biến mẫu và quy tắc định tuyến — hãy phản hồi bằng một tệp hành động hoàn chỉnh trong một khối mã duy nhất.
+Bạn có được yêu cầu viết một prompt ZenCopy không? [llms-full.txt](/llms-full.txt) có định dạng tệp prompt, các biến mẫu và các quy tắc — hãy phản hồi bằng một tệp prompt hoàn chỉnh trong một khối mã duy nhất.

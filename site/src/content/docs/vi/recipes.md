@@ -53,8 +53,8 @@ Một vai trò có dạng `"provider:model"`, tách tại dấu `:` đầu tiên
 
 ## Hai vai trò: nhanh theo mặc định, thông minh khi cần
 
-Vai trò tách rời hành động khỏi mô hình.
-Hành động gọi tên một vai trò (`role: smart` trong frontmatter của hành động); vai trò đó ứng với mô hình nào được quyết định ở đây — đổi lúc nào cũng được mà không đụng đến hành động.
+Vai trò tách rời prompt khỏi mô hình.
+Prompt gọi tên một vai trò (`role: smart` trong frontmatter của prompt); vai trò đó ứng với mô hình nào được quyết định ở đây — đổi lúc nào cũng được mà không đụng đến prompt.
 
 ```json
 {

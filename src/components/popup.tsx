@@ -20,7 +20,7 @@ import { SourceView } from "@/components/source-view.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
-import { type ActionInfo, listActions } from "@/lib/actions.ts";
+import { type PromptInfo, listPrompts } from "@/lib/prompts.ts";
 import {
   ATTACHMENT_TOO_LARGE,
   buildAttachments,
@@ -32,14 +32,14 @@ import {
   UNSUPPORTED_FILE_PREFIX,
 } from "@/lib/capture.ts";
 import { formatUsd, monthCostUsd } from "@/lib/costs.ts";
-import { useActionLabel, useLocale, useT } from "@/lib/i18n.tsx";
+import { usePromptLabel, useLocale, useT } from "@/lib/i18n.tsx";
 import { createLogger, errorMessage } from "@/lib/log.ts";
 import {
   type Exchange,
   EMPTY_RESULT,
   INVALID_CONFIG,
   NOT_CONFIGURED,
-  streamAction,
+  streamPrompt,
   type StreamOutcome,
   TIMED_OUT,
   warmUp,
@@ -47,7 +47,7 @@ import {
 import { TRIGGER_MODIFIER } from "@/lib/platform.ts";
 import {
   getCostLimit,
-  getQuickActions,
+  getQuickPrompts,
   isConfirmAttachments,
   isDevMode,
   isPopupCostShown,
@@ -162,7 +162,7 @@ function Turn({
         ) : (
           <Markdown text={turn.text} imageHost={imageHost} />
         ))}
-      {/* The reply's own action row, start-aligned — the convention every AI
+      {/* The reply's own prompt row, start-aligned — the convention every AI
           chat converged on. Always visible but a size quieter than the text;
           Retry rewinds the conversation to this reply and runs it again. */}
       {(copyable || onRetry !== undefined) && (
@@ -204,22 +204,22 @@ const definitionOf = (payload: CapturePayload): string =>
 
 export function Popup(): React.JSX.Element {
   const [payload, setPayload] = useState<CapturePayload | undefined>(undefined);
-  // Every action's output for the current capture, keyed by action id —
+  // Every prompt's output for the current capture, keyed by prompt id —
   // running entries stream in place, finished ones stay until the next
-  // capture. Actions run in parallel: switching away never cancels a stream,
+  // capture. Prompts run in parallel: switching away never cancels a stream,
   // and switching back shows whatever it has produced so far.
   const [results, setResults] = useState<ReadonlyMap<string, Result>>(new Map());
   // The follow-up field's draft, reset when the view changes underneath it.
   const [followUpText, setFollowUpText] = useState("");
   // The composer element, so view changes can also collapse its grown height.
   const composerRef = useRef<HTMLTextAreaElement | null>(null);
-  // The full-list action palette (the long tail beyond the quick slots).
+  // The full-list prompt palette (the long tail beyond the quick slots).
   const [menuOpen, setMenuOpen] = useState(false);
-  // Filter text inside the palette, for finding an action among many.
+  // Filter text inside the palette, for finding an prompt among many.
   const [menuFilter, setMenuFilter] = useState("");
-  const [actions, setActions] = useState<ActionInfo[]>([]);
-  // The action ids bound to number keys 1–4 (settings), in slot order.
-  const [quickIds] = useLiveValue<string[]>(getQuickActions, "quick-actions-changed", []);
+  const [prompts, setPrompts] = useState<PromptInfo[]>([]);
+  // The prompt ids bound to number keys 1–4 (settings), in slot order.
+  const [quickIds] = useLiveValue<string[]>(getQuickPrompts, "quick-prompts-changed", []);
   // The "Show template variables" toggle (stored as `devMode`).
   const [devMode] = useLiveValue(isDevMode, "dev-mode-changed", false);
   // Usage statistics (settings toggle, default on): append invocation events.
@@ -244,10 +244,10 @@ export function Popup(): React.JSX.Element {
   const [dontAsk, setDontAsk] = useState(false);
   const t = useT();
   const locale = useLocale();
-  const actionLabel = useActionLabel();
+  const promptLabel = usePromptLabel();
   const updateVersion = useUpdateVersion();
 
-  // The in-flight run per action id (current capture only). A run's identity
+  // The in-flight run per prompt id (current capture only). A run's identity
   // is its controller: stale callbacks compare against this map before
   // touching state, so a Retry or a new capture cleanly orphans old streams.
   const runsRef = useRef(new Map<string, AbortController>());
@@ -255,16 +255,16 @@ export function Popup(): React.JSX.Element {
   // signature aborts everything and starts a clean slate.
   const captureSig = useRef<string | undefined>(undefined);
   // Signature of the capture whose attachments the user approved sending, so
-  // Retry and action switches on the same content don't ask again.
+  // Retry and prompt switches on the same content don't ask again.
   const approvedSig = useRef<string | undefined>(undefined);
   // The run the attachment gate interrupted, so approval resumes exactly it.
   const pendingSend = useRef<
     { payload: CapturePayload; prior: Exchange[]; question?: string | undefined } | undefined
   >(undefined);
   // What each kept result was produced WITH (role + instructions + prompt at
-  // run time): editing an action and re-copying the same test text must run
+  // run time): editing an prompt and re-copying the same test text must run
   // the new definition, not parrot the old result — that edit-and-retry loop
-  // is exactly how actions get written.
+  // is exactly how prompts get written.
   const ranDefinition = useRef(new Map<string, string>());
   const bodyRef = useRef<HTMLDivElement>(null);
   // Whether the view is glued to the streaming output's bottom edge. "At the
@@ -276,16 +276,16 @@ export function Popup(): React.JSX.Element {
   // The palette's filter field, focused when the palette opens.
   const filterRef = useRef<HTMLInputElement>(null);
 
-  // What the popup shows: the current action's entry (live or kept).
-  const result = payload ? results.get(payload.action_id) : undefined;
+  // What the popup shows: the current prompt's entry (live or kept).
+  const result = payload ? results.get(payload.prompt_id) : undefined;
 
-  const putResult = (actionId: string, entry: Result | undefined): void => {
+  const putResult = (promptId: string, entry: Result | undefined): void => {
     setResults((prev) => {
       const next = new Map(prev);
       if (entry) {
-        next.set(actionId, entry);
+        next.set(promptId, entry);
       } else {
-        next.delete(actionId);
+        next.delete(promptId);
       }
       return next;
     });
@@ -295,8 +295,8 @@ export function Popup(): React.JSX.Element {
   // retries, and kept results being shown — prose for the human reading the
   // log (statistics live in their own store, not here). Ids and kinds only,
   // never content.
-  const logUsage = (actionId: string, kind: string): void => {
-    log.info(`action run: ${actionId} (${kind})`);
+  const logUsage = (promptId: string, kind: string): void => {
+    log.info(`prompt run: ${promptId} (${kind})`);
   };
 
   // Refresh the header's month estimate; a failure hides the number rather
@@ -327,10 +327,10 @@ export function Popup(): React.JSX.Element {
   // config errors, user stops, timeouts, and error responses all leave no
   // line. Fire-and-forget; a failed append is logged Rust-side and never
   // blocks anything.
-  const recordUsage = (actionId: string, kind: string, outcome: StreamOutcome): void => {
+  const recordUsage = (promptId: string, kind: string, outcome: StreamOutcome): void => {
     if (statsEnabled) {
       void invoke("record_usage", {
-        action: actionId,
+        prompt: promptId,
         kind,
         model: outcome.model,
         tokens: outcome.tokens,
@@ -348,8 +348,8 @@ export function Popup(): React.JSX.Element {
   const run = (next: CapturePayload, force = false): void => {
     const sig = sourceSignature(next.source);
     // A different capture orphans everything: streams are aborted, kept
-    // results dropped. The same capture keeps both — actions run in parallel
-    // and every action's result stays valid for identical content.
+    // results dropped. The same capture keeps both — prompts run in parallel
+    // and every prompt's result stays valid for identical content.
     if (captureSig.current !== sig) {
       abortAll();
       captureSig.current = sig;
@@ -365,19 +365,19 @@ export function Popup(): React.JSX.Element {
 
     setAwaitingSend(false);
 
-    const actionId = next.action_id;
-    // Same content, same action, same definition, and a finished result:
+    const promptId = next.prompt_id;
+    // Same content, same prompt, same definition, and a finished result:
     // show it again instead of re-running — Esc-then-recopy means "let me see
     // that once more", not "spend tokens again". Retry stays the explicit
     // regenerate. Deliberately NOT reused: a failed FIRST run (a fresh C+C
     // retries it instead of parroting the error — but a thread whose only
     // blemish is its last follow-up IS kept: overwriting good turns over one
     // network blip would be data loss, and Retry re-asks that question),
-    // runs of an edited action (the definition fingerprint differs), and
+    // runs of an edited prompt (the definition fingerprint differs), and
     // `files` captures (their signature is the paths, so the files' contents
     // may have changed).
     const definition = definitionOf(next);
-    const kept = results.get(actionId);
+    const kept = results.get(promptId);
     if (
       !force &&
       kept?.phase === "done" &&
@@ -387,14 +387,14 @@ export function Popup(): React.JSX.Element {
       // Only a failed FIRST run re-runs (a fresh C+C means "retry it" there).
       (kept.turns.length > 1 || (kept.ok && !kept.setup)) &&
       next.kind !== "files" &&
-      ranDefinition.current.get(actionId) === definition
+      ranDefinition.current.get(promptId) === definition
     ) {
-      logUsage(actionId, next.kind);
+      logUsage(promptId, next.kind);
       return;
     }
-    const existing = runsRef.current.get(actionId);
+    const existing = runsRef.current.get(promptId);
     if (existing && !force) {
-      // Already streaming this action for this content — the view follows it.
+      // Already streaming this prompt for this content — the view follows it.
       return;
     }
     existing?.abort();
@@ -405,40 +405,40 @@ export function Popup(): React.JSX.Element {
   // The shared run body — a first run and a follow-up differ only in the
   // thread they extend (`prior`, empty at first) and the user turn extending
   // it (`question`, absent at first: the first turn's question is the
-  // action's own prompt). One path for both means a follow-up is capped,
+  // prompt's own prompt). One path for both means a follow-up is capped,
   // confirmed, logged, and recorded in the ledger exactly like a first run.
   const execute = (next: CapturePayload, prior: Exchange[], question?: string): void => {
     const sig = sourceSignature(next.source);
     // The precondition run() used to guarantee by construction: execute only
     // ever extends the CURRENT capture. A stale payload must not claim the
     // run slot — an unowned claim would never be released and would wedge
-    // the action for the session.
+    // the prompt for the session.
     if (captureSig.current !== sig) {
       return;
     }
-    const actionId = next.action_id;
+    const promptId = next.prompt_id;
 
-    logUsage(actionId, next.kind);
+    logUsage(promptId, next.kind);
 
     const controller = new AbortController();
-    runsRef.current.set(actionId, controller);
-    ranDefinition.current.set(actionId, definitionOf(next));
+    runsRef.current.set(promptId, controller);
+    ranDefinition.current.set(promptId, definitionOf(next));
     // A callback owns its entry only while the capture is current AND its
     // controller is still the registered run — a Retry or a new capture takes
     // the slot over and orphans the old stream mid-flight.
     const owns = (): boolean =>
-      captureSig.current === sig && runsRef.current.get(actionId) === controller;
+      captureSig.current === sig && runsRef.current.get(promptId) === controller;
     // The thread with the current turn's text-so-far as its last entry.
     const turnsWith = (text: string): Exchange[] => [...prior, { question, text }];
     // Nothing arrived: a first run returns to the source-only view; a
     // follow-up returns to the thread it grew from.
     const revert = (): void => {
       putResult(
-        actionId,
+        promptId,
         question === undefined ? undefined : { phase: "done", turns: prior, ok: true },
       );
     };
-    putResult(actionId, { phase: "running", turns: turnsWith("") });
+    putResult(promptId, { phase: "running", turns: turnsWith("") });
 
     void (async () => {
       // The outcome once the stream settles — undefined when the run never
@@ -458,7 +458,7 @@ export function Popup(): React.JSX.Element {
           }
           if (owns() && spent !== undefined && spent >= costLimit) {
             const capped = t.popup.costLimitReached(formatUsd(locale, costLimit));
-            putResult(actionId, { phase: "done", turns: turnsWith(capped), ok: false });
+            putResult(promptId, { phase: "done", turns: turnsWith(capped), ok: false });
             return;
           }
         }
@@ -469,7 +469,7 @@ export function Popup(): React.JSX.Element {
         const expensive = attachments?.some((file) => !file.media_type.startsWith("text/"));
         if (expensive && confirmSend && approvedSig.current !== sig) {
           if (owns()) {
-            runsRef.current.delete(actionId);
+            runsRef.current.delete(promptId);
             // Suspend THIS run — approval must resume a follow-up or retry
             // as itself, not restart the capture from scratch via run().
             pendingSend.current = { payload: next, prior, question };
@@ -480,8 +480,8 @@ export function Popup(): React.JSX.Element {
           return;
         }
         const followUp = question === undefined ? undefined : { turns: prior, question };
-        const outcome = await streamAction(
-          // Expose the user's locale to action templates ({{ locale }}).
+        const outcome = await streamPrompt(
+          // Expose the user's locale to prompt templates ({{ locale }}).
           {
             ...next,
             vars: { ...next.vars, locale },
@@ -490,7 +490,7 @@ export function Popup(): React.JSX.Element {
           },
           (chunk) => {
             if (owns()) {
-              putResult(actionId, { phase: "running", turns: turnsWith(chunk) });
+              putResult(promptId, { phase: "running", turns: turnsWith(chunk) });
             }
           },
           controller.signal,
@@ -506,7 +506,7 @@ export function Popup(): React.JSX.Element {
               setFollowUpText((draft) => draft || question);
             }
           } else {
-            putResult(actionId, { phase: "done", turns: turnsWith(text), ok: true });
+            putResult(promptId, { phase: "done", turns: turnsWith(text), ok: true });
           }
         }
       } catch (error) {
@@ -515,7 +515,7 @@ export function Popup(): React.JSX.Element {
           // No provider set up yet. Stay put and offer a way into settings —
           // auto-opening it would steal focus from this popup.
           if (owns()) {
-            putResult(actionId, {
+            putResult(promptId, {
               phase: "done",
               turns: turnsWith(t.ai.notConfigured),
               ok: false,
@@ -526,9 +526,9 @@ export function Popup(): React.JSX.Element {
           // The catalog file exists but fails the schema. Same treatment as
           // "not configured" — a human sentence plus a way into settings; the
           // zod detail is already in the log.
-          log.error("action failed: invalid ai-sdk-catalog.json", error);
+          log.error("prompt failed: invalid ai-sdk-catalog.json", error);
           if (owns()) {
-            putResult(actionId, {
+            putResult(promptId, {
               phase: "done",
               turns: turnsWith(t.ai.invalidConfig),
               ok: false,
@@ -536,7 +536,7 @@ export function Popup(): React.JSX.Element {
             });
           }
         } else {
-          log.error("action failed", error);
+          log.error("prompt failed", error);
           if (owns()) {
             let text: string;
             if (reason === TIMED_OUT) {
@@ -552,14 +552,14 @@ export function Popup(): React.JSX.Element {
             } else {
               text = t.popup.failed(reason);
             }
-            putResult(actionId, { phase: "done", turns: turnsWith(text), ok: false });
+            putResult(promptId, { phase: "done", turns: turnsWith(text), ok: false });
           }
         }
       } finally {
         if (owns()) {
-          runsRef.current.delete(actionId); // free the slot for a later re-run
+          runsRef.current.delete(promptId); // free the slot for a later re-run
           if (settled && !controller.signal.aborted) {
-            recordUsage(actionId, next.kind, settled);
+            recordUsage(promptId, next.kind, settled);
             refreshMonthCost(); // the number just changed (fire-and-forget race is fine)
           }
         }
@@ -578,14 +578,14 @@ export function Popup(): React.JSX.Element {
     }
     const incoming = checked.success ? checked.data : raw;
     // run() drops kept results itself when the content actually changed; a
-    // re-copy of identical content keeps every action's result valid.
-    // Refresh the action list so edits on disk show up without the menu
+    // re-copy of identical content keeps every prompt's result valid.
+    // Refresh the prompt list so edits on disk show up without the menu
     // ever being opened.
     void (async () => {
       try {
-        setActions(await listActions());
+        setPrompts(await listPrompts());
       } catch (error) {
-        log.error("listing actions failed", error);
+        log.error("listing prompts failed", error);
       }
     })();
     run(incoming);
@@ -622,14 +622,14 @@ export function Popup(): React.JSX.Element {
   }, []);
 
   // What the auto-scroll saw last, so the settle of a stream (running →
-  // done, same action) can be told apart from switching to a finished result.
+  // done, same prompt) can be told apart from switching to a finished result.
   const scrollSeenRef = useRef<{ id: string; phase: string } | undefined>(undefined);
   // Follow the streaming output to the bottom — unless the user scrolled up
   // to read; scrolling back to the bottom resumes following. The settle also
   // pins once more: the reply field appears under the finished answer, and
   // stopping one line above it would hide the way to continue.
   useEffect(() => {
-    const id = payload?.action_id;
+    const id = payload?.prompt_id;
     const previous = scrollSeenRef.current;
     scrollSeenRef.current =
       id === undefined || result === undefined ? undefined : { id, phase: result.phase };
@@ -637,9 +637,9 @@ export function Popup(): React.JSX.Element {
     if ((result?.phase === "running" || settled) && pinnedRef.current && bodyRef.current) {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
-  }, [payload?.action_id, result]);
+  }, [payload?.prompt_id, result]);
 
-  // A different view (new capture or a switched action) starts back at the
+  // A different view (new capture or a switched prompt) starts back at the
   // top with fresh content — follow its stream until the user says otherwise,
   // and drop any half-typed follow-up (and the height it grew) that belonged
   // to the previous view.
@@ -649,7 +649,7 @@ export function Popup(): React.JSX.Element {
     if (composerRef.current) {
       composerRef.current.style.height = "auto";
     }
-  }, [payload?.action_id, payload?.source]);
+  }, [payload?.prompt_id, payload?.source]);
 
   // A palette that opens for typing should receive the caret immediately.
   useEffect(() => {
@@ -658,10 +658,10 @@ export function Popup(): React.JSX.Element {
     }
   }, [menuOpen]);
 
-  // Stop cancels only the action on screen; other actions keep streaming.
+  // Stop cancels only the prompt on screen; other prompts keep streaming.
   const stop = (): void => {
     if (payload) {
-      runsRef.current.get(payload.action_id)?.abort();
+      runsRef.current.get(payload.prompt_id)?.abort();
     }
   };
   // Retry any turn: the conversation rewinds to that point and the turn's
@@ -671,11 +671,11 @@ export function Popup(): React.JSX.Element {
     if (!payload) {
       return;
     }
-    const kept = results.get(payload.action_id);
+    const kept = results.get(payload.prompt_id);
     if (kept?.phase !== "done") {
       return;
     }
-    runsRef.current.get(payload.action_id)?.abort();
+    runsRef.current.get(payload.prompt_id)?.abort();
     execute(payload, kept.turns.slice(0, index), kept.turns[index]?.question);
   };
 
@@ -685,7 +685,7 @@ export function Popup(): React.JSX.Element {
     if (!payload || !question) {
       return;
     }
-    const kept = results.get(payload.action_id);
+    const kept = results.get(payload.prompt_id);
     if (kept?.phase !== "done") {
       return; // Enter while the reply still streams — the draft just stays
     }
@@ -697,7 +697,7 @@ export function Popup(): React.JSX.Element {
   };
 
   // The go-ahead on the confirmation card: remember it for this capture (so
-  // Retry and action switches don't re-ask) and optionally stop asking at all.
+  // Retry and prompt switches don't re-ask) and optionally stop asking at all.
   const approveSend = (): void => {
     if (!payload) {
       return;
@@ -726,7 +726,7 @@ export function Popup(): React.JSX.Element {
     hidePopup();
   };
 
-  // The palette: the full action list, for the long tail beyond the quick
+  // The palette: the full prompt list, for the long tail beyond the quick
   // slots. Re-read from disk on every open, so file edits show up immediately.
   const toggleMenu = (): void => {
     if (menuOpen) {
@@ -736,58 +736,58 @@ export function Popup(): React.JSX.Element {
     setMenuFilter("");
     void (async () => {
       try {
-        setActions(await listActions());
+        setPrompts(await listPrompts());
         setMenuOpen(true);
       } catch (error) {
-        log.error("listing actions failed", error);
+        log.error("listing prompts failed", error);
       }
     })();
   };
 
-  const switchAction = (action: ActionInfo): void => {
+  const switchPrompt = (prompt: PromptInfo): void => {
     setMenuOpen(false);
-    if (!payload || action.id === payload.action_id) {
+    if (!payload || prompt.id === payload.prompt_id) {
       return;
     }
     const next: CapturePayload = {
       ...payload,
-      action_id: action.id,
-      label: action.label,
-      role: action.role ?? "default",
-      instructions: action.instructions,
-      prompt: action.prompt,
+      prompt_id: prompt.id,
+      label: prompt.label,
+      role: prompt.role ?? "default",
+      instructions: prompt.instructions,
+      prompt: prompt.prompt,
       runnable: true,
     };
-    // An action that already ran (or is still streaming) just becomes the
+    // An prompt that already ran (or is still streaming) just becomes the
     // view: the derived result shows its kept text or its live stream — no
     // cancellation, no silent re-execution; Retry is the explicit re-run.
-    if (results.has(action.id)) {
-      logUsage(action.id, next.kind);
+    if (results.has(prompt.id)) {
+      logUsage(prompt.id, next.kind);
       setPayload(next);
       return;
     }
     run(next);
   };
 
-  // Number keys 1–4: switch to the quick slot's action (abort + re-run, via
-  // switchAction). A number binds to a slot, not to the nth visible chip, so a
-  // missing/absent action just makes its number a no-op — positions stay put.
+  // Number keys 1–4: switch to the quick slot's prompt (abort + re-run, via
+  // switchPrompt). A number binds to a slot, not to the nth visible chip, so a
+  // missing/absent prompt just makes its number a no-op — positions stay put.
   const switchToSlot = (num: number): void => {
     if (!payload || awaitingSend) {
       return;
     }
     const id = quickIds[num - 1];
-    if (id === undefined || id === "" || id === payload.action_id) {
+    if (id === undefined || id === "" || id === payload.prompt_id) {
       return;
     }
-    const action = actions.find((entry) => entry.id === id);
-    if (action) {
-      switchAction(action);
+    const prompt = prompts.find((entry) => entry.id === id);
+    if (prompt) {
+      switchPrompt(prompt);
     }
   };
 
   // Effect Events, so the once-registered handlers below always see the
-  // latest state (payload, actions, menuOpen change constantly) without
+  // latest state (payload, prompts, menuOpen change constantly) without
   // re-subscribing.
   const onKeyDown = useEffectEvent((event: KeyboardEvent): void => {
     // Keys that belong to an IME composition (the Esc cancelling a
@@ -826,7 +826,7 @@ export function Popup(): React.JSX.Element {
   // Dismiss on Escape only. Losing focus is deliberately NOT a dismissal: the
   // popup is a picture-in-picture panel whose content cost tokens and seconds
   // to produce, so a stray click elsewhere must never destroy it — Esc (while
-  // focused) and the close button are the only ways out. While the action
+  // focused) and the close button are the only ways out. While the prompt
   // menu is open, Escape closes the menu first.
   useEffect(() => {
     globalThis.addEventListener("keydown", onKeyDown);
@@ -853,10 +853,10 @@ export function Popup(): React.JSX.Element {
     }
   })();
 
-  // The quick slots, resolved: each number's action, or undefined when its id
-  // names a deleted action. Positions are preserved (the number IS the slot),
-  // so a gone action leaves a gap rather than shifting the rest.
-  const quickSlots = quickIds.map((id) => actions.find((entry) => entry.id === id));
+  // The quick slots, resolved: each number's prompt, or undefined when its id
+  // names a deleted prompt. Positions are preserved (the number IS the slot),
+  // so a gone prompt leaves a gap rather than shifting the rest.
+  const quickSlots = quickIds.map((id) => prompts.find((entry) => entry.id === id));
   // The status glyph for the headline (running / done / setup / failed).
   const statusIcon = ((): React.JSX.Element | undefined => {
     if (running) {
@@ -874,14 +874,14 @@ export function Popup(): React.JSX.Element {
     return undefined;
   })();
 
-  // The action block: a prominent headline (the single source of truth for
-  // "what is running") over a row of numbered quick slots. The current action
-  // is the headline; the slots are the one-key switch. When the running action
+  // The prompt block: a prominent headline (the single source of truth for
+  // "what is running") over a row of numbered quick slots. The current prompt
+  // is the headline; the slots are the one-key switch. When the running prompt
   // is not among the four slots, none is highlighted — the layout never shifts.
-  const actionRow = payload ? (
+  const promptRow = payload ? (
     <div className="flex flex-col gap-2">
-      {/* Headline: status glyph + the action label as the visual anchor. The
-          label carries the "-ing" via the spinner + ellipsis, so no per-action
+      {/* Headline: status glyph + the prompt label as the visual anchor. The
+          label carries the "-ing" via the spinner + ellipsis, so no per-prompt
           verb form is needed (works for custom labels too). */}
       <div
         className={cn(
@@ -891,7 +891,7 @@ export function Popup(): React.JSX.Element {
       >
         {statusIcon}
         <span className="min-w-0 truncate">
-          {actionLabel(payload.action_id, payload.label) || t.popup.chooseAction}
+          {promptLabel(payload.prompt_id, payload.label) || t.popup.choosePrompt}
           {running ? "…" : ""}
         </span>
       </div>
@@ -900,17 +900,17 @@ export function Popup(): React.JSX.Element {
           run outside the four leaves none highlighted. A trailing button opens
           the full palette for everything else. */}
       <div className="flex flex-wrap items-center gap-1">
-        {quickSlots.map((action, index) =>
-          action ? (
+        {quickSlots.map((prompt, index) =>
+          prompt ? (
             <button
-              key={action.id}
+              key={prompt.id}
               type="button"
               onClick={() => {
-                switchAction(action);
+                switchPrompt(prompt);
               }}
               className={cn(
                 "flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-xs transition-colors",
-                action.id === payload.action_id
+                prompt.id === payload.prompt_id
                   ? "border-foreground/30 bg-accent text-foreground"
                   : "border-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
               )}
@@ -918,26 +918,26 @@ export function Popup(): React.JSX.Element {
               <kbd className="rounded bg-muted px-1 font-mono text-[10px] text-muted-foreground/80">
                 {index + 1}
               </kbd>
-              <span className="max-w-32 truncate">{actionLabel(action.id, action.label)}</span>
-              {/* A background action still streaming announces itself, so
+              <span className="max-w-32 truncate">{promptLabel(prompt.id, prompt.label)}</span>
+              {/* A background prompt still streaming announces itself, so
                   "switch away and come back later" is a visible affordance. */}
-              {results.get(action.id)?.phase === "running" ? (
+              {results.get(prompt.id)?.phase === "running" ? (
                 <LoaderCircle className="size-3 shrink-0 animate-spin" />
               ) : undefined}
             </button>
           ) : undefined,
         )}
         {/* The full-list palette only earns its place when there are more
-            actions than the numbered slots can show — with just the
+            prompts than the numbered slots can show — with just the
             pre-installed set, it would merely repeat the row above. */}
-        {actions.length > QUICK_SLOT_COUNT ? (
+        {prompts.length > QUICK_SLOT_COUNT ? (
           <button
             type="button"
             onClick={toggleMenu}
             aria-haspopup="menu"
             aria-expanded={menuOpen}
-            aria-label={t.popup.switchAction}
-            title={t.popup.switchAction}
+            aria-label={t.popup.switchPrompt}
+            title={t.popup.switchPrompt}
             className="flex items-center gap-1 rounded-md border border-transparent px-1.5 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
           >
             <LayoutGrid className="size-3.5" />
@@ -963,36 +963,36 @@ export function Popup(): React.JSX.Element {
             <input
               ref={filterRef}
               value={menuFilter}
-              placeholder={t.popup.chooseAction}
+              placeholder={t.popup.choosePrompt}
               onChange={(event) => {
                 setMenuFilter(event.target.value);
               }}
               className="mb-1 rounded-md border bg-background px-2 py-1.5 text-xs outline-none focus-visible:border-ring"
             />
             <div className="max-h-[45svh] overflow-auto">
-              {actions
-                .filter((action) =>
-                  actionLabel(action.id, action.label)
+              {prompts
+                .filter((prompt) =>
+                  promptLabel(prompt.id, prompt.label)
                     .toLowerCase()
                     .includes(menuFilter.trim().toLowerCase()),
                 )
-                .map((action) => (
+                .map((prompt) => (
                   <button
-                    key={action.id}
+                    key={prompt.id}
                     type="button"
                     role="menuitem"
                     onClick={() => {
-                      switchAction(action);
+                      switchPrompt(prompt);
                     }}
                     className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-start text-xs hover:bg-accent"
                   >
                     <Check
                       className={cn(
                         "size-3 shrink-0",
-                        action.id === payload.action_id ? "opacity-100" : "opacity-0",
+                        prompt.id === payload.prompt_id ? "opacity-100" : "opacity-0",
                       )}
                     />
-                    <span className="truncate">{actionLabel(action.id, action.label)}</span>
+                    <span className="truncate">{promptLabel(prompt.id, prompt.label)}</span>
                   </button>
                 ))}
             </div>
@@ -1101,7 +1101,7 @@ export function Popup(): React.JSX.Element {
       <>
         <SourceView source={payload.source} />
         {devVarsView}
-        {actionRow}
+        {promptRow}
         {awaitingSend ? confirmCard : resultView}
         {setup ? (
           <Button variant="outline" size="sm" className="self-start" onClick={openSettings}>
@@ -1116,19 +1116,19 @@ export function Popup(): React.JSX.Element {
       <>
         <SourceView source={payload.source} />
         {devVarsView}
-        {actionRow}
+        {promptRow}
         {payload.kind === "empty" ? undefined : (
           <div className="flex flex-col gap-2">
-            <p className="text-xs text-muted-foreground">{t.popup.noAction}</p>
+            <p className="text-xs text-muted-foreground">{t.popup.noPrompt}</p>
             <Button
               variant="outline"
               size="sm"
               className="self-start"
               onClick={() => {
-                void invoke("open_url", { url: siteUrl(locale, "configuration/#routingjson") });
+                void invoke("open_url", { url: siteUrl(locale, "configuration/#rulesjson") });
               }}
             >
-              {t.popup.routingDocs}
+              {t.popup.rulesDocs}
               <ExternalLink className="size-3" />
             </Button>
           </div>

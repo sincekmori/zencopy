@@ -36,7 +36,7 @@ Elle est réellement utile pour saisir l'essentiel d'un texte, mais pour les chi
 
 La plupart des outils de ce type sont réservés à macOS, ne traitent que le texte sélectionné et sont liés à l'IA d'un seul éditeur ou à un abonnement.
 ZenCopy fonctionne sous **Windows, macOS et Linux**, traite **le texte, le texte enrichi, les images et les fichiers**, et vous laisse **choisir le service d'IA** (OpenAI / Google / Anthropic / une passerelle d'entreprise / Ollama en local).
-[Le choix de l'action qui s'exécute vous appartient aussi](/fr/configuration/#routingjson).
+[Le choix du prompt qui s'exécute vous appartient aussi](/fr/configuration/#rulesjson).
 Pas de compte, pas d'abonnement, pas de télémétrie — un logiciel open source.
 
 ## Une autre application réagit aussi à Ctrl/⌘ + C + C (DeepL, par exemple)
@@ -73,7 +73,7 @@ Les journaux ne contiennent jamais votre contenu copié ni vos clés d'API.
 <Tabs syncKey="os">
   <TabItem label="Windows">
     Le désinstalleur pose la question via une case **Delete application data** — la cocher supprime
-    tout : les réglages, les clés d'API, les actions personnalisées, les journaux et le profil de la
+    tout : les réglages, les clés d'API, les prompts personnalisés, les journaux et le profil de la
     webview. (Un reste inoffensif, que vous la cochiez ou non : si le lancement à la connexion était
     activé, une entrée de registre pointant vers rien peut subsister — Windows ignore les entrées
     dont la cible n'existe pas.)

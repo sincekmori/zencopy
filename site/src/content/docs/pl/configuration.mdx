@@ -13,7 +13,7 @@ Pierwsza połowa, o **oknie ustawień**, jest dla wszystkich; druga połowa, o *
 ## Okno ustawień
 
 Otwórz je z menu ikony w zasobniku albo ikoną koła zębatego w okienku.
-Ma trzy karty: **Ogólne, AI i Akcje**.
+Ma trzy karty: **Ogólne, AI i Prompty**.
 
 ### Ogólne
 
@@ -34,29 +34,29 @@ To miejsce, by w kilku prostych zdaniach, w dowolnym języku, opisać swoją rol
 
 > Przykład: „Sprzedaż. Piszę głównie e-maile do klientów — uprzejme, ale nie sztywne, wniosek na początku.”
 
-Z wypełnionym polem każda akcja dopasowuje wyniki do Ciebie.
+Z wypełnionym polem każdy prompt dopasowuje wyniki do Ciebie.
 Wyjaśnienia przychodzą na Twoim poziomie wiedzy, a wersje robocze wracają w preferowanym przez Ciebie tonie.
 Pole nigdy nie wpływa na niezwiązane zadania, a sam jego tekst nigdy nie pojawia się w wynikach.
 
-### Akcje
+### Prompty
 
 Lista tego, „co dzieje się po podwójnym kopiowaniu”.
 
-- Wstępnie zainstalowane akcje można otwierać i czytać — służą zarazem jako gotowe przykłady.
-- **Nowa akcja** wymaga tylko nazwy i opisu, co ma zostać zrobione.
+- Wstępnie zainstalowane prompty można otwierać i czytać — służą zarazem jako gotowe przykłady.
+- **Nowy prompt** wymaga tylko nazwy i opisu, co ma zostać zrobione.
   Na przykład: nazwa „Streszczenie w 3 linijkach”, instrukcja „Streść to w 3 linijkach”.
 - Nie masz pewności, jak pisać instrukcje? Zanotuj z grubsza, czego chcesz, i naciśnij **Szkicuj z AI** — skonfigurowane przez Ciebie AI zamieni to w porządną instrukcję.
-- **Routing** pozwala wybrać inną akcję dla każdego rodzaju treści (tekst / obraz / pliki).
+- **Reguły** pozwalają wybrać inny prompt dla każdego rodzaju treści (tekst / obraz / pliki).
 
-Zbudowane przez Ciebie akcje można udostępniać: **Eksportuj (.md)** zapisuje akcję jako plik, a odbiorca po prostu wkleja ją w **Importuj** albo wybiera plik.
+Zbudowane przez Ciebie prompty można udostępniać: **Eksportuj (.md)** zapisuje prompt jako plik, a odbiorca po prostu wkleja go w **Importuj** albo wybiera plik.
 
-Wolisz powierzyć całe zadanie sztucznej inteligencji? Każdy czat AI może napisać dla Ciebie gotową do zaimportowania akcję — wklej to i uzupełnij puste miejsce:
+Wolisz powierzyć całe zadanie sztucznej inteligencji? Każdy czat AI może napisać dla Ciebie gotowy do zaimportowania prompt — wklej to i uzupełnij puste miejsce:
 
 ```text
-Przeczytaj https://zencopy.app/llms-full.txt — pełną dokumentację ZenCopy, w tym format pliku akcji, zmienne szablonu oraz sposób działania routingu. Następnie napisz akcję ZenCopy, która robi następujące rzeczy: [co chcesz osiągnąć]. Wygeneruj jeden kompletny plik akcji (Markdown z frontmatterem) w pojedynczym bloku kodu, gotowy do wklejenia w ZenCopy w Ustawienia → Akcje → Importuj. Jeśli akcja ma sens tylko w konkretnej aplikacji lub na określonej stronie, dodaj jedno zdanie informujące mnie, którą regułę routingu należy ustawić.
+Przeczytaj https://zencopy.app/llms-full.txt — pełną dokumentację ZenCopy, w tym format pliku promptu, zmienne szablonu oraz sposób działania reguł. Następnie napisz prompt ZenCopy, który robi następujące rzeczy: [co chcesz osiągnąć]. Wygeneruj jeden kompletny plik promptu (Markdown z frontmatterem) w pojedynczym bloku kodu, gotowy do wklejenia w ZenCopy w Ustawienia → Prompty → Importuj. Jeśli prompt ma sens tylko w konkretnej aplikacji lub na określonej stronie, dodaj jedno zdanie informujące mnie, którą regułę należy ustawić.
 ```
 
-Blok kodu w odpowiedzi trafia bezpośrednio do **Ustawienia → Akcje → Importuj**.
+Blok kodu w odpowiedzi trafia bezpośrednio do **Ustawienia → Prompty → Importuj**.
 W przypadku pytań, na które dokumentacja nie odpowiada („czy ZenCopy w ogóle potrafi…?”), <RepomixLink>jedno kliknięcie pakuje odpowiedni kod źródłowy</RepomixLink> — przekaż wynik tej samej sztucznej inteligencji.
 
 ## Pliki konfiguracyjne (dla zaawansowanych użytkowników)
@@ -73,38 +73,38 @@ Dokładna ścieżka jest też wypisywana do logu przy starcie:
   <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
 </Tabs>
 
-Domyślny routing jest wbudowany w aplikację; `routing.json` może go jedynie **nadpisywać**.
-Pliki akcji są **addytywne**:
-definiują nowe akcje, a wbudowane pozostają nienaruszalne (lokalny plik podszywający się pod id wbudowanej akcji jest ignorowany).
+Domyślne reguły są wbudowane w aplikację; `rules.json` może je jedynie **nadpisywać**.
+Pliki promptów są **addytywne**:
+definiują nowe prompty, a wbudowane pozostają nienaruszalne (lokalny plik podszywający się pod id wbudowanego promptu jest ignorowany).
 Zmiany obowiązują od następnego wyzwolenia — restart nie jest potrzebny.
 
 ### `ai-sdk-catalog.json`
 
 Dostawcy plus mapowanie **rola → model**.
 Format pliku ma swój dom w [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — każde pole jest tam udokumentowane (łącznie z `$schema` do walidacji i podpowiedzi w edytorze), a w [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) znajdują się konfiguracje w trzech rozmiarach.
-Punkty startowe w stylu ZenCopy (to, co zapisuje interfejs ustawień, lokalny Ollama, role dla akcji) znajdziesz w [Przepisach](/pl/recipes/).
+Punkty startowe w stylu ZenCopy (to, co zapisuje interfejs ustawień, lokalny Ollama, role dla promptów) znajdziesz w [Przepisach](/pl/recipes/).
 
 Jedno wymaganie pochodzi od samego ZenCopy, nie od formatu: `roles` musi zawsze zawierać **`default`**.
-Każda akcja działa z tym role, o ile jej frontmatter nie wskazuje innego role, a test połączenia w ustawieniach pinguje właśnie to role.
+Każdy prompt działa z tym role, o ile jego frontmatter nie wskazuje innego role, a test połączenia w ustawieniach pinguje właśnie to role.
 
 Klucze API trafiają wprost do tego lokalnego pliku (interfejs ustawień zapisuje ten sam format); nigdy nie opuszczają Twojego komputera.
 Zmienne środowiskowe nie są odczytywane — aplikacje z interfejsem graficznym uruchamia system, a nie Twoja powłoka, więc zmienne wyeksportowane w `.zshrc` i podobnych nigdy do nich nie docierają.
 Plik jest walidowany schematem przy każdym odczycie.
 Zepsuta edycja pokazuje się jako czytelny komunikat w okienku i w edytorze ustawień — nic nie zawodzi po cichu.
 
-### `routing.json`
+### `rules.json`
 
-Która akcja obsługuje który rodzaj przechwycenia:
-płaska mapa `kind → action` plus opcjonalna lista `overrides` o wyższym priorytecie (wygrywa pierwsze dopasowanie).
-Trzy rodzaje to `text`, `image` i `files` (kopia tekstu sformatowanego liczy się jako `text`); fabrycznie tekst trafia do akcji Zen, a obrazy i pliki do akcji Wyjaśnij.
-Płaską mapę można edytować w aplikacji (Ustawienia → Akcje → Routing), więc tego pliku potrzebujesz tylko dla `overrides`.
+Który prompt obsługuje który rodzaj przechwycenia:
+płaska mapa `kind → prompt` plus opcjonalna lista `overrides` o wyższym priorytecie (wygrywa pierwsze dopasowanie).
+Trzy rodzaje to `text`, `image` i `files` (kopia tekstu sformatowanego liczy się jako `text`); fabrycznie tekst trafia do promptu Zen, a obrazy i pliki do promptu Wyjaśnij.
+Płaską mapę można edytować w aplikacji (Ustawienia → Prompty → Reguły), więc tego pliku potrzebujesz tylko dla `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
-  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
 }
 ```
 
@@ -119,10 +119,10 @@ Wszystko inne jest odrzucane z czytelnym komunikatem.
 Razem z zawartością wysyłane są pełne ścieżki, aby model mógł odróżnić pliki od siebie i wiedział, gdzie się znajdują.
 Ponieważ załączniki binarne mogą kosztować więcej niż tekst, okienko pyta przed ich wysłaniem (pliki tekstowe działają bez pytania) — potwierdzenie można wyłączyć na miejscu albo w Ustawieniach.
 
-### `actions/*.md`
+### `prompts/*.md`
 
-Jeden plik = jedna akcja: frontmatter YAML + treść promptu w [Liquid](https://liquidjs.com).
-Ten sam pojedynczy plik jest zarazem formatem udostępniania — Ustawienia → Akcje → Importuj przyjmuje go jako wklejony tekst albo wybrany plik.
+Jeden plik = jeden prompt: frontmatter YAML + treść promptu w [Liquid](https://liquidjs.com).
+Ten sam pojedynczy plik jest zarazem formatem udostępniania — Ustawienia → Prompty → Importuj przyjmuje go jako wklejony tekst albo wybrany plik.
 
 ```markdown
 ---
@@ -137,12 +137,12 @@ Streść w 3 linijkach, w języku {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Znaczenie                                                                                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`           | Nazwa, do której odwołuje się `routing.json` (domyślnie: nazwa pliku) — prefiks `zencopy-` jest zarezerwowany dla akcji preinstalowanych |
-| `label`        | Wyświetlana w okienku                                                                                                                    |
-| `role`         | Rola z katalogu użyta do uruchomienia (domyślnie: `default`)                                                                             |
-| `instructions` | Prompt systemowy (szablon Liquid)                                                                                                        |
+| Frontmatter    | Znaczenie                                                                                                                                 |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nazwa, do której odwołuje się `rules.json` (domyślnie: nazwa pliku) — prefiks `zencopy-` jest zarezerwowany dla promptów preinstalowanych |
+| `label`        | Wyświetlana w okienku                                                                                                                     |
+| `role`         | Rola z katalogu użyta do uruchomienia (domyślnie: `default`)                                                                              |
+| `instructions` | Prompt systemowy (szablon Liquid)                                                                                                         |
 
 Zmienne szablonu, z przykładowymi wartościami dla akapitu skopiowanego w przeglądarce:
 
@@ -166,12 +166,12 @@ Zmienne szablonu, z przykładowymi wartościami dla akapitu skopiowanego w przeg
 Jest też specyficzny dla ZenCopy filtr `language_name`: `{{ locale | language_name }}` rozwija się do „Polish” zamiast „pl”, co brzmi naturalnie w promptcie.
 Aby zobaczyć rzeczywiste wartości, włącz w Ustawieniach **Pokaż zmienne szablonu** — zmienne każdego przechwycenia pojawiają się w okienku jako JSON.
 
-Proste akcje (nazwa i instrukcja) można też tworzyć z okna ustawień; to, co ono zapisuje, to dokładnie ten format pliku.
+Proste prompty (nazwa i instrukcja) można też tworzyć z okna ustawień; to, co ono zapisuje, to dokładnie ten format pliku.
 
 #### Zaawansowane szablony
 
 Zarówno frontmatter `instructions`, jak i treść są pełnoprawnymi szablonami [LiquidJS](https://liquidjs.com/tags/overview.html): działają instrukcje warunkowe, pętle i [filtry](https://liquidjs.com/filters/overview.html).
-Jedna akcja może dostosować się do tego, skąd pochodzi kopia:
+Jeden prompt może dostosować się do tego, skąd pochodzi kopia:
 
 ```markdown
 ---

@@ -1,11 +1,11 @@
 //! Turning a copycopy capture into the payload the popup receives:
 //! source previews, template variables, and markup-to-text conversion.
 
-use crate::actions::Action;
+use crate::prompts::Prompt;
 
 /// The captured content, prepared for display in the popup ("what is being acted
 /// on"). Serialized with its own `kind` tag: rich text keeps a distinct tag
-/// here for rendering, even though the routing kind folds it into `text`.
+/// here for rendering, even though the rules kind folds it into `text`.
 #[derive(Clone, serde::Serialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub(crate) enum SourcePreview {
@@ -36,20 +36,20 @@ pub(crate) struct CapturePayload {
     pub(crate) kind: &'static str,
     /// The captured content itself, for the popup to display.
     pub(crate) source: SourcePreview,
-    /// The matched action's id (empty if none). Lets the popup's switcher know
+    /// The matched prompt's id (empty if none). Lets the popup's switcher know
     /// what is selected and what "set as default" refers to.
-    pub(crate) action_id: String,
-    /// The matched action's label (empty if none).
+    pub(crate) prompt_id: String,
+    /// The matched prompt's label (empty if none).
     pub(crate) label: String,
     /// Catalog role to run with (already resolved to "default" when omitted).
     pub(crate) role: String,
-    /// The action's system prompt as a Liquid template (the frontend renders it).
+    /// The prompt's system prompt as a Liquid template (the frontend renders it).
     pub(crate) instructions: String,
-    /// The action body (user prompt) as a Liquid template (the frontend renders it).
+    /// The prompt body (user prompt) as a Liquid template (the frontend renders it).
     pub(crate) prompt: String,
     /// Template variables (from the capture + now) for the frontend to render with.
     pub(crate) vars: std::collections::HashMap<&'static str, String>,
-    /// Whether an action applies to this capture and is ready to run.
+    /// Whether an prompt applies to this capture and is ready to run.
     pub(crate) runnable: bool,
 }
 
@@ -65,7 +65,7 @@ pub(crate) fn html_to_markdown(markup: &str, plain: &str) -> String {
     })
 }
 
-/// Template variables available to action prompts, from the capture plus now.
+/// Template variables available to prompt prompts, from the capture plus now.
 /// Rendered by the frontend with Liquid; here we just collect the values.
 pub(crate) fn template_vars(
     event: &copycopy::CaptureEvent,
@@ -129,7 +129,7 @@ pub(crate) fn template_vars(
 }
 
 /// A path's final component, for the `file_name(s)` template variables and
-/// the `file_name` routing condition. Falls back to the whole string when the
+/// the `file_name` rules condition. Falls back to the whole string when the
 /// path has no name component (which real copied-file paths always have).
 pub(crate) fn file_basename(path: &str) -> String {
     std::path::Path::new(path).file_name().map_or_else(
@@ -171,7 +171,7 @@ pub(crate) fn source_preview(event: &copycopy::CaptureEvent) -> SourcePreview {
     }
 }
 
-/// The capture's content kind, used for routing and shown in the payload.
+/// The capture's content kind, used for rules and shown in the payload.
 /// Rich text is deliberately just "text": which clipboard flavor a copy
 /// carries is the source app's habit, not the user's intent, so the kind
 /// vocabulary ignores it. The richness itself survives where it is useful —
@@ -187,25 +187,25 @@ pub(crate) fn capture_kind(event: &copycopy::CaptureEvent) -> &'static str {
     }
 }
 
-/// With no routed action the action fields stay empty but the template vars
-/// are still collected, so an action picked manually from the popup's
+/// With no routed prompt the prompt fields stay empty but the template vars
+/// are still collected, so an prompt picked manually from the popup's
 /// switcher can run on this capture.
 pub(crate) fn build_capture_payload(
     event: &copycopy::CaptureEvent,
-    action: Option<&Action>,
+    prompt: Option<&Prompt>,
 ) -> CapturePayload {
     CapturePayload {
         kind: capture_kind(event),
         source: source_preview(event),
-        action_id: action.map(|a| a.id.clone()).unwrap_or_default(),
-        label: action.map(|a| a.label.clone()).unwrap_or_default(),
-        role: action
+        prompt_id: prompt.map(|a| a.id.clone()).unwrap_or_default(),
+        label: prompt.map(|a| a.label.clone()).unwrap_or_default(),
+        role: prompt
             .and_then(|a| a.role.clone())
             .unwrap_or_else(|| "default".to_string()),
-        instructions: action.map(|a| a.instructions.clone()).unwrap_or_default(),
-        prompt: action.map(|a| a.body.clone()).unwrap_or_default(),
+        instructions: prompt.map(|a| a.instructions.clone()).unwrap_or_default(),
+        prompt: prompt.map(|a| a.body.clone()).unwrap_or_default(),
         vars: template_vars(event),
-        runnable: action.is_some(),
+        runnable: prompt.is_some(),
     }
 }
 
@@ -267,7 +267,7 @@ pub(crate) fn rtf_visible_text(rtf: &str) -> String {
 
 /// Whether a capture has nothing worth acting on — empty clipboard, or text /
 /// rich text whose *visible* content is only whitespace. Such captures are ignored
-/// entirely (no popup, no action). Images and files are never considered blank.
+/// entirely (no popup, no prompt). Images and files are never considered blank.
 ///
 /// For rich text we can't trust `plain` alone: it comes from the clipboard's
 /// plain-text format, which some apps omit (leaving it empty though the markup has
@@ -295,7 +295,7 @@ pub(crate) fn is_blank(event: &copycopy::CaptureEvent) -> bool {
     }
 }
 
-/// The text of a capture, for the min/max-chars routing conditions. For rich
+/// The text of a capture, for the min/max-chars rules conditions. For rich
 /// captures `plain` comes from the clipboard's plain-text flavor, which some
 /// apps omit — fall back to the markup's visible text so a rich copy is
 /// measured by what the user sees, the same rule `is_blank` applies.

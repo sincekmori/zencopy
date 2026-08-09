@@ -18,16 +18,16 @@ export const TIMED_OUT = "timed-out";
  *  empty body would read as "success with no output". */
 export const EMPTY_RESULT = "empty-result";
 
-/** The catalog roles ZenCopy itself depends on: every action without a
+/** The catalog roles ZenCopy itself depends on: every prompt without a
  *  frontmatter role runs as `default`, and the connection test pings it.
  *  The single definition feeds both the runtime catalog (createCatalog's
  *  `requiredRoles`) and the settings editor's validation, so "valid in the
  *  editor" and "valid at run time" can never disagree. */
 export const REQUIRED_ROLES = ["default"] as const;
 
-/** One turn of an action thread: the follow-up question that produced the
+/** One turn of an prompt thread: the follow-up question that produced the
  *  reply (`text` is partial while the turn still streams). The first turn
- *  has no `question` — its question is the action's rendered prompt itself.
+ *  has no `question` — its question is the prompt's rendered prompt itself.
  *  Shared with the popup, whose thread state is exactly this shape. */
 export interface Exchange {
   question?: string | undefined;
@@ -35,7 +35,7 @@ export interface Exchange {
   text: string;
 }
 
-export interface ActionInput {
+export interface PromptInput {
   role: string;
   instructions: string;
   prompt: string;
@@ -80,19 +80,19 @@ export interface StreamOutcome {
 // cost is noise next to the LLM round trip (and the popup warms it on mount).
 
 /**
- * Stream an action: render its Liquid templates, then stream the model's text,
+ * Stream an prompt: render its Liquid templates, then stream the model's text,
  * revealing only the text between the result tags. `onChunk` receives the
  * text-so-far; the returned promise resolves with the outcome — the final
  * text (or what streamed before `signal` aborted) plus the model and token
  * facts for the usage statistics.
  */
-export async function streamAction(
-  action: ActionInput,
+export async function streamPrompt(
+  input: PromptInput,
   onChunk: (text: string) => void,
   signal: AbortSignal,
 ): Promise<StreamOutcome> {
   const impl = await import("@/lib/llm-impl.ts");
-  return impl.streamAction(action, onChunk, signal);
+  return impl.streamPrompt(input, onChunk, signal);
 }
 
 /**
@@ -113,8 +113,8 @@ export async function testConnection(): Promise<void> {
 }
 
 /**
- * Draft an action instruction from the user's rough description, using the
- * default role. Same failure modes as an action run (NOT_CONFIGURED,
+ * Draft an prompt instruction from the user's rough description, using the
+ * default role. Same failure modes as an prompt run (NOT_CONFIGURED,
  * INVALID_CONFIG, EMPTY_RESULT).
  */
 export async function draftInstruction(description: string): Promise<string> {

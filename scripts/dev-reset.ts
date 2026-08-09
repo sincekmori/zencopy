@@ -5,7 +5,7 @@
 //
 // Removes, wholesale (directories, not file lists, so the reset stays complete
 // as future versions add files):
-//   - the config dir (ai-sdk-catalog.json with API keys, routing.json, actions/)
+//   - the config dir (ai-sdk-catalog.json with API keys, rules.json, prompts/)
 //   - the data dir (settings.json store), webview storage, and caches
 //   - the log dir
 //   - the autostart artifact (LaunchAgent plist / autostart .desktop / registry Run values)
@@ -85,7 +85,7 @@ function targetsFor(platform: NodeJS.Platform): Target[] {
       const data = process.env["XDG_DATA_HOME"] ?? join(home, ".local", "share");
       const cache = process.env["XDG_CACHE_HOME"] ?? join(home, ".cache");
       return [
-        pathTarget(join(config, IDENTIFIER)), // config (catalog, routing, actions/)
+        pathTarget(join(config, IDENTIFIER)), // config (catalog, rules, prompts/)
         pathTarget(join(data, IDENTIFIER)), // data dir (settings store, stats/, logs/, webview data)
         pathTarget(join(cache, IDENTIFIER)),
         pathTarget(join(config, "autostart", `${PRODUCT}.desktop`)), // autostart

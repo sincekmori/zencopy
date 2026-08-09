@@ -53,8 +53,8 @@ Rola to `"provider:model"`, dzielone na pierwszym `:` — dlatego `"ollama:gemma
 
 ## Dwie role: domyślnie szybko, na żądanie mądrzej
 
-Role oddzielają akcje od modeli.
-Akcje wskazują rolę (`role: smart` we frontmatterze akcji); to, jaki model to oznacza, rozstrzyga się tutaj — możesz go podmienić w każdej chwili, nie dotykając akcji.
+Role oddzielają prompty od modeli.
+Prompty wskazują rolę (`role: smart` we frontmatterze promptu); to, jaki model to oznacza, rozstrzyga się tutaj — możesz go podmienić w każdej chwili, nie dotykając promptów.
 
 ```json
 {

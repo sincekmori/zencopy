@@ -53,8 +53,8 @@ Eine Rolle ist `"provider:model"`, getrennt am ersten `:` — deshalb funktionie
 
 ## Zwei Rollen: standardmäßig schnell, auf Wunsch schlau
 
-Rollen entkoppeln Aktionen von Modellen.
-Aktionen nennen eine Rolle (`role: smart` im Frontmatter der Aktion); welches Modell das bedeutet, wird hier entschieden — tausche es jederzeit aus, ohne Aktionen anzufassen.
+Rollen entkoppeln Prompts von Modellen.
+Prompts nennen eine Rolle (`role: smart` im Frontmatter des Prompts); welches Modell das bedeutet, wird hier entschieden — tausche es jederzeit aus, ohne Prompts anzufassen.
 
 ```json
 {

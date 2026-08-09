@@ -3,16 +3,16 @@ use tauri::{Emitter, Manager, tray::TrayIconBuilder};
 /// OOXML (docx/pptx/xlsx) text extraction for attachments.
 mod office;
 
-/// Actions: built-ins, user files, and their commands.
-mod actions;
 /// File attachments: sniffing, decoding, reading.
 mod attachments;
 /// Capture → popup payload conversion.
 mod capture;
 /// Config-dir paths, the AI catalog, full reset.
 mod config;
-/// Capture → action routing.
-mod routing;
+/// Prompts: built-ins, user files, and their commands.
+mod prompts;
+/// Capture → prompt rules.
+mod rules;
 /// Handing URLs and folders to the OS shell.
 mod shell;
 /// Usage statistics: the append-only invocation JSONL.
@@ -22,16 +22,14 @@ mod tray;
 /// Window placement and reveal helpers.
 mod windows;
 
-use crate::actions::{
-    delete_action, export_action_file, import_action, import_action_from_file, list_actions_ui,
-    load_actions, save_action,
-};
 use crate::attachments::read_capture_files;
 use crate::capture::{build_capture_payload, is_blank};
 use crate::config::{STORE_FILE, config_base, read_catalog, reset_all_settings, write_catalog};
-use crate::routing::{
-    get_routing_ui, load_routing, resolve_action, set_kind_action, set_overrides,
+use crate::prompts::{
+    delete_prompt, export_prompt_file, import_prompt, import_prompt_from_file, list_prompts_ui,
+    load_prompts, save_prompt,
 };
+use crate::rules::{get_rules_ui, load_rules, resolve_prompt, set_kind_prompt, set_overrides};
 use crate::shell::{open_log_dir, open_url};
 use crate::stats::{
     export_usage_csv, open_catalog_file, open_stats_dir, read_usage_stats, record_usage,
@@ -280,10 +278,10 @@ pub fn run() {
             read_catalog,
             write_catalog,
             read_capture_files,
-            list_actions_ui,
-            save_action,
-            delete_action,
-            set_kind_action,
+            list_prompts_ui,
+            save_prompt,
+            delete_prompt,
+            set_kind_prompt,
             record_usage,
             read_usage_stats,
             reset_usage_stats,
@@ -291,11 +289,11 @@ pub fn run() {
             export_usage_csv,
             open_stats_dir,
             set_overrides,
-            get_routing_ui,
+            get_rules_ui,
             reset_all_settings,
-            export_action_file,
-            import_action,
-            import_action_from_file,
+            export_prompt_file,
+            import_prompt,
+            import_prompt_from_file,
             open_settings,
             open_about,
             app_info,
@@ -358,7 +356,7 @@ pub fn run() {
             }
             match config_base(app.handle()) {
                 Some(dir) => log::info!(
-                    "config dir (ai-sdk-catalog.json, routing.json, actions/): {}",
+                    "config dir (ai-sdk-catalog.json, rules.json, prompts/): {}",
                     dir.display()
                 ),
                 None => log::warn!("config dir unavailable"),
@@ -374,7 +372,7 @@ pub fn run() {
 
             // System tray — ZenCopy lives here as a resident agent. Both mouse
             // buttons open the same menu (the builder's default), so the tray is
-            // one predictable surface; the primary action sits at the top.
+            // one predictable surface; the primary prompt sits at the top.
             // Labels follow the in-app language (falling back to the OS locale).
             let startup_locale = app_locale(app.handle());
             let menu = build_tray_menu(app.handle(), startup_locale)?;
@@ -446,11 +444,11 @@ pub fn run() {
                             log::debug!("capture: blank content, ignored");
                             return;
                         }
-                        let actions = load_actions(&handle);
-                        let routing = load_routing(&handle);
-                        let action = resolve_action(&routing, &actions, &event);
+                        let prompts = load_prompts(&handle);
+                        let rules = load_rules(&handle);
+                        let prompt = resolve_prompt(&rules, &prompts, &event);
                         let corner = current_corner(&handle);
-                        let payload = build_capture_payload(&event, action);
+                        let payload = build_capture_payload(&event, prompt);
                         log::debug!(
                             "capture: kind={} runnable={}",
                             payload.kind,
@@ -530,8 +528,8 @@ pub fn run() {
 #[cfg(test)]
 mod ts_mirror_tests {
     use super::*;
-    use crate::actions::{DEFAULT_ACTIONS, is_builtin_action};
     use crate::attachments::MAX_ATTACHMENT_BYTES;
+    use crate::prompts::{DEFAULT_ACTIONS, is_builtin_prompt};
 
     const SETTINGS_TS: &str = include_str!("../../src/lib/settings.ts");
     const CAPTURE_TS: &str = include_str!("../../src/lib/capture.ts");
@@ -568,32 +566,32 @@ mod ts_mirror_tests {
         }
     }
 
-    /// DEFAULT_QUICK_ACTIONS in settings.ts names pre-installed actions by id;
+    /// DEFAULT_QUICK_ACTIONS in settings.ts names pre-installed prompts by id;
     /// renaming a built-in here would leave a quick slot empty over there.
     #[test]
     fn builtin_ids_appear_in_frontend_defaults() {
         for (id, _) in DEFAULT_ACTIONS {
             assert!(
                 SETTINGS_TS.contains(&format!("\"{id}\"")),
-                "built-in action '{id}' missing from settings.ts defaults"
+                "built-in prompt '{id}' missing from settings.ts defaults"
             );
         }
     }
 
-    /// routing.json (the default routing table) may only reference built-ins;
+    /// rules.json (the default rules table) may only reference built-ins;
     /// an unknown id would make captures of that kind silently do nothing.
     #[test]
-    fn default_routing_uses_builtin_ids() {
-        let routing: serde_json::Value =
-            serde_json::from_str(include_str!("../routing.json")).expect("routing.json parses");
-        for (kind, action) in routing.as_object().expect("routing.json is an object") {
+    fn default_rules_uses_builtin_ids() {
+        let rules: serde_json::Value =
+            serde_json::from_str(include_str!("../rules.json")).expect("rules.json parses");
+        for (kind, prompt) in rules.as_object().expect("rules.json is an object") {
             if kind == "overrides" {
                 continue;
             }
-            let id = action.as_str().expect("routing target is a string");
+            let id = prompt.as_str().expect("rules target is a string");
             assert!(
-                is_builtin_action(id),
-                "routing.json routes '{kind}' to unknown action '{id}'"
+                is_builtin_prompt(id),
+                "rules.json routes '{kind}' to unknown prompt '{id}'"
             );
         }
     }

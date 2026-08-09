@@ -11,9 +11,9 @@ Elle n'a ni serveur, ni compte, ni télémétrie.
 ## Ce qui quitte votre appareil
 
 Quand vous appuyez sur le déclencheur (<span data-os-modifier>Ctrl/⌘</span> + C + C), le contenu du presse-papiers capturé est envoyé directement au fournisseur de LLM que _vous_ avez configuré — rien d'autre, et nulle part ailleurs.
-Ce qui est envoyé exactement dépend de l'action qui s'exécute :
+Ce qui est envoyé exactement dépend du prompt qui s'exécute :
 
-- Le prompt rendu, qui peut incorporer le contexte de la capture sous forme de [variables de gabarit](/fr/configuration/#actionsmd) : le texte copié et son balisage, le nom de l'application source et le titre de sa fenêtre, l'URL de la page, la date et votre langue.
+- Le prompt rendu, qui peut incorporer le contexte de la capture sous forme de [variables de gabarit](/fr/configuration/#promptsmd) : le texte copié et son balisage, le nom de l'application source et le titre de sa fenêtre, l'URL de la page, la date et votre langue.
 - Pour une image ou des fichiers copiés, le contenu lui-même est joint (jusqu'à 10 Mo par capture) — et pour les fichiers, leurs chemins complets.
   Par défaut, le popup demande confirmation avant de les envoyer.
 
@@ -29,7 +29,7 @@ Indépendamment des captures, la vérification des mises à jour ne demande à G
 - Les fichiers journaux.
   Les journaux masquent les secrets et ne contiennent jamais le contenu copié ni les clés d'API.
 
-- Les statistiques d'utilisation (interrupteur dans les réglages, activé par défaut) : quelle action a traité quel type de capture, avec le modèle et le nombre de tokens, pour que vos coûts restent calculables.
+- Les statistiques d'utilisation (interrupteur dans les réglages, activé par défaut) : quel prompt a traité quel type de capture, avec le modèle et le nombre de tokens, pour que vos coûts restent calculables.
   Un simple fichier local — jamais le contenu copié, jamais envoyé nulle part.
 
 ## Tiers

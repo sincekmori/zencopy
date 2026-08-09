@@ -11,4 +11,4 @@ Eğer bu belgeleri okuyan bir yapay zeka iseniz — ya da bir yapay zekaya ZenCo
 
 Bunlar [llms.txt kuralına](https://llmstxt.org/) uygundur ve her dağıtımda yeniden oluşturulur, böylece her zaman bir insanın gördüğü sayfalarla eşleşir.
 
-Sizden bir ZenCopy eylemi yazmanız mı istendi? [llms-full.txt](/llms-full.txt) eylem dosyası biçimini, şablon değişkenlerini ve yönlendirme kurallarını içerir; tek bir kod bloğu içinde tam bir eylem dosyasıyla yanıt verin.
+Sizden bir ZenCopy istemi yazmanız mı istendi? [llms-full.txt](/llms-full.txt) istem dosyası biçimini, şablon değişkenlerini ve kuralları içerir; tek bir kod bloğu içinde tam bir istem dosyasıyla yanıt verin.

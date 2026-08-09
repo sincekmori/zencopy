@@ -16,29 +16,29 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import * as z from "zod";
-import { QuickActionsSettings } from "@/components/quick-actions-settings.tsx";
+import { QuickPromptsSettings } from "@/components/quick-prompts-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Select } from "@/components/ui/select.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import {
-  type ActionInfo,
-  deleteAction,
+  type PromptInfo,
+  deletePrompt,
   EditableOverrideSchema,
-  exportActionFile,
-  getRouting,
-  importAction,
-  importActionFromFile,
-  listActions,
+  exportPromptFile,
+  getRules,
+  importPrompt,
+  importPromptFromFile,
+  listPrompts,
   ROUTABLE_KINDS,
   type RoutableKind,
-  type RoutingInfo,
-  type RoutingOverride,
-  saveAction,
-  setKindAction,
+  type RulesInfo,
+  type RulesOverride,
+  savePrompt,
+  setKindPrompt,
   setOverrides,
   type WhenCondition,
-} from "@/lib/actions.ts";
-import { useActionLabel, useLocale, useT } from "@/lib/i18n.tsx";
+} from "@/lib/prompts.ts";
+import { usePromptLabel, useLocale, useT } from "@/lib/i18n.tsx";
 import { draftInstruction, INVALID_CONFIG, NOT_CONFIGURED } from "@/lib/llm.ts";
 import type { Messages } from "@/lib/messages/types.ts";
 import { createLogger, errorMessage } from "@/lib/log.ts";
@@ -46,54 +46,54 @@ import { TRIGGER_KEYS } from "@/lib/platform.ts";
 import { cn } from "@/lib/utils.ts";
 import { siteUrl } from "@/lib/site.ts";
 
-const log = createLogger("actions-settings");
+const log = createLogger("prompts-settings");
 
-// The structured failure import_action / save_action (src-tauri) reject with.
-const ActionErrorSchema = z.object({
+// The structured failure import_prompt / save_prompt (src-tauri) reject with.
+const PromptErrorSchema = z.object({
   code: z.string(),
   detail: z.string().nullish(),
 });
 
-/** Localize an action failure; anything not shaped like an ActionError (a
+/** Localize an prompt failure; anything not shaped like an PromptError (a
  *  network error, a bug) falls back to the generic failed(reason). */
-function actionErrorText(t: Messages, error: unknown): string {
-  const parsed = ActionErrorSchema.safeParse(error);
+function promptErrorText(t: Messages, error: unknown): string {
+  const parsed = PromptErrorSchema.safeParse(error);
   if (!parsed.success) {
-    return t.actions.failed(errorMessage(error).slice(0, 200));
+    return t.prompts.failed(errorMessage(error).slice(0, 200));
   }
   const detail = parsed.data.detail ?? "";
   switch (parsed.data.code) {
-    case "not-an-action": {
-      return t.actions.importNotAnAction;
+    case "not-an-prompt": {
+      return t.prompts.importNotAPrompt;
     }
     case "no-label": {
-      return t.actions.importNoLabel;
+      return t.prompts.importNoLabel;
     }
     case "invalid-id": {
-      return t.actions.importInvalidId(detail);
+      return t.prompts.importInvalidId(detail);
     }
     case "builtin-id": {
-      return t.actions.importBuiltinId(detail);
+      return t.prompts.importBuiltinId(detail);
     }
     case "reserved-id": {
-      return t.actions.importReservedId(detail);
+      return t.prompts.importReservedId(detail);
     }
     case "id-exists": {
-      return t.actions.importIdExists(detail);
+      return t.prompts.importIdExists(detail);
     }
     case "label-exists": {
-      return t.actions.labelExists(detail);
+      return t.prompts.labelExists(detail);
     }
     case "file-too-large": {
-      return t.actions.importTooLarge;
+      return t.prompts.importTooLarge;
     }
     default: {
-      return t.actions.failed((detail === "" ? parsed.data.code : detail).slice(0, 200));
+      return t.prompts.failed((detail === "" ? parsed.data.code : detail).slice(0, 200));
     }
   }
 }
 
-/** What the form shows. `id` present = an existing action; `locked` = a
+/** What the form shows. `id` present = an existing prompt; `locked` = a
  *  built-in opened read-only (they are immutable, but worth reading — they
  *  double as examples). */
 interface Draft {
@@ -119,7 +119,7 @@ interface RuleDraft {
   fileName: string;
   minChars: string;
   maxChars: string;
-  action: string;
+  prompt: string;
 }
 
 const NEW_RULE: RuleDraft = {
@@ -131,26 +131,26 @@ const NEW_RULE: RuleDraft = {
   fileName: "",
   minChars: "",
   maxChars: "",
-  action: "",
+  prompt: "",
 };
 
-export function ActionsSettings(): React.JSX.Element {
+export function PromptsSettings(): React.JSX.Element {
   const t = useT();
   const locale = useLocale();
-  const actionLabel = useActionLabel();
-  const [actions, setActions] = useState<ActionInfo[]>([]);
+  const promptLabel = usePromptLabel();
+  const [prompts, setPrompts] = useState<PromptInfo[]>([]);
   const [draft, setDraft] = useState<Draft | undefined>(undefined);
   const [formError, setFormError] = useState<string | undefined>(undefined);
   // The ✨ button: the configured model is rewriting the instruction field.
   const [drafting, setDrafting] = useState(false);
-  // The effective kind → action assignments, kept in the same reload path as
-  // the list so the selects and the action list never disagree.
-  const [routing, setRouting] = useState<RoutingInfo>({ by_kind: {}, overrides: [] });
-  const [routingError, setRoutingError] = useState<string | undefined>(undefined);
+  // The effective kind → prompt assignments, kept in the same reload path as
+  // the list so the selects and the prompt list never disagree.
+  const [rules, setRules] = useState<RulesInfo>({ by_kind: {}, overrides: [] });
+  const [rulesError, setRulesError] = useState<string | undefined>(undefined);
   // The override rule being added or edited, if any.
   const [rule, setRule] = useState<RuleDraft | undefined>(undefined);
   const [ruleError, setRuleError] = useState<string | undefined>(undefined);
-  // Which action was just exported (transient check mark), and the import
+  // Which prompt was just exported (transient check mark), and the import
   // panel's state.
   const [exportedId, setExportedId] = useState<string | undefined>(undefined);
   const [importOpen, setImportOpen] = useState(false);
@@ -161,16 +161,16 @@ export function ActionsSettings(): React.JSX.Element {
   const reload = (): void => {
     void (async () => {
       try {
-        const [list, routes] = await Promise.all([listActions(), getRouting()]);
-        setActions(list);
-        setRouting(routes);
+        const [list, routes] = await Promise.all([listPrompts(), getRules()]);
+        setPrompts(list);
+        setRules(routes);
       } catch (error) {
-        log.error("listing actions failed", error);
+        log.error("listing prompts failed", error);
       }
     })();
   };
 
-  // Load on mount, and again when the window regains focus — so actions the
+  // Load on mount, and again when the window regains focus — so prompts the
   // user edits as files on disk show up without reopening the window.
   useEffect(() => {
     reload();
@@ -197,16 +197,16 @@ export function ActionsSettings(): React.JSX.Element {
   // Import and the editor/viewer are alternatives: opening one closes the
   // other, so exactly one panel is ever on screen and a click always has a
   // visible effect.
-  const edit = (action: ActionInfo): void => {
+  const edit = (prompt: PromptInfo): void => {
     setFormError(undefined);
     setImportOpen(false);
     setDraft({
-      id: action.id,
-      label: action.label,
-      instructions: action.instructions,
-      prompt: action.prompt,
-      role: action.role ?? "",
-      locked: action.origin === "builtin",
+      id: prompt.id,
+      label: prompt.label,
+      instructions: prompt.instructions,
+      prompt: prompt.prompt,
+      role: prompt.role ?? "",
+      locked: prompt.origin === "builtin",
     });
   };
 
@@ -216,7 +216,7 @@ export function ActionsSettings(): React.JSX.Element {
   const viewerRef = useRef<HTMLDivElement | null>(null);
   const labelRef = useRef<HTMLInputElement | null>(null);
 
-  // The editor and viewer render below the (long) actions list — opened
+  // The editor and viewer render below the (long) prompts list — opened
   // off-screen they look like a dead button. Scroll the freshly opened panel
   // into view and put the caret where typing starts. Keyed by the edited id
   // (not the draft object) so typing never re-triggers the scroll.
@@ -267,7 +267,7 @@ export function ActionsSettings(): React.JSX.Element {
         } else if (reason === INVALID_CONFIG) {
           setFormError(t.ai.invalidConfig);
         } else {
-          setFormError(t.actions.draftFailed);
+          setFormError(t.prompts.draftFailed);
         }
       } finally {
         setDrafting(false);
@@ -285,18 +285,18 @@ export function ActionsSettings(): React.JSX.Element {
     // also catches collisions with a built-in's *localized* display name
     // ("翻訳"), which only the frontend can resolve.
     const wanted = draft.label.trim().toLowerCase();
-    const duplicate = actions.some(
-      (action) =>
-        action.id !== draft.id &&
-        actionLabel(action.id, action.label).trim().toLowerCase() === wanted,
+    const duplicate = prompts.some(
+      (prompt) =>
+        prompt.id !== draft.id &&
+        promptLabel(prompt.id, prompt.label).trim().toLowerCase() === wanted,
     );
     if (wanted !== "" && duplicate) {
-      setFormError(t.actions.labelExists(draft.label.trim()));
+      setFormError(t.prompts.labelExists(draft.label.trim()));
       return;
     }
     void (async () => {
       try {
-        await saveAction({
+        await savePrompt({
           id: draft.id,
           label: draft.label,
           instructions: draft.instructions,
@@ -306,39 +306,39 @@ export function ActionsSettings(): React.JSX.Element {
         setDraft(undefined);
         reload();
       } catch (error) {
-        log.error("saving action failed", error);
-        setFormError(actionErrorText(t, error));
+        log.error("saving prompt failed", error);
+        setFormError(promptErrorText(t, error));
       }
     })();
   };
 
-  const remove = (action: ActionInfo): void => {
+  const remove = (prompt: PromptInfo): void => {
     setFormError(undefined);
     void (async () => {
       try {
-        await deleteAction(action.id);
+        await deletePrompt(prompt.id);
         reload();
       } catch (error) {
-        log.error("deleting action failed", error);
-        setFormError(t.actions.failed(errorMessage(error).slice(0, 200)));
+        log.error("deleting prompt failed", error);
+        setFormError(t.prompts.failed(errorMessage(error).slice(0, 200)));
       }
     })();
   };
 
-  // Export = save the action's .md into Downloads, browser-download style
+  // Export = save the prompt's .md into Downloads, browser-download style
   // (Rust reveals the file — that reveal is the real feedback; the transient
   // check here covers the case where the reveal is disabled or slow).
   const exportFile = (id: string): void => {
     void (async () => {
       try {
-        await exportActionFile(id);
+        await exportPromptFile(id);
         setExportedId(id);
         globalThis.setTimeout(() => {
           setExportedId((prev) => (prev === id ? undefined : prev));
         }, 1500);
       } catch (error) {
-        log.error("exporting action failed", error);
-        setFormError(t.actions.failed(errorMessage(error).slice(0, 200)));
+        log.error("exporting prompt failed", error);
+        setFormError(t.prompts.failed(errorMessage(error).slice(0, 200)));
       }
     })();
   };
@@ -349,13 +349,13 @@ export function ActionsSettings(): React.JSX.Element {
     setImportBusy(true);
     void (async () => {
       try {
-        await importAction(await load());
+        await importPrompt(await load());
         setImportOpen(false);
         setImportText("");
         reload();
       } catch (error) {
-        log.error("importing action failed", error);
-        setImportError(actionErrorText(t, error));
+        log.error("importing prompt failed", error);
+        setImportError(promptErrorText(t, error));
       } finally {
         setImportBusy(false);
       }
@@ -369,25 +369,25 @@ export function ActionsSettings(): React.JSX.Element {
     setImportBusy(true);
     void (async () => {
       try {
-        const id = await importActionFromFile();
+        const id = await importPromptFromFile();
         if (id !== null) {
           setImportOpen(false);
           setImportText("");
           reload();
         }
       } catch (error) {
-        log.error("importing action from a file failed", error);
-        setImportError(actionErrorText(t, error));
+        log.error("importing prompt from a file failed", error);
+        setImportError(promptErrorText(t, error));
       } finally {
         setImportBusy(false);
       }
     })();
   };
 
-  const changeRouting = (kind: RoutableKind, id: string): void => {
-    setRoutingError(undefined);
+  const changeRules = (kind: RoutableKind, id: string): void => {
+    setRulesError(undefined);
     // Optimistic: the select reflects the choice instantly; reload confirms.
-    setRouting((prev) => {
+    setRules((prev) => {
       const byKind = { ...prev.by_kind };
       if (id === "") {
         delete byKind[kind];
@@ -398,10 +398,10 @@ export function ActionsSettings(): React.JSX.Element {
     });
     void (async () => {
       try {
-        await setKindAction(kind, id === "" ? undefined : id);
+        await setKindPrompt(kind, id === "" ? undefined : id);
       } catch (error) {
-        log.error("updating routing failed", error);
-        setRoutingError(t.actions.failed(errorMessage(error).slice(0, 200)));
+        log.error("updating rules failed", error);
+        setRulesError(t.prompts.failed(errorMessage(error).slice(0, 200)));
       } finally {
         reload();
       }
@@ -409,21 +409,21 @@ export function ActionsSettings(): React.JSX.Element {
   };
 
   // The overrides reference on zencopy.app, in the user's language.
-  const openRoutingDocs = (): void => {
-    void invoke("open_url", { url: siteUrl(locale, "configuration/#routingjson") });
+  const openRulesDocs = (): void => {
+    void invoke("open_url", { url: siteUrl(locale, "configuration/#rulesjson") });
   };
 
   // Every rule mutation (add, edit, delete, reorder) writes the whole ordered
   // list — the order IS the priority, so partial updates would be a lie.
-  const commitOverrides = (next: RoutingOverride[]): void => {
-    setRoutingError(undefined);
-    setRouting((prev) => ({ ...prev, overrides: next })); // optimistic
+  const commitOverrides = (next: RulesOverride[]): void => {
+    setRulesError(undefined);
+    setRules((prev) => ({ ...prev, overrides: next })); // optimistic
     void (async () => {
       try {
         await setOverrides(next);
       } catch (error) {
         log.error("saving override rules failed", error);
-        setRoutingError(t.actions.failed(errorMessage(error).slice(0, 200)));
+        setRulesError(t.prompts.failed(errorMessage(error).slice(0, 200)));
       } finally {
         reload();
       }
@@ -431,7 +431,7 @@ export function ActionsSettings(): React.JSX.Element {
   };
 
   const moveOverride = (index: number, delta: -1 | 1): void => {
-    const next = [...routing.overrides];
+    const next = [...rules.overrides];
     const target = index + delta;
     const moved = next[index];
     if (!moved || target < 0 || target >= next.length) {
@@ -443,7 +443,7 @@ export function ActionsSettings(): React.JSX.Element {
   };
 
   const editOverride = (index: number): void => {
-    const existing = routing.overrides[index];
+    const existing = rules.overrides[index];
     if (!existing) {
       return;
     }
@@ -458,7 +458,7 @@ export function ActionsSettings(): React.JSX.Element {
       fileName: existing.when.file_name ?? "",
       minChars: existing.when.min_chars?.toString() ?? "",
       maxChars: existing.when.max_chars?.toString() ?? "",
-      action: existing.action,
+      prompt: existing.prompt,
     });
   };
 
@@ -491,18 +491,16 @@ export function ActionsSettings(): React.JSX.Element {
     if (rule.maxChars.trim() !== "") {
       when.max_chars = Number(rule.maxChars);
     }
-    // The schema owns validity (a target action, at least one condition,
+    // The schema owns validity (a target prompt, at least one condition,
     // coherent bounds); its sentinel messages map to i18n sentences here.
-    const checked = EditableOverrideSchema.safeParse({ when, action: rule.action });
+    const checked = EditableOverrideSchema.safeParse({ when, prompt: rule.prompt });
     if (!checked.success) {
       const sentinel = checked.error.issues[0]?.message;
-      setRuleError(
-        sentinel === "bounds-order" ? t.routing.needsValidBounds : t.routing.needsCondition,
-      );
+      setRuleError(sentinel === "bounds-order" ? t.rules.needsValidBounds : t.rules.needsCondition);
       return;
     }
-    const entry: RoutingOverride = checked.data;
-    const next = [...routing.overrides];
+    const entry: RulesOverride = checked.data;
+    const next = [...rules.overrides];
     if (rule.index === undefined) {
       next.push(entry);
     } else {
@@ -514,9 +512,9 @@ export function ActionsSettings(): React.JSX.Element {
   };
 
   const kindLabels: Record<RoutableKind, string> = {
-    text: t.routing.kindText,
-    image: t.routing.kindImage,
-    files: t.routing.kindFiles,
+    text: t.rules.kindText,
+    image: t.rules.kindImage,
+    files: t.rules.kindFiles,
   };
 
   // A rule's conditions as compact chips; the numeric bounds read as ≥ / ≤,
@@ -531,19 +529,19 @@ export function ActionsSettings(): React.JSX.Element {
       });
     }
     if (when.app_name) {
-      chips.push({ label: t.routing.fieldApp, value: when.app_name });
+      chips.push({ label: t.rules.fieldApp, value: when.app_name });
     }
     if (when.exec_name) {
-      chips.push({ label: t.routing.fieldExec, value: when.exec_name });
+      chips.push({ label: t.rules.fieldExec, value: when.exec_name });
     }
     if (when.window_title) {
-      chips.push({ label: t.routing.fieldTitle, value: when.window_title });
+      chips.push({ label: t.rules.fieldTitle, value: when.window_title });
     }
     if (when.url) {
-      chips.push({ label: t.routing.fieldUrl, value: when.url });
+      chips.push({ label: t.rules.fieldUrl, value: when.url });
     }
     if (when.file_name) {
-      chips.push({ label: t.routing.fieldFile, value: when.file_name });
+      chips.push({ label: t.rules.fieldFile, value: when.file_name });
     }
     if (when.min_chars !== undefined) {
       chips.push({ value: `≥ ${when.min_chars}` });
@@ -559,8 +557,8 @@ export function ActionsSettings(): React.JSX.Element {
       <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h2 className="text-sm font-medium">{t.actions.title}</h2>
-            <p className="mt-1 text-xs text-muted-foreground">{t.actions.hint(TRIGGER_KEYS)}</p>
+            <h2 className="text-sm font-medium">{t.prompts.title}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">{t.prompts.hint(TRIGGER_KEYS)}</p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <Button
@@ -573,7 +571,7 @@ export function ActionsSettings(): React.JSX.Element {
               }}
             >
               <Upload className="size-3.5" />
-              {t.actions.import}
+              {t.prompts.import}
             </Button>
             <Button
               size="sm"
@@ -585,7 +583,7 @@ export function ActionsSettings(): React.JSX.Element {
               }}
             >
               <Plus className="size-3.5" />
-              {t.actions.add}
+              {t.prompts.add}
             </Button>
           </div>
         </div>
@@ -595,7 +593,7 @@ export function ActionsSettings(): React.JSX.Element {
             ref={importPanelRef}
             className="flex flex-col gap-3 rounded-lg border bg-muted/20 p-4"
           >
-            <p className="text-xs text-muted-foreground">{t.actions.importHint}</p>
+            <p className="text-xs text-muted-foreground">{t.prompts.importHint}</p>
             <textarea
               ref={importTextRef}
               className={cn(FIELD, "h-28 resize-none font-mono text-xs leading-relaxed")}
@@ -616,10 +614,10 @@ export function ActionsSettings(): React.JSX.Element {
                 }}
               >
                 {importBusy ? <LoaderCircle className="size-3.5 animate-spin" /> : undefined}
-                {t.actions.import}
+                {t.prompts.import}
               </Button>
               <Button size="sm" variant="outline" disabled={importBusy} onClick={importFromFile}>
-                {t.actions.importFromFile}
+                {t.prompts.importFromFile}
               </Button>
               <Button
                 size="sm"
@@ -638,36 +636,36 @@ export function ActionsSettings(): React.JSX.Element {
         ) : undefined}
 
         <ul className="flex flex-col divide-y rounded-lg border">
-          {actions.map((action) => (
-            <li key={action.id} className="flex items-center gap-2 px-3 py-2">
+          {prompts.map((prompt) => (
+            <li key={prompt.id} className="flex items-center gap-2 px-3 py-2">
               <span className="min-w-0 truncate text-sm">
-                {actionLabel(action.id, action.label)}
+                {promptLabel(prompt.id, prompt.label)}
               </span>
               <span className="ms-auto flex shrink-0 items-center gap-0.5 text-muted-foreground">
                 <Button
                   variant="ghost"
                   size="icon-xs"
-                  aria-label={t.actions.export}
-                  title={t.actions.export}
+                  aria-label={t.prompts.export}
+                  title={t.prompts.export}
                   onClick={() => {
-                    exportFile(action.id);
+                    exportFile(prompt.id);
                   }}
                 >
-                  {exportedId === action.id ? (
+                  {exportedId === prompt.id ? (
                     <Check className="size-3.5" />
                   ) : (
                     <Download className="size-3.5" />
                   )}
                 </Button>
                 {/* Built-ins are immutable but readable — they double as examples. */}
-                {action.origin === "builtin" ? (
+                {prompt.origin === "builtin" ? (
                   <Button
                     variant="ghost"
                     size="icon-xs"
-                    aria-label={t.actions.view}
-                    title={t.actions.view}
+                    aria-label={t.prompts.view}
+                    title={t.prompts.view}
                     onClick={() => {
-                      edit(action);
+                      edit(prompt);
                     }}
                   >
                     <Eye className="size-3.5" />
@@ -677,10 +675,10 @@ export function ActionsSettings(): React.JSX.Element {
                     <Button
                       variant="ghost"
                       size="icon-xs"
-                      aria-label={t.actions.edit}
-                      title={t.actions.edit}
+                      aria-label={t.prompts.edit}
+                      title={t.prompts.edit}
                       onClick={() => {
-                        edit(action);
+                        edit(prompt);
                       }}
                     >
                       <Pencil className="size-3.5" />
@@ -688,10 +686,10 @@ export function ActionsSettings(): React.JSX.Element {
                     <Button
                       variant="ghost"
                       size="icon-xs"
-                      aria-label={t.actions.remove}
-                      title={t.actions.remove}
+                      aria-label={t.prompts.remove}
+                      title={t.prompts.remove}
                       onClick={() => {
-                        remove(action);
+                        remove(prompt);
                       }}
                     >
                       <Trash2 className="size-3.5" />
@@ -703,17 +701,17 @@ export function ActionsSettings(): React.JSX.Element {
           ))}
         </ul>
 
-        {/* Read-only actions get a viewer, not a disabled editor — nothing on
+        {/* Read-only prompts get a viewer, not a disabled editor — nothing on
           this surface should look like it accepts input. */}
         {draft?.locked ? (
           <div ref={viewerRef} className="flex flex-col gap-3 rounded-lg border bg-muted/20 p-4">
             <div className="flex flex-col gap-1.5">
-              <span className="text-xs font-medium text-muted-foreground">{t.actions.name}</span>
-              <p className="text-sm">{actionLabel(draft.id ?? "", draft.label)}</p>
+              <span className="text-xs font-medium text-muted-foreground">{t.prompts.name}</span>
+              <p className="text-sm">{promptLabel(draft.id ?? "", draft.label)}</p>
             </div>
             <div className="flex flex-col gap-1.5">
               <span className="text-xs font-medium text-muted-foreground">
-                {t.actions.instruction}
+                {t.prompts.instruction}
               </span>
               <pre className="overflow-x-auto rounded-md bg-muted/50 p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap">
                 {draft.instructions}
@@ -721,7 +719,7 @@ export function ActionsSettings(): React.JSX.Element {
             </div>
             <div className="flex flex-col gap-1.5">
               <span className="text-xs font-medium text-muted-foreground">
-                {t.actions.template}
+                {t.prompts.template}
               </span>
               <pre className="overflow-x-auto rounded-md bg-muted/50 p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap">
                 {draft.prompt}
@@ -730,7 +728,7 @@ export function ActionsSettings(): React.JSX.Element {
             {draft.role ? (
               <div className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.actions.roleLabel}
+                  {t.prompts.roleLabel}
                 </span>
                 <p className="text-sm">{draft.role}</p>
               </div>
@@ -740,7 +738,7 @@ export function ActionsSettings(): React.JSX.Element {
               className="inline-flex items-center gap-0.5 self-start text-[11px] text-muted-foreground underline underline-offset-2 hover:text-foreground"
               onClick={openTemplateDocs}
             >
-              {t.actions.templateDocs}
+              {t.prompts.templateDocs}
               <ExternalLink className="size-3" />
             </button>
             <div>
@@ -760,7 +758,7 @@ export function ActionsSettings(): React.JSX.Element {
         {draft && !draft.locked ? (
           <div ref={editorRef} className="flex flex-col gap-3 rounded-lg border bg-muted/20 p-4">
             <label className="flex flex-col gap-1.5">
-              <span className="text-xs font-medium text-muted-foreground">{t.actions.name}</span>
+              <span className="text-xs font-medium text-muted-foreground">{t.prompts.name}</span>
               <input
                 ref={labelRef}
                 className={FIELD}
@@ -772,11 +770,11 @@ export function ActionsSettings(): React.JSX.Element {
             </label>
             <label className="flex flex-col gap-1.5">
               <span className="text-xs font-medium text-muted-foreground">
-                {t.actions.instruction}
+                {t.prompts.instruction}
               </span>
               <textarea
                 className={cn(FIELD, "h-24 resize-none leading-relaxed")}
-                placeholder={t.actions.instructionPlaceholder}
+                placeholder={t.prompts.instructionPlaceholder}
                 value={draft.instructions}
                 onChange={(event) => {
                   setDraft({ ...draft, instructions: event.target.value });
@@ -794,19 +792,19 @@ export function ActionsSettings(): React.JSX.Element {
                   ) : (
                     <Sparkles className="size-3.5" />
                   )}
-                  {t.actions.draft}
+                  {t.prompts.draft}
                 </Button>
-                <span className="text-[11px] text-muted-foreground/80">{t.actions.draftHint}</span>
+                <span className="text-[11px] text-muted-foreground/80">{t.prompts.draftHint}</span>
               </div>
             </label>
             <details>
               <summary className="cursor-pointer text-xs text-muted-foreground select-none">
-                {t.actions.advanced}
+                {t.prompts.advanced}
               </summary>
               <div className="mt-3 flex flex-col gap-3">
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-medium text-muted-foreground">
-                    {t.actions.template}
+                    {t.prompts.template}
                   </span>
                   <textarea
                     className={cn(FIELD, "h-20 resize-none font-mono text-xs leading-relaxed")}
@@ -817,20 +815,20 @@ export function ActionsSettings(): React.JSX.Element {
                     }}
                   />
                   <span className="text-[11px] text-muted-foreground/80">
-                    {t.actions.templateHint}
+                    {t.prompts.templateHint}
                   </span>
                   <button
                     type="button"
                     className="inline-flex items-center gap-0.5 self-start text-[11px] text-muted-foreground underline underline-offset-2 hover:text-foreground"
                     onClick={openTemplateDocs}
                   >
-                    {t.actions.templateDocs}
+                    {t.prompts.templateDocs}
                     <ExternalLink className="size-3" />
                   </button>
                 </label>
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-medium text-muted-foreground">
-                    {t.actions.roleLabel}
+                    {t.prompts.roleLabel}
                   </span>
                   <input
                     className={FIELD}
@@ -864,17 +862,17 @@ export function ActionsSettings(): React.JSX.Element {
         {formError ? <p className="text-xs text-destructive">{formError}</p> : undefined}
       </section>
 
-      <QuickActionsSettings />
+      <QuickPromptsSettings />
 
       <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
         <div>
-          <h2 className="text-sm font-medium">{t.routing.title}</h2>
-          <p className="mt-1 text-xs text-muted-foreground">{t.routing.hint}</p>
+          <h2 className="text-sm font-medium">{t.rules.title}</h2>
+          <p className="mt-1 text-xs text-muted-foreground">{t.rules.hint}</p>
         </div>
         <div className="flex flex-col gap-2">
           {ROUTABLE_KINDS.map((kind) => {
-            const assigned = routing.by_kind[kind] ?? "";
-            const known = assigned === "" || actions.some((action) => action.id === assigned);
+            const assigned = rules.by_kind[kind] ?? "";
+            const known = assigned === "" || prompts.some((prompt) => prompt.id === assigned);
             return (
               <label key={kind} className="flex items-center justify-between gap-4">
                 <span className="text-sm">{kindLabels[kind]}</span>
@@ -882,17 +880,17 @@ export function ActionsSettings(): React.JSX.Element {
                   className="w-56"
                   value={assigned}
                   onChange={(event) => {
-                    changeRouting(kind, event.target.value);
+                    changeRules(kind, event.target.value);
                   }}
                 >
-                  <option value="">{t.routing.none}</option>
-                  {/* An assignment pointing at a deleted action stays listed by
+                  <option value="">{t.rules.none}</option>
+                  {/* An assignment pointing at a deleted prompt stays listed by
                     its raw id, so the state is visible instead of silently
                     showing "None". */}
                   {known ? undefined : <option value={assigned}>{assigned}</option>}
-                  {actions.map((action) => (
-                    <option key={action.id} value={action.id}>
-                      {actionLabel(action.id, action.label)}
+                  {prompts.map((prompt) => (
+                    <option key={prompt.id} value={prompt.id}>
+                      {promptLabel(prompt.id, prompt.label)}
                     </option>
                   ))}
                 </Select>
@@ -902,15 +900,15 @@ export function ActionsSettings(): React.JSX.Element {
         </div>
         <div className="mt-1 flex items-center justify-between gap-4 border-t pt-4">
           <div>
-            <h3 className="text-sm font-medium">{t.routing.overridesTitle}</h3>
+            <h3 className="text-sm font-medium">{t.rules.overridesTitle}</h3>
             <p className="mt-1 text-xs text-muted-foreground">
-              {t.routing.overridesHint}{" "}
+              {t.rules.overridesHint}{" "}
               <button
                 type="button"
                 className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-foreground"
-                onClick={openRoutingDocs}
+                onClick={openRulesDocs}
               >
-                {t.routing.overridesDocs}
+                {t.rules.overridesDocs}
                 <ExternalLink className="size-3" />
               </button>
             </p>
@@ -925,13 +923,13 @@ export function ActionsSettings(): React.JSX.Element {
             }}
           >
             <Plus className="size-3.5" />
-            {t.routing.addOverride}
+            {t.rules.addOverride}
           </Button>
         </div>
 
-        {routing.overrides.length > 0 ? (
+        {rules.overrides.length > 0 ? (
           <ul className="flex flex-col divide-y rounded-lg border">
-            {routing.overrides.map((entry, index) => (
+            {rules.overrides.map((entry, index) => (
               // Order is priority, so position is the only stable identity a
               // rule has — the index key is correct here, not a fallback.
               // eslint-disable-next-line react/no-array-index-key
@@ -939,8 +937,8 @@ export function ActionsSettings(): React.JSX.Element {
                 <span className="flex shrink-0 flex-col">
                   <button
                     type="button"
-                    aria-label={t.routing.moveUp}
-                    title={t.routing.moveUp}
+                    aria-label={t.rules.moveUp}
+                    title={t.rules.moveUp}
                     disabled={index === 0}
                     className="text-muted-foreground/50 hover:text-foreground disabled:opacity-25"
                     onClick={() => {
@@ -951,9 +949,9 @@ export function ActionsSettings(): React.JSX.Element {
                   </button>
                   <button
                     type="button"
-                    aria-label={t.routing.moveDown}
-                    title={t.routing.moveDown}
-                    disabled={index === routing.overrides.length - 1}
+                    aria-label={t.rules.moveDown}
+                    title={t.rules.moveDown}
+                    disabled={index === rules.overrides.length - 1}
                     className="text-muted-foreground/50 hover:text-foreground disabled:opacity-25"
                     onClick={() => {
                       moveOverride(index, 1);
@@ -976,9 +974,9 @@ export function ActionsSettings(): React.JSX.Element {
                   ))}
                   <span className="text-muted-foreground/60">→</span>
                   <span className="truncate font-medium">
-                    {actionLabel(
-                      entry.action,
-                      actions.find((action) => action.id === entry.action)?.label ?? entry.action,
+                    {promptLabel(
+                      entry.prompt,
+                      prompts.find((prompt) => prompt.id === entry.prompt)?.label ?? entry.prompt,
                     )}
                   </span>
                 </span>
@@ -986,8 +984,8 @@ export function ActionsSettings(): React.JSX.Element {
                   <Button
                     variant="ghost"
                     size="icon-xs"
-                    aria-label={t.actions.edit}
-                    title={t.actions.edit}
+                    aria-label={t.prompts.edit}
+                    title={t.prompts.edit}
                     onClick={() => {
                       editOverride(index);
                     }}
@@ -997,10 +995,10 @@ export function ActionsSettings(): React.JSX.Element {
                   <Button
                     variant="ghost"
                     size="icon-xs"
-                    aria-label={t.actions.remove}
-                    title={t.actions.remove}
+                    aria-label={t.prompts.remove}
+                    title={t.prompts.remove}
                     onClick={() => {
-                      commitOverrides(routing.overrides.filter((_, i) => i !== index));
+                      commitOverrides(rules.overrides.filter((_, i) => i !== index));
                     }}
                   >
                     <Trash2 className="size-3.5" />
@@ -1018,7 +1016,7 @@ export function ActionsSettings(): React.JSX.Element {
             <div className="flex flex-col gap-3">
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.routing.fieldKind}
+                  {t.rules.fieldKind}
                 </span>
                 <Select
                   value={rule.kind}
@@ -1026,7 +1024,7 @@ export function ActionsSettings(): React.JSX.Element {
                     setRule({ ...rule, kind: event.target.value });
                   }}
                 >
-                  <option value="">{t.routing.anyKind}</option>
+                  <option value="">{t.rules.anyKind}</option>
                   {/* A rule carrying a kind we no longer know stays listed by
                     its raw value, so the state is visible instead of silently
                     showing as blank (same convention as the assignment list). */}
@@ -1042,7 +1040,7 @@ export function ActionsSettings(): React.JSX.Element {
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.routing.fieldApp}
+                  {t.rules.fieldApp}
                 </span>
                 <input
                   className={FIELD}
@@ -1055,7 +1053,7 @@ export function ActionsSettings(): React.JSX.Element {
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.routing.fieldTitle}
+                  {t.rules.fieldTitle}
                 </span>
                 <input
                   className={FIELD}
@@ -1068,7 +1066,7 @@ export function ActionsSettings(): React.JSX.Element {
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.routing.fieldUrl}
+                  {t.rules.fieldUrl}
                 </span>
                 <input
                   className={FIELD}
@@ -1081,7 +1079,7 @@ export function ActionsSettings(): React.JSX.Element {
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.routing.fieldExec}
+                  {t.rules.fieldExec}
                 </span>
                 <input
                   className={FIELD}
@@ -1093,11 +1091,11 @@ export function ActionsSettings(): React.JSX.Element {
                 />
               </label>
               {/* File-copy rules: every copied file's name must match, so a
-                  PDF action never fires on a mixed selection. Matching is
+                  PDF prompt never fires on a mixed selection. Matching is
                   case-insensitive — `*.pdf` catches `Scan.PDF`. */}
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.routing.fieldFile}
+                  {t.rules.fieldFile}
                 </span>
                 <input
                   className={FIELD}
@@ -1114,7 +1112,7 @@ export function ActionsSettings(): React.JSX.Element {
               <div className="grid grid-cols-2 gap-3">
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-medium text-muted-foreground">
-                    {t.routing.fieldMinChars}
+                    {t.rules.fieldMinChars}
                   </span>
                   <input
                     className={FIELD}
@@ -1127,7 +1125,7 @@ export function ActionsSettings(): React.JSX.Element {
                 </label>
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-medium text-muted-foreground">
-                    {t.routing.fieldMaxChars}
+                    {t.rules.fieldMaxChars}
                   </span>
                   <input
                     className={FIELD}
@@ -1141,26 +1139,26 @@ export function ActionsSettings(): React.JSX.Element {
               </div>
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground">
-                  {t.routing.ruleAction}
+                  {t.rules.rulePrompt}
                 </span>
                 <Select
-                  value={rule.action}
+                  value={rule.prompt}
                   onChange={(event) => {
-                    setRule({ ...rule, action: event.target.value });
+                    setRule({ ...rule, prompt: event.target.value });
                   }}
                 >
                   <option value="">—</option>
-                  {actions.map((action) => (
-                    <option key={action.id} value={action.id}>
-                      {actionLabel(action.id, action.label)}
+                  {prompts.map((prompt) => (
+                    <option key={prompt.id} value={prompt.id}>
+                      {promptLabel(prompt.id, prompt.label)}
                     </option>
                   ))}
                 </Select>
               </label>
             </div>
-            <span className="text-[11px] text-muted-foreground/80">{t.routing.wildcardHint}</span>
+            <span className="text-[11px] text-muted-foreground/80">{t.rules.wildcardHint}</span>
             <div className="flex items-center gap-3">
-              <Button size="sm" disabled={rule.action === ""} onClick={saveRule}>
+              <Button size="sm" disabled={rule.prompt === ""} onClick={saveRule}>
                 {t.common.save}
               </Button>
               <Button
@@ -1178,7 +1176,7 @@ export function ActionsSettings(): React.JSX.Element {
           </div>
         ) : undefined}
 
-        {routingError ? <p className="text-xs text-destructive">{routingError}</p> : undefined}
+        {rulesError ? <p className="text-xs text-destructive">{rulesError}</p> : undefined}
       </section>
     </>
   );

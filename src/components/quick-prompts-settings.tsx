@@ -1,35 +1,35 @@
 import { emit } from "@tauri-apps/api/event";
 import { GripVertical } from "lucide-react";
 import { useEffect, useState } from "react";
-import { type ActionInfo, listActions } from "@/lib/actions.ts";
-import { useActionLabel, useT } from "@/lib/i18n.tsx";
+import { type PromptInfo, listPrompts } from "@/lib/prompts.ts";
+import { usePromptLabel, useT } from "@/lib/i18n.tsx";
 import { createLogger } from "@/lib/log.ts";
-import { getQuickActions, QUICK_SLOT_COUNT, setQuickActions } from "@/lib/settings.ts";
+import { getQuickPrompts, QUICK_SLOT_COUNT, setQuickPrompts } from "@/lib/settings.ts";
 import { cn } from "@/lib/utils.ts";
 import { Select } from "@/components/ui/select.tsx";
 
-const log = createLogger("quick-actions-settings");
+const log = createLogger("quick-prompts-settings");
 
 /** The four popup quick slots (number keys 1–4): drag to reorder, pick the
- *  action per slot. Positions are stable so the numbers a user memorizes
+ *  prompt per slot. Positions are stable so the numbers a user memorizes
  *  never move on their own; assignments stay duplicate-free (choosing an
- *  action already in another slot swaps the two). The default action is
- *  chosen in the actions list, not here — one star, one place. */
-export function QuickActionsSettings(): React.JSX.Element {
+ *  prompt already in another slot swaps the two). The default prompt is
+ *  chosen in the prompts list, not here — one star, one place. */
+export function QuickPromptsSettings(): React.JSX.Element {
   const t = useT();
-  const actionLabel = useActionLabel();
-  const [actions, setActions] = useState<ActionInfo[]>([]);
+  const promptLabel = usePromptLabel();
+  const [prompts, setPrompts] = useState<PromptInfo[]>([]);
   const [slots, setSlots] = useState<string[]>([]);
   const [dragIndex, setDragIndex] = useState<number | undefined>(undefined);
 
   const reload = (): void => {
     void (async () => {
       try {
-        const [list, quick] = await Promise.all([listActions(), getQuickActions()]);
-        setActions(list);
+        const [list, quick] = await Promise.all([listPrompts(), getQuickPrompts()]);
+        setPrompts(list);
         setSlots(quick);
       } catch (error) {
-        log.error("loading quick actions failed", error);
+        log.error("loading quick prompts failed", error);
       }
     })();
   };
@@ -43,16 +43,16 @@ export function QuickActionsSettings(): React.JSX.Element {
     setSlots(next);
     void (async () => {
       try {
-        await setQuickActions(next);
-        await emit("quick-actions-changed", next);
+        await setQuickPrompts(next);
+        await emit("quick-prompts-changed", next);
       } catch (error) {
-        log.error("saving quick actions failed", error);
+        log.error("saving quick prompts failed", error);
         reload();
       }
     })();
   };
 
-  // Assign an action to a slot. If it already occupies another slot, swap them
+  // Assign an prompt to a slot. If it already occupies another slot, swap them
   // so the four stay distinct without ever leaving a slot empty.
   const assign = (slotIndex: number, id: string): void => {
     const next = [...slots];
@@ -85,7 +85,7 @@ export function QuickActionsSettings(): React.JSX.Element {
       </div>
       <ul className="flex flex-col gap-2">
         {slots.map((id, index) => {
-          const known = actions.some((a) => a.id === id);
+          const known = prompts.some((a) => a.id === id);
           return (
             // Slot order IS the identity here (the number is the slot), so the
             // index key is correct, not a fallback.
@@ -131,12 +131,12 @@ export function QuickActionsSettings(): React.JSX.Element {
                     assign(index, event.target.value);
                   }}
                 >
-                  {/* An id pointing at a deleted action stays listed raw, so the
+                  {/* An id pointing at a deleted prompt stays listed raw, so the
                       slot's state is visible instead of silently blank. */}
                   {known ? undefined : <option value={id}>{id}</option>}
-                  {actions.map((action) => (
-                    <option key={action.id} value={action.id}>
-                      {actionLabel(action.id, action.label)}
+                  {prompts.map((prompt) => (
+                    <option key={prompt.id} value={prompt.id}>
+                      {promptLabel(prompt.id, prompt.label)}
                     </option>
                   ))}
                 </Select>

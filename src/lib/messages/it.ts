@@ -30,7 +30,7 @@ export const it: Messages = {
       "Il popup chiede prima quando una cattura invierebbe un'immagine o un altro file binario al provider; i file di testo vengono elaborati senza chiedere",
     devMode: "Mostra le variabili di template",
     devModeHint:
-      "Per scrivere le proprie azioni: il popup mostra le variabili di ogni copia e il loro contenuto",
+      "Per scrivere i propri prompt: il popup mostra le variabili di ogni copia e il loro contenuto",
     stats: "Statistiche di utilizzo",
     statsHint:
       "Ogni esecuzione del modello aggiunge una riga a un registro locale da cui calcolare i costi. Tutto resta su questo dispositivo e non viene mai inviato da nessuna parte; il contenuto copiato non viene mai incluso.",
@@ -52,7 +52,7 @@ export const it: Messages = {
       "I costi qui sono stime: le esecuzioni fallite o interrotte non vengono contate, e il rilevamento del modello può sbagliare. La pagina di fatturazione del tuo provider ha le cifre esatte.",
     userContext: "Su di te",
     userContextHint:
-      "Cosa dovrebbe sapere l'IA di te: ruolo, competenze, preferenze. Aggiunto a ogni azione.",
+      "Cosa dovrebbe sapere l'IA di te: ruolo, competenze, preferenze. Aggiunto a ogni prompt.",
     userContextPlaceholders: [
       "Impiegato. Scrivo soprattutto e-mail a persone fuori dall'azienda, quindi tienile cortesi; per il resto parti dalla conclusione e sii breve.",
       "Dirigente. Dei documenti lunghi voglio solo i punti chiave — metti in evidenza ciò che devo decidere, e supporta i numeri con la loro base.",
@@ -62,15 +62,15 @@ export const it: Messages = {
     ],
     userContextClear: "Pulisci",
     userContextCleared: "Pulito",
-    quickTitle: "Azioni rapide",
+    quickTitle: "Prompt rapidi",
     quickHint:
-      "Le quattro azioni che il popup associa ai tasti numerici 1–4. Trascina per riordinare.",
+      "I quattro prompt che il popup associa ai tasti numerici 1–4. Trascina per riordinare.",
     resetTitle: "Ripristino",
     resetHint:
-      "Riporta ZenCopy allo stato appena installato: impostazioni, azioni e statistiche d'uso vengono tutte eliminate",
+      "Riporta ZenCopy allo stato appena installato: impostazioni, prompt e statistiche d'uso vengono tutti eliminati",
     resetButton: "Ripristina",
     resetWarning:
-      "Questa operazione non è reversibile. Le impostazioni IA (chiavi API incluse), le regole di routing, le azioni personalizzate e le preferenze delle finestre vengono eliminate, e ZenCopy torna allo stato del primo avvio.",
+      "Questa operazione non è reversibile. Le impostazioni IA (chiavi API incluse), le regole, i prompt personalizzati e le preferenze delle finestre vengono eliminati, e ZenCopy torna allo stato del primo avvio.",
     resetConfirm: "Elimina tutto",
     optionSystem: "Sistema",
     optionLight: "Chiaro",
@@ -79,9 +79,9 @@ export const it: Messages = {
   popup: {
     placeholder: "Copia due volte, rapidamente — come un doppio clic — e il risultato appare qui.",
     devVars: "Variabili di template",
-    noAction:
-      "Questa cattura non esegue alcuna azione automaticamente — scegline una qui sotto o premi 1–4 per eseguirla.",
-    routingDocs: "Come funziona il routing",
+    noPrompt:
+      "Questa cattura non esegue alcun prompt automaticamente — scegline uno qui sotto o premi 1–4 per eseguirlo.",
+    rulesDocs: "Come funzionano le regole",
     confirmSend:
       "Inviare questa cattura al tuo provider di IA? Immagini e file possono costare più del testo.",
     send: "Invia",
@@ -89,8 +89,8 @@ export const it: Messages = {
     attachmentTooLarge: (mb) => `Troppo grande per l'invio — il limite è di ${mb} MB per cattura.`,
     unsupportedFile: (name) => `"${name}" è un tipo di file che non può essere inviato al modello.`,
     fileUnreadable: (name) => `Impossibile leggere "${name}".`,
-    switchAction: "Cambia azione",
-    chooseAction: "Scegli un'azione",
+    switchPrompt: "Cambia prompt",
+    choosePrompt: "Scegli un prompt",
     failed: (reason) => `Errore: ${reason}`,
     timedOut: "Nessuna risposta dal modello. Controlla rete e provider, poi riprova.",
     emptyResult: "Il modello ha restituito una risposta vuota.",
@@ -147,19 +147,19 @@ export const it: Messages = {
     macosPermissions:
       "Manca un passaggio: macOS ha bisogno della tua autorizzazione per accorgersi della doppia copia. In Impostazioni di Sistema → Privacy e Sicurezza, consenti ZenCopy in Monitoraggio input, poi chiudi e riapri ZenCopy.",
   },
-  actions: {
+  prompts: {
     builtinLabels: {
       "zencopy-translate": "Traduci",
       "zencopy-explain": "Spiega",
       "zencopy-polish": "Rifinisci",
     },
-    title: "Azioni",
+    title: "Prompt",
     hint: (keys) =>
       `Cosa può fare ${keys}. Si cambia anche dall'etichetta del risultato nel popup.`,
-    add: "Nuova azione",
+    add: "Nuovo prompt",
     export: "Esporta (.md)",
     import: "Importa",
-    importHint: "Incolla il Markdown di un'azione condivisa, oppure scegli il file.",
+    importHint: "Incolla il Markdown di un prompt condiviso, oppure scegli il file.",
     importFromFile: "Scegli file",
     name: "Nome",
     instruction: "Istruzione",
@@ -177,22 +177,22 @@ export const it: Messages = {
     edit: "Modifica",
     remove: "Elimina",
     failed: (reason) => `Errore: ${reason}`,
-    importNotAnAction:
-      "Non è un'azione: è atteso il frontmatter YAML `---` seguito dal corpo del prompt.",
-    importNoLabel: "L'azione non ha label.",
-    importInvalidId: (id) => `Id azione non valido: '${id}'.`,
+    importNotAPrompt:
+      "Non è un prompt: è atteso il frontmatter YAML `---` seguito dal corpo del prompt.",
+    importNoLabel: "Il prompt non ha label.",
+    importInvalidId: (id) => `Id prompt non valido: '${id}'.`,
     importBuiltinId: (id) =>
-      `'${id}' è l'id di un'azione integrata — modifica l'id nel file e riprova.`,
+      `'${id}' è l'id di un prompt integrato — modifica l'id nel file e riprova.`,
     importReservedId: (id) =>
-      `'${id}' inizia con 'zencopy-': questo prefisso di id è riservato alle azioni preinstallate.`,
+      `'${id}' inizia con 'zencopy-': questo prefisso di id è riservato ai prompt preinstallati.`,
     importIdExists: (id) =>
-      `Esiste già un'azione con l'id '${id}' — eliminala prima, oppure modifica l'id nel file.`,
-    importTooLarge: "Il file è troppo grande per essere un'azione.",
-    labelExists: (label) => `Esiste già un'azione chiamata '${label}' — scegli un altro nome.`,
+      `Esiste già un prompt con l'id '${id}' — eliminalo prima, oppure modifica l'id nel file.`,
+    importTooLarge: "Il file è troppo grande per essere un prompt.",
+    labelExists: (label) => `Esiste già un prompt chiamato '${label}' — scegli un altro nome.`,
   },
-  routing: {
-    title: "Routing",
-    hint: "Quale azione viene eseguita per ogni tipo di cattura.",
+  rules: {
+    title: "Regole",
+    hint: "Quale prompt viene eseguito per ogni tipo di cattura.",
     kindText: "Testo",
     kindImage: "Immagine",
     kindFiles: "File",
@@ -211,7 +211,7 @@ export const it: Messages = {
     fieldFile: "Nome file",
     fieldMinChars: "Caratteri min.",
     fieldMaxChars: "Caratteri max.",
-    ruleAction: "Esegui azione",
+    rulePrompt: "Esegui prompt",
     wildcardHint:
       "Le condizioni si combinano in AND; * corrisponde a qualsiasi cosa. I campi vuoti vengono ignorati.",
     needsCondition: "Aggiungi almeno una condizione.",
@@ -221,7 +221,7 @@ export const it: Messages = {
   },
   ai: {
     title: "IA",
-    hint: "Il provider e il modello usati dalle azioni.",
+    hint: "Il provider e il modello usati dai prompt.",
     disclosure:
       "Ciò che copi viene inviato direttamente al provider che configuri — ZenCopy non ha server intermedi né telemetria. L'uso dell'API e i relativi costi sono a tuo carico, e l'output dell'IA può essere sbagliato.",
     provider: "Provider",
@@ -237,7 +237,7 @@ export const it: Messages = {
     testUnreachable:
       "Connessione non riuscita. Controlla nome del modello, chiave API, URL base e rete.",
     advancedHint:
-      "Scrivi la configurazione direttamente: per un gateway aziendale, più provider insieme o un modello per azione.",
+      "Scrivi la configurazione direttamente: per un gateway aziendale, più provider insieme o un modello per prompt.",
     examplesLink: "Vedi configurazioni di esempio",
     invalidJson: "JSON non valido.",
     invalidSchema: "JSON valido, ma non è una configurazione valida. I dettagli sono nel log.",

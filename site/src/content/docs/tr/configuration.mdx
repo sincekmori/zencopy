@@ -13,7 +13,7 @@ Bu sayfa, onu kendine daha çok uydurmak istediğin an için.
 ## Ayarlar penceresi
 
 Tepsi simgesinin menüsünden ya da açılır penceredeki dişli simgesinden açabilirsin.
-Üç sekmesi var: **Genel, AI ve Eylemler**.
+Üç sekmesi var: **Genel, AI ve İstemler**.
 
 ### Genel
 
@@ -34,29 +34,29 @@ Rolünü ve tercihlerini, istediğin dilde birkaç sade cümleyle anlattığın 
 
 > Örnek: "Satış. Çoğunlukla müşteri e-postası yazıyorum — kibar ama resmî değil, önce sonuç."
 
-Bunu doldurduğunda her eylem sonuçlarını sana göre uyarlar.
+Bunu doldurduğunda her istem sonuçlarını sana göre uyarlar.
 Açıklamalar bilgi düzeyine uygun gelir, taslaklar tercih ettiğin tonda geri döner.
 İlgisiz görevleri asla etkilemez ve yazdığın metin sonuçlarda asla görünmez.
 
-### Eylemler
+### İstemler
 
 "Çift kopyalamadan sonra ne olacağının" listesi.
 
-- Önceden yüklü eylemler açılıp okunabilir — aynı zamanda çalışan birer örnektirler.
-- **Yeni eylem** için bir ad ile ne yapılmasını istediğin yeter.
+- Önceden yüklü istemler açılıp okunabilir — aynı zamanda çalışan birer örnektirler.
+- **Yeni istem** için bir ad ile ne yapılmasını istediğin yeter.
   Örneğin: ad "3 satırlık özet", talimat "Bunu 3 satırda özetle".
 - Talimat yazmakta kendine güvenmiyor musun? İstediğini kabaca karala ve **AI ile taslak oluştur** düğmesine bas — yapılandırdığın AI onu düzgün bir talimata dönüştürür.
-- **Yönlendirme**, içerik türüne göre (metin / görsel / dosyalar) farklı bir eylem seçmeni sağlar.
+- **Kurallar**, içerik türüne göre (metin / görsel / dosyalar) farklı bir istem seçmeni sağlar.
 
-Oluşturduğun eylemler paylaşılabilir: **Dışa aktar** bir eylemi dosya olarak yazar; karşı taraf onu **İçe aktar**'a yapıştırır ya da dosyayı seçer.
+Oluşturduğun istemler paylaşılabilir: **Dışa aktar** bir istemi dosya olarak yazar; karşı taraf onu **İçe aktar**'a yapıştırır ya da dosyayı seçer.
 
-Tüm işi bir yapay zekaya devretmeyi mi tercih edersiniz? Herhangi bir yapay zeka sohbeti sizin için içe aktarılmaya hazır bir eylem yazabilir; bunu yapıştırın ve boşluğu doldurun:
+Tüm işi bir yapay zekaya devretmeyi mi tercih edersiniz? Herhangi bir yapay zeka sohbeti sizin için içe aktarılmaya hazır bir istem yazabilir; bunu yapıştırın ve boşluğu doldurun:
 
 ```text
-https://zencopy.app/llms-full.txt adresini okuyun; bu adres, eylem dosyası biçimi, şablon değişkenleri ve yönlendirmenin nasıl çalıştığı dahil olmak üzere tam ZenCopy belgelerini içerir. Ardından, şunları yapan bir ZenCopy eylemi yazın: [ne yapmak istiyorsunuz]. ZenCopy'nin Ayarlar → Eylemler → İçe Aktar bölümüne yapıştırılmaya hazır, tek bir kod bloğu içinde tam bir eylem dosyası (frontmatter içeren Markdown) çıktısı verin. Eylem yalnızca belirli bir uygulamada veya belirli bir sitede anlamlıysa, hangi yönlendirme kuralını ayarlamam gerektiğini söyleyen bir cümle ekleyin.
+https://zencopy.app/llms-full.txt adresini okuyun; bu adres, istem dosyası biçimi, şablon değişkenleri ve kuralların nasıl çalıştığı dahil olmak üzere tam ZenCopy belgelerini içerir. Ardından, şunları yapan bir ZenCopy istemi yazın: [ne yapmak istiyorsunuz]. ZenCopy'nin Ayarlar → İstemler → İçe Aktar bölümüne yapıştırılmaya hazır, tek bir kod bloğu içinde tam bir istem dosyası (frontmatter içeren Markdown) çıktısı verin. İstem yalnızca belirli bir uygulamada veya belirli bir sitede anlamlıysa, hangi kuralı ayarlamam gerektiğini söyleyen bir cümle ekleyin.
 ```
 
-Yanıttaki kod bloğu doğrudan **Ayarlar → Eylemler → İçe Aktar** bölümüne gider.
+Yanıttaki kod bloğu doğrudan **Ayarlar → İstemler → İçe Aktar** bölümüne gider.
 Belgelerin yanıtlayamadığı sorular için ("ZenCopy şunu bile yapabilir mi...?"), <RepomixLink>tek bir tıklama ilgili kaynak kodunu paketler</RepomixLink>; sonucu aynı yapay zekaya iletin.
 
 ## Yapılandırma dosyaları (ileri düzey kullanıcılar için)
@@ -73,38 +73,38 @@ Tam yol, açılışta günlüğe de yazılır:
   <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
 </Tabs>
 
-Yönlendirme varsayılanları uygulamaya gömülüdür; `routing.json` onları yalnızca **geçersiz kılar**.
-Eylem dosyaları **ekleme amaçlıdır**:
-yeni eylemler tanımlarlar; yerleşik eylemlere dokunulamaz (yerleşik bir id'yi sahiplenen yerel dosya yok sayılır).
+Kural varsayılanları uygulamaya gömülüdür; `rules.json` onları yalnızca **geçersiz kılar**.
+İstem dosyaları **ekleme amaçlıdır**:
+yeni istemler tanımlarlar; yerleşik istemlere dokunulamaz (yerleşik bir id'yi sahiplenen yerel dosya yok sayılır).
 Düzenlemeler bir sonraki tetiklemede geçerli olur — yeniden başlatmak gerekmez.
 
 ### `ai-sdk-catalog.json`
 
 Sağlayıcılar ve bir **role → model** eşlemesi.
 Dosya biçiminin ana yurdu [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — her alan orada belgelenmiştir (düzenleyicide doğrulama ve tamamlama sağlayan `$schema` dahil) ve [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) içinde üç boyda hazır yapılandırma vardır.
-ZenCopy'ye özgü başlangıç noktaları için (ayarlar arayüzünün yazdığı biçim, yerel Ollama, eylemler için role'ler) [Tarifler](/tr/recipes/) sayfasına bak.
+ZenCopy'ye özgü başlangıç noktaları için (ayarlar arayüzünün yazdığı biçim, yerel Ollama, istemler için role'ler) [Tarifler](/tr/recipes/) sayfasına bak.
 
 Bir gereklilik dosya formatından değil ZenCopy'nin kendisinden gelir: `roles` her zaman **`default`** içermelidir.
-Frontmatter'ında başka bir role belirtmeyen her eylem onunla çalışır ve ayarlardaki bağlantı testi ona ping atar.
+Frontmatter'ında başka bir role belirtmeyen her istem onunla çalışır ve ayarlardaki bağlantı testi ona ping atar.
 
 API anahtarları doğrudan bu yerel dosyaya yazılır (ayarlar arayüzü de aynı biçimi yazar); makinenden asla çıkmazlar.
 Ortam değişkenleri okunmaz — grafik arayüzlü uygulamaları kabuk değil işletim sistemi başlatır; bu yüzden `.zshrc` ve benzerlerinde export edilen değişkenler onlara hiç ulaşmaz.
 Dosya her okunuşta şemaya göre doğrulanır.
 Bozuk bir düzenleme, açılır pencerede ve ayarlar düzenleyicisinde net bir mesaj olarak görünür — hiçbir şey sessizce başarısız olmaz.
 
-### `routing.json`
+### `rules.json`
 
-Hangi tür yakalamayı hangi eylemin işleyeceği:
-düz bir `kind → action` eşlemesi ve isteğe bağlı, daha öncelikli bir `overrides` listesi (ilk eşleşen kazanır).
+Hangi tür yakalamayı hangi istemin işleyeceği:
+düz bir `kind → prompt` eşlemesi ve isteğe bağlı, daha öncelikli bir `overrides` listesi (ilk eşleşen kazanır).
 Üç tür şunlardır: `text`, `image` ve `files` (zengin metin kopyası `text` sayılır); başlangıçta metin Zen'e, görseller ve dosyalar Açıkla'ya yönlendirilir.
-Düz eşleme uygulama içinden düzenlenebilir (Ayarlar → Eylemler → Yönlendirme); bu dosyaya yalnızca `overrides` için dokunman gerekir.
+Düz eşleme uygulama içinden düzenlenebilir (Ayarlar → İstemler → Kurallar); bu dosyaya yalnızca `overrides` için dokunman gerekir.
 
 ```json
 {
   "text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
-  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
 }
 ```
 
@@ -119,10 +119,10 @@ Bunların dışındaki her şey net bir mesajla geri çevrilir.
 Modelin dosyaları ayırt edebilmesi ve nerede olduklarını bilmesi için içerikle birlikte tam yollar da gönderilir.
 İkili ekler metinden pahalı olabildiği için açılır pencere göndermeden önce sorar (metin dosyaları sormadan çalışır) — onay, oracıkta ya da Ayarlar'dan kapatılabilir.
 
-### `actions/*.md`
+### `prompts/*.md`
 
-1 dosya = 1 eylem: YAML frontmatter + [Liquid](https://liquidjs.com) prompt gövdesi.
-Aynı tek dosya paylaşım biçimidir de — Ayarlar → Eylemler → İçe aktar onu yapıştırılmış metin ya da seçilmiş dosya olarak kabul eder.
+1 dosya = 1 istem: YAML frontmatter + [Liquid](https://liquidjs.com) istem gövdesi.
+Aynı tek dosya paylaşım biçimidir de — Ayarlar → İstemler → İçe aktar onu yapıştırılmış metin ya da seçilmiş dosya olarak kabul eder.
 
 ```markdown
 ---
@@ -137,12 +137,12 @@ instructions: Özlü bir asistansın.
 {{ text }}
 ```
 
-| Frontmatter    | Anlamı                                                                                                              |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `id`           | `routing.json` içinden başvurulan ad (varsayılan: dosya adı) — `zencopy-` öneki önceden yüklü eylemlere ayrılmıştır |
-| `label`        | Açılır pencerede gösterilir                                                                                         |
-| `role`         | Çalıştırmada kullanılacak katalog role'ü (varsayılan: `default`)                                                    |
-| `instructions` | Sistem prompt'u (Liquid şablonu)                                                                                    |
+| Frontmatter    | Anlamı                                                                                                            |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `id`           | `rules.json` içinden başvurulan ad (varsayılan: dosya adı) — `zencopy-` öneki önceden yüklü istemlere ayrılmıştır |
+| `label`        | Açılır pencerede gösterilir                                                                                       |
+| `role`         | Çalıştırmada kullanılacak katalog role'ü (varsayılan: `default`)                                                  |
+| `instructions` | Sistem prompt'u (Liquid şablonu)                                                                                  |
 
 Şablon değişkenleri ve tarayıcıda kopyalanan bir paragraf için örnek değerler:
 
@@ -166,12 +166,12 @@ instructions: Özlü bir asistansın.
 Ayrıca ZenCopy'ye özgü bir `language_name` filtresi var: `{{ locale | language_name }}`, "tr" yerine "Turkish" olarak açılır; bu da bir prompt içinde doğal okunur.
 Gerçek değerleri görmek için Ayarlar'dan **Şablon değişkenlerini göster** seçeneğini etkinleştir — her yakalamanın değişkenleri açılır pencerede JSON olarak görünür.
 
-Basit eylemler (bir ad ve bir talimat) ayarlar penceresinden de oluşturulabilir; yazdığı, tam olarak bu dosya biçimidir.
+Basit istemler (bir ad ve bir talimat) ayarlar penceresinden de oluşturulabilir; yazdığı, tam olarak bu dosya biçimidir.
 
 #### Gelişmiş şablonlar
 
 `instructions` frontmatter'ı da gövde de eksiksiz birer [LiquidJS](https://liquidjs.com/tags/overview.html) şablonudur: koşullar, döngüler ve [filtreler](https://liquidjs.com/filters/overview.html) tümüyle çalışır.
-Tek bir eylem, kopyanın geldiği yere göre uyum sağlayabilir:
+Tek bir istem, kopyanın geldiği yere göre uyum sağlayabilir:
 
 ```markdown
 ---

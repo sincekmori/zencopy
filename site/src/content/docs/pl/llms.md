@@ -11,4 +11,4 @@ Jeśli jesteś sztuczną inteligencją czytającą tę dokumentację — lub cz�
 
 Są one zgodne z [konwencją llms.txt](https://llmstxt.org/) i są generowane na nowo przy każdym wdrożeniu, dzięki czemu zawsze odpowiadają stronom widocznym dla człowieka.
 
-Czy poproszono Cię o napisanie akcji ZenCopy? [llms-full.txt](/llms-full.txt) zawiera format pliku akcji, zmienne szablonu i reguły routingu — odpowiedz jednym kompletnym plikiem akcji w pojedynczym bloku kodu.
+Czy poproszono Cię o napisanie promptu ZenCopy? [llms-full.txt](/llms-full.txt) zawiera format pliku promptu, zmienne szablonu i reguły — odpowiedz jednym kompletnym plikiem promptu w pojedynczym bloku kodu.

@@ -11,7 +11,7 @@ Nie ma serwera, konta ani telemetrii.
 ## Co opuszcza Twoje urządzenie
 
 Gdy naciśniesz wyzwalacz (<span data-os-modifier>Ctrl/⌘</span> + C + C), przechwycona treść schowka jest wysyłana bezpośrednio do dostawcy LLM skonfigurowanego przez _Ciebie_ — nic więcej i nigdzie indziej.
-Co dokładnie jest wysyłane, zależy od uruchamianej akcji:
+Co dokładnie jest wysyłane, zależy od uruchamianego promptu:
 
 - Wyrenderowany prompt, który może osadzać kontekst przechwycenia jako [zmienne szablonu](/pl/configuration/): skopiowany tekst i znaczniki, nazwę aplikacji źródłowej i tytuł okna, URL strony, datę oraz Twoje locale.
 - Dla obrazu lub skopiowanych plików dołączana jest sama treść (do 10 MB na przechwycenie) — a dla plików także ich pełne ścieżki.
@@ -29,7 +29,7 @@ Niezależnie od przechwyceń sprawdzanie aktualizacji pyta GitHub wyłącznie o 
 - Pliki logów.
   Logi mają usuwane sekrety i nigdy nie zawierają skopiowanej treści ani kluczy API.
 
-- Statystyki użycia (przełącznik w ustawieniach, domyślnie włączony): która akcja działała na jakim typie przechwycenia, wraz z modelem i liczbą tokenów, aby koszty pozostały policzalne.
+- Statystyki użycia (przełącznik w ustawieniach, domyślnie włączony): który prompt działał na jakim typie przechwycenia, wraz z modelem i liczbą tokenów, aby koszty pozostały policzalne.
   Tylko lokalny plik — nigdy skopiowana treść, nigdy nigdzie nie wysyłany.
 
 ## Strony trzecie

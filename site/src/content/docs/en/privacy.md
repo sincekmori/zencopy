@@ -11,9 +11,9 @@ It has no server, no account, and no telemetry.
 ## What leaves your device
 
 When you press the trigger (<span data-os-modifier>Ctrl/⌘</span> + C + C), the captured clipboard content is sent directly to the LLM provider _you_ configured — nothing else, and nowhere else.
-What exactly is sent depends on the action that runs:
+What exactly is sent depends on the prompt that runs:
 
-- The rendered prompt, which can embed the capture's context as [template variables](/en/configuration/#actionsmd): the copied text and markup, the source app's name and window title, the page URL, the date, and your locale.
+- The rendered prompt, which can embed the capture's context as [template variables](/en/configuration/#promptsmd): the copied text and markup, the source app's name and window title, the page URL, the date, and your locale.
 - For an image or copied files, the content itself is attached (up to 10 MB per capture) — and for files, their full paths.
   By default the popup asks before sending these.
 
@@ -29,7 +29,7 @@ Separately from captures, checking for updates asks GitHub for release metadata 
 - Log files.
   Logs redact secrets and never include copied content or API keys.
 
-- Usage statistics (a settings toggle, on by default): which action ran on which kind of capture, plus the model and token counts, so your costs stay computable.
+- Usage statistics (a settings toggle, on by default): which prompt ran on which kind of capture, plus the model and token counts, so your costs stay computable.
   Kept in a local file only — never the copied content, never sent anywhere.
 
 ## Third parties

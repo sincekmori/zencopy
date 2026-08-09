@@ -53,8 +53,8 @@ Role berbentuk `"provider:model"`, dipisah pada `:` pertama — itulah sebabnya 
 
 ## Dua role: cepat sebagai bawaan, pintar saat diperlukan
 
-Role memisahkan aksi dari model.
-Aksi menyebut sebuah role (`role: smart` di frontmatter aksinya); model mana yang dimaksud diputuskan di sini — tukar kapan saja tanpa menyentuh aksi.
+Role memisahkan prompt dari model.
+Prompt menyebut sebuah role (`role: smart` di frontmatter prompt tersebut); model mana yang dimaksud diputuskan di sini — tukar kapan saja tanpa menyentuh prompt.
 
 ```json
 {

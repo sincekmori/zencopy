@@ -9,7 +9,7 @@ export const id: Messages = {
   settings: {
     title: "Pengaturan ZenCopy",
     tagline: (keys) =>
-      `Tekan ${keys} untuk melakukan aksi pada apa yang kamu salin — dua ketukan C yang cepat, seperti klik ganda.`,
+      `Tekan ${keys} untuk bertindak atas apa yang kamu salin — dua ketukan C yang cepat, seperti klik ganda.`,
     tabGeneral: "Umum",
     position: "Posisi popup",
     positionHint: "Di sudut layar mana popup muncul",
@@ -30,7 +30,7 @@ export const id: Messages = {
       "Popup bertanya dulu ketika tangkapan akan mengirim gambar atau berkas biner lain ke penyedia; berkas teks akan diproses tanpa bertanya",
     devMode: "Tampilkan variabel templat",
     devModeHint:
-      "Untuk menulis aksi sendiri: popup menampilkan variabel setiap salinan beserta isinya",
+      "Untuk menulis prompt sendiri: popup menampilkan variabel setiap salinan beserta isinya",
     stats: "Statistik penggunaan",
     statsHint:
       "Setiap kali model dijalankan, satu baris ditambahkan ke catatan lokal yang bisa dipakai menghitung biaya. Semuanya hanya tersimpan di perangkat ini dan tidak pernah dikirim ke mana pun; konten yang disalin tidak pernah dicatat.",
@@ -52,7 +52,7 @@ export const id: Messages = {
       "Biaya di sini hanyalah perkiraan: eksekusi yang gagal atau dihentikan tidak dihitung, dan deteksi model bisa meleset. Angka pastinya ada di halaman tagihan penyedia kamu.",
     userContext: "Tentang kamu",
     userContextHint:
-      "Hal yang perlu diketahui AI tentang kamu — peran, keahlian, preferensi. Ditambahkan ke setiap aksi.",
+      "Hal yang perlu diketahui AI tentang kamu — peran, keahlian, preferensi. Ditambahkan ke setiap prompt.",
     userContextPlaceholders: [
       "Karyawan kantoran. Sebagian besar email dikirim ke luar perusahaan, jadi buat tetap sopan; jika tidak, langsung ke kesimpulan dan singkat saja.",
       "Eksekutif. Untuk dokumen panjang cukup poin pentingnya — dahulukan yang perlu saya putuskan, sertakan dasar untuk angka-angka tersebut.",
@@ -62,14 +62,14 @@ export const id: Messages = {
     ],
     userContextClear: "Bersihkan",
     userContextCleared: "Dibersihkan",
-    quickTitle: "Aksi cepat",
-    quickHint: "Empat aksi yang ditautkan popup ke tombol angka 1–4. Seret untuk menyusun ulang.",
+    quickTitle: "Prompt cepat",
+    quickHint: "Empat prompt yang ditautkan popup ke tombol angka 1–4. Seret untuk menyusun ulang.",
     resetTitle: "Reset",
     resetHint:
-      "Mengembalikan ZenCopy ke kondisi tepat setelah dipasang — pengaturan, aksi, dan statistik penggunaan semuanya dihapus",
+      "Mengembalikan ZenCopy ke kondisi tepat setelah dipasang — pengaturan, prompt, dan statistik penggunaan semuanya dihapus",
     resetButton: "Reset",
     resetWarning:
-      "Tindakan ini tidak bisa dibatalkan. Pengaturan AI (termasuk kunci API), aturan perutean, aksi buatan sendiri, dan preferensi jendela akan dihapus, lalu ZenCopy kembali ke kondisi awal seperti pertama kali dijalankan.",
+      "Tindakan ini tidak bisa dibatalkan. Pengaturan AI (termasuk kunci API), aturan, prompt buatan sendiri, dan preferensi jendela akan dihapus, lalu ZenCopy kembali ke kondisi awal seperti pertama kali dijalankan.",
     resetConfirm: "Hapus semua",
     optionSystem: "Sistem",
     optionLight: "Terang",
@@ -78,9 +78,9 @@ export const id: Messages = {
   popup: {
     placeholder: "Salin dua kali dengan cepat — seperti klik ganda — dan hasilnya muncul di sini.",
     devVars: "Variabel templat",
-    noAction:
-      "Tangkapan ini tidak menjalankan aksi secara otomatis — pilih satu di bawah atau tekan 1–4 untuk menjalankannya.",
-    routingDocs: "Cara kerja perutean",
+    noPrompt:
+      "Tangkapan ini tidak menjalankan prompt secara otomatis — pilih satu di bawah atau tekan 1–4 untuk menjalankannya.",
+    rulesDocs: "Cara kerja aturan",
     confirmSend:
       "Kirim tangkapan ini ke penyedia AI kamu? Gambar dan berkas bisa lebih mahal daripada teks.",
     send: "Kirim",
@@ -88,8 +88,8 @@ export const id: Messages = {
     attachmentTooLarge: (mb) => `Terlalu besar untuk dikirim — batasnya ${mb} MB per tangkapan.`,
     unsupportedFile: (name) => `"${name}" adalah jenis berkas yang tidak bisa dikirim ke model.`,
     fileUnreadable: (name) => `Tidak bisa membaca "${name}".`,
-    switchAction: "Ganti aksi",
-    chooseAction: "Pilih aksi",
+    switchPrompt: "Ganti prompt",
+    choosePrompt: "Pilih prompt",
     failed: (reason) => `Gagal: ${reason}`,
     timedOut: "Tidak ada respons dari model. Periksa jaringan dan penyedia, lalu coba lagi.",
     emptyResult: "Model mengembalikan respons kosong.",
@@ -116,7 +116,7 @@ export const id: Messages = {
     open: "Buka",
   },
   about: {
-    tagline: "Salin dua kali, langsung beraksi.",
+    tagline: "Salin dua kali, langsung bertindak.",
     update: (version) => `Perbarui ke v${version} dan mulai ulang aplikasi`,
     updateRestart: (version) => `Mulai ulang aplikasi untuk memperbarui ke v${version}`,
     updating: "Memperbarui…",
@@ -145,18 +145,18 @@ export const id: Messages = {
     macosPermissions:
       "Tinggal satu langkah: macOS memerlukan izinmu agar aplikasi bisa menyadari bahwa salin ditekan dua kali. Di Pengaturan Sistem → Privasi & Keamanan, izinkan ZenCopy di Pengawasan Input, lalu tutup dan buka kembali ZenCopy.",
   },
-  actions: {
+  prompts: {
     builtinLabels: {
       "zencopy-translate": "Terjemahkan",
       "zencopy-explain": "Jelaskan",
       "zencopy-polish": "Rapikan",
     },
-    title: "Aksi",
+    title: "Prompt",
     hint: (keys) => `Apa yang bisa dilakukan ${keys}. Bisa juga diganti dari label hasil di popup.`,
-    add: "Aksi baru",
+    add: "Prompt baru",
     export: "Ekspor (.md)",
     import: "Impor",
-    importHint: "Tempel Markdown aksi yang dibagikan, atau pilih berkasnya.",
+    importHint: "Tempel Markdown prompt yang dibagikan, atau pilih berkasnya.",
     importFromFile: "Pilih berkas",
     name: "Nama",
     instruction: "Instruksi",
@@ -174,21 +174,21 @@ export const id: Messages = {
     edit: "Sunting",
     remove: "Hapus",
     failed: (reason) => `Gagal: ${reason}`,
-    importNotAnAction: "Bukan aksi: diharapkan frontmatter YAML `---` diikuti isi prompt.",
-    importNoLabel: "Aksi ini tidak punya label.",
-    importInvalidId: (actionId) => `Id aksi tidak valid: '${actionId}'.`,
+    importNotAPrompt: "Bukan prompt: diharapkan frontmatter YAML `---` diikuti isi prompt.",
+    importNoLabel: "Prompt ini tidak punya label.",
+    importInvalidId: (actionId) => `Id prompt tidak valid: '${actionId}'.`,
     importBuiltinId: (actionId) =>
-      `'${actionId}' adalah id aksi bawaan — ubah id di dalam berkas lalu coba lagi.`,
+      `'${actionId}' adalah id prompt bawaan — ubah id di dalam berkas lalu coba lagi.`,
     importReservedId: (actionId) =>
-      `'${actionId}' diawali 'zencopy-' — prefiks id ini dikhususkan untuk aksi prainstal.`,
+      `'${actionId}' diawali 'zencopy-' — prefiks id ini dikhususkan untuk prompt prainstal.`,
     importIdExists: (actionId) =>
-      `Aksi dengan id '${actionId}' sudah ada — hapus dulu, atau ubah id di dalam berkas.`,
-    importTooLarge: "Berkas terlalu besar untuk menjadi aksi.",
-    labelExists: (actionLabel) => `Aksi bernama '${actionLabel}' sudah ada — pilih nama lain.`,
+      `Prompt dengan id '${actionId}' sudah ada — hapus dulu, atau ubah id di dalam berkas.`,
+    importTooLarge: "Berkas terlalu besar untuk menjadi prompt.",
+    labelExists: (actionLabel) => `Prompt bernama '${actionLabel}' sudah ada — pilih nama lain.`,
   },
-  routing: {
-    title: "Perutean",
-    hint: "Aksi mana yang berjalan untuk tiap jenis tangkapan.",
+  rules: {
+    title: "Aturan",
+    hint: "Prompt mana yang berjalan untuk tiap jenis tangkapan.",
     kindText: "Teks",
     kindImage: "Gambar",
     kindFiles: "Berkas",
@@ -207,7 +207,7 @@ export const id: Messages = {
     fieldFile: "Nama file",
     fieldMinChars: "Karakter min.",
     fieldMaxChars: "Karakter maks.",
-    ruleAction: "Jalankan aksi",
+    rulePrompt: "Jalankan prompt",
     wildcardHint: "Kondisi digabung dengan AND; * cocok dengan apa saja. Kolom kosong diabaikan.",
     needsCondition: "Tambahkan setidaknya satu kondisi.",
     needsValidBounds: "Karakter minimum tidak boleh melebihi maksimum.",
@@ -216,7 +216,7 @@ export const id: Messages = {
   },
   ai: {
     title: "AI",
-    hint: "Penyedia dan model yang dipakai aksi.",
+    hint: "Penyedia dan model yang dipakai prompt.",
     disclosure:
       "Apa pun yang kamu salin dikirim langsung ke penyedia yang kamu atur — ZenCopy tidak punya server perantara maupun telemetri. Pemakaian API dan biayanya jadi tanggunganmu, dan keluaran AI bisa salah.",
     provider: "Penyedia",
@@ -231,7 +231,7 @@ export const id: Messages = {
     testOk: "Terhubung",
     testUnreachable: "Koneksi gagal. Periksa nama model, kunci API, URL dasar, dan jaringan.",
     advancedHint:
-      "Tulis konfigurasi secara langsung — untuk gateway perusahaan, beberapa penyedia sekaligus, atau model per aksi.",
+      "Tulis konfigurasi secara langsung — untuk gateway perusahaan, beberapa penyedia sekaligus, atau model per prompt.",
     examplesLink: "Lihat contoh konfigurasi",
     invalidJson: "JSON tidak valid.",
     invalidSchema: "JSON benar, tetapi bukan konfigurasi yang valid. Detailnya ada di log.",

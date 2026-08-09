@@ -11,9 +11,9 @@ Sie hat keinen Server, kein Konto und keine Telemetrie.
 ## Was dein Gerät verlässt
 
 Wenn du den Trigger drückst (<span data-os-modifier>Ctrl/⌘</span> + C + C), wird der erfasste Zwischenablage-Inhalt direkt an den LLM-Anbieter gesendet, den _du_ eingerichtet hast — nichts anderes, und nirgendwo sonst hin.
-Was genau gesendet wird, hängt von der ausgeführten Aktion ab:
+Was genau gesendet wird, hängt vom ausgeführten Prompt ab:
 
-- Der gerenderte Prompt, der den Kontext der Erfassung als [Template-Variablen](/de/configuration/#actionsmd) einbetten kann: den kopierten Text und das Markup, den Namen der Quell-App und den Fenstertitel, die Seiten-URL, das Datum und deine Sprache.
+- Der gerenderte Prompt, der den Kontext der Erfassung als [Template-Variablen](/de/configuration/#promptsmd) einbetten kann: den kopierten Text und das Markup, den Namen der Quell-App und den Fenstertitel, die Seiten-URL, das Datum und deine Sprache.
 - Bei einem Bild oder kopierten Dateien wird der Inhalt selbst angehängt (bis zu 10 MB pro Erfassung) — bei Dateien auch ihre vollständigen Pfade.
   Standardmäßig fragt das Popup, bevor diese gesendet werden.
 
@@ -29,7 +29,7 @@ Unabhängig von Captures fragt die Update-Prüfung bei GitHub nur Release-Metada
 - Log-Dateien.
   Logs schwärzen Geheimnisse und enthalten nie kopierte Inhalte oder API-Schlüssel.
 
-- Nutzungsstatistik (Schalter in den Einstellungen, standardmäßig an): welche Aktion auf welcher Art von Capture lief, dazu Modell und Tokenzahlen, damit sich deine Kosten berechnen lassen.
+- Nutzungsstatistik (Schalter in den Einstellungen, standardmäßig an): welcher Prompt auf welcher Art von Capture lief, dazu Modell und Tokenzahlen, damit sich deine Kosten berechnen lassen.
   Nur eine lokale Datei — nie der kopierte Inhalt, nie irgendwohin gesendet.
 
 ## Dritte

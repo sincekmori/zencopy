@@ -11,7 +11,7 @@ Tidak punya server, tidak punya akun, dan tidak punya telemetri.
 ## Apa yang meninggalkan perangkatmu
 
 Saat kamu menekan pemicu (<span data-os-modifier>Ctrl/⌘</span> + C + C), konten papan klip yang ditangkap dikirim langsung ke penyedia LLM yang _kamu_ atur — tidak ada yang lain, dan tidak ke mana pun yang lain.
-Apa persisnya yang dikirim bergantung pada aksi yang berjalan:
+Apa persisnya yang dikirim bergantung pada prompt yang berjalan:
 
 - Prompt yang sudah dirender, yang dapat menyematkan konteks tangkapan sebagai [variabel templat](/id/configuration/): teks dan markup yang disalin, nama aplikasi sumber dan judul jendelanya, URL halaman, tanggal, dan lokalmu.
 - Untuk gambar atau berkas yang disalin, kontennya sendiri dilampirkan (hingga 10 MB per tangkapan) — dan untuk berkas, jalur lengkapnya juga.
@@ -29,7 +29,7 @@ Terpisah dari tangkapan, pemeriksaan pembaruan hanya meminta metadata rilis ke G
 - Berkas log.
   Log menyamarkan rahasia dan tidak pernah menyertakan konten yang disalin maupun kunci API.
 
-- Statistik penggunaan (sakelar di pengaturan, aktif secara bawaan): aksi mana yang berjalan pada jenis tangkapan mana, beserta model dan jumlah token, agar biayamu tetap bisa dihitung.
+- Statistik penggunaan (sakelar di pengaturan, aktif secara bawaan): prompt mana yang berjalan pada jenis tangkapan mana, beserta model dan jumlah token, agar biayamu tetap bisa dihitung.
   Hanya berkas lokal — tidak pernah berisi konten yang disalin, tidak pernah dikirim ke mana pun.
 
 ## Pihak ketiga

@@ -3,7 +3,7 @@
 // exercising the settings cost viewer without burning real tokens.
 // Cross-platform (run with `bun scripts/dev-usage.ts`, or `bun run dev-usage`).
 //
-// Writes events in the ledger's frozen vocabulary ({ at, action, kind, model,
+// Writes events in the ledger's frozen vocabulary ({ at, prompt, kind, model,
 // tokens: { input, output, cache_read, cache_write } }), spread over the last
 // three months, and mixed on purpose: mostly a priced catalog model, plus
 // some runs on an unpriced local model — the export's error path.
@@ -78,7 +78,7 @@ function makeEvent(now: Date): Record<string, unknown> {
   const at = new Date(now.getTime() - randomInt(0, 90 * 24 * 60 * 60) * 1000);
   const event: Record<string, unknown> = {
     at: formatAt(at),
-    action: pick(ACTIONS),
+    prompt: pick(ACTIONS),
     kind: pick(KINDS),
     model: weightedModel(),
   };

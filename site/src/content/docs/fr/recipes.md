@@ -53,8 +53,8 @@ Un role s'écrit `"provider:model"`, découpé au premier `:` — c'est pourquoi
 
 ## Deux roles : rapide par défaut, intelligent à la demande
 
-Les roles découplent les actions des modèles.
-Les actions nomment un role (`role: smart` dans le frontmatter de l'action) ; le modèle que cela désigne se décide ici — changez-le quand vous voulez sans toucher aux actions.
+Les roles découplent les prompts des modèles.
+Les prompts nomment un role (`role: smart` dans le frontmatter du prompt) ; le modèle que cela désigne se décide ici — changez-le quand vous voulez sans toucher aux prompts.
 
 ```json
 {

@@ -11,4 +11,4 @@ Se você é uma inteligência artificial lendo esta documentação — ou um hum
 
 Eles seguem a [convenção llms.txt](https://llmstxt.org/) e são regenerados a cada implantação, para que sempre correspondam às páginas que um humano vê.
 
-Foi solicitado que você escrevesse uma ação do ZenCopy? [llms-full.txt](/llms-full.txt) contém o formato do arquivo de ação, as variáveis de modelo e as regras de roteamento — responda com um arquivo de ação completo em um único bloco de código.
+Foi solicitado que você escrevesse um prompt do ZenCopy? [llms-full.txt](/llms-full.txt) contém o formato do arquivo de prompt, as variáveis de modelo e as regras — responda com um arquivo de prompt completo em um único bloco de código.

@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import * as z from "zod";
-import { ROUTABLE_KINDS } from "@/lib/actions.ts";
+import { ROUTABLE_KINDS } from "@/lib/prompts.ts";
 import { createLogger } from "@/lib/log.ts";
 
 const log = createLogger("capture");
@@ -34,16 +34,16 @@ export type Source = z.infer<typeof SourceSchema>;
 /** A capture prepared by Rust, emitted as the `capture` event. The schema is
  *  the contract with Rust's serialization; the popup validates each event at
  *  the boundary. Field notes:
- *  - `action_id` / `label`: the matched action (empty if none) — what the
+ *  - `prompt_id` / `label`: the matched prompt (empty if none) — what the
  *    switcher has selected.
  *  - `role`: catalog role to run with (already resolved to "default").
- *  - `instructions` / `prompt`: the action's system prompt and body, as
+ *  - `instructions` / `prompt`: the prompt's system prompt and body, as
  *    Liquid templates rendered on the frontend with `vars`.
- *  - `runnable`: whether an action applies and is ready to run. */
+ *  - `runnable`: whether an prompt applies and is ready to run. */
 export const CapturePayloadSchema = z.object({
   kind: z.enum([...ROUTABLE_KINDS, "empty"]),
   source: SourceSchema,
-  action_id: z.string(),
+  prompt_id: z.string(),
   label: z.string(),
   role: z.string(),
   instructions: z.string(),

@@ -53,8 +53,8 @@ role 的写法是 `"provider:model"`，在第一个 `:` 处拆分 — 所以即�
 
 ## 两个 role：默认求快，需要时求强
 
-role 把动作和模型解耦。
-动作只写 role 的名字（在动作的 frontmatter 里写 `role: smart`）；这个名字对应哪个模型在这里决定 — 随时可换，动作一个字都不用改。
+role 把提示词和模型解耦。
+提示词只写 role 的名字（在提示词的 frontmatter 里写 `role: smart`）；这个名字对应哪个模型在这里决定 — 随时可换，提示词一个字都不用改。
 
 ```json
 {

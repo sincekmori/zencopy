@@ -13,7 +13,7 @@ La primera mitad, sobre la **ventana de ajustes**, es para todos; la segunda mit
 ## La ventana de ajustes
 
 Ábrela desde el menú del icono de la bandeja o desde el icono de engranaje del popup.
-Tiene tres pestañas: **General, IA y Acciones**.
+Tiene tres pestañas: **General, IA y Prompts**.
 
 ### General
 
@@ -34,29 +34,29 @@ Es un lugar para describir tu rol y tus preferencias en unas pocas frases sencil
 
 > Ejemplo: "Ventas. Escribo sobre todo correos a clientes — cordiales pero no rígidos, la conclusión primero."
 
-Con esto rellenado, cada acción adapta sus resultados a ti.
+Con esto rellenado, cada prompt adapta sus resultados a ti.
 Las explicaciones llegan a tu nivel de conocimiento y los borradores vuelven en tu tono preferido.
 Nunca afecta a tareas sin relación, y el texto en sí nunca aparece en los resultados.
 
-### Acciones
+### Prompts
 
 La lista de "qué pasa después de un doble copiado".
 
-- Las acciones preinstaladas se pueden abrir y leer — sirven también como ejemplos resueltos.
-- Crear una **Nueva acción** no requiere más que un nombre y lo que quieres que se haga.
+- Los prompts preinstalados se pueden abrir y leer — sirven también como ejemplos resueltos.
+- Crear un **Nuevo prompt** no requiere más que un nombre y lo que quieres que se haga.
   Por ejemplo: nombre "Resumen en 3 líneas", instrucción "Resume esto en 3 líneas".
 - ¿No te sientes seguro escribiendo instrucciones? Anota más o menos lo que quieres y pulsa **Redactar con IA** — la IA que configuraste lo convierte en una instrucción bien formada.
-- **Enrutamiento** te permite elegir una acción distinta según el tipo de contenido (texto / imagen / archivos).
+- **Reglas** te permite elegir un prompt distinto según el tipo de contenido (texto / imagen / archivos).
 
-Las acciones que creas se pueden compartir: **Exportar (.md)** escribe una como archivo, y quien la recibe solo tiene que pegarla en **Importar** o elegir el archivo.
+Los prompts que creas se pueden compartir: **Exportar (.md)** escribe uno como archivo, y quien lo recibe solo tiene que pegarlo en **Importar** o elegir el archivo.
 
-¿Prefieres dejar todo el trabajo en manos de una IA? Cualquier chat de IA puede escribir una acción lista para importar por ti: pega esto y rellena el espacio en blanco:
+¿Prefieres dejar todo el trabajo en manos de una IA? Cualquier chat de IA puede escribir un prompt listo para importar por ti: pega esto y rellena el espacio en blanco:
 
 ```text
-Lee https://zencopy.app/llms-full.txt, la documentación completa de ZenCopy, incluido el formato del archivo de acción, las variables de plantilla y cómo funciona el enrutamiento. Luego, escribe una acción de ZenCopy que haga lo siguiente: [lo que quieras]. Genera un archivo de acción completo (Markdown con frontmatter) en un solo bloque de código, listo para pegar en Configuración → Acciones → Importar de ZenCopy. Si la acción solo tiene sentido en una aplicación específica o en un sitio específico, añade una frase que me indique qué regla de enrutamiento configurar.
+Lee https://zencopy.app/llms-full.txt, la documentación completa de ZenCopy, incluido el formato del archivo de prompt, las variables de plantilla y cómo funcionan las reglas. Luego, escribe un prompt de ZenCopy que haga lo siguiente: [lo que quieras]. Genera un archivo de prompt completo (Markdown con frontmatter) en un solo bloque de código, listo para pegar en Configuración → Prompts → Importar de ZenCopy. Si el prompt solo tiene sentido en una aplicación específica o en un sitio específico, añade una frase que me indique qué regla configurar.
 ```
 
-El bloque de código de la respuesta va directo a **Configuración → Acciones → Importar**.
+El bloque de código de la respuesta va directo a **Configuración → Prompts → Importar**.
 Para preguntas que la documentación no puede responder («¿podría ZenCopy siquiera hacer...?»), <RepomixLink>un clic empaqueta el código fuente relevante</RepomixLink>; entrega el resultado a la misma IA.
 
 ## Archivos de configuración (para usuarios avanzados)
@@ -73,38 +73,38 @@ La ruta exacta también se imprime en el log al arrancar:
   <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
 </Tabs>
 
-Los valores predeterminados de enrutamiento van incorporados en la aplicación; `routing.json` solo los **sobrescribe**.
-Los archivos de acciones son **aditivos**:
-definen acciones nuevas, y las integradas son intocables (un archivo local que reclame el id de una integrada se ignora).
+Los valores predeterminados de las reglas van incorporados en la aplicación; `rules.json` solo los **sobrescribe**.
+Los archivos de prompts son **aditivos**:
+definen prompts nuevos, y los integrados son intocables (un archivo local que reclame el id de uno integrado se ignora).
 Las ediciones se aplican desde el siguiente disparo — sin reiniciar.
 
 ### `ai-sdk-catalog.json`
 
 Proveedores más una correspondencia **rol → modelo**.
 La casa del formato de archivo es [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — cada campo está documentado allí (incluido un `$schema` para validación y autocompletado en el editor), y [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) tiene configuraciones en tres tamaños.
-Para puntos de partida al estilo de ZenCopy (lo que escribe la interfaz de ajustes, Ollama local, roles para acciones), consulta las [Recetas](/es/recipes/).
+Para puntos de partida al estilo de ZenCopy (lo que escribe la interfaz de ajustes, Ollama local, roles para prompts), consulta las [Recetas](/es/recipes/).
 
 Hay un requisito propio de ZenCopy, no del formato: `roles` siempre debe incluir **`default`**.
-Toda acción se ejecuta con él salvo que su frontmatter nombre otro role, y la prueba de conexión de los ajustes le hace ping.
+Todo prompt se ejecuta con él salvo que su frontmatter nombre otro role, y la prueba de conexión de los ajustes le hace ping.
 
 Las claves de API van directamente en este archivo local (la interfaz de ajustes escribe el mismo formato); nunca salen de tu máquina.
 Las variables de entorno no se leen — las aplicaciones gráficas las inicia el sistema operativo, no tu shell, así que las variables exportadas en `.zshrc` y similares nunca les llegan.
 El archivo se valida contra el esquema en cada lectura.
 Una edición rota aparece como un mensaje claro en el popup y en el editor de ajustes — nada falla en silencio.
 
-### `routing.json`
+### `rules.json`
 
-Qué acción atiende cada tipo de captura:
-un mapa plano `kind → action` más una lista opcional `overrides` de mayor prioridad (gana la primera coincidencia).
+Qué prompt atiende cada tipo de captura:
+un mapa plano `kind → prompt` más una lista opcional `overrides` de mayor prioridad (gana la primera coincidencia).
 Los tres tipos son `text`, `image` y `files` (una copia de texto enriquecido cuenta como `text`); de fábrica, el texto se enruta a Zen, y las imágenes y los archivos a Explicar.
-El mapa plano se puede editar dentro de la aplicación (Ajustes → Acciones → Enrutamiento), así que solo necesitas tocar este archivo para `overrides`.
+El mapa plano se puede editar dentro de la aplicación (Ajustes → Prompts → Reglas), así que solo necesitas tocar este archivo para `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
-  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
 }
 ```
 
@@ -119,10 +119,10 @@ Todo lo demás se rechaza con un mensaje claro.
 Las rutas completas acompañan al contenido, para que el modelo pueda distinguir los archivos y sepa dónde están.
 Como los adjuntos binarios pueden costar más que el texto, el popup pregunta antes de enviarlos (los archivos de texto se ejecutan sin preguntar) — la confirmación se puede desactivar ahí mismo o en Ajustes.
 
-### `actions/*.md`
+### `prompts/*.md`
 
-Un archivo = una acción: frontmatter YAML + un cuerpo de prompt en [Liquid](https://liquidjs.com).
-Ese mismo archivo único es el formato para compartir — Ajustes → Acciones → Importar lo acepta como texto pegado o como archivo elegido.
+Un archivo = un prompt: frontmatter YAML + un cuerpo de prompt en [Liquid](https://liquidjs.com).
+Ese mismo archivo único es el formato para compartir — Ajustes → Prompts → Importar lo acepta como texto pegado o como archivo elegido.
 
 ```markdown
 ---
@@ -137,12 +137,12 @@ Resume lo siguiente en 3 líneas, en {{ locale }}:
 {{ text }}
 ```
 
-| Frontmatter    | Significado                                                                                                                                           |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`           | Nombre al que hace referencia `routing.json` (por defecto: el nombre del archivo) — el prefijo `zencopy-` está reservado a las acciones preinstaladas |
-| `label`        | Se muestra en el popup                                                                                                                                |
-| `role`         | Rol del catálogo con el que se ejecuta (por defecto: `default`)                                                                                       |
-| `instructions` | Prompt de sistema (plantilla Liquid)                                                                                                                  |
+| Frontmatter    | Significado                                                                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | Nombre al que hace referencia `rules.json` (por defecto: el nombre del archivo) — el prefijo `zencopy-` está reservado a los prompts preinstalados |
+| `label`        | Se muestra en el popup                                                                                                                             |
+| `role`         | Rol del catálogo con el que se ejecuta (por defecto: `default`)                                                                                    |
+| `instructions` | Prompt de sistema (plantilla Liquid)                                                                                                               |
 
 Variables de plantilla, con valores de ejemplo para un párrafo copiado en un navegador:
 
@@ -166,12 +166,12 @@ Variables de plantilla, con valores de ejemplo para un párrafo copiado en un na
 También hay un filtro `language_name` propio de ZenCopy: `{{ locale | language_name }}` se expande a "Spanish" en lugar de "es", lo que se lee con naturalidad en un prompt.
 Para ver los valores reales, activa **Mostrar variables de plantilla** en Ajustes — las variables de cada captura aparecen en el popup como JSON.
 
-Las acciones simples (un nombre y una instrucción) también se pueden crear desde la ventana de ajustes; lo que esta escribe es exactamente este formato de archivo.
+Los prompts simples (un nombre y una instrucción) también se pueden crear desde la ventana de ajustes; lo que esta escribe es exactamente este formato de archivo.
 
 #### Plantillas avanzadas
 
 Tanto el frontmatter `instructions` como el cuerpo son plantillas [LiquidJS](https://liquidjs.com/tags/overview.html) completas: los condicionales, los bucles y los [filtros](https://liquidjs.com/filters/overview.html) funcionan todos.
-Una sola acción puede adaptarse al lugar de donde vino la copia:
+Un solo prompt puede adaptarse al lugar de donde vino la copia:
 
 ```markdown
 ---

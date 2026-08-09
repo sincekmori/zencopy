@@ -53,8 +53,8 @@ Bir role, ilk `:` işaretinden bölünen `"provider:model"` biçimindedir — mo
 
 ## İki role: varsayılan olarak hızlı, istendiğinde akıllı
 
-Role'ler eylemleri modellerden ayırır.
-Eylemler bir role adı belirtir (eylemin frontmatter'ında `role: smart`); bunun hangi model anlamına geldiğine burada karar verilir — eylemlere dokunmadan istediğin an değiştir.
+Role'ler istemleri modellerden ayırır.
+İstemler bir role adı belirtir (istemin frontmatter'ında `role: smart`); bunun hangi model anlamına geldiğine burada karar verilir — istemlere dokunmadan istediğin an değiştir.
 
 ```json
 {

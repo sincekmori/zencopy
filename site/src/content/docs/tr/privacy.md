@@ -11,9 +11,9 @@ Sunucusu, hesabı ve telemetrisi yoktur.
 ## Cihazından neler çıkar
 
 Tetikleyiciye bastığında (<span data-os-modifier>Ctrl/⌘</span> + C + C), yakalanan pano içeriği doğrudan _senin_ yapılandırdığın LLM sağlayıcısına gönderilir — başka hiçbir şey ve başka hiçbir yere.
-Tam olarak neyin gönderileceği, çalışan eyleme bağlıdır:
+Tam olarak neyin gönderileceği, çalışan isteme bağlıdır:
 
-- Render edilmiş prompt; yakalamanın bağlamını [şablon değişkenleri](/tr/configuration/#actionsmd) olarak içerebilir: kopyalanan metin ve markup, kaynak uygulamanın adı ve pencere başlığı, sayfa URL'si, tarih ve arayüz dilin.
+- Render edilmiş istem; yakalamanın bağlamını [şablon değişkenleri](/tr/configuration/#promptsmd) olarak içerebilir: kopyalanan metin ve markup, kaynak uygulamanın adı ve pencere başlığı, sayfa URL'si, tarih ve arayüz dilin.
 - Görselde ya da kopyalanan dosyalarda içeriğin kendisi eklenir (yakalama başına 10 MB'a kadar) — dosyalarda tam yolları da.
   Varsayılan olarak açılır pencere, bunları göndermeden önce sorar.
 
@@ -29,7 +29,7 @@ Yakalamalardan ayrı olarak, güncelleme denetimi GitHub'dan yalnızca sürüm m
 - Günlük dosyaları.
   Günlükler gizli bilgileri ayıklar; kopyalanan içeriği ya da API anahtarlarını asla içermez.
 
-- Kullanım istatistikleri (ayarlarda bir anahtar, varsayılan olarak açık): hangi eylemin hangi tür yakalamada çalıştığı, model ve token sayılarıyla birlikte; böylece maliyetlerin hesaplanabilir kalır.
+- Kullanım istatistikleri (ayarlarda bir anahtar, varsayılan olarak açık): hangi istemin hangi tür yakalamada çalıştığı, model ve token sayılarıyla birlikte; böylece maliyetlerin hesaplanabilir kalır.
   Yalnızca yerel bir dosya — asla kopyalanan içerik değil, asla hiçbir yere gönderilmez.
 
 ## Üçüncü taraflar

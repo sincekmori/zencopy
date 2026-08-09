@@ -53,8 +53,8 @@ Un rol es `"provider:model"`, dividido en el primer `:` — por eso `"ollama:gem
 
 ## Dos roles: rápido por defecto, inteligente bajo demanda
 
-Los roles desacoplan las acciones de los modelos.
-Las acciones nombran un rol (`role: smart` en el frontmatter de la acción); qué modelo significa eso se decide aquí — cámbialo cuando quieras sin tocar las acciones.
+Los roles desacoplan los prompts de los modelos.
+Los prompts nombran un rol (`role: smart` en el frontmatter del prompt); qué modelo significa eso se decide aquí — cámbialo cuando quieras sin tocar los prompts.
 
 ```json
 {

@@ -53,8 +53,8 @@ role 的值是 `"provider:model"`，以第一個 `:` 分割——這就是為什
 
 ## 兩個 role：預設求快，需要時求聰明
 
-role 把動作與模型脫鉤。
-動作只指定 role 的名稱（在動作的 frontmatter 裡寫 `role: smart`）；那代表哪個模型則在這裡決定——隨時可以更換，完全不必動到動作。
+role 把提示詞與模型脫鉤。
+提示詞只指定 role 的名稱（在提示詞的 frontmatter 裡寫 `role: smart`）；那代表哪個模型則在這裡決定——隨時可以更換，完全不必動到提示詞。
 
 ```json
 {

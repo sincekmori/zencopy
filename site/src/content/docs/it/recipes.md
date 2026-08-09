@@ -53,8 +53,8 @@ Un role è `"provider:model"`, diviso al primo `:` — ecco perché `"ollama:gem
 
 ## Due role: veloce di default, intelligente su richiesta
 
-I role disaccoppiano le azioni dai modelli.
-Le azioni nominano un role (`role: smart` nel frontmatter dell'azione); quale modello significhi lo si decide qui — puoi cambiarlo in qualsiasi momento senza toccare le azioni.
+I role disaccoppiano i prompt dai modelli.
+I prompt nominano un role (`role: smart` nel frontmatter del prompt); quale modello significhi lo si decide qui — puoi cambiarlo in qualsiasi momento senza toccare i prompt.
 
 ```json
 {

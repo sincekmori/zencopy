@@ -5,16 +5,16 @@ import { type Catalog, type Config, createCatalog, type RoleEntry } from "ai-sdk
 import { ping } from "ai-sdk-ping";
 import { franc } from "franc-min";
 import { Liquid } from "liquidjs";
-import { listActions } from "@/lib/actions.ts";
+import { listPrompts } from "@/lib/prompts.ts";
 import { getUserContext } from "@/lib/settings.ts";
-// Meta-prompt for the actions form: turns a rough "what I want" into a proper
-// action instruction, written by the user's own configured model. A real .md
-// file (like the pre-installed actions) so the formatter keeps it honest.
+// Meta-prompt for the prompts form: turns a rough "what I want" into a proper
+// prompt instruction, written by the user's own configured model. A real .md
+// file (like the pre-installed prompts) so the formatter keeps it honest.
 import DRAFT_TEMPLATE from "@/lib/draft-instruction.md?raw";
 // The heavy half of @/lib/llm (see the facade there for why it is split);
-// the error sentinels and the ActionInput shape live on the facade.
+// the error sentinels and the PromptInput shape live on the facade.
 import {
-  type ActionInput,
+  type PromptInput,
   EMPTY_RESULT,
   INVALID_CONFIG,
   NOT_CONFIGURED,
@@ -25,14 +25,14 @@ import {
 } from "@/lib/llm.ts";
 import { createLogger } from "@/lib/log.ts";
 // The system-prompt assembly and the <result> streaming protocol (pure, no
-// Tauri imports — see prompt.ts for the section layout and its rationale).
+// Tauri imports — see protocol.ts for the section layout and its rationale).
 import {
   composeInstructions,
   composeUserText,
   extractResult,
   stripResultTags,
   wrapResult,
-} from "@/lib/prompt.ts";
+} from "@/lib/protocol.ts";
 
 const log = createLogger("llm");
 
@@ -104,7 +104,7 @@ async function catalog(): Promise<ZenCatalog> {
 /** Thrown when the connection test could not reach the model. */
 const UNREACHABLE = "unreachable";
 
-/** How long the connection test may take overall. Shorter than the action
+/** How long the connection test may take overall. Shorter than the prompt
  *  watchdog — a test is an interactive "is my config right?" check. */
 const TEST_TIMEOUT_MS = 30_000;
 
@@ -189,22 +189,22 @@ const metaLiquid = new Liquid({
   outputDelimiterRight: "]]",
 });
 
-/** The pre-installed actions, as few-shot examples for drafting — the house
+/** The pre-installed prompts, as few-shot examples for drafting — the house
  *  style, straight from the running app (single source; no build-time copy).
  *  Drafting still works if the list can't be read; the examples just help. */
 async function builtinExamples(): Promise<{ label: string; instructions: string }[]> {
   try {
-    const actions = await listActions();
-    return actions.filter((action) => action.origin === "builtin");
+    const prompts = await listPrompts();
+    return prompts.filter((prompt) => prompt.origin === "builtin");
   } catch (error) {
-    log.warn("reading built-in actions for draft examples failed", error);
+    log.warn("reading built-in prompts for draft examples failed", error);
     return [];
   }
 }
 
 /**
- * Draft an action instruction from the user's rough description, using the
- * default role. Same failure modes as an action run (NOT_CONFIGURED,
+ * Draft an prompt instruction from the user's rough description, using the
+ * default role. Same failure modes as an prompt run (NOT_CONFIGURED,
  * INVALID_CONFIG, EMPTY_RESULT); bounded like the connection test.
  */
 export async function draftInstruction(description: string): Promise<string> {
@@ -230,7 +230,7 @@ const liquid = new Liquid();
 
 // `{{ locale | language_name }}` → "Japanese": prompts read better with the
 // English language name than a BCP 47 tag, and Intl.DisplayNames knows them
-// all. Registered here so every action template gets it.
+// all. Registered here so every prompt template gets it.
 const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 liquid.registerFilter("language_name", (code: unknown): string => {
   try {
@@ -261,17 +261,17 @@ liquid.registerFilter("language_of", (value: unknown): string => {
 });
 
 /**
- * Stream an action: render its Liquid templates, then stream the model's text,
+ * Stream an prompt: render its Liquid templates, then stream the model's text,
  * revealing only the text between the result tags. `onChunk` receives the
  * text-so-far; the returned promise resolves with the final text (or what
  * streamed before `signal` aborted).
  */
-export async function streamAction(
-  action: ActionInput,
+export async function streamPrompt(
+  input: PromptInput,
   onChunk: (text: string) => void,
   signal: AbortSignal,
 ): Promise<StreamOutcome> {
-  const attachments = action.attachments ?? [];
+  const attachments = input.attachments ?? [];
   const binaries = attachments.filter((file) => !file.media_type.startsWith("text/"));
   const texts = attachments.filter((file) => file.media_type.startsWith("text/"));
 
@@ -279,14 +279,14 @@ export async function streamAction(
   // had been copied — one meaning for templates, language detection, and the
   // model alike. Several files in one capture join with separators; their
   // paths are listed separately below.
-  const vars = { ...action.vars };
+  const vars = { ...input.vars };
   if (texts.length > 0 && !vars["text"]) {
     vars["text"] = texts.map((file) => file.data).join("\n\n---\n\n");
   }
 
   const [instructions, prompt, userContext] = await Promise.all([
-    liquid.parseAndRender(action.instructions, vars),
-    liquid.parseAndRender(action.prompt, vars),
+    liquid.parseAndRender(input.instructions, vars),
+    liquid.parseAndRender(input.prompt, vars),
     // Read fresh per run, so a just-saved profile applies without any event
     // plumbing (a settings-store read is one cheap IPC round trip).
     getUserContext(),
@@ -340,30 +340,30 @@ export async function streamAction(
         : prompt,
   };
   const messages: ModelMessage[] = [firstUser];
-  if (action.followUp) {
+  if (input.followUp) {
     // Replay the thread. Stored replies are the extracted tag bodies, so
     // wrapResult puts the tags back: the transcript must demonstrate the
     // protocol the instructions demand, or the model learns by example to
     // skip the tags — and an untagged reply never streams.
-    for (const turn of action.followUp.turns) {
+    for (const turn of input.followUp.turns) {
       if (turn.question !== undefined) {
         messages.push({ role: "user", content: turn.question });
       }
       messages.push({ role: "assistant", content: wrapResult(turn.text) });
     }
-    messages.push({ role: "user", content: action.followUp.question });
+    messages.push({ role: "user", content: input.followUp.question });
   }
 
   // AI SDK only throws stream-stopping errors (e.g. network) from the iterator;
   // others (API errors) go to `onError` and the stream just ends. Capture them
   // so we surface the real reason instead of silently rendering nothing.
   let streamError: unknown;
-  // The action's role must be mapped in the config — an unmapped name is a
+  // The prompt's role must be mapped in the config — an unmapped name is a
   // config problem and deserves the config-problem message, not a raw throw
   // from deep inside the model lookup. `default` itself is proven present.
-  const roleEntry = roleFor(resolved, action.role);
+  const roleEntry = roleFor(resolved, input.role);
   if (roleEntry === undefined) {
-    const detail = new Error(`the config's roles do not map "${action.role}"`);
+    const detail = new Error(`the config's roles do not map "${input.role}"`);
     log.error("ai-sdk-catalog.json failed validation", detail);
     throw new Error(INVALID_CONFIG, { cause: detail });
   }
@@ -453,7 +453,7 @@ export async function streamAction(
 
   const elapsed = `${Date.now() - startedAt}ms`;
   if (signal.aborted) {
-    log.debug(`run stopped by the user after ${elapsed} (role=${action.role})`);
+    log.debug(`run stopped by the user after ${elapsed} (role=${input.role})`);
     // Stopped — keep what we have (and whatever tokens the provider reported).
     return {
       text: stripResultTags(extractResult(raw, true) ?? raw),
@@ -468,7 +468,7 @@ export async function streamAction(
   }
   if (timedOut) {
     log.warn(
-      `run timed out after ${elapsed} of silence (role=${action.role}, ${raw.length} chars received)`,
+      `run timed out after ${elapsed} of silence (role=${input.role}, ${raw.length} chars received)`,
     );
     throw new Error(TIMED_OUT);
   }
@@ -484,14 +484,14 @@ export async function streamAction(
   const tagged = extractResult(raw, true);
   if (tagged === undefined && raw.trim()) {
     log.warn(
-      `model ignored the result-tag protocol; falling back to the full output (role=${action.role})`,
+      `model ignored the result-tag protocol; falling back to the full output (role=${input.role})`,
     );
   }
   const result = stripResultTags(tagged ?? raw);
   if (!result) {
     throw new Error(EMPTY_RESULT);
   }
-  log.debug(`run finished in ${elapsed} (role=${action.role}, ${result.length} chars)`);
+  log.debug(`run finished in ${elapsed} (role=${input.role}, ${result.length} chars)`);
   onChunk(result);
   return { text: result, model: modelRef, tokens: await harvestTokens() };
 }

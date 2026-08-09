@@ -13,7 +13,7 @@ Paruh pertama, tentang **jendela pengaturan**, ditujukan untuk semua orang; paru
 ## Jendela pengaturan
 
 Buka dari menu ikon tray, atau dari ikon roda gigi pada popup.
-Ada tiga tab: **Umum, AI, dan Aksi**.
+Ada tiga tab: **Umum, AI, dan Prompt**.
 
 ### Umum
 
@@ -34,29 +34,29 @@ Ini tempat menuliskan peran dan preferensimu dalam beberapa kalimat sederhana, d
 
 > Contoh: "Sales. Kebanyakan menulis email pelanggan — sopan tapi tidak kaku, kesimpulan di awal."
 
-Dengan kolom ini terisi, setiap aksi menyesuaikan hasilnya untukmu.
+Dengan kolom ini terisi, setiap prompt menyesuaikan hasilnya untukmu.
 Penjelasan datang sesuai tingkat pengetahuanmu, dan draf kembali dengan nada yang kamu sukai.
 Kolom ini tidak pernah memengaruhi tugas yang tidak berkaitan, dan teksnya sendiri tidak pernah muncul di hasil.
 
-### Aksi
+### Prompt
 
 Daftar "apa yang terjadi setelah salin dua kali".
 
-- Aksi yang sudah terpasang bisa dibuka dan dibaca — sekaligus menjadi contoh cara menulisnya.
-- **Aksi baru** hanya butuh nama dan apa yang ingin kamu lakukan.
+- Prompt yang sudah terpasang bisa dibuka dan dibaca — sekaligus menjadi contoh cara menulisnya.
+- **Prompt baru** hanya butuh nama dan apa yang ingin kamu lakukan.
   Misalnya: nama "Ringkasan 3 baris", instruksi "Ringkas ini dalam 3 baris".
 - Belum percaya diri menulis instruksi? Tulis kasar saja apa yang kamu mau dan tekan **Draf dengan AI** — AI yang sudah kamu atur akan mengubahnya menjadi instruksi yang rapi.
-- **Perutean** memungkinkanmu memilih aksi yang berbeda untuk tiap jenis konten (teks / gambar / berkas).
+- **Aturan** memungkinkanmu memilih prompt yang berbeda untuk tiap jenis konten (teks / gambar / berkas).
 
-Aksi buatanmu bisa dibagikan: **Ekspor (.md)** menuliskannya sebagai berkas, dan pihak penerima cukup menempelkannya ke **Impor** atau memilih berkasnya.
+Prompt buatanmu bisa dibagikan: **Ekspor (.md)** menuliskannya sebagai berkas, dan pihak penerima cukup menempelkannya ke **Impor** atau memilih berkasnya.
 
-Lebih suka menyerahkan seluruh pekerjaan ke AI? Obrolan AI apa pun dapat menulis tindakan yang siap diimpor untuk Anda — tempelkan ini dan isi bagian yang kosong:
+Lebih suka menyerahkan seluruh pekerjaan ke AI? Obrolan AI apa pun dapat menulis prompt yang siap diimpor untuk Anda — tempelkan ini dan isi bagian yang kosong:
 
 ```text
-Baca https://zencopy.app/llms-full.txt — dokumentasi lengkap ZenCopy, termasuk format file tindakan, variabel templat, dan cara kerja perutean. Kemudian tulis tindakan ZenCopy yang melakukan hal berikut: [apa yang Anda inginkan]. Hasilkan satu file tindakan lengkap (Markdown dengan frontmatter) dalam satu blok kode, siap untuk ditempelkan ke Pengaturan → Tindakan → Impor di ZenCopy. Jika tindakan tersebut hanya berfungsi di aplikasi tertentu atau di situs tertentu, tambahkan satu kalimat yang memberi tahu saya aturan perutean mana yang harus disetel.
+Baca https://zencopy.app/llms-full.txt — dokumentasi lengkap ZenCopy, termasuk format file prompt, variabel templat, dan cara kerja aturan. Kemudian tulis prompt ZenCopy yang melakukan hal berikut: [apa yang Anda inginkan]. Hasilkan satu file prompt lengkap (Markdown dengan frontmatter) dalam satu blok kode, siap untuk ditempelkan ke Pengaturan → Prompt → Impor di ZenCopy. Jika prompt tersebut hanya berfungsi di aplikasi tertentu atau di situs tertentu, tambahkan satu kalimat yang memberi tahu saya aturan mana yang harus disetel.
 ```
 
-Blok kode dalam balasan langsung masuk ke **Pengaturan → Tindakan → Impor**.
+Blok kode dalam balasan langsung masuk ke **Pengaturan → Prompt → Impor**.
 Untuk pertanyaan yang tidak dapat dijawab oleh dokumentasi ("apakah ZenCopy bahkan bisa melakukan...?"), <RepomixLink>satu klik akan mengemas kode sumber yang relevan</RepomixLink> — serahkan hasilnya ke AI yang sama.
 
 ## Berkas konfigurasi (untuk pengguna mahir)
@@ -73,38 +73,38 @@ Jalur persisnya juga dicetak ke log saat aplikasi dijalankan:
   <TabItem label="Linux">`~/.config/app.zencopy`</TabItem>
 </Tabs>
 
-Nilai bawaan perutean tertanam di dalam aplikasi; `routing.json` hanya bekerja sebagai **penimpa** atasnya.
-Berkas aksi bersifat **tambahan**:
-berkas itu mendefinisikan aksi baru, dan aksi bawaan tidak tersentuh (berkas lokal yang mengaku memakai id bawaan akan diabaikan).
+Nilai bawaan aturan tertanam di dalam aplikasi; `rules.json` hanya bekerja sebagai **penimpa** atasnya.
+Berkas prompt bersifat **tambahan**:
+berkas itu mendefinisikan prompt baru, dan prompt bawaan tidak tersentuh (berkas lokal yang mengaku memakai id bawaan akan diabaikan).
 Suntingan berlaku pada pemicu berikutnya — tanpa perlu memulai ulang.
 
 ### `ai-sdk-catalog.json`
 
 Penyedia plus pemetaan **role → model**.
 Rumah format berkas ini adalah [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — setiap field didokumentasikan di sana (termasuk `$schema` untuk validasi dan pelengkapan otomatis di editor), dan [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) memuat contoh konfigurasi dalam tiga ukuran.
-Untuk titik awal bergaya ZenCopy (apa yang ditulis UI pengaturan, Ollama lokal, role untuk aksi), lihat [Resep](/id/recipes/).
+Untuk titik awal bergaya ZenCopy (apa yang ditulis UI pengaturan, Ollama lokal, role untuk prompt), lihat [Resep](/id/recipes/).
 
 Satu persyaratan berasal dari ZenCopy sendiri, bukan dari format berkas: `roles` harus selalu memuat **`default`**.
-Setiap aksi berjalan dengannya kecuali frontmatter-nya menyebut role lain, dan uji koneksi di pengaturan mengirim ping ke role ini.
+Setiap prompt berjalan dengannya kecuali frontmatter-nya menyebut role lain, dan uji koneksi di pengaturan mengirim ping ke role ini.
 
 Kunci API ditulis langsung ke berkas lokal ini (UI pengaturan menulis format yang sama); kunci tidak pernah meninggalkan perangkatmu.
 Variabel lingkungan tidak dibaca — aplikasi GUI dijalankan oleh OS, bukan oleh shell-mu, sehingga variabel yang di-export di `.zshrc` dan sejenisnya tidak pernah sampai ke sana.
 Berkas ini divalidasi terhadap skema pada setiap pembacaan.
 Suntingan yang rusak muncul sebagai pesan yang jelas di popup dan editor pengaturan — tidak ada yang gagal secara diam-diam.
 
-### `routing.json`
+### `rules.json`
 
-Aksi mana yang menangani jenis tangkapan mana:
-peta datar `kind → action` plus daftar `overrides` opsional dengan prioritas lebih tinggi (kecocokan pertama menang).
+Prompt mana yang menangani jenis tangkapan mana:
+peta datar `kind → prompt` plus daftar `overrides` opsional dengan prioritas lebih tinggi (kecocokan pertama menang).
 Tiga jenisnya adalah `text`, `image`, dan `files` (salinan teks kaya dihitung sebagai `text`); sejak awal, teks dirutekan ke Zen sementara gambar dan berkas dirutekan ke Jelaskan.
-Peta datarnya bisa disunting di dalam aplikasi (Pengaturan → Aksi → Perutean), jadi kamu hanya perlu menyentuh berkas ini untuk `overrides`.
+Peta datarnya bisa disunting di dalam aplikasi (Pengaturan → Prompt → Aturan), jadi kamu hanya perlu menyentuh berkas ini untuk `overrides`.
 
 ```json
 {
   "text": "zencopy-zen",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
-  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "action": "summarize" }]
+  "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
 }
 ```
 
@@ -119,10 +119,10 @@ Berkas jenis lain ditolak dengan pesan yang jelas.
 Jalur lengkap ikut terkirim bersama isinya agar model bisa membedakan berkas dan tahu di mana letaknya.
 Karena lampiran biner bisa lebih mahal daripada teks, popup bertanya dulu sebelum mengirimnya (berkas teks berjalan tanpa bertanya) — konfirmasinya bisa dimatikan di tempat atau di Pengaturan.
 
-### `actions/*.md`
+### `prompts/*.md`
 
-Satu berkas = satu aksi: frontmatter YAML + isi prompt [Liquid](https://liquidjs.com).
-Berkas tunggal yang sama juga menjadi format berbagi — Pengaturan → Aksi → Impor menerimanya sebagai teks yang ditempel atau berkas yang dipilih.
+Satu berkas = satu prompt: frontmatter YAML + isi prompt [Liquid](https://liquidjs.com).
+Berkas tunggal yang sama juga menjadi format berbagi — Pengaturan → Prompt → Impor menerimanya sebagai teks yang ditempel atau berkas yang dipilih.
 
 ```markdown
 ---
@@ -139,7 +139,7 @@ Ringkas dalam 3 baris, dalam {{ locale }}:
 
 | Frontmatter    | Arti                                                                                                              |
 | -------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `id`           | Nama yang dirujuk dari `routing.json` (bawaan: nama berkas) — prefiks `zencopy-` dikhususkan untuk aksi prainstal |
+| `id`           | Nama yang dirujuk dari `rules.json` (bawaan: nama berkas) — prefiks `zencopy-` dikhususkan untuk prompt prainstal |
 | `label`        | Ditampilkan di popup                                                                                              |
 | `role`         | Role catalog yang dipakai saat berjalan (bawaan: `default`)                                                       |
 | `instructions` | Prompt sistem (templat Liquid)                                                                                    |
@@ -166,12 +166,12 @@ Variabel templat, dengan contoh nilai untuk paragraf yang disalin di browser:
 Ada juga filter `language_name` khusus ZenCopy: `{{ locale | language_name }}` diperluas menjadi "Indonesian" alih-alih "id", sehingga terbaca alami dalam sebuah prompt.
 Untuk melihat nilai sebenarnya, aktifkan **Tampilkan variabel templat** di Pengaturan — variabel setiap tangkapan muncul di popup sebagai JSON.
 
-Aksi sederhana (nama dan instruksi saja) juga bisa dibuat dari jendela pengaturan; yang ditulisnya persis format berkas ini.
+Prompt sederhana (nama dan instruksi saja) juga bisa dibuat dari jendela pengaturan; yang ditulisnya persis format berkas ini.
 
 #### Templat tingkat lanjut
 
 Frontmatter `instructions` maupun isi prompt sama-sama merupakan templat [LiquidJS](https://liquidjs.com/tags/overview.html) penuh: percabangan, perulangan, dan [filter](https://liquidjs.com/filters/overview.html) semuanya berfungsi.
-Satu aksi bisa menyesuaikan diri dengan asal salinan:
+Satu prompt bisa menyesuaikan diri dengan asal salinan:
 
 ```markdown
 ---

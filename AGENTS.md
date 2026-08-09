@@ -86,7 +86,7 @@ Both sides share the same sinks (tauri-plugin-log): stdout in dev, a rotating fi
 - Formatter: `rustfmt` (default settings).
 - Linter: `clippy` with `-D warnings` in CI.
   Fix, do not silence, unless suppression is deliberate and commented.
-- The Rust side is split by domain: [src-tauri/src/lib.rs](src-tauri/src/lib.rs) holds the `run()` wiring (trigger, setup, invoke handler) plus cross-cutting state; the domains live in sibling modules — `actions.rs`, `routing.rs`, `capture.rs`, `attachments.rs` (+ `office.rs`), `config.rs`, `shell.rs`, `windows.rs`, `tray.rs`.
+- The Rust side is split by domain: [src-tauri/src/lib.rs](src-tauri/src/lib.rs) holds the `run()` wiring (trigger, setup, invoke handler) plus cross-cutting state; the domains live in sibling modules — `prompts.rs`, `rules.rs`, `capture.rs`, `attachments.rs` (+ `office.rs`), `config.rs`, `shell.rs`, `windows.rs`, `tray.rs`.
   New code goes into the module owning its domain, not into lib.rs.
 
 ## TOML
@@ -130,5 +130,5 @@ Keep the summary line short and factual; put the "why" and any surprising contex
 | About window                  | [src/components/about.tsx](src/components/about.tsx)                                                                                                        |
 | AI provider / catalog         | [src/lib/llm.ts](src/lib/llm.ts); `ai-sdk-catalog.json` lives in the app config dir                                                                         |
 | Global trigger, tray, windows | [src-tauri/src/lib.rs](src-tauri/src/lib.rs) (wiring), [src-tauri/src/tray.rs](src-tauri/src/tray.rs), [src-tauri/src/windows.rs](src-tauri/src/windows.rs) |
-| Action templates              | [src-tauri/actions/](src-tauri/actions/) (pre-installed, embedded at build time, immutable at runtime); user actions live in the app config dir             |
+| Prompt templates              | [src-tauri/prompts/](src-tauri/prompts/) (pre-installed, embedded at build time, immutable at runtime); user prompts live in the app config dir             |
 | Homepage / docs (zencopy.app) | [site/](site/) — Astro + Starlight, deployed via Cloudflare Workers                                                                                         |

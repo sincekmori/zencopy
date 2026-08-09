@@ -9,7 +9,7 @@ export const vi: Messages = {
   settings: {
     title: "Cài đặt ZenCopy",
     tagline: (keys) =>
-      `Nhấn ${keys} để thực hiện hành động với nội dung đã sao chép — hai lần C thật nhanh, như nhấp đúp chuột.`,
+      `Nhấn ${keys} để xử lý ngay nội dung đã sao chép — hai lần C thật nhanh, như nhấp đúp chuột.`,
     tabGeneral: "Chung",
     position: "Vị trí cửa sổ nổi",
     positionHint: "Cửa sổ nổi xuất hiện ở góc màn hình nào",
@@ -30,7 +30,7 @@ export const vi: Messages = {
       "Cửa sổ nổi sẽ hỏi trước khi gửi hình ảnh hoặc tệp nhị phân khác đến nhà cung cấp; tệp văn bản sẽ được gửi mà không cần hỏi.",
     devMode: "Hiển thị biến mẫu",
     devModeHint:
-      "Dùng khi viết hành động của riêng bạn: cửa sổ nổi hiển thị các biến của mỗi lần sao chép và nội dung của chúng",
+      "Dùng khi viết prompt của riêng bạn: cửa sổ nổi hiển thị các biến của mỗi lần sao chép và nội dung của chúng",
     stats: "Thống kê sử dụng",
     statsHint:
       "Mỗi lần chạy mô hình sẽ thêm một dòng vào nhật ký cục bộ, dùng để tính chi phí. Mọi thứ chỉ nằm trên thiết bị này và không bao giờ được gửi đi bất cứ đâu; nội dung đã sao chép không bao giờ được ghi lại.",
@@ -51,7 +51,7 @@ export const vi: Messages = {
       "Chi phí ở đây chỉ là ước tính: các lần chạy lỗi hoặc bị dừng không được tính, và việc nhận diện mô hình có thể sai. Con số chính xác nằm ở trang thanh toán của nhà cung cấp.",
     userContext: "Về bạn",
     userContextHint:
-      "Những điều AI nên biết về bạn — vai trò, chuyên môn, sở thích. Được thêm vào mọi hành động.",
+      "Những điều AI nên biết về bạn — vai trò, chuyên môn, sở thích. Được thêm vào mọi prompt.",
     userContextPlaceholders: [
       "Nhân viên văn phòng. Email chủ yếu gửi ra ngoài công ty nên cần lịch sự; còn lại thì đưa kết luận lên đầu và ngắn gọn.",
       "Quản lý cấp cao. Với tài liệu dài, tôi chỉ cần ý chính — đưa ra trước những gì tôi cần quyết định, số liệu phải có căn cứ đi kèm.",
@@ -61,14 +61,14 @@ export const vi: Messages = {
     ],
     userContextClear: "Xóa",
     userContextCleared: "Đã xóa",
-    quickTitle: "Hành động nhanh",
-    quickHint: "Bốn hành động mà cửa sổ nổi gán cho các phím số 1–4. Kéo để sắp xếp lại.",
+    quickTitle: "Prompt nhanh",
+    quickHint: "Bốn prompt mà cửa sổ nổi gán cho các phím số 1–4. Kéo để sắp xếp lại.",
     resetTitle: "Đặt lại",
     resetHint:
-      "Đưa ZenCopy về trạng thái ngay sau khi cài đặt — cài đặt, hành động và thống kê sử dụng đều bị xóa hết",
+      "Đưa ZenCopy về trạng thái ngay sau khi cài đặt — cài đặt, prompt và thống kê sử dụng đều bị xóa hết",
     resetButton: "Đặt lại",
     resetWarning:
-      "Thao tác này không thể hoàn tác. Cài đặt AI (gồm khóa API), quy tắc định tuyến, hành động tự tạo và tùy chọn cửa sổ sẽ bị xóa, và ZenCopy trở về trạng thái như lần chạy đầu tiên.",
+      "Thao tác này không thể hoàn tác. Cài đặt AI (gồm khóa API), quy tắc, prompt tự tạo và tùy chọn cửa sổ sẽ bị xóa, và ZenCopy trở về trạng thái như lần chạy đầu tiên.",
     resetConfirm: "Xóa tất cả",
     optionSystem: "Hệ thống",
     optionLight: "Sáng",
@@ -77,9 +77,9 @@ export const vi: Messages = {
   popup: {
     placeholder: "Sao chép hai lần thật nhanh — như nhấp đúp chuột — và kết quả sẽ hiện ở đây.",
     devVars: "Biến mẫu",
-    noAction:
-      "Nội dung này không tự động chạy hành động nào — hãy chọn một hành động bên dưới hoặc nhấn 1–4 để chạy.",
-    routingDocs: "Cách định tuyến hoạt động",
+    noPrompt:
+      "Nội dung này không tự động chạy prompt nào — hãy chọn một prompt bên dưới hoặc nhấn 1–4 để chạy.",
+    rulesDocs: "Cách quy tắc hoạt động",
     confirmSend:
       "Gửi nội dung này đến nhà cung cấp AI của bạn? Hình ảnh và tệp có thể tốn kém hơn văn bản.",
     send: "Gửi",
@@ -87,8 +87,8 @@ export const vi: Messages = {
     attachmentTooLarge: (mb) => `Quá lớn để gửi — giới hạn là ${mb} MB cho mỗi lần bắt.`,
     unsupportedFile: (name) => `"${name}" là loại tệp không thể gửi đến mô hình.`,
     fileUnreadable: (name) => `Không đọc được "${name}".`,
-    switchAction: "Đổi hành động",
-    chooseAction: "Chọn hành động",
+    switchPrompt: "Đổi prompt",
+    choosePrompt: "Chọn prompt",
     failed: (reason) => `Thất bại: ${reason}`,
     timedOut: "Mô hình không phản hồi. Kiểm tra mạng và nhà cung cấp, rồi thử lại.",
     emptyResult: "Mô hình trả về phản hồi trống.",
@@ -145,18 +145,18 @@ export const vi: Messages = {
     macosPermissions:
       "Còn một bước: macOS cần bạn cấp quyền để nhận biết thao tác sao chép hai lần. Trong Cài đặt hệ thống → Quyền riêng tư & Bảo mật, hãy cho phép ZenCopy ở Giám sát đầu vào, sau đó thoát ZenCopy rồi mở lại.",
   },
-  actions: {
+  prompts: {
     builtinLabels: {
       "zencopy-translate": "Dịch",
       "zencopy-explain": "Giải thích",
       "zencopy-polish": "Trau chuốt",
     },
-    title: "Hành động",
+    title: "Prompt",
     hint: (keys) => `Những gì ${keys} làm được. Cũng đổi được từ nhãn kết quả trên cửa sổ nổi.`,
-    add: "Hành động mới",
+    add: "Prompt mới",
     export: "Xuất (.md)",
     import: "Nhập",
-    importHint: "Dán Markdown của hành động được chia sẻ, hoặc chọn tệp.",
+    importHint: "Dán Markdown của prompt được chia sẻ, hoặc chọn tệp.",
     importFromFile: "Chọn tệp",
     name: "Tên",
     instruction: "Chỉ dẫn",
@@ -173,29 +173,28 @@ export const vi: Messages = {
     edit: "Sửa",
     remove: "Xóa",
     failed: (reason) => `Thất bại: ${reason}`,
-    importNotAnAction:
-      "Không phải hành động: cần frontmatter YAML `---`, sau đó là nội dung prompt.",
-    importNoLabel: "Hành động này không có label.",
-    importInvalidId: (id) => `Id hành động không hợp lệ: '${id}'.`,
+    importNotAPrompt: "Không phải prompt: cần frontmatter YAML `---`, sau đó là nội dung prompt.",
+    importNoLabel: "Prompt này không có label.",
+    importInvalidId: (id) => `Id prompt không hợp lệ: '${id}'.`,
     importBuiltinId: (id) =>
-      `'${id}' là id của hành động dựng sẵn — hãy đổi id trong tệp rồi thử lại.`,
+      `'${id}' là id của prompt dựng sẵn — hãy đổi id trong tệp rồi thử lại.`,
     importReservedId: (id) =>
-      `'${id}' bắt đầu bằng 'zencopy-' — tiền tố id này được dành riêng cho các hành động cài sẵn.`,
+      `'${id}' bắt đầu bằng 'zencopy-' — tiền tố id này được dành riêng cho các prompt cài sẵn.`,
     importIdExists: (id) =>
-      `Đã có hành động với id '${id}' — hãy xóa nó trước, hoặc đổi id trong tệp.`,
-    importTooLarge: "Tệp quá lớn để là một hành động.",
-    labelExists: (label) => `Đã có hành động tên '${label}' — hãy chọn tên khác.`,
+      `Đã có prompt với id '${id}' — hãy xóa nó trước, hoặc đổi id trong tệp.`,
+    importTooLarge: "Tệp quá lớn để nhập dưới dạng prompt.",
+    labelExists: (label) => `Đã có prompt tên '${label}' — hãy chọn tên khác.`,
   },
-  routing: {
-    title: "Định tuyến",
-    hint: "Hành động nào chạy cho từng loại nội dung.",
+  rules: {
+    title: "Quy tắc",
+    hint: "Prompt nào chạy cho từng loại nội dung.",
     kindText: "Văn bản",
     kindImage: "Hình ảnh",
     kindFiles: "Tệp",
     none: "Không tự động chạy",
     overridesTitle: "Quy tắc",
     overridesHint:
-      "Định tuyến theo ứng dụng, cửa sổ hoặc độ dài — được kiểm tra trước, từ trên xuống.",
+      "Phân nhánh theo ứng dụng, cửa sổ hoặc độ dài — được kiểm tra trước, từ trên xuống.",
     overridesDocs: "Cách quy tắc hoạt động",
     addOverride: "Quy tắc mới",
     anyKind: "Bất kỳ",
@@ -207,7 +206,7 @@ export const vi: Messages = {
     fieldFile: "Tên tệp",
     fieldMinChars: "Ký tự tối thiểu",
     fieldMaxChars: "Ký tự tối đa",
-    ruleAction: "Chạy hành động",
+    rulePrompt: "Chạy prompt",
     wildcardHint:
       "Các điều kiện kết hợp bằng AND; * khớp với mọi thứ. Trường bỏ trống sẽ được bỏ qua.",
     needsCondition: "Thêm ít nhất một điều kiện.",
@@ -217,7 +216,7 @@ export const vi: Messages = {
   },
   ai: {
     title: "AI",
-    hint: "Nhà cung cấp và mô hình dùng cho các hành động.",
+    hint: "Nhà cung cấp và mô hình dùng cho các prompt.",
     disclosure:
       "Những gì bạn sao chép được gửi thẳng đến nhà cung cấp bạn cấu hình — ZenCopy không có máy chủ trung gian, không thu thập dữ liệu. Chi phí API do bạn chịu, và đầu ra của AI có thể sai.",
     provider: "Nhà cung cấp",
@@ -232,7 +231,7 @@ export const vi: Messages = {
     testOk: "Đã kết nối",
     testUnreachable: "Kết nối thất bại. Kiểm tra tên mô hình, khóa API, URL gốc và mạng.",
     advancedHint:
-      "Viết cấu hình trực tiếp — cho gateway công ty, dùng nhiều nhà cung cấp cùng lúc, hoặc mỗi hành động một mô hình.",
+      "Viết cấu hình trực tiếp — cho gateway công ty, dùng nhiều nhà cung cấp cùng lúc, hoặc mỗi prompt một mô hình.",
     examplesLink: "Xem cấu hình mẫu",
     invalidJson: "JSON không hợp lệ.",
     invalidSchema: "JSON đúng cú pháp nhưng không phải cấu hình hợp lệ. Chi tiết trong nhật ký.",

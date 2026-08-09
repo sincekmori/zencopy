@@ -3,7 +3,7 @@ import type { Source } from "@/lib/capture.ts";
 import { useT } from "@/lib/i18n.tsx";
 import { useDarkScheme } from "@/lib/theme.ts";
 
-// Deliberately small from the first frame: the default action starts with the
+// Deliberately small from the first frame: the default prompt starts with the
 // capture, so a "shrink once the result arrives" state never really shows —
 // the source's whole job is a quick "yes, that's what I copied" glance.
 const TEXT_CLASS =
@@ -64,7 +64,7 @@ function Body({ source }: { source: Source }): React.JSX.Element {
 }
 
 /** The copied content, framed as a quotation so it reads as the input an
- *  action runs against — not as output. A left rule + a quiet eyebrow ("copied
+ *  prompt runs against — not as output. A left rule + a quiet eyebrow ("copied
  *  content") remove the first-run "is this the result?" ambiguity without
  *  clutter. */
 export function SourceView({ source }: { source: Source }): React.JSX.Element {

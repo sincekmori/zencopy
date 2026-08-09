@@ -3,7 +3,7 @@ import { emit } from "@tauri-apps/api/event";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
-import { ActionsSettings } from "@/components/actions-settings.tsx";
+import { PromptsSettings } from "@/components/prompts-settings.tsx";
 import { AiSettings } from "@/components/ai-settings.tsx";
 import { TriggerNotice } from "@/components/trigger-notice.tsx";
 import { UserContextSettings } from "@/components/user-context-settings.tsx";
@@ -114,7 +114,7 @@ export function Settings(): React.JSX.Element {
   const [exportIssue, setExportIssue] = useState<"empty" | string[] | undefined>(undefined);
   const [resetError, setResetError] = useState<string | undefined>(undefined);
   // The window's tab. AI first: it's the one thing that must be set up.
-  const [tab, setTab] = useState<"ai" | "actions" | "general">("ai");
+  const [tab, setTab] = useState<"ai" | "prompts" | "general">("ai");
 
   useEffect(() => {
     let cancelled = false;
@@ -368,7 +368,7 @@ export function Settings(): React.JSX.Element {
         await invoke("reset_all_settings");
       } catch (error) {
         log.error("factory reset failed", error);
-        setResetError(t.actions.failed(errorMessage(error).slice(0, 200)));
+        setResetError(t.prompts.failed(errorMessage(error).slice(0, 200)));
         setResetting(false);
       }
     })();
@@ -391,9 +391,9 @@ export function Settings(): React.JSX.Element {
   // same thing; the inline-mapped arrays below (corners, languages) are not
   // props and stay plain.
   const tabs = useMemo(
-    (): { value: "ai" | "actions" | "general"; label: string }[] => [
+    (): { value: "ai" | "prompts" | "general"; label: string }[] => [
       { value: "ai", label: t.ai.title },
-      { value: "actions", label: t.actions.title },
+      { value: "prompts", label: t.prompts.title },
       { value: "general", label: t.settings.tabGeneral },
     ],
     [t],
@@ -458,7 +458,7 @@ export function Settings(): React.JSX.Element {
         <TriggerNotice />
 
         {/* Tabs keep the window calm as sections grow. Panels hide instead of
-            unmounting, so unsaved edits (the AI JSON, an action draft) survive
+            unmounting, so unsaved edits (the AI JSON, an prompt draft) survive
             a tab switch. */}
         <nav className="flex justify-center">
           <SegmentedControl value={tab} options={tabs} onChange={setTab} />
@@ -469,8 +469,8 @@ export function Settings(): React.JSX.Element {
           <UserContextSettings />
         </div>
 
-        <div className={cn("flex-col gap-8", tab === "actions" ? "flex" : "hidden")}>
-          <ActionsSettings />
+        <div className={cn("flex-col gap-8", tab === "prompts" ? "flex" : "hidden")}>
+          <PromptsSettings />
         </div>
 
         <div className={cn("flex-col gap-8", tab === "general" ? "flex" : "hidden")}>

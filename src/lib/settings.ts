@@ -121,7 +121,7 @@ const DEV_MODE_KEY = "devMode";
 
 /** The "Show template variables" toggle (stored as `devMode`, its original
  *  name): the popup shows each capture's template variables as JSON,
- *  so action authors can see exactly what their Liquid templates receive. */
+ *  so prompt authors can see exactly what their Liquid templates receive. */
 export function isDevMode(): Promise<boolean> {
   return readSetting(DEV_MODE_KEY, z.boolean(), false);
 }
@@ -132,7 +132,7 @@ export async function setDevMode(enabled: boolean): Promise<void> {
 
 const STATS_ENABLED_KEY = "statsEnabled";
 
-/** Whether action invocations are appended to the local usage statistics
+/** Whether prompt invocations are appended to the local usage statistics
  *  (stats/usage.jsonl in the app data dir). On by default: the record is
  *  ids, kinds, and timestamps only, and it never leaves the machine. */
 export function isStatsEnabled(): Promise<boolean> {
@@ -185,11 +185,11 @@ export async function setConfirmAttachments(enabled: boolean): Promise<void> {
   await writeSetting(CONFIRM_ATTACHMENTS_KEY, enabled);
 }
 
-/** The number of popup quick slots — the actions bound to number keys 1–N.
- *  Four matches the pre-installed action count and keeps the popup compact. */
+/** The number of popup quick slots — the prompts bound to number keys 1–N.
+ *  Four matches the pre-installed prompt count and keeps the popup compact. */
 export const QUICK_SLOT_COUNT = 4;
 
-/** The pre-installed actions, in slot order — the zero-config default.
+/** The pre-installed prompts, in slot order — the zero-config default.
  *  Mirrors DEFAULT_ACTIONS in src-tauri/src/lib.rs (same ids, same order). */
 const DEFAULT_QUICK_ACTIONS = [
   "zencopy-zen",
@@ -198,14 +198,14 @@ const DEFAULT_QUICK_ACTIONS = [
   "zencopy-polish",
 ];
 
-const QUICK_ACTIONS_KEY = "quickActions";
+const QUICK_ACTIONS_KEY = "quickPrompts";
 
-/** The action ids bound to the popup's number keys (1–4), in slot order.
+/** The prompt ids bound to the popup's number keys (1–4), in slot order.
  *  Positions are stable so muscle memory holds — the settings editor is the
  *  only thing that reorders them. Stored loosely (any string array) and
  *  normalized to exactly QUICK_SLOT_COUNT ids on read, so a hand-edited or
  *  older file can never desync the row. */
-export async function getQuickActions(): Promise<string[]> {
+export async function getQuickPrompts(): Promise<string[]> {
   const stored = await readSetting(QUICK_ACTIONS_KEY, z.array(z.string()), DEFAULT_QUICK_ACTIONS);
   const slots = stored.slice(0, QUICK_SLOT_COUNT);
   // Backfill from the defaults if the stored list is short, skipping ids
@@ -221,14 +221,14 @@ export async function getQuickActions(): Promise<string[]> {
   return slots.slice(0, QUICK_SLOT_COUNT);
 }
 
-export async function setQuickActions(ids: string[]): Promise<void> {
+export async function setQuickPrompts(ids: string[]): Promise<void> {
   await writeSetting(QUICK_ACTIONS_KEY, ids.slice(0, QUICK_SLOT_COUNT));
 }
 
 const USER_CONTEXT_KEY = "userContext";
 
 /** The user's self-description (one free-form multiline text), appended to
- *  every action run's instructions so results fit who is asking — role,
+ *  every prompt run's instructions so results fit who is asking — role,
  *  expertise, taste. Empty means "say nothing about me". */
 export function getUserContext(): Promise<string> {
   return readSetting(USER_CONTEXT_KEY, z.string(), "");

@@ -53,8 +53,8 @@ A role is `"provider:model"`, split at the first `:` — which is why `"ollama:g
 
 ## Two roles: fast by default, smart on demand
 
-Roles decouple actions from models.
-Actions name a role (`role: smart` in the action's frontmatter); which model that means is decided here — swap it any time without touching actions.
+Roles decouple prompts from models.
+Prompts name a role (`role: smart` in the prompt's frontmatter); which model that means is decided here — swap it any time without touching prompts.
 
 ```json
 {

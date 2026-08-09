@@ -1,19 +1,19 @@
-// The actions API, shared by the popup's switcher and the settings editor.
+// The prompts API, shared by the popup's switcher and the settings editor.
 // Thin wrappers over the Rust commands; all file handling stays in Rust.
-// Routing shapes follow the settings.ts convention: zod schemas are the
+// Rules shapes follow the settings.ts convention: zod schemas are the
 // single source of truth, the TS types are inferred from them.
 
 import { invoke } from "@tauri-apps/api/core";
 import * as z from "zod";
 import { createLogger } from "@/lib/log.ts";
 
-const log = createLogger("actions");
+const log = createLogger("prompts");
 
-/** An action as listed by Rust (`list_actions_ui`), sorted by label.
+/** An prompt as listed by Rust (`list_prompts_ui`), sorted by label.
  *  `instructions` is the system prompt and `prompt` the user prompt body
  *  (both Liquid templates); "builtin" ships with the app and is immutable,
  *  "custom" is a local file. */
-const ActionInfoSchema = z.object({
+const PromptInfoSchema = z.object({
   id: z.string(),
   label: z.string(),
   role: z.string().nullable(),
@@ -21,28 +21,28 @@ const ActionInfoSchema = z.object({
   prompt: z.string(),
   origin: z.enum(["builtin", "custom"]),
 });
-export type ActionInfo = z.infer<typeof ActionInfoSchema>;
+export type PromptInfo = z.infer<typeof PromptInfoSchema>;
 
-export async function listActions(): Promise<ActionInfo[]> {
-  const raw = await invoke<ActionInfo[]>("list_actions_ui");
-  const parsed = z.array(ActionInfoSchema).safeParse(raw);
+export async function listPrompts(): Promise<PromptInfo[]> {
+  const raw = await invoke<PromptInfo[]>("list_prompts_ui");
+  const parsed = z.array(PromptInfoSchema).safeParse(raw);
   if (!parsed.success) {
-    log.warn("list_actions_ui returned an unexpected shape; using it as-is", parsed.error);
+    log.warn("list_prompts_ui returned an unexpected shape; using it as-is", parsed.error);
     return raw;
   }
   return parsed.data;
 }
 
-/** Create or update a custom action file; returns the id (derived from the
+/** Create or update a custom prompt file; returns the id (derived from the
  *  label when omitted). Built-ins are immutable and cannot be targeted. */
-export function saveAction(input: {
+export function savePrompt(input: {
   id?: string | undefined;
   label: string;
   instructions: string;
   prompt: string;
   role?: string | undefined;
 }): Promise<string> {
-  return invoke<string>("save_action", {
+  return invoke<string>("save_prompt", {
     id: input.id,
     label: input.label,
     instructions: input.instructions,
@@ -51,29 +51,29 @@ export function saveAction(input: {
   });
 }
 
-/** Delete a custom action. */
-export function deleteAction(id: string): Promise<void> {
-  return invoke("delete_action", { id });
+/** Delete a custom prompt. */
+export function deletePrompt(id: string): Promise<void> {
+  return invoke("delete_prompt", { id });
 }
 
-/** Export the action as a .md file into Downloads (revealed in the file
+/** Export the prompt as a .md file into Downloads (revealed in the file
  *  manager, browser-download style); resolves to the written path. */
-export function exportActionFile(id: string): Promise<string> {
-  return invoke<string>("export_action_file", { id });
+export function exportPromptFile(id: string): Promise<string> {
+  return invoke<string>("export_prompt_file", { id });
 }
 
-/** Install a shared action from its .md text; returns the id. */
-export function importAction(text: string): Promise<string> {
-  return invoke<string>("import_action", { text });
+/** Install a shared prompt from its .md text; returns the id. */
+export function importPrompt(text: string): Promise<string> {
+  return invoke<string>("import_prompt", { text });
 }
 
-/** Pick a local .md file with the native dialog and install it as an action;
+/** Pick a local .md file with the native dialog and install it as an prompt;
  *  resolves to the id, or null when the user cancels the picker. */
-export function importActionFromFile(): Promise<string | null> {
-  return invoke<string | null>("import_action_from_file");
+export function importPromptFromFile(): Promise<string | null> {
+  return invoke<string | null>("import_prompt_from_file");
 }
 
-/** The capture kinds routing can assign (mirrors Rust's ROUTABLE_KINDS). */
+/** The capture kinds rules can assign (mirrors Rust's ROUTABLE_KINDS). */
 export const ROUTABLE_KINDS = ["text", "image", "files"] as const;
 export type RoutableKind = (typeof ROUTABLE_KINDS)[number];
 
@@ -93,20 +93,20 @@ const WhenConditionSchema = z.object({
 });
 export type WhenCondition = z.infer<typeof WhenConditionSchema>;
 
-/** A higher-priority routing rule: if `when` matches, `action` runs. */
-const RoutingOverrideSchema = z.object({
+/** A higher-priority rules rule: if `when` matches, `prompt` runs. */
+const RulesOverrideSchema = z.object({
   when: WhenConditionSchema,
-  action: z.string(),
+  prompt: z.string(),
 });
-export type RoutingOverride = z.infer<typeof RoutingOverrideSchema>;
+export type RulesOverride = z.infer<typeof RulesOverrideSchema>;
 
 /** What the rule editor may save, beyond a structurally valid override:
- *  a target action, at least one condition (an empty `when` would shadow all
- *  routing), and coherent character bounds. Rules already in routing.json are
+ *  a target prompt, at least one condition (an empty `when` would shadow all
+ *  rules), and coherent character bounds. Rules already in rules.json are
  *  deliberately looser — hand-edited files are the power-user escape hatch.
  *  The refinement messages are sentinels the editor maps to i18n sentences. */
-export const EditableOverrideSchema = RoutingOverrideSchema.extend({
-  action: z.string().min(1),
+export const EditableOverrideSchema = RulesOverrideSchema.extend({
+  prompt: z.string().min(1),
 })
   .refine((rule) => Object.values(rule.when).some((value) => value !== undefined), {
     error: "needs-condition",
@@ -119,33 +119,33 @@ export const EditableOverrideSchema = RoutingOverrideSchema.extend({
     { error: "bounds-order" },
   );
 
-/** Effective routing (`get_routing_ui`): which action each capture kind runs,
+/** Effective rules (`get_rules_ui`): which prompt each capture kind runs,
  *  plus the ordered overrides list (evaluated first — first match wins). */
-const RoutingInfoSchema = z.object({
+const RulesInfoSchema = z.object({
   by_kind: z.record(z.string(), z.string()),
-  overrides: z.array(RoutingOverrideSchema),
+  overrides: z.array(RulesOverrideSchema),
 });
-export type RoutingInfo = z.infer<typeof RoutingInfoSchema>;
+export type RulesInfo = z.infer<typeof RulesInfoSchema>;
 
-export async function getRouting(): Promise<RoutingInfo> {
-  const raw = await invoke<RoutingInfo>("get_routing_ui");
-  const parsed = RoutingInfoSchema.safeParse(raw);
+export async function getRules(): Promise<RulesInfo> {
+  const raw = await invoke<RulesInfo>("get_rules_ui");
+  const parsed = RulesInfoSchema.safeParse(raw);
   if (!parsed.success) {
     // Rust serialized something this schema no longer matches — a version
     // skew bug. Warn and render the raw data rather than blanking the UI.
-    log.warn("get_routing_ui returned an unexpected shape; using it as-is", parsed.error);
+    log.warn("get_rules_ui returned an unexpected shape; using it as-is", parsed.error);
     return raw;
   }
   return parsed.data;
 }
 
-/** Route captures of `kind` to an action (undefined clears the assignment —
+/** Route captures of `kind` to an prompt (undefined clears the assignment —
  *  an omitted key reaches Rust as `None`). */
-export function setKindAction(kind: RoutableKind, id: string | undefined): Promise<void> {
-  return invoke("set_kind_action", { kind, id });
+export function setKindPrompt(kind: RoutableKind, id: string | undefined): Promise<void> {
+  return invoke("set_kind_prompt", { kind, id });
 }
 
 /** Replace the whole overrides list; array order is the priority. */
-export function setOverrides(overrides: RoutingOverride[]): Promise<void> {
+export function setOverrides(overrides: RulesOverride[]): Promise<void> {
   return invoke("set_overrides", { overrides });
 }
