@@ -6,7 +6,9 @@ const log = createLogger("text-size");
 
 /** Zoom per size, on the browsers' own zoom ladder (90% / 100% / 115%).
  *  Before widening it, re-check the fixed-size windows (about, the popup's
- *  compact breakpoint) at the new extremes. */
+ *  compact breakpoint) at the new extremes — and the popup's per-size home
+ *  widths, which multiply this ladder in Rust (home_width_for in
+ *  src-tauri/src/windows.rs, pinned by a ts_mirror test). */
 const ZOOM: Record<TextSize, number> = { small: 0.9, standard: 1, large: 1.15 };
 
 /** What this window last applied. Starts unknown, NOT "standard": webview

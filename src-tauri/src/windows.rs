@@ -13,15 +13,23 @@ pub(crate) enum Corner {
     BottomLeft,
 }
 
-/// Read the user's chosen popup corner from the settings store (default top-right).
-pub(crate) fn current_corner(handle: &tauri::AppHandle) -> Corner {
+/// A string setting from the settings store, if present and a string.
+fn store_str(handle: &tauri::AppHandle, key: &str) -> Option<String> {
     use tauri_plugin_store::StoreExt;
 
     let value = handle
         .store(STORE_FILE)
         .ok()
-        .and_then(|store| store.get("popupCorner"));
-    match value.as_ref().and_then(serde_json::Value::as_str) {
+        .and_then(|store| store.get(key));
+    value
+        .as_ref()
+        .and_then(serde_json::Value::as_str)
+        .map(str::to_owned)
+}
+
+/// Read the user's chosen popup corner from the settings store (default top-right).
+pub(crate) fn current_corner(handle: &tauri::AppHandle) -> Corner {
+    match store_str(handle, "popupCorner").as_deref() {
         Some("bottom-right") => Corner::BottomRight,
         Some("top-left") => Corner::TopLeft,
         Some("bottom-left") => Corner::BottomLeft,
@@ -29,15 +37,87 @@ pub(crate) fn current_corner(handle: &tauri::AppHandle) -> Corner {
     }
 }
 
-/// The popup's HOME shape: the width (matches the `popup` window's `width` in
-/// tauri.conf.json) and the height bounds — on show it takes half the work
+/// The popup's HOME shape: the height bounds — on show it takes half the work
 /// area's height, clamped. The conf's `minWidth`/`minHeight` are a different
-/// thing: the manual-resize floor, deliberately below this home shape. The
-/// home width must stay under the webview's `compact` breakpoint (index.css)
-/// or the home card loses its padded look.
-pub(crate) const POPUP_WIDTH: f64 = 380.0;
+/// thing: the manual-resize floor, deliberately below this home shape.
 pub(crate) const POPUP_MIN_HEIGHT: f64 = 360.0;
 pub(crate) const POPUP_MAX_HEIGHT: f64 = 720.0;
+
+/// The home viewport width in CSS px, the same at every text size: the widest
+/// built-in slot row (German, four labels + number badges + the palette
+/// button) measures 458, card chrome (float padding, border, body padding)
+/// adds 42, plus 8 for font differences across platforms. Re-measure when a
+/// built-in label changes (see `builtinLabels` in src/lib/messages/types.ts).
+/// Must stay under the `compact` breakpoint (index.css) or the home card
+/// loses its padded look. The popup window's `width` in tauri.conf.json is
+/// only the pre-show placeholder.
+const POPUP_HOME_VIEWPORT: f64 = 508.0;
+
+/// The home width per text size — the viewport scaled by the webview zoom
+/// that size applies (the ladder in src/lib/text-size.ts, pinned by a
+/// ts_mirror test), so the popup looks the same at every size and in every
+/// locale.
+fn home_width_for(size: Option<&str>) -> f64 {
+    let zoom = match size {
+        Some("small") => ZOOM_SMALL,
+        Some("large") => ZOOM_LARGE,
+        _ => 1.0,
+    };
+    (POPUP_HOME_VIEWPORT * zoom).ceil()
+}
+
+pub(crate) const ZOOM_SMALL: f64 = 0.9;
+pub(crate) const ZOOM_LARGE: f64 = 1.15;
+
+/// `home_width_for` keyed by the stored text size (the summon path — by show
+/// time any settings write has landed).
+fn popup_home_width(handle: &tauri::AppHandle) -> f64 {
+    home_width_for(store_str(handle, "textSize").as_deref())
+}
+
+/// While the popup is visible, a text-size change re-fits it immediately: the
+/// width snaps to the new size's home width the moment the webviews apply
+/// their zoom. The new size rides in the event's payload — the store write
+/// may still be in flight when the event lands. Height and position are kept
+/// (for right-side corners the right edge stays pinned), so a dragged popup
+/// is not yanked back home.
+pub(crate) fn follow_text_size(app: &tauri::App) {
+    use tauri::{Listener, PhysicalPosition, PhysicalSize};
+
+    let handle = app.handle().clone();
+    app.listen("text-size-changed", move |event| {
+        let Some(popup) = handle.get_webview_window("popup") else {
+            return;
+        };
+        if !popup.is_visible().unwrap_or(false) {
+            return;
+        }
+        let width_logical = serde_json::from_str::<String>(event.payload())
+            .map(|size| home_width_for(Some(&size)))
+            .unwrap_or_else(|_| popup_home_width(&handle));
+        let scale = popup.scale_factor().unwrap_or(1.0);
+        let width = (width_logical * scale) as u32;
+        let Ok(outer) = popup.outer_size() else {
+            return;
+        };
+        if width == outer.width {
+            return;
+        }
+        if matches!(
+            current_corner(&handle),
+            Corner::TopRight | Corner::BottomRight
+        ) && let Ok(position) = popup.outer_position()
+        {
+            let dx = outer.width as i32 - width as i32;
+            popup
+                .set_position(PhysicalPosition::new(position.x + dx, position.y))
+                .or_log("popup: text-size reposition");
+        }
+        popup
+            .set_size(PhysicalSize::new(width, outer.height))
+            .or_log("popup: text-size resize");
+    });
+}
 
 /// Show `window` on the desktop (macOS Space) the user is on right now, focused,
 /// and pin it there. A hidden window keeps its previous Space assignment, so a
@@ -147,13 +227,15 @@ fn show_popup_in_corner(handle: &tauri::AppHandle, popup: &WebviewWindow, corner
     // "enough". Reading bigger is the user's own move: drag an edge, and the
     // panel keeps that size for as long as it stays visible.
     let height_logical = (area_height_logical / 2.0).clamp(POPUP_MIN_HEIGHT, POPUP_MAX_HEIGHT);
+    let area_width_logical = f64::from(area.size.width) / scale;
+    let width_logical = popup_home_width(handle).min(area_width_logical);
     popup
-        .set_size(tauri::LogicalSize::new(POPUP_WIDTH, height_logical))
+        .set_size(tauri::LogicalSize::new(width_logical, height_logical))
         .or_log("popup: set size");
     // Flush against the work area: the webview's own compact-size padding
     // (popup.tsx's `max-compact:p-2`) is the only visible gap — exactly where
     // the OS would stop the panel if the user dragged it into the corner.
-    let w = (POPUP_WIDTH * scale) as i32;
+    let w = (width_logical * scale) as i32;
     let h = (height_logical * scale) as i32;
     let left = area.position.x;
     let right = area.position.x + area.size.width as i32 - w;

@@ -337,6 +337,7 @@ pub fn run() {
             }
         })
         .setup(|app| {
+            crate::windows::follow_text_size(app);
             // One-line banner so an attached log answers "which version, on
             // what?" without a follow-up question.
             let os = os_info::get();
@@ -551,6 +552,29 @@ mod ts_mirror_tests {
             SETTINGS_TS.contains("\"welcomeSeen\""),
             "settings.ts must persist the welcome flag under the key setup reads"
         );
+    }
+
+    /// The popup's home width is the 508 px viewport times the zoom the
+    /// frontend applies per text size; a retuned ladder or renamed size over
+    /// there would quietly open the popup at the wrong width.
+    #[test]
+    fn text_size_zoom_ladder_matches_the_frontend() {
+        const TEXT_SIZE_TS: &str = include_str!("../../src/lib/text-size.ts");
+        let ladder = format!(
+            "{{ small: {small}, standard: 1, large: {large} }}",
+            small = crate::windows::ZOOM_SMALL,
+            large = crate::windows::ZOOM_LARGE
+        );
+        assert!(
+            TEXT_SIZE_TS.contains(&ladder),
+            "text-size.ts must apply the zoom ladder windows.rs sizes the popup with ({ladder})"
+        );
+        for key in ["\"textSize\"", "\"small\"", "\"large\""] {
+            assert!(
+                SETTINGS_TS.contains(key),
+                "settings.ts must carry the text-size key/value {key} windows.rs matches on"
+            );
+        }
     }
 
     /// corner() falls back to top-right for any unknown string, so a renamed

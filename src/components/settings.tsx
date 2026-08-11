@@ -183,7 +183,10 @@ export function Settings(): React.JSX.Element {
     setTextSize(value);
     void saveTextSize(value);
     applyTextSize(value); // instant in this window
-    void emit("text-size-changed", value); // live-update the other windows
+    // Live-update the other windows — and Rust: the payload drives the
+    // popup's re-fit (follow_text_size in windows.rs), which reads it
+    // precisely because the store write above may still be in flight.
+    void emit("text-size-changed", value);
   };
 
   const changeLanguage = (value: LocalePreference): void => {

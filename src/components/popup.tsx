@@ -898,8 +898,10 @@ export function Popup(): React.JSX.Element {
 
       {/* Quick slots: numbered chips (1–4). The active one is highlighted; a
           run outside the four leaves none highlighted. A trailing button opens
-          the full palette for everything else. */}
-      <div className="flex flex-wrap items-center gap-1">
+          the full palette for everything else. One line always: the home width
+          fits the longest built-in labels (windows.rs); a window dragged
+          narrower shrinks the chips into their ellipses instead of wrapping. */}
+      <div className="flex items-center gap-1">
         {quickSlots.map((prompt, index) =>
           prompt ? (
             <button
@@ -909,13 +911,13 @@ export function Popup(): React.JSX.Element {
                 switchPrompt(prompt);
               }}
               className={cn(
-                "flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-xs transition-colors",
+                "flex min-w-0 items-center gap-1 rounded-md border px-1.5 py-0.5 text-xs transition-colors",
                 prompt.id === payload.prompt_id
                   ? "border-foreground/30 bg-accent text-foreground"
                   : "border-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
               )}
             >
-              <kbd className="rounded bg-muted px-1 font-mono text-[10px] text-muted-foreground/80">
+              <kbd className="shrink-0 rounded bg-muted px-1 font-mono text-[10px] text-muted-foreground/80">
                 {index + 1}
               </kbd>
               <span className="max-w-32 truncate">{promptLabel(prompt.id, prompt.label)}</span>
@@ -938,7 +940,7 @@ export function Popup(): React.JSX.Element {
             aria-expanded={menuOpen}
             aria-label={t.popup.switchPrompt}
             title={t.popup.switchPrompt}
-            className="flex items-center gap-1 rounded-md border border-transparent px-1.5 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            className="flex shrink-0 items-center gap-1 rounded-md border border-transparent px-1.5 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
           >
             <LayoutGrid className="size-3.5" />
           </button>

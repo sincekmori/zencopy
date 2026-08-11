@@ -190,7 +190,9 @@ export interface Messages {
     /** Localized display labels for pre-installed prompts, keyed by prompt id.
      *  The ids live in Rust (DEFAULT_PROMPTS), so this is an open map rather
      *  than fixed keys; a missing id falls back to the prompt's own (English)
-     *  label from its .md file. User prompts are always shown verbatim. */
+     *  label from its .md file. The widest label across all locales sets the
+     *  popup's home width (POPUP_HOME_VIEWPORT in src-tauri/src/windows.rs,
+     *  measured on German) — re-measure when these grow. User prompts are always shown verbatim. */
     builtinLabels: Record<string, string>;
     title: string;
     hint: (keys: string) => string;
