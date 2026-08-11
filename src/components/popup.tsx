@@ -267,12 +267,30 @@ export function Popup(): React.JSX.Element {
   // is exactly how prompts get written.
   const ranDefinition = useRef(new Map<string, string>());
   const bodyRef = useRef<HTMLDivElement>(null);
-  // Whether the view is glued to the streaming output's bottom edge. "At the
-  // bottom" is the single source of truth: our own scrollTo lands there (stays
-  // pinned), a user scrolling up to read leaves it (auto-scroll stops), and
-  // scrolling back down re-engages it — the usual AI-chat pattern, with no
-  // flag juggling to tell user scrolls from programmatic ones.
+  // Whether the view is glued to the streaming output's bottom edge: a user
+  // scrolling up to read leaves it (auto-scroll stops), scrolling back down
+  // re-engages it — the usual AI-chat pattern.
   const pinnedRef = useRef(true);
+  // Where our own follow (autoScroll below) last scrolled to. Its scroll
+  // event dispatches asynchronously, and a burst of streamed content can
+  // commit in between — the handler would then read the old scrollTop against
+  // the grown scrollHeight, conclude "not at the bottom anymore", and unpin
+  // by itself, killing the follow for the rest of the stream. So the handler
+  // recognizes the follow's own event by its position (pinned by definition)
+  // — and only by its position, so a user scroll coalesced into the same
+  // event still reads as the user's and wins.
+  const autoScrollTargetRef = useRef<number | undefined>(undefined);
+
+  /** Glue the body to its bottom edge, announcing the scroll as our own. */
+  const autoScroll = (body: HTMLDivElement): void => {
+    const bottom = body.scrollHeight - body.clientHeight;
+    // Only a real movement dispatches an event; recording a target without
+    // one would mislabel the user's next scroll as ours.
+    if (bottom - body.scrollTop >= 1) {
+      autoScrollTargetRef.current = bottom;
+      body.scrollTop = bottom;
+    }
+  };
   // The palette's filter field, focused when the palette opens.
   const filterRef = useRef<HTMLInputElement>(null);
 
@@ -613,6 +631,17 @@ export function Popup(): React.JSX.Element {
       return;
     }
     const onScroll = (): void => {
+      const target = autoScrollTargetRef.current;
+      autoScrollTargetRef.current = undefined;
+      // Our own follow, arriving where it was sent (within the sub-pixel
+      // clamp residual): pinned by definition, whatever grew since.
+      if (target !== undefined && Math.abs(body.scrollTop - target) < 2) {
+        pinnedRef.current = true;
+        return;
+      }
+      // A user scroll. Note the moving-target tradeoff: while a stream grows
+      // fast, the bottom keeps fleeing, so scrolling back down may not
+      // re-pin until the stream pauses or ends — known and accepted.
       pinnedRef.current = body.scrollTop + body.clientHeight >= body.scrollHeight - 40;
     };
     body.addEventListener("scroll", onScroll, { passive: true });
@@ -635,7 +664,7 @@ export function Popup(): React.JSX.Element {
       id === undefined || result === undefined ? undefined : { id, phase: result.phase };
     const settled = result?.phase === "done" && previous?.phase === "running" && previous.id === id;
     if ((result?.phase === "running" || settled) && pinnedRef.current && bodyRef.current) {
-      bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+      autoScroll(bodyRef.current);
     }
   }, [payload?.prompt_id, result]);
 
