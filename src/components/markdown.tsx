@@ -48,7 +48,7 @@ function ScrollableTable({ children }: React.ComponentProps<"table">): React.JSX
 }
 
 /** Whether an image URL may load. Remote images in model output are an
- *  exfiltration channel — a malicious action could instruct the model to
+ *  exfiltration channel — a malicious prompt could instruct the model to
  *  embed the captured text in an image URL, and rendering it would ship the
  *  data to that server. Policy: `data:` images always (no network), http(s)
  *  only from the host the capture came from (that host already served the
@@ -112,7 +112,7 @@ export function Markdown({
       </div>
       {pendingHref !== undefined && (
         <>
-          {/* Mouse-only backdrop, like the popup's action palette. */}
+          {/* Mouse-only backdrop, like the popup's prompt palette. */}
           <div
             aria-hidden="true"
             className="fixed inset-0 z-10 bg-background/50"

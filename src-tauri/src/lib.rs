@@ -529,7 +529,7 @@ pub fn run() {
 mod ts_mirror_tests {
     use super::*;
     use crate::attachments::MAX_ATTACHMENT_BYTES;
-    use crate::prompts::{DEFAULT_ACTIONS, is_builtin_prompt};
+    use crate::prompts::{DEFAULT_PROMPTS, is_builtin_prompt};
 
     const SETTINGS_TS: &str = include_str!("../../src/lib/settings.ts");
     const CAPTURE_TS: &str = include_str!("../../src/lib/capture.ts");
@@ -566,11 +566,11 @@ mod ts_mirror_tests {
         }
     }
 
-    /// DEFAULT_QUICK_ACTIONS in settings.ts names pre-installed prompts by id;
+    /// DEFAULT_QUICK_PROMPTS in settings.ts names pre-installed prompts by id;
     /// renaming a built-in here would leave a quick slot empty over there.
     #[test]
     fn builtin_ids_appear_in_frontend_defaults() {
-        for (id, _) in DEFAULT_ACTIONS {
+        for (id, _) in DEFAULT_PROMPTS {
             assert!(
                 SETTINGS_TS.contains(&format!("\"{id}\"")),
                 "built-in prompt '{id}' missing from settings.ts defaults"

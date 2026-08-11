@@ -190,15 +190,15 @@ export async function setConfirmAttachments(enabled: boolean): Promise<void> {
 export const QUICK_SLOT_COUNT = 4;
 
 /** The pre-installed prompts, in slot order — the zero-config default.
- *  Mirrors DEFAULT_ACTIONS in src-tauri/src/lib.rs (same ids, same order). */
-const DEFAULT_QUICK_ACTIONS = [
-  "zencopy-zen",
+ *  Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs (same ids, same order). */
+const DEFAULT_QUICK_PROMPTS = [
+  "zencopy-summarize",
   "zencopy-explain",
   "zencopy-translate",
   "zencopy-polish",
 ];
 
-const QUICK_ACTIONS_KEY = "quickPrompts";
+const QUICK_PROMPTS_KEY = "quickPrompts";
 
 /** The prompt ids bound to the popup's number keys (1–4), in slot order.
  *  Positions are stable so muscle memory holds — the settings editor is the
@@ -206,11 +206,11 @@ const QUICK_ACTIONS_KEY = "quickPrompts";
  *  normalized to exactly QUICK_SLOT_COUNT ids on read, so a hand-edited or
  *  older file can never desync the row. */
 export async function getQuickPrompts(): Promise<string[]> {
-  const stored = await readSetting(QUICK_ACTIONS_KEY, z.array(z.string()), DEFAULT_QUICK_ACTIONS);
+  const stored = await readSetting(QUICK_PROMPTS_KEY, z.array(z.string()), DEFAULT_QUICK_PROMPTS);
   const slots = stored.slice(0, QUICK_SLOT_COUNT);
   // Backfill from the defaults if the stored list is short, skipping ids
   // already present so slots stay duplicate-free.
-  for (const id of DEFAULT_QUICK_ACTIONS) {
+  for (const id of DEFAULT_QUICK_PROMPTS) {
     if (slots.length >= QUICK_SLOT_COUNT) {
       break;
     }
@@ -222,7 +222,7 @@ export async function getQuickPrompts(): Promise<string[]> {
 }
 
 export async function setQuickPrompts(ids: string[]): Promise<void> {
-  await writeSetting(QUICK_ACTIONS_KEY, ids.slice(0, QUICK_SLOT_COUNT));
+  await writeSetting(QUICK_PROMPTS_KEY, ids.slice(0, QUICK_SLOT_COUNT));
 }
 
 const USER_CONTEXT_KEY = "userContext";

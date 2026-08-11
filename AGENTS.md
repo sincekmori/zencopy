@@ -7,7 +7,7 @@ Humans are welcome to read it too.
 
 ZenCopy is a Tauri v2 desktop agent for Windows, macOS, and Linux.
 React 19 + Vite 8 frontend, Rust backend.
-The global trigger (Ctrl/Cmd + C + C) runs an AI action on whatever was copied and shows the result in a small popup.
+The global trigger (Ctrl/Cmd + C + C) runs an AI prompt on whatever was copied and shows the result in a small popup.
 See [README.md](README.md) for the product overview.
 
 ## Local checks (mirror CI)

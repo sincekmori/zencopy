@@ -96,12 +96,12 @@ Una modifica errata appare come messaggio chiaro nel popup e nell'editor delle i
 
 Quale prompt gestisce quale tipo di cattura:
 una mappa piatta `kind → prompt` più un elenco `overrides` opzionale e a priorità più alta (vince la prima corrispondenza).
-I tre kind sono `text`, `image` e `files` (una copia formattata conta come `text`); in partenza il testo è instradato su Zen, immagini e file su Spiega.
+I tre kind sono `text`, `image` e `files` (una copia formattata conta come `text`); in partenza il testo è instradato su Riassumi, immagini e file su Spiega.
 La mappa piatta è modificabile nell'app (Impostazioni → Prompt → Regole), quindi devi toccare questo file solo per gli `overrides`.
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

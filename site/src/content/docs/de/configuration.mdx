@@ -96,12 +96,12 @@ Eine kaputte Änderung zeigt sich als klare Meldung im Popup und im Einstellungs
 
 Welcher Prompt welche Art von Erfassung übernimmt:
 eine flache Zuordnung `kind → prompt` plus eine optionale, höher priorisierte `overrides`-Liste (der erste Treffer gewinnt).
-Die drei Arten sind `text`, `image` und `files` (eine formatierte Kopie zählt als `text`); ab Werk geht Text an Zen, Bilder und Dateien gehen an Erklären.
+Die drei Arten sind `text`, `image` und `files` (eine formatierte Kopie zählt als `text`); ab Werk geht Text an Zusammenfassen, Bilder und Dateien gehen an Erklären.
 Die flache Zuordnung ist in der App bearbeitbar (Einstellungen → Prompts → Regeln), du brauchst diese Datei also nur für `overrides`.
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

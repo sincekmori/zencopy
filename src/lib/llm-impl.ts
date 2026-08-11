@@ -48,7 +48,7 @@ const INACTIVITY_TIMEOUT_MS = 90_000;
  *  can't miss. */
 type ZenCatalog = Catalog<(typeof REQUIRED_ROLES)[number]>;
 
-/** A role by name, for the roles ACTIONS declare — anything beyond the
+/** A role by name, for the roles PROMPTS declare — anything beyond the
  *  required ones is the user's own vocabulary, so the typed record widens
  *  back to a dictionary and absence means "the config doesn't map it". */
 function roleFor(resolved: ZenCatalog, role: string): RoleEntry | undefined {

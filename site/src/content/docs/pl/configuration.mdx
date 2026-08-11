@@ -96,12 +96,12 @@ Zepsuta edycja pokazuje się jako czytelny komunikat w okienku i w edytorze usta
 
 Który prompt obsługuje który rodzaj przechwycenia:
 płaska mapa `kind → prompt` plus opcjonalna lista `overrides` o wyższym priorytecie (wygrywa pierwsze dopasowanie).
-Trzy rodzaje to `text`, `image` i `files` (kopia tekstu sformatowanego liczy się jako `text`); fabrycznie tekst trafia do promptu Zen, a obrazy i pliki do promptu Wyjaśnij.
+Trzy rodzaje to `text`, `image` i `files` (kopia tekstu sformatowanego liczy się jako `text`); fabrycznie tekst trafia do promptu Streść, a obrazy i pliki do promptu Wyjaśnij.
 Płaską mapę można edytować w aplikacji (Ustawienia → Prompty → Reguły), więc tego pliku potrzebujesz tylko dla `overrides`.
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

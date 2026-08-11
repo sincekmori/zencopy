@@ -136,6 +136,7 @@ export const zhHans: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "总结",
       "zencopy-translate": "翻译",
       "zencopy-explain": "解释",
       "zencopy-polish": "润色",

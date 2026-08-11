@@ -137,6 +137,7 @@ export const zhHant: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "摘要",
       "zencopy-translate": "翻譯",
       "zencopy-explain": "解說",
       "zencopy-polish": "潤飾",

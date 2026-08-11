@@ -152,6 +152,7 @@ export const fr: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "Résumer",
       "zencopy-translate": "Traduire",
       "zencopy-explain": "Expliquer",
       "zencopy-polish": "Peaufiner",

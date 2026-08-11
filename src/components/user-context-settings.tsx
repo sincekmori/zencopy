@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils.ts";
 const log = createLogger("user-context");
 
 /** "About you": one free-form multiline self-description, sent with every
- *  action run (appended to the instructions, see llm-impl). One field on
+ *  prompt run (appended to the instructions, see llm-impl). One field on
  *  purpose — people describe themselves better in their own words than in a
  *  form, and the model reads prose natively. */
 /** How long each example persona stays on screen before the next rotates in. */
@@ -20,7 +20,7 @@ export function UserContextSettings(): React.JSX.Element {
   const t = useT();
   const [text, setText] = useState("");
   // Which confirmation the footer shows — saving and clearing each get their
-  // own words, so the user knows exactly which action just took effect.
+  // own words, so the user knows exactly which prompt just took effect.
   const [confirmation, setConfirmation] = useState<"saved" | "cleared" | undefined>(undefined);
 
   // The settings window hides on close instead of being destroyed, so state

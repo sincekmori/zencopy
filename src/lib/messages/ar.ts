@@ -144,6 +144,7 @@ export const ar: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "تلخيص",
       "zencopy-translate": "ترجمة",
       "zencopy-explain": "شرح",
       "zencopy-polish": "تنقيح",

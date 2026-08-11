@@ -32,7 +32,7 @@ function dataDir(): string {
 }
 
 // The same shapes the app records: real ids, kinds, and catalog addresses.
-const ACTIONS = ["zencopy-zen", "zencopy-explain", "zencopy-translate", "zencopy-polish"];
+const PROMPTS = ["zencopy-summarize", "zencopy-explain", "zencopy-translate", "zencopy-polish"];
 const KINDS = ["text", "image", "files"];
 const MODELS = [
   { model: "google:gemini-3.1-flash-lite", weight: 8 }, // priced by the catalog
@@ -78,7 +78,7 @@ function makeEvent(now: Date): Record<string, unknown> {
   const at = new Date(now.getTime() - randomInt(0, 90 * 24 * 60 * 60) * 1000);
   const event: Record<string, unknown> = {
     at: formatAt(at),
-    prompt: pick(ACTIONS),
+    prompt: pick(PROMPTS),
     kind: pick(KINDS),
     model: weightedModel(),
   };

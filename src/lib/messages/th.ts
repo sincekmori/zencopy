@@ -138,6 +138,7 @@ export const th: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "สรุป",
       "zencopy-translate": "แปล",
       "zencopy-explain": "อธิบาย",
       "zencopy-polish": "ขัดเกลา",

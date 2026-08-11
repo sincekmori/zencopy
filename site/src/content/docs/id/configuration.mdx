@@ -44,7 +44,7 @@ Daftar "apa yang terjadi setelah salin dua kali".
 
 - Prompt yang sudah terpasang bisa dibuka dan dibaca — sekaligus menjadi contoh cara menulisnya.
 - **Prompt baru** hanya butuh nama dan apa yang ingin kamu lakukan.
-  Misalnya: nama "Ringkasan 3 baris", instruksi "Ringkas ini dalam 3 baris".
+  Misalnya: nama "Ringkasan 3 baris", instruksi "Ringkaskan ini dalam 3 baris".
 - Belum percaya diri menulis instruksi? Tulis kasar saja apa yang kamu mau dan tekan **Draf dengan AI** — AI yang sudah kamu atur akan mengubahnya menjadi instruksi yang rapi.
 - **Aturan** memungkinkanmu memilih prompt yang berbeda untuk tiap jenis konten (teks / gambar / berkas).
 
@@ -96,12 +96,12 @@ Suntingan yang rusak muncul sebagai pesan yang jelas di popup dan editor pengatu
 
 Prompt mana yang menangani jenis tangkapan mana:
 peta datar `kind → prompt` plus daftar `overrides` opsional dengan prioritas lebih tinggi (kecocokan pertama menang).
-Tiga jenisnya adalah `text`, `image`, dan `files` (salinan berformat dihitung sebagai `text`); sejak awal, teks dirutekan ke Zen sementara gambar dan berkas dirutekan ke Jelaskan.
+Tiga jenisnya adalah `text`, `image`, dan `files` (salinan berformat dihitung sebagai `text`); sejak awal, teks dirutekan ke Ringkaskan sementara gambar dan berkas dirutekan ke Jelaskan.
 Peta datarnya bisa disunting di dalam aplikasi (Pengaturan → Prompt → Aturan), jadi kamu hanya perlu menyentuh berkas ini untuk `overrides`.
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]
@@ -127,12 +127,12 @@ Berkas tunggal yang sama juga menjadi format berbagi — Pengaturan → Prompt �
 ```markdown
 ---
 id: summarize
-label: Ringkas
+label: Ringkaskan
 role: default
 instructions: Kamu adalah asisten yang ringkas.
 ---
 
-Ringkas dalam 3 baris, dalam {{ locale }}:
+Ringkaskan dalam 3 baris, dalam {{ locale }}:
 
 {{ text }}
 ```
@@ -182,7 +182,7 @@ label: Peka konteks
 {% if url contains "github.com" %}
 Tinjau kode ini dan tunjukkan satu risiko terbesarnya:
 {% elsif app_name == "Slack" %}
-Ringkas utas obrolan ini dalam 2 baris:
+Ringkaskan utas obrolan ini dalam 2 baris:
 {% else %}
 Jelaskan ini dalam {{ locale }}:
 {% endif %}

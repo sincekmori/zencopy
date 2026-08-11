@@ -147,6 +147,7 @@ export const id: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "Ringkaskan",
       "zencopy-translate": "Terjemahkan",
       "zencopy-explain": "Jelaskan",
       "zencopy-polish": "Rapikan",
@@ -176,15 +177,15 @@ export const id: Messages = {
     failed: (reason) => `Gagal: ${reason}`,
     importNotAPrompt: "Bukan prompt: diharapkan frontmatter YAML `---` diikuti isi prompt.",
     importNoLabel: "Prompt ini tidak punya label.",
-    importInvalidId: (actionId) => `Id prompt tidak valid: '${actionId}'.`,
-    importBuiltinId: (actionId) =>
-      `'${actionId}' adalah id prompt bawaan — ubah id di dalam berkas lalu coba lagi.`,
-    importReservedId: (actionId) =>
-      `'${actionId}' diawali 'zencopy-' — prefiks id ini dikhususkan untuk prompt prainstal.`,
-    importIdExists: (actionId) =>
-      `Prompt dengan id '${actionId}' sudah ada — hapus dulu, atau ubah id di dalam berkas.`,
+    importInvalidId: (promptId) => `Id prompt tidak valid: '${promptId}'.`,
+    importBuiltinId: (promptId) =>
+      `'${promptId}' adalah id prompt bawaan — ubah id di dalam berkas lalu coba lagi.`,
+    importReservedId: (promptId) =>
+      `'${promptId}' diawali 'zencopy-' — prefiks id ini dikhususkan untuk prompt prainstal.`,
+    importIdExists: (promptId) =>
+      `Prompt dengan id '${promptId}' sudah ada — hapus dulu, atau ubah id di dalam berkas.`,
     importTooLarge: "Berkas terlalu besar untuk menjadi prompt.",
-    labelExists: (actionLabel) => `Prompt bernama '${actionLabel}' sudah ada — pilih nama lain.`,
+    labelExists: (promptLabel) => `Prompt bernama '${promptLabel}' sudah ada — pilih nama lain.`,
   },
   rules: {
     title: "Aturan",

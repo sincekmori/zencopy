@@ -96,12 +96,12 @@ A broken edit shows up as a clear message in the popup and the settings editor �
 
 Which prompt handles which kind of capture:
 a flat `kind → prompt` map plus an optional, higher-priority `overrides` list (first match wins).
-The three kinds are `text`, `image`, and `files` (a formatted copy counts as `text`); out of the box, text routes to Zen and images and files route to Explain.
+The three kinds are `text`, `image`, and `files` (a formatted copy counts as `text`); out of the box, text routes to Summarize and images and files route to Explain.
 The flat map is editable in-app (Settings → Prompts → Rules), so you only need to touch this file for `overrides`.
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

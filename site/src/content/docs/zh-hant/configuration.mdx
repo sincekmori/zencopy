@@ -96,12 +96,12 @@ API 金鑰直接寫進這個本機檔案（設定 UI 寫的也是同一種格式
 
 哪個提示詞處理哪種擷取：
 一個扁平的 `kind → prompt` 對應，加上一份選用、優先度更高的 `overrides` 清單（先符合者先贏）。
-三種 kind 是 `text`、`image` 與 `files`（帶格式的複製會視為 `text`）；預設情況下，文字交給 Zen，圖片和檔案交給解說。
+三種 kind 是 `text`、`image` 與 `files`（帶格式的複製會視為 `text`）；預設情況下，文字交給摘要，圖片和檔案交給解說。
 扁平對應可以在應用程式內編輯（設定 → 提示詞 → 規則），所以只有在需要 `overrides` 時才需要動這個檔案。
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

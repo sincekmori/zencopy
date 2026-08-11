@@ -142,6 +142,7 @@ export const he: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "סיכום",
       "zencopy-translate": "תרגום",
       "zencopy-explain": "הסבר",
       "zencopy-polish": "ליטוש",

@@ -96,12 +96,12 @@ Một chỉnh sửa hỏng sẽ hiện thành thông báo rõ ràng trong cửa 
 
 Prompt nào xử lý loại nội dung bắt được nào:
 một ánh xạ phẳng `kind → prompt` cộng với danh sách `overrides` tùy chọn có độ ưu tiên cao hơn (quy tắc khớp đầu tiên thắng).
-Ba loại là `text`, `image` và `files` (bản sao có định dạng được tính là `text`); theo mặc định, văn bản được chuyển đến Zen, còn hình ảnh và tệp đến Giải thích.
+Ba loại là `text`, `image` và `files` (bản sao có định dạng được tính là `text`); theo mặc định, văn bản được chuyển đến Tóm tắt, còn hình ảnh và tệp đến Giải thích.
 Ánh xạ phẳng chỉnh được ngay trong ứng dụng (Cài đặt → Prompt → Quy tắc), nên bạn chỉ cần đụng đến tệp này khi dùng `overrides`.
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

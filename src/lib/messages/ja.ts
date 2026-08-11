@@ -149,8 +149,8 @@ export const ja: Messages = {
       "あと一歩です。コピーの 2 連打を検知するには macOS の許可が必要です。システム設定 → プライバシーとセキュリティ の「入力監視」で ZenCopy を許可し、ZenCopy を起動し直してください。",
   },
   prompts: {
-    // Zen stays "Zen" everywhere (intentionally omitted).
     builtinLabels: {
+      "zencopy-summarize": "要約",
       "zencopy-translate": "翻訳",
       "zencopy-explain": "解説",
       "zencopy-polish": "清書",

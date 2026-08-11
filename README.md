@@ -29,7 +29,7 @@ The signal is **Ctrl/Cmd + C + C** — your ordinary copy, twice, quickly. From 
 
 1. what you had selected — text, image, or files — is captured,
 2. a small popup opens in the corner of your screen,
-3. the default prompt streams its answer immediately (out of the box that is **Zen**, which distills the copy to its essence in one sentence; switching to Explain, Translate, Polish, or your own prompts takes one click or one number key),
+3. the default prompt streams its answer immediately (out of the box that is **Summarize**, which distills the copy to its essence in one sentence; switching to Explain, Translate, Polish, or your own prompts takes one click or one number key),
 4. and a message field waits under the answer — "more detail", "as a table", "in English?". The conversation continues in place, no window switch.
 
 A single normal copy is never disturbed.

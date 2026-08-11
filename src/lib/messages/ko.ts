@@ -148,6 +148,7 @@ export const ko: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "요약",
       "zencopy-translate": "번역",
       "zencopy-explain": "설명",
       "zencopy-polish": "다듬기",

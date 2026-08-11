@@ -30,11 +30,11 @@ function openRepo(): void {
 
 // Quiet footer links: no button chrome, no icons — the whole row reads as
 // one line of small print, which is what these links are.
-function footerLink(label: string, action: () => void): React.JSX.Element {
+function footerLink(label: string, onClick: () => void): React.JSX.Element {
   return (
     <button
       type="button"
-      onClick={action}
+      onClick={onClick}
       className="rounded-sm px-0.5 underline-offset-2 transition-colors hover:text-foreground hover:underline"
     >
       {label}
@@ -217,9 +217,9 @@ export function About(): React.JSX.Element {
                 },
               ],
             ] as const
-          ).map(([label, action], index, links) => (
+          ).map(([label, onClick], index, links) => (
             <span key={label} className="flex items-center gap-1.5 whitespace-nowrap">
-              {footerLink(label, action)}
+              {footerLink(label, onClick)}
               {index < links.length - 1 ? DOT : undefined}
             </span>
           ))}

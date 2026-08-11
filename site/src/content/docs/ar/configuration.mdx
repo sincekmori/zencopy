@@ -96,12 +96,12 @@ import RepomixLink from "../../../components/RepomixLink.astro";
 
 أي موجّه يتولى أي نوع من الالتقاط:
 خريطة مسطّحة `kind ← prompt` إضافة إلى قائمة `overrides` اختيارية أعلى أولوية (أول تطابق يفوز).
-الأنواع الثلاثة هي `text` و`image` و`files` (تُعامل النسخة المنسّقة على أنها `text`)؛ وافتراضيًا يوجَّه النص إلى Zen، وتوجَّه الصور والملفات إلى «شرح».
+الأنواع الثلاثة هي `text` و`image` و`files` (تُعامل النسخة المنسّقة على أنها `text`)؛ وافتراضيًا يوجَّه النص إلى تلخيص، وتوجَّه الصور والملفات إلى «شرح».
 الخريطة المسطّحة قابلة للتحرير داخل التطبيق (الإعدادات ← الموجّهات ← القواعد)، فلا تحتاج إلى لمس هذا الملف إلا من أجل `overrides`.
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

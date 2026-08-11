@@ -96,12 +96,12 @@ API 密钥直接写进这个本地文件（设置界面写出的也是同样的�
 
 哪种捕获由哪个提示词处理：
 一个扁平的 `kind → prompt` 映射，加上一个可选的、优先级更高的 `overrides` 列表（先匹配者胜出）。
-三种 kind 是 `text`、`image` 和 `files`（带格式的复制按 `text` 处理）；初始状态下，文本交给 Zen，图片和文件交给解释。
+三种 kind 是 `text`、`image` 和 `files`（带格式的复制按 `text` 处理）；初始状态下，文本交给总结，图片和文件交给解释。
 扁平映射可以在应用内编辑（设置 → 提示词 → 规则），所以只有用 `overrides` 时才需要碰这个文件。
 
 ```json
 {
-  "text": "zencopy-zen",
+  "text": "zencopy-summarize",
   "image": "zencopy-explain",
   "files": "zencopy-explain",
   "overrides": [{ "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "summarize" }]

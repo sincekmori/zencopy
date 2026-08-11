@@ -219,7 +219,7 @@ const whyHref = `/${lang}/why/`;
             the guide's own name and opens it: the download lives there,
             next to the steps that make sense of it. */
         }
-        <div class="actions">
+        <div class="cta">
           <a class="primary" href={gettingStartedHref}>{getStarted}</a>
           <a class="quiet" href={whyHref}
             >{why} {locale.dir === "rtl" ? "←" : "→"}</a
@@ -518,7 +518,7 @@ const whyHref = `/${lang}/why/`;
   h1 .line {
     display: block;
   }
-  .actions {
+  .cta {
     display: flex;
     align-items: center;
     gap: 2rem;

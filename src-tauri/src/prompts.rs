@@ -64,8 +64,8 @@ pub(crate) fn parse_prompt(raw: &str, default_id: &str) -> Option<Prompt> {
     })
 }
 
-pub(crate) const DEFAULT_ACTIONS: &[(&str, &str)] = &[
-    ("zencopy-zen", include_str!("../prompts/zen.md")),
+pub(crate) const DEFAULT_PROMPTS: &[(&str, &str)] = &[
+    ("zencopy-summarize", include_str!("../prompts/summarize.md")),
     ("zencopy-explain", include_str!("../prompts/explain.md")),
     ("zencopy-translate", include_str!("../prompts/translate.md")),
     ("zencopy-polish", include_str!("../prompts/polish.md")),
@@ -79,7 +79,7 @@ pub(crate) const RESERVED_ID_PREFIX: &str = "zencopy-";
 
 /// Whether `id` names a built-in (immutable) prompt.
 pub(crate) fn is_builtin_prompt(id: &str) -> bool {
-    DEFAULT_ACTIONS.iter().any(|(builtin, _)| *builtin == id)
+    DEFAULT_PROMPTS.iter().any(|(builtin, _)| *builtin == id)
 }
 
 /// Prompts defined by local files in the config dir — the user's additions and
@@ -126,7 +126,7 @@ pub(crate) fn load_prompts(handle: &tauri::AppHandle) -> Vec<Prompt> {
     // The built-ins are compile-time constants — parse their YAML once, not
     // on every capture (cloning a few KB of Strings is far cheaper).
     static BUILTINS: std::sync::LazyLock<Vec<Prompt>> = std::sync::LazyLock::new(|| {
-        DEFAULT_ACTIONS
+        DEFAULT_PROMPTS
             .iter()
             .filter_map(|(id, raw)| parse_prompt(raw, id))
             .collect()
@@ -168,7 +168,7 @@ pub(crate) struct PromptInfo {
     origin: &'static str,
 }
 
-/// Every prompt: pre-installed first, in their DEFAULT_ACTIONS order (Zen
+/// Every prompt: pre-installed first, in their DEFAULT_PROMPTS order (Summarize
 /// leads by construction), then the user's prompts sorted by label.
 #[tauri::command]
 pub(crate) fn list_prompts_ui(app: tauri::AppHandle) -> Vec<PromptInfo> {
@@ -188,7 +188,7 @@ pub(crate) fn list_prompts_ui(app: tauri::AppHandle) -> Vec<PromptInfo> {
         })
         .collect();
     let builtin_rank = |id: &str| {
-        DEFAULT_ACTIONS
+        DEFAULT_PROMPTS
             .iter()
             .position(|(builtin, _)| *builtin == id)
     };
@@ -316,7 +316,7 @@ pub(crate) fn write_prompt_md(
 /// another ZenCopy (paste or URL) reinstalls it.
 pub(crate) fn prompt_source(app: &tauri::AppHandle, id: &str) -> Result<String, String> {
     let id = checked_prompt_id(id)?;
-    if let Some((_, raw)) = DEFAULT_ACTIONS.iter().find(|(builtin, _)| *builtin == id) {
+    if let Some((_, raw)) = DEFAULT_PROMPTS.iter().find(|(builtin, _)| *builtin == id) {
         return Ok((*raw).to_string());
     }
     let path = config_base(app)
@@ -429,7 +429,7 @@ pub(crate) fn import_prompt(app: tauri::AppHandle, text: String) -> Result<Strin
 
 /// The most bytes an imported prompt file may have — an prompt is a few KB
 /// of Markdown, so anything huge is a mistake, not an prompt.
-pub(crate) const MAX_ACTION_TEXT_BYTES: u64 = 256 * 1024;
+pub(crate) const MAX_PROMPT_TEXT_BYTES: u64 = 256 * 1024;
 
 /// Pick a local .md file and install it as an prompt — the file-dialog
 /// sibling of import_prompt (pasted text). Returns the new prompt's id, or
@@ -456,7 +456,7 @@ pub(crate) fn import_prompt_from_file(
     let size = std::fs::metadata(&path)
         .map_err(|e| PromptError::with("failed", e.to_string()))?
         .len();
-    if size > MAX_ACTION_TEXT_BYTES {
+    if size > MAX_PROMPT_TEXT_BYTES {
         return Err(PromptError::code("file-too-large"));
     }
     let text =
@@ -496,7 +496,7 @@ mod tests {
     /// the app (parse_prompt returns None) — catch that at test time instead.
     #[test]
     fn builtin_prompts_parse() {
-        for (id, raw) in DEFAULT_ACTIONS {
+        for (id, raw) in DEFAULT_PROMPTS {
             let prompt = parse_prompt(raw, id)
                 .unwrap_or_else(|| panic!("built-in prompt '{id}' failed to parse"));
             assert_eq!(&prompt.id, id, "built-in prompt id must match its key");
@@ -520,7 +520,7 @@ mod tests {
             "future_kind": "my-custom",
             "overrides": [
                 { "when": { "app_name": "Mail" }, "prompt": "my-custom" },
-                { "when": { "app_name": "Code" }, "prompt": "zencopy-zen" }
+                { "when": { "app_name": "Code" }, "prompt": "zencopy-summarize" }
             ]
         })
         .as_object()
@@ -528,7 +528,7 @@ mod tests {
         .clone();
         purge_prompt_from_rules_object(&mut object, "my-custom");
         assert_eq!(
-            object["text"], "zencopy-zen",
+            object["text"], "zencopy-summarize",
             "kind returns to the embedded default"
         );
         assert_eq!(
@@ -547,7 +547,7 @@ mod tests {
             1,
             "rules running the deleted prompt are dropped"
         );
-        assert_eq!(rules[0]["prompt"], "zencopy-zen");
+        assert_eq!(rules[0]["prompt"], "zencopy-summarize");
     }
 
     /// The prompt format's compatibility contract (see PromptMeta): shared

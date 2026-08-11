@@ -149,6 +149,7 @@ export const tr: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-summarize": "Özetle",
       "zencopy-translate": "Çevir",
       "zencopy-explain": "Açıkla",
       "zencopy-polish": "İyileştir",
