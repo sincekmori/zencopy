@@ -203,6 +203,7 @@ export const fa: Messages = {
     overridesHint: "هدایت بر اساس برنامه، پنجره یا طول — اول بررسی می‌شوند، از بالا به پایین.",
     overridesDocs: "قوانین چگونه کار می‌کنند",
     addOverride: "قانون جدید",
+    edit: "ویرایش",
     anyKind: "هر نوع",
     fieldKind: "نوع برداشت",
     fieldApp: "برنامه",

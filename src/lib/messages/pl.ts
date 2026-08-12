@@ -207,6 +207,7 @@ export const pl: Messages = {
       "Kieruj według aplikacji, okna lub długości — sprawdzane najpierw, od góry do dołu.",
     overridesDocs: "Jak działają reguły",
     addOverride: "Nowa reguła",
+    edit: "Edytuj",
     anyKind: "Dowolny",
     fieldKind: "Typ przechwycenia",
     fieldApp: "Aplikacja",

@@ -206,6 +206,7 @@ export const ptBR: Messages = {
       "Roteie por aplicativo, janela ou tamanho — verificadas primeiro, de cima para baixo.",
     overridesDocs: "Como funcionam as regras",
     addOverride: "Nova regra",
+    edit: "Editar",
     anyKind: "Qualquer",
     fieldKind: "Tipo de captura",
     fieldApp: "Aplicativo",

@@ -211,6 +211,7 @@ export const fr: Messages = {
       "Routez par application, fenêtre ou longueur — vérifiées en premier, de haut en bas.",
     overridesDocs: "Comment fonctionnent les règles",
     addOverride: "Nouvelle règle",
+    edit: "Modifier",
     anyKind: "Tous",
     fieldKind: "Type de capture",
     fieldApp: "Application",

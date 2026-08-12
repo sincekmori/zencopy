@@ -207,6 +207,7 @@ export const tr: Messages = {
       "Uygulamaya, pencereye veya uzunluğa göre yönlendir — önce, yukarıdan aşağıya denetlenir.",
     overridesDocs: "Kurallar nasıl çalışır",
     addOverride: "Yeni kural",
+    edit: "Düzenle",
     anyKind: "Hepsi",
     fieldKind: "Yakalama türü",
     fieldApp: "Uygulama",

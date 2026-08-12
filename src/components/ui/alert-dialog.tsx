@@ -1,6 +1,8 @@
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
+import { DIALOG_CARD, DIALOG_OVERLAY, DIALOG_TITLE } from "@/components/ui/dialog-shell.ts";
+import { cn } from "@/lib/utils.ts";
 
 /** A modal confirmation for consequential choices (turning off statistics,
  *  resets, deleting a prompt): a question the user must answer before the
@@ -41,11 +43,9 @@ export function ConfirmDialog({
       }}
     >
       <AlertDialogPrimitive.Portal>
-        <AlertDialogPrimitive.Overlay className="fixed inset-0 z-40 bg-background/50" />
-        <AlertDialogPrimitive.Content className="fixed inset-x-0 top-1/2 z-50 mx-auto flex w-96 max-w-[calc(100vw-2rem)] -translate-y-1/2 flex-col gap-3 rounded-xl border bg-popover p-5 text-popover-foreground shadow-xl">
-          <AlertDialogPrimitive.Title className="text-sm font-semibold">
-            {title}
-          </AlertDialogPrimitive.Title>
+        <AlertDialogPrimitive.Overlay className={DIALOG_OVERLAY} />
+        <AlertDialogPrimitive.Content className={cn(DIALOG_CARD, "w-96")}>
+          <AlertDialogPrimitive.Title className={DIALOG_TITLE}>{title}</AlertDialogPrimitive.Title>
           <AlertDialogPrimitive.Description className="text-xs leading-relaxed text-muted-foreground">
             {description}
           </AlertDialogPrimitive.Description>

@@ -203,6 +203,7 @@ export const vi: Messages = {
       "Phân nhánh theo ứng dụng, cửa sổ hoặc độ dài — được kiểm tra trước, từ trên xuống.",
     overridesDocs: "Cách quy tắc hoạt động",
     addOverride: "Quy tắc mới",
+    edit: "Sửa",
     anyKind: "Bất kỳ",
     fieldKind: "Loại nội dung",
     fieldApp: "Ứng dụng",

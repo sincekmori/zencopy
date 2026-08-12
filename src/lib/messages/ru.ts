@@ -205,6 +205,7 @@ export const ru: Messages = {
     overridesHint: "Правила по приложению, окну или длине — проверяются первыми, сверху вниз.",
     overridesDocs: "Как работают правила",
     addOverride: "Новое правило",
+    edit: "Изменить",
     anyKind: "Любой",
     fieldKind: "Тип захвата",
     fieldApp: "Приложение",

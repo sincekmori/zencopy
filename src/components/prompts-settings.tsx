@@ -14,11 +14,12 @@ import {
   Trash2,
   Upload,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import * as z from "zod";
 import { QuickPromptsSettings } from "@/components/quick-prompts-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { ConfirmDialog } from "@/components/ui/alert-dialog.tsx";
+import { FormDialog } from "@/components/ui/dialog.tsx";
 import { Select } from "@/components/ui/select.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import {
@@ -152,7 +153,7 @@ export function PromptsSettings(): React.JSX.Element {
   const [rule, setRule] = useState<RuleDraft | undefined>(undefined);
   const [ruleError, setRuleError] = useState<string | undefined>(undefined);
   // Which prompt was just exported (transient check mark), and the import
-  // panel's state.
+  // dialog's state.
   const [exportedId, setExportedId] = useState<string | undefined>(undefined);
   const [importOpen, setImportOpen] = useState(false);
   const [importText, setImportText] = useState("");
@@ -195,12 +196,22 @@ export function PromptsSettings(): React.JSX.Element {
     };
   }, []);
 
-  // Import and the editor/viewer are alternatives: opening one closes the
-  // other, so exactly one panel is ever on screen and a click always has a
-  // visible effect.
+  const closeViewer = (): void => {
+    setDraft(undefined);
+  };
+
+  const closeEditor = (): void => {
+    setDraft(undefined);
+    setFormError(undefined);
+  };
+
+  const closeRule = (): void => {
+    setRule(undefined);
+    setRuleError(undefined);
+  };
+
   const edit = (prompt: PromptInfo): void => {
     setFormError(undefined);
-    setImportOpen(false);
     setDraft({
       id: prompt.id,
       label: prompt.label,
@@ -210,36 +221,6 @@ export function PromptsSettings(): React.JSX.Element {
       locked: prompt.origin === "builtin",
     });
   };
-
-  const importPanelRef = useRef<HTMLDivElement | null>(null);
-  const importTextRef = useRef<HTMLTextAreaElement | null>(null);
-  const editorRef = useRef<HTMLDivElement | null>(null);
-  const viewerRef = useRef<HTMLDivElement | null>(null);
-  const labelRef = useRef<HTMLInputElement | null>(null);
-
-  // The editor and viewer render below the (long) prompts list — opened
-  // off-screen they look like a dead button. Scroll the freshly opened panel
-  // into view and put the caret where typing starts. Keyed by the edited id
-  // (not the draft object) so typing never re-triggers the scroll.
-  const editorKey = draft && !draft.locked ? (draft.id ?? "new") : undefined;
-  const viewerKey = draft?.locked ? draft.id : undefined;
-  useEffect(() => {
-    if (importOpen) {
-      importTextRef.current?.focus({ preventScroll: true });
-      importPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }, [importOpen]);
-  useEffect(() => {
-    if (editorKey !== undefined) {
-      labelRef.current?.focus({ preventScroll: true });
-      editorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [editorKey]);
-  useEffect(() => {
-    if (viewerKey !== undefined) {
-      viewerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [viewerKey]);
 
   // The template guide on zencopy.app, in the user's language.
   const openTemplateDocs = (): void => {
@@ -348,6 +329,11 @@ export function PromptsSettings(): React.JSX.Element {
   };
 
   // One path for both import sources: pasted text and a fetched URL.
+  const closeImport = (): void => {
+    setImportOpen(false);
+    setImportError(undefined);
+  };
+
   const importFrom = (load: () => Promise<string>): void => {
     setImportError(undefined);
     setImportBusy(true);
@@ -367,7 +353,7 @@ export function PromptsSettings(): React.JSX.Element {
   };
 
   // The native-picker variant: Rust owns the dialog and the read; a null id
-  // just means the picker was cancelled — no error, panel stays open.
+  // just means the picker was cancelled — no error, the dialog stays open.
   const importFromFile = (): void => {
     setImportError(undefined);
     setImportBusy(true);
@@ -570,7 +556,6 @@ export function PromptsSettings(): React.JSX.Element {
               variant="outline"
               onClick={() => {
                 setImportError(undefined);
-                setDraft(undefined);
                 setImportOpen(true);
               }}
             >
@@ -582,7 +567,6 @@ export function PromptsSettings(): React.JSX.Element {
               variant="outline"
               onClick={() => {
                 setFormError(undefined);
-                setImportOpen(false);
                 setDraft({ ...NEW_DRAFT });
               }}
             >
@@ -592,52 +576,38 @@ export function PromptsSettings(): React.JSX.Element {
           </div>
         </div>
 
-        {importOpen ? (
-          <div
-            ref={importPanelRef}
-            className="flex flex-col gap-3 rounded-lg border bg-muted/20 p-4"
-          >
-            <p className="text-xs text-muted-foreground">{t.prompts.importHint}</p>
-            <textarea
-              ref={importTextRef}
-              className={cn(FIELD, "h-28 resize-none font-mono text-xs leading-relaxed")}
-              spellCheck={false}
-              placeholder="---"
-              value={importText}
-              onChange={(event) => {
-                setImportError(undefined);
-                setImportText(event.target.value);
+        <FormDialog open={importOpen} title={t.prompts.import} onClose={closeImport}>
+          <p className="text-xs text-muted-foreground">{t.prompts.importHint}</p>
+          <textarea
+            className={cn(FIELD, "h-72 resize-none font-mono text-xs leading-relaxed")}
+            spellCheck={false}
+            placeholder="---"
+            value={importText}
+            onChange={(event) => {
+              setImportError(undefined);
+              setImportText(event.target.value);
+            }}
+          />
+          <div className="flex items-center gap-3">
+            <Button
+              size="sm"
+              disabled={importBusy || importText.trim() === ""}
+              onClick={() => {
+                importFrom(() => Promise.resolve(importText));
               }}
-            />
-            <div className="flex items-center gap-3">
-              <Button
-                size="sm"
-                disabled={importBusy || importText.trim() === ""}
-                onClick={() => {
-                  importFrom(() => Promise.resolve(importText));
-                }}
-              >
-                {importBusy ? <LoaderCircle className="size-3.5 animate-spin" /> : undefined}
-                {t.prompts.import}
-              </Button>
-              <Button size="sm" variant="outline" disabled={importBusy} onClick={importFromFile}>
-                {t.prompts.importFromFile}
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                disabled={importBusy}
-                onClick={() => {
-                  setImportOpen(false);
-                  setImportError(undefined);
-                }}
-              >
-                {t.common.cancel}
-              </Button>
-            </div>
-            {importError ? <p className="text-xs text-destructive">{importError}</p> : undefined}
+            >
+              {importBusy ? <LoaderCircle className="size-3.5 animate-spin" /> : undefined}
+              {t.prompts.import}
+            </Button>
+            <Button size="sm" variant="outline" disabled={importBusy} onClick={importFromFile}>
+              {t.prompts.importFromFile}
+            </Button>
+            <Button size="sm" variant="ghost" disabled={importBusy} onClick={closeImport}>
+              {t.common.cancel}
+            </Button>
           </div>
-        ) : undefined}
+          {importError ? <p className="text-xs text-destructive">{importError}</p> : undefined}
+        </FormDialog>
 
         <ul className="flex flex-col divide-y rounded-lg border">
           {prompts.map((prompt) => (
@@ -706,13 +676,10 @@ export function PromptsSettings(): React.JSX.Element {
         </ul>
 
         {/* Read-only prompts get a viewer, not a disabled editor — nothing on
-          this surface should look like it accepts input. */}
+          this surface should look like it accepts input. Its title is the
+          prompt's own name. */}
         {draft?.locked ? (
-          <div ref={viewerRef} className="flex flex-col gap-3 rounded-lg border bg-muted/20 p-4">
-            <div className="flex flex-col gap-1.5">
-              <span className="text-xs font-medium text-muted-foreground">{t.prompts.name}</span>
-              <p className="text-sm">{promptLabel(draft.id ?? "", draft.label)}</p>
-            </div>
+          <FormDialog open title={promptLabel(draft.id ?? "", draft.label)} onClose={closeViewer}>
             <div className="flex flex-col gap-1.5">
               <span className="text-xs font-medium text-muted-foreground">
                 {t.prompts.instruction}
@@ -746,25 +713,22 @@ export function PromptsSettings(): React.JSX.Element {
               <ExternalLink className="size-3" />
             </button>
             <div>
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => {
-                  setDraft(undefined);
-                }}
-              >
+              <Button size="sm" variant="ghost" onClick={closeViewer}>
                 {t.popup.close}
               </Button>
             </div>
-          </div>
+          </FormDialog>
         ) : undefined}
 
         {draft && !draft.locked ? (
-          <div ref={editorRef} className="flex flex-col gap-3 rounded-lg border bg-muted/20 p-4">
+          <FormDialog
+            open
+            title={draft.id === undefined ? t.prompts.add : t.prompts.edit}
+            onClose={closeEditor}
+          >
             <label className="flex flex-col gap-1.5">
               <span className="text-xs font-medium text-muted-foreground">{t.prompts.name}</span>
               <input
-                ref={labelRef}
                 className={FIELD}
                 value={draft.label}
                 onChange={(event) => {
@@ -777,7 +741,7 @@ export function PromptsSettings(): React.JSX.Element {
                 {t.prompts.instruction}
               </span>
               <textarea
-                className={cn(FIELD, "h-24 resize-none leading-relaxed")}
+                className={cn(FIELD, "h-40 resize-none leading-relaxed")}
                 placeholder={t.prompts.instructionPlaceholder}
                 value={draft.instructions}
                 onChange={(event) => {
@@ -811,7 +775,7 @@ export function PromptsSettings(): React.JSX.Element {
                     {t.prompts.template}
                   </span>
                   <textarea
-                    className={cn(FIELD, "h-20 resize-none font-mono text-xs leading-relaxed")}
+                    className={cn(FIELD, "h-32 resize-none font-mono text-xs leading-relaxed")}
                     spellCheck={false}
                     value={draft.prompt}
                     onChange={(event) => {
@@ -849,21 +813,17 @@ export function PromptsSettings(): React.JSX.Element {
               <Button size="sm" disabled={draft.label.trim() === ""} onClick={save}>
                 {t.common.save}
               </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => {
-                  setDraft(undefined);
-                  setFormError(undefined);
-                }}
-              >
+              <Button size="sm" variant="ghost" onClick={closeEditor}>
                 {t.common.cancel}
               </Button>
             </div>
-          </div>
+            {formError ? <p className="text-xs text-destructive">{formError}</p> : undefined}
+          </FormDialog>
         ) : undefined}
 
-        {formError ? <p className="text-xs text-destructive">{formError}</p> : undefined}
+        {/* Errors from list actions (a failed delete) — form errors show
+            inside their dialog. */}
+        {formError && !draft ? <p className="text-xs text-destructive">{formError}</p> : undefined}
       </section>
 
       <QuickPromptsSettings />
@@ -1014,7 +974,11 @@ export function PromptsSettings(): React.JSX.Element {
         ) : undefined}
 
         {rule ? (
-          <div className="flex flex-col gap-3 rounded-lg border bg-muted/20 p-4">
+          <FormDialog
+            open
+            title={rule.index === undefined ? t.rules.addOverride : t.rules.edit}
+            onClose={closeRule}
+          >
             {/* One field per row — app names, window titles, and URLs get
                 long. Only the two character bounds share a row. */}
             <div className="flex flex-col gap-3">
@@ -1165,45 +1129,34 @@ export function PromptsSettings(): React.JSX.Element {
               <Button size="sm" disabled={rule.prompt === ""} onClick={saveRule}>
                 {t.common.save}
               </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => {
-                  setRule(undefined);
-                  setRuleError(undefined);
-                }}
-              >
+              <Button size="sm" variant="ghost" onClick={closeRule}>
                 {t.common.cancel}
               </Button>
             </div>
             {ruleError ? <p className="text-xs text-destructive">{ruleError}</p> : undefined}
-          </div>
+          </FormDialog>
         ) : undefined}
 
         {rulesError ? <p className="text-xs text-destructive">{rulesError}</p> : undefined}
       </section>
 
-      <ConfirmDialog
-        open={deleting !== undefined}
-        title={t.prompts.remove}
-        description={
-          deleting === undefined
-            ? ""
-            : t.prompts.removeConfirm(promptLabel(deleting.id, deleting.label))
-        }
-        confirmLabel={t.prompts.remove}
-        cancelLabel={t.common.cancel}
-        destructive
-        onConfirm={() => {
-          if (deleting !== undefined) {
+      {deleting ? (
+        <ConfirmDialog
+          open
+          title={t.prompts.remove}
+          description={t.prompts.removeConfirm(promptLabel(deleting.id, deleting.label))}
+          confirmLabel={t.prompts.remove}
+          cancelLabel={t.common.cancel}
+          destructive
+          onConfirm={() => {
             remove(deleting);
-          }
-          setDeleting(undefined);
-        }}
-        onCancel={() => {
-          setDeleting(undefined);
-        }}
-      />
+            setDeleting(undefined);
+          }}
+          onCancel={() => {
+            setDeleting(undefined);
+          }}
+        />
+      ) : undefined}
     </>
   );
 }

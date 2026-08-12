@@ -313,6 +313,15 @@ pub(crate) fn center_on_active_monitor(handle: &tauri::AppHandle, window: &Webvi
         return;
     }
     let area = monitor.work_area();
+    // A window taller than the work area (the settings default on a short
+    // monitor) is shrunk to fit, never grown — a user's own resize survives.
+    let mut size = size;
+    if size.height > area.size.height {
+        size.height = area.size.height;
+        window
+            .set_size(tauri::PhysicalSize::new(size.width, size.height))
+            .or_log(&format!("{label}: clamp to work area"));
+    }
     let x = area.position.x + (area.size.width as i32 - size.width as i32) / 2;
     let y = area.position.y + (area.size.height as i32 - size.height as i32) / 2;
     window

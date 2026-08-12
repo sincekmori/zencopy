@@ -209,6 +209,7 @@ export const it: Messages = {
       "Instrada per app, finestra o lunghezza — controllate per prime, dall'alto in basso.",
     overridesDocs: "Come funzionano le regole",
     addOverride: "Nuova regola",
+    edit: "Modifica",
     anyKind: "Qualsiasi",
     fieldKind: "Tipo di cattura",
     fieldApp: "App",

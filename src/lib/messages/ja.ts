@@ -208,6 +208,7 @@ export const ja: Messages = {
       "アプリ・ウィンドウ・文字数で振り分け。上から順に先勝ちで、種類別の割り当てより優先されます。",
     overridesDocs: "ルールの仕組みを見る",
     addOverride: "新しいルール",
+    edit: "編集",
     anyKind: "すべて",
     fieldKind: "コピーの種類",
     fieldApp: "アプリ",

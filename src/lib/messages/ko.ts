@@ -204,6 +204,7 @@ export const ko: Messages = {
     overridesHint: "앱·창·길이로 분기합니다. 위에서부터 순서대로 먼저 일치하는 규칙이 적용됩니다.",
     overridesDocs: "규칙 동작 방식 보기",
     addOverride: "새 규칙",
+    edit: "편집",
     anyKind: "모두",
     fieldKind: "캡처 유형",
     fieldApp: "앱",

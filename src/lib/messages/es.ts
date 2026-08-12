@@ -208,6 +208,7 @@ export const es: Messages = {
       "Enruta por aplicación, ventana o longitud — se comprueban primero, de arriba abajo.",
     overridesDocs: "Cómo funcionan las reglas",
     addOverride: "Nueva regla",
+    edit: "Editar",
     anyKind: "Cualquiera",
     fieldKind: "Tipo de captura",
     fieldApp: "Aplicación",

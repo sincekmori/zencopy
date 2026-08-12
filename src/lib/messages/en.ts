@@ -197,6 +197,7 @@ export const en: Messages = {
     overridesHint: "Route by app, window, or length — checked first, top to bottom.",
     overridesDocs: "How rules work",
     addOverride: "New rule",
+    edit: "Edit",
     anyKind: "Any",
     fieldKind: "Capture type",
     fieldApp: "App",

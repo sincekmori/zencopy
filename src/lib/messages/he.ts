@@ -196,6 +196,7 @@ export const he: Messages = {
     overridesHint: "התאמה לפי אפליקציה, חלון או אורך — הכללים נבדקים קודם, מלמעלה למטה.",
     overridesDocs: "איך כללים עובדים",
     addOverride: "כלל חדש",
+    edit: "עריכה",
     anyKind: "הכול",
     fieldKind: "סוג לכידה",
     fieldApp: "אפליקציה",

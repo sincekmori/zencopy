@@ -251,6 +251,10 @@ export interface Messages {
     overridesHint: string;
     overridesDocs: string;
     addOverride: string;
+    /** The rule editor dialog's title when editing (its own key, not a
+     *  borrow of prompts.edit, so retranslating one never mislabels the
+     *  other). */
+    edit: string;
     anyKind: string;
     fieldKind: string;
     fieldApp: string;

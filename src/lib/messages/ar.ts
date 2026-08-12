@@ -198,6 +198,7 @@ export const ar: Messages = {
     overridesHint: "وجِّه حسب التطبيق أو النافذة أو الطول — تُفحص أولًا، من الأعلى إلى الأسفل.",
     overridesDocs: "كيف تعمل القواعد",
     addOverride: "قاعدة جديدة",
+    edit: "تعديل",
     anyKind: "أي نوع",
     fieldKind: "نوع الالتقاط",
     fieldApp: "التطبيق",

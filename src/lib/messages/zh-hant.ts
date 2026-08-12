@@ -189,6 +189,7 @@ export const zhHant: Messages = {
     overridesHint: "依應用程式、視窗或長度分流 — 由上而下優先比對。",
     overridesDocs: "了解規則機制",
     addOverride: "新增規則",
+    edit: "編輯",
     anyKind: "任意",
     fieldKind: "擷取類型",
     fieldApp: "應用程式",

@@ -188,6 +188,7 @@ export const zhHans: Messages = {
     overridesHint: "按应用、窗口或长度分流 — 自上而下优先匹配。",
     overridesDocs: "了解规则机制",
     addOverride: "新建规则",
+    edit: "编辑",
     anyKind: "任意",
     fieldKind: "捕获类型",
     fieldApp: "应用",

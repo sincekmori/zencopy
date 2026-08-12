@@ -190,6 +190,7 @@ export const th: Messages = {
     overridesHint: "แยกตามแอป หน้าต่าง หรือความยาว — ตรวจสอบก่อน จากบนลงล่าง",
     overridesDocs: "กฎทำงานอย่างไร",
     addOverride: "กฎใหม่",
+    edit: "แก้ไข",
     anyKind: "ทุกประเภท",
     fieldKind: "ประเภทข้อมูล",
     fieldApp: "แอป",

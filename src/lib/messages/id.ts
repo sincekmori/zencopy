@@ -204,6 +204,7 @@ export const id: Messages = {
       "Rutekan berdasarkan aplikasi, jendela, atau panjang — diperiksa lebih dulu, dari atas ke bawah.",
     overridesDocs: "Cara kerja aturan",
     addOverride: "Aturan baru",
+    edit: "Sunting",
     anyKind: "Apa saja",
     fieldKind: "Jenis tangkapan",
     fieldApp: "Aplikasi",

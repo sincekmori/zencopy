@@ -16,7 +16,7 @@
         "label": "settings",
         "title": "ZenCopy",
         "width": 640,
-        "height": 720,
+        "height": 820,
         "minWidth": 480,
         "minHeight": 520,
         "resizable": true,

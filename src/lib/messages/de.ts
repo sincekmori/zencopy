@@ -210,6 +210,7 @@ export const de: Messages = {
       "Nach App, Fenster oder Länge routen — werden zuerst geprüft, von oben nach unten.",
     overridesDocs: "So funktionieren Regeln",
     addOverride: "Neue Regel",
+    edit: "Bearbeiten",
     anyKind: "Alle",
     fieldKind: "Erfassungstyp",
     fieldApp: "App",
