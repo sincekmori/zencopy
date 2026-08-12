@@ -34,6 +34,11 @@ It is a TypeScript script ([scripts/dev-reset.ts](scripts/dev-reset.ts)) running
 To exercise the auto-update UI without publishing a release: `VITE_ZENCOPY_FAKE_UPDATE=9.9.9 bun tauri dev` fakes an available update (About button, tray item, popup hint; download/install are simulated delays).
 Dev builds only — the flag is ignored in production ([src/lib/updater.ts](src/lib/updater.ts)).
 
+To screenshot the app's screens per locale without launching the app: `bun run screenshot [scenario …] [--out <dir>]` (scenarios default to all; shots land in `--out`, else a temp directory printed at the end).
+It renders the React app in headless Playwright WebKit (the webview's own engine; one-time `bunx playwright install webkit`) against a Tauri-IPC mock.
+The parts: [screenshot.html](screenshot.html) (dev-server entry) → [src/screenshot/harness.ts](src/screenshot/harness.ts) (the mock, fed by the real `src-tauri/prompts/*.md` and `rules.json`) → [scripts/screenshot.ts](scripts/screenshot.ts) (the runner); scenarios are declared in [src/lib/screenshot.ts](src/lib/screenshot.ts) and ride the URL (`?screenshot=…`), which components react to via `screenshotScenario()`.
+Dev-only throughout: production builds contain neither the harness nor a live scenario check.
+
 Run everything relevant to your change before opening a PR.
 Windows- and Linux-side compilation is CI's job (the Rust code here is only ever compiled for macOS locally).
 See [.github/workflows/ci.yml](.github/workflows/ci.yml) for the exact recipe.

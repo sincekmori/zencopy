@@ -20,6 +20,8 @@ import { QuickPromptsSettings } from "@/components/quick-prompts-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { ConfirmDialog } from "@/components/ui/alert-dialog.tsx";
 import { FormDialog } from "@/components/ui/dialog.tsx";
+import { screenshotScenario } from "@/lib/screenshot.ts";
+import { RULE_EDITOR_SCENARIO } from "@/lib/screenshot-scenarios.ts";
 import { Select } from "@/components/ui/select.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import {
@@ -194,6 +196,13 @@ export function PromptsSettings(): React.JSX.Element {
       cancelled = true;
       unlisten?.();
     };
+  }, []);
+
+  // Screenshot scenario (dev-only, see src/lib/screenshot.ts).
+  useEffect(() => {
+    if (screenshotScenario() === RULE_EDITOR_SCENARIO) {
+      setRule({ ...NEW_RULE });
+    }
   }, []);
 
   const closeViewer = (): void => {

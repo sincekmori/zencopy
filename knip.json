@@ -2,7 +2,8 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "workspaces": {
     ".": {
-      "ignore": ["src-tauri/**"]
+      "ignore": ["src-tauri/**"],
+      "entry": ["src/screenshot/harness.ts"]
     },
     "site": {
       "entry": ["src/scripts/*.ts"]

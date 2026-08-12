@@ -12,6 +12,8 @@ import { SegmentedControl } from "@/components/ui/segmented-control.tsx";
 import { Select } from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import { ConfirmDialog } from "@/components/ui/alert-dialog.tsx";
+import { screenshotScenario } from "@/lib/screenshot.ts";
+import { RULE_EDITOR_SCENARIO } from "@/lib/screenshot-scenarios.ts";
 import { Welcome } from "@/components/welcome.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { useT } from "@/lib/i18n.tsx";
@@ -118,6 +120,14 @@ export function Settings(): React.JSX.Element {
   const [resetError, setResetError] = useState<string | undefined>(undefined);
   // The window's tab. AI first: it's the one thing that must be set up.
   const [tab, setTab] = useState<"ai" | "prompts" | "general">("ai");
+
+  // Screenshot scenario (dev-only, see src/lib/screenshot.ts): jump to the
+  // prompts tab so the rule editor can present itself without clicking.
+  useEffect(() => {
+    if (screenshotScenario() === RULE_EDITOR_SCENARIO) {
+      setTab("prompts");
+    }
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
