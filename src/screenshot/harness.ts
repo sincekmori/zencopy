@@ -22,6 +22,7 @@
  */
 
 import rulesRaw from "../../src-tauri/rules.json?raw";
+import { version } from "../../package.json";
 
 // Playwright's WebKit driver crashes rendering console previews of object
 // arguments — stringify everything the page logs.
@@ -127,6 +128,12 @@ const handlers: Record<string, (args: Record<string, unknown>) => unknown> = {
   get_rules_ui: () => defaultRules(),
   read_usage_stats: () => [],
   read_catalog: () => "{}",
+  app_info: () => ({
+    name: "ZenCopy",
+    version,
+    os: "macOS",
+    copyright: `© ${new Date().getFullYear()} Shinsuke Mori`,
+  }),
 };
 
 interface TauriInternals {

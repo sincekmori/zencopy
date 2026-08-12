@@ -21,7 +21,11 @@ import { Button } from "@/components/ui/button.tsx";
 import { ConfirmDialog } from "@/components/ui/alert-dialog.tsx";
 import { FormDialog } from "@/components/ui/dialog.tsx";
 import { screenshotScenario } from "@/lib/screenshot.ts";
-import { RULE_EDITOR_SCENARIO } from "@/lib/screenshot-scenarios.ts";
+import {
+  PROMPT_EDITOR_SCENARIO,
+  PROMPT_IMPORT_SCENARIO,
+  RULE_EDITOR_SCENARIO,
+} from "@/lib/screenshot-scenarios.ts";
 import { Select } from "@/components/ui/select.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import {
@@ -198,10 +202,25 @@ export function PromptsSettings(): React.JSX.Element {
     };
   }, []);
 
-  // Screenshot scenario (dev-only, see src/lib/screenshot.ts).
+  // Screenshot scenarios (dev-only, see src/lib/screenshot.ts).
   useEffect(() => {
-    if (screenshotScenario() === RULE_EDITOR_SCENARIO) {
-      setRule({ ...NEW_RULE });
+    if (!import.meta.env.DEV) {
+      return; // build-time constant: the branch (and its strings) never ship
+    }
+    switch (screenshotScenario()) {
+      case RULE_EDITOR_SCENARIO: {
+        setRule({ ...NEW_RULE });
+        break;
+      }
+      case PROMPT_EDITOR_SCENARIO: {
+        setDraft({ ...NEW_DRAFT });
+        break;
+      }
+      case PROMPT_IMPORT_SCENARIO: {
+        setImportOpen(true);
+        break;
+      }
+      default:
     }
   }, []);
 

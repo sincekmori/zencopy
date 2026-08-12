@@ -2,9 +2,11 @@
 // server and the Tauri-mocking harness (screenshot.html) — WebKit, the same
 // engine as the app's webview, so fonts and layout match the real thing.
 //
-// Usage: bun run screenshot [scenario ...] [--out <dir>]
-// Scenarios default to all; shots land in <dir> (default: a temp directory,
-// printed at the end) as <scenario>.<locale>.png — 640×792 logical at 2x,
+// Usage: bun run screenshot [scenario ...] [--out <root>]
+// Scenarios default to all; each shot lands at
+// <root>/<locale>/screenshots/<scenario>.png (default root: site/public, so
+// the docs can reference /{locale}/screenshots/<scenario>.png) — the
+// settings window's 640×792 logical at 2x unless the scenario overrides,
 // light theme.
 //
 // Prerequisite once: `bunx playwright install webkit`. A dev server on :1420
@@ -14,7 +16,6 @@
    the output order is deterministic and WebKit stays light. */
 import { type ChildProcess, spawn } from "node:child_process";
 import { mkdirSync } from "node:fs";
-import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 import { webkit } from "playwright";
@@ -25,12 +26,11 @@ const DEV_URL = "http://localhost:1420";
 
 const args = process.argv.slice(2);
 const outIndex = args.indexOf("--out");
-const outDir =
+const outRoot =
   outIndex === -1 || args[outIndex + 1] === undefined
-    ? join(tmpdir(), "zencopy-screenshots")
+    ? join(import.meta.dirname, "..", "site", "public")
     : (args[outIndex + 1] as string);
 const requested = outIndex === -1 ? args : args.toSpliced(outIndex, 2);
-mkdirSync(outDir, { recursive: true });
 const names = requested.length > 0 ? requested : Object.keys(SCREENSHOT_SCENARIOS);
 for (const name of names) {
   if (!(name in SCREENSHOT_SCENARIOS)) {
@@ -79,14 +79,15 @@ for (const [name, scenario] of scenarios) {
       waitUntil: "networkidle",
     });
     await page.waitForTimeout(1200); // lazy chunks, fonts, dialog mounts
-    const file = join(outDir, `${name}.${value.toLowerCase()}.png`);
-    await page.screenshot({ path: file });
+    const dir = join(outRoot, value.toLowerCase(), "screenshots");
+    mkdirSync(dir, { recursive: true });
+    await page.screenshot({ path: join(dir, `${name}.png`) });
     await page.close();
-    console.log(`ok ${name}.${value.toLowerCase()}.png`);
+    console.log(`ok ${value.toLowerCase()}/screenshots/${name}.png`);
   }
   await context.close();
 }
 
 await browser.close();
 devServer?.kill();
-console.log(`shots in ${outDir}`);
+console.log(`shots under ${outRoot}`);

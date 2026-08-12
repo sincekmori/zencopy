@@ -59,6 +59,8 @@ import { cn } from "@/lib/utils.ts";
 import { siteUrl } from "@/lib/site.ts";
 import { useUpdateVersion } from "@/lib/updater.ts";
 import { useLiveValue, useTauriEvent } from "@/lib/use-tauri-event.ts";
+import { screenshotScenario } from "@/lib/screenshot.ts";
+import { POPUP_RESULT_SCENARIO } from "@/lib/screenshot-scenarios.ts";
 
 type Result =
   // The last turn streams; completed turns before it are settled.
@@ -622,6 +624,65 @@ export function Popup(): React.JSX.Element {
   useEffect(() => {
     warmUp();
   }, []);
+
+  // Screenshot scenario (dev-only, see src/lib/screenshot.ts): a settled
+  // two-turn conversation, injected directly — no capture, no model call.
+  // Re-runs when the async locale load lands, so the fixture speaks the
+  // page's language, not the boot default.
+  useEffect(() => {
+    // The literal DEV check (a build-time constant, unlike the function call
+    // below) is what lets the bundler drop this whole branch — and with it
+    // the dynamically imported fixture chunk — from production.
+    if (!import.meta.env.DEV) {
+      return;
+    }
+    if (screenshotScenario() !== POPUP_RESULT_SCENARIO) {
+      return;
+    }
+    // Dynamic import: the fixture table stays out of production chunks —
+    // with the scenario check folded away, this branch (and the chunk) die.
+    void (async () => {
+      const { POPUP_RESULT_FIXTURES, POPUP_RESULT_SOURCE } =
+        await import("@/lib/screenshot-scenarios.ts");
+      const fixture = POPUP_RESULT_FIXTURES[locale] ?? POPUP_RESULT_FIXTURES["en"];
+      if (fixture === undefined) {
+        return;
+      }
+      setPayload({
+        kind: "text",
+        source: { kind: "text", text: POPUP_RESULT_SOURCE },
+        prompt_id: "zencopy-summarize",
+        label: "Summarize",
+        role: "",
+        instructions: "",
+        prompt: POPUP_RESULT_SOURCE,
+        vars: {},
+        runnable: true,
+      });
+      setResults(
+        new Map([
+          [
+            "zencopy-summarize",
+            {
+              phase: "done",
+              ok: true,
+              turns: [
+                { text: fixture.answer },
+                { question: fixture.question, text: fixture.reply },
+              ],
+            },
+          ],
+        ]),
+      );
+      // The quick-slot chips resolve against the prompt list, which normally
+      // loads on capture — load it for the fixture too.
+      try {
+        setPrompts(await listPrompts());
+      } catch (error) {
+        log.error("listing prompts failed", error);
+      }
+    })();
+  }, [locale]);
 
   // Track whether the user is at the bottom. A threshold absorbs sub-pixel
   // scroll positions and the last few pixels of a fling.

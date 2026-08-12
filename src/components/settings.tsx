@@ -12,8 +12,7 @@ import { SegmentedControl } from "@/components/ui/segmented-control.tsx";
 import { Select } from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import { ConfirmDialog } from "@/components/ui/alert-dialog.tsx";
-import { screenshotScenario } from "@/lib/screenshot.ts";
-import { RULE_EDITOR_SCENARIO } from "@/lib/screenshot-scenarios.ts";
+import { screenshotParam } from "@/lib/screenshot.ts";
 import { Welcome } from "@/components/welcome.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { useT } from "@/lib/i18n.tsx";
@@ -121,11 +120,15 @@ export function Settings(): React.JSX.Element {
   // The window's tab. AI first: it's the one thing that must be set up.
   const [tab, setTab] = useState<"ai" | "prompts" | "general">("ai");
 
-  // Screenshot scenario (dev-only, see src/lib/screenshot.ts): jump to the
-  // prompts tab so the rule editor can present itself without clicking.
+  // Screenshot scenarios (dev-only, see src/lib/screenshot.ts): the harness
+  // picks the tab with ?tab=…, so every tab is shootable without clicking.
   useEffect(() => {
-    if (screenshotScenario() === RULE_EDITOR_SCENARIO) {
-      setTab("prompts");
+    if (!import.meta.env.DEV) {
+      return; // build-time constant: the branch (and its strings) never ship
+    }
+    const wanted = screenshotParam("tab");
+    if (wanted === "ai" || wanted === "prompts" || wanted === "general") {
+      setTab(wanted);
     }
   }, []);
 

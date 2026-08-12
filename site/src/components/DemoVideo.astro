@@ -1,6 +1,6 @@
 ---
 // One demo video embed for the docs pages. Every demo is recorded per locale
-// as a portrait screen capture (/public/demo/<demo>.<locale>.mp4 with a
+// as a portrait screen capture (/public/<locale>/demo/<demo>.mp4 with a
 // matching .jpg poster), so the dimensions live here, once. The slot is the
 // localized fallback link text for browsers that cannot play the video.
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   locale: string;
 }
 const { demo, locale } = Astro.props;
-const base = `/demo/${demo}.${locale}`;
+const base = `/${locale}/demo/${demo}`;
 ---
 
 <video
