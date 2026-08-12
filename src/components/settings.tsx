@@ -1,7 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { emit } from "@tauri-apps/api/event";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
-import { LoaderCircle } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { PromptsSettings } from "@/components/prompts-settings.tsx";
 import { AiSettings } from "@/components/ai-settings.tsx";
@@ -12,6 +11,7 @@ import { FIELD } from "@/components/ui/field.ts";
 import { SegmentedControl } from "@/components/ui/segmented-control.tsx";
 import { Select } from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
+import { ConfirmDialog } from "@/components/ui/alert-dialog.tsx";
 import { Welcome } from "@/components/welcome.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { useT } from "@/lib/i18n.tsx";
@@ -97,16 +97,19 @@ export function Settings(): React.JSX.Element {
   const [confirmSend, setConfirmSend] = useState(true);
   // First-run welcome: undefined while loading, then seen? — shown once.
   const [welcomed, setWelcomed] = useState<boolean | undefined>(undefined);
-  // Factory reset: the destructive path is a two-step inline confirmation.
+  // Factory reset: the destructive path asks first in a modal dialog.
   const [confirmingReset, setConfirmingReset] = useState(false);
   const [resetting, setResetting] = useState(false);
   const [statsOn, setStatsOn] = useState(true);
+  // Turning statistics OFF asks first: the record is local-only and purely
+  // the user's own, so the dialog's job is "you don't have to".
+  const [confirmingStatsOff, setConfirmingStatsOff] = useState(false);
   // The popup's live month-cost readout (off by default) and the monthly cap
   // (the input holds the raw text; empty = no cap). Both need the ledger, so
   // both are disabled while statistics are off.
   const [popupCost, setPopupCost] = useState(false);
   const [costLimitText, setCostLimitText] = useState("");
-  // The quiet stats-reset link's inline confirm, and its transient "done".
+  // The quiet stats-reset link's dialog, and its transient "done".
   const [confirmingStatsReset, setConfirmingStatsReset] = useState(false);
   const [statsResetDone, setStatsResetDone] = useState(false);
   // The CSV export's inline complaint: models it could not price, or the
@@ -201,10 +204,20 @@ export function Settings(): React.JSX.Element {
     void emit("dev-mode-changed", next); // live-update the popup
   };
 
-  const toggleStats = (next: boolean): void => {
+  const applyStats = (next: boolean): void => {
     setStatsOn(next);
     void saveStatsEnabled(next);
     void emit("stats-enabled-changed", next); // live-update the popup
+  };
+
+  // ON applies directly; OFF asks first — the record never leaves the device
+  // and exists only for the user, so the dialog says "you don't have to".
+  const toggleStats = (next: boolean): void => {
+    if (next) {
+      applyStats(true);
+    } else {
+      setConfirmingStatsOff(true);
+    }
   };
 
   const togglePopupCost = (next: boolean): void => {
@@ -311,45 +324,21 @@ export function Settings(): React.JSX.Element {
     );
   }
 
-  // The reset link's three faces: idle link, inline confirm, transient done.
-  let statsResetRow: React.JSX.Element;
-  if (confirmingStatsReset) {
-    statsResetRow = (
-      <span className="flex items-center gap-2">
-        {t.settings.statsResetConfirm}
-        <button
-          type="button"
-          className="text-destructive underline-offset-2 hover:underline"
-          onClick={resetStats}
-        >
-          {t.settings.statsReset}
-        </button>
-        <button
-          type="button"
-          className="underline-offset-2 hover:text-foreground hover:underline"
-          onClick={() => {
-            setConfirmingStatsReset(false);
-          }}
-        >
-          {t.common.cancel}
-        </button>
-      </span>
-    );
-  } else if (statsResetDone) {
-    statsResetRow = <span>{t.settings.statsResetDone}</span>;
-  } else {
-    statsResetRow = (
-      <button
-        type="button"
-        className="underline-offset-2 hover:text-foreground hover:underline"
-        onClick={() => {
-          setConfirmingStatsReset(true);
-        }}
-      >
-        {t.settings.statsReset}
-      </button>
-    );
-  }
+  // The reset link's two faces: idle link and transient done; the question
+  // itself lives in a dialog (ConfirmDialog at the bottom of the window).
+  const statsResetRow: React.JSX.Element = statsResetDone ? (
+    <span>{t.settings.statsResetDone}</span>
+  ) : (
+    <button
+      type="button"
+      className="underline-offset-2 hover:text-foreground hover:underline"
+      onClick={() => {
+        setConfirmingStatsReset(true);
+      }}
+    >
+      {t.settings.statsReset}
+    </button>
+  );
 
   const toggleConfirmSend = (next: boolean): void => {
     setConfirmSend(next);
@@ -373,6 +362,7 @@ export function Settings(): React.JSX.Element {
         log.error("factory reset failed", error);
         setResetError(t.prompts.failed(errorMessage(error).slice(0, 200)));
         setResetting(false);
+        setConfirmingReset(false); // the error shows in the section below
       }
     })();
   };
@@ -546,8 +536,8 @@ export function Settings(): React.JSX.Element {
               />
             </div>
             {/* Deliberately quiet utilities (small print, gray): the record is
-                a background fact, not a feature to advertise. Reset confirms
-                inline instead of raising a dialog — same register, one line. */}
+                a background fact, not a feature to advertise. Reset asks in
+                the shared confirm dialog below. */}
             <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               <button
                 type="button"
@@ -658,52 +648,73 @@ export function Settings(): React.JSX.Element {
                 <h2 className="text-sm font-medium">{t.settings.resetTitle}</h2>
                 <p className="mt-1 text-xs text-muted-foreground">{t.settings.resetHint}</p>
               </div>
-              {confirmingReset ? undefined : (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className={
-                    // Not redundant: the outline variant's own
-                    // hover:text-accent-foreground would recolor the label on
-                    // hover — this override (resolved by twMerge) keeps it
-                    // destructive. The linter sees this string in isolation.
-                    // oxlint-disable-next-line tailwindcss/no-contradicting-variants
-                    "shrink-0 text-destructive hover:text-destructive"
-                  }
-                  onClick={() => {
-                    setResetError(undefined);
-                    setConfirmingReset(true);
-                  }}
-                >
-                  {t.settings.resetButton}
-                </Button>
-              )}
+              <Button
+                size="sm"
+                variant="outline"
+                className={
+                  // Not redundant: the outline variant's own
+                  // hover:text-accent-foreground would recolor the label on
+                  // hover — this override (resolved by twMerge) keeps it
+                  // destructive. The linter sees this string in isolation.
+                  // oxlint-disable-next-line tailwindcss/no-contradicting-variants
+                  "shrink-0 text-destructive hover:text-destructive"
+                }
+                onClick={() => {
+                  setResetError(undefined);
+                  setConfirmingReset(true);
+                }}
+              >
+                {t.settings.resetButton}
+              </Button>
             </div>
-            {confirmingReset ? (
-              <div className="flex flex-col gap-3 rounded-lg border border-destructive/40 bg-destructive/5 p-4">
-                <p className="text-xs leading-relaxed">{t.settings.resetWarning}</p>
-                <div className="flex items-center gap-3">
-                  <Button size="sm" variant="destructive" disabled={resetting} onClick={resetAll}>
-                    {resetting ? <LoaderCircle className="size-3.5 animate-spin" /> : undefined}
-                    {t.settings.resetConfirm}
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    disabled={resetting}
-                    onClick={() => {
-                      setConfirmingReset(false);
-                    }}
-                  >
-                    {t.common.cancel}
-                  </Button>
-                </div>
-                {resetError ? <p className="text-xs text-destructive">{resetError}</p> : undefined}
-              </div>
-            ) : undefined}
+            {resetError ? <p className="text-xs text-destructive">{resetError}</p> : undefined}
           </section>
         </div>
       </div>
+
+      {/* The consequential choices ask in a modal, one register for all
+          three: turning statistics off (a "you don't have to" — the record is
+          local-only and purely the user's own), wiping the statistics, and
+          the factory reset. */}
+      <ConfirmDialog
+        open={confirmingStatsOff}
+        title={t.settings.statsOffTitle}
+        description={t.settings.statsOffBody}
+        confirmLabel={t.settings.statsOffConfirm}
+        cancelLabel={t.common.cancel}
+        onConfirm={() => {
+          setConfirmingStatsOff(false);
+          applyStats(false);
+        }}
+        onCancel={() => {
+          setConfirmingStatsOff(false);
+        }}
+      />
+      <ConfirmDialog
+        open={confirmingStatsReset}
+        title={t.settings.statsReset}
+        description={t.settings.statsResetConfirm}
+        confirmLabel={t.settings.statsReset}
+        cancelLabel={t.common.cancel}
+        destructive
+        onConfirm={resetStats}
+        onCancel={() => {
+          setConfirmingStatsReset(false);
+        }}
+      />
+      <ConfirmDialog
+        open={confirmingReset}
+        title={t.settings.resetButton}
+        description={t.settings.resetWarning}
+        confirmLabel={t.settings.resetConfirm}
+        cancelLabel={t.common.cancel}
+        destructive
+        busy={resetting}
+        onConfirm={resetAll}
+        onCancel={() => {
+          setConfirmingReset(false);
+        }}
+      />
     </main>
   );
 }

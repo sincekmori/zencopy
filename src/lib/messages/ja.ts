@@ -38,6 +38,10 @@ export const ja: Messages = {
     statsReset: "統計をリセット",
     statsResetConfirm: "記録した統計をすべて削除しますか？",
     statsResetDone: "統計をリセットしました。",
+    statsOffTitle: "利用統計をオフにしますか？",
+    statsOffBody:
+      "この記録はあなただけのものです。この端末の外には送られず、自分のコストを確認するためだけに存在します。オフにするとコスト表示と上限も使えなくなります。",
+    statsOffConfirm: "オフにする",
     costsEmpty: "まだ記録がありません。",
     costsExport: "コスト集計をエクスポート",
     costsError: (models) =>
@@ -176,6 +180,7 @@ export const ja: Messages = {
     view: "内容を見る",
     edit: "編集",
     remove: "削除",
+    removeConfirm: (label) => `プロンプト「${label}」を削除しますか？この操作は元に戻せません。`,
     failed: (reason) => `失敗しました: ${reason}`,
     importNotAPrompt:
       "プロンプトではありません。`---` の YAML frontmatter と、その後にプロンプト本文が必要です。",

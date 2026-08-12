@@ -38,6 +38,10 @@ export const ko: Messages = {
     statsReset: "통계 재설정",
     statsResetConfirm: "기록된 통계를 모두 삭제할까요?",
     statsResetDone: "통계를 재설정했습니다.",
+    statsOffTitle: "사용 통계를 끄시겠어요?",
+    statsOffBody:
+      "이 기록은 오직 사용자의 것입니다. 이 기기 밖으로 전송되지 않으며, 자신의 비용을 확인하기 위해서만 존재합니다. 끄면 비용 표시와 상한도 사용할 수 없게 됩니다.",
+    statsOffConfirm: "끄기",
     costsEmpty: "아직 기록이 없습니다.",
     costsExport: "비용 집계 내보내기",
     costsError: (models) =>
@@ -174,6 +178,7 @@ export const ko: Messages = {
     view: "보기",
     edit: "편집",
     remove: "삭제",
+    removeConfirm: (label) => `프롬프트 "${label}"을(를) 삭제할까요? 이 작업은 되돌릴 수 없습니다.`,
     failed: (reason) => `실패: ${reason}`,
     importNotAPrompt: "프롬프트가 아닙니다. `---` YAML frontmatter와 그 뒤의 본문이 필요합니다.",
     importNoLabel: "프롬프트에 label이 없습니다.",

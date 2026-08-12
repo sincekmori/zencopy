@@ -38,6 +38,10 @@ export const id: Messages = {
     statsReset: "Reset statistik",
     statsResetConfirm: "Hapus semua statistik yang tercatat?",
     statsResetDone: "Statistik direset.",
+    statsOffTitle: "Matikan statistik penggunaan?",
+    statsOffBody:
+      "Catatan ini sepenuhnya milikmu: tersimpan di perangkat ini, tidak pernah dikirim ke mana pun, dan ada hanya agar kamu bisa melihat biayamu sendiri. Jika dimatikan, tampilan biaya dan batas pengeluaran juga ikut nonaktif.",
+    statsOffConfirm: "Matikan",
     costsEmpty: "Belum ada yang tercatat.",
     costsExport: "Ekspor ringkasan biaya",
     costsError: (models) =>
@@ -174,6 +178,7 @@ export const id: Messages = {
     view: "Lihat",
     edit: "Sunting",
     remove: "Hapus",
+    removeConfirm: (label) => `Hapus prompt "${label}"? Tindakan ini tidak bisa dibatalkan.`,
     failed: (reason) => `Gagal: ${reason}`,
     importNotAPrompt: "Bukan prompt: diharapkan frontmatter YAML `---` diikuti isi prompt.",
     importNoLabel: "Prompt ini tidak punya label.",

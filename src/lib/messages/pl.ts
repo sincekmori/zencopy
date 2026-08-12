@@ -38,6 +38,10 @@ export const pl: Messages = {
     statsReset: "Zresetuj statystyki",
     statsResetConfirm: "Usunąć wszystkie zapisane statystyki?",
     statsResetDone: "Statystyki zresetowane.",
+    statsOffTitle: "Wyłączyć statystyki użycia?",
+    statsOffBody:
+      "Ten rejestr należy wyłącznie do Ciebie: pozostaje na tym urządzeniu, nigdy nie jest nigdzie wysyłany i istnieje tylko po to, byś mógł sprawdzić własne koszty. Wyłączenie zablokuje też wyświetlanie kosztów i limit wydatków.",
+    statsOffConfirm: "Wyłącz",
     costsEmpty: "Nic jeszcze nie zapisano.",
     costsExport: "Eksportuj zestawienie kosztów",
     costsError: (models) =>
@@ -176,6 +180,7 @@ export const pl: Messages = {
     view: "Podgląd",
     edit: "Edytuj",
     remove: "Usuń",
+    removeConfirm: (label) => `Usunąć prompt „${label}”? Tej operacji nie można cofnąć.`,
     failed: (reason) => `Niepowodzenie: ${reason}`,
     importNotAPrompt:
       "To nie jest prompt: oczekiwano frontmattera YAML `---`, a po nim treści promptu.",

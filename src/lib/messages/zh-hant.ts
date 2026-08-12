@@ -36,6 +36,10 @@ export const zhHant: Messages = {
     statsReset: "重設統計",
     statsResetConfirm: "刪除所有已記錄的統計？",
     statsResetDone: "統計已重設。",
+    statsOffTitle: "要關閉使用統計嗎？",
+    statsOffBody:
+      "這份紀錄只屬於你：它保存在本裝置上，絕不會被傳送到任何地方，存在的唯一目的是讓你了解自己的花費。關閉後，費用顯示與上限也將無法使用。",
+    statsOffConfirm: "關閉",
     costsEmpty: "還沒有任何記錄。",
     costsExport: "匯出費用彙總",
     costsError: (models) => `無法計算以下模型的費用：${models}。請在此檔案中加入 cost 區塊：`,
@@ -163,6 +167,7 @@ export const zhHant: Messages = {
     view: "檢視",
     edit: "編輯",
     remove: "刪除",
+    removeConfirm: (label) => `要刪除提示詞「${label}」嗎？此操作無法復原。`,
     failed: (reason) => `失敗：${reason}`,
     importNotAPrompt: "這不是提示詞：應為 `---` YAML frontmatter，後接正文。",
     importNoLabel: "此提示詞沒有 label。",

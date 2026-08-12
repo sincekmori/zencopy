@@ -38,6 +38,10 @@ export const fa: Messages = {
     statsReset: "بازنشانی آمار",
     statsResetConfirm: "همه آمار ثبت‌شده حذف شود؟",
     statsResetDone: "آمار بازنشانی شد.",
+    statsOffTitle: "آمار استفاده خاموش شود؟",
+    statsOffBody:
+      "این سابقه فقط متعلق به شماست: روی همین دستگاه می‌ماند، هرگز به جایی فرستاده نمی‌شود و فقط برای این وجود دارد که هزینه‌های خودتان را ببینید. با خاموش کردن آن، نمایش هزینه و سقف هزینه هم از کار می‌افتند.",
+    statsOffConfirm: "خاموش کردن",
     costsEmpty: "هنوز چیزی ثبت نشده است.",
     costsExport: "خروجی خلاصهٔ هزینه‌ها",
     costsError: (models) =>
@@ -173,6 +177,7 @@ export const fa: Messages = {
     view: "مشاهده",
     edit: "ویرایش",
     remove: "حذف",
+    removeConfirm: (label) => `پرامپت «${label}» حذف شود؟ این کار قابل بازگشت نیست.`,
     failed: (reason) => `ناموفق: ${reason}`,
     importNotAPrompt:
       "این یک پرامپت نیست: frontmatter YAML با `---` و سپس متن پرامپت انتظار می‌رود.",

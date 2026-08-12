@@ -37,6 +37,10 @@ export const ar: Messages = {
     statsReset: "إعادة تعيين الإحصاءات",
     statsResetConfirm: "حذف جميع الإحصاءات المسجلة؟",
     statsResetDone: "تمت إعادة تعيين الإحصاءات.",
+    statsOffTitle: "هل تريد إيقاف إحصاءات الاستخدام؟",
+    statsOffBody:
+      "هذا السجل ملكك وحدك: يبقى على هذا الجهاز ولا يُرسل إلى أي مكان أبدًا، ولا يوجد إلا لتتمكن من رؤية تكاليفك. عند إيقافه يتعطل أيضًا عرض التكلفة وسقف الإنفاق.",
+    statsOffConfirm: "إيقاف",
     costsEmpty: "لا توجد سجلات بعد.",
     costsExport: "تصدير ملخص التكاليف",
     costsError: (models) => `تعذّر حساب التكاليف لـ: ${models}. أضف كتلة cost في هذا الملف:`,
@@ -171,6 +175,7 @@ export const ar: Messages = {
     view: "عرض",
     edit: "تعديل",
     remove: "حذف",
+    removeConfirm: (label) => `هل تريد حذف الموجّه «${label}»؟ لا يمكن التراجع عن هذا الإجراء.`,
     failed: (reason) => `فشل: ${reason}`,
     importNotAPrompt: "هذا ليس موجّهًا: يُتوقع frontmatter YAML بين `---`، يليه نص الموجّه.",
     importNoLabel: "لا يحتوي الموجّه على label.",

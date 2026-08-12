@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from "react";
 import * as z from "zod";
 import { QuickPromptsSettings } from "@/components/quick-prompts-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
+import { ConfirmDialog } from "@/components/ui/alert-dialog.tsx";
 import { Select } from "@/components/ui/select.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import {
@@ -311,6 +312,9 @@ export function PromptsSettings(): React.JSX.Element {
       }
     })();
   };
+
+  // Deleting a prompt destroys an authored .md with no undo — ask first.
+  const [deleting, setDeleting] = useState<PromptInfo | undefined>(undefined);
 
   const remove = (prompt: PromptInfo): void => {
     setFormError(undefined);
@@ -689,7 +693,7 @@ export function PromptsSettings(): React.JSX.Element {
                       aria-label={t.prompts.remove}
                       title={t.prompts.remove}
                       onClick={() => {
-                        remove(prompt);
+                        setDeleting(prompt);
                       }}
                     >
                       <Trash2 className="size-3.5" />
@@ -1178,6 +1182,28 @@ export function PromptsSettings(): React.JSX.Element {
 
         {rulesError ? <p className="text-xs text-destructive">{rulesError}</p> : undefined}
       </section>
+
+      <ConfirmDialog
+        open={deleting !== undefined}
+        title={t.prompts.remove}
+        description={
+          deleting === undefined
+            ? ""
+            : t.prompts.removeConfirm(promptLabel(deleting.id, deleting.label))
+        }
+        confirmLabel={t.prompts.remove}
+        cancelLabel={t.common.cancel}
+        destructive
+        onConfirm={() => {
+          if (deleting !== undefined) {
+            remove(deleting);
+          }
+          setDeleting(undefined);
+        }}
+        onCancel={() => {
+          setDeleting(undefined);
+        }}
+      />
     </>
   );
 }

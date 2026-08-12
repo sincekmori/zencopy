@@ -46,10 +46,15 @@ export interface Messages {
     /** Quiet small-print links under the toggle. */
     statsOpen: string;
     statsReset: string;
-    /** Inline confirm shown after clicking reset. */
+    /** The reset dialog's question (its title and action reuse statsReset). */
     statsResetConfirm: string;
     /** Transient confirmation after the file was deleted. */
     statsResetDone: string;
+    /** Turning statistics OFF asks first: the record is local-only and purely
+     *  the user's own, so the dialog's job is "you don't have to". */
+    statsOffTitle: string;
+    statsOffBody: string;
+    statsOffConfirm: string;
     /** Quiet link that saves the cost summary (the raw ledger aggregated
      *  into all-time month × model USD totals) — named for the content, not
      *  the CSV format the save dialog reveals anyway. */
@@ -216,6 +221,8 @@ export interface Messages {
     view: string;
     edit: string;
     remove: string;
+    /** The delete dialog's question; the argument is the prompt's label. */
+    removeConfirm: (label: string) => string;
     failed: (reason: string) => string;
     /** Import failures, mapped from the structured error codes import_prompt
      *  (src-tauri) rejects with; `id` is the offending prompt id. `label` and

@@ -38,6 +38,10 @@ export const ptBR: Messages = {
     statsReset: "Redefinir estatísticas",
     statsResetConfirm: "Excluir todas as estatísticas registradas?",
     statsResetDone: "Estatísticas redefinidas.",
+    statsOffTitle: "Desativar as estatísticas de uso?",
+    statsOffBody:
+      "Este registro é só seu: fica neste dispositivo, nunca é enviado a lugar nenhum e existe apenas para você ver os próprios custos. Ao desativar, a exibição de custo e o limite de gastos também deixam de funcionar.",
+    statsOffConfirm: "Desativar",
     costsEmpty: "Nada registrado ainda.",
     costsExport: "Exportar o resumo de custos",
     costsError: (models) =>
@@ -175,6 +179,7 @@ export const ptBR: Messages = {
     view: "Ver",
     edit: "Editar",
     remove: "Excluir",
+    removeConfirm: (label) => `Excluir o prompt "${label}"? Esta ação não pode ser desfeita.`,
     failed: (reason) => `Falhou: ${reason}`,
     importNotAPrompt:
       "Não é um prompt: espera-se frontmatter YAML `---` seguido do corpo do prompt.",

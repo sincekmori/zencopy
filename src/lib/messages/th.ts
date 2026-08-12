@@ -36,6 +36,10 @@ export const th: Messages = {
     statsReset: "รีเซ็ตสถิติ",
     statsResetConfirm: "ลบสถิติที่บันทึกไว้ทั้งหมดหรือไม่",
     statsResetDone: "รีเซ็ตสถิติแล้ว",
+    statsOffTitle: "ปิดสถิติการใช้งานหรือไม่",
+    statsOffBody:
+      "บันทึกนี้เป็นของคุณคนเดียว อยู่บนอุปกรณ์นี้เท่านั้น ไม่ถูกส่งไปที่ใดทั้งสิ้น และมีไว้เพียงเพื่อให้คุณเห็นค่าใช้จ่ายของตัวเอง หากปิด การแสดงค่าใช้จ่ายและเพดานการใช้จ่ายจะใช้ไม่ได้ด้วย",
+    statsOffConfirm: "ปิด",
     costsEmpty: "ยังไม่มีการบันทึก",
     costsExport: "ส่งออกสรุปค่าใช้จ่าย",
     costsError: (models) => `ไม่สามารถคำนวณค่าใช้จ่ายของ: ${models} ได้ — เพิ่มบล็อก cost ในไฟล์นี้:`,
@@ -164,6 +168,7 @@ export const th: Messages = {
     view: "ดู",
     edit: "แก้ไข",
     remove: "ลบ",
+    removeConfirm: (label) => `ลบพรอมต์ "${label}" หรือไม่ การดำเนินการนี้ไม่สามารถย้อนกลับได้`,
     failed: (reason) => `ล้มเหลว: ${reason}`,
     importNotAPrompt: "ไม่ใช่พรอมต์: ต้องมี frontmatter YAML `---` ตามด้วยเนื้อหา",
     importNoLabel: "พรอมต์นี้ไม่มี label",

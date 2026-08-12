@@ -38,6 +38,10 @@ export const tr: Messages = {
     statsReset: "İstatistikleri sıfırla",
     statsResetConfirm: "Kaydedilen tüm istatistikler silinsin mi?",
     statsResetDone: "İstatistikler sıfırlandı.",
+    statsOffTitle: "Kullanım istatistikleri kapatılsın mı?",
+    statsOffBody:
+      "Bu kayıt yalnızca size aittir: bu cihazda kalır, asla hiçbir yere gönderilmez ve yalnızca kendi maliyetlerinizi görebilmeniz için vardır. Kapatınca maliyet göstergesi ve harcama sınırı da devre dışı kalır.",
+    statsOffConfirm: "Kapat",
     costsEmpty: "Henüz kayıt yok.",
     costsExport: "Maliyet özetini dışa aktar",
     costsError: (models) =>
@@ -176,6 +180,7 @@ export const tr: Messages = {
     view: "Görüntüle",
     edit: "Düzenle",
     remove: "Sil",
+    removeConfirm: (label) => `"${label}" istemi silinsin mi? Bu işlem geri alınamaz.`,
     failed: (reason) => `Başarısız: ${reason}`,
     importNotAPrompt:
       "Bu bir istem değil: `---` YAML frontmatter ve ardından istem gövdesi bekleniyor.",

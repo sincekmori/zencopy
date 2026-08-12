@@ -38,6 +38,10 @@ export const de: Messages = {
     statsReset: "Statistik zurücksetzen",
     statsResetConfirm: "Alle aufgezeichneten Statistiken löschen?",
     statsResetDone: "Statistik zurückgesetzt.",
+    statsOffTitle: "Nutzungsstatistik ausschalten?",
+    statsOffBody:
+      "Diese Aufzeichnung gehört nur dir: Sie bleibt auf diesem Gerät, wird niemals irgendwohin gesendet und existiert nur, damit du deine eigenen Kosten sehen kannst. Beim Ausschalten entfallen auch die Kostenanzeige und das Ausgabenlimit.",
+    statsOffConfirm: "Ausschalten",
     costsEmpty: "Noch nichts aufgezeichnet.",
     costsExport: "Kostenübersicht exportieren",
     costsError: (models) =>
@@ -178,6 +182,8 @@ export const de: Messages = {
     view: "Ansehen",
     edit: "Bearbeiten",
     remove: "Löschen",
+    removeConfirm: (label) =>
+      `Den Prompt „${label}“ löschen? Das lässt sich nicht rückgängig machen.`,
     failed: (reason) => `Fehlgeschlagen: ${reason}`,
     importNotAPrompt: "Kein Prompt: erwartet wird `---`-YAML-Frontmatter, gefolgt vom Prompt-Text.",
     importNoLabel: "Dem Prompt fehlt das label.",

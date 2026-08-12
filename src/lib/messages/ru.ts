@@ -38,6 +38,10 @@ export const ru: Messages = {
     statsReset: "Сбросить статистику",
     statsResetConfirm: "Удалить всю записанную статистику?",
     statsResetDone: "Статистика сброшена.",
+    statsOffTitle: "Отключить статистику использования?",
+    statsOffBody:
+      "Этот журнал принадлежит только вам: он остаётся на этом устройстве, никогда никуда не отправляется и существует лишь для того, чтобы вы видели собственные расходы. При отключении перестанут работать и показ расходов, и лимит трат.",
+    statsOffConfirm: "Отключить",
     costsEmpty: "Пока ничего не записано.",
     costsExport: "Экспортировать сводку расходов",
     costsError: (models) =>
@@ -176,6 +180,7 @@ export const ru: Messages = {
     view: "Просмотр",
     edit: "Изменить",
     remove: "Удалить",
+    removeConfirm: (label) => `Удалить промпт «${label}»? Это действие нельзя отменить.`,
     failed: (reason) => `Ошибка: ${reason}`,
     importNotAPrompt: "Это не промпт: ожидается YAML-frontmatter `---`, затем текст промпта.",
     importNoLabel: "У промпта нет поля label.",

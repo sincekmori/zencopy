@@ -35,6 +35,10 @@ export const zhHans: Messages = {
     statsReset: "重置统计",
     statsResetConfirm: "删除所有已记录的统计？",
     statsResetDone: "统计已重置。",
+    statsOffTitle: "要关闭使用统计吗？",
+    statsOffBody:
+      "这份记录只属于你：它保存在本设备上，绝不会被发送到任何地方，存在的唯一目的是让你了解自己的花费。关闭后，费用显示和上限也将不可用。",
+    statsOffConfirm: "关闭",
     costsEmpty: "还没有任何记录。",
     costsExport: "导出费用汇总",
     costsError: (models) => `无法计算以下模型的费用：${models}。请在此文件中添加 cost 块：`,
@@ -162,6 +166,7 @@ export const zhHans: Messages = {
     view: "查看",
     edit: "编辑",
     remove: "删除",
+    removeConfirm: (label) => `要删除提示词“${label}”吗？此操作无法撤销。`,
     failed: (reason) => `失败：${reason}`,
     importNotAPrompt: "这不是提示词：应为 `---` YAML frontmatter，后接正文。",
     importNoLabel: "该提示词没有 label。",

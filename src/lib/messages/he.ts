@@ -37,6 +37,10 @@ export const he: Messages = {
     statsReset: "איפוס סטטיסטיקה",
     statsResetConfirm: "למחוק את כל הסטטיסטיקה שנרשמה?",
     statsResetDone: "הסטטיסטיקה אופסה.",
+    statsOffTitle: "לכבות את סטטיסטיקת השימוש?",
+    statsOffBody:
+      "התיעוד הזה שייך רק לך: הוא נשאר במכשיר הזה, לעולם לא נשלח לשום מקום, וקיים רק כדי שתוכל לראות את העלויות שלך. כיבויו משבית גם את תצוגת העלות ואת תקרת ההוצאה.",
+    statsOffConfirm: "כיבוי",
     costsEmpty: "עדיין לא נרשם דבר.",
     costsExport: "ייצוא סיכום עלויות",
     costsError: (models) => `לא ניתן היה לחשב עלויות עבור: ${models}. הוסיפו בלוק cost בקובץ זה:`,
@@ -168,6 +172,7 @@ export const he: Messages = {
     view: "הצגה",
     edit: "עריכה",
     remove: "מחיקה",
+    removeConfirm: (label) => `למחוק את הפרומפט "${label}"? פעולה זו אינה ניתנת לביטול.`,
     failed: (reason) => `נכשל: ${reason}`,
     importNotAPrompt: "זה אינו פרומפט: נדרש frontmatter YAML בין `---`, ואחריו גוף הפרומפט.",
     importNoLabel: "לפרומפט אין label.",

@@ -38,6 +38,10 @@ export const en: Messages = {
     statsReset: "Reset statistics",
     statsResetConfirm: "Delete all recorded statistics?",
     statsResetDone: "Statistics reset.",
+    statsOffTitle: "Turn off usage statistics?",
+    statsOffBody:
+      "This record is yours alone: it stays on this device, is never sent anywhere, and exists only so you can see your own costs. Turning it off also disables the cost display and the spending cap.",
+    statsOffConfirm: "Turn off",
     costsEmpty: "Nothing recorded yet.",
     costsExport: "Export cost summary",
     costsError: (models) =>
@@ -168,6 +172,7 @@ export const en: Messages = {
     view: "View",
     edit: "Edit",
     remove: "Delete",
+    removeConfirm: (label) => `Delete the prompt "${label}"? This cannot be undone.`,
     failed: (reason) => `Failed: ${reason}`,
     importNotAPrompt: "Not a prompt: expected `---` YAML frontmatter, then the prompt body.",
     importNoLabel: "The prompt has no label.",

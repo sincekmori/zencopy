@@ -38,6 +38,10 @@ export const fr: Messages = {
     statsReset: "Réinitialiser les statistiques",
     statsResetConfirm: "Supprimer toutes les statistiques enregistrées ?",
     statsResetDone: "Statistiques réinitialisées.",
+    statsOffTitle: "Désactiver les statistiques d'utilisation ?",
+    statsOffBody:
+      "Cet enregistrement n'appartient qu'à vous : il reste sur cet appareil, n'est jamais envoyé nulle part et n'existe que pour vous montrer vos propres coûts. Le désactiver coupe aussi l'affichage des coûts et le plafond de dépenses.",
+    statsOffConfirm: "Désactiver",
     costsEmpty: "Rien d'enregistré pour l'instant.",
     costsExport: "Exporter le récapitulatif des coûts",
     costsError: (models) =>
@@ -180,6 +184,7 @@ export const fr: Messages = {
     view: "Voir",
     edit: "Modifier",
     remove: "Supprimer",
+    removeConfirm: (label) => `Supprimer le prompt « ${label} » ? Cette action est irréversible.`,
     failed: (reason) => `Échec : ${reason}`,
     importNotAPrompt:
       "Ce n'est pas un prompt : frontmatter YAML `---` attendu, suivi du corps du prompt.",

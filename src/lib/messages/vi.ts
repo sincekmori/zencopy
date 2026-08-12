@@ -38,6 +38,10 @@ export const vi: Messages = {
     statsReset: "Đặt lại thống kê",
     statsResetConfirm: "Xóa toàn bộ thống kê đã ghi?",
     statsResetDone: "Đã đặt lại thống kê.",
+    statsOffTitle: "Tắt thống kê sử dụng?",
+    statsOffBody:
+      "Bản ghi này hoàn toàn thuộc về bạn: nó nằm trên thiết bị này, không bao giờ được gửi đi đâu, và chỉ tồn tại để bạn xem chi phí của chính mình. Khi tắt, phần hiển thị chi phí và hạn mức chi tiêu cũng ngừng hoạt động.",
+    statsOffConfirm: "Tắt",
     costsEmpty: "Chưa có gì được ghi lại.",
     costsExport: "Xuất tóm tắt chi phí",
     costsError: (models) => `Không thể tính chi phí cho: ${models}. Thêm khối cost vào tệp này:`,
@@ -173,6 +177,7 @@ export const vi: Messages = {
     view: "Xem",
     edit: "Sửa",
     remove: "Xóa",
+    removeConfirm: (label) => `Xóa prompt "${label}"? Hành động này không thể hoàn tác.`,
     failed: (reason) => `Thất bại: ${reason}`,
     importNotAPrompt: "Không phải prompt: cần frontmatter YAML `---`, sau đó là nội dung prompt.",
     importNoLabel: "Prompt này không có label.",
