@@ -5,7 +5,7 @@ description: Chi phí, quyền riêng tư, xung đột với ứng dụng khác 
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 
-## Có tốn tiền không?
+## Có tốn tiền không? {#does-it-cost-money}
 
 Bản thân ZenCopy là phần mềm mã nguồn mở miễn phí (Apache-2.0).
 Không có tài khoản và không có phí thuê bao.
@@ -14,25 +14,25 @@ Dịch vụ AI thu phí thế nào là chuyện giữa bạn và dịch vụ đ�
 Với [gói miễn phí của Google](/vi/getting-started/), hoàn toàn miễn phí — chừng nào bạn chưa đăng ký phương thức thanh toán, bạn không thể bị tính tiền.
 Còn với AI chạy hoàn toàn trên máy tính của bạn (ví dụ Ollama), ngay từ đầu đã không có dịch vụ bên ngoài nào để trả tiền.
 
-## Nội dung tôi sao chép đi đâu?
+## Nội dung tôi sao chép đi đâu? {#where-does-my-copied-content-go}
 
 Chỉ khi bạn sao chép hai lần, nội dung mới được gửi **thẳng đến dịch vụ AI bạn đã cấu hình** — và không đi đâu khác.
 Không có máy chủ ZenCopy, không có trung gian, và không có theo dõi sử dụng (telemetry).
 Khóa API của bạn cũng không bao giờ rời khỏi máy.
 
-## Sao chép bình thường có kích hoạt gì không?
+## Sao chép bình thường có kích hoạt gì không? {#does-an-ordinary-copy-trigger-anything}
 
 Không.
 Một lần <span data-os-modifier>Ctrl/⌘</span> + C không khởi động gì, không đọc gì và không gửi gì.
 Chỉ hai lần sao chép liên tiếp thật nhanh mới là tín hiệu.
 Ngay cả khi đó, nội dung bộ nhớ tạm được các ứng dụng khác đánh dấu là bảo mật (ví dụ trình quản lý mật khẩu) vẫn bị bỏ qua.
 
-## Có thể tin câu trả lời của AI đến mức nào?
+## Có thể tin câu trả lời của AI đến mức nào? {#how-much-can-i-trust-the-ais-answers}
 
 AI có thể sai một cách rất trôi chảy.
 Nó thực sự hữu ích để nắm đại ý của một văn bản, nhưng với con số, tên riêng và mọi thứ hệ trọng — hợp đồng, nội dung y tế — hãy đối chiếu với bản gốc trước khi hành động dựa trên đó.
 
-## Khác gì các công cụ "AI trên vùng chọn" khác?
+## Khác gì các công cụ "AI trên vùng chọn" khác? {#how-is-this-different-from-other-ai-on-selection-tools}
 
 Phần lớn công cụ trong mảng này chỉ chạy trên macOS, chỉ xử lý văn bản được chọn, và bị gắn với AI của một hãng hoặc một gói thuê bao.
 ZenCopy chạy trên **Windows, macOS và Linux**, xử lý **văn bản, hình ảnh và tệp**, và để **bạn chọn dịch vụ AI** (OpenAI / Google / Anthropic / gateway công ty / Ollama chạy tại máy).
@@ -40,7 +40,7 @@ Và không dừng ở một lượt hỏi đáp. Từ ô nhập bên dưới câ
 [Prompt nào chạy cũng do bạn quyết định](/vi/configuration/#rulesjson).
 Không tài khoản, không thuê bao, không telemetry — phần mềm mã nguồn mở.
 
-## Khác gì các trang chat như ChatGPT?
+## Khác gì các trang chat như ChatGPT? {#how-is-this-different-from-chat-sites-like-chatgpt}
 
 Trang chat là nơi bạn phải "đi sang bên đó" để trò chuyện.
 ZenCopy **triệu hồi cuộc trò chuyện ngay trên thứ bạn đang nhìn**.
@@ -48,26 +48,26 @@ Chọn rồi sao chép hai lần — bài đang đọc, ảnh chụp màn hình 
 Câu trả lời đầu tiên (tóm tắt, bản dịch…) bắt đầu tự động, phần tiếp theo giống hệt một cuộc chat bình thường.
 Mô hình do bạn chọn, và lịch sử không nằm lại trên bất kỳ máy chủ nào (cuộc trò chuyện chỉ tồn tại tại chỗ, đến lần sao chép kế tiếp).
 
-## Một ứng dụng khác cũng phản ứng với Ctrl/⌘ + C + C (ví dụ DeepL)
+## Một ứng dụng khác cũng phản ứng với Ctrl/⌘ + C + C (ví dụ DeepL) {#another-app-also-reacts-to-ctrl--c--c-eg-deepl}
 
 Không ứng dụng nào có thể độc chiếm tín hiệu "sao chép hai lần" ở cấp hệ điều hành.
 Nếu một ứng dụng khác cũng đang lắng nghe cùng tín hiệu đó (DeepL là ví dụ nổi tiếng nhất), **cả hai** cùng phản ứng và hai cửa sổ nổi hiện ra.
 ZenCopy không chặn cũng không can thiệp bất kỳ sự kiện phím nào, nên không có gì hỏng — hiện tượng chỉ có vậy.
 Hãy tắt phím tắt trong ứng dụng bạn ít dùng hơn (với DeepL: Settings → General → phím tắt dịch).
 
-## Cửa sổ nổi không bao giờ hiện ra (macOS)
+## Cửa sổ nổi không bao giờ hiện ra (macOS) {#the-popup-never-appears-macos}
 
 Gần như chắc chắn là do quyền hệ thống.
 Cho phép **Giám sát đầu vào** cho ZenCopy trong Cài đặt hệ thống → Quyền riêng tư & Bảo mật, rồi thoát và khởi động lại ứng dụng.
 (Quyền này là cách ứng dụng nhận biết thao tác sao chép được nhấn hai lần.)
 
-## Không có kết quả trả về / báo hết thời gian chờ
+## Không có kết quả trả về / báo hết thời gian chờ {#no-result-comes-back--it-says-it-timed-out}
 
 Nếu phản hồi im lặng suốt 90 giây, ZenCopy kết thúc lượt chạy với lỗi thay vì chờ mãi.
 Kiểm tra kết nối mạng và cài đặt dịch vụ AI (khóa API, v.v.), rồi nhấn **Thử lại**.
 AI chạy tại máy có thể mất một lúc để nạp lần đầu, vì vậy thời gian chờ được cố ý đặt rộng rãi.
 
-## Nhật ký nằm ở đâu?
+## Nhật ký nằm ở đâu? {#where-are-the-logs}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
@@ -77,7 +77,7 @@ AI chạy tại máy có thể mất một lúc để nạp lần đầu, vì v�
 
 Nhật ký không bao giờ chứa nội dung bạn sao chép hay khóa API.
 
-## Gỡ cài đặt sẽ xóa những gì?
+## Gỡ cài đặt sẽ xóa những gì? {#what-does-uninstalling-remove}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
@@ -100,7 +100,7 @@ Nhật ký không bao giờ chứa nội dung bạn sao chép hay khóa API.
   </TabItem>
 </Tabs>
 
-## Những môi trường Linux nào được hỗ trợ?
+## Những môi trường Linux nào được hỗ trợ? {#which-linux-environments-are-supported}
 
 **GNOME trên Wayland, và X11.**
 Trên GNOME Wayland, tiến trình chạy nền theo thiết kế không thể quan sát phím bấm hay bộ nhớ tạm, vì vậy ZenCopy (qua crate [`copycopy`](https://crates.io/crates/copycopy)) đi kèm một tiện ích mở rộng GNOME Shell nhỏ phát hiện thao tác sao chép hai lần từ bên trong compositor.
@@ -108,7 +108,7 @@ Nó được tự động cài vào hồ sơ người dùng của bạn ở lầ
 Trên X11, một trình lắng nghe phím thụ động thông thường hoạt động được, như trên Windows.
 Các compositor Wayland khác (KDE Plasma, các bản dựa trên wlroots) không có cách nào quan sát thao tác kích hoạt mà không cần đặc quyền, nên chưa được hỗ trợ — ứng dụng vẫn chạy, nhưng trình kích hoạt nằm im.
 
-## Biểu tượng khay hệ thống không hiện ra (Linux)
+## Biểu tượng khay hệ thống không hiện ra (Linux) {#the-tray-icon-does-not-show-up-linux}
 
 Biểu tượng khay hệ thống của ZenCopy dùng giao thức AppIndicator.
 GNOME của Ubuntu hỗ trợ sẵn, nhưng GNOME nguyên bản (ví dụ Fedora) không hiển thị gì cho đến khi cài tiện ích mở rộng Shell **AppIndicator and KStatusNotifierItem Support**.

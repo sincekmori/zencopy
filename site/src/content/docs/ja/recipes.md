@@ -7,9 +7,9 @@ description: ai-sdk-catalog.json のコピペ例。1プロバイダー構成か�
 アプリの画面だけで使いたい方には必要ありません。
 
 `ai-sdk-catalog.json` のコピペ用スターターです。
-ファイルは[アプリ設定ディレクトリ](/ja/configuration/#設定ファイル上級者向け)に置きます。編集は次のトリガーから反映されます。
+ファイルは[アプリ設定ディレクトリ](/ja/configuration/#config-files-for-power-users)に置きます。編集は次のトリガーから反映されます。
 
-## 1 プロバイダー・1 モデル
+## 1 プロバイダー・1 モデル {#one-provider-one-model}
 
 設定 UI が書くのと同じ形。ほとんどの人はこれで全部です:
 
@@ -31,7 +31,7 @@ description: ai-sdk-catalog.json のコピペ例。1プロバイダー構成か�
 
 `$schema` の行は省略できます。JSON Schema を理解するエディタなら、この行があると入力中に検証と補完が効きます。
 
-## ローカル Ollama（何も端末の外に出ない）
+## ローカル Ollama（何も端末の外に出ない） {#local-ollama--nothing-leaves-your-machine}
 
 ```json
 {
@@ -51,7 +51,7 @@ description: ai-sdk-catalog.json のコピペ例。1プロバイダー構成か�
 OpenAI 互換エンドポイントなら何でも同じ書き方です。LM Studio、llama.cpp、企業内ゲートウェイのいずれも vendor の `baseURL` を変えるだけです（必要なら隣に `apiKey` を足します）。
 role の `"provider:model"` は最初の `:` で分割されるので、モデル ID にコロンを含む `"ollama:gemma4:e4b"` もそのまま書けます。
 
-## role を 2 つ: 普段は速く、要所は賢く
+## role を 2 つ: 普段は速く、要所は賢く {#two-roles-fast-by-default-smart-on-demand}
 
 role はプロンプトとモデルを疎結合にします。
 プロンプトは role 名だけを持ち（フロントマターに `role: smart`）、それがどのモデルを意味するかはここで決めます。プロンプトに触れずにいつでも差し替えられます。

@@ -10,12 +10,12 @@ ZenCopy funktioniert direkt nach der Installation, ohne dass etwas eingestellt w
 Diese Seite ist für den Moment, in dem du es besser an dich anpassen willst.
 Die erste Hälfte über das **Einstellungsfenster** ist für alle; die zweite Hälfte über **Konfigurationsdateien** ist für Power-User.
 
-## Das Einstellungsfenster
+## Das Einstellungsfenster {#the-settings-window}
 
 Öffne es über das Menü des Tray-Symbols oder das Zahnrad-Symbol im Popup.
 Es hat drei Tabs: **Allgemein, KI und Prompts**.
 
-### Allgemein
+### Allgemein {#general}
 
 - **Popup-Position** — in welcher Bildschirmecke Ergebnisse erscheinen.
 - **Design** — hell / dunkel / dem System folgen.
@@ -24,7 +24,7 @@ Es hat drei Tabs: **Allgemein, KI und Prompts**.
 - **Bei Anmeldung starten** — ZenCopy wartet bereits, sobald dein Computer läuft.
 - **Nachfrage vor dem Senden** — ob einmal gefragt wird, bevor Bilder oder Dateien an die KI gehen.
 
-### KI
+### KI {#ai}
 
 Hier wechselst du den KI-Dienst (Anbieter, Modell, API-Schlüssel).
 Die Schaltfläche **Testen** sagt dir sofort, ob die Verbindung funktioniert.
@@ -38,7 +38,7 @@ Ist das ausgefüllt, richtet jeder Prompt seine Ergebnisse nach dir.
 Erklärungen kommen auf deinem Wissensstand an, und Entwürfe kommen in deinem bevorzugten Ton zurück.
 Auf unpassende Aufgaben hat es nie Einfluss, und der Text selbst taucht nie in Ergebnissen auf.
 
-### Prompts
+### Prompts {#prompts}
 
 Die Liste dessen, „was nach einem doppelten Kopieren passiert“.
 
@@ -59,7 +59,7 @@ Lies https://zencopy.app/llms-full.txt – die vollständige ZenCopy-Dokumentati
 Der Codeblock in der Antwort kann direkt in **Einstellungen → Prompts → Importieren** eingefügt werden.
 Bei Fragen, die die Dokumentation nicht beantworten kann („kann ZenCopy überhaupt…?“), <RepomixLink>packt ein Klick den relevanten Quellcode</RepomixLink> – übergeben Sie das Ergebnis derselben KI.
 
-## Konfigurationsdateien (für Power-User)
+## Konfigurationsdateien (für Power-User) {#config-files-for-power-users}
 
 Ab hier geht es auf dieser Seite um das direkte Bearbeiten von Textdateien.
 **Alles Wesentliche ist über das Einstellungsfenster erreichbar — du kannst hier also guten Gewissens aufhören zu lesen.**
@@ -78,7 +78,7 @@ Prompt-Dateien sind **additiv**:
 Sie definieren neue Prompts, und die eingebauten bleiben unantastbar (eine lokale Datei, die die id eines eingebauten Prompts beansprucht, wird ignoriert).
 Änderungen gelten ab dem nächsten Auslösen — kein Neustart nötig.
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 Anbieter plus eine Zuordnung **Rolle → Modell**.
 Das Zuhause des Dateiformats ist [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — dort ist jedes Feld dokumentiert (inklusive eines `$schema` für Validierung und Vervollständigung im Editor), und [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) enthält Konfigurationen in drei Größen.
@@ -92,7 +92,7 @@ Umgebungsvariablen werden nicht gelesen — GUI-Apps werden vom Betriebssystem g
 Die Datei wird bei jedem Lesen gegen das Schema validiert.
 Eine kaputte Änderung zeigt sich als klare Meldung im Popup und im Einstellungs-Editor — nichts schlägt still fehl.
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 Welcher Prompt welche Art von Erfassung übernimmt:
 eine flache Zuordnung `kind → prompt` plus eine optionale, höher priorisierte `overrides`-Liste (der erste Treffer gewinnt).
@@ -119,7 +119,7 @@ Alles andere wird mit einer klaren Meldung abgelehnt.
 Die vollständigen Pfade reisen mit den Inhalten mit, damit das Modell Dateien auseinanderhalten kann und weiß, wo sie liegen.
 Weil binäre Anhänge mehr kosten können als Text, fragt das Popup vor dem Senden nach (Textdateien laufen ohne Nachfrage) — die Nachfrage lässt sich direkt dort oder in den Einstellungen abschalten.
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 Eine Datei = ein Prompt: YAML-Frontmatter + ein [Liquid](https://liquidjs.com)-Prompt-Text.
 Dieselbe einzelne Datei ist auch das Format zum Teilen — Einstellungen → Prompts → Importieren nimmt sie als eingefügten Text oder als ausgewählte Datei an.
@@ -168,7 +168,7 @@ Um die echten Werte zu sehen, aktiviere **Template-Variablen anzeigen** in den E
 
 Einfache Prompts (ein Name und eine Anweisung) lassen sich auch im Einstellungsfenster anlegen; was es schreibt, ist genau dieses Dateiformat.
 
-#### Fortgeschrittene Templates
+#### Fortgeschrittene Templates {#advanced-templating}
 
 Sowohl das `instructions`-Frontmatter als auch der Prompt-Text sind vollwertige [LiquidJS](https://liquidjs.com/tags/overview.html)-Templates: Bedingungen, Schleifen und [Filter](https://liquidjs.com/filters/overview.html) funktionieren alle.
 Ein einziger Prompt kann sich daran anpassen, woher die Kopie stammt:
@@ -190,7 +190,7 @@ Erkläre das auf {{ locale }}:
 {{ text | truncate: 8000 }}
 ```
 
-## Logs
+## Logs {#logs}
 
 Strukturierte Logs (Geheimnisse und kopierte Inhalte werden geschwärzt) gehen in der Entwicklung ins Terminal und im Release in eine rotierende Datei:
 

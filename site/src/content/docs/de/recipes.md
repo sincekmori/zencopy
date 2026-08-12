@@ -9,7 +9,7 @@ Wenn du lieber in den Bildschirmen der App bleibst, wirst du sie nie brauchen.
 Kopierfertige Ausgangspunkte für `ai-sdk-catalog.json`.
 Lege die Datei ins [App-Konfigurationsverzeichnis](/de/configuration/); Änderungen gelten ab dem nächsten Auslösen.
 
-## Ein Anbieter, ein Modell
+## Ein Anbieter, ein Modell {#one-provider-one-model}
 
 Was die Einstellungs-UI schreibt — für die meisten die ganze Datei:
 
@@ -31,7 +31,7 @@ Was die Einstellungs-UI schreibt — für die meisten die ganze Datei:
 
 Die `$schema`-Zeile ist optional; Editoren, die JSON Schema verstehen, nutzen sie, um die Datei beim Tippen zu validieren und zu vervollständigen.
 
-## Lokales Ollama — nichts verlässt dein Gerät
+## Lokales Ollama — nichts verlässt dein Gerät {#local-ollama--nothing-leaves-your-machine}
 
 ```json
 {
@@ -51,7 +51,7 @@ Die `$schema`-Zeile ist optional; Editoren, die JSON Schema verstehen, nutzen si
 Jeder OpenAI-kompatible Endpunkt funktioniert auf dieselbe Weise — LM Studio, llama.cpp, ein Firmen-Gateway: Ändere die `baseURL` des Anbieters (und ergänze daneben `apiKey`, wenn der Endpunkt einen verlangt).
 Eine Rolle ist `"provider:model"`, getrennt am ersten `:` — deshalb funktioniert `"ollama:gemma4:e4b"`, obwohl die Modell-id selbst einen Doppelpunkt enthält.
 
-## Zwei Rollen: standardmäßig schnell, auf Wunsch schlau
+## Zwei Rollen: standardmäßig schnell, auf Wunsch schlau {#two-roles-fast-by-default-smart-on-demand}
 
 Rollen entkoppeln Prompts von Modellen.
 Prompts nennen eine Rolle (`role: smart` im Frontmatter des Prompts); welches Modell das bedeutet, wird hier entschieden — tausche es jederzeit aus, ohne Prompts anzufassen.

@@ -5,36 +5,36 @@ description: 料金・プライバシー・他アプリとの競合・困った�
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 
-## お金はかかりますか？
+## お金はかかりますか？ {#does-it-cost-money}
 
 ZenCopy 本体は無料のオープンソースソフトウェア（Apache-2.0）です。
 アカウント登録もサブスクリプションもありません。
 
 実際に文章を処理する AI サービス側の料金は、あなたとそのサービスの契約次第です。
-[はじめる](/ja/getting-started/#無料の-ai-キーを用意する)で案内している Google の無料枠なら、**完全に無料**です。
+[はじめる](/ja/getting-started/#prepare-a-free-ai-key)で案内している Google の無料枠なら、**完全に無料**です。
 支払い情報を登録しない限り、料金が発生することはありません。
 自分のパソコンの中だけで動く AI（Ollama など）を選べば、外部サービス自体を使わないので、やはり無料です。
 
-## コピーした内容はどこへ送られる？
+## コピーした内容はどこへ送られる？ {#where-does-my-copied-content-go}
 
 コピーを 2 回して実行したときだけ、その内容が**あなたが設定した AI サービスへ直接**送られます。
 それ以外の場所へは送られません。
 ZenCopy 自身のサーバーというものは存在せず、中継も、利用状況の収集（テレメトリ）もありません。
 API キーも端末の外に出ません。
 
-## 普通のコピーで何か起きる？
+## 普通のコピーで何か起きる？ {#does-an-ordinary-copy-trigger-anything}
 
 いいえ。
 1 回の <span data-os-modifier>Ctrl/⌘</span> + C は何も起動せず、何も読み取られず、何も送信されません。
 短い間隔での 2 回コピーだけが実行の合図です。
 その場合でも、パスワードマネージャーなどが「機密」と印を付けたコピーは無視します。
 
-## AI の答えはどこまで信頼できる？
+## AI の答えはどこまで信頼できる？ {#how-much-can-i-trust-the-ais-answers}
 
 AI は流暢に間違えることがあります。
 要約や説明の大筋をつかむには十分役立ちますが、数字・固有名詞・契約や医療のような重要な内容は、元の文章で確かめてから使ってください。
 
-## 他の「選択テキスト + AI」系ツールと何が違う？
+## 他の「選択テキスト + AI」系ツールと何が違う？ {#how-is-this-different-from-other-ai-on-selection-tools}
 
 この分野のツールの多くは macOS 専用で、対象は選択テキストのみ、AI は特定のサービスやサブスクリプションに固定されています。
 ZenCopy は **Windows・macOS・Linux** で動き、**テキスト・画像・ファイル**を扱え、**AI サービスを自分で選べます**（OpenAI / Google / Anthropic / 社内ゲートウェイ / ローカルの Ollama）。
@@ -42,7 +42,7 @@ ZenCopy は **Windows・macOS・Linux** で動き、**テキスト・画像・�
 どのプロンプトが動くかも[自分で決められます](/ja/configuration/#rulesjson)。
 アカウントもサブスクリプションもテレメトリもない、オープンソースのソフトウェアです。
 
-## ChatGPT などのチャットサイトと何が違う？
+## ChatGPT などのチャットサイトと何が違う？ {#how-is-this-different-from-chat-sites-like-chatgpt}
 
 チャットサイトは「向こうへ行って」話す場所です。
 ZenCopy は**いま見ているものの上に会話を呼び出します**。
@@ -50,26 +50,26 @@ ZenCopy は**いま見ているものの上に会話を呼び出します**。
 最初の答え（要約・翻訳など）は自動で始まり、続きは普通のチャットと同じです。
 モデルは自分で選び、履歴はどこのサーバーにも残りません（会話は次のコピーまでの、その場限りのものです）。
 
-## 別のアプリも Ctrl/⌘ + C + C に反応する（例: DeepL）
+## 別のアプリも Ctrl/⌘ + C + C に反応する（例: DeepL） {#another-app-also-reacts-to-ctrl--c--c-eg-deepl}
 
 「コピー 2 回」という合図に、OS 上の持ち主は存在しません。
 同じ合図を待ち受けるアプリが他にもあると（有名なのは DeepL）、**両方**が反応してポップアップが 2 つ出ます。
 ZenCopy はキー操作を横取りも邪魔もしないので、症状はそれだけで、何かが壊れることはありません。
 使う頻度の低い方のアプリでショートカットを無効にしてください（DeepL の場合: 設定 → 一般 → 翻訳ショートカット）。
 
-## ポップアップが表示されない（macOS）
+## ポップアップが表示されない（macOS） {#the-popup-never-appears-macos}
 
 ほぼ確実に権限の問題です。
 システム設定 → プライバシーとセキュリティで **入力監視** を ZenCopy に許可し、アプリを起動し直してください。
 （これは「コピーが 2 回押された」ことに気づくための許可です。）
 
-## 結果が出ない・「時間切れ」と表示される
+## 結果が出ない・「時間切れ」と表示される {#no-result-comes-back--it-says-it-timed-out}
 
 ZenCopy は応答が 90 秒途絶えると、待ち続けるのをやめて失敗として表示します。
 インターネット接続と、AI サービスの設定（API キーなど）を確認して、**やり直す**を押してください。
 ローカルの AI は初回の読み込みに時間がかかることがあるため、待ち時間は意図的に長めにしてあります。
 
-## ログはどこ？
+## ログはどこ？ {#where-are-the-logs}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
@@ -79,7 +79,7 @@ ZenCopy は応答が 90 秒途絶えると、待ち続けるのをやめて失�
 
 ログにコピーした内容や API キーが含まれることはありません。
 
-## アンインストールすると何が消える？
+## アンインストールすると何が消える？ {#what-does-uninstalling-remove}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
@@ -103,7 +103,7 @@ ZenCopy は応答が 90 秒途絶えると、待ち続けるのをやめて失�
   </TabItem>
 </Tabs>
 
-## 対応している Linux 環境は？
+## 対応している Linux 環境は？ {#which-linux-environments-are-supported}
 
 **GNOME の Wayland セッションと X11 です。**
 GNOME Wayland では、バックグラウンドプロセスがキー入力やクリップボードを監視することが設計上できないため、ZenCopy は（[`copycopy`](https://crates.io/crates/copycopy) クレート経由で）小さな GNOME Shell 拡張を同梱し、コンポジターの内側で「2 回コピー」を検知します。
@@ -112,7 +112,7 @@ X11 では Windows と同じく、通常のパッシブなキー監視で動作�
 それ以外の Wayland コンポジター（KDE Plasma、wlroots 系）には非特権でトリガーを監視する手段がなく、現時点では非対応です。
 アプリ自体は起動しますが、トリガーは動作しません。
 
-## トレイアイコンが表示されない（Linux）
+## トレイアイコンが表示されない（Linux） {#the-tray-icon-does-not-show-up-linux}
 
 ZenCopy のトレイアイコンは AppIndicator プロトコルを使います。
 Ubuntu の GNOME は標準で対応していますが、素の GNOME（Fedora など）では **AppIndicator and KStatusNotifierItem Support** Shell 拡張を入れるまで表示されません。

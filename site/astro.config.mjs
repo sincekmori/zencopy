@@ -3,6 +3,8 @@ import { unified } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
+import { remarkHeadingId } from "remark-custom-heading-id";
+import starlightLinksValidator from "starlight-links-validator";
 import starlightLlmsTxt from "starlight-llms-txt";
 import { LANDING_LOCALES } from "./src/components/landing-copy.ts";
 
@@ -20,6 +22,11 @@ export default defineConfig({
     // explicitly (the top-level rehypePlugins shorthand is deprecated, and
     // Astro's default Sätteri pipeline cannot host rehype).
     processor: unified({
+      // Translated pages carry the English page's heading anchors explicitly
+      // (`## 見出し {#english-slug}`), so section links are locale-invariant;
+      // English keeps auto-generated slugs, and starlight-links-validator
+      // fails the build wherever a rename leaves a stale anchor behind.
+      remarkPlugins: [remarkHeadingId],
       // External links leave the docs in a new tab; in-site navigation stays
       // in the same tab. rel guards the opener even where browsers don't
       // imply it.
@@ -358,7 +365,7 @@ export default defineConfig({
       components: { Sidebar: "./src/components/Sidebar.astro" },
       // /llms.txt, /llms-small.txt, /llms-full.txt — generated into dist/ at
       // build time (never committed), so LLMs can read the docs as Markdown.
-      plugins: [starlightLlmsTxt()],
+      plugins: [starlightLlmsTxt(), starlightLinksValidator()],
     }),
   ],
 });

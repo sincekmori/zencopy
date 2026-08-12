@@ -10,12 +10,12 @@ ZenCopy hiçbir şey ayarlamadan, kutudan çıktığı gibi çalışır.
 Bu sayfa, onu kendine daha çok uydurmak istediğin an için.
 **Ayarlar penceresini** anlatan ilk yarı herkes için; **yapılandırma dosyalarını** anlatan ikinci yarı ileri düzey kullanıcılar için.
 
-## Ayarlar penceresi
+## Ayarlar penceresi {#the-settings-window}
 
 Tepsi simgesinin menüsünden ya da açılır penceredeki dişli simgesinden açabilirsin.
 Üç sekmesi var: **Genel, AI ve İstemler**.
 
-### Genel
+### Genel {#general}
 
 - **Açılır pencere konumu** — sonuçların ekranın hangi köşesinde görüneceği.
 - **Tema** — açık / koyu / sistemi izle.
@@ -24,7 +24,7 @@ Tepsi simgesinin menüsünden ya da açılır penceredeki dişli simgesinden aç
 - **Oturum açılınca başlat** — bilgisayarın açıkken ZenCopy hep hazır beklesin.
 - **Görsel ve dosya göndermeden önce onayla** — görseller ya da dosyalar AI'ya gitmeden önce bir kez sorulsun mu.
 
-### AI
+### AI {#ai}
 
 AI hizmetini (sağlayıcı, model, API anahtarı) burada değiştirirsin.
 **Sına** düğmesi bağlantının çalışıp çalışmadığını anında söyler.
@@ -38,7 +38,7 @@ Bunu doldurduğunda her istem sonuçlarını sana göre uyarlar.
 Açıklamalar bilgi düzeyine uygun gelir, taslaklar tercih ettiğin tonda geri döner.
 İlgisiz görevleri asla etkilemez ve yazdığın metin sonuçlarda asla görünmez.
 
-### İstemler
+### İstemler {#prompts}
 
 "Çift kopyalamadan sonra ne olacağının" listesi.
 
@@ -59,7 +59,7 @@ https://zencopy.app/llms-full.txt adresini okuyun; bu adres, istem dosyası biç
 Yanıttaki kod bloğu doğrudan **Ayarlar → İstemler → İçe Aktar** bölümüne gider.
 Belgelerin yanıtlayamadığı sorular için ("ZenCopy şunu bile yapabilir mi...?"), <RepomixLink>tek bir tıklama ilgili kaynak kodunu paketler</RepomixLink>; sonucu aynı yapay zekaya iletin.
 
-## Yapılandırma dosyaları (ileri düzey kullanıcılar için)
+## Yapılandırma dosyaları (ileri düzey kullanıcılar için) {#config-files-for-power-users}
 
 Buradan sonrası, metin dosyalarını doğrudan düzenlemekle ilgili.
 **Temel her şey ayarlar penceresinden yapılabildiği için burada okumayı bırakabilirsin.**
@@ -78,7 +78,7 @@ Kural varsayılanları uygulamaya gömülüdür; `rules.json` onları yalnızca 
 yeni istemler tanımlarlar; yerleşik istemlere dokunulamaz (yerleşik bir id'yi sahiplenen yerel dosya yok sayılır).
 Düzenlemeler bir sonraki tetiklemede geçerli olur — yeniden başlatmak gerekmez.
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 Sağlayıcılar ve bir **role → model** eşlemesi.
 Dosya biçiminin ana yurdu [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — her alan orada belgelenmiştir (düzenleyicide doğrulama ve tamamlama sağlayan `$schema` dahil) ve [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) içinde üç boyda hazır yapılandırma vardır.
@@ -92,7 +92,7 @@ Ortam değişkenleri okunmaz — grafik arayüzlü uygulamaları kabuk değil i�
 Dosya her okunuşta şemaya göre doğrulanır.
 Bozuk bir düzenleme, açılır pencerede ve ayarlar düzenleyicisinde net bir mesaj olarak görünür — hiçbir şey sessizce başarısız olmaz.
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 Hangi tür yakalamayı hangi istemin işleyeceği:
 düz bir `kind → prompt` eşlemesi ve isteğe bağlı, daha öncelikli bir `overrides` listesi (ilk eşleşen kazanır).
@@ -119,7 +119,7 @@ Bunların dışındaki her şey net bir mesajla geri çevrilir.
 Modelin dosyaları ayırt edebilmesi ve nerede olduklarını bilmesi için içerikle birlikte tam yollar da gönderilir.
 İkili ekler metinden pahalı olabildiği için açılır pencere göndermeden önce sorar (metin dosyaları sormadan çalışır) — onay, oracıkta ya da Ayarlar'dan kapatılabilir.
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 1 dosya = 1 istem: YAML frontmatter + [Liquid](https://liquidjs.com) istem gövdesi.
 Aynı tek dosya paylaşım biçimidir de — Ayarlar → İstemler → İçe aktar onu yapıştırılmış metin ya da seçilmiş dosya olarak kabul eder.
@@ -168,7 +168,7 @@ Gerçek değerleri görmek için Ayarlar'dan **Şablon değişkenlerini göster*
 
 Basit istemler (bir ad ve bir talimat) ayarlar penceresinden de oluşturulabilir; yazdığı, tam olarak bu dosya biçimidir.
 
-#### Gelişmiş şablonlar
+#### Gelişmiş şablonlar {#advanced-templating}
 
 `instructions` frontmatter'ı da gövde de eksiksiz birer [LiquidJS](https://liquidjs.com/tags/overview.html) şablonudur: koşullar, döngüler ve [filtreler](https://liquidjs.com/filters/overview.html) tümüyle çalışır.
 Tek bir istem, kopyanın geldiği yere göre uyum sağlayabilir:
@@ -190,7 +190,7 @@ Bunu {{ locale }} dilinde açıkla:
 {{ text | truncate: 8000 }}
 ```
 
-## Günlükler
+## Günlükler {#logs}
 
 Yapılandırılmış günlükler (gizli bilgiler ve kopyalanan içerik ayıklanmış hâlde) geliştirmede terminale, sürümde ise dönüşümlü bir dosyaya yazılır:
 

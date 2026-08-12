@@ -10,12 +10,12 @@ ZenCopy fonctionne d'emblée, sans rien configurer.
 Cette page est là pour le jour où vous voudrez qu'il vous ressemble davantage.
 La première moitié, sur la **fenêtre des réglages**, s'adresse à tout le monde ; la seconde, sur les **fichiers de configuration**, aux utilisateurs avancés.
 
-## La fenêtre des réglages
+## La fenêtre des réglages {#the-settings-window}
 
 Ouvrez-la depuis le menu de l'icône ZenCopy, ou via l'icône d'engrenage du popup.
 Elle comporte trois onglets : **Général, IA et Prompts**.
 
-### Général
+### Général {#general}
 
 - **Position du popup** — dans quel coin de l'écran les résultats apparaissent.
 - **Thème** — clair / sombre / suivre le système.
@@ -24,7 +24,7 @@ Elle comporte trois onglets : **Général, IA et Prompts**.
 - **Lancer à la connexion** — pour que ZenCopy soit prêt dès que votre ordinateur est allumé.
 - **Confirmation avant l'envoi** — demander ou non une confirmation avant qu'images ou fichiers ne partent vers l'IA.
 
-### IA
+### IA {#ai}
 
 C'est ici que vous changez de service d'IA (fournisseur, modèle, clé d'API).
 Le bouton **Tester** vous dit tout de suite si la connexion fonctionne.
@@ -38,7 +38,7 @@ Une fois ce champ rempli, chaque prompt adapte ses résultats à vous.
 Les explications arrivent à votre niveau de connaissances, et les brouillons reviennent dans le ton que vous préférez.
 Cela n'affecte jamais les tâches sans rapport, et le texte lui-même n'apparaît jamais dans les résultats.
 
-### Prompts
+### Prompts {#prompts}
 
 La liste de « ce qui se passe après un double copier ».
 
@@ -59,7 +59,7 @@ Lisez https://zencopy.app/llms-full.txt — la documentation complète de ZenCop
 Le bloc de code dans la réponse va directement dans **Paramètres → Prompts → Importer**.
 Pour les questions auxquelles la documentation ne peut pas répondre (« ZenCopy pourrait-il seulement faire… ? »), <RepomixLink>un clic regroupe le code source pertinent</RepomixLink> — transmettez le résultat à la même IA.
 
-## Fichiers de configuration (pour les utilisateurs avancés)
+## Fichiers de configuration (pour les utilisateurs avancés) {#config-files-for-power-users}
 
 À partir d'ici, cette page parle d'éditer des fichiers texte directement.
 **Tout l'essentiel est accessible depuis la fenêtre des réglages, alors n'hésitez pas à vous arrêter là.**
@@ -78,7 +78,7 @@ Les fichiers de prompts sont **additifs** :
 ils définissent de nouveaux prompts, et les prompts intégrés restent intouchables (un fichier local qui revendique l'id d'un prompt intégré est ignoré).
 Les modifications s'appliquent au déclenchement suivant — aucun redémarrage nécessaire.
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 Les fournisseurs, plus une correspondance **role → modèle**.
 Le format du fichier est défini par [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — chaque champ y est documenté (y compris un `$schema` pour la validation et la complétion dans l'éditeur), et [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) propose des configurations en trois tailles.
@@ -92,7 +92,7 @@ Les variables d'environnement ne sont pas lues — les applications graphiques s
 Le fichier est validé par schéma à chaque lecture.
 Une modification cassée se manifeste par un message clair dans le popup et dans l'éditeur des réglages — rien n'échoue en silence.
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 Quel prompt traite quel type de capture :
 une table plate `kind → prompt`, plus une liste `overrides` optionnelle et prioritaire (la première correspondance gagne).
@@ -119,7 +119,7 @@ Tout le reste est refusé avec un message clair.
 Les chemins complets accompagnent les contenus, pour que le modèle puisse distinguer les fichiers et sache où ils se trouvent.
 Comme les pièces jointes binaires peuvent coûter plus cher que le texte, le popup demande confirmation avant de les envoyer (les fichiers texte s'exécutent sans confirmation) — la confirmation peut être désactivée sur place ou dans les réglages.
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 Un fichier = un prompt : frontmatter YAML + un corps de prompt [Liquid](https://liquidjs.com).
 Ce même fichier unique est aussi le format de partage — Réglages → Prompts → Importer l'accepte comme texte collé ou comme fichier choisi.
@@ -168,7 +168,7 @@ Pour voir les valeurs réelles, activez **Afficher les variables de gabarit** da
 
 Les prompts simples (un nom et une instruction) peuvent aussi être créés depuis la fenêtre des réglages ; ce qu'elle écrit est exactement ce format de fichier.
 
-#### Gabarits avancés
+#### Gabarits avancés {#advanced-templating}
 
 Le frontmatter `instructions` et le corps sont tous deux des gabarits [LiquidJS](https://liquidjs.com/tags/overview.html) complets : conditions, boucles et [filtres](https://liquidjs.com/filters/overview.html) fonctionnent tous.
 Un même prompt peut s'adapter à la provenance de la copie :
@@ -190,7 +190,7 @@ Expliquez ceci en {{ locale }} :
 {{ text | truncate: 8000 }}
 ```
 
-## Journaux
+## Journaux {#logs}
 
 Les journaux structurés (secrets et contenu copié masqués) vont vers le terminal en développement et vers un fichier à rotation en version publiée :
 

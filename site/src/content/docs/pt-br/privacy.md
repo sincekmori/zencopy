@@ -8,7 +8,7 @@ sidebar:
 O ZenCopy é um aplicativo de desktop local.
 Ele não tem servidor, nem conta, nem telemetria.
 
-## O que sai do seu dispositivo
+## O que sai do seu dispositivo {#what-leaves-your-device}
 
 Quando você pressiona o gatilho (<span data-os-modifier>Ctrl/⌘</span> + C + C), o conteúdo capturado da área de transferência é enviado diretamente ao provedor de LLM que _você_ configurou — nada além disso, e para nenhum outro lugar.
 O que exatamente é enviado depende do prompt executado:
@@ -22,7 +22,7 @@ Conteúdo da área de transferência que outros aplicativos marcam como sensíve
 
 À parte das capturas, a verificação de atualizações pede ao GitHub apenas os metadados da release — nunca o seu conteúdo.
 
-## O que fica no seu dispositivo
+## O que fica no seu dispositivo {#what-stays-on-your-device}
 
 - Suas chaves de API (`ai-sdk-catalog.json` no diretório de configuração do aplicativo — nunca empacotadas, nunca enviadas).
 - Suas configurações (tema, idioma, posição do popup, …).
@@ -32,12 +32,12 @@ Conteúdo da área de transferência que outros aplicativos marcam como sensíve
 - Estatísticas de uso (um interruptor nas configurações, ativado por padrão): qual prompt rodou em qual tipo de captura, com o modelo e a contagem de tokens, para que seus custos continuem calculáveis.
   Apenas um arquivo local — nunca o conteúdo copiado, nunca enviado a lugar nenhum.
 
-## Terceiros
+## Terceiros {#third-parties}
 
 Seu uso de um provedor de LLM é regido pelos termos e pela política de privacidade do próprio provedor.
 O ZenCopy não adiciona nenhum intermediário: seu conteúdo vai apenas para o provedor que você configura, e o uso e os custos são seus.
 
-## Não acredite só na nossa palavra
+## Não acredite só na nossa palavra {#dont-take-our-word-for-it}
 
 O ZenCopy é de código aberto (Apache-2.0).
 Toda afirmação desta página pode ser verificada no [código-fonte](https://github.com/sincekmori/zencopy).

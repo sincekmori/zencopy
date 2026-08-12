@@ -10,12 +10,12 @@ ZenCopy langsung bisa dipakai tanpa mengatur apa pun.
 Halaman ini untuk saat kamu ingin ZenCopy lebih pas denganmu.
 Paruh pertama, tentang **jendela pengaturan**, ditujukan untuk semua orang; paruh kedua, tentang **berkas konfigurasi**, untuk pengguna mahir.
 
-## Jendela pengaturan
+## Jendela pengaturan {#the-settings-window}
 
 Buka dari menu ikon tray, atau dari ikon roda gigi pada popup.
 Ada tiga tab: **Umum, AI, dan Prompt**.
 
-### Umum
+### Umum {#general}
 
 - **Posisi popup** — di sudut layar mana hasil muncul.
 - **Tema** — terang / gelap / ikut sistem.
@@ -24,7 +24,7 @@ Ada tiga tab: **Umum, AI, dan Prompt**.
 - **Mulai saat masuk** — ZenCopy siap sedia kapan pun komputermu menyala.
 - **Konfirmasi sebelum mengirim gambar & berkas** — apakah popup bertanya dulu sebelum gambar atau berkas dikirim ke AI.
 
-### AI
+### AI {#ai}
 
 Di sinilah kamu mengubah layanan AI (penyedia, model, kunci API).
 Tombol **Uji** langsung memberi tahu apakah koneksinya berfungsi.
@@ -38,7 +38,7 @@ Dengan kolom ini terisi, setiap prompt menyesuaikan hasilnya untukmu.
 Penjelasan datang sesuai tingkat pengetahuanmu, dan draf kembali dengan nada yang kamu sukai.
 Kolom ini tidak pernah memengaruhi tugas yang tidak berkaitan, dan teksnya sendiri tidak pernah muncul di hasil.
 
-### Prompt
+### Prompt {#prompts}
 
 Daftar "apa yang terjadi setelah salin dua kali".
 
@@ -59,7 +59,7 @@ Baca https://zencopy.app/llms-full.txt — dokumentasi lengkap ZenCopy, termasuk
 Blok kode dalam balasan langsung masuk ke **Pengaturan → Prompt → Impor**.
 Untuk pertanyaan yang tidak dapat dijawab oleh dokumentasi ("apakah ZenCopy bahkan bisa melakukan...?"), <RepomixLink>satu klik akan mengemas kode sumber yang relevan</RepomixLink> — serahkan hasilnya ke AI yang sama.
 
-## Berkas konfigurasi (untuk pengguna mahir)
+## Berkas konfigurasi (untuk pengguna mahir) {#config-files-for-power-users}
 
 Mulai dari sini, halaman ini membahas penyuntingan berkas teks secara langsung.
 **Semua hal penting sudah tersedia dari jendela pengaturan, jadi silakan berhenti membaca di sini.**
@@ -78,7 +78,7 @@ Berkas prompt bersifat **tambahan**:
 berkas itu mendefinisikan prompt baru, dan prompt bawaan tidak tersentuh (berkas lokal yang mengaku memakai id bawaan akan diabaikan).
 Suntingan berlaku pada pemicu berikutnya — tanpa perlu memulai ulang.
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 Penyedia plus pemetaan **role → model**.
 Rumah format berkas ini adalah [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — setiap field didokumentasikan di sana (termasuk `$schema` untuk validasi dan pelengkapan otomatis di editor), dan [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) memuat contoh konfigurasi dalam tiga ukuran.
@@ -92,7 +92,7 @@ Variabel lingkungan tidak dibaca — aplikasi GUI dijalankan oleh OS, bukan oleh
 Berkas ini divalidasi terhadap skema pada setiap pembacaan.
 Suntingan yang rusak muncul sebagai pesan yang jelas di popup dan editor pengaturan — tidak ada yang gagal secara diam-diam.
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 Prompt mana yang menangani jenis tangkapan mana:
 peta datar `kind → prompt` plus daftar `overrides` opsional dengan prioritas lebih tinggi (kecocokan pertama menang).
@@ -119,7 +119,7 @@ Berkas jenis lain ditolak dengan pesan yang jelas.
 Jalur lengkap ikut terkirim bersama isinya agar model bisa membedakan berkas dan tahu di mana letaknya.
 Karena lampiran biner bisa lebih mahal daripada teks, popup bertanya dulu sebelum mengirimnya (berkas teks berjalan tanpa bertanya) — konfirmasinya bisa dimatikan di tempat atau di Pengaturan.
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 Satu berkas = satu prompt: frontmatter YAML + isi prompt [Liquid](https://liquidjs.com).
 Berkas tunggal yang sama juga menjadi format berbagi — Pengaturan → Prompt → Impor menerimanya sebagai teks yang ditempel atau berkas yang dipilih.
@@ -168,7 +168,7 @@ Untuk melihat nilai sebenarnya, aktifkan **Tampilkan variabel templat** di Penga
 
 Prompt sederhana (nama dan instruksi saja) juga bisa dibuat dari jendela pengaturan; yang ditulisnya persis format berkas ini.
 
-#### Templat tingkat lanjut
+#### Templat tingkat lanjut {#advanced-templating}
 
 Frontmatter `instructions` maupun isi prompt sama-sama merupakan templat [LiquidJS](https://liquidjs.com/tags/overview.html) penuh: percabangan, perulangan, dan [filter](https://liquidjs.com/filters/overview.html) semuanya berfungsi.
 Satu prompt bisa menyesuaikan diri dengan asal salinan:
@@ -190,7 +190,7 @@ Jelaskan ini dalam {{ locale }}:
 {{ text | truncate: 8000 }}
 ```
 
-## Log
+## Log {#logs}
 
 Log terstruktur (rahasia dan konten yang disalin sudah disamarkan) menuju terminal dalam mode dev dan berkas berotasi dalam rilis:
 

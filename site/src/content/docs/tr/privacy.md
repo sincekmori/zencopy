@@ -8,7 +8,7 @@ sidebar:
 ZenCopy yerel bir masaüstü uygulamasıdır.
 Sunucusu, hesabı ve telemetrisi yoktur.
 
-## Cihazından neler çıkar
+## Cihazından neler çıkar {#what-leaves-your-device}
 
 Tetikleyiciye bastığında (<span data-os-modifier>Ctrl/⌘</span> + C + C), yakalanan pano içeriği doğrudan _senin_ yapılandırdığın LLM sağlayıcısına gönderilir — başka hiçbir şey ve başka hiçbir yere.
 Tam olarak neyin gönderileceği, çalışan isteme bağlıdır:
@@ -22,7 +22,7 @@ Başka uygulamaların hassas olarak işaretlediği pano içeriği (örn. parola 
 
 Yakalamalardan ayrı olarak, güncelleme denetimi GitHub'dan yalnızca sürüm meta verilerini ister — içeriğini asla.
 
-## Cihazında neler kalır
+## Cihazında neler kalır {#what-stays-on-your-device}
 
 - API anahtarların (uygulama yapılandırma dizinindeki `ai-sdk-catalog.json` — asla pakete dahil edilmez, asla yüklenmez).
 - Ayarların (tema, dil, açılır pencere konumu, …).
@@ -32,12 +32,12 @@ Yakalamalardan ayrı olarak, güncelleme denetimi GitHub'dan yalnızca sürüm m
 - Kullanım istatistikleri (ayarlarda bir anahtar, varsayılan olarak açık): hangi istemin hangi tür yakalamada çalıştığı, model ve token sayılarıyla birlikte; böylece maliyetlerin hesaplanabilir kalır.
   Yalnızca yerel bir dosya — asla kopyalanan içerik değil, asla hiçbir yere gönderilmez.
 
-## Üçüncü taraflar
+## Üçüncü taraflar {#third-parties}
 
 Bir LLM sağlayıcısını kullanman, o sağlayıcının kendi koşullarına ve gizlilik politikasına tabidir.
 ZenCopy araya hiçbir aracı katmaz: içeriğin yalnızca yapılandırdığın sağlayıcıya gider; kullanımı ve maliyetleri sana aittir.
 
-## Sözümüze güvenmek zorunda değilsin
+## Sözümüze güvenmek zorunda değilsin {#dont-take-our-word-for-it}
 
 ZenCopy açık kaynaktır (Apache-2.0).
 Bu sayfadaki her iddia [kaynak kodla](https://github.com/sincekmori/zencopy) doğrulanabilir.

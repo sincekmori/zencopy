@@ -5,7 +5,7 @@ description: 비용, 개인정보, 다른 앱과의 충돌, 문제 해결.
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 
-## 돈이 드나요?
+## 돈이 드나요? {#does-it-cost-money}
 
 ZenCopy 자체는 무료 오픈 소스 소프트웨어(Apache-2.0)입니다.
 계정도 구독도 없습니다.
@@ -14,25 +14,25 @@ AI 서비스가 청구하는 요금은 사용자와 해당 서비스 사이의 �
 [Google 무료 등급](/ko/getting-started/)이라면 완전한 무료입니다 — 결제 수단을 등록하지 않는 한 요금이 청구될 수 없습니다.
 그리고 내 컴퓨터 안에서만 실행되는 AI(예: Ollama)라면 애초에 요금을 낼 외부 서비스가 없습니다.
 
-## 복사한 내용은 어디로 가나요?
+## 복사한 내용은 어디로 가나요? {#where-does-my-copied-content-go}
 
 두 번 복사했을 때에만 내용이 **직접 설정한 AI 서비스로** 전송되며, 그 외 어디로도 가지 않습니다.
 ZenCopy의 서버도, 중계도, 사용 추적(텔레메트리)도 없습니다.
 API 키 역시 절대 컴퓨터를 떠나지 않습니다.
 
-## 평범한 복사에도 반응하나요?
+## 평범한 복사에도 반응하나요? {#does-an-ordinary-copy-trigger-anything}
 
 아니요.
 한 번의 <span data-os-modifier>Ctrl/⌘</span> + C는 아무것도 시작하지 않고, 읽지 않고, 보내지 않습니다.
 빠르게 이어진 두 번의 복사만이 신호입니다.
 그때조차 다른 앱(예: 비밀번호 관리자)이 기밀로 표시한 클립보드 내용은 무시됩니다.
 
-## AI의 답을 얼마나 믿어도 되나요?
+## AI의 답을 얼마나 믿어도 되나요? {#how-much-can-i-trust-the-ais-answers}
 
 AI는 유창하게 틀릴 수 있습니다.
 글의 요지를 잡는 데는 정말 유용하지만, 숫자와 이름, 그리고 계약서나 의료 문서처럼 결과가 중대한 내용은 행동으로 옮기기 전에 원문과 대조하세요.
 
-## 다른 "선택하면 AI" 도구와 무엇이 다른가요?
+## 다른 "선택하면 AI" 도구와 무엇이 다른가요? {#how-is-this-different-from-other-ai-on-selection-tools}
 
 이 분야의 도구 대부분은 macOS 전용이고, 선택한 텍스트만 다루며, 특정 업체의 AI나 구독에 묶여 있습니다.
 ZenCopy는 **Windows, macOS, Linux**에서 동작하고, **텍스트, 이미지, 파일**을 다루며, **AI 서비스를 직접 고를 수 있습니다**(OpenAI / Google / Anthropic / 사내 게이트웨이 / 로컬 Ollama).
@@ -40,7 +40,7 @@ ZenCopy는 **Windows, macOS, Linux**에서 동작하고, **텍스트, 이미지,
 [어떤 프롬프트를 실행할지도 직접 정할 수 있습니다](/ko/configuration/#rulesjson).
 계정도, 구독도, 텔레메트리도 없는 오픈 소스 소프트웨어입니다.
 
-## ChatGPT 같은 채팅 사이트와 무엇이 다른가요?
+## ChatGPT 같은 채팅 사이트와 무엇이 다른가요? {#how-is-this-different-from-chat-sites-like-chatgpt}
 
 채팅 사이트는 "그쪽으로 가서" 이야기하는 곳입니다.
 ZenCopy는 **지금 보고 있는 것 위로 대화를 불러냅니다**.
@@ -48,26 +48,26 @@ ZenCopy는 **지금 보고 있는 것 위로 대화를 불러냅니다**.
 첫 답(요약, 번역 등)은 자동으로 시작되고, 그다음은 보통의 채팅과 같습니다.
 모델은 직접 고르고, 기록은 어느 서버에도 남지 않습니다(대화는 다음 복사까지의, 그 자리 한정입니다).
 
-## 다른 앱도 Ctrl/⌘ + C + C에 반응해요 (예: DeepL)
+## 다른 앱도 Ctrl/⌘ + C + C에 반응해요 (예: DeepL) {#another-app-also-reacts-to-ctrl--c--c-eg-deepl}
 
 OS 수준에서 "두 번 복사" 신호를 독점할 수 있는 앱은 없습니다.
 다른 앱이 같은 신호를 듣고 있다면(잘 알려진 예가 DeepL), **둘 다** 반응해서 팝업이 두 개 나타납니다.
 ZenCopy는 키 이벤트를 가로채지도 막지도 않으므로 고장 나는 것은 없습니다 — 증상은 그게 전부입니다.
 덜 쓰는 쪽 앱에서 단축키를 끄세요(DeepL의 경우: 설정 → 일반 → 번역 단축키).
 
-## 팝업이 전혀 나타나지 않아요 (macOS)
+## 팝업이 전혀 나타나지 않아요 (macOS) {#the-popup-never-appears-macos}
 
 거의 확실히 권한 문제입니다.
 시스템 설정 → 개인정보 보호 및 보안에서 **입력 모니터링**을 ZenCopy에 허용한 뒤, 앱을 종료하고 다시 실행하세요.
 (이 권한이 복사가 두 번 눌렸음을 앱이 알아채는 방법입니다.)
 
-## 결과가 돌아오지 않아요 / 시간이 초과됐다고 나와요
+## 결과가 돌아오지 않아요 / 시간이 초과됐다고 나와요 {#no-result-comes-back--it-says-it-timed-out}
 
 응답이 90초 동안 잠잠하면 ZenCopy는 무한정 기다리는 대신 실행을 실패로 처리합니다.
 인터넷 연결과 AI 서비스 설정(API 키 등)을 확인한 뒤 **다시 시도**를 누르세요.
 로컬 AI는 처음 불러올 때 시간이 걸릴 수 있어서, 시간 제한을 일부러 넉넉하게 잡았습니다.
 
-## 로그는 어디에 있나요?
+## 로그는 어디에 있나요? {#where-are-the-logs}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
@@ -77,7 +77,7 @@ ZenCopy는 키 이벤트를 가로채지도 막지도 않으므로 고장 나는
 
 로그에는 복사한 내용이나 API 키가 절대 포함되지 않습니다.
 
-## 제거하면 무엇이 삭제되나요?
+## 제거하면 무엇이 삭제되나요? {#what-does-uninstalling-remove}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
@@ -99,7 +99,7 @@ ZenCopy는 키 이벤트를 가로채지도 막지도 않으므로 고장 나는
   </TabItem>
 </Tabs>
 
-## 어떤 Linux 환경이 지원되나요?
+## 어떤 Linux 환경이 지원되나요? {#which-linux-environments-are-supported}
 
 **Wayland의 GNOME, 그리고 X11입니다.**
 GNOME Wayland에서는 백그라운드 프로세스가 설계상 키 입력이나 클립보드를 관찰할 수 없으므로, ZenCopy는 ([`copycopy`](https://crates.io/crates/copycopy) 크레이트를 통해) 컴포지터 내부에서 두 번 복사를 감지하는 작은 GNOME Shell 확장을 함께 제공합니다.
@@ -107,7 +107,7 @@ GNOME Wayland에서는 백그라운드 프로세스가 설계상 키 입력이�
 X11에서는 Windows와 마찬가지로 평범한 수동적 키 리스너가 동작합니다.
 다른 Wayland 컴포지터(KDE Plasma, wlroots 계열)는 권한 없이 트리거를 관찰할 방법이 없어 아직 지원되지 않습니다 — 앱은 실행되지만 트리거는 동작하지 않습니다.
 
-## 트레이 아이콘이 보이지 않아요 (Linux)
+## 트레이 아이콘이 보이지 않아요 (Linux) {#the-tray-icon-does-not-show-up-linux}
 
 ZenCopy의 트레이 아이콘은 AppIndicator 프로토콜을 사용합니다.
 Ubuntu의 GNOME은 기본으로 지원하지만, 순정 GNOME(예: Fedora)은 **AppIndicator and KStatusNotifierItem Support** Shell 확장을 설치할 때까지 아무것도 표시하지 않습니다.

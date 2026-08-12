@@ -5,7 +5,7 @@ description: Maliyetler, gizlilik, diğer uygulamalarla çakışmalar ve sorun g
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 
-## Para tutuyor mu?
+## Para tutuyor mu? {#does-it-cost-money}
 
 ZenCopy'nin kendisi ücretsiz, açık kaynaklı bir yazılımdır (Apache-2.0).
 Hesap da abonelik de yok.
@@ -14,25 +14,25 @@ AI hizmetinin aldığı ücret, seninle o hizmet arasındadır.
 [Google'ın ücretsiz katmanıyla](/tr/getting-started/) tamamen ücretsizdir — bir ödeme yöntemi kaydetmediğin sürece senden ücret alınamaz.
 Tamamen kendi bilgisayarında çalışan bir AI ile de (örneğin Ollama) zaten ödeme yapılacak harici bir hizmet yoktur.
 
-## Kopyaladığım içerik nereye gidiyor?
+## Kopyaladığım içerik nereye gidiyor? {#where-does-my-copied-content-go}
 
 İçerik yalnızca iki kez kopyaladığında, **doğrudan yapılandırdığın AI hizmetine** gider — başka hiçbir yere değil.
 ZenCopy sunucusu yok, aktarma yok, kullanım takibi (telemetri) yok.
 API anahtarın da makinenden asla çıkmaz.
 
-## Sıradan bir kopyalama bir şey tetikler mi?
+## Sıradan bir kopyalama bir şey tetikler mi? {#does-an-ordinary-copy-trigger-anything}
 
 Hayır.
 Tek bir <span data-os-modifier>Ctrl/⌘</span> + C hiçbir şey başlatmaz, hiçbir şey okumaz ve hiçbir şey göndermez.
 Sinyal, yalnızca art arda hızlıca yapılan iki kopyalamadır.
 O zaman bile, başka uygulamaların gizli olarak işaretlediği pano içeriği (örneğin parola yöneticileri) yok sayılır.
 
-## AI'nın yanıtlarına ne kadar güvenebilirim?
+## AI'nın yanıtlarına ne kadar güvenebilirim? {#how-much-can-i-trust-the-ais-answers}
 
 AI, gayet akıcı biçimde yanılabilir.
 Bir metnin özünü kavramakta gerçekten işe yarar; ama sayılar, adlar ve sonuçları ağır her konuda — sözleşmeler, tıbbi metinler — harekete geçmeden önce aslıyla karşılaştır.
 
-## Diğer "seçime AI" araçlarından farkı ne?
+## Diğer "seçime AI" araçlarından farkı ne? {#how-is-this-different-from-other-ai-on-selection-tools}
 
 Bu alandaki araçların çoğu yalnızca macOS'te çalışır, yalnızca seçili metinle sınırlıdır ve tek bir firmanın AI'sına ya da bir aboneliğe bağlıdır.
 ZenCopy **Windows, macOS ve Linux'ta** çalışır; **metin, görsel ve dosyaları** işler; **AI hizmetini sen seçersin** (OpenAI / Google / Anthropic / kurumsal ağ geçidi / yerel Ollama).
@@ -40,7 +40,7 @@ ZenCopy **Windows, macOS ve Linux'ta** çalışır; **metin, görsel ve dosyalar
 [Hangi istemin çalışacağı da senin kararın](/tr/configuration/#rulesjson).
 Hesap yok, abonelik yok, telemetri yok — açık kaynaklı yazılım.
 
-## ChatGPT gibi sohbet sitelerinden farkı ne?
+## ChatGPT gibi sohbet sitelerinden farkı ne? {#how-is-this-different-from-chat-sites-like-chatgpt}
 
 Sohbet sitesi, konuşmak için "oraya gittiğin" bir yerdir.
 ZenCopy ise **sohbeti, baktığın şeyin üzerine çağırır**.
@@ -48,26 +48,26 @@ Seç ve iki kez kopyala — okuduğun metin, hata ekranının görüntüsü, san
 İlk yanıt (özet, çeviri vb.) kendiliğinden başlar; gerisi sıradan bir sohbetle aynıdır.
 Modeli sen seçersin ve geçmiş hiçbir sunucuda kalmaz (sohbet, bir sonraki kopyalamaya kadar süren, o âna özgü bir şeydir).
 
-## Ctrl/⌘ + C + C'ye başka bir uygulama da tepki veriyor (örn. DeepL)
+## Ctrl/⌘ + C + C'ye başka bir uygulama da tepki veriyor (örn. DeepL) {#another-app-also-reacts-to-ctrl--c--c-eg-deepl}
 
 Hiçbir uygulama "iki kez kopyala" sinyalini işletim sistemi düzeyinde sahiplenemez.
 Aynı sinyali başka bir uygulama da dinliyorsa (en bilineni DeepL), **ikisi de** tepki verir ve iki açılır pencere görünür.
 ZenCopy hiçbir tuş olayını ne yakalar ne engeller; dolayısıyla hiçbir şey bozulmaz — belirtinin tamamı budur.
 Kısayolu, daha az kullandığın uygulamada kapat (DeepL için: Ayarlar → Genel → çeviri kısayolu).
 
-## Açılır pencere hiç görünmüyor (macOS)
+## Açılır pencere hiç görünmüyor (macOS) {#the-popup-never-appears-macos}
 
 Neredeyse kesin olarak izin meselesi.
 Sistem Ayarları → Gizlilik ve Güvenlik altında ZenCopy için **Giriş İzleme** iznini ver, sonra uygulamayı kapatıp yeniden başlat.
 (Uygulama, kopyalamaya iki kez basıldığını bu izinle fark eder.)
 
-## Sonuç gelmiyor / zaman aşımı diyor
+## Sonuç gelmiyor / zaman aşımı diyor {#no-result-comes-back--it-says-it-timed-out}
 
 Yanıt 90 saniye boyunca sessiz kalırsa ZenCopy sonsuza dek beklemek yerine çalışmayı başarısız sayar.
 İnternet bağlantını ve AI hizmeti ayarlarını (API anahtarı vb.) kontrol et, sonra **Yeniden dene** düğmesine bas.
 Yerel bir AI'nın ilk yüklenmesi zaman alabilir; zaman aşımının bilerek cömert tutulmasının nedeni bu.
 
-## Günlükler nerede?
+## Günlükler nerede? {#where-are-the-logs}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
@@ -77,7 +77,7 @@ Yerel bir AI'nın ilk yüklenmesi zaman alabilir; zaman aşımının bilerek cö
 
 Günlükler kopyaladığın içeriği ya da API anahtarlarını asla içermez.
 
-## Kaldırmak neleri siler?
+## Kaldırmak neleri siler? {#what-does-uninstalling-remove}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
@@ -101,7 +101,7 @@ Günlükler kopyaladığın içeriği ya da API anahtarlarını asla içermez.
   </TabItem>
 </Tabs>
 
-## Hangi Linux ortamları destekleniyor?
+## Hangi Linux ortamları destekleniyor? {#which-linux-environments-are-supported}
 
 **Wayland üzerinde GNOME ve X11.**
 GNOME Wayland'de arka plan süreçleri, tasarım gereği tuşları ya da panoyu gözlemleyemez; bu yüzden ZenCopy ([`copycopy`](https://crates.io/crates/copycopy) crate'i aracılığıyla), çift kopyalamayı compositor'ün içinden algılayan küçük bir GNOME Shell uzantısıyla gelir.
@@ -109,7 +109,7 @@ Uzantı ilk açılışta kullanıcı profiline otomatik kurulur (sudo gerekmez) 
 X11'de, Windows'taki gibi sıradan bir pasif tuş dinleyicisi iş görür.
 Diğer Wayland compositor'leri (KDE Plasma, wlroots tabanlılar) tetikleyiciyi ayrıcalıksız gözlemlemenin bir yolunu sunmaz ve henüz desteklenmez — uygulama çalışır ama tetikleyici devre dışı kalır.
 
-## Tepsi simgesi görünmüyor (Linux)
+## Tepsi simgesi görünmüyor (Linux) {#the-tray-icon-does-not-show-up-linux}
 
 ZenCopy'nin tepsi simgesi AppIndicator protokolünü kullanır.
 Ubuntu'nun GNOME'u bunu hazır olarak destekler; ama saf GNOME (örneğin Fedora), **AppIndicator and KStatusNotifierItem Support** Shell uzantısı kurulana kadar hiçbir şey göstermez.

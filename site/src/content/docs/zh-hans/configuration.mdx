@@ -10,12 +10,12 @@ ZenCopy 开箱即用，什么都不用配置。
 本页是当你想让它更贴合自己时的指南。
 前半部分讲**设置窗口**，面向所有人；后半部分讲**配置文件**，面向进阶用户。
 
-## 设置窗口
+## 设置窗口 {#the-settings-window}
 
 可以从托盘图标的菜单，或弹窗上的齿轮图标打开。
 它有三个标签页：**通用、AI、提示词**。
 
-### 通用
+### 通用 {#general}
 
 - **弹窗位置** — 结果出现在屏幕的哪个角落。
 - **主题** — 浅色 / 深色 / 跟随系统。
@@ -24,7 +24,7 @@ ZenCopy 开箱即用，什么都不用配置。
 - **登录时启动** — 只要电脑开着，ZenCopy 就随时待命。
 - **发送图片和文件前确认** — 在把图片或文件发送给 AI 之前，是否先询问一次。
 
-### AI
+### AI {#ai}
 
 在这里更改 AI 服务（提供商、模型、API 密钥）。
 点**测试**按钮，马上就能知道连接是否正常。
@@ -38,7 +38,7 @@ ZenCopy 开箱即用，什么都不用配置。
 解释会贴合你的知识水平，改出来的文稿会符合你偏好的语气。
 它不会影响无关的任务，写的内容本身也不会出现在结果里。
 
-### 提示词
+### 提示词 {#prompts}
 
 这是“复制两次之后做什么”的列表。
 
@@ -59,7 +59,7 @@ ZenCopy 开箱即用，什么都不用配置。
 回复中的代码块可以直接放入**设置 → 提示词 → 导入**。
 对于文档无法回答的问题（例如“ZenCopy 到底能不能做……”），<RepomixLink>只需一键即可打包相关源码</RepomixLink>——然后将结果交给同一个 AI。
 
-## 配置文件（进阶用户）
+## 配置文件（进阶用户） {#config-files-for-power-users}
 
 从这里开始，讲的是直接编辑文本文件。
 **所有基本功能都能在设置窗口里完成，所以到这里就停下也完全没问题。**
@@ -78,7 +78,7 @@ ZenCopy 开箱即用，什么都不用配置。
 它们定义新的提示词，内置提示词不可触碰（声明内置 id 的本地文件会被忽略）。
 编辑在下一次触发时生效 — 无需重启。
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 提供商，加上 **role → 模型**的映射。
 这个文件格式的老家是 [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — 每个字段都在那里有文档（包括供编辑器校验和补全用的 `$schema`），[`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) 里有三种规模的配置。
@@ -92,7 +92,7 @@ API 密钥直接写进这个本地文件（设置界面写出的也是同样的�
 每次读取时都会按 schema 校验这个文件。
 改坏了会在弹窗和设置编辑器里显示明确的提示 — 不会有任何静默失败。
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 哪种捕获由哪个提示词处理：
 一个扁平的 `kind → prompt` 映射，加上一个可选的、优先级更高的 `overrides` 列表（先匹配者胜出）。
@@ -119,7 +119,7 @@ Office 文档（Word、Excel、PowerPoint）也会变为文本：其内容会被
 完整路径会随内容一起发送，让模型能区分不同文件、知道它们的位置。
 由于二进制附件可能比文本花费更多，弹窗会在发送前先询问（文本文件无需确认直接运行）— 这个确认可以当场关闭，也可以在设置里关闭。
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 一个文件 = 一个提示词：YAML frontmatter + [Liquid](https://liquidjs.com) 正文。
 这同一个文件也就是分享格式 — 设置 → 提示词 → 导入既接受粘贴的文本，也接受选择的文件。
@@ -168,7 +168,7 @@ instructions: 你是一位简洁的助手。
 
 简单的提示词（一个名称加一条指令）也可以在设置窗口里创建；它写出的正是这种文件格式。
 
-#### 进阶模板
+#### 进阶模板 {#advanced-templating}
 
 `instructions` frontmatter 和正文都是完整的 [LiquidJS](https://liquidjs.com/tags/overview.html) 模板：条件、循环和[过滤器](https://liquidjs.com/filters/overview.html)全都可用。
 一个提示词可以根据复制来源自动切换行为：
@@ -190,7 +190,7 @@ label: 随上下文切换
 {{ text | truncate: 8000 }}
 ```
 
-## 日志
+## 日志 {#logs}
 
 结构化日志（密钥和复制内容已脱敏）在开发版输出到终端，在正式版输出到自动轮转的文件：
 

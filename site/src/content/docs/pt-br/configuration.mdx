@@ -10,12 +10,12 @@ O ZenCopy funciona de fábrica sem configurar nada.
 Esta página é para quando você quiser que ele se ajuste melhor a você.
 A primeira metade, sobre a **janela de configurações**, é para todo mundo; a segunda, sobre **arquivos de configuração**, é para usuários avançados.
 
-## A janela de configurações
+## A janela de configurações {#the-settings-window}
 
 Abra-a pelo menu do ícone da bandeja ou pelo ícone de engrenagem do popup.
 Ela tem três abas: **Geral, IA e Prompts**.
 
-### Geral
+### Geral {#general}
 
 - **Posição do popup** — em qual canto da tela os resultados aparecem.
 - **Tema** — claro / escuro / seguir o sistema.
@@ -24,7 +24,7 @@ Ela tem três abas: **Geral, IA e Prompts**.
 - **Iniciar ao fazer login** — deixar o ZenCopy sempre a postos quando o computador estiver ligado.
 - **Confirmar antes de enviar imagens e arquivos** — perguntar ou não uma vez antes de eles irem para a IA.
 
-### IA
+### IA {#ai}
 
 É aqui que você troca o serviço de IA (provedor, modelo, chave de API).
 O botão **Testar** diz na hora se a conexão funciona.
@@ -38,7 +38,7 @@ Com isso preenchido, todo prompt adapta os resultados a você.
 As explicações chegam no seu nível de conhecimento, e os rascunhos voltam no tom que você prefere.
 Isso nunca afeta tarefas sem relação, e o texto em si nunca aparece nos resultados.
 
-### Prompts
+### Prompts {#prompts}
 
 A lista do "que acontece depois de um copiar duplo".
 
@@ -59,7 +59,7 @@ Leia https://zencopy.app/llms-full.txt — a documentação completa do ZenCopy,
 O bloco de código na resposta vai direto para **Configurações → Prompts → Importar**.
 Para perguntas que a documentação não pode responder ("o ZenCopy conseguiria fazer...?"), <RepomixLink>um clique empacota o código-fonte relevante</RepomixLink> — entregue o resultado para a mesma IA.
 
-## Arquivos de configuração (para usuários avançados)
+## Arquivos de configuração (para usuários avançados) {#config-files-for-power-users}
 
 Daqui em diante, esta página trata de editar arquivos de texto diretamente.
 **Tudo o que é essencial está disponível na janela de configurações, então fique à vontade para parar de ler aqui.**
@@ -78,7 +78,7 @@ Os arquivos de prompt são **aditivos**:
 eles definem prompts novos, e os integrados são intocáveis (um arquivo local que reivindique o id de um integrado é ignorado).
 As edições valem a partir do próximo acionamento — sem precisar reiniciar.
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 Provedores mais um mapeamento **role → modelo**.
 A casa do formato do arquivo é o [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — todos os campos estão documentados lá (incluindo um `$schema` para validação e preenchimento automático no editor), e [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) tem configurações em três tamanhos.
@@ -92,7 +92,7 @@ Variáveis de ambiente não são lidas — aplicativos gráficos são iniciados 
 O arquivo é validado contra o esquema a cada leitura.
 Uma edição quebrada aparece como uma mensagem clara no popup e no editor de configurações — nada falha em silêncio.
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 Qual prompt cuida de cada tipo de captura:
 um mapa simples `kind → prompt` mais uma lista `overrides` opcional e de prioridade maior (vence a primeira regra que corresponder).
@@ -119,7 +119,7 @@ Qualquer outra coisa é recusada com uma mensagem clara.
 Os caminhos completos acompanham o conteúdo, para que o modelo distinga os arquivos e saiba onde eles estão.
 Como anexos binários podem custar mais que texto, o popup pergunta antes de enviá-los (arquivos de texto executam sem perguntar) — a confirmação pode ser desligada ali mesmo ou nas Configurações.
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 Um arquivo = um prompt: frontmatter YAML + um corpo de prompt em [Liquid](https://liquidjs.com).
 Esse mesmo arquivo único é o formato de compartilhamento — Configurações → Prompts → Importar o aceita como texto colado ou como arquivo escolhido.
@@ -168,7 +168,7 @@ Para ver os valores reais, ative **Mostrar variáveis de template** nas Configur
 
 Prompts simples (um nome e uma instrução) também podem ser criados pela janela de configurações; o que ela grava é exatamente este formato de arquivo.
 
-#### Templates avançados
+#### Templates avançados {#advanced-templating}
 
 Tanto o frontmatter `instructions` quanto o corpo são templates [LiquidJS](https://liquidjs.com/tags/overview.html) completos: condicionais, loops e [filtros](https://liquidjs.com/filters/overview.html) funcionam.
 Um único prompt pode se adaptar ao lugar de onde veio a cópia:
@@ -190,7 +190,7 @@ Explique isto em {{ locale }}:
 {{ text | truncate: 8000 }}
 ```
 
-## Logs
+## Logs {#logs}
 
 Logs estruturados (com segredos e conteúdo copiado ocultados) vão para o terminal em desenvolvimento e para um arquivo rotativo na versão final:
 

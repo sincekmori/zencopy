@@ -85,6 +85,8 @@ Both sides share the same sinks (tauri-plugin-log): stdout in dev, a rotating fi
 - Adding a language = one new locale file plus `messages` / `LOCALES` entries in [src/lib/messages/index.ts](src/lib/messages/index.ts); extend `locale_from_tag` in [src-tauri/src/tray.rs](src-tauri/src/tray.rs) (tray menu) to match.
 - RTL locales (ar, fa, he) flip the layout via `<html dir>` — use logical Tailwind utilities (`ms-*`, `me-*`, `text-start`, …), never physical ones (`ml-*`, `text-left`), except for screen-physical UI like the popup-corner picker.
 - Changing a `Messages` key means updating all 19 locale files in the same commit — the build fails otherwise, by design.
+- Docs heading anchors are locale-invariant: every translated heading carries the English page's slug explicitly (`## 見出し {#english-slug}`), so section links are identical in all 19 locales and translators copy them verbatim.
+  English itself keeps auto-generated slugs — renaming an English heading is SUPPOSED to ripple, and `starlight-links-validator` fails the site build at every stale anchor until the translations and links catch up.
 
 ## Rust & Tauri
 

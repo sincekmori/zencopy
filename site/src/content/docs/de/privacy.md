@@ -8,7 +8,7 @@ sidebar:
 ZenCopy ist eine lokale Desktop-App.
 Sie hat keinen Server, kein Konto und keine Telemetrie.
 
-## Was dein Gerät verlässt
+## Was dein Gerät verlässt {#what-leaves-your-device}
 
 Wenn du den Trigger drückst (<span data-os-modifier>Ctrl/⌘</span> + C + C), wird der erfasste Zwischenablage-Inhalt direkt an den LLM-Anbieter gesendet, den _du_ eingerichtet hast — nichts anderes, und nirgendwo sonst hin.
 Was genau gesendet wird, hängt vom ausgeführten Prompt ab:
@@ -22,7 +22,7 @@ Zwischenablage-Inhalte, die andere Apps als sensibel markieren (z. B. Passwort-M
 
 Unabhängig von Captures fragt die Update-Prüfung bei GitHub nur Release-Metadaten ab — nie deine Inhalte.
 
-## Was auf deinem Gerät bleibt
+## Was auf deinem Gerät bleibt {#what-stays-on-your-device}
 
 - Deine API-Schlüssel (`ai-sdk-catalog.json` im App-Konfigurationsverzeichnis — nie mitgeliefert, nie hochgeladen).
 - Deine Einstellungen (Design, Sprache, Popup-Position, …).
@@ -32,12 +32,12 @@ Unabhängig von Captures fragt die Update-Prüfung bei GitHub nur Release-Metada
 - Nutzungsstatistik (Schalter in den Einstellungen, standardmäßig an): welcher Prompt auf welcher Art von Capture lief, dazu Modell und Tokenzahlen, damit sich deine Kosten berechnen lassen.
   Nur eine lokale Datei — nie der kopierte Inhalt, nie irgendwohin gesendet.
 
-## Dritte
+## Dritte {#third-parties}
 
 Deine Nutzung eines LLM-Anbieters unterliegt dessen eigenen Bedingungen und dessen eigener Datenschutzerklärung.
 ZenCopy fügt keinen Vermittler hinzu: Deine Inhalte gehen nur an den Anbieter, den du einrichtest, und Nutzung und Kosten liegen bei dir.
 
-## Verlass dich nicht auf unser Wort
+## Verlass dich nicht auf unser Wort {#dont-take-our-word-for-it}
 
 ZenCopy ist Open Source (Apache-2.0).
 Jede Aussage auf dieser Seite lässt sich am [Quellcode](https://github.com/sincekmori/zencopy) überprüfen.

@@ -9,7 +9,7 @@ Nếu bạn thích ở yên trong các màn hình của chính ứng dụng, b�
 Các điểm khởi đầu sao chép-và-dán cho `ai-sdk-catalog.json`.
 Đặt tệp vào [thư mục cấu hình ứng dụng](/vi/configuration/); chỉnh sửa có hiệu lực ở lần kích hoạt kế tiếp.
 
-## Một nhà cung cấp, một mô hình
+## Một nhà cung cấp, một mô hình {#one-provider-one-model}
 
 Những gì giao diện cài đặt ghi ra — với phần lớn mọi người, đây là toàn bộ tệp:
 
@@ -31,7 +31,7 @@ Những gì giao diện cài đặt ghi ra — với phần lớn mọi người
 
 Dòng `$schema` là tùy chọn; các trình soạn thảo hiểu JSON Schema dùng nó để kiểm tra và tự hoàn thành tệp khi bạn gõ.
 
-## Ollama chạy tại máy — không gì rời khỏi máy bạn
+## Ollama chạy tại máy — không gì rời khỏi máy bạn {#local-ollama--nothing-leaves-your-machine}
 
 ```json
 {
@@ -51,7 +51,7 @@ Dòng `$schema` là tùy chọn; các trình soạn thảo hiểu JSON Schema d�
 Mọi endpoint tương thích OpenAI đều hoạt động theo cùng cách — LM Studio, llama.cpp, gateway công ty: đổi `baseURL` của vendor (và thêm `apiKey` bên cạnh nếu endpoint yêu cầu).
 Một vai trò có dạng `"provider:model"`, tách tại dấu `:` đầu tiên — vì vậy `"ollama:gemma4:e4b"` vẫn hoạt động dù id mô hình chứa dấu hai chấm.
 
-## Hai vai trò: nhanh theo mặc định, thông minh khi cần
+## Hai vai trò: nhanh theo mặc định, thông minh khi cần {#two-roles-fast-by-default-smart-on-demand}
 
 Vai trò tách rời prompt khỏi mô hình.
 Prompt gọi tên một vai trò (`role: smart` trong frontmatter của prompt); vai trò đó ứng với mô hình nào được quyết định ở đây — đổi lúc nào cũng được mà không đụng đến prompt.

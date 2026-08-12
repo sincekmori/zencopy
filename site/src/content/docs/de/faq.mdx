@@ -5,7 +5,7 @@ description: Kosten, Datenschutz, Konflikte mit anderen Apps und Fehlerbehebung.
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 
-## Kostet es etwas?
+## Kostet es etwas? {#does-it-cost-money}
 
 ZenCopy selbst ist kostenlose Open-Source-Software (Apache-2.0).
 Es gibt kein Konto und kein Abo.
@@ -14,25 +14,25 @@ Was der KI-Dienst berechnet, ist eine Sache zwischen dir und diesem Dienst.
 Mit dem [kostenlosen Kontingent von Google](/de/getting-started/) ist es komplett kostenlos — solange du keine Zahlungsmethode hinterlegst, kann dir nichts berechnet werden.
 Und bei einer KI, die vollständig auf deinem eigenen Computer läuft (zum Beispiel Ollama), gibt es von vornherein keinen externen Dienst, den man bezahlen müsste.
 
-## Wohin gehen meine kopierten Inhalte?
+## Wohin gehen meine kopierten Inhalte? {#where-does-my-copied-content-go}
 
 Nur wenn du zweimal kopierst, geht der Inhalt **direkt an den KI-Dienst, den du eingerichtet hast** — und nirgendwo sonst hin.
 Es gibt keinen ZenCopy-Server, kein Relay und keine Nutzungserfassung (Telemetrie).
 Auch dein API-Schlüssel verlässt dein Gerät nie.
 
-## Löst ein gewöhnliches Kopieren irgendetwas aus?
+## Löst ein gewöhnliches Kopieren irgendetwas aus? {#does-an-ordinary-copy-trigger-anything}
 
 Nein.
 Ein einzelnes <span data-os-modifier>Ctrl/⌘</span> + C startet nichts, liest nichts und sendet nichts.
 Nur zwei Kopiervorgänge kurz hintereinander sind das Signal.
 Und selbst dann werden Zwischenablage-Inhalte ignoriert, die andere Apps als vertraulich markieren (zum Beispiel Passwort-Manager).
 
-## Wie sehr kann ich den Antworten der KI vertrauen?
+## Wie sehr kann ich den Antworten der KI vertrauen? {#how-much-can-i-trust-the-ais-answers}
 
 KI kann wortgewandt falschliegen.
 Sie ist wirklich nützlich, um den Kern eines Textes zu erfassen — aber bei Zahlen, Namen und allem mit Folgen (Verträge, medizinische Texte) prüfe gegen das Original, bevor du danach handelst.
 
-## Was unterscheidet das von anderen „KI auf Auswahl“-Tools?
+## Was unterscheidet das von anderen „KI auf Auswahl“-Tools? {#how-is-this-different-from-other-ai-on-selection-tools}
 
 Die meisten Tools in diesem Bereich gibt es nur für macOS, sie funktionieren nur mit ausgewähltem Text und sind an die KI eines Anbieters oder ein Abo gebunden.
 ZenCopy läuft auf **Windows, macOS und Linux**, verarbeitet **Text, Bilder und Dateien**, und **du wählst den KI-Dienst** (OpenAI / Google / Anthropic / ein Firmen-Gateway / lokales Ollama).
@@ -40,7 +40,7 @@ Und es bleibt nicht bei einem einzigen Hin und Her: Im Feld unter der Antwort **
 [Auch welcher Prompt läuft, entscheidest du](/de/configuration/#rulesjson).
 Kein Konto, kein Abo, keine Telemetrie — Open-Source-Software.
 
-## Was unterscheidet das von Chat-Websites wie ChatGPT?
+## Was unterscheidet das von Chat-Websites wie ChatGPT? {#how-is-this-different-from-chat-sites-like-chatgpt}
 
 Eine Chat-Website ist ein Ort, zu dem man „hinübergeht“, um zu reden.
 ZenCopy **ruft das Gespräch über dem auf, was du gerade ansiehst**.
@@ -48,26 +48,26 @@ Auswählen, zweimal kopieren — der Text, den du gelesen hast, der Screenshot e
 Die erste Antwort (Zusammenfassung, Übersetzung und so weiter) beginnt automatisch, danach ist es ein ganz normaler Chat.
 Das Modell wählst du selbst, und der Verlauf landet auf keinem Server (ein Gespräch lebt nur bis zum nächsten Kopieren).
 
-## Eine andere App reagiert ebenfalls auf Ctrl/⌘ + C + C (z. B. DeepL)
+## Eine andere App reagiert ebenfalls auf Ctrl/⌘ + C + C (z. B. DeepL) {#another-app-also-reacts-to-ctrl--c--c-eg-deepl}
 
 Keine App kann das Signal „zweimal kopieren“ auf Betriebssystemebene für sich beanspruchen.
 Wenn eine andere App auf dasselbe Signal lauscht (DeepL ist das bekannte Beispiel), reagieren **beide**, und zwei Popups erscheinen.
 ZenCopy fängt keine Tastenereignisse ab und blockiert keine — es geht also nichts kaputt, das ist schon das ganze Symptom.
 Deaktiviere die Tastenkombination in der App, die du seltener nutzt (bei DeepL: Einstellungen → Allgemein → Tastenkombination zum Übersetzen).
 
-## Das Popup erscheint nie (macOS)
+## Das Popup erscheint nie (macOS) {#the-popup-never-appears-macos}
 
 Fast sicher eine Frage der Berechtigungen.
 Erlaube ZenCopy unter Systemeinstellungen → Datenschutz & Sicherheit die **Eingabeüberwachung**, und beende und starte die App danach neu.
 (Über diese Berechtigung bemerkt die App, dass Kopieren zweimal gedrückt wurde.)
 
-## Es kommt kein Ergebnis zurück / es heißt, die Zeit sei abgelaufen
+## Es kommt kein Ergebnis zurück / es heißt, die Zeit sei abgelaufen {#no-result-comes-back--it-says-it-timed-out}
 
 Bleibt die Antwort 90 Sekunden lang still, bricht ZenCopy den Lauf ab, statt ewig zu warten.
 Prüfe deine Internetverbindung und die Einstellungen des KI-Dienstes (API-Schlüssel und so weiter) und drücke dann **Erneut versuchen**.
 Eine lokale KI kann beim ersten Mal eine Weile zum Laden brauchen — deshalb ist die Zeitgrenze bewusst großzügig.
 
-## Wo liegen die Logs?
+## Wo liegen die Logs? {#where-are-the-logs}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
@@ -77,7 +77,7 @@ Eine lokale KI kann beim ersten Mal eine Weile zum Laden brauchen — deshalb is
 
 Logs enthalten nie deine kopierten Inhalte oder API-Schlüssel.
 
-## Was entfernt eine Deinstallation?
+## Was entfernt eine Deinstallation? {#what-does-uninstalling-remove}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
@@ -102,7 +102,7 @@ Logs enthalten nie deine kopierten Inhalte oder API-Schlüssel.
   </TabItem>
 </Tabs>
 
-## Welche Linux-Umgebungen werden unterstützt?
+## Welche Linux-Umgebungen werden unterstützt? {#which-linux-environments-are-supported}
 
 **GNOME unter Wayland sowie X11.**
 Unter GNOME Wayland können Hintergrundprozesse konstruktionsbedingt weder Tasten noch die Zwischenablage beobachten, deshalb bringt ZenCopy (über das [`copycopy`](https://crates.io/crates/copycopy)-Crate) eine kleine GNOME-Shell-Erweiterung mit, die das doppelte Kopieren aus dem Inneren des Compositors erkennt.
@@ -110,7 +110,7 @@ Sie wird beim ersten Start automatisch in dein Benutzerprofil installiert (ohne 
 Unter X11 funktioniert ein gewöhnlicher passiver Tasten-Listener, wie unter Windows.
 Andere Wayland-Compositor (KDE Plasma, wlroots-basierte) bieten keinen unprivilegierten Weg, den Trigger zu beobachten, und werden noch nicht unterstützt — die App läuft, aber der Trigger bleibt stumm.
 
-## Das Tray-Symbol taucht nicht auf (Linux)
+## Das Tray-Symbol taucht nicht auf (Linux) {#the-tray-icon-does-not-show-up-linux}
 
 Das Tray-Symbol von ZenCopy nutzt das AppIndicator-Protokoll.
 Ubuntus GNOME unterstützt es von Haus aus, aber pures GNOME (zum Beispiel Fedora) zeigt nichts an, bis die Shell-Erweiterung **AppIndicator and KStatusNotifierItem Support** installiert ist.

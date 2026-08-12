@@ -8,7 +8,7 @@ sidebar:
 ZenCopy est une application de bureau locale.
 Elle n'a ni serveur, ni compte, ni télémétrie.
 
-## Ce qui quitte votre appareil
+## Ce qui quitte votre appareil {#what-leaves-your-device}
 
 Quand vous appuyez sur le déclencheur (<span data-os-modifier>Ctrl/⌘</span> + C + C), le contenu du presse-papiers capturé est envoyé directement au fournisseur de LLM que _vous_ avez configuré — rien d'autre, et nulle part ailleurs.
 Ce qui est envoyé exactement dépend du prompt qui s'exécute :
@@ -22,7 +22,7 @@ Le contenu du presse-papiers que d'autres applications marquent comme sensible (
 
 Indépendamment des captures, la vérification des mises à jour ne demande à GitHub que les métadonnées de version — jamais vos contenus.
 
-## Ce qui reste sur votre appareil
+## Ce qui reste sur votre appareil {#what-stays-on-your-device}
 
 - Vos clés d'API (`ai-sdk-catalog.json` dans le répertoire de configuration de l'application — jamais embarquées, jamais téléversées).
 - Vos réglages (thème, langue, position du popup, …).
@@ -32,12 +32,12 @@ Indépendamment des captures, la vérification des mises à jour ne demande à G
 - Les statistiques d'utilisation (interrupteur dans les réglages, activé par défaut) : quel prompt a traité quel type de capture, avec le modèle et le nombre de tokens, pour que vos coûts restent calculables.
   Un simple fichier local — jamais le contenu copié, jamais envoyé nulle part.
 
-## Tiers
+## Tiers {#third-parties}
 
 Votre utilisation d'un fournisseur de LLM est régie par les conditions et la politique de confidentialité de ce fournisseur.
 ZenCopy n'ajoute aucun intermédiaire : votre contenu ne va qu'au fournisseur que vous configurez, et son utilisation comme ses coûts vous appartiennent.
 
-## Ne nous croyez pas sur parole
+## Ne nous croyez pas sur parole {#dont-take-our-word-for-it}
 
 ZenCopy est open source (Apache-2.0).
 Chaque affirmation de cette page peut être vérifiée dans [le code source](https://github.com/sincekmori/zencopy).

@@ -5,7 +5,7 @@ description: Les coûts, la confidentialité, les conflits avec d'autres applica
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 
-## Est-ce payant ?
+## Est-ce payant ? {#does-it-cost-money}
 
 ZenCopy est un logiciel gratuit et open source (Apache-2.0).
 Il n'y a ni compte ni abonnement.
@@ -14,25 +14,25 @@ Ce que le service d'IA facture ne regarde que vous et ce service.
 Avec [l'offre gratuite de Google](/fr/getting-started/), c'est entièrement gratuit — tant que vous n'enregistrez pas de moyen de paiement, rien ne peut vous être facturé.
 Et avec une IA qui tourne entièrement sur votre propre ordinateur (Ollama, par exemple), il n'y a tout simplement aucun service externe à payer.
 
-## Où va le contenu que je copie ?
+## Où va le contenu que je copie ? {#where-does-my-copied-content-go}
 
 C'est seulement quand vous copiez deux fois que le contenu part **directement vers le service d'IA que vous avez configuré** — et nulle part ailleurs.
 Il n'y a pas de serveur ZenCopy, pas de relais, pas de suivi d'utilisation (télémétrie).
 Votre clé d'API ne quitte pas non plus votre machine.
 
-## Un copier ordinaire déclenche-t-il quelque chose ?
+## Un copier ordinaire déclenche-t-il quelque chose ? {#does-an-ordinary-copy-trigger-anything}
 
 Non.
 Un seul <span data-os-modifier>Ctrl/⌘</span> + C ne démarre rien, ne lit rien et n'envoie rien.
 Seuls deux copiers rapprochés constituent le signal.
 Et même dans ce cas, le contenu du presse-papiers marqué comme confidentiel par d'autres applications (les gestionnaires de mots de passe, par exemple) est ignoré.
 
-## À quel point puis-je me fier aux réponses de l'IA ?
+## À quel point puis-je me fier aux réponses de l'IA ? {#how-much-can-i-trust-the-ais-answers}
 
 L'IA peut se tromper avec beaucoup d'aplomb.
 Elle est réellement utile pour saisir l'essentiel d'un texte, mais pour les chiffres, les noms et tout ce qui a des conséquences — contrats, textes médicaux — vérifiez avec l'original avant d'agir.
 
-## En quoi est-ce différent des autres outils « IA sur la sélection » ?
+## En quoi est-ce différent des autres outils « IA sur la sélection » ? {#how-is-this-different-from-other-ai-on-selection-tools}
 
 La plupart des outils de ce type sont réservés à macOS, ne traitent que le texte sélectionné et sont liés à l'IA d'un seul éditeur ou à un abonnement.
 ZenCopy fonctionne sous **Windows, macOS et Linux**, traite **le texte, les images et les fichiers**, et vous laisse **choisir le service d'IA** (OpenAI / Google / Anthropic / une passerelle d'entreprise / Ollama en local).
@@ -40,7 +40,7 @@ Et cela ne s'arrête pas à un seul aller-retour : dans le champ sous la répons
 [Le choix du prompt qui s'exécute vous appartient aussi](/fr/configuration/#rulesjson).
 Pas de compte, pas d'abonnement, pas de télémétrie — un logiciel open source.
 
-## Quelle différence avec les sites de chat comme ChatGPT ?
+## Quelle différence avec les sites de chat comme ChatGPT ? {#how-is-this-different-from-chat-sites-like-chatgpt}
 
 Un site de chat est un endroit où l'on « se rend » pour parler.
 ZenCopy **invoque la conversation par-dessus ce que vous regardez**.
@@ -48,26 +48,26 @@ Sélectionnez et copiez deux fois — le texte que vous lisiez, la capture d'un 
 La première réponse (résumé, traduction…) démarre toute seule ; la suite se déroule comme dans n'importe quel chat.
 Le modèle, c'est vous qui le choisissez, et l'historique ne reste sur aucun serveur (la conversation est éphémère : elle dure jusqu'à votre prochain copier).
 
-## Une autre application réagit aussi à Ctrl/⌘ + C + C (DeepL, par exemple)
+## Une autre application réagit aussi à Ctrl/⌘ + C + C (DeepL, par exemple) {#another-app-also-reacts-to-ctrl--c--c-eg-deepl}
 
 Aucune application ne peut s'approprier le signal « copier deux fois » au niveau du système.
 Si une autre application écoute le même signal (DeepL est le cas le plus connu), **les deux** réagissent et deux popups apparaissent.
 ZenCopy n'intercepte ni ne bloque aucun événement clavier, donc rien ne casse — le symptôme s'arrête là.
 Désactivez le raccourci dans l'application que vous utilisez le moins (pour DeepL : Réglages → Général → raccourci de traduction).
 
-## Le popup n'apparaît jamais (macOS)
+## Le popup n'apparaît jamais (macOS) {#the-popup-never-appears-macos}
 
 Ce sont presque certainement les autorisations.
 Autorisez **Surveillance de l'entrée** pour ZenCopy dans Réglages Système → Confidentialité et sécurité, puis quittez et relancez l'application.
 (Cette autorisation est ce qui permet à l'application de remarquer que copier a été appuyé deux fois.)
 
-## Aucun résultat n'arrive / un dépassement de délai est signalé
+## Aucun résultat n'arrive / un dépassement de délai est signalé {#no-result-comes-back--it-says-it-timed-out}
 
 Si la réponse reste silencieuse pendant 90 secondes, ZenCopy interrompt l'exécution plutôt que d'attendre indéfiniment.
 Vérifiez votre connexion Internet et les réglages du service d'IA (clé d'API, etc.), puis appuyez sur **Réessayer**.
 Une IA locale peut mettre du temps à se charger la première fois, c'est pourquoi le délai est volontairement généreux.
 
-## Où sont les journaux ?
+## Où sont les journaux ? {#where-are-the-logs}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
@@ -77,7 +77,7 @@ Une IA locale peut mettre du temps à se charger la première fois, c'est pourqu
 
 Les journaux ne contiennent jamais votre contenu copié ni vos clés d'API.
 
-## Que supprime la désinstallation ?
+## Que supprime la désinstallation ? {#what-does-uninstalling-remove}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
@@ -102,7 +102,7 @@ Les journaux ne contiennent jamais votre contenu copié ni vos clés d'API.
   </TabItem>
 </Tabs>
 
-## Quels environnements Linux sont pris en charge ?
+## Quels environnements Linux sont pris en charge ? {#which-linux-environments-are-supported}
 
 **GNOME sous Wayland, et X11.**
 Sous GNOME Wayland, les processus en arrière-plan ne peuvent, par conception, observer ni les touches ni le presse-papiers ; ZenCopy (via le crate [`copycopy`](https://crates.io/crates/copycopy)) fournit donc une petite extension GNOME Shell qui détecte le double copier depuis l'intérieur du compositeur.
@@ -110,7 +110,7 @@ Elle est installée automatiquement dans votre profil utilisateur au premier lan
 Sous X11, un simple écouteur de touches passif fonctionne, comme sous Windows.
 Les autres compositeurs Wayland (KDE Plasma, ceux basés sur wlroots) n'offrent aucun moyen non privilégié d'observer le déclencheur et ne sont pas encore pris en charge — l'application se lance, mais le déclencheur reste inerte.
 
-## L'icône n'apparaît pas dans la zone de notification (Linux)
+## L'icône n'apparaît pas dans la zone de notification (Linux) {#the-tray-icon-does-not-show-up-linux}
 
 L'icône de ZenCopy utilise le protocole AppIndicator.
 Le GNOME d'Ubuntu le prend en charge d'emblée, mais le GNOME de base (Fedora, par exemple) n'affiche rien tant que l'extension Shell **AppIndicator and KStatusNotifierItem Support** n'est pas installée.

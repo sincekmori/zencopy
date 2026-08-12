@@ -10,12 +10,12 @@ ZenCopy działa od razu, bez żadnej konfiguracji.
 Ta strona przyda się, gdy zechcesz lepiej dopasować go do siebie.
 Pierwsza połowa, o **oknie ustawień**, jest dla wszystkich; druga połowa, o **plikach konfiguracyjnych**, dla zaawansowanych użytkowników.
 
-## Okno ustawień
+## Okno ustawień {#the-settings-window}
 
 Otwórz je z menu ikony w zasobniku albo ikoną koła zębatego w okienku.
 Ma trzy karty: **Ogólne, AI i Prompty**.
 
-### Ogólne
+### Ogólne {#general}
 
 - **Pozycja okienka** — w którym rogu ekranu pojawiają się wyniki.
 - **Motyw** — jasny / ciemny / zgodny z systemem.
@@ -24,7 +24,7 @@ Ma trzy karty: **Ogólne, AI i Prompty**.
 - **Uruchamiaj przy logowaniu** — ZenCopy czeka w gotowości, gdy tylko komputer jest włączony.
 - **Potwierdzaj przed wysłaniem obrazów i plików** — czy pytać jednorazowo, zanim obrazy lub pliki trafią do AI.
 
-### AI
+### AI {#ai}
 
 Tu zmienisz usługę AI (dostawcę, model, klucz API).
 Przycisk **Testuj** od razu mówi, czy połączenie działa.
@@ -38,7 +38,7 @@ Z wypełnionym polem każdy prompt dopasowuje wyniki do Ciebie.
 Wyjaśnienia przychodzą na Twoim poziomie wiedzy, a wersje robocze wracają w preferowanym przez Ciebie tonie.
 Pole nigdy nie wpływa na niezwiązane zadania, a sam jego tekst nigdy nie pojawia się w wynikach.
 
-### Prompty
+### Prompty {#prompts}
 
 Lista tego, „co dzieje się po podwójnym kopiowaniu”.
 
@@ -59,7 +59,7 @@ Przeczytaj https://zencopy.app/llms-full.txt — pełną dokumentację ZenCopy, 
 Blok kodu w odpowiedzi trafia bezpośrednio do **Ustawienia → Prompty → Importuj**.
 W przypadku pytań, na które dokumentacja nie odpowiada („czy ZenCopy w ogóle potrafi…?”), <RepomixLink>jedno kliknięcie pakuje odpowiedni kod źródłowy</RepomixLink> — przekaż wynik tej samej sztucznej inteligencji.
 
-## Pliki konfiguracyjne (dla zaawansowanych użytkowników)
+## Pliki konfiguracyjne (dla zaawansowanych użytkowników) {#config-files-for-power-users}
 
 Od tego miejsca strona dotyczy bezpośredniej edycji plików tekstowych.
 **Wszystko, co niezbędne, jest dostępne z okna ustawień, więc śmiało możesz zakończyć lekturę tutaj.**
@@ -78,7 +78,7 @@ Pliki promptów są **addytywne**:
 definiują nowe prompty, a wbudowane pozostają nienaruszalne (lokalny plik podszywający się pod id wbudowanego promptu jest ignorowany).
 Zmiany obowiązują od następnego wyzwolenia — restart nie jest potrzebny.
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 Dostawcy plus mapowanie **rola → model**.
 Format pliku ma swój dom w [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — każde pole jest tam udokumentowane (łącznie z `$schema` do walidacji i podpowiedzi w edytorze), a w [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) znajdują się konfiguracje w trzech rozmiarach.
@@ -92,7 +92,7 @@ Zmienne środowiskowe nie są odczytywane — aplikacje z interfejsem graficznym
 Plik jest walidowany schematem przy każdym odczycie.
 Zepsuta edycja pokazuje się jako czytelny komunikat w okienku i w edytorze ustawień — nic nie zawodzi po cichu.
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 Który prompt obsługuje który rodzaj przechwycenia:
 płaska mapa `kind → prompt` plus opcjonalna lista `overrides` o wyższym priorytecie (wygrywa pierwsze dopasowanie).
@@ -119,7 +119,7 @@ Wszystko inne jest odrzucane z czytelnym komunikatem.
 Razem z zawartością wysyłane są pełne ścieżki, aby model mógł odróżnić pliki od siebie i wiedział, gdzie się znajdują.
 Ponieważ załączniki binarne mogą kosztować więcej niż tekst, okienko pyta przed ich wysłaniem (pliki tekstowe działają bez pytania) — potwierdzenie można wyłączyć na miejscu albo w Ustawieniach.
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 Jeden plik = jeden prompt: frontmatter YAML + treść promptu w [Liquid](https://liquidjs.com).
 Ten sam pojedynczy plik jest zarazem formatem udostępniania — Ustawienia → Prompty → Importuj przyjmuje go jako wklejony tekst albo wybrany plik.
@@ -168,7 +168,7 @@ Aby zobaczyć rzeczywiste wartości, włącz w Ustawieniach **Pokaż zmienne sza
 
 Proste prompty (nazwa i instrukcja) można też tworzyć z okna ustawień; to, co ono zapisuje, to dokładnie ten format pliku.
 
-#### Zaawansowane szablony
+#### Zaawansowane szablony {#advanced-templating}
 
 Zarówno frontmatter `instructions`, jak i treść są pełnoprawnymi szablonami [LiquidJS](https://liquidjs.com/tags/overview.html): działają instrukcje warunkowe, pętle i [filtry](https://liquidjs.com/filters/overview.html).
 Jeden prompt może dostosować się do tego, skąd pochodzi kopia:
@@ -190,7 +190,7 @@ Wyjaśnij to w języku {{ locale }}:
 {{ text | truncate: 8000 }}
 ```
 
-## Logi
+## Logi {#logs}
 
 Logi strukturalne (z usuniętymi sekretami i skopiowaną treścią) trafiają w trybie deweloperskim do terminala, a w wydaniu do pliku z rotacją:
 

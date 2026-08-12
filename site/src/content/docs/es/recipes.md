@@ -9,7 +9,7 @@ Si prefieres quedarte en las pantallas de la propia aplicación, nunca la necesi
 Puntos de partida para copiar y pegar en `ai-sdk-catalog.json`.
 Coloca el archivo en el [directorio de configuración de la aplicación](/es/configuration/); las ediciones se aplican desde el siguiente disparo.
 
-## Un proveedor, un modelo
+## Un proveedor, un modelo {#one-provider-one-model}
 
 Lo que escribe la interfaz de ajustes — el archivo completo para la mayoría de la gente:
 
@@ -31,7 +31,7 @@ Lo que escribe la interfaz de ajustes — el archivo completo para la mayoría d
 
 La línea `$schema` es opcional; los editores que entienden JSON Schema la usan para validar y autocompletar el archivo mientras escribes.
 
-## Ollama local — nada sale de tu máquina
+## Ollama local — nada sale de tu máquina {#local-ollama--nothing-leaves-your-machine}
 
 ```json
 {
@@ -51,7 +51,7 @@ La línea `$schema` es opcional; los editores que entienden JSON Schema la usan 
 Cualquier endpoint compatible con OpenAI funciona de la misma manera — LM Studio, llama.cpp, una pasarela corporativa: cambia el `baseURL` del vendor (y añade `apiKey` a su lado si el endpoint lo pide).
 Un rol es `"provider:model"`, dividido en el primer `:` — por eso `"ollama:gemma4:e4b"` funciona aunque el id del modelo contenga dos puntos.
 
-## Dos roles: rápido por defecto, inteligente bajo demanda
+## Dos roles: rápido por defecto, inteligente bajo demanda {#two-roles-fast-by-default-smart-on-demand}
 
 Los roles desacoplan los prompts de los modelos.
 Los prompts nombran un rol (`role: smart` en el frontmatter del prompt); qué modelo significa eso se decide aquí — cámbialo cuando quieras sin tocar los prompts.

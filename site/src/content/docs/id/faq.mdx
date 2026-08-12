@@ -5,7 +5,7 @@ description: Biaya, privasi, bentrok dengan aplikasi lain, dan pemecahan masalah
 
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 
-## Apakah berbayar?
+## Apakah berbayar? {#does-it-cost-money}
 
 ZenCopy sendiri adalah perangkat lunak gratis dan open source (Apache-2.0).
 Tidak ada akun dan tidak ada langganan.
@@ -14,25 +14,25 @@ Biaya dari layanan AI adalah urusan antara kamu dan layanan itu.
 Dengan [tingkat gratis Google](/id/getting-started/), semuanya benar-benar gratis — selama kamu tidak mendaftarkan metode pembayaran, kamu tidak bisa ditagih.
 Dan dengan AI yang berjalan sepenuhnya di komputermu sendiri (Ollama, misalnya), sejak awal memang tidak ada layanan eksternal yang perlu dibayar.
 
-## Ke mana konten yang kusalin pergi?
+## Ke mana konten yang kusalin pergi? {#where-does-my-copied-content-go}
 
 Hanya saat kamu menyalin dua kali, konten pergi **langsung ke layanan AI yang kamu atur** — dan tidak ke mana pun selain itu.
 Tidak ada server ZenCopy, tidak ada relai, dan tidak ada pelacakan pemakaian (telemetri).
 Kunci API kamu juga tidak pernah meninggalkan perangkatmu.
 
-## Apakah salinan biasa memicu sesuatu?
+## Apakah salinan biasa memicu sesuatu? {#does-an-ordinary-copy-trigger-anything}
 
 Tidak.
 Satu kali <span data-os-modifier>Ctrl/⌘</span> + C tidak memulai apa pun, tidak membaca apa pun, dan tidak mengirim apa pun.
 Sinyalnya hanyalah dua salinan yang dilakukan beruntun dengan cepat.
 Bahkan saat itu pun, konten papan klip yang ditandai rahasia oleh aplikasi lain (pengelola kata sandi, misalnya) diabaikan.
 
-## Seberapa jauh jawaban AI bisa dipercaya?
+## Seberapa jauh jawaban AI bisa dipercaya? {#how-much-can-i-trust-the-ais-answers}
 
 AI bisa salah dengan cara yang sangat meyakinkan.
 AI sungguh berguna untuk menangkap inti sebuah teks, tetapi untuk angka, nama, dan apa pun yang berdampak besar — kontrak, teks medis — periksa dulu terhadap aslinya sebelum menindaklanjutinya.
 
-## Apa bedanya dengan alat "AI pada teks terpilih" lain?
+## Apa bedanya dengan alat "AI pada teks terpilih" lain? {#how-is-this-different-from-other-ai-on-selection-tools}
 
 Kebanyakan alat sejenis hanya untuk macOS, hanya bekerja pada teks yang dipilih, dan terikat pada AI satu vendor atau sebuah langganan.
 ZenCopy berjalan di **Windows, macOS, dan Linux**, menangani **teks, gambar, dan berkas**, dan membiarkan **kamu memilih layanan AI-nya** (OpenAI / Google / Anthropic / gateway perusahaan / Ollama lokal).
@@ -40,7 +40,7 @@ Dan tidak berhenti di satu kali tukar pesan: dari kolom di bawah jawaban, **perc
 [Prompt mana yang berjalan juga kamu yang menentukan](/id/configuration/#rulesjson).
 Tanpa akun, tanpa langganan, tanpa telemetri — perangkat lunak open source.
 
-## Apa bedanya dengan situs chat seperti ChatGPT?
+## Apa bedanya dengan situs chat seperti ChatGPT? {#how-is-this-different-from-chat-sites-like-chatgpt}
 
 Situs chat adalah tempat yang kamu "datangi" untuk berbicara.
 ZenCopy **memanggil percakapan di atas apa yang sedang kamu lihat**.
@@ -48,26 +48,26 @@ Pilih dan salin dua kali — teks yang sedang kamu baca, tangkapan layar galat, 
 Jawaban pertama (ringkasan, terjemahan, dan sebagainya) dimulai otomatis, dan selebihnya sama seperti chat biasa.
 Modelnya kamu pilih sendiri, dan riwayatnya tidak tersimpan di server mana pun (percakapan hanya berlaku sampai salinan berikutnya).
 
-## Aplikasi lain juga bereaksi terhadap Ctrl/⌘ + C + C (mis. DeepL)
+## Aplikasi lain juga bereaksi terhadap Ctrl/⌘ + C + C (mis. DeepL) {#another-app-also-reacts-to-ctrl--c--c-eg-deepl}
 
 Tidak ada aplikasi yang bisa memiliki sinyal "salin dua kali" di tingkat OS.
 Kalau aplikasi lain juga mendengarkan sinyal yang sama (DeepL yang paling dikenal), **keduanya** bereaksi dan dua popup muncul.
 ZenCopy tidak mencegat maupun memblokir peristiwa tombol apa pun, jadi tidak ada yang rusak — hanya itu saja gejalanya.
 Nonaktifkan pintasan di aplikasi yang lebih jarang kamu pakai (untuk DeepL: Settings → General → pintasan untuk menerjemahkan).
 
-## Popup tidak pernah muncul (macOS)
+## Popup tidak pernah muncul (macOS) {#the-popup-never-appears-macos}
 
 Hampir pasti soal izin.
 Izinkan **Pengawasan Input** untuk ZenCopy di Pengaturan Sistem → Privasi & Keamanan, lalu tutup dan jalankan ulang aplikasinya.
 (Lewat izin inilah aplikasi menyadari bahwa tombol salin ditekan dua kali.)
 
-## Tidak ada hasil yang kembali / muncul pesan waktu habis
+## Tidak ada hasil yang kembali / muncul pesan waktu habis {#no-result-comes-back--it-says-it-timed-out}
 
 Kalau respons hening selama 90 detik, ZenCopy menggagalkan proses alih-alih menunggu selamanya.
 Periksa koneksi internet dan pengaturan layanan AI (kunci API dan sebagainya), lalu tekan **Coba lagi**.
 AI lokal bisa butuh waktu untuk memuat pada kali pertama, itulah sebabnya batas waktunya sengaja dibuat longgar.
 
-## Di mana lognya?
+## Di mana lognya? {#where-are-the-logs}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">`%LOCALAPPDATA%\app.zencopy\logs`</TabItem>
@@ -77,7 +77,7 @@ AI lokal bisa butuh waktu untuk memuat pada kali pertama, itulah sebabnya batas 
 
 Log tidak pernah berisi konten yang kamu salin maupun kunci API.
 
-## Apa yang dihapus saat pencopotan?
+## Apa yang dihapus saat pencopotan? {#what-does-uninstalling-remove}
 
 <Tabs syncKey="os">
   <TabItem label="Windows">
@@ -102,7 +102,7 @@ Log tidak pernah berisi konten yang kamu salin maupun kunci API.
   </TabItem>
 </Tabs>
 
-## Lingkungan Linux mana yang didukung?
+## Lingkungan Linux mana yang didukung? {#which-linux-environments-are-supported}
 
 **GNOME di Wayland, dan X11.**
 Di GNOME Wayland, proses latar belakang memang dirancang tidak bisa mengamati tombol maupun papan klip, jadi ZenCopy (lewat crate [`copycopy`](https://crates.io/crates/copycopy)) menyertakan ekstensi GNOME Shell kecil yang mendeteksi salin dua kali dari dalam compositor.
@@ -110,7 +110,7 @@ Ekstensi ini dipasang otomatis ke profil penggunamu pada peluncuran pertama (tan
 Di X11, pendengar tombol pasif biasa bekerja, seperti di Windows.
 Compositor Wayland lain (KDE Plasma, berbasis wlroots) tidak menawarkan cara tanpa hak istimewa untuk mengamati pemicunya dan belum didukung — aplikasinya berjalan, tetapi pemicunya tetap diam.
 
-## Ikon tray tidak muncul (Linux)
+## Ikon tray tidak muncul (Linux) {#the-tray-icon-does-not-show-up-linux}
 
 Ikon tray ZenCopy memakai protokol AppIndicator.
 GNOME milik Ubuntu mendukungnya sejak awal, tetapi GNOME murni (Fedora, misalnya) tidak menampilkan apa pun sampai ekstensi Shell **AppIndicator and KStatusNotifierItem Support** dipasang.

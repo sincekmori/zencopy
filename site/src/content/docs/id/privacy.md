@@ -8,7 +8,7 @@ sidebar:
 ZenCopy adalah aplikasi desktop lokal.
 Tidak punya server, tidak punya akun, dan tidak punya telemetri.
 
-## Apa yang meninggalkan perangkatmu
+## Apa yang meninggalkan perangkatmu {#what-leaves-your-device}
 
 Saat kamu menekan pemicu (<span data-os-modifier>Ctrl/⌘</span> + C + C), konten papan klip yang ditangkap dikirim langsung ke penyedia LLM yang _kamu_ atur — tidak ada yang lain, dan tidak ke mana pun yang lain.
 Apa persisnya yang dikirim bergantung pada prompt yang berjalan:
@@ -22,7 +22,7 @@ Konten papan klip yang ditandai sensitif oleh aplikasi lain (mis. pengelola kata
 
 Terpisah dari tangkapan, pemeriksaan pembaruan hanya meminta metadata rilis ke GitHub — tidak pernah konten kamu.
 
-## Apa yang tetap di perangkatmu
+## Apa yang tetap di perangkatmu {#what-stays-on-your-device}
 
 - Kunci API kamu (`ai-sdk-catalog.json` di direktori konfigurasi aplikasi — tidak pernah dibundel, tidak pernah diunggah).
 - Pengaturanmu (tema, bahasa, posisi popup, …).
@@ -32,12 +32,12 @@ Terpisah dari tangkapan, pemeriksaan pembaruan hanya meminta metadata rilis ke G
 - Statistik penggunaan (sakelar di pengaturan, aktif secara bawaan): prompt mana yang berjalan pada jenis tangkapan mana, beserta model dan jumlah token, agar biayamu tetap bisa dihitung.
   Hanya berkas lokal — tidak pernah berisi konten yang disalin, tidak pernah dikirim ke mana pun.
 
-## Pihak ketiga
+## Pihak ketiga {#third-parties}
 
 Pemakaianmu atas sebuah penyedia LLM diatur oleh ketentuan dan kebijakan privasi penyedia itu sendiri.
 ZenCopy tidak menambahkan perantara apa pun: kontenmu hanya pergi ke penyedia yang kamu atur, dan pemakaian serta biayanya menjadi tanggunganmu.
 
-## Jangan hanya percaya kata kami
+## Jangan hanya percaya kata kami {#dont-take-our-word-for-it}
 
 ZenCopy bersifat open source (Apache-2.0).
 Setiap klaim di halaman ini dapat diverifikasi terhadap [kode sumbernya](https://github.com/sincekmori/zencopy).

@@ -8,7 +8,7 @@ sidebar:
 ZenCopy to lokalna aplikacja desktopowa.
 Nie ma serwera, konta ani telemetrii.
 
-## Co opuszcza Twoje urządzenie
+## Co opuszcza Twoje urządzenie {#what-leaves-your-device}
 
 Gdy naciśniesz wyzwalacz (<span data-os-modifier>Ctrl/⌘</span> + C + C), przechwycona treść schowka jest wysyłana bezpośrednio do dostawcy LLM skonfigurowanego przez _Ciebie_ — nic więcej i nigdzie indziej.
 Co dokładnie jest wysyłane, zależy od uruchamianego promptu:
@@ -22,7 +22,7 @@ Treść schowka, którą inne aplikacje oznaczają jako wrażliwą (np. menedże
 
 Niezależnie od przechwyceń sprawdzanie aktualizacji pyta GitHub wyłącznie o metadane wydania — nigdy o twoje treści.
 
-## Co zostaje na Twoim urządzeniu
+## Co zostaje na Twoim urządzeniu {#what-stays-on-your-device}
 
 - Twoje klucze API (`ai-sdk-catalog.json` w katalogu konfiguracyjnym aplikacji — nigdy nie są dołączane do aplikacji ani nigdzie przesyłane).
 - Twoje ustawienia (motyw, język, pozycja okienka, …).
@@ -32,12 +32,12 @@ Niezależnie od przechwyceń sprawdzanie aktualizacji pyta GitHub wyłącznie o 
 - Statystyki użycia (przełącznik w ustawieniach, domyślnie włączony): który prompt działał na jakim typie przechwycenia, wraz z modelem i liczbą tokenów, aby koszty pozostały policzalne.
   Tylko lokalny plik — nigdy skopiowana treść, nigdy nigdzie nie wysyłany.
 
-## Strony trzecie
+## Strony trzecie {#third-parties}
 
 Twoje korzystanie z dostawcy LLM podlega warunkom i polityce prywatności tego dostawcy.
 ZenCopy nie dodaje żadnego pośrednika: Twoja treść trafia wyłącznie do skonfigurowanego przez Ciebie dostawcy, a jej wykorzystanie i koszty są po Twojej stronie.
 
-## Nie wierz nam na słowo
+## Nie wierz nam na słowo {#dont-take-our-word-for-it}
 
 ZenCopy jest oprogramowaniem open source (Apache-2.0).
 Każde stwierdzenie na tej stronie można zweryfikować w [kodzie źródłowym](https://github.com/sincekmori/zencopy).

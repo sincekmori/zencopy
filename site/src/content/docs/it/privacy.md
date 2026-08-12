@@ -8,7 +8,7 @@ sidebar:
 ZenCopy è un'app desktop locale.
 Non ha server, né account, né telemetria.
 
-## Cosa lascia il tuo dispositivo
+## Cosa lascia il tuo dispositivo {#what-leaves-your-device}
 
 Quando premi il trigger (<span data-os-modifier>Ctrl/⌘</span> + C + C), il contenuto degli appunti catturato viene inviato direttamente al provider LLM che _tu_ hai configurato — nient'altro, e da nessun'altra parte.
 Cosa venga inviato esattamente dipende dal prompt eseguito:
@@ -22,7 +22,7 @@ Il contenuto degli appunti che altre app contrassegnano come riservato (es. i ge
 
 A parte le catture, il controllo degli aggiornamenti chiede a GitHub solo i metadati della release — mai i tuoi contenuti.
 
-## Cosa resta sul tuo dispositivo
+## Cosa resta sul tuo dispositivo {#what-stays-on-your-device}
 
 - Le tue chiavi API (`ai-sdk-catalog.json` nella directory di configurazione dell'app — mai incluse nel pacchetto, mai caricate).
 - Le tue impostazioni (tema, lingua, posizione del popup, …).
@@ -32,12 +32,12 @@ A parte le catture, il controllo degli aggiornamenti chiede a GitHub solo i meta
 - Statistiche d'uso (un interruttore nelle impostazioni, attivo per impostazione predefinita): quale prompt è stato eseguito su quale tipo di cattura, con il modello e il numero di token, così i costi restano calcolabili.
   Solo un file locale — mai il contenuto copiato, mai inviato da nessuna parte.
 
-## Terze parti
+## Terze parti {#third-parties}
 
 Il tuo uso di un provider LLM è regolato dai termini e dall'informativa sulla privacy di quel provider.
 ZenCopy non aggiunge intermediari: il tuo contenuto va solo al provider che configuri, e il suo uso e i suoi costi sono tuoi.
 
-## Non fidarti sulla parola
+## Non fidarti sulla parola {#dont-take-our-word-for-it}
 
 ZenCopy è open source (Apache-2.0).
 Ogni affermazione di questa pagina può essere verificata sul [codice sorgente](https://github.com/sincekmori/zencopy).

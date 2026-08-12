@@ -9,7 +9,7 @@ Kalau kamu lebih suka tetap berada di layar aplikasi saja, halaman ini tidak aka
 Titik awal siap salin-tempel untuk `ai-sdk-catalog.json`.
 Letakkan berkasnya di [direktori konfigurasi aplikasi](/id/configuration/); suntingan berlaku pada pemicu berikutnya.
 
-## Satu penyedia, satu model
+## Satu penyedia, satu model {#one-provider-one-model}
 
 Inilah yang ditulis UI pengaturan — seluruh isi berkas bagi kebanyakan orang:
 
@@ -31,7 +31,7 @@ Inilah yang ditulis UI pengaturan — seluruh isi berkas bagi kebanyakan orang:
 
 Baris `$schema` opsional; editor yang memahami JSON Schema memakainya untuk memvalidasi dan melengkapi berkas secara otomatis saat kamu mengetik.
 
-## Ollama lokal — tidak ada yang meninggalkan perangkatmu
+## Ollama lokal — tidak ada yang meninggalkan perangkatmu {#local-ollama--nothing-leaves-your-machine}
 
 ```json
 {
@@ -51,7 +51,7 @@ Baris `$schema` opsional; editor yang memahami JSON Schema memakainya untuk memv
 Endpoint apa pun yang kompatibel dengan OpenAI bekerja dengan cara yang sama — LM Studio, llama.cpp, gateway perusahaan: ubah `baseURL` milik vendor (dan tambahkan `apiKey` di sebelahnya kalau endpoint-nya memintanya).
 Role berbentuk `"provider:model"`, dipisah pada `:` pertama — itulah sebabnya `"ollama:gemma4:e4b"` tetap berfungsi meski id modelnya mengandung titik dua.
 
-## Dua role: cepat sebagai bawaan, pintar saat diperlukan
+## Dua role: cepat sebagai bawaan, pintar saat diperlukan {#two-roles-fast-by-default-smart-on-demand}
 
 Role memisahkan prompt dari model.
 Prompt menyebut sebuah role (`role: smart` di frontmatter prompt tersebut); model mana yang dimaksud diputuskan di sini — tukar kapan saja tanpa menyentuh prompt.

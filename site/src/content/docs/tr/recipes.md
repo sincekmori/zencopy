@@ -9,7 +9,7 @@ Uygulamanın kendi ekranlarında kalmayı tercih ediyorsan buna hiç ihtiyacın 
 `ai-sdk-catalog.json` için kopyala-yapıştır başlangıç noktaları.
 Dosyayı [uygulama yapılandırma dizinine](/tr/configuration/) koy; düzenlemeler bir sonraki tetiklemede geçerli olur.
 
-## Tek sağlayıcı, tek model
+## Tek sağlayıcı, tek model {#one-provider-one-model}
 
 Ayarlar arayüzünün yazdığı şey — çoğu kişi için dosyanın tamamı:
 
@@ -31,7 +31,7 @@ Ayarlar arayüzünün yazdığı şey — çoğu kişi için dosyanın tamamı:
 
 `$schema` satırı isteğe bağlıdır; JSON Schema'dan anlayan düzenleyiciler, sen yazarken dosyayı doğrulamak ve otomatik tamamlamak için onu kullanır.
 
-## Yerel Ollama — hiçbir şey makinenden çıkmaz
+## Yerel Ollama — hiçbir şey makinenden çıkmaz {#local-ollama--nothing-leaves-your-machine}
 
 ```json
 {
@@ -51,7 +51,7 @@ Ayarlar arayüzünün yazdığı şey — çoğu kişi için dosyanın tamamı:
 OpenAI uyumlu her uç nokta aynı şekilde çalışır — LM Studio, llama.cpp, kurumsal bir ağ geçidi: vendor'ın `baseURL` değerini değiştir (uç nokta istiyorsa yanına bir `apiKey` ekle).
 Bir role, ilk `:` işaretinden bölünen `"provider:model"` biçimindedir — model id'sinde iki nokta üst üste olsa da `"ollama:gemma4:e4b"` bu yüzden çalışır.
 
-## İki role: varsayılan olarak hızlı, istendiğinde akıllı
+## İki role: varsayılan olarak hızlı, istendiğinde akıllı {#two-roles-fast-by-default-smart-on-demand}
 
 Role'ler istemleri modellerden ayırır.
 İstemler bir role adı belirtir (istemin frontmatter'ında `role: smart`); bunun hangi model anlamına geldiğine burada karar verilir — istemlere dokunmadan istediğin an değiştir.

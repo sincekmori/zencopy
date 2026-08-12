@@ -10,12 +10,12 @@ ZenCopy hoạt động ngay mà không cần cấu hình gì.
 Trang này dành cho lúc bạn muốn ứng dụng hợp với mình hơn.
 Nửa đầu, về **cửa sổ cài đặt**, dành cho mọi người; nửa sau, về **tệp cấu hình**, dành cho người dùng thành thạo.
 
-## Cửa sổ cài đặt
+## Cửa sổ cài đặt {#the-settings-window}
 
 Mở từ menu của biểu tượng khay hệ thống, hoặc biểu tượng bánh răng trên cửa sổ nổi.
 Cửa sổ có ba thẻ: **Chung, AI và Prompt**.
 
-### Chung
+### Chung {#general}
 
 - **Vị trí cửa sổ nổi** — kết quả hiện ra ở góc màn hình nào.
 - **Giao diện** — sáng / tối / theo hệ thống.
@@ -24,7 +24,7 @@ Cửa sổ có ba thẻ: **Chung, AI và Prompt**.
 - **Khởi động khi đăng nhập** — để ZenCopy luôn sẵn sàng mỗi khi máy tính bật.
 - **Xác nhận trước khi gửi** — có hỏi một lần trước khi hình ảnh hoặc tệp được gửi đến AI hay không.
 
-### AI
+### AI {#ai}
 
 Đây là nơi bạn đổi dịch vụ AI (nhà cung cấp, mô hình, khóa API).
 Nút **Kiểm tra** cho bạn biết ngay kết nối có hoạt động hay không.
@@ -38,7 +38,7 @@ Thẻ này còn có ô **Về bạn**.
 Lời giải thích đến đúng mức hiểu biết của bạn, và bản nháp trở về theo giọng văn bạn ưa thích.
 Nó không bao giờ ảnh hưởng đến những nhiệm vụ không liên quan, và bản thân đoạn văn đó không bao giờ xuất hiện trong kết quả.
 
-### Prompt
+### Prompt {#prompts}
 
 Danh sách "điều gì xảy ra sau khi sao chép hai lần".
 
@@ -59,7 +59,7 @@ Bạn muốn giao toàn bộ công việc cho AI? Bất kỳ cuộc trò chuyệ
 Khối mã trong câu trả lời sẽ được đưa trực tiếp vào **Cài đặt → Prompt → Nhập**.
 Đối với những câu hỏi mà tài liệu không thể trả lời ("liệu ZenCopy có thể làm được... không?"), <RepomixLink>một cú nhấp chuột sẽ đóng gói mã nguồn liên quan</RepomixLink> — hãy chuyển kết quả cho chính AI đó.
 
-## Tệp cấu hình (dành cho người dùng thành thạo)
+## Tệp cấu hình (dành cho người dùng thành thạo) {#config-files-for-power-users}
 
 Từ đây trở đi, trang này nói về việc chỉnh sửa trực tiếp các tệp văn bản.
 **Mọi thứ thiết yếu đều có trong cửa sổ cài đặt, nên bạn hoàn toàn có thể dừng đọc tại đây.**
@@ -78,7 +78,7 @@ Các tệp prompt mang tính **bổ sung**:
 chúng định nghĩa prompt mới, còn các prompt dựng sẵn là bất khả xâm phạm (tệp cục bộ nhận id của prompt dựng sẵn sẽ bị bỏ qua).
 Chỉnh sửa có hiệu lực ở lần kích hoạt kế tiếp — không cần khởi động lại.
 
-### `ai-sdk-catalog.json`
+### `ai-sdk-catalog.json` {#ai-sdk-catalogjson}
 
 Các nhà cung cấp cùng một ánh xạ **vai trò → mô hình**.
 Nhà gốc của định dạng tệp là [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) — mọi trường đều được mô tả ở đó (kèm `$schema` để trình soạn thảo kiểm tra và tự hoàn thành), và [`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) có cấu hình ở ba kích cỡ.
@@ -92,7 +92,7 @@ Biến môi trường không được đọc — ứng dụng đồ họa do h�
 Tệp được kiểm tra theo schema ở mỗi lần đọc.
 Một chỉnh sửa hỏng sẽ hiện thành thông báo rõ ràng trong cửa sổ nổi và trình soạn thảo cài đặt — không có gì thất bại trong im lặng.
 
-### `rules.json`
+### `rules.json` {#rulesjson}
 
 Prompt nào xử lý loại nội dung bắt được nào:
 một ánh xạ phẳng `kind → prompt` cộng với danh sách `overrides` tùy chọn có độ ưu tiên cao hơn (quy tắc khớp đầu tiên thắng).
@@ -119,7 +119,7 @@ Mọi thứ khác đều bị từ chối kèm thông báo rõ ràng.
 Đường dẫn đầy đủ đi kèm nội dung để mô hình phân biệt được các tệp và biết chúng nằm ở đâu.
 Vì tệp đính kèm nhị phân có thể tốn kém hơn văn bản, cửa sổ nổi sẽ hỏi trước khi gửi (tệp văn bản chạy không cần hỏi) — có thể tắt bước xác nhận ngay tại chỗ hoặc trong Cài đặt.
 
-### `prompts/*.md`
+### `prompts/*.md` {#promptsmd}
 
 Một tệp = một prompt: frontmatter YAML + phần thân viết bằng [Liquid](https://liquidjs.com).
 Chính tệp đơn này cũng là định dạng chia sẻ — Cài đặt → Prompt → Nhập chấp nhận nó dưới dạng văn bản dán vào hoặc tệp được chọn.
@@ -168,7 +168,7 @@ Còn có bộ lọc `language_name` riêng của ZenCopy: `{{ locale | language_
 
 Prompt đơn giản (một cái tên và một chỉ dẫn) cũng tạo được từ cửa sổ cài đặt; những gì nó ghi ra chính xác là định dạng tệp này.
 
-#### Mẫu nâng cao
+#### Mẫu nâng cao {#advanced-templating}
 
 Cả trường `instructions` trong frontmatter lẫn phần thân đều là mẫu [LiquidJS](https://liquidjs.com/tags/overview.html) đầy đủ: câu điều kiện, vòng lặp và [bộ lọc](https://liquidjs.com/filters/overview.html) đều hoạt động.
 Một prompt duy nhất có thể thích ứng theo nơi nội dung được sao chép:
@@ -190,7 +190,7 @@ Giải thích nội dung này bằng {{ locale }}:
 {{ text | truncate: 8000 }}
 ```
 
-## Nhật ký
+## Nhật ký {#logs}
 
 Nhật ký có cấu trúc (đã che thông tin bí mật và nội dung sao chép) được ghi ra terminal khi phát triển và vào tệp xoay vòng ở bản phát hành:
 

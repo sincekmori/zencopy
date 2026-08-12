@@ -8,7 +8,7 @@ sidebar:
 ZenCopy là ứng dụng desktop chạy cục bộ.
 Nó không có máy chủ, không có tài khoản và không có telemetry.
 
-## Những gì rời khỏi thiết bị của bạn
+## Những gì rời khỏi thiết bị của bạn {#what-leaves-your-device}
 
 Khi bạn nhấn thao tác kích hoạt (<span data-os-modifier>Ctrl/⌘</span> + C + C), nội dung bộ nhớ tạm bắt được sẽ được gửi thẳng đến nhà cung cấp LLM do _chính bạn_ cấu hình — không gì khác, và không đi đâu khác.
 Chính xác những gì được gửi phụ thuộc vào prompt được chạy:
@@ -22,7 +22,7 @@ Nội dung bộ nhớ tạm được các ứng dụng khác đánh dấu là nh
 
 Tách biệt với các lần bắt nội dung, việc kiểm tra cập nhật chỉ hỏi GitHub về siêu dữ liệu bản phát hành — không bao giờ gửi nội dung của bạn.
 
-## Những gì ở lại trên thiết bị của bạn
+## Những gì ở lại trên thiết bị của bạn {#what-stays-on-your-device}
 
 - Khóa API của bạn (`ai-sdk-catalog.json` trong thư mục cấu hình ứng dụng — không bao giờ được đóng gói kèm, không bao giờ được tải lên).
 - Cài đặt của bạn (giao diện, ngôn ngữ, vị trí cửa sổ nổi, …).
@@ -32,12 +32,12 @@ Tách biệt với các lần bắt nội dung, việc kiểm tra cập nhật c
 - Thống kê sử dụng (công tắc trong cài đặt, bật mặc định): prompt nào chạy trên loại bắt nội dung nào, cùng mô hình và số token, để chi phí luôn tính được.
   Chỉ là một tệp cục bộ — không bao giờ chứa nội dung đã sao chép, không bao giờ được gửi đi đâu.
 
-## Bên thứ ba
+## Bên thứ ba {#third-parties}
 
 Việc bạn sử dụng một nhà cung cấp LLM chịu sự điều chỉnh của điều khoản và chính sách quyền riêng tư của chính nhà cung cấp đó.
 ZenCopy không thêm bên trung gian nào: nội dung của bạn chỉ đi đến nhà cung cấp bạn cấu hình, và việc sử dụng cùng chi phí là của riêng bạn.
 
-## Đừng chỉ tin lời chúng tôi
+## Đừng chỉ tin lời chúng tôi {#dont-take-our-word-for-it}
 
 ZenCopy là mã nguồn mở (Apache-2.0).
 Mọi tuyên bố trên trang này đều có thể kiểm chứng bằng [mã nguồn](https://github.com/sincekmori/zencopy).
