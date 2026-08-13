@@ -2,7 +2,7 @@
 // server and the Tauri-mocking harness (screenshot.html) — WebKit, the same
 // engine as the app's webview, so fonts and layout match the real thing.
 //
-// Usage: bun run screenshot [scenario ...] [--out <root>]
+// Usage: bun run screenshot [scenario ...] [--out <root>] [--locale <code>]
 // Scenarios default to all; each shot lands at
 // <root>/<locale>/screenshots/<scenario>.png (default root: site/public, so
 // the docs can reference /{locale}/screenshots/<scenario>.png) — the
@@ -25,12 +25,20 @@ import { SCREENSHOT_SCENARIOS } from "../src/lib/screenshot-scenarios.ts";
 const DEV_URL = "http://localhost:1420";
 
 const args = process.argv.slice(2);
-const outIndex = args.indexOf("--out");
-const outRoot =
-  outIndex === -1 || args[outIndex + 1] === undefined
-    ? join(import.meta.dirname, "..", "site", "public")
-    : (args[outIndex + 1] as string);
-const requested = outIndex === -1 ? args : args.toSpliced(outIndex, 2);
+
+/** Consume a `--flag value` pair from `args`, returning the value. */
+function takeFlag(flag: string): string | undefined {
+  const index = args.indexOf(flag);
+  if (index === -1 || args[index + 1] === undefined) {
+    return undefined;
+  }
+  const [, value] = args.splice(index, 2);
+  return value;
+}
+
+const outRoot = takeFlag("--out") ?? join(import.meta.dirname, "..", "site", "public");
+const onlyLocale = takeFlag("--locale");
+const requested = args;
 const names = requested.length > 0 ? requested : Object.keys(SCREENSHOT_SCENARIOS);
 for (const name of names) {
   if (!(name in SCREENSHOT_SCENARIOS)) {
@@ -72,7 +80,9 @@ for (const [name, scenario] of scenarios) {
     deviceScaleFactor: 2,
     colorScheme: "light",
   });
-  for (const { value } of LOCALES) {
+  for (const { value } of LOCALES.filter(
+    (entry) => onlyLocale === undefined || entry.value.toLowerCase() === onlyLocale.toLowerCase(),
+  )) {
     const query = new URLSearchParams({ locale: value, ...scenario.params });
     const page = await context.newPage();
     await page.goto(`${DEV_URL}/screenshot.html?${query.toString()}`, {

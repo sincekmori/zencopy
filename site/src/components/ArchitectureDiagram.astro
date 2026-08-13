@@ -1,0 +1,22 @@
+---
+/** Renders the docs architecture diagram for one locale.
+ *  Labels come from the per-locale table in architecture-labels.ts and the
+ *  markup from architectureDiagram(), a pure function of those labels — see
+ *  architecture-diagram.ts for the layout rules. RTL locales mirror
+ *  automatically. */
+import { architectureDiagram } from "./architecture-diagram.ts";
+import {
+  ARCHITECTURE_LABELS,
+  RTL_ARCHITECTURE_LOCALES,
+  type ArchitectureLocale,
+} from "./architecture-labels.ts";
+
+interface Props {
+  locale: ArchitectureLocale;
+}
+
+const { locale } = Astro.props;
+const dir = RTL_ARCHITECTURE_LOCALES.has(locale) ? "rtl" : "ltr";
+---
+
+<Fragment set:html={architectureDiagram(ARCHITECTURE_LABELS[locale], dir)} />

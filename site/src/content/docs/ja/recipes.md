@@ -1,10 +1,10 @@
 ---
 title: レシピ集
-description: ai-sdk-catalog.json のコピペ例。1プロバイダー構成から、複数プロバイダーの role 使い分けまで。
+description: ai-sdk-catalog.json のコピペ例。1 プロバイダー構成から、複数プロバイダーの role 使い分けまで。
 ---
 
 このページは、設定ファイルを直接編集する**上級者向け**です。
-アプリの画面だけで使いたい方には必要ありません。
+[設定画面の AI タブ](/ja/configuration/#ai)だけで使いたい方には必要ありません。
 
 `ai-sdk-catalog.json` のコピペ用スターターです。
 ファイルは[アプリ設定ディレクトリ](/ja/configuration/#config-files-for-power-users)に置きます。編集は次のトリガーから反映されます。

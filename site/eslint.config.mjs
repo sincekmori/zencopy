@@ -24,6 +24,16 @@ const config = [
       "astro/no-unsafe-inline-scripts": "off",
     },
   },
+  {
+    // The architecture diagram is an SVG string computed by our own pure
+    // function from label props it XML-escapes — no user or remote input ever
+    // reaches it, so set:html is the intended form here, not an injection
+    // risk. The rule stays on everywhere else.
+    files: ["src/components/ArchitectureDiagram.astro"],
+    rules: {
+      "astro/no-set-html-directive": "off",
+    },
+  },
 ];
 
 export default config;

@@ -146,30 +146,6 @@ export default defineConfig({
       locales,
       sidebar: [
         {
-          label: "Why ZenCopy?",
-          translations: {
-            ar: "لماذا ZenCopy؟",
-            de: "Warum ZenCopy?",
-            es: "¿Por qué ZenCopy?",
-            fa: "چرا ZenCopy؟",
-            fr: "Pourquoi ZenCopy ?",
-            he: "למה ZenCopy?",
-            id: "Mengapa ZenCopy?",
-            it: "Perché ZenCopy?",
-            ja: "なぜ ZenCopy？",
-            ko: "왜 ZenCopy인가요?",
-            pl: "Dlaczego ZenCopy?",
-            "pt-BR": "Por que o ZenCopy?",
-            ru: "Почему ZenCopy?",
-            th: "ทำไมต้อง ZenCopy?",
-            tr: "Neden ZenCopy?",
-            vi: "Vì sao chọn ZenCopy?",
-            "zh-CN": "为什么选 ZenCopy？",
-            "zh-TW": "為什麼選 ZenCopy？",
-          },
-          slug: "why",
-        },
-        {
           label: "Getting started",
           translations: {
             ar: "البدء",
