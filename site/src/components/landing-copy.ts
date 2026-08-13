@@ -353,7 +353,7 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
     features: [
       {
         title: "AI を探しに行かない",
-        body: "ブラウザでも Slack でも、いま見ている画面の上に AI が現れます。",
+        body: "ブラウザでも Slack でも、今見ている画面の上に AI が現れます。",
       },
       {
         title: "コピーできるものなら何でも",
