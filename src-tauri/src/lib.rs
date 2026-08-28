@@ -337,6 +337,9 @@ pub fn run() {
             }
         })
         .setup(|app| {
+            // First thing, before anything reads the config dir: run pending
+            // config migrations (none yet) and stamp the running version.
+            crate::config::migrate_config(app.handle());
             crate::windows::follow_text_size(app);
             // One-line banner so an attached log answers "which version, on
             // what?" without a follow-up question.
