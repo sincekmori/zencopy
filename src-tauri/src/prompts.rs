@@ -72,6 +72,13 @@ pub(crate) const DEFAULT_PROMPTS: &[(&str, &str)] = &[
     ("zencopy-polish", include_str!("../prompts/polish.md")),
 ];
 
+/// Built-ins that run from routing rather than a quick slot — they earn no
+/// number key, so DEFAULT_QUICK_PROMPTS in settings.ts must NOT list them
+/// (the mirror test in lib.rs skips them by this constant; nothing at
+/// runtime needs it, hence test-only).
+#[cfg(test)]
+pub(crate) const ROUTING_ONLY_BUILTINS: [&str; 1] = ["zencopy-auto"];
+
 /// Every pre-installed prompt id carries this prefix — it marks an prompt as
 /// official, and reserving it keeps user prompts from colliding with future
 /// built-ins. User-supplied ids with this prefix are rejected everywhere ids

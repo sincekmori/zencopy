@@ -150,9 +150,7 @@ export const en: Messages = {
   },
   prompts: {
     // The .md files are authored in English, so English needs no overrides.
-    builtinLabels: {
-      "zencopy-auto": "Auto",
-    },
+    builtinLabels: {},
     title: "Prompts",
     hint: (keys) => `What ${keys} can do. Switchable from the popup's result label, too.`,
     add: "New prompt",

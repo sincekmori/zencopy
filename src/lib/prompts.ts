@@ -82,6 +82,9 @@ export type RoutableKind = (typeof ROUTABLE_KINDS)[number];
  *  an override says otherwise. */
 export const DEFAULT_RULE_KEY = "default";
 
+/** What the flat map may be keyed by: a routable kind or the default entry. */
+export type RuleKey = RoutableKind | typeof DEFAULT_RULE_KEY;
+
 /** An override's `when` condition: every present field must match (AND).
  *  String fields support `*` wildcards; names mirror the template variables.
  *  `file_name` matches every copied file's base name, case-insensitively
@@ -146,10 +149,7 @@ export async function getRules(): Promise<RulesInfo> {
 
 /** Route captures of `kind` to an prompt (undefined clears the assignment —
  *  an omitted key reaches Rust as `None`). */
-export function setKindPrompt(
-  kind: RoutableKind | typeof DEFAULT_RULE_KEY,
-  id: string | undefined,
-): Promise<void> {
+export function setKindPrompt(kind: RuleKey, id: string | undefined): Promise<void> {
   return invoke("set_kind_prompt", { kind, id });
 }
 

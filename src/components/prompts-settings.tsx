@@ -40,6 +40,7 @@ import {
   DEFAULT_RULE_KEY,
   ROUTABLE_KINDS,
   type RoutableKind,
+  type RuleKey,
   type RulesInfo,
   type RulesOverride,
   savePrompt,
@@ -162,6 +163,9 @@ export function PromptsSettings(): React.JSX.Element {
   // The effective kind → prompt assignments, kept in the same reload path as
   // the list so the selects and the prompt list never disagree.
   const [rules, setRules] = useState<RulesInfo>({ by_kind: {}, overrides: [] });
+  // Whether the per-kind fine-tuning rows are disclosed. Seeded by reload,
+  // then the user's own toggling owns it.
+  const [perKindOpen, setPerKindOpen] = useState(false);
   const [rulesError, setRulesError] = useState<string | undefined>(undefined);
   // The override rule being added or edited, if any.
   const [rule, setRule] = useState<RuleDraft | undefined>(() =>
@@ -188,6 +192,11 @@ export function PromptsSettings(): React.JSX.Element {
         const [list, routes] = await Promise.all([listPrompts(), getRules()]);
         setPrompts(list);
         setRules(routes);
+        // Reveal the per-kind disclosure when saved entries exist — open
+        // only, so a reload never snaps it shut under the user.
+        setPerKindOpen(
+          (open) => open || ROUTABLE_KINDS.some((kind) => routes.by_kind[kind] !== undefined),
+        );
       } catch (error) {
         log.error("listing prompts failed", error);
       }
@@ -396,7 +405,7 @@ export function PromptsSettings(): React.JSX.Element {
     })();
   };
 
-  const changeRules = (kind: RoutableKind | typeof DEFAULT_RULE_KEY, id: string): void => {
+  const changeRules = (kind: RuleKey, id: string): void => {
     setRulesError(undefined);
     // Optimistic: the select reflects the choice instantly; reload confirms.
     setRules((prev) => {
@@ -528,6 +537,36 @@ export function PromptsSettings(): React.JSX.Element {
     rich_text: t.rules.kindRichText,
     image: t.rules.kindImage,
     files: t.rules.kindFiles,
+  };
+
+  // One row of the routing table: the default row and the per-kind rows are
+  // the same control, differing only in key and empty-option label.
+  const routeRow = (key: RuleKey, label: string, emptyLabel: string): React.JSX.Element => {
+    const assigned = rules.by_kind[key] ?? "";
+    const known = assigned === "" || prompts.some((prompt) => prompt.id === assigned);
+    return (
+      <label key={key} className="flex items-center justify-between gap-4">
+        <span className="text-sm">{label}</span>
+        <Select
+          className="w-56"
+          value={assigned}
+          onChange={(event) => {
+            changeRules(key, event.target.value);
+          }}
+        >
+          <option value="">{emptyLabel}</option>
+          {/* An assignment pointing at a deleted prompt stays listed by its
+            raw id, so the state is visible instead of silently showing the
+            empty option. */}
+          {known ? undefined : <option value={assigned}>{assigned}</option>}
+          {prompts.map((prompt) => (
+            <option key={prompt.id} value={prompt.id}>
+              {promptLabel(prompt.id, prompt.label)}
+            </option>
+          ))}
+        </Select>
+      </label>
+    );
   };
 
   // A rule's conditions as compact chips; the numeric bounds read as ≥ / ≤,
@@ -857,75 +896,22 @@ export function PromptsSettings(): React.JSX.Element {
           <p className="mt-1 text-xs text-muted-foreground">{t.rules.hint}</p>
         </div>
         <div className="flex flex-col gap-2">
-          {(() => {
-            const assigned = rules.by_kind[DEFAULT_RULE_KEY] ?? "";
-            const known = assigned === "" || prompts.some((prompt) => prompt.id === assigned);
-            return (
-              <label className="flex items-center justify-between gap-4">
-                <span className="text-sm">{t.rules.allKinds}</span>
-                <Select
-                  className="w-56"
-                  value={assigned}
-                  onChange={(event) => {
-                    changeRules(DEFAULT_RULE_KEY, event.target.value);
-                  }}
-                >
-                  <option value="">{t.rules.none}</option>
-                  {/* An assignment pointing at a deleted prompt stays listed by
-                    its raw id, so the state is visible instead of silently
-                    showing "None". */}
-                  {known ? undefined : <option value={assigned}>{assigned}</option>}
-                  {prompts.map((prompt) => (
-                    <option key={prompt.id} value={prompt.id}>
-                      {promptLabel(prompt.id, prompt.label)}
-                    </option>
-                  ))}
-                </Select>
-              </label>
-            );
-          })()}
+          {routeRow(DEFAULT_RULE_KEY, t.rules.allKinds, t.rules.none)}
           {/* Per-kind entries are the fine-tuning on top of the one-prompt
-            default, so they hide behind a disclosure. The key remounts the
-            details when saved per-kind entries appear (rules load async), so
-            the open attribute — applied at mount only — tracks them without
-            fighting the user's own toggling. */}
-          {(() => {
-            const hasPerKind = ROUTABLE_KINDS.some((kind) => rules.by_kind[kind] !== undefined);
-            return (
-              <details key={hasPerKind ? "configured" : "empty"} open={hasPerKind}>
-                <summary className="cursor-pointer text-xs text-muted-foreground select-none">
-                  {t.rules.perKind}
-                </summary>
-                <div className="mt-2 flex flex-col gap-2">
-                  {ROUTABLE_KINDS.map((kind) => {
-                    const assigned = rules.by_kind[kind] ?? "";
-                    const known =
-                      assigned === "" || prompts.some((prompt) => prompt.id === assigned);
-                    return (
-                      <label key={kind} className="flex items-center justify-between gap-4">
-                        <span className="text-sm">{kindLabels[kind]}</span>
-                        <Select
-                          className="w-56"
-                          value={assigned}
-                          onChange={(event) => {
-                            changeRules(kind, event.target.value);
-                          }}
-                        >
-                          <option value="">{t.rules.inherit}</option>
-                          {known ? undefined : <option value={assigned}>{assigned}</option>}
-                          {prompts.map((prompt) => (
-                            <option key={prompt.id} value={prompt.id}>
-                              {promptLabel(prompt.id, prompt.label)}
-                            </option>
-                          ))}
-                        </Select>
-                      </label>
-                    );
-                  })}
-                </div>
-              </details>
-            );
-          })()}
+            default, so they hide behind a disclosure. */}
+          <details
+            open={perKindOpen}
+            onToggle={(event) => {
+              setPerKindOpen(event.currentTarget.open);
+            }}
+          >
+            <summary className="cursor-pointer text-xs text-muted-foreground select-none">
+              {t.rules.perKind}
+            </summary>
+            <div className="mt-2 flex flex-col gap-2">
+              {ROUTABLE_KINDS.map((kind) => routeRow(kind, kindLabels[kind], t.rules.inherit))}
+            </div>
+          </details>
         </div>
         <div className="mt-1 flex items-center justify-between gap-4 border-t pt-4">
           <div>

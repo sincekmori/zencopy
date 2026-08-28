@@ -95,7 +95,7 @@ pub(crate) fn load_rules(handle: &tauri::AppHandle) -> RulesConfig {
     // A rule naming a kind that doesn't exist (a typo, or a leftover from a
     // removed kind) can never fire — silent config decay deserves a trace.
     for kind in rules.by_kind.keys() {
-        if kind != DEFAULT_RULE_KEY && !RULE_KINDS.contains(&kind.as_str()) {
+        if !is_rule_key(kind) {
             log::warn!("rules.json: unknown kind \"{kind}\" is never matched, ignored");
         }
     }
@@ -269,6 +269,12 @@ pub(crate) const RULE_KINDS: [&str; 4] = ["text", "rich_text", "image", "files"]
 /// unless a per-kind entry or an override says otherwise.
 pub(crate) const DEFAULT_RULE_KEY: &str = "default";
 
+/// Whether `key` may appear in the flat map: a routable kind, or the
+/// kind-independent default entry.
+fn is_rule_key(key: &str) -> bool {
+    key == DEFAULT_RULE_KEY || RULE_KINDS.contains(&key)
+}
+
 /// Read-modify-write the user's rules.json as a JSON object (seeded from
 /// the embedded default when none exists). Everything the mutation doesn't
 /// touch is preserved verbatim.
@@ -323,7 +329,7 @@ pub(crate) fn set_kind_prompt(
     kind: String,
     id: Option<String>,
 ) -> Result<(), String> {
-    if kind != DEFAULT_RULE_KEY && !RULE_KINDS.contains(&kind.as_str()) {
+    if !is_rule_key(&kind) {
         return Err(format!("unknown capture kind: {kind:?}"));
     }
     let id = id.as_deref().map(checked_prompt_id).transpose()?;
