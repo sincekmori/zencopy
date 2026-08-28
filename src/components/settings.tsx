@@ -118,19 +118,18 @@ export function Settings(): React.JSX.Element {
   const [exportIssue, setExportIssue] = useState<"empty" | string[] | undefined>(undefined);
   const [resetError, setResetError] = useState<string | undefined>(undefined);
   // The window's tab. AI first: it's the one thing that must be set up.
-  const [tab, setTab] = useState<"ai" | "prompts" | "general">("ai");
-
-  // Screenshot scenarios (dev-only, see src/lib/screenshot.ts): the harness
-  // picks the tab with ?tab=…, so every tab is shootable without clicking.
-  useEffect(() => {
-    if (!import.meta.env.DEV) {
-      return; // build-time constant: the branch (and its strings) never ship
+  // Screenshot scenarios (dev-only, see src/lib/screenshot.ts) pick the tab
+  // with ?tab=… instead, so every tab is shootable without clicking; the DEV
+  // check is a build-time constant, so the branch never ships.
+  const [tab, setTab] = useState<"ai" | "prompts" | "general">(() => {
+    if (import.meta.env.DEV) {
+      const wanted = screenshotParam("tab");
+      if (wanted === "ai" || wanted === "prompts" || wanted === "general") {
+        return wanted;
+      }
     }
-    const wanted = screenshotParam("tab");
-    if (wanted === "ai" || wanted === "prompts" || wanted === "general") {
-      setTab(wanted);
-    }
-  }, []);
+    return "ai";
+  });
 
   useEffect(() => {
     let cancelled = false;

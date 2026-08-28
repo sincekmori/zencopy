@@ -32,6 +32,7 @@
   },
   "ignorePatterns": ["dist", "src-tauri", "node_modules"],
   "rules": {
+    "one-var": ["error", "never"],
     "import-zod/prefer-zod-namespace": "error",
     "tailwindcss/no-unknown-classes": ["error", { "ignorePrefixes": ["hd-"] }],
     "tailwindcss/no-conflicting-classes": "error",

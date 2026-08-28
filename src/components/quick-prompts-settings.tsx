@@ -1,6 +1,6 @@
 import { emit } from "@tauri-apps/api/event";
 import { GripVertical } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { type PromptInfo, listPrompts } from "@/lib/prompts.ts";
 import { usePromptLabel, useT } from "@/lib/i18n.tsx";
 import { createLogger } from "@/lib/log.ts";
@@ -22,7 +22,9 @@ export function QuickPromptsSettings(): React.JSX.Element {
   const [slots, setSlots] = useState<string[]>([]);
   const [dragIndex, setDragIndex] = useState<number | undefined>(undefined);
 
-  const reload = (): void => {
+  // useCallback deliberately: reload is a useEffect dependency below and must
+  // stay referentially stable even if the compiler bails out here.
+  const reload = useCallback((): void => {
     void (async () => {
       try {
         const [list, quick] = await Promise.all([listPrompts(), getQuickPrompts()]);
@@ -32,11 +34,11 @@ export function QuickPromptsSettings(): React.JSX.Element {
         log.error("loading quick prompts failed", error);
       }
     })();
-  };
+  }, []);
 
   useEffect(() => {
     reload();
-  }, []);
+  }, [reload]);
 
   // Persist + broadcast so the popup's row updates live.
   const commit = (next: string[]): void => {

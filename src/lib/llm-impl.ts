@@ -86,7 +86,8 @@ async function buildCatalog(): Promise<ZenCatalog> {
 }
 
 async function catalog(): Promise<ZenCatalog> {
-  const pending = (catalogPromise ??= buildCatalog());
+  catalogPromise ??= buildCatalog();
+  const pending = catalogPromise;
   try {
     return await pending;
   } catch (error) {

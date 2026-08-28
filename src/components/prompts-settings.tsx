@@ -14,7 +14,7 @@ import {
   Trash2,
   Upload,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as z from "zod";
 import { QuickPromptsSettings } from "@/components/quick-prompts-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
@@ -147,7 +147,14 @@ export function PromptsSettings(): React.JSX.Element {
   const locale = useLocale();
   const promptLabel = usePromptLabel();
   const [prompts, setPrompts] = useState<PromptInfo[]>([]);
-  const [draft, setDraft] = useState<Draft | undefined>(undefined);
+  // Screenshot scenarios (dev-only, see src/lib/screenshot.ts) start with the
+  // matching dialog already open, so the harness shoots without clicking; the
+  // DEV check is a build-time constant, so none of this ships.
+  const [draft, setDraft] = useState<Draft | undefined>(() =>
+    import.meta.env.DEV && screenshotScenario() === PROMPT_EDITOR_SCENARIO
+      ? { ...NEW_DRAFT }
+      : undefined,
+  );
   const [formError, setFormError] = useState<string | undefined>(undefined);
   // The ✨ button: the configured model is rewriting the instruction field.
   const [drafting, setDrafting] = useState(false);
@@ -156,17 +163,25 @@ export function PromptsSettings(): React.JSX.Element {
   const [rules, setRules] = useState<RulesInfo>({ by_kind: {}, overrides: [] });
   const [rulesError, setRulesError] = useState<string | undefined>(undefined);
   // The override rule being added or edited, if any.
-  const [rule, setRule] = useState<RuleDraft | undefined>(undefined);
+  const [rule, setRule] = useState<RuleDraft | undefined>(() =>
+    import.meta.env.DEV && screenshotScenario() === RULE_EDITOR_SCENARIO
+      ? { ...NEW_RULE }
+      : undefined,
+  );
   const [ruleError, setRuleError] = useState<string | undefined>(undefined);
   // Which prompt was just exported (transient check mark), and the import
   // dialog's state.
   const [exportedId, setExportedId] = useState<string | undefined>(undefined);
-  const [importOpen, setImportOpen] = useState(false);
+  const [importOpen, setImportOpen] = useState(
+    () => import.meta.env.DEV && screenshotScenario() === PROMPT_IMPORT_SCENARIO,
+  );
   const [importText, setImportText] = useState("");
   const [importBusy, setImportBusy] = useState(false);
   const [importError, setImportError] = useState<string | undefined>(undefined);
 
-  const reload = (): void => {
+  // useCallback deliberately: reload is a useEffect dependency below, and the
+  // focus listener must not resubscribe every render if the compiler bails.
+  const reload = useCallback((): void => {
     void (async () => {
       try {
         const [list, routes] = await Promise.all([listPrompts(), getRules()]);
@@ -176,7 +191,7 @@ export function PromptsSettings(): React.JSX.Element {
         log.error("listing prompts failed", error);
       }
     })();
-  };
+  }, []);
 
   // Load on mount, and again when the window regains focus — so prompts the
   // user edits as files on disk show up without reopening the window.
@@ -200,29 +215,7 @@ export function PromptsSettings(): React.JSX.Element {
       cancelled = true;
       unlisten?.();
     };
-  }, []);
-
-  // Screenshot scenarios (dev-only, see src/lib/screenshot.ts).
-  useEffect(() => {
-    if (!import.meta.env.DEV) {
-      return; // build-time constant: the branch (and its strings) never ship
-    }
-    switch (screenshotScenario()) {
-      case RULE_EDITOR_SCENARIO: {
-        setRule({ ...NEW_RULE });
-        break;
-      }
-      case PROMPT_EDITOR_SCENARIO: {
-        setDraft({ ...NEW_DRAFT });
-        break;
-      }
-      case PROMPT_IMPORT_SCENARIO: {
-        setImportOpen(true);
-        break;
-      }
-      default:
-    }
-  }, []);
+  }, [reload]);
 
   const closeViewer = (): void => {
     setDraft(undefined);
