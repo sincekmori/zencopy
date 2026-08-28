@@ -180,8 +180,12 @@ export const zhHans: Messages = {
   },
   rules: {
     title: "规则",
-    hint: "每种捕获类型分别运行哪个提示词。",
+    hint: "复制时自动运行的提示词。",
+    allKinds: "每次复制",
+    perKind: "按类型区分",
+    inherit: "与每次复制相同",
     kindText: "文本",
+    kindRichText: "富文本",
     kindImage: "图片",
     kindFiles: "文件",
     none: "不自动执行",

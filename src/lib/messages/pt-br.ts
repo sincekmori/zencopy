@@ -197,8 +197,12 @@ export const ptBR: Messages = {
   },
   rules: {
     title: "Regras",
-    hint: "Qual prompt é executado para cada tipo de captura.",
+    hint: "Qual prompt é executado ao copiar.",
+    allKinds: "Todas as cópias",
+    perKind: "Variar por tipo",
+    inherit: "Igual a todas as cópias",
     kindText: "Texto",
+    kindRichText: "Texto formatado",
     kindImage: "Imagem",
     kindFiles: "Arquivos",
     none: "Não executar automaticamente",

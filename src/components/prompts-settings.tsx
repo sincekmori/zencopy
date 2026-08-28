@@ -37,6 +37,7 @@ import {
   importPrompt,
   importPromptFromFile,
   listPrompts,
+  DEFAULT_RULE_KEY,
   ROUTABLE_KINDS,
   type RoutableKind,
   type RulesInfo,
@@ -395,7 +396,7 @@ export function PromptsSettings(): React.JSX.Element {
     })();
   };
 
-  const changeRules = (kind: RoutableKind, id: string): void => {
+  const changeRules = (kind: RoutableKind | typeof DEFAULT_RULE_KEY, id: string): void => {
     setRulesError(undefined);
     // Optimistic: the select reflects the choice instantly; reload confirms.
     setRules((prev) => {
@@ -524,6 +525,7 @@ export function PromptsSettings(): React.JSX.Element {
 
   const kindLabels: Record<RoutableKind, string> = {
     text: t.rules.kindText,
+    rich_text: t.rules.kindRichText,
     image: t.rules.kindImage,
     files: t.rules.kindFiles,
   };
@@ -855,17 +857,17 @@ export function PromptsSettings(): React.JSX.Element {
           <p className="mt-1 text-xs text-muted-foreground">{t.rules.hint}</p>
         </div>
         <div className="flex flex-col gap-2">
-          {ROUTABLE_KINDS.map((kind) => {
-            const assigned = rules.by_kind[kind] ?? "";
+          {(() => {
+            const assigned = rules.by_kind[DEFAULT_RULE_KEY] ?? "";
             const known = assigned === "" || prompts.some((prompt) => prompt.id === assigned);
             return (
-              <label key={kind} className="flex items-center justify-between gap-4">
-                <span className="text-sm">{kindLabels[kind]}</span>
+              <label className="flex items-center justify-between gap-4">
+                <span className="text-sm">{t.rules.allKinds}</span>
                 <Select
                   className="w-56"
                   value={assigned}
                   onChange={(event) => {
-                    changeRules(kind, event.target.value);
+                    changeRules(DEFAULT_RULE_KEY, event.target.value);
                   }}
                 >
                   <option value="">{t.rules.none}</option>
@@ -881,7 +883,49 @@ export function PromptsSettings(): React.JSX.Element {
                 </Select>
               </label>
             );
-          })}
+          })()}
+          {/* Per-kind entries are the fine-tuning on top of the one-prompt
+            default, so they hide behind a disclosure. The key remounts the
+            details when saved per-kind entries appear (rules load async), so
+            the open attribute — applied at mount only — tracks them without
+            fighting the user's own toggling. */}
+          {(() => {
+            const hasPerKind = ROUTABLE_KINDS.some((kind) => rules.by_kind[kind] !== undefined);
+            return (
+              <details key={hasPerKind ? "configured" : "empty"} open={hasPerKind}>
+                <summary className="cursor-pointer text-xs text-muted-foreground select-none">
+                  {t.rules.perKind}
+                </summary>
+                <div className="mt-2 flex flex-col gap-2">
+                  {ROUTABLE_KINDS.map((kind) => {
+                    const assigned = rules.by_kind[kind] ?? "";
+                    const known =
+                      assigned === "" || prompts.some((prompt) => prompt.id === assigned);
+                    return (
+                      <label key={kind} className="flex items-center justify-between gap-4">
+                        <span className="text-sm">{kindLabels[kind]}</span>
+                        <Select
+                          className="w-56"
+                          value={assigned}
+                          onChange={(event) => {
+                            changeRules(kind, event.target.value);
+                          }}
+                        >
+                          <option value="">{t.rules.inherit}</option>
+                          {known ? undefined : <option value={assigned}>{assigned}</option>}
+                          {prompts.map((prompt) => (
+                            <option key={prompt.id} value={prompt.id}>
+                              {promptLabel(prompt.id, prompt.label)}
+                            </option>
+                          ))}
+                        </Select>
+                      </label>
+                    );
+                  })}
+                </div>
+              </details>
+            );
+          })()}
         </div>
         <div className="mt-1 flex items-center justify-between gap-4 border-t pt-4">
           <div>

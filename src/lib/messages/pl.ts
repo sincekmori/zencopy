@@ -198,8 +198,12 @@ export const pl: Messages = {
   },
   rules: {
     title: "Reguły",
-    hint: "Który prompt działa dla każdego typu przechwycenia.",
+    hint: "Który prompt uruchamia się przy kopiowaniu.",
+    allKinds: "Każde kopiowanie",
+    perKind: "Rozróżnij według rodzaju",
+    inherit: "Tak jak przy każdym kopiowaniu",
     kindText: "Tekst",
+    kindRichText: "Tekst sformatowany",
     kindImage: "Obraz",
     kindFiles: "Pliki",
     none: "Nie uruchamiaj automatycznie",

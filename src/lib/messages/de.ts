@@ -201,8 +201,12 @@ export const de: Messages = {
   },
   rules: {
     title: "Regeln",
-    hint: "Welcher Prompt für welchen Erfassungstyp läuft.",
+    hint: "Welcher Prompt beim Kopieren ausgeführt wird.",
+    allKinds: "Jede Kopie",
+    perKind: "Nach Art unterscheiden",
+    inherit: "Wie jede Kopie",
     kindText: "Text",
+    kindRichText: "Formatierter Text",
     kindImage: "Bild",
     kindFiles: "Dateien",
     none: "Nicht automatisch ausführen",

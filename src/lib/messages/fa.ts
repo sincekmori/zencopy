@@ -195,8 +195,12 @@ export const fa: Messages = {
   },
   rules: {
     title: "قوانین",
-    hint: "برای هر نوع برداشت کدام پرامپت اجرا شود.",
+    hint: "پرامپتی که هنگام کپی اجرا می‌شود.",
+    allKinds: "همهٔ کپی‌ها",
+    perKind: "تنظیم بر اساس نوع",
+    inherit: "مانند همهٔ کپی‌ها",
     kindText: "متن",
+    kindRichText: "متن قالب‌بندی‌شده",
     kindImage: "تصویر",
     kindFiles: "فایل‌ها",
     none: "بدون اجرای خودکار",

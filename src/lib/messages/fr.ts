@@ -202,8 +202,12 @@ export const fr: Messages = {
   },
   rules: {
     title: "Règles",
-    hint: "Quel prompt s'exécute pour chaque type de capture.",
+    hint: "Quel prompt est exécuté lors de la copie.",
+    allKinds: "Toutes les copies",
+    perKind: "Varier selon le type",
+    inherit: "Comme toutes les copies",
     kindText: "Texte",
+    kindRichText: "Texte enrichi",
     kindImage: "Image",
     kindFiles: "Fichiers",
     none: "Ne pas exécuter automatiquement",

@@ -195,8 +195,12 @@ export const id: Messages = {
   },
   rules: {
     title: "Aturan",
-    hint: "Prompt mana yang berjalan untuk tiap jenis tangkapan.",
+    hint: "Prompt yang dijalankan saat menyalin.",
+    allKinds: "Setiap penyalinan",
+    perKind: "Bedakan per jenis",
+    inherit: "Sama seperti setiap penyalinan",
     kindText: "Teks",
+    kindRichText: "Teks berformat",
     kindImage: "Gambar",
     kindFiles: "Berkas",
     none: "Jangan jalankan otomatis",

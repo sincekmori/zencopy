@@ -528,9 +528,9 @@ mod tests {
         .expect("test fixture is an object")
         .clone();
         purge_prompt_from_rules_object(&mut object, "my-custom");
-        assert_eq!(
-            object["text"], "zencopy-summarize",
-            "kind returns to the embedded default"
+        assert!(
+            !object.contains_key("text"),
+            "a kind with no embedded per-kind default is removed (routing falls back to `default`)"
         );
         assert_eq!(
             object["image"], "zencopy-explain",

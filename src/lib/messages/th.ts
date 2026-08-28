@@ -182,8 +182,12 @@ export const th: Messages = {
   },
   rules: {
     title: "กฎ",
-    hint: "พรอมต์ใดทำงานกับข้อมูลแต่ละประเภท",
+    hint: "พรอมป์ตที่ทำงานเมื่อคุณคัดลอก",
+    allKinds: "ทุกการคัดลอก",
+    perKind: "ปรับตามประเภท",
+    inherit: "เหมือนทุกการคัดลอก",
     kindText: "ข้อความ",
+    kindRichText: "ข้อความมีการจัดรูปแบบ",
     kindImage: "รูปภาพ",
     kindFiles: "ไฟล์",
     none: "ไม่เรียกใช้อัตโนมัติ",

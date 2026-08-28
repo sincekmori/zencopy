@@ -196,8 +196,12 @@ export const ko: Messages = {
   },
   rules: {
     title: "규칙",
-    hint: "캡처 유형별로 실행할 프롬프트.",
+    hint: "복사했을 때 실행되는 프롬프트.",
+    allKinds: "모든 복사",
+    perKind: "종류별로 다르게",
+    inherit: "모든 복사와 동일",
     kindText: "텍스트",
+    kindRichText: "서식 있는 텍스트",
     kindImage: "이미지",
     kindFiles: "파일",
     none: "자동 실행 안 함",

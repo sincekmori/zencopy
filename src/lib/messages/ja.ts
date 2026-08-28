@@ -199,8 +199,12 @@ export const ja: Messages = {
   },
   rules: {
     title: "振り分け",
-    hint: "コピーの種類ごとに実行するプロンプト。",
+    hint: "コピーしたときに自動実行するプロンプト。",
+    allKinds: "すべてのコピー",
+    perKind: "種類ごとに変える",
+    inherit: "すべてのコピーと同じ",
     kindText: "テキスト",
+    kindRichText: "書式付きテキスト",
     kindImage: "画像",
     kindFiles: "ファイル",
     none: "自動実行しない",

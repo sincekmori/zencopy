@@ -199,8 +199,12 @@ export const es: Messages = {
   },
   rules: {
     title: "Reglas",
-    hint: "Qué prompt se ejecuta para cada tipo de captura.",
+    hint: "Qué prompt se ejecuta al copiar.",
+    allKinds: "Todas las copias",
+    perKind: "Ajustar por tipo",
+    inherit: "Igual que todas las copias",
     kindText: "Texto",
+    kindRichText: "Texto con formato",
     kindImage: "Imagen",
     kindFiles: "Archivos",
     none: "No ejecutar automáticamente",

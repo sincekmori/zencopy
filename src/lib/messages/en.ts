@@ -190,8 +190,12 @@ export const en: Messages = {
   },
   rules: {
     title: "Rules",
-    hint: "Which prompt runs for each type of capture.",
+    hint: "Which prompt runs when you copy.",
+    allKinds: "Every copy",
+    perKind: "Vary by kind",
+    inherit: "Same as every copy",
     kindText: "Text",
+    kindRichText: "Formatted text",
     kindImage: "Image",
     kindFiles: "Files",
     none: "Don't run automatically",
