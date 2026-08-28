@@ -189,8 +189,10 @@ export async function setConfirmAttachments(enabled: boolean): Promise<void> {
  *  Four matches the pre-installed prompt count and keeps the popup compact. */
 export const QUICK_SLOT_COUNT = 4;
 
-/** The pre-installed prompts, in slot order — the zero-config default.
- *  Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs (same ids, same order). */
+/** The pre-installed specialist prompts, in slot order — the zero-config
+ *  default. Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs minus
+ *  zencopy-auto: Auto is what runs before the user picks anything, so it
+ *  earns no number key of its own. */
 const DEFAULT_QUICK_PROMPTS = [
   "zencopy-summarize",
   "zencopy-explain",

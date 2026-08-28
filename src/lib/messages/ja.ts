@@ -154,6 +154,7 @@ export const ja: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-auto": "おまかせ",
       "zencopy-summarize": "要約",
       "zencopy-translate": "翻訳",
       "zencopy-explain": "解説",

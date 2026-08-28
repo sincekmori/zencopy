@@ -595,9 +595,18 @@ mod ts_mirror_tests {
 
     /// DEFAULT_QUICK_PROMPTS in settings.ts names pre-installed prompts by id;
     /// renaming a built-in here would leave a quick slot empty over there.
+    /// zencopy-auto is the deliberate exception: it runs before the user picks
+    /// anything (the routing default), so it earns no number key of its own.
     #[test]
     fn builtin_ids_appear_in_frontend_defaults() {
         for (id, _) in DEFAULT_PROMPTS {
+            if *id == "zencopy-auto" {
+                assert!(
+                    !SETTINGS_TS.contains(&format!("\"{id}\"")),
+                    "zencopy-auto must stay out of the quick-slot defaults"
+                );
+                continue;
+            }
             assert!(
                 SETTINGS_TS.contains(&format!("\"{id}\"")),
                 "built-in prompt '{id}' missing from settings.ts defaults"

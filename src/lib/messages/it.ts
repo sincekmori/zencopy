@@ -153,6 +153,7 @@ export const it: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-auto": "Automatico",
       "zencopy-summarize": "Riassumi",
       "zencopy-translate": "Traduci",
       "zencopy-explain": "Spiega",

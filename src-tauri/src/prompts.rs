@@ -65,6 +65,7 @@ pub(crate) fn parse_prompt(raw: &str, default_id: &str) -> Option<Prompt> {
 }
 
 pub(crate) const DEFAULT_PROMPTS: &[(&str, &str)] = &[
+    ("zencopy-auto", include_str!("../prompts/auto.md")),
     ("zencopy-summarize", include_str!("../prompts/summarize.md")),
     ("zencopy-explain", include_str!("../prompts/explain.md")),
     ("zencopy-translate", include_str!("../prompts/translate.md")),
