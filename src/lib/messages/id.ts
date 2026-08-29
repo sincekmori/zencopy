@@ -199,7 +199,7 @@ export const id: Messages = {
     kindText: "Teks",
     kindImage: "Gambar",
     kindFiles: "Berkas",
-    none: "Jangan jalankan otomatis",
+    none: "Jangan jalankan",
     overridesTitle: "Aturan",
     overridesHint:
       "Rutekan berdasarkan aplikasi, jendela, atau panjang — diperiksa lebih dulu, dari atas ke bawah.",

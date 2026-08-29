@@ -200,7 +200,7 @@ export const ko: Messages = {
     kindText: "텍스트",
     kindImage: "이미지",
     kindFiles: "파일",
-    none: "자동 실행 안 함",
+    none: "실행 안 함",
     overridesTitle: "규칙",
     overridesHint: "앱·창·길이로 분기합니다. 위에서부터 순서대로 먼저 일치하는 규칙이 적용됩니다.",
     overridesDocs: "규칙 동작 방식 보기",

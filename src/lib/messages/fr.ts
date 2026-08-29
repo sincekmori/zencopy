@@ -206,7 +206,7 @@ export const fr: Messages = {
     kindText: "Texte",
     kindImage: "Image",
     kindFiles: "Fichiers",
-    none: "Ne pas exécuter automatiquement",
+    none: "Ne pas exécuter",
     overridesTitle: "Règles",
     overridesHint:
       "Routez par application, fenêtre ou longueur — vérifiées en premier, de haut en bas.",

@@ -201,7 +201,7 @@ export const ru: Messages = {
     kindText: "Текст",
     kindImage: "Изображение",
     kindFiles: "Файлы",
-    none: "Не запускать автоматически",
+    none: "Не запускать",
     overridesTitle: "Правила",
     overridesHint: "Правила по приложению, окну или длине — проверяются первыми, сверху вниз.",
     overridesDocs: "Как работают правила",

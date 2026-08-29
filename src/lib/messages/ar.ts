@@ -194,7 +194,7 @@ export const ar: Messages = {
     kindText: "نص",
     kindImage: "صورة",
     kindFiles: "ملفات",
-    none: "بدون تشغيل تلقائي",
+    none: "بدون تشغيل",
     overridesTitle: "القواعد",
     overridesHint: "وجِّه حسب التطبيق أو النافذة أو الطول — تُفحص أولًا، من الأعلى إلى الأسفل.",
     overridesDocs: "كيف تعمل القواعد",

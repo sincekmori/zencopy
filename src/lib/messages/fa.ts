@@ -199,7 +199,7 @@ export const fa: Messages = {
     kindText: "متن",
     kindImage: "تصویر",
     kindFiles: "فایل‌ها",
-    none: "بدون اجرای خودکار",
+    none: "بدون اجرا",
     overridesTitle: "قوانین",
     overridesHint: "هدایت بر اساس برنامه، پنجره یا طول — اول بررسی می‌شوند، از بالا به پایین.",
     overridesDocs: "قوانین چگونه کار می‌کنند",

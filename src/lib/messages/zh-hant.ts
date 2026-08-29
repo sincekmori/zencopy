@@ -185,7 +185,7 @@ export const zhHant: Messages = {
     kindText: "文字",
     kindImage: "圖片",
     kindFiles: "檔案",
-    none: "不自動執行",
+    none: "不執行",
     overridesTitle: "規則",
     overridesHint: "依應用程式、視窗或長度分流 — 由上而下優先比對。",
     overridesDocs: "了解規則機制",

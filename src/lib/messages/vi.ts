@@ -198,7 +198,7 @@ export const vi: Messages = {
     kindText: "Văn bản",
     kindImage: "Hình ảnh",
     kindFiles: "Tệp",
-    none: "Không tự động chạy",
+    none: "Không chạy",
     overridesTitle: "Quy tắc",
     overridesHint:
       "Phân nhánh theo ứng dụng, cửa sổ hoặc độ dài — được kiểm tra trước, từ trên xuống.",

@@ -192,7 +192,7 @@ export const he: Messages = {
     kindText: "טקסט",
     kindImage: "תמונה",
     kindFiles: "קבצים",
-    none: "לא להריץ אוטומטית",
+    none: "לא להריץ",
     overridesTitle: "כללים",
     overridesHint: "התאמה לפי אפליקציה, חלון או אורך — הכללים נבדקים קודם, מלמעלה למטה.",
     overridesDocs: "איך כללים עובדים",

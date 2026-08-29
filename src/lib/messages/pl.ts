@@ -202,7 +202,7 @@ export const pl: Messages = {
     kindText: "Tekst",
     kindImage: "Obraz",
     kindFiles: "Pliki",
-    none: "Nie uruchamiaj automatycznie",
+    none: "Nie uruchamiaj",
     overridesTitle: "Reguły",
     overridesHint:
       "Kieruj według aplikacji, okna lub długości — sprawdzane najpierw, od góry do dołu.",

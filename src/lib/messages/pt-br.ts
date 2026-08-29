@@ -201,7 +201,7 @@ export const ptBR: Messages = {
     kindText: "Texto",
     kindImage: "Imagem",
     kindFiles: "Arquivos",
-    none: "Não executar automaticamente",
+    none: "Não executar",
     overridesTitle: "Regras",
     overridesHint:
       "Roteie por aplicativo, janela ou tamanho — verificadas primeiro, de cima para baixo.",

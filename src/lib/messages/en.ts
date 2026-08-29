@@ -192,7 +192,7 @@ export const en: Messages = {
     kindText: "Text",
     kindImage: "Image",
     kindFiles: "Files",
-    none: "Don't run automatically",
+    none: "Don't run",
     overridesTitle: "Rules",
     overridesHint: "Route by app, window, or length — checked first, top to bottom.",
     overridesDocs: "How rules work",

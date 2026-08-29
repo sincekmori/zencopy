@@ -202,7 +202,7 @@ export const tr: Messages = {
     kindText: "Metin",
     kindImage: "Görsel",
     kindFiles: "Dosyalar",
-    none: "Otomatik çalıştırma",
+    none: "Çalıştırma",
     overridesTitle: "Kurallar",
     overridesHint:
       "Uygulamaya, pencereye veya uzunluğa göre yönlendir — önce, yukarıdan aşağıya denetlenir.",

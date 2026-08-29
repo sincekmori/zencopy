@@ -186,7 +186,7 @@ export const th: Messages = {
     kindText: "ข้อความ",
     kindImage: "รูปภาพ",
     kindFiles: "ไฟล์",
-    none: "ไม่เรียกใช้อัตโนมัติ",
+    none: "ไม่เรียกใช้",
     overridesTitle: "กฎ",
     overridesHint: "แยกตามแอป หน้าต่าง หรือความยาว — ตรวจสอบก่อน จากบนลงล่าง",
     overridesDocs: "กฎทำงานอย่างไร",

@@ -204,7 +204,7 @@ export const it: Messages = {
     kindText: "Testo",
     kindImage: "Immagine",
     kindFiles: "File",
-    none: "Non eseguire automaticamente",
+    none: "Non eseguire",
     overridesTitle: "Regole",
     overridesHint:
       "Instrada per app, finestra o lunghezza — controllate per prime, dall'alto in basso.",

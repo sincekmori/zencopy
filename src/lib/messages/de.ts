@@ -205,7 +205,7 @@ export const de: Messages = {
     kindText: "Text",
     kindImage: "Bild",
     kindFiles: "Dateien",
-    none: "Nicht automatisch ausführen",
+    none: "Nicht ausführen",
     overridesTitle: "Regeln",
     overridesHint:
       "Nach App, Fenster oder Länge routen — werden zuerst geprüft, von oben nach unten.",

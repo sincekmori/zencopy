@@ -184,7 +184,7 @@ export const zhHans: Messages = {
     kindText: "文本",
     kindImage: "图片",
     kindFiles: "文件",
-    none: "不自动执行",
+    none: "不执行",
     overridesTitle: "规则",
     overridesHint: "按应用、窗口或长度分流 — 自上而下优先匹配。",
     overridesDocs: "了解规则机制",

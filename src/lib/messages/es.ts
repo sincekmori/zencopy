@@ -203,7 +203,7 @@ export const es: Messages = {
     kindText: "Texto",
     kindImage: "Imagen",
     kindFiles: "Archivos",
-    none: "No ejecutar automáticamente",
+    none: "No ejecutar",
     overridesTitle: "Reglas",
     overridesHint:
       "Enruta por aplicación, ventana o longitud — se comprueban primero, de arriba abajo.",

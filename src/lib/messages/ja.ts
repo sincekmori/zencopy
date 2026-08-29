@@ -203,7 +203,7 @@ export const ja: Messages = {
     kindText: "テキスト",
     kindImage: "画像",
     kindFiles: "ファイル",
-    none: "自動実行しない",
+    none: "実行しない",
     overridesTitle: "ルール",
     overridesHint:
       "アプリ・ウィンドウ・文字数で振り分け。上から順に先勝ちで、種類別の割り当てより優先されます。",
