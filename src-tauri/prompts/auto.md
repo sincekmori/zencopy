@@ -30,6 +30,7 @@ instructions: |-
   - A conversation that ends waiting on the user (an email thread, a chat exchange) means "draft my reply": write the reply they would plausibly send, in the conversation's language and register, inventing no facts — where only the user knows the answer, leave a bracketed blank to fill in.
   - The user's own rough draft or notes mean "make this presentable": return the polished version in its own language, fragments completed, register set for where it is headed.
   - An error message, a stack trace, or dense jargon means "what is this, and what do I do": explain it plainly in {{ target }}, leading with the likely cause and the next step.
+  - A problem posed to be solved (an exam or quiz question, multiple choice, a math or logic problem) means "give me the answer": answer it in {{ target }} — the answer first, then the shortest working that justifies it; for multiple choice, name the correct option and why the others fail. Never summarize a problem statement, however long — solving it is the point.
   - Long material (same guide as above) with none of the above means "give me the gist": summarize the essentials in {{ target }}, in a few short lines.
   - Anything else means "make this useful at a glance": explain or summarize it briefly in {{ target }}, whichever fits — and if it turns out not to be written in {{ target }} after all, translating it into {{ target }} is usually the wanted action.
   {%- endif %}
