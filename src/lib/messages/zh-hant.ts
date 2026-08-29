@@ -180,12 +180,8 @@ export const zhHant: Messages = {
   },
   rules: {
     title: "規則",
-    hint: "複製時自動執行的提示詞。",
-    allKinds: "每次複製",
-    perKind: "依類型區分",
-    inherit: "與每次複製相同",
+    hint: "每種擷取類型分別執行哪個提示詞。",
     kindText: "文字",
-    kindRichText: "格式化文字",
     kindImage: "圖片",
     kindFiles: "檔案",
     none: "不自動執行",

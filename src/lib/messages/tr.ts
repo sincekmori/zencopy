@@ -197,12 +197,8 @@ export const tr: Messages = {
   },
   rules: {
     title: "Kurallar",
-    hint: "Kopyaladığınızda çalışacak istem.",
-    allKinds: "Her kopyalama",
-    perKind: "Türe göre ayarla",
-    inherit: "Her kopyalamayla aynı",
+    hint: "Her yakalama türü için hangi istemin çalışacağı.",
     kindText: "Metin",
-    kindRichText: "Biçimlendirilmiş metin",
     kindImage: "Görsel",
     kindFiles: "Dosyalar",
     none: "Otomatik çalıştırma",

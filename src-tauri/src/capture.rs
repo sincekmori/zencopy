@@ -180,8 +180,7 @@ pub(crate) fn source_preview(event: &copycopy::CaptureEvent) -> SourcePreview {
 pub(crate) fn capture_kind(event: &copycopy::CaptureEvent) -> &'static str {
     use copycopy::Captured;
     match &event.content {
-        Captured::Text { .. } => "text",
-        Captured::RichText { .. } => "rich_text",
+        Captured::Text { .. } | Captured::RichText { .. } => "text",
         Captured::Image { .. } => "image",
         Captured::Files { .. } => "files",
         Captured::Empty => "empty",

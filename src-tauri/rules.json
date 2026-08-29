@@ -1,4 +1,6 @@
 {
-  "default": "zencopy-auto",
+  "text": "zencopy-auto",
+  "image": "zencopy-auto",
+  "files": "zencopy-auto",
   "overrides": []
 }

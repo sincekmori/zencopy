@@ -187,12 +187,8 @@ export const he: Messages = {
   },
   rules: {
     title: "כללים",
-    hint: "הפרומפט שרץ בעת העתקה.",
-    allKinds: "כל העתקה",
-    perKind: "התאמה לפי סוג",
-    inherit: "כמו כל העתקה",
+    hint: "איזה פרומפט רץ עבור כל סוג לכידה.",
     kindText: "טקסט",
-    kindRichText: "טקסט מעוצב",
     kindImage: "תמונה",
     kindFiles: "קבצים",
     none: "לא להריץ אוטומטית",

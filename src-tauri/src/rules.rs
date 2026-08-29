@@ -39,9 +39,7 @@ pub(crate) struct Override {
     prompt: String,
 }
 
-/// Rules: a flat `kind` → prompt map plus the kind-independent `default`
-/// entry it falls back to (setting one prompt for every copy is the intuitive
-/// base; per-kind entries are the fine-tuning on top), plus an optional,
+/// Rules: a flat `kind` → prompt map (the intuitive base) plus an optional,
 /// higher-priority `overrides` list, evaluated first (first match wins).
 #[derive(Clone)]
 pub(crate) struct RulesConfig {
@@ -95,7 +93,7 @@ pub(crate) fn load_rules(handle: &tauri::AppHandle) -> RulesConfig {
     // A rule naming a kind that doesn't exist (a typo, or a leftover from a
     // removed kind) can never fire — silent config decay deserves a trace.
     for kind in rules.by_kind.keys() {
-        if !is_rule_key(kind) {
+        if !RULE_KINDS.contains(&kind.as_str()) {
             log::warn!("rules.json: unknown kind \"{kind}\" is never matched, ignored");
         }
     }
@@ -209,9 +207,8 @@ pub(crate) fn when_matches(
     true
 }
 
-/// Resolve which prompt handles a capture: a matching override (first wins)
-/// takes priority over the kind map, and a kind with no entry of its own
-/// falls back to the kind-independent `default` entry.
+/// Resolve which prompt handles a capture: a matching override (first wins) takes
+/// priority over the 1:1 kind map.
 pub(crate) fn resolve_prompt<'a>(
     rules: &RulesConfig,
     prompts: &'a [Prompt],
@@ -225,10 +222,7 @@ pub(crate) fn resolve_prompt<'a>(
             return Some(prompt);
         }
     }
-    let id = rules
-        .by_kind
-        .get(kind)
-        .or_else(|| rules.by_kind.get(DEFAULT_RULE_KEY))?;
+    let id = rules.by_kind.get(kind)?;
     prompts.iter().find(|prompt| &prompt.id == id)
 }
 
@@ -263,17 +257,7 @@ pub(crate) fn purge_prompt_from_rules_object(
 
 /// The capture kinds the rules UI exposes (mirrors `capture_kind`; `empty`
 /// is deliberately not routable).
-pub(crate) const RULE_KINDS: [&str; 4] = ["text", "rich_text", "image", "files"];
-
-/// The kind-independent entry in the flat map: the prompt every copy runs
-/// unless a per-kind entry or an override says otherwise.
-pub(crate) const DEFAULT_RULE_KEY: &str = "default";
-
-/// Whether `key` may appear in the flat map: a routable kind, or the
-/// kind-independent default entry.
-fn is_rule_key(key: &str) -> bool {
-    key == DEFAULT_RULE_KEY || RULE_KINDS.contains(&key)
-}
+pub(crate) const RULE_KINDS: [&str; 3] = ["text", "image", "files"];
 
 /// Read-modify-write the user's rules.json as a JSON object (seeded from
 /// the embedded default when none exists). Everything the mutation doesn't
@@ -329,7 +313,7 @@ pub(crate) fn set_kind_prompt(
     kind: String,
     id: Option<String>,
 ) -> Result<(), String> {
-    if !is_rule_key(&kind) {
+    if !RULE_KINDS.contains(&kind.as_str()) {
         return Err(format!("unknown capture kind: {kind:?}"));
     }
     let id = id.as_deref().map(checked_prompt_id).transpose()?;
@@ -372,66 +356,6 @@ pub(crate) fn get_rules_ui(app: tauri::AppHandle) -> RulesInfo {
     RulesInfo {
         by_kind: rules.by_kind,
         overrides: rules.overrides,
-    }
-}
-
-#[cfg(test)]
-mod default_rule_tests {
-    use super::*;
-
-    fn text_event(text: &str) -> copycopy::CaptureEvent {
-        copycopy::CaptureEvent {
-            timestamp_ms: 0,
-            content: copycopy::Captured::Text {
-                text: text.to_string(),
-            },
-            app_name: "TestApp".to_string(),
-            exec_name: "test".to_string(),
-            exec_path: String::new(),
-            window_title: String::new(),
-            url: None,
-            process_id: 0,
-        }
-    }
-
-    fn prompt(id: &str) -> Prompt {
-        Prompt {
-            id: id.to_string(),
-            label: id.to_string(),
-            role: None,
-            instructions: String::new(),
-            body: String::new(),
-        }
-    }
-
-    /// The kind-independent `default` entry catches every kind that has no
-    /// entry of its own — the one-prompt-for-everything base the settings UI
-    /// writes.
-    #[test]
-    fn default_entry_catches_unmapped_kinds() {
-        let rules = parse_rules(r#"{ "default": "auto" }"#).expect("parses");
-        let prompts = [prompt("auto")];
-        let resolved = resolve_prompt(&rules, &prompts, &text_event("hello"));
-        assert_eq!(resolved.expect("routed").id, "auto");
-    }
-
-    /// A per-kind entry is the fine-tuning on top: it beats `default` for its
-    /// kind and leaves every other kind on the default.
-    #[test]
-    fn kind_entry_beats_the_default() {
-        let rules = parse_rules(r#"{ "default": "auto", "text": "summarize" }"#).expect("parses");
-        let prompts = [prompt("auto"), prompt("summarize")];
-        let resolved = resolve_prompt(&rules, &prompts, &text_event("hello"));
-        assert_eq!(resolved.expect("routed").id, "summarize");
-    }
-
-    /// No entry at all means nothing runs — the popup still opens with the
-    /// capture, just without an auto-started prompt.
-    #[test]
-    fn no_entry_routes_nothing() {
-        let rules = parse_rules(r#"{ "image": "explain" }"#).expect("parses");
-        let prompts = [prompt("explain")];
-        assert!(resolve_prompt(&rules, &prompts, &text_event("hello")).is_none());
     }
 }
 

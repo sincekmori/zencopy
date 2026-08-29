@@ -74,16 +74,8 @@ export function importPromptFromFile(): Promise<string | null> {
 }
 
 /** The capture kinds rules can assign (mirrors Rust's RULE_KINDS). */
-export const ROUTABLE_KINDS = ["text", "rich_text", "image", "files"] as const;
+export const ROUTABLE_KINDS = ["text", "image", "files"] as const;
 export type RoutableKind = (typeof ROUTABLE_KINDS)[number];
-
-/** The kind-independent entry in the flat map (mirrors Rust's
- *  DEFAULT_RULE_KEY): the prompt every copy runs unless a per-kind entry or
- *  an override says otherwise. */
-export const DEFAULT_RULE_KEY = "default";
-
-/** What the flat map may be keyed by: a routable kind or the default entry. */
-export type RuleKey = RoutableKind | typeof DEFAULT_RULE_KEY;
 
 /** An override's `when` condition: every present field must match (AND).
  *  String fields support `*` wildcards; names mirror the template variables.
@@ -149,7 +141,7 @@ export async function getRules(): Promise<RulesInfo> {
 
 /** Route captures of `kind` to an prompt (undefined clears the assignment —
  *  an omitted key reaches Rust as `None`). */
-export function setKindPrompt(kind: RuleKey, id: string | undefined): Promise<void> {
+export function setKindPrompt(kind: RoutableKind, id: string | undefined): Promise<void> {
   return invoke("set_kind_prompt", { kind, id });
 }
 

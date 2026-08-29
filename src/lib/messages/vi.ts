@@ -193,12 +193,8 @@ export const vi: Messages = {
   },
   rules: {
     title: "Quy tắc",
-    hint: "Prompt chạy khi bạn sao chép.",
-    allKinds: "Mỗi lần sao chép",
-    perKind: "Tùy chỉnh theo loại",
-    inherit: "Giống mỗi lần sao chép",
+    hint: "Prompt nào chạy cho từng loại nội dung.",
     kindText: "Văn bản",
-    kindRichText: "Văn bản có định dạng",
     kindImage: "Hình ảnh",
     kindFiles: "Tệp",
     none: "Không tự động chạy",

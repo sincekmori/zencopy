@@ -37,10 +37,8 @@ import {
   importPrompt,
   importPromptFromFile,
   listPrompts,
-  DEFAULT_RULE_KEY,
   ROUTABLE_KINDS,
   type RoutableKind,
-  type RuleKey,
   type RulesInfo,
   type RulesOverride,
   savePrompt,
@@ -163,9 +161,6 @@ export function PromptsSettings(): React.JSX.Element {
   // The effective kind → prompt assignments, kept in the same reload path as
   // the list so the selects and the prompt list never disagree.
   const [rules, setRules] = useState<RulesInfo>({ by_kind: {}, overrides: [] });
-  // Whether the per-kind fine-tuning rows are disclosed. Seeded by reload,
-  // then the user's own toggling owns it.
-  const [perKindOpen, setPerKindOpen] = useState(false);
   const [rulesError, setRulesError] = useState<string | undefined>(undefined);
   // The override rule being added or edited, if any.
   const [rule, setRule] = useState<RuleDraft | undefined>(() =>
@@ -192,11 +187,6 @@ export function PromptsSettings(): React.JSX.Element {
         const [list, routes] = await Promise.all([listPrompts(), getRules()]);
         setPrompts(list);
         setRules(routes);
-        // Reveal the per-kind disclosure when saved entries exist — open
-        // only, so a reload never snaps it shut under the user.
-        setPerKindOpen(
-          (open) => open || ROUTABLE_KINDS.some((kind) => routes.by_kind[kind] !== undefined),
-        );
       } catch (error) {
         log.error("listing prompts failed", error);
       }
@@ -405,7 +395,7 @@ export function PromptsSettings(): React.JSX.Element {
     })();
   };
 
-  const changeRules = (kind: RuleKey, id: string): void => {
+  const changeRules = (kind: RoutableKind, id: string): void => {
     setRulesError(undefined);
     // Optimistic: the select reflects the choice instantly; reload confirms.
     setRules((prev) => {
@@ -534,14 +524,12 @@ export function PromptsSettings(): React.JSX.Element {
 
   const kindLabels: Record<RoutableKind, string> = {
     text: t.rules.kindText,
-    rich_text: t.rules.kindRichText,
     image: t.rules.kindImage,
     files: t.rules.kindFiles,
   };
 
-  // One row of the routing table: the default row and the per-kind rows are
-  // the same control, differing only in key and empty-option label.
-  const routeRow = (key: RuleKey, label: string, emptyLabel: string): React.JSX.Element => {
+  // One row of the routing table.
+  const routeRow = (key: RoutableKind, label: string, emptyLabel: string): React.JSX.Element => {
     const assigned = rules.by_kind[key] ?? "";
     const known = assigned === "" || prompts.some((prompt) => prompt.id === assigned);
     return (
@@ -896,22 +884,7 @@ export function PromptsSettings(): React.JSX.Element {
           <p className="mt-1 text-xs text-muted-foreground">{t.rules.hint}</p>
         </div>
         <div className="flex flex-col gap-2">
-          {routeRow(DEFAULT_RULE_KEY, t.rules.allKinds, t.rules.none)}
-          {/* Per-kind entries are the fine-tuning on top of the one-prompt
-            default, so they hide behind a disclosure. */}
-          <details
-            open={perKindOpen}
-            onToggle={(event) => {
-              setPerKindOpen(event.currentTarget.open);
-            }}
-          >
-            <summary className="cursor-pointer text-xs text-muted-foreground select-none">
-              {t.rules.perKind}
-            </summary>
-            <div className="mt-2 flex flex-col gap-2">
-              {ROUTABLE_KINDS.map((kind) => routeRow(kind, kindLabels[kind], t.rules.inherit))}
-            </div>
-          </details>
+          {ROUTABLE_KINDS.map((kind) => routeRow(kind, kindLabels[kind], t.rules.none))}
         </div>
         <div className="mt-1 flex items-center justify-between gap-4 border-t pt-4">
           <div>

@@ -189,12 +189,8 @@ export const ar: Messages = {
   },
   rules: {
     title: "القواعد",
-    hint: "الموجّه الذي يعمل عند النسخ.",
-    allKinds: "كل عملية نسخ",
-    perKind: "تخصيص حسب النوع",
-    inherit: "مثل كل عملية نسخ",
+    hint: "أي موجّه يعمل مع كل نوع من الالتقاط.",
     kindText: "نص",
-    kindRichText: "نص منسّق",
     kindImage: "صورة",
     kindFiles: "ملفات",
     none: "بدون تشغيل تلقائي",

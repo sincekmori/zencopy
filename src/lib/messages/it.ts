@@ -199,12 +199,8 @@ export const it: Messages = {
   },
   rules: {
     title: "Regole",
-    hint: "Quale prompt viene eseguito quando copi.",
-    allKinds: "Tutte le copie",
-    perKind: "Distingui per tipo",
-    inherit: "Come tutte le copie",
+    hint: "Quale prompt viene eseguito per ogni tipo di cattura.",
     kindText: "Testo",
-    kindRichText: "Testo formattato",
     kindImage: "Immagine",
     kindFiles: "File",
     none: "Non eseguire automaticamente",

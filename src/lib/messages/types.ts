@@ -243,16 +243,7 @@ export interface Messages {
   rules: {
     title: string;
     hint: string;
-    /** The kind-independent default row: the prompt every copy runs unless a
-     *  per-kind entry or an override says otherwise. */
-    allKinds: string;
-    /** The disclosure hiding the per-kind fine-tuning rows. */
-    perKind: string;
-    /** A per-kind select's first option: no entry of its own, the copy
-     *  follows the kind-independent default. */
-    inherit: string;
     kindText: string;
-    kindRichText: string;
     kindImage: string;
     kindFiles: string;
     none: string;
