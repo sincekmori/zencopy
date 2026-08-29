@@ -52,7 +52,6 @@ import {
   isDevMode,
   isPopupCostShown,
   isStatsEnabled,
-  QUICK_SLOT_COUNT,
   setConfirmAttachments,
 } from "@/lib/settings.ts";
 import { cn } from "@/lib/utils.ts";
@@ -1019,10 +1018,12 @@ export function Popup(): React.JSX.Element {
             </button>
           ) : undefined,
         )}
-        {/* The full-list palette only earns its place when there are more
-            prompts than the numbered slots can show — with just the
-            pre-installed set, it would merely repeat the row above. */}
-        {prompts.length > QUICK_SLOT_COUNT ? (
+        {/* The full-list palette only earns its place when a custom prompt
+            exists — those never appear on the popup by themselves, while the
+            pre-installed set is already covered by the slots and the routing
+            default. Detected from the list, not a count, so the number of
+            built-ins can change freely. */}
+        {prompts.some((prompt) => prompt.origin === "custom") ? (
           <button
             type="button"
             onClick={toggleMenu}
