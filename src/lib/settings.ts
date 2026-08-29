@@ -202,7 +202,7 @@ const DEFAULT_QUICK_PROMPTS = [
 
 const QUICK_PROMPTS_KEY = "quickPrompts";
 
-/** The prompt ids bound to the popup's number keys (1–4), in slot order.
+/** The prompt ids bound to the popup's number keys (1–5), in slot order.
  *  Positions are stable so muscle memory holds — the settings editor is the
  *  only thing that reorders them. Stored loosely (any string array) and
  *  normalized to exactly QUICK_SLOT_COUNT ids on read, so a hand-edited or
