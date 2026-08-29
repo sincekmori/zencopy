@@ -529,7 +529,8 @@ export function PromptsSettings(): React.JSX.Element {
   };
 
   // One row of the routing table.
-  const routeRow = (key: RoutableKind, label: string, emptyLabel: string): React.JSX.Element => {
+  const routeRow = (key: RoutableKind): React.JSX.Element => {
+    const label = kindLabels[key];
     const assigned = rules.by_kind[key] ?? "";
     const known = assigned === "" || prompts.some((prompt) => prompt.id === assigned);
     return (
@@ -542,7 +543,7 @@ export function PromptsSettings(): React.JSX.Element {
             changeRules(key, event.target.value);
           }}
         >
-          <option value="">{emptyLabel}</option>
+          <option value="">{t.rules.none}</option>
           {/* An assignment pointing at a deleted prompt stays listed by its
             raw id, so the state is visible instead of silently showing the
             empty option. */}
@@ -883,9 +884,7 @@ export function PromptsSettings(): React.JSX.Element {
           <h2 className="text-sm font-medium">{t.rules.title}</h2>
           <p className="mt-1 text-xs text-muted-foreground">{t.rules.hint}</p>
         </div>
-        <div className="flex flex-col gap-2">
-          {ROUTABLE_KINDS.map((kind) => routeRow(kind, kindLabels[kind], t.rules.none))}
-        </div>
+        <div className="flex flex-col gap-2">{ROUTABLE_KINDS.map((kind) => routeRow(kind))}</div>
         <div className="mt-1 flex items-center justify-between gap-4 border-t pt-4">
           <div>
             <h3 className="text-sm font-medium">{t.rules.overridesTitle}</h3>

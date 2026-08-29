@@ -185,10 +185,6 @@ export async function setConfirmAttachments(enabled: boolean): Promise<void> {
   await writeSetting(CONFIRM_ATTACHMENTS_KEY, enabled);
 }
 
-/** The number of popup quick slots — the prompts bound to number keys 1–N.
- *  Five matches the pre-installed prompt count and keeps the popup compact. */
-export const QUICK_SLOT_COUNT = 5;
-
 /** The pre-installed prompts, in slot order — the zero-config default.
  *  Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs (same ids, same
  *  order): Auto leads on key 1, matching its role as the routing default. */
@@ -199,6 +195,11 @@ const DEFAULT_QUICK_PROMPTS = [
   "zencopy-translate",
   "zencopy-polish",
 ];
+
+/** The number of popup quick slots — the prompts bound to number keys 1–N.
+ *  Derived from the default list, so one shipped prompt more or fewer never
+ *  desyncs the count. */
+export const QUICK_SLOT_COUNT = DEFAULT_QUICK_PROMPTS.length;
 
 const QUICK_PROMPTS_KEY = "quickPrompts";
 
@@ -217,7 +218,9 @@ export function getQuickPrompts(): Promise<string[]> {
 }
 
 export async function setQuickPrompts(ids: string[]): Promise<void> {
-  await writeSetting(QUICK_PROMPTS_KEY, ids.slice(0, QUICK_SLOT_COUNT));
+  // Stored verbatim: the read side validates the shape wholesale, so a
+  // half-hearted normalization here would only mask a caller bug.
+  await writeSetting(QUICK_PROMPTS_KEY, ids);
 }
 
 const USER_CONTEXT_KEY = "userContext";

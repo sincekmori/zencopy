@@ -219,7 +219,7 @@ export function Popup(): React.JSX.Element {
   // Filter text inside the palette, for finding an prompt among many.
   const [menuFilter, setMenuFilter] = useState("");
   const [prompts, setPrompts] = useState<PromptInfo[]>([]);
-  // The prompt ids bound to number keys 1–4 (settings), in slot order.
+  // The prompt ids bound to the number keys (settings), in slot order.
   const [quickIds] = useLiveValue<string[]>(getQuickPrompts, "quick-prompts-changed", []);
   // The "Show template variables" toggle (stored as `devMode`).
   const [devMode] = useLiveValue(isDevMode, "dev-mode-changed", false);
@@ -858,7 +858,7 @@ export function Popup(): React.JSX.Element {
     run(next);
   };
 
-  // Number keys 1–4: switch to the quick slot's prompt (abort + re-run, via
+  // Number keys 1–N: switch to the quick slot's prompt (abort + re-run, via
   // switchPrompt). A number binds to a slot, not to the nth visible chip, so a
   // missing/absent prompt just makes its number a no-op — positions stay put.
   const switchToSlot = (num: number): void => {
@@ -966,7 +966,7 @@ export function Popup(): React.JSX.Element {
   // The prompt block: a prominent headline (the single source of truth for
   // "what is running") over a row of numbered quick slots. The current prompt
   // is the headline; the slots are the one-key switch. When the running prompt
-  // is not among the four slots, none is highlighted — the layout never shifts.
+  // is not among the slots, none is highlighted — the layout never shifts.
   const promptRow = payload ? (
     <div className="flex flex-col gap-2">
       {/* Headline: status glyph + the prompt label as the visual anchor. The
@@ -1019,12 +1019,11 @@ export function Popup(): React.JSX.Element {
             </button>
           ) : undefined,
         )}
-        {/* The full-list palette only earns its place when a custom prompt
-            exists — those never appear on the popup by themselves, while the
-            pre-installed set is already covered by the slots and the routing
-            default. Detected from the list, not a count, so the number of
-            built-ins can change freely. */}
-        {prompts.some((prompt) => prompt.origin === "custom") ? (
+        {/* The full-list palette only earns its place when some prompt is
+            not reachable from the slot row — a custom prompt, or a built-in
+            pushed out by one. Judged by coverage, not by count or origin, so
+            it also survives built-ins coming and going. */}
+        {prompts.some((prompt) => !quickIds.includes(prompt.id)) ? (
           <button
             type="button"
             onClick={toggleMenu}

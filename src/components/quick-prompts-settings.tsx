@@ -10,11 +10,11 @@ import { Select } from "@/components/ui/select.tsx";
 
 const log = createLogger("quick-prompts-settings");
 
-/** The four popup quick slots (number keys 1–4): drag to reorder, pick the
- *  prompt per slot. Positions are stable so the numbers a user memorizes
- *  never move on their own; assignments stay duplicate-free (choosing an
- *  prompt already in another slot swaps the two). The default prompt is
- *  chosen in the prompts list, not here — one star, one place. */
+/** The popup quick slots (number keys 1–N, QUICK_SLOT_COUNT of them): drag
+ *  to reorder, pick the prompt per slot. Positions are stable so the numbers
+ *  a user memorizes never move on their own; assignments stay duplicate-free
+ *  (choosing a prompt already in another slot swaps the two). What runs by
+ *  default is the routing section's business, not this one's. */
 export function QuickPromptsSettings(): React.JSX.Element {
   const t = useT();
   const promptLabel = usePromptLabel();
@@ -55,7 +55,7 @@ export function QuickPromptsSettings(): React.JSX.Element {
   };
 
   // Assign an prompt to a slot. If it already occupies another slot, swap them
-  // so the four stay distinct without ever leaving a slot empty.
+  // so the slots stay distinct without ever leaving one empty.
   const assign = (slotIndex: number, id: string): void => {
     const next = [...slots];
     const existing = next.indexOf(id);

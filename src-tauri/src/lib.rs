@@ -580,6 +580,32 @@ mod ts_mirror_tests {
         }
     }
 
+    /// The screenshot harness renders the popup at the same home viewport
+    /// windows.rs opens it with, and that viewport must sit under the CSS
+    /// `compact` breakpoint or the home card silently loses its padded look.
+    #[test]
+    fn popup_home_viewport_matches_the_frontend() {
+        const SCENARIOS_TS: &str = include_str!("../../src/lib/screenshot-scenarios.ts");
+        let viewport = crate::windows::POPUP_HOME_VIEWPORT;
+        assert!(
+            SCENARIOS_TS.contains(&format!("width: {viewport}")),
+            "screenshot-scenarios.ts must render the popup at the home viewport ({viewport})"
+        );
+        const INDEX_CSS: &str = include_str!("../../src/index.css");
+        let breakpoint: f64 = INDEX_CSS
+            .lines()
+            .find_map(|line| line.trim().strip_prefix("--breakpoint-compact:"))
+            .and_then(|value| value.trim().strip_suffix("px;"))
+            .expect("index.css declares --breakpoint-compact in px")
+            .trim()
+            .parse()
+            .expect("--breakpoint-compact is a number");
+        assert!(
+            viewport < breakpoint,
+            "the home viewport ({viewport}) must stay under the compact breakpoint ({breakpoint})"
+        );
+    }
+
     /// corner() falls back to top-right for any unknown string, so a renamed
     /// variant on either side would not error — every popup would just quietly
     /// pin to the default corner.
@@ -607,11 +633,27 @@ mod ts_mirror_tests {
 
     /// rules.json (the default rules table) may only reference built-ins;
     /// an unknown id would make captures of that kind silently do nothing.
+    /// It must also route EVERY kind — a missing key would leave captures of
+    /// that kind inert out of the box — and the frontend's ROUTABLE_KINDS
+    /// must list the same kinds, or the settings UI would show phantom rows
+    /// or hide real ones.
     #[test]
     fn default_rules_uses_builtin_ids() {
         let rules: serde_json::Value =
             serde_json::from_str(include_str!("../rules.json")).expect("rules.json parses");
-        for (kind, prompt) in rules.as_object().expect("rules.json is an object") {
+        let table = rules.as_object().expect("rules.json is an object");
+        const PROMPTS_TS: &str = include_str!("../../src/lib/prompts.ts");
+        for kind in crate::rules::RULE_KINDS {
+            assert!(
+                table.contains_key(kind),
+                "rules.json must route kind '{kind}' out of the box"
+            );
+            assert!(
+                PROMPTS_TS.contains(&format!("\"{kind}\"")),
+                "kind '{kind}' missing from ROUTABLE_KINDS in prompts.ts"
+            );
+        }
+        for (kind, prompt) in table {
             if kind == "overrides" {
                 continue;
             }

@@ -51,7 +51,7 @@ pub(crate) const POPUP_MAX_HEIGHT: f64 = 720.0;
 /// src/lib/messages/types.ts). Must stay under the `compact` breakpoint
 /// (index.css) or the home card loses its padded look. The popup window's
 /// `width` in tauri.conf.json is only the pre-show placeholder.
-const POPUP_HOME_VIEWPORT: f64 = 613.0;
+pub(crate) const POPUP_HOME_VIEWPORT: f64 = 613.0;
 
 /// The home width per text size — the viewport scaled by the webview zoom
 /// that size applies (the ladder in src/lib/text-size.ts, pinned by a
