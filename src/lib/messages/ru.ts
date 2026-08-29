@@ -153,7 +153,6 @@ export const ru: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Автоматически",
       "zencopy-summarize": "Пересказ",
       "zencopy-translate": "Перевод",
       "zencopy-explain": "Объяснение",

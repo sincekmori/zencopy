@@ -142,7 +142,6 @@ export const th: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "อัตโนมัติ",
       "zencopy-summarize": "สรุป",
       "zencopy-translate": "แปล",
       "zencopy-explain": "อธิบาย",

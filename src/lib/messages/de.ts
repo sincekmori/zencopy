@@ -155,7 +155,6 @@ export const de: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Automatisch",
       "zencopy-summarize": "Zusammenfassen",
       "zencopy-translate": "Übersetzen",
       "zencopy-explain": "Erklären",

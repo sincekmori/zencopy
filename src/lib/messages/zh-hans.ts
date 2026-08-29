@@ -140,7 +140,6 @@ export const zhHans: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "自动",
       "zencopy-summarize": "总结",
       "zencopy-translate": "翻译",
       "zencopy-explain": "解释",

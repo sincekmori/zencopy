@@ -151,7 +151,6 @@ export const id: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Otomatis",
       "zencopy-summarize": "Ringkaskan",
       "zencopy-translate": "Terjemahkan",
       "zencopy-explain": "Jelaskan",

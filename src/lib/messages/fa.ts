@@ -151,7 +151,6 @@ export const fa: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "خودکار",
       "zencopy-summarize": "خلاصه",
       "zencopy-translate": "ترجمه",
       "zencopy-explain": "توضیح",
