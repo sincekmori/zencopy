@@ -151,6 +151,7 @@ export const vi: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-auto": "Tự động",
       "zencopy-summarize": "Tóm tắt",
       "zencopy-translate": "Dịch",
       "zencopy-explain": "Giải thích",

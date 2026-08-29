@@ -153,6 +153,7 @@ export const ptBR: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-auto": "Automático",
       "zencopy-summarize": "Resumir",
       "zencopy-translate": "Traduzir",
       "zencopy-explain": "Explicar",

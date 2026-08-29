@@ -153,6 +153,7 @@ export const tr: Messages = {
   },
   prompts: {
     builtinLabels: {
+      "zencopy-auto": "Otomatik",
       "zencopy-summarize": "Özetle",
       "zencopy-translate": "Çevir",
       "zencopy-explain": "Açıkla",
