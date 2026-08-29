@@ -204,23 +204,16 @@ const QUICK_PROMPTS_KEY = "quickPrompts";
 
 /** The prompt ids bound to the popup's number keys (1–5), in slot order.
  *  Positions are stable so muscle memory holds — the settings editor is the
- *  only thing that reorders them. Stored loosely (any string array) and
- *  normalized to exactly QUICK_SLOT_COUNT ids on read, so a hand-edited or
- *  older file can never desync the row. */
-export async function getQuickPrompts(): Promise<string[]> {
-  const stored = await readSetting(QUICK_PROMPTS_KEY, z.array(z.string()), DEFAULT_QUICK_PROMPTS);
-  const slots = stored.slice(0, QUICK_SLOT_COUNT);
-  // Backfill from the defaults if the stored list is short, skipping ids
-  // already present so slots stay duplicate-free.
-  for (const id of DEFAULT_QUICK_PROMPTS) {
-    if (slots.length >= QUICK_SLOT_COUNT) {
-      break;
-    }
-    if (!slots.includes(id)) {
-      slots.push(id);
-    }
-  }
-  return slots.slice(0, QUICK_SLOT_COUNT);
+ *  only thing that reorders them. Stored as exactly QUICK_SLOT_COUNT ids;
+ *  anything else (a hand-edited file, a foreign shape) falls back wholesale
+ *  to the defaults via readSetting's validation, warned and self-healing on
+ *  the next save. */
+export function getQuickPrompts(): Promise<string[]> {
+  return readSetting(
+    QUICK_PROMPTS_KEY,
+    z.array(z.string()).length(QUICK_SLOT_COUNT),
+    DEFAULT_QUICK_PROMPTS,
+  );
 }
 
 export async function setQuickPrompts(ids: string[]): Promise<void> {
