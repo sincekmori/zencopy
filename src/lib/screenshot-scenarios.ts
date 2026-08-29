@@ -28,7 +28,7 @@ export const SCREENSHOT_SCENARIOS: Record<
   about: { params: { window: "about" }, viewport: { width: 360, height: 412 } },
   popup: {
     params: { window: "popup", screenshot: POPUP_RESULT_SCENARIO },
-    viewport: { width: 508, height: 620 },
+    viewport: { width: 613, height: 620 },
   },
 };
 

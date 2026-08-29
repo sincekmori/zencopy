@@ -60,7 +60,7 @@ export const zhHans: Messages = {
     userContextClear: "清除",
     userContextCleared: "已清除",
     quickTitle: "快捷提示词",
-    quickHint: "弹窗中绑定到数字键 1–4 的四个提示词。拖动可重新排序。",
+    quickHint: "弹窗中绑定到数字键 1–5 的五个提示词。拖动可重新排序。",
     resetTitle: "重置",
     resetHint: "将 ZenCopy 恢复到刚安装完成的状态——设置、提示词和使用统计都会被删除",
     resetButton: "初始化",
@@ -74,7 +74,7 @@ export const zhHans: Messages = {
   popup: {
     placeholder: "像双击一样快速复制两次，结果就会显示在这里。",
     devVars: "模板变量",
-    noPrompt: "这次捕获不会自动运行提示词 — 在下方选择一个，或按数字键 1–4 运行。",
+    noPrompt: "这次捕获不会自动运行提示词 — 在下方选择一个，或按数字键 1–5 运行。",
     rulesDocs: "了解规则机制",
     confirmSend: "要把这次捕获发送给你的 AI 提供商吗？图片和文件可能比文本花费更多。",
     send: "发送",

@@ -67,7 +67,7 @@ export const id: Messages = {
     userContextClear: "Bersihkan",
     userContextCleared: "Dibersihkan",
     quickTitle: "Prompt cepat",
-    quickHint: "Empat prompt yang ditautkan popup ke tombol angka 1–4. Seret untuk menyusun ulang.",
+    quickHint: "Lima prompt yang ditautkan popup ke tombol angka 1–5. Seret untuk menyusun ulang.",
     resetTitle: "Reset",
     resetHint:
       "Mengembalikan ZenCopy ke kondisi tepat setelah dipasang — pengaturan, prompt, dan statistik penggunaan semuanya dihapus",
@@ -83,7 +83,7 @@ export const id: Messages = {
     placeholder: "Salin dua kali dengan cepat — seperti klik ganda — dan hasilnya muncul di sini.",
     devVars: "Variabel templat",
     noPrompt:
-      "Tangkapan ini tidak menjalankan prompt secara otomatis — pilih satu di bawah atau tekan 1–4 untuk menjalankannya.",
+      "Tangkapan ini tidak menjalankan prompt secara otomatis — pilih satu di bawah atau tekan 1–5 untuk menjalankannya.",
     rulesDocs: "Cara kerja aturan",
     confirmSend:
       "Kirim tangkapan ini ke penyedia AI kamu? Gambar dan berkas bisa lebih mahal daripada teks.",

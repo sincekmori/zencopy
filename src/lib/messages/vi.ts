@@ -66,7 +66,7 @@ export const vi: Messages = {
     userContextClear: "Xóa",
     userContextCleared: "Đã xóa",
     quickTitle: "Prompt nhanh",
-    quickHint: "Bốn prompt mà cửa sổ nổi gán cho các phím số 1–4. Kéo để sắp xếp lại.",
+    quickHint: "Năm prompt mà cửa sổ nổi gán cho các phím số 1–5. Kéo để sắp xếp lại.",
     resetTitle: "Đặt lại",
     resetHint:
       "Đưa ZenCopy về trạng thái ngay sau khi cài đặt — cài đặt, prompt và thống kê sử dụng đều bị xóa hết",
@@ -82,7 +82,7 @@ export const vi: Messages = {
     placeholder: "Sao chép hai lần thật nhanh — như nhấp đúp chuột — và kết quả sẽ hiện ở đây.",
     devVars: "Biến mẫu",
     noPrompt:
-      "Nội dung này không tự động chạy prompt nào — hãy chọn một prompt bên dưới hoặc nhấn 1–4 để chạy.",
+      "Nội dung này không tự động chạy prompt nào — hãy chọn một prompt bên dưới hoặc nhấn 1–5 để chạy.",
     rulesDocs: "Cách quy tắc hoạt động",
     confirmSend:
       "Gửi nội dung này đến nhà cung cấp AI của bạn? Hình ảnh và tệp có thể tốn kém hơn văn bản.",

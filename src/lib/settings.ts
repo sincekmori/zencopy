@@ -186,14 +186,14 @@ export async function setConfirmAttachments(enabled: boolean): Promise<void> {
 }
 
 /** The number of popup quick slots — the prompts bound to number keys 1–N.
- *  Four matches the pre-installed prompt count and keeps the popup compact. */
-export const QUICK_SLOT_COUNT = 4;
+ *  Five matches the pre-installed prompt count and keeps the popup compact. */
+export const QUICK_SLOT_COUNT = 5;
 
-/** The pre-installed specialist prompts, in slot order — the zero-config
- *  default. Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs minus
- *  zencopy-auto: Auto is what runs before the user picks anything, so it
- *  earns no number key of its own. */
+/** The pre-installed prompts, in slot order — the zero-config default.
+ *  Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs (same ids, same
+ *  order): Auto leads on key 1, matching its role as the routing default. */
 const DEFAULT_QUICK_PROMPTS = [
+  "zencopy-auto",
   "zencopy-summarize",
   "zencopy-explain",
   "zencopy-translate",

@@ -68,7 +68,7 @@ export const tr: Messages = {
     userContextCleared: "Temizlendi",
     quickTitle: "Hızlı istemler",
     quickHint:
-      "Açılır pencerenin 1–4 sayı tuşlarına bağladığı dört istem. Yeniden sıralamak için sürükle.",
+      "Açılır pencerenin 1–5 sayı tuşlarına bağladığı beş istem. Yeniden sıralamak için sürükle.",
     resetTitle: "Sıfırla",
     resetHint:
       "ZenCopy'yi kurulumdan hemen sonraki duruma döndürür — ayarlar, istemler ve kullanım istatistikleri tümüyle silinir",
@@ -84,7 +84,7 @@ export const tr: Messages = {
     placeholder: "Hızlıca iki kez kopyala — çift tıklama gibi — sonuç burada görünür.",
     devVars: "Şablon değişkenleri",
     noPrompt:
-      "Bu yakalama otomatik olarak bir istem çalıştırmaz — aşağıdan birini seç veya çalıştırmak için 1–4'e bas.",
+      "Bu yakalama otomatik olarak bir istem çalıştırmaz — aşağıdan birini seç veya çalıştırmak için 1–5'e bas.",
     rulesDocs: "Kurallar nasıl çalışır",
     confirmSend:
       "Bu yakalama AI sağlayıcına gönderilsin mi? Görseller ve dosyalar metinden pahalı olabilir.",

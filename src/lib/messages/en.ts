@@ -67,7 +67,7 @@ export const en: Messages = {
     userContextClear: "Clear",
     userContextCleared: "Cleared",
     quickTitle: "Quick prompts",
-    quickHint: "The four prompts the popup binds to number keys 1–4. Drag to reorder.",
+    quickHint: "The five prompts the popup binds to number keys 1–5. Drag to reorder.",
     resetTitle: "Reset",
     resetHint:
       "Return this ZenCopy to the just-installed state — settings, prompts, and usage statistics are all deleted",
@@ -83,7 +83,7 @@ export const en: Messages = {
     placeholder: "Copy twice, quickly — like a double-click — and the result appears here.",
     devVars: "Template variables",
     noPrompt:
-      "No prompt runs automatically for this capture — pick one below or press 1–4 to run it.",
+      "No prompt runs automatically for this capture — pick one below or press 1–5 to run it.",
     rulesDocs: "How rules work",
     confirmSend: "Send this capture to your AI provider? Images and files can cost more than text.",
     send: "Send",

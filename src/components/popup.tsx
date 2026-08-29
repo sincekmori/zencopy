@@ -985,11 +985,12 @@ export function Popup(): React.JSX.Element {
         </span>
       </div>
 
-      {/* Quick slots: numbered chips (1–4). The active one is highlighted; a
-          run outside the four leaves none highlighted. A trailing button opens
-          the full palette for everything else. One line always: the home width
-          fits the longest built-in labels (windows.rs); a window dragged
-          narrower shrinks the chips into their ellipses instead of wrapping. */}
+      {/* Quick slots: numbered chips (1–5, Auto on 1). The active one is
+          highlighted; a run outside the slots leaves none highlighted. A
+          trailing button opens the full palette for custom prompts. One line
+          always: the home width fits the longest built-in labels
+          (windows.rs); a window dragged narrower shrinks the chips into
+          their ellipses instead of wrapping. */}
       <div className="flex items-center gap-1">
         {quickSlots.map((prompt, index) =>
           prompt ? (

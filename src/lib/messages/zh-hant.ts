@@ -61,7 +61,7 @@ export const zhHant: Messages = {
     userContextClear: "清除",
     userContextCleared: "已清除",
     quickTitle: "快捷提示詞",
-    quickHint: "彈出視窗中綁定到數字鍵 1–4 的四個提示詞。拖曳可重新排序。",
+    quickHint: "彈出視窗中綁定到數字鍵 1–5 的五個提示詞。拖曳可重新排序。",
     resetTitle: "重設",
     resetHint: "將 ZenCopy 恢復到剛安裝完成的狀態——設定、提示詞和使用統計都會被刪除",
     resetButton: "初始化",
@@ -75,7 +75,7 @@ export const zhHant: Messages = {
   popup: {
     placeholder: "像連按兩下一樣快速複製兩次，結果就會顯示在這裡。",
     devVars: "範本變數",
-    noPrompt: "這次擷取不會自動執行提示詞 — 請在下方選擇一個，或按數字鍵 1–4 執行。",
+    noPrompt: "這次擷取不會自動執行提示詞 — 請在下方選擇一個，或按數字鍵 1–5 執行。",
     rulesDocs: "了解規則機制",
     confirmSend: "要把這次擷取傳送給你的 AI 供應商嗎？圖片和檔案可能比文字花費更多。",
     send: "傳送",

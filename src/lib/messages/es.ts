@@ -68,7 +68,7 @@ export const es: Messages = {
     userContextCleared: "Limpiado",
     quickTitle: "Prompts rápidos",
     quickHint:
-      "Los cuatro prompts que el popup asigna a las teclas numéricas 1–4. Arrastra para reordenar.",
+      "Los cinco prompts que el popup asigna a las teclas numéricas 1–5. Arrastra para reordenar.",
     resetTitle: "Restablecer",
     resetHint:
       "Devuelve ZenCopy al estado recién instalado: ajustes, prompts y estadísticas de uso se eliminan por completo",
@@ -84,7 +84,7 @@ export const es: Messages = {
     placeholder: "Copia dos veces, rápido — como un doble clic — y el resultado aparecerá aquí.",
     devVars: "Variables de plantilla",
     noPrompt:
-      "Esta captura no ejecuta ningún prompt automáticamente — elige uno abajo o pulsa 1–4 para ejecutarlo.",
+      "Esta captura no ejecuta ningún prompt automáticamente — elige uno abajo o pulsa 1–5 para ejecutarlo.",
     rulesDocs: "Cómo funcionan las reglas",
     confirmSend:
       "¿Enviar esta captura a tu proveedor de IA? Las imágenes y archivos pueden costar más que el texto.",

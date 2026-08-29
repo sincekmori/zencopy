@@ -68,7 +68,7 @@ export const pl: Messages = {
     userContextCleared: "Wyczyszczono",
     quickTitle: "Szybkie prompty",
     quickHint:
-      "Cztery prompty przypisane w okienku do klawiszy 1–4. Przeciągnij, aby zmienić kolejność.",
+      "Pięć promptów przypisanych w okienku do klawiszy 1–5. Przeciągnij, aby zmienić kolejność.",
     resetTitle: "Reset",
     resetHint:
       "Przywraca ZenCopy do stanu tuż po instalacji — ustawienia, prompty i statystyki użycia zostają w całości usunięte",
@@ -84,7 +84,7 @@ export const pl: Messages = {
     placeholder: "Skopiuj dwa razy, szybko — jak podwójne kliknięcie — a wynik pojawi się tutaj.",
     devVars: "Zmienne szablonu",
     noPrompt:
-      "To przechwycenie nie uruchamia promptu automatycznie — wybierz jeden poniżej albo naciśnij 1–4, aby go uruchomić.",
+      "To przechwycenie nie uruchamia promptu automatycznie — wybierz jeden poniżej albo naciśnij 1–5, aby go uruchomić.",
     rulesDocs: "Jak działają reguły",
     confirmSend:
       "Wysłać to przechwycenie do twojego dostawcy AI? Obrazy i pliki mogą kosztować więcej niż tekst.",

@@ -68,7 +68,7 @@ export const de: Messages = {
     userContextCleared: "Geleert",
     quickTitle: "Schnell-Prompts",
     quickHint:
-      "Die vier Prompts, die das Popup den Zifferntasten 1–4 zuordnet. Zum Umsortieren ziehen.",
+      "Die fünf Prompts, die das Popup den Zifferntasten 1–5 zuordnet. Zum Umsortieren ziehen.",
     resetTitle: "Zurücksetzen",
     resetHint:
       "Versetzt ZenCopy in den Zustand direkt nach der Installation — Einstellungen, Prompts und Nutzungsstatistik werden alle gelöscht",
@@ -85,7 +85,7 @@ export const de: Messages = {
       "Zweimal schnell kopieren — wie ein Doppelklick — und das Ergebnis erscheint hier.",
     devVars: "Template-Variablen",
     noPrompt:
-      "Für diese Erfassung läuft kein Prompt automatisch — wähle unten einen aus oder drücke 1–4, um ihn auszuführen.",
+      "Für diese Erfassung läuft kein Prompt automatisch — wähle unten einen aus oder drücke 1–5, um ihn auszuführen.",
     rulesDocs: "So funktionieren Regeln",
     confirmSend:
       "Diese Erfassung an deinen KI-Anbieter senden? Bilder und Dateien können mehr kosten als Text.",
