@@ -1,14 +1,17 @@
 ---
-// One demo video embed for the docs pages. Every demo is recorded per locale
-// as a portrait screen capture (/public/<locale>/demo/<demo>.mp4 with a
-// matching .jpg poster), so the dimensions live here, once. The slot is the
-// localized fallback link text for browsers that cannot play the video.
+// One demo video embed for the docs pages. Demos are portrait screen captures
+// (/public/<locale>/demo/<demo>.mp4 with a matching .jpg poster), so the
+// dimensions live here, once. Only the locales in RECORDED have their own
+// recordings; every other locale serves the English one — the app in the
+// video just speaks English there. The slot is the localized fallback link
+// text for browsers that cannot play the video.
+const RECORDED = ["en", "ja"];
 interface Props {
-  demo: "summarize" | "explain";
+  demo: "auto" | "summarize";
   locale: string;
 }
 const { demo, locale } = Astro.props;
-const base = `/${locale}/demo/${demo}`;
+const base = `/${RECORDED.includes(locale) ? locale : "en"}/demo/${demo}`;
 ---
 
 <video

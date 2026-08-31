@@ -15,9 +15,9 @@ import DemoVideo from "../../../components/DemoVideo.astro";
 要約か、翻訳か、答えか — コピーした内容を見て AI が判断します。
 ZenCopy は、そのための無料アプリです。
 
-{/* 動画: 現行の summarize デモを流用。ウェブページの文章を選択 → C+C → 要約がストリーミング表示、まで */}
+{/* 動画: 自動デモ。ウェブページの文章を選択 → C+C → 「自動」の答えがストリーミング表示、まで */}
 
-<DemoVideo demo="summarize" locale="ja">
+<DemoVideo demo="auto" locale="ja">
   デモ動画を見る
 </DemoVideo>
 
@@ -36,7 +36,7 @@ ZenCopy は、そのための無料アプリです。
 
     {/* 撮影: 「WindowsによってPCが保護されました」の SmartScreen 画面。「詳細情報」を押して「実行」ボタンが見えている状態が理想 */}
 
-    ![「WindowsによってPCが保護されました」の画面。「詳細情報」から「実行」で進める](/ja/screenshots/win-smartscreen.png)
+    {/* 撮影後に有効化: ![「WindowsによってPCが保護されました」の画面。「詳細情報」から「実行」で進める](/ja/screenshots/win-smartscreen.png) */}
 
   </TabItem>
   <TabItem label="macOS">
@@ -45,7 +45,7 @@ ZenCopy は、そのための無料アプリです。
 
     {/* 撮影: 初回起動時の Gatekeeper ダイアログ（「“ZenCopy”はインターネットからダウンロードされたアプリケーションです…」）。「開く」ボタンが見えていること */}
 
-    ![初回起動時の確認ダイアログ。「開く」で進める](/ja/screenshots/macos-gatekeeper.png)
+    {/* 撮影後に有効化: ![初回起動時の確認ダイアログ。「開く」で進める](/ja/screenshots/macos-gatekeeper.png) */}
 
   </TabItem>
   <TabItem label="Linux">
@@ -84,8 +84,7 @@ ZenCopy を起動しても、ウィンドウはすぐには開きません。
 
     {/* 撮影: Google AI Studio の API キーのページ。「API キーを作成」ボタンが写っていること（ログイン済み状態） */}
 
-    ![Google AI Studio の API キーのページ](/ja/screenshots/aistudio-create-key.png)
-
+    {/* 撮影後に有効化: ![Google AI Studio の API キーのページ](/ja/screenshots/aistudio-create-key.png) */}
     「勝手に課金されないだろうか」と不安になるかもしれません。
     なりません。
     **支払い情報を登録しない限り料金は発生せず**、無料枠の上限に達しても、しばらく使えなくなるだけです。
@@ -110,8 +109,7 @@ ZenCopy を起動しても、ウィンドウはすぐには開きません。
 
     {/* 撮影: 設定画面の AI タブでプロバイダーに JSON を選び、編集欄にサンプル JSON を貼った状態。「保存」と「テスト」ボタンが写っていること */}
 
-    ![設定画面で JSON を選び、渡されたテキストを貼り付けたところ](/ja/screenshots/settings-json.png)
-
+    {/* 撮影後に有効化: ![設定画面で JSON を選び、渡されたテキストを貼り付けたところ](/ja/screenshots/settings-json.png) */}
     保存時に赤いメッセージが出たら、それはあなたの操作ミスではありません。
     メッセージごと、配ってくれた担当者に伝えてください。
 
@@ -130,7 +128,7 @@ ZenCopy を起動しても、ウィンドウはすぐには開きません。
 
     {/* 撮影: システム設定 → プライバシーとセキュリティ → 入力監視で ZenCopy がオンになっている画面 */}
 
-    ![入力監視の設定画面で ZenCopy をオンにしたところ](/ja/screenshots/macos-input-monitoring.png)
+    {/* 撮影後に有効化: ![入力監視の設定画面で ZenCopy をオンにしたところ](/ja/screenshots/macos-input-monitoring.png) */}
 
   </TabItem>
   <TabItem label="Linux">
@@ -154,9 +152,9 @@ ZenCopy を起動しても、ウィンドウはすぐには開きません。
 - 答えの上に並ぶ「自動」「要約」「解説」「翻訳」「清書」は切り替えボタンです。数字キー 1〜5 で押せます。
 - 閉じるのは **Esc**。テキストだけでなく、スクリーンショットやファイルも同じ操作で扱えます。
 
-{/* 動画: 現行の explain デモを流用。ポップアップで 2 を押して「解説」に切り替わる様子 */}
+{/* 動画: 要約デモ。「自動」の答えから 2 を押して「要約」に切り替わる様子 */}
 
-<DemoVideo demo="explain" locale="ja">
+<DemoVideo demo="summarize" locale="ja">
   デモ動画を見る
 </DemoVideo>
 
