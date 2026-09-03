@@ -111,10 +111,10 @@ async function checkCatalog(
   } catch {
     return { problem: "syntax" };
   }
-  const { Config } = await import("ai-sdk-catalog");
+  const { ConfigSchema } = await import("ai-sdk-catalog");
   let config: Config;
   try {
-    config = Config.parse(data);
+    config = ConfigSchema.parse(data);
   } catch (error) {
     log.warn("catalog JSON failed schema validation", error);
     return { problem: "schema" };

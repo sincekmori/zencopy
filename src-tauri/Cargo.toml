@@ -38,7 +38,7 @@ serde_yaml_ng = "0.10"
 chrono = "0.4"
 uuid = { version = "1", features = ["v4"] }
 # Encode captured images as PNG data URLs for the popup preview.
-base64 = "0.22"
+base64 = "0.23"
 # Detect the OS locale to label native chrome (the tray menu).
 sys-locale = "0.3"
 # OS name/version for the startup log banner (issue-report context).
