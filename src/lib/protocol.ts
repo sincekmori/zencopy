@@ -48,12 +48,21 @@ export function composeInstructions(instructions: string, userContext: string): 
  * attachments ride along — their full paths in an `<attached_files>` section,
  * so the model can tell the file parts apart (a file part's `filename` is not
  * reliably forwarded by every provider, and full paths carry context — folder,
- * project — an prompt may need). No files, no tag.
+ * project — an prompt may need). No files, no tag. A Custom run's typed
+ * `instruction` closes the message in its own `<instruction>` section: last,
+ * and tagged, so the copied input can never masquerade as the request.
  */
-export function composeUserText(prompt: string, attachedPaths: string[]): string {
+export function composeUserText(
+  prompt: string,
+  attachedPaths: string[],
+  instruction?: string,
+): string {
   const sections = [prompt];
   if (attachedPaths.length > 0) {
     sections.push(`<attached_files>\n${attachedPaths.join("\n")}\n</attached_files>`);
+  }
+  if (instruction !== undefined) {
+    sections.push(`<instruction>\n${instruction}\n</instruction>`);
   }
   return sections.filter(Boolean).join("\n\n");
 }

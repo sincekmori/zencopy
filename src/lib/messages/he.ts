@@ -97,6 +97,7 @@ export const he: Messages = {
     stop: "עצירה",
     retry: "ניסיון חוזר",
     followUp: "הקלידו הודעה…",
+    custom: "שאלה או הוראה…",
     copy: "העתקה",
     copied: "הועתק",
     close: "סגירה",
@@ -146,11 +147,11 @@ export const he: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "אוטומטי",
       "zencopy-summarize": "סיכום",
       "zencopy-translate": "תרגום",
       "zencopy-explain": "הסבר",
       "zencopy-polish": "ליטוש",
+      "zencopy-custom": "בקשה",
     },
     title: "פרומפטים",
     hint: (keys) => `מה ${keys} יודעת לעשות. אפשר להחליף גם מתווית התוצאה בחלון.`,

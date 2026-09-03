@@ -101,6 +101,7 @@ export const en: Messages = {
     stop: "Stop",
     retry: "Retry",
     followUp: "Message…",
+    custom: "Question or instruction…",
     copy: "Copy",
     copied: "Copied",
     close: "Close",

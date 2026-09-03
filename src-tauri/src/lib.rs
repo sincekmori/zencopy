@@ -557,7 +557,7 @@ mod ts_mirror_tests {
         );
     }
 
-    /// The popup's home width is the 613 px viewport times the zoom the
+    /// The popup's home width is the 615 px viewport times the zoom the
     /// frontend applies per text size; a retuned ladder or renamed size over
     /// there would quietly open the popup at the wrong width.
     #[test]
@@ -629,6 +629,22 @@ mod ts_mirror_tests {
                 "built-in prompt '{id}' missing from settings.ts defaults"
             );
         }
+    }
+
+    /// The popup recognizes Custom by id (CUSTOM_PROMPT_ID in prompts.ts) to hold
+    /// its first run until the user types; a renamed id here would turn Custom
+    /// into a prompt that runs an empty instruction.
+    #[test]
+    fn custom_prompt_id_matches_the_frontend() {
+        const PROMPTS_TS: &str = include_str!("../../src/lib/prompts.ts");
+        assert!(
+            is_builtin_prompt("zencopy-custom"),
+            "Custom must stay pre-installed"
+        );
+        assert!(
+            PROMPTS_TS.contains("CUSTOM_PROMPT_ID = \"zencopy-custom\""),
+            "prompts.ts must special-case the same Custom id"
+        );
     }
 
     /// rules.json (the default rules table) may only reference built-ins;

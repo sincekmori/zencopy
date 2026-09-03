@@ -323,6 +323,14 @@ export async function streamPrompt(
   const attachedPaths = attachments
     .map((file) => file.path)
     .filter((path): path is string => typeof path === "string");
+  const thread = input.followUp?.turns ?? [];
+  // The first turn's own question — a Custom run's typed instruction — rides
+  // inside the first user message rather than as a second user message in a
+  // row: chat templates that insist on alternating roles reject the latter.
+  // On a follow-up it is the first turn's stored question, replayed verbatim
+  // like the rest of that message; on a plain run there is none.
+  const opening = thread.length === 0 ? input.followUp?.question : thread[0]?.question;
+  const firstText = composeUserText(prompt, attachedPaths, opening);
   // The first user message — what the first run sends, and what every
   // follow-up replays verbatim at the head of its thread.
   const firstUser: ModelMessage = {
@@ -330,7 +338,7 @@ export async function streamPrompt(
     content:
       attachments.length > 0
         ? [
-            { type: "text" as const, text: composeUserText(prompt, attachedPaths) },
+            { type: "text" as const, text: firstText },
             ...binaries.map((file) => ({
               type: "file" as const,
               data: file.data,
@@ -338,7 +346,7 @@ export async function streamPrompt(
               filename: file.name,
             })),
           ]
-        : prompt,
+        : firstText,
   };
   const messages: ModelMessage[] = [firstUser];
   if (input.followUp) {
@@ -346,13 +354,15 @@ export async function streamPrompt(
     // wrapResult puts the tags back: the transcript must demonstrate the
     // protocol the instructions demand, or the model learns by example to
     // skip the tags — and an untagged reply never streams.
-    for (const turn of input.followUp.turns) {
-      if (turn.question !== undefined) {
+    thread.forEach((turn, index) => {
+      if (index > 0 && turn.question !== undefined) {
         messages.push({ role: "user", content: turn.question });
       }
       messages.push({ role: "assistant", content: wrapResult(turn.text) });
+    });
+    if (thread.length > 0) {
+      messages.push({ role: "user", content: input.followUp.question });
     }
-    messages.push({ role: "user", content: input.followUp.question });
   }
 
   // AI SDK only throws stream-stopping errors (e.g. network) from the iterator;

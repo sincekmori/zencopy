@@ -92,6 +92,7 @@ export const zhHans: Messages = {
     stop: "停止",
     retry: "重试",
     followUp: "输入消息…",
+    custom: "提问或下指令…",
     copy: "复制",
     copied: "已复制",
     close: "关闭",
@@ -140,11 +141,11 @@ export const zhHans: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "自动",
       "zencopy-summarize": "总结",
       "zencopy-translate": "翻译",
       "zencopy-explain": "解释",
       "zencopy-polish": "润色",
+      "zencopy-custom": "自定义",
     },
     title: "提示词",
     hint: (keys) => `${keys} 能做什么。也可以从弹窗的结果标签切换。`,

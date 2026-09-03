@@ -12,6 +12,9 @@ export const RULE_EDITOR_SCENARIO = "rule-editor";
 export const PROMPT_EDITOR_SCENARIO = "prompt-editor";
 export const PROMPT_IMPORT_SCENARIO = "prompt-import";
 export const POPUP_RESULT_SCENARIO = "popup-result";
+/** The popup with Custom selected and nothing typed yet: the copied source, the
+ *  slot row, and the composer waiting for the instruction. */
+export const POPUP_CUSTOM_SCENARIO = "popup-custom";
 
 export const SCREENSHOT_SCENARIOS: Record<
   string,
@@ -30,7 +33,11 @@ export const SCREENSHOT_SCENARIOS: Record<
   about: { params: { window: "about" }, viewport: { width: 360, height: 412 } },
   popup: {
     params: { window: "popup", screenshot: POPUP_RESULT_SCENARIO },
-    viewport: { width: 613, height: 620 },
+    viewport: { width: 615, height: 620 },
+  },
+  "popup-custom": {
+    params: { window: "popup", screenshot: POPUP_CUSTOM_SCENARIO },
+    viewport: { width: 615, height: 620 },
   },
 };
 

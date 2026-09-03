@@ -64,12 +64,17 @@ pub(crate) fn parse_prompt(raw: &str, default_id: &str) -> Option<Prompt> {
     })
 }
 
+/// The pre-installed prompts, in the order the popup's quick slots and the
+/// settings list show them: Summarize leads (it is the routing default for
+/// text), Custom closes the row — the one prompt that runs nothing on its own
+/// and instead takes the user's typed instruction as its first message (the
+/// popup treats its id specially; the template itself is an ordinary one).
 pub(crate) const DEFAULT_PROMPTS: &[(&str, &str)] = &[
-    ("zencopy-auto", include_str!("../prompts/auto.md")),
     ("zencopy-summarize", include_str!("../prompts/summarize.md")),
     ("zencopy-explain", include_str!("../prompts/explain.md")),
     ("zencopy-translate", include_str!("../prompts/translate.md")),
     ("zencopy-polish", include_str!("../prompts/polish.md")),
+    ("zencopy-custom", include_str!("../prompts/custom.md")),
 ];
 
 /// Every pre-installed prompt id carries this prefix — it marks an prompt as
@@ -529,7 +534,7 @@ mod tests {
         .clone();
         purge_prompt_from_rules_object(&mut object, "my-custom");
         assert_eq!(
-            object["text"], "zencopy-auto",
+            object["text"], "zencopy-summarize",
             "kind returns to the embedded default"
         );
         assert_eq!(

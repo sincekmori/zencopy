@@ -104,6 +104,7 @@ export const tr: Messages = {
     stop: "Durdur",
     retry: "Yeniden dene",
     followUp: "Mesaj yaz…",
+    custom: "Soru veya talimat…",
     copy: "Kopyala",
     copied: "Kopyalandı",
     close: "Kapat",
@@ -153,11 +154,11 @@ export const tr: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Otomatik",
       "zencopy-summarize": "Özetle",
       "zencopy-translate": "Çevir",
       "zencopy-explain": "Açıkla",
       "zencopy-polish": "İyileştir",
+      "zencopy-custom": "Özelleştir",
     },
     title: "İstemler",
     hint: (keys) =>

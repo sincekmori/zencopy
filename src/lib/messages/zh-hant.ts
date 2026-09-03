@@ -93,6 +93,7 @@ export const zhHant: Messages = {
     stop: "停止",
     retry: "重試",
     followUp: "輸入訊息…",
+    custom: "提問或下指令…",
     copy: "複製",
     copied: "已複製",
     close: "關閉",
@@ -141,11 +142,11 @@ export const zhHant: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "自動",
       "zencopy-summarize": "摘要",
       "zencopy-translate": "翻譯",
       "zencopy-explain": "解說",
       "zencopy-polish": "潤飾",
+      "zencopy-custom": "自訂",
     },
     title: "提示詞",
     hint: (keys) => `${keys} 能做什麼。也可以從彈出視窗的結果標籤切換。`,

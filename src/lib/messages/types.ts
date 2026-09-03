@@ -115,6 +115,10 @@ export interface Messages {
     retry: string;
     /** Placeholder of the field that continues the thread under a result. */
     followUp: string;
+    /** Placeholder of that same field when it is Custom's opening request —
+     *  the prompt that runs nothing until the user types what they want,
+     *  a question about the copy or a task to do with it. */
+    custom: string;
     copy: string;
     copied: string;
     close: string;

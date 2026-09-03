@@ -23,6 +23,12 @@ const PromptInfoSchema = z.object({
 });
 export type PromptInfo = z.infer<typeof PromptInfoSchema>;
 
+/** The pre-installed prompt that runs nothing by itself: the popup holds its
+ *  first run until the user types what they want, and that message becomes
+ *  the request (see the Custom handling in popup.tsx). Mirrors the id in Rust's
+ *  DEFAULT_PROMPTS (pinned by a ts_mirror test there). */
+export const CUSTOM_PROMPT_ID = "zencopy-custom";
+
 export async function listPrompts(): Promise<PromptInfo[]> {
   const raw = await invoke<PromptInfo[]>("list_prompts_ui");
   const parsed = z.array(PromptInfoSchema).safeParse(raw);

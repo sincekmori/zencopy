@@ -104,6 +104,7 @@ export const ptBR: Messages = {
     stop: "Parar",
     retry: "Tentar de novo",
     followUp: "Digite uma mensagem…",
+    custom: "Pergunta ou instrução…",
     copy: "Copiar",
     copied: "Copiado",
     close: "Fechar",
@@ -153,11 +154,11 @@ export const ptBR: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Automático",
       "zencopy-summarize": "Resumir",
       "zencopy-translate": "Traduzir",
       "zencopy-explain": "Explicar",
       "zencopy-polish": "Aprimorar",
+      "zencopy-custom": "Personalizar",
     },
     title: "Prompts",
     hint: (keys) => `O que ${keys} pode fazer. Também dá para trocar pelo rótulo do popup.`,

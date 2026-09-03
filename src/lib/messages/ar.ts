@@ -99,6 +99,7 @@ export const ar: Messages = {
     stop: "إيقاف",
     retry: "إعادة المحاولة",
     followUp: "اكتب رسالة…",
+    custom: "سؤال أو طلب…",
     copy: "نسخ",
     copied: "نُسخ",
     close: "إغلاق",
@@ -148,11 +149,11 @@ export const ar: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "تلقائي",
       "zencopy-summarize": "تلخيص",
       "zencopy-translate": "ترجمة",
       "zencopy-explain": "شرح",
       "zencopy-polish": "تنقيح",
+      "zencopy-custom": "تخصيص",
     },
     title: "الموجّهات",
     hint: (keys) =>

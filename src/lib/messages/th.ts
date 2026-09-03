@@ -93,6 +93,7 @@ export const th: Messages = {
     stop: "หยุด",
     retry: "ลองใหม่",
     followUp: "พิมพ์ข้อความ…",
+    custom: "คำถามหรือคำสั่ง…",
     copy: "คัดลอก",
     copied: "คัดลอกแล้ว",
     close: "ปิด",
@@ -142,11 +143,11 @@ export const th: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "อัตโนมัติ",
       "zencopy-summarize": "สรุป",
       "zencopy-translate": "แปล",
       "zencopy-explain": "อธิบาย",
       "zencopy-polish": "ขัดเกลา",
+      "zencopy-custom": "พิมพ์เอง",
     },
     title: "พรอมต์",
     hint: (keys) => `สิ่งที่ ${keys} ทำได้ สลับจากป้ายผลลัพธ์บนป๊อปอัปก็ได้เช่นกัน`,

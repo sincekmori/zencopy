@@ -103,6 +103,7 @@ export const ko: Messages = {
     stop: "중지",
     retry: "다시 시도",
     followUp: "메시지 입력…",
+    custom: "질문 또는 지시…",
     copy: "복사",
     copied: "복사됨",
     close: "닫기",
@@ -152,11 +153,11 @@ export const ko: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "자동",
       "zencopy-summarize": "요약",
       "zencopy-translate": "번역",
       "zencopy-explain": "설명",
       "zencopy-polish": "다듬기",
+      "zencopy-custom": "직접입력",
     },
     title: "프롬프트",
     hint: (keys) => `${keys}로 실행할 프롬프트. 팝업의 결과 라벨에서도 전환할 수 있습니다.`,

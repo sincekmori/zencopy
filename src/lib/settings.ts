@@ -187,13 +187,14 @@ export async function setConfirmAttachments(enabled: boolean): Promise<void> {
 
 /** The pre-installed prompts, in slot order — the zero-config default.
  *  Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs (same ids, same
- *  order): Auto leads on key 1, matching its role as the routing default. */
+ *  order): Summarize leads on key 1, matching its role as the routing
+ *  default for text; Custom closes the row on 5. */
 const DEFAULT_QUICK_PROMPTS = [
-  "zencopy-auto",
   "zencopy-summarize",
   "zencopy-explain",
   "zencopy-translate",
   "zencopy-polish",
+  "zencopy-custom",
 ];
 
 /** The number of popup quick slots — the prompts bound to number keys 1–N.

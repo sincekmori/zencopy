@@ -102,6 +102,7 @@ export const vi: Messages = {
     stop: "Dừng",
     retry: "Thử lại",
     followUp: "Nhập tin nhắn…",
+    custom: "Câu hỏi hoặc yêu cầu…",
     copy: "Sao chép",
     copied: "Đã sao chép",
     close: "Đóng",
@@ -151,11 +152,11 @@ export const vi: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Tự động",
       "zencopy-summarize": "Tóm tắt",
       "zencopy-translate": "Dịch",
       "zencopy-explain": "Giải thích",
       "zencopy-polish": "Trau chuốt",
+      "zencopy-custom": "Tự nhập",
     },
     title: "Prompt",
     hint: (keys) => `Những gì ${keys} làm được. Cũng đổi được từ nhãn kết quả trên cửa sổ nổi.`,

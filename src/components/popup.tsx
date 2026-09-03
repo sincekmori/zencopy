@@ -8,6 +8,7 @@ import {
   ExternalLink,
   LayoutGrid,
   LoaderCircle,
+  PenLine,
   RotateCcw,
   Settings,
   Square,
@@ -20,7 +21,7 @@ import { SourceView } from "@/components/source-view.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
-import { type PromptInfo, listPrompts } from "@/lib/prompts.ts";
+import { CUSTOM_PROMPT_ID, type PromptInfo, listPrompts } from "@/lib/prompts.ts";
 import {
   ATTACHMENT_TOO_LARGE,
   buildAttachments,
@@ -59,7 +60,7 @@ import { siteUrl } from "@/lib/site.ts";
 import { useUpdateVersion } from "@/lib/updater.ts";
 import { useLiveValue, useTauriEvent } from "@/lib/use-tauri-event.ts";
 import { screenshotScenario } from "@/lib/screenshot.ts";
-import { POPUP_RESULT_SCENARIO } from "@/lib/screenshot-scenarios.ts";
+import { POPUP_CUSTOM_SCENARIO, POPUP_RESULT_SCENARIO } from "@/lib/screenshot-scenarios.ts";
 
 type Result =
   // The last turn streams; completed turns before it are settled.
@@ -294,9 +295,17 @@ export function Popup(): React.JSX.Element {
   };
   // The palette's filter field, focused when the palette opens.
   const filterRef = useRef<HTMLInputElement>(null);
+  // The digit that switched slots, until it is released: Custom focuses the
+  // composer during that keydown, so the key's auto-repeats would otherwise
+  // type into it — they are the same keystroke and are swallowed.
+  const switchingKey = useRef<string | undefined>(undefined);
 
   // What the popup shows: the current prompt's entry (live or kept).
   const result = payload ? results.get(payload.prompt_id) : undefined;
+  // Custom waiting for its instruction: no thread yet, or one emptied again by
+  // Stop or the attachment gate — the composer is the whole interaction.
+  const awaitingInstruction =
+    payload?.prompt_id === CUSTOM_PROMPT_ID && (result === undefined || result.turns.length === 0);
 
   const putResult = (promptId: string, entry: Result | undefined): void => {
     setResults((prev) => {
@@ -385,13 +394,20 @@ export function Popup(): React.JSX.Element {
     setAwaitingSend(false);
 
     const promptId = next.prompt_id;
+    // Custom runs nothing by itself: the view waits, composer focused, for the
+    // user to type what they want — that first message is the run (see
+    // submitFollowUp). A kept thread, whatever its outcome, just shows;
+    // Retry is its explicit re-run.
+    if (promptId === CUSTOM_PROMPT_ID) {
+      return;
+    }
     // Same content, same prompt, same definition, and a finished result:
     // show it again instead of re-running — Esc-then-recopy means "let me see
     // that once more", not "spend tokens again". Retry stays the explicit
     // regenerate. Deliberately NOT reused: a failed FIRST run (a fresh C+C
     // retries it instead of parroting the error — but a thread whose only
     // blemish is its last follow-up IS kept: overwriting good turns over one
-    // network blip would be data loss, and Retry re-asks that question),
+    // network blip would be data loss, and Retry re-custom that question),
     // runs of an edited prompt (the definition fingerprint differs), and
     // `files` captures (their signature is the paths, so the files' contents
     // may have changed).
@@ -624,10 +640,10 @@ export function Popup(): React.JSX.Element {
     warmUp();
   }, []);
 
-  // Screenshot scenario (dev-only, see src/lib/screenshot.ts): a settled
-  // two-turn conversation, injected directly — no capture, no model call.
-  // Re-runs when the async locale load lands, so the fixture speaks the
-  // page's language, not the boot default.
+  // Screenshot scenarios (dev-only, see src/lib/screenshot.ts): a settled
+  // two-turn conversation, or Custom waiting for its instruction — injected
+  // directly, no capture, no model call. Re-runs when the async locale load
+  // lands, so the fixture speaks the page's language, not the boot default.
   useEffect(() => {
     // The literal DEV check (a build-time constant, unlike the function call
     // below) is what lets the bundler drop this whole branch — and with it
@@ -635,7 +651,8 @@ export function Popup(): React.JSX.Element {
     if (!import.meta.env.DEV) {
       return;
     }
-    if (screenshotScenario() !== POPUP_RESULT_SCENARIO) {
+    const scenario = screenshotScenario();
+    if (scenario !== POPUP_RESULT_SCENARIO && scenario !== POPUP_CUSTOM_SCENARIO) {
       return;
     }
     // Dynamic import: the fixture table stays out of production chunks —
@@ -647,11 +664,16 @@ export function Popup(): React.JSX.Element {
       if (fixture === undefined) {
         return;
       }
+      const custom = scenario === POPUP_CUSTOM_SCENARIO;
+      const source = { kind: "text", text: POPUP_RESULT_SOURCE } as const;
+      // Claim the capture like run() would, so the fixture's thread can be
+      // continued (a typed follow-up, Custom's first message) in the harness.
+      captureSig.current = sourceSignature(source);
       setPayload({
         kind: "text",
-        source: { kind: "text", text: POPUP_RESULT_SOURCE },
-        prompt_id: "zencopy-summarize",
-        label: "Summarize",
+        source,
+        prompt_id: custom ? CUSTOM_PROMPT_ID : "zencopy-summarize",
+        label: custom ? "Custom" : "Summarize",
         role: "",
         instructions: "",
         prompt: POPUP_RESULT_SOURCE,
@@ -659,19 +681,21 @@ export function Popup(): React.JSX.Element {
         runnable: true,
       });
       setResults(
-        new Map([
-          [
-            "zencopy-summarize",
-            {
-              phase: "done",
-              ok: true,
-              turns: [
-                { text: fixture.answer },
-                { question: fixture.question, text: fixture.reply },
+        custom
+          ? new Map()
+          : new Map([
+              [
+                "zencopy-summarize",
+                {
+                  phase: "done",
+                  ok: true,
+                  turns: [
+                    { text: fixture.answer },
+                    { question: fixture.question, text: fixture.reply },
+                  ],
+                },
               ],
-            },
-          ],
-        ]),
+            ]),
       );
       // The quick-slot chips resolve against the prompt list, which normally
       // loads on capture — load it for the fixture too.
@@ -747,6 +771,14 @@ export function Popup(): React.JSX.Element {
     }
   }, [menuOpen]);
 
+  // Custom's composer takes the caret the moment it is the interaction: a C+C
+  // routed to Custom (or a 5 pressed on a result) is typing-ready, no click.
+  useEffect(() => {
+    if (awaitingInstruction && !awaitingSend) {
+      composerRef.current?.focus();
+    }
+  }, [awaitingInstruction, awaitingSend, payload?.source]);
+
   // Stop cancels only the prompt on screen; other prompts keep streaming.
   const stop = (): void => {
     if (payload) {
@@ -768,21 +800,23 @@ export function Popup(): React.JSX.Element {
     execute(payload, kept.turns.slice(0, index), kept.turns[index]?.question);
   };
 
-  // The quiet composer under a finished result: submit to continue the thread.
+  // The quiet composer under a finished result: submit to continue the thread
+  // — or, for Custom with no thread yet, to start it: the typed instruction is
+  // Custom's first request, an execute() with nothing prior.
   const submitFollowUp = (element: HTMLTextAreaElement): void => {
     const question = followUpText.trim();
     if (!payload || !question) {
       return;
     }
     const kept = results.get(payload.prompt_id);
-    if (kept?.phase !== "done") {
+    if (kept === undefined ? payload.prompt_id !== CUSTOM_PROMPT_ID : kept.phase !== "done") {
       return; // Enter while the reply still streams — the draft just stays
     }
     setFollowUpText("");
     // Inline, not growComposer: the element still holds the old text until
     // React commits, so measuring now would restore the old height.
     element.style.height = "auto";
-    execute(payload, kept.turns, question);
+    execute(payload, kept?.turns ?? [], question);
   };
 
   // The go-ahead on the confirmation card: remember it for this capture (so
@@ -886,6 +920,10 @@ export function Popup(): React.JSX.Element {
     if (event.isComposing || event.keyCode === 229) {
       return;
     }
+    if (event.repeat && event.key === switchingKey.current) {
+      event.preventDefault();
+      return;
+    }
     const target = event.target as HTMLElement | null;
     const inTextField = target?.tagName === "INPUT" || target?.tagName === "TEXTAREA";
     if (event.key === "Escape") {
@@ -909,7 +947,17 @@ export function Popup(): React.JSX.Element {
       return;
     }
     if (/^[1-9]$/u.test(event.key)) {
+      // Consumed here, or the digit's default action lands in the composer
+      // Custom focuses during this very keydown (React flushes the effect
+      // before the browser inserts the character).
+      event.preventDefault();
+      switchingKey.current = event.key;
       switchToSlot(Number(event.key));
+    }
+  });
+  const onKeyUp = useEffectEvent((event: KeyboardEvent): void => {
+    if (event.key === switchingKey.current) {
+      switchingKey.current = undefined;
     }
   });
   // Dismiss on Escape only. Losing focus is deliberately NOT a dismissal: the
@@ -919,8 +967,10 @@ export function Popup(): React.JSX.Element {
   // menu is open, Escape closes the menu first.
   useEffect(() => {
     globalThis.addEventListener("keydown", onKeyDown);
+    globalThis.addEventListener("keyup", onKeyUp);
     return () => {
       globalThis.removeEventListener("keydown", onKeyDown);
+      globalThis.removeEventListener("keyup", onKeyUp);
     };
   }, []);
 
@@ -946,8 +996,21 @@ export function Popup(): React.JSX.Element {
   // names a deleted prompt. Positions are preserved (the number IS the slot),
   // so a gone prompt leaves a gap rather than shifting the rest.
   const quickSlots = quickIds.map((id) => prompts.find((entry) => entry.id === id));
-  // The status glyph for the headline (running / done / setup / failed).
+  // The status glyph for the headline (waiting for your input / running /
+  // done / setup / failed). The pen is Custom's: the one state where the next
+  // move is the user's, so the same glyph the chip carries as a trait shows
+  // here as the state — the pairing the spinner already teaches (chip
+  // spinner = that prompt is working, headline spinner = this one is).
   const statusIcon = ((): React.JSX.Element | undefined => {
+    // The attachment gate: the confirm card IS the state, so the headline
+    // shows none — in particular not a check for the empty thread the gate
+    // leaves behind when it suspends Custom's first message.
+    if (awaitingSend) {
+      return undefined;
+    }
+    if (awaitingInstruction) {
+      return <PenLine className="size-4 shrink-0" />;
+    }
     if (running) {
       return <LoaderCircle className="size-4 shrink-0 animate-spin" />;
     }
@@ -962,6 +1025,22 @@ export function Popup(): React.JSX.Element {
     }
     return undefined;
   })();
+
+  // A chip's trailing slot, one glyph at most: a background prompt still
+  // streaming announces itself (so "switch away and come back later" is a
+  // visible affordance); otherwise Custom carries its pen — the one chip that
+  // asks YOU to write, marked as a trait, the way the same pen marks the
+  // state in the headline. Both glyphs share the slot, so swapping never
+  // moves the row.
+  const slotGlyph = (prompt: PromptInfo): React.JSX.Element | undefined => {
+    if (results.get(prompt.id)?.phase === "running") {
+      return <LoaderCircle className="size-3 shrink-0 animate-spin" />;
+    }
+    if (prompt.id === CUSTOM_PROMPT_ID) {
+      return <PenLine className="size-3 shrink-0" />;
+    }
+    return undefined;
+  };
 
   // The prompt block: a prominent headline (the single source of truth for
   // "what is running") over a row of numbered quick slots. The current prompt
@@ -985,15 +1064,28 @@ export function Popup(): React.JSX.Element {
         </span>
       </div>
 
-      {/* Quick slots: numbered chips (1–5, Auto on 1). The active one is
+      {/* Quick slots: numbered chips (1–5, Summarize on 1). The active one is
           highlighted; a run outside the slots leaves none highlighted. A
           trailing button opens the full palette for custom prompts. One line
-          always: the home width fits the longest built-in labels
-          (windows.rs); a window dragged narrower shrinks the chips into
+          always: the home width fits the longest built-in labels plus Custom's
+          pen (windows.rs); a window dragged narrower shrinks the chips into
           their ellipses instead of wrapping. */}
       <div className="flex items-center gap-1">
-        {quickSlots.map((prompt, index) =>
-          prompt ? (
+        {quickSlots.map((prompt, index) => {
+          if (!prompt) {
+            return undefined;
+          }
+          const active = prompt.id === payload.prompt_id;
+          // Custom looks like the blank it stands for: a dashed box where the
+          // canned prompts are bare text, set a step apart, with the pen
+          // inside — the same difference the headline and the composer spell
+          // out once it is chosen. The dashes are the trait and stay in every
+          // state; colour and fill remain the state, shared with every chip,
+          // so a chosen Summarize (solid, filled) and a resting Custom (dashed,
+          // faint) never read alike. Intrinsic to the chip, so it survives
+          // any slot order.
+          const custom = prompt.id === CUSTOM_PROMPT_ID;
+          return (
             <button
               key={prompt.id}
               type="button"
@@ -1002,23 +1094,22 @@ export function Popup(): React.JSX.Element {
               }}
               className={cn(
                 "flex min-w-0 items-center gap-1 rounded-md border px-1.5 py-0.5 text-xs transition-colors",
-                prompt.id === payload.prompt_id
+                custom && "ms-1 border-dashed first:ms-0",
+                active
                   ? "border-foreground/30 bg-accent text-foreground"
-                  : "border-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                !active && (custom ? "border-border" : "border-transparent"),
               )}
+              title={custom ? t.popup.custom : undefined}
             >
               <kbd className="shrink-0 rounded bg-muted px-1 font-mono text-[10px] text-muted-foreground/80">
                 {index + 1}
               </kbd>
               <span className="max-w-32 truncate">{promptLabel(prompt.id, prompt.label)}</span>
-              {/* A background prompt still streaming announces itself, so
-                  "switch away and come back later" is a visible affordance. */}
-              {results.get(prompt.id)?.phase === "running" ? (
-                <LoaderCircle className="size-3 shrink-0 animate-spin" />
-              ) : undefined}
+              {slotGlyph(prompt)}
             </button>
-          ) : undefined,
-        )}
+          );
+        })}
         {/* The full-list palette only earns its place when some prompt is
             not reachable from the slot row — a custom prompt, or a built-in
             pushed out by one. Judged by coverage, not by count or origin, so
@@ -1086,6 +1177,9 @@ export function Popup(): React.JSX.Element {
                       )}
                     />
                     <span className="truncate">{promptLabel(prompt.id, prompt.label)}</span>
+                    {prompt.id === CUSTOM_PROMPT_ID ? (
+                      <PenLine className="ms-auto size-3 shrink-0 opacity-70" />
+                    ) : undefined}
                   </button>
                 ))}
             </div>
@@ -1170,7 +1264,7 @@ export function Popup(): React.JSX.Element {
       );
     }
     // The attachment go-ahead: what will be sent is already on screen (the
-    // source view above); this card only asks whether to send it.
+    // source view above); this card only custom whether to send it.
     const confirmCard = (
       <div className="flex flex-col gap-2.5 rounded-lg bg-muted/40 px-3 py-2.5">
         <p className="text-sm">{t.popup.confirmSend}</p>
@@ -1281,54 +1375,56 @@ export function Popup(): React.JSX.Element {
         {/* The composer is fixed chrome, outside the scroll: the interaction
             point for "now" never moves. While a reply streams, its trailing
             corner holds Stop — the same spot ChatGPT taught the world. */}
-        {payload?.runnable && !awaitingSend && (running || (done && !failed && !setup)) && (
-          <div className="relative border-t px-3 py-2">
-            <textarea
-              ref={composerRef}
-              rows={1}
-              value={followUpText}
-              onChange={(event) => {
-                setFollowUpText(event.target.value);
-                growComposer(event.target);
-              }}
-              onKeyDown={(event) => {
-                if (event.key !== "Enter") {
-                  return;
-                }
-                // The Enter that commits an IME conversion must never send.
-                // Safari reports it with isComposing already false but the
-                // legacy keyCode 229 — guard both.
-                if (event.nativeEvent.isComposing || event.nativeEvent.keyCode === 229) {
-                  return;
-                }
-                if (event.shiftKey) {
-                  return; // Shift+Enter = newline, the chat convention
-                }
-                event.preventDefault();
-                submitFollowUp(event.currentTarget);
-              }}
-              placeholder={t.popup.followUp}
-              aria-label={t.popup.followUp}
-              className={cn(
-                FIELD,
-                "max-h-32 resize-none overflow-y-auto placeholder:text-muted-foreground/60",
-                running && "pe-9",
+        {payload?.runnable &&
+          !awaitingSend &&
+          (awaitingInstruction || running || (done && !failed && !setup)) && (
+            <div className="relative border-t px-3 py-2">
+              <textarea
+                ref={composerRef}
+                rows={1}
+                value={followUpText}
+                onChange={(event) => {
+                  setFollowUpText(event.target.value);
+                  growComposer(event.target);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key !== "Enter") {
+                    return;
+                  }
+                  // The Enter that commits an IME conversion must never send.
+                  // Safari reports it with isComposing already false but the
+                  // legacy keyCode 229 — guard both.
+                  if (event.nativeEvent.isComposing || event.nativeEvent.keyCode === 229) {
+                    return;
+                  }
+                  if (event.shiftKey) {
+                    return; // Shift+Enter = newline, the chat convention
+                  }
+                  event.preventDefault();
+                  submitFollowUp(event.currentTarget);
+                }}
+                placeholder={awaitingInstruction ? t.popup.custom : t.popup.followUp}
+                aria-label={awaitingInstruction ? t.popup.custom : t.popup.followUp}
+                className={cn(
+                  FIELD,
+                  "max-h-32 resize-none overflow-y-auto placeholder:text-muted-foreground/60",
+                  running && "pe-9",
+                )}
+              />
+              {running && (
+                <Button
+                  variant="ghost"
+                  size="icon-xs"
+                  onClick={stop}
+                  aria-label={t.popup.stop}
+                  title={t.popup.stop}
+                  className={cn(QUIET_ICON, "absolute inset-e-5 top-1/2 -translate-y-1/2")}
+                >
+                  <Square />
+                </Button>
               )}
-            />
-            {running && (
-              <Button
-                variant="ghost"
-                size="icon-xs"
-                onClick={stop}
-                aria-label={t.popup.stop}
-                title={t.popup.stop}
-                className={cn(QUIET_ICON, "absolute inset-e-5 top-1/2 -translate-y-1/2")}
-              >
-                <Square />
-              </Button>
-            )}
-          </div>
-        )}
+            </div>
+          )}
 
         {updateVersion && (
           // Whisper-level, by design: rendered below everything, never louder

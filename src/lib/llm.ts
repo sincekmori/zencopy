@@ -27,8 +27,10 @@ export const REQUIRED_ROLES = ["default"] as const;
 
 /** One turn of an prompt thread: the follow-up question that produced the
  *  reply (`text` is partial while the turn still streams). The first turn
- *  has no `question` — its question is the prompt's rendered prompt itself.
- *  Shared with the popup, whose thread state is exactly this shape. */
+ *  has no `question` — its question is the prompt's rendered prompt itself —
+ *  except in a Custom thread, where the user's typed instruction is the first
+ *  turn's question and travels inside the first user message. Shared with
+ *  the popup, whose thread state is exactly this shape. */
 export interface Exchange {
   question?: string | undefined;
   /** The assistant's extracted reply (the result-tag body). */
@@ -45,7 +47,8 @@ export interface PromptInput {
   /** Continue the thread instead of starting one: the completed exchanges so
    *  far plus the new question. The first user message is rebuilt from
    *  `prompt`/`attachments` exactly as on the first run, so the model sees
-   *  the whole conversation. */
+   *  the whole conversation. With no exchanges yet, the question is a Custom
+   *  run's opening instruction and becomes part of that first message. */
   followUp?: { turns: Exchange[]; question: string } | undefined;
 }
 

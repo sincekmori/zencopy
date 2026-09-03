@@ -102,6 +102,7 @@ export const fa: Messages = {
     stop: "توقف",
     retry: "تلاش دوباره",
     followUp: "پیام بنویسید…",
+    custom: "پرسش یا دستور…",
     copy: "کپی",
     copied: "کپی شد",
     close: "بستن",
@@ -151,11 +152,11 @@ export const fa: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "خودکار",
       "zencopy-summarize": "خلاصه",
       "zencopy-translate": "ترجمه",
       "zencopy-explain": "توضیح",
       "zencopy-polish": "ویرایش",
+      "zencopy-custom": "سفارشی",
     },
     title: "پرامپت‌ها",
     hint: (keys) => `کاری که ${keys} انجام می‌دهد. از برچسب نتیجه در پنجره هم قابل تعویض است.`,

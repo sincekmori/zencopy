@@ -104,6 +104,7 @@ export const pl: Messages = {
     stop: "Zatrzymaj",
     retry: "Ponów",
     followUp: "Napisz wiadomość…",
+    custom: "Pytanie lub polecenie…",
     copy: "Kopiuj",
     copied: "Skopiowano",
     close: "Zamknij",
@@ -153,11 +154,11 @@ export const pl: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Automatycznie",
       "zencopy-summarize": "Streść",
       "zencopy-translate": "Przetłumacz",
       "zencopy-explain": "Wyjaśnij",
       "zencopy-polish": "Dopracuj",
+      "zencopy-custom": "Wpisz",
     },
     title: "Prompty",
     hint: (keys) =>

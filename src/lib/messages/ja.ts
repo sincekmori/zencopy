@@ -105,6 +105,7 @@ export const ja: Messages = {
     stop: "停止",
     retry: "やり直す",
     followUp: "メッセージを入力",
+    custom: "質問や指示を入力",
     copy: "コピー",
     copied: "コピーしました",
     close: "閉じる",
@@ -154,11 +155,11 @@ export const ja: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "自動",
       "zencopy-summarize": "要約",
       "zencopy-translate": "翻訳",
       "zencopy-explain": "解説",
       "zencopy-polish": "清書",
+      "zencopy-custom": "カスタム",
     },
     title: "プロンプト",
     hint: (keys) => `${keys} で実行する処理。ポップアップの結果ラベルからも切り替えられます。`,

@@ -104,6 +104,7 @@ export const ru: Messages = {
     stop: "Стоп",
     retry: "Повторить",
     followUp: "Введите сообщение…",
+    custom: "Вопрос или инструкция…",
     copy: "Копировать",
     copied: "Скопировано",
     close: "Закрыть",
@@ -153,11 +154,11 @@ export const ru: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Автоматически",
       "zencopy-summarize": "Пересказ",
       "zencopy-translate": "Перевод",
       "zencopy-explain": "Объяснение",
       "zencopy-polish": "Редактура",
+      "zencopy-custom": "Запрос",
     },
     title: "Промпты",
     hint: (keys) => `Что умеет ${keys}. Переключается и по метке результата во всплывающем окне.`,

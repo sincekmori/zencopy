@@ -44,14 +44,15 @@ pub(crate) const POPUP_MIN_HEIGHT: f64 = 360.0;
 pub(crate) const POPUP_MAX_HEIGHT: f64 = 720.0;
 
 /// The home viewport width in CSS px, the same at every text size: the widest
-/// built-in slot row (German, five labels + number badges) measures 533, the
-/// palette button budgets 30, card chrome (float padding, border, body
-/// padding) adds 42, plus 8 for font differences across platforms.
+/// built-in slot row (German: five labels, number badges, the Custom chip's pen
+/// and its step of space) measures 535, the palette button budgets 30, card
+/// chrome (float padding, border, body padding) adds 42, plus 8 for font
+/// differences across platforms.
 /// Re-measure when a built-in label changes (see `builtinLabels` in
 /// src/lib/messages/types.ts). Must stay under the `compact` breakpoint
 /// (index.css) or the home card loses its padded look. The popup window's
 /// `width` in tauri.conf.json is only the pre-show placeholder.
-pub(crate) const POPUP_HOME_VIEWPORT: f64 = 613.0;
+pub(crate) const POPUP_HOME_VIEWPORT: f64 = 615.0;
 
 /// The home width per text size — the viewport scaled by the webview zoom
 /// that size applies (the ladder in src/lib/text-size.ts, pinned by a

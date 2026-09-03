@@ -102,6 +102,7 @@ export const id: Messages = {
     stop: "Hentikan",
     retry: "Coba lagi",
     followUp: "Ketik pesan…",
+    custom: "Pertanyaan atau instruksi…",
     copy: "Salin",
     copied: "Tersalin",
     close: "Tutup",
@@ -151,11 +152,11 @@ export const id: Messages = {
   },
   prompts: {
     builtinLabels: {
-      "zencopy-auto": "Otomatis",
       "zencopy-summarize": "Ringkaskan",
       "zencopy-translate": "Terjemahkan",
       "zencopy-explain": "Jelaskan",
       "zencopy-polish": "Rapikan",
+      "zencopy-custom": "Ketikkan",
     },
     title: "Prompt",
     hint: (keys) => `Apa yang bisa dilakukan ${keys}. Bisa juga diganti dari label hasil di popup.`,

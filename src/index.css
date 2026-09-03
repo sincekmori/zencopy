@@ -118,7 +118,7 @@
 
 /* The popup's card-vs-window threshold: at or below this width the result
    floats as a padded card, above it the panel goes edge-to-edge (popup.tsx).
-   Must stay above the popup's home viewport (the 613 px basis of
+   Must stay above the popup's home viewport (the 615 px basis of
    popup_home_width in src-tauri/src/windows.rs) or the home card loses its
    padded look. */
 @theme {
