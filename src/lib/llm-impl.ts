@@ -323,14 +323,16 @@ export async function streamPrompt(
   const attachedPaths = attachments
     .map((file) => file.path)
     .filter((path): path is string => typeof path === "string");
-  const thread = input.followUp?.turns ?? [];
-  // The first turn's own question — a Custom run's typed instruction — rides
-  // inside the first user message rather than as a second user message in a
-  // row: chat templates that insist on alternating roles reject the latter.
-  // On a follow-up it is the first turn's stored question, replayed verbatim
-  // like the rest of that message; on a plain run there is none.
-  const opening = thread.length === 0 ? input.followUp?.question : thread[0]?.question;
-  const firstText = composeUserText(prompt, attachedPaths, opening);
+  // The thread as the model will see it: the settled exchanges plus, on a
+  // follow-up, the pending question as an unfinished last turn — so one rule
+  // covers every question. The first turn's rides inside the first user
+  // message (a Custom run's typed instruction; a plain first run has none),
+  // every later one is its own user message — never two user messages in a
+  // row, which chat templates that insist on alternating roles reject.
+  const turns: { question?: string | undefined; text?: string }[] = input.followUp
+    ? [...input.followUp.turns, { question: input.followUp.question }]
+    : [];
+  const firstText = composeUserText(prompt, attachedPaths, turns[0]?.question);
   // The first user message — what the first run sends, and what every
   // follow-up replays verbatim at the head of its thread.
   const firstUser: ModelMessage = {
@@ -349,21 +351,18 @@ export async function streamPrompt(
         : firstText,
   };
   const messages: ModelMessage[] = [firstUser];
-  if (input.followUp) {
-    // Replay the thread. Stored replies are the extracted tag bodies, so
-    // wrapResult puts the tags back: the transcript must demonstrate the
-    // protocol the instructions demand, or the model learns by example to
-    // skip the tags — and an untagged reply never streams.
-    thread.forEach((turn, index) => {
-      if (index > 0 && turn.question !== undefined) {
-        messages.push({ role: "user", content: turn.question });
-      }
-      messages.push({ role: "assistant", content: wrapResult(turn.text) });
-    });
-    if (thread.length > 0) {
-      messages.push({ role: "user", content: input.followUp.question });
+  // Replay the thread. Stored replies are the extracted tag bodies, so
+  // wrapResult puts the tags back: the transcript must demonstrate the
+  // protocol the instructions demand, or the model learns by example to
+  // skip the tags — and an untagged reply never streams.
+  turns.forEach((turn, index) => {
+    if (index > 0 && turn.question !== undefined) {
+      messages.push({ role: "user", content: turn.question });
     }
-  }
+    if (turn.text !== undefined) {
+      messages.push({ role: "assistant", content: wrapResult(turn.text) });
+    }
+  });
 
   // AI SDK only throws stream-stopping errors (e.g. network) from the iterator;
   // others (API errors) go to `onError` and the stream just ends. Capture them

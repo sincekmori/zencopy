@@ -188,7 +188,7 @@ export async function setConfirmAttachments(enabled: boolean): Promise<void> {
 /** The pre-installed prompts, in slot order — the zero-config default.
  *  Mirrors DEFAULT_PROMPTS in src-tauri/src/prompts.rs (same ids, same
  *  order): Summarize leads on key 1, matching its role as the routing
- *  default for text; Custom closes the row on 5. */
+ *  default for text; Custom closes the row. */
 const DEFAULT_QUICK_PROMPTS = [
   "zencopy-summarize",
   "zencopy-explain",

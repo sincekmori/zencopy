@@ -124,6 +124,12 @@ const handlers: Record<string, (args: Record<string, unknown>) => unknown> = {
   "plugin:event|unlisten": () => null,
   "plugin:event|emit": () => null,
   "plugin:autostart|is_enabled": () => false,
+  // Sinks, not data: the log plugin must swallow silently — an "unhandled"
+  // warning for it would be forwarded to the log plugin again, and that
+  // recursion has crashed the WebKit renderer — and the zoom call is a no-op
+  // in a plain browser.
+  "plugin:log|log": () => null,
+  "plugin:webview|set_webview_zoom": () => null,
   list_prompts_ui: () => builtinPrompts(),
   get_rules_ui: () => defaultRules(),
   read_usage_stats: () => [],

@@ -16,6 +16,10 @@ export const POPUP_RESULT_SCENARIO = "popup-result";
  *  slot row, and the composer waiting for the instruction. */
 export const POPUP_CUSTOM_SCENARIO = "popup-custom";
 
+/** The popup's home viewport — the width mirrors POPUP_HOME_VIEWPORT in
+ *  src-tauri/src/windows.rs (pinned by a ts_mirror test there). */
+const POPUP_VIEWPORT = { width: 615, height: 620 };
+
 export const SCREENSHOT_SCENARIOS: Record<
   string,
   { params: Record<string, string>; viewport?: { width: number; height: number } }
@@ -27,17 +31,16 @@ export const SCREENSHOT_SCENARIOS: Record<
   "new-rule": { params: { tab: "prompts", screenshot: RULE_EDITOR_SCENARIO } },
   "prompt-editor": { params: { tab: "prompts", screenshot: PROMPT_EDITOR_SCENARIO } },
   "prompt-import": { params: { tab: "prompts", screenshot: PROMPT_IMPORT_SCENARIO } },
-  // The other two windows. The about viewport mirrors tauri.conf.json minus
-  // the title bar; the popup width mirrors POPUP_HOME_VIEWPORT in
-  // src-tauri/src/windows.rs (pinned by a ts_mirror test there).
+  // The other two windows; the about viewport mirrors tauri.conf.json minus
+  // the title bar.
   about: { params: { window: "about" }, viewport: { width: 360, height: 412 } },
   popup: {
     params: { window: "popup", screenshot: POPUP_RESULT_SCENARIO },
-    viewport: { width: 615, height: 620 },
+    viewport: POPUP_VIEWPORT,
   },
   "popup-custom": {
     params: { window: "popup", screenshot: POPUP_CUSTOM_SCENARIO },
-    viewport: { width: 615, height: 620 },
+    viewport: POPUP_VIEWPORT,
   },
 };
 

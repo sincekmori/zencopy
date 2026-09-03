@@ -537,6 +537,7 @@ mod ts_mirror_tests {
 
     const SETTINGS_TS: &str = include_str!("../../src/lib/settings.ts");
     const CAPTURE_TS: &str = include_str!("../../src/lib/capture.ts");
+    const PROMPTS_TS: &str = include_str!("../../src/lib/prompts.ts");
 
     #[test]
     fn store_file_matches_the_frontend() {
@@ -557,7 +558,7 @@ mod ts_mirror_tests {
         );
     }
 
-    /// The popup's home width is the 615 px viewport times the zoom the
+    /// The popup's home width is POPUP_HOME_VIEWPORT times the zoom the
     /// frontend applies per text size; a retuned ladder or renamed size over
     /// there would quietly open the popup at the wrong width.
     #[test]
@@ -631,19 +632,19 @@ mod ts_mirror_tests {
         }
     }
 
-    /// The popup recognizes Custom by id (CUSTOM_PROMPT_ID in prompts.ts) to hold
-    /// its first run until the user types; a renamed id here would turn Custom
-    /// into a prompt that runs an empty instruction.
+    /// The popup recognizes Custom by id (CUSTOM_PROMPT_ID in prompts.ts) to
+    /// hold its first run until the user types; that id must name a
+    /// pre-installed prompt, or Custom silently becomes an empty slot.
     #[test]
     fn custom_prompt_id_matches_the_frontend() {
-        const PROMPTS_TS: &str = include_str!("../../src/lib/prompts.ts");
+        let id = PROMPTS_TS
+            .lines()
+            .find_map(|line| line.strip_prefix("export const CUSTOM_PROMPT_ID = \""))
+            .and_then(|rest| rest.strip_suffix("\";"))
+            .expect("prompts.ts declares CUSTOM_PROMPT_ID");
         assert!(
-            is_builtin_prompt("zencopy-custom"),
-            "Custom must stay pre-installed"
-        );
-        assert!(
-            PROMPTS_TS.contains("CUSTOM_PROMPT_ID = \"zencopy-custom\""),
-            "prompts.ts must special-case the same Custom id"
+            is_builtin_prompt(id),
+            "prompts.ts special-cases '{id}', which must stay pre-installed"
         );
     }
 
@@ -658,7 +659,6 @@ mod ts_mirror_tests {
         let rules: serde_json::Value =
             serde_json::from_str(include_str!("../rules.json")).expect("rules.json parses");
         let table = rules.as_object().expect("rules.json is an object");
-        const PROMPTS_TS: &str = include_str!("../../src/lib/prompts.ts");
         for kind in crate::rules::RULE_KINDS {
             assert!(
                 table.contains_key(kind),

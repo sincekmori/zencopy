@@ -302,10 +302,9 @@ export function Popup(): React.JSX.Element {
 
   // What the popup shows: the current prompt's entry (live or kept).
   const result = payload ? results.get(payload.prompt_id) : undefined;
-  // Custom waiting for its instruction: no thread yet, or one emptied again by
-  // Stop or the attachment gate — the composer is the whole interaction.
-  const awaitingInstruction =
-    payload?.prompt_id === CUSTOM_PROMPT_ID && (result === undefined || result.turns.length === 0);
+  // Custom waiting for its instruction: no thread yet — the composer is the
+  // whole interaction.
+  const awaitingInstruction = payload?.prompt_id === CUSTOM_PROMPT_ID && result === undefined;
 
   const putResult = (promptId: string, entry: Result | undefined): void => {
     setResults((prev) => {
@@ -407,7 +406,7 @@ export function Popup(): React.JSX.Element {
     // regenerate. Deliberately NOT reused: a failed FIRST run (a fresh C+C
     // retries it instead of parroting the error — but a thread whose only
     // blemish is its last follow-up IS kept: overwriting good turns over one
-    // network blip would be data loss, and Retry re-custom that question),
+    // network blip would be data loss, and Retry re-asks that question),
     // runs of an edited prompt (the definition fingerprint differs), and
     // `files` captures (their signature is the paths, so the files' contents
     // may have changed).
@@ -465,12 +464,13 @@ export function Popup(): React.JSX.Element {
       captureSig.current === sig && runsRef.current.get(promptId) === controller;
     // The thread with the current turn's text-so-far as its last entry.
     const turnsWith = (text: string): Exchange[] => [...prior, { question, text }];
-    // Nothing arrived: a first run returns to the source-only view; a
-    // follow-up returns to the thread it grew from.
+    // Nothing arrived: with no thread to return to (a first run, or Custom's
+    // first message) back to the source-only view; a follow-up returns to
+    // the thread it grew from.
     const revert = (): void => {
       putResult(
         promptId,
-        question === undefined ? undefined : { phase: "done", turns: prior, ok: true },
+        prior.length === 0 ? undefined : { phase: "done", turns: prior, ok: true },
       );
     };
     putResult(promptId, { phase: "running", turns: turnsWith("") });
@@ -809,7 +809,7 @@ export function Popup(): React.JSX.Element {
       return;
     }
     const kept = results.get(payload.prompt_id);
-    if (kept === undefined ? payload.prompt_id !== CUSTOM_PROMPT_ID : kept.phase !== "done") {
+    if (!awaitingInstruction && kept?.phase !== "done") {
       return; // Enter while the reply still streams — the draft just stays
     }
     setFollowUpText("");
@@ -949,15 +949,11 @@ export function Popup(): React.JSX.Element {
     if (/^[1-9]$/u.test(event.key)) {
       // Consumed here, or the digit's default action lands in the composer
       // Custom focuses during this very keydown (React flushes the effect
-      // before the browser inserts the character).
+      // before the browser inserts the character); see switchingKey for the
+      // key's repeats.
       event.preventDefault();
       switchingKey.current = event.key;
       switchToSlot(Number(event.key));
-    }
-  });
-  const onKeyUp = useEffectEvent((event: KeyboardEvent): void => {
-    if (event.key === switchingKey.current) {
-      switchingKey.current = undefined;
     }
   });
   // Dismiss on Escape only. Losing focus is deliberately NOT a dismissal: the
@@ -966,6 +962,12 @@ export function Popup(): React.JSX.Element {
   // focused) and the close button are the only ways out. While the prompt
   // menu is open, Escape closes the menu first.
   useEffect(() => {
+    // The switching digit's release (a ref write only, so no Effect Event).
+    const onKeyUp = (event: KeyboardEvent): void => {
+      if (event.key === switchingKey.current) {
+        switchingKey.current = undefined;
+      }
+    };
     globalThis.addEventListener("keydown", onKeyDown);
     globalThis.addEventListener("keyup", onKeyUp);
     return () => {
@@ -978,6 +980,8 @@ export function Popup(): React.JSX.Element {
   const done = result?.phase === "done";
   const setup = result?.phase === "done" && result.setup === true;
   const failed = result?.phase === "done" && !result.ok && !result.setup;
+  // What the composer asks for: Custom's opening request, else a follow-up.
+  const composerLabel = awaitingInstruction ? t.popup.custom : t.popup.followUp;
   // The one host the result may load remote images from: where the capture
   // came from (see Markdown's isAllowedImage for the threat model).
   const imageHost = (() => {
@@ -997,14 +1001,11 @@ export function Popup(): React.JSX.Element {
   // so a gone prompt leaves a gap rather than shifting the rest.
   const quickSlots = quickIds.map((id) => prompts.find((entry) => entry.id === id));
   // The status glyph for the headline (waiting for your input / running /
-  // done / setup / failed). The pen is Custom's: the one state where the next
-  // move is the user's, so the same glyph the chip carries as a trait shows
-  // here as the state — the pairing the spinner already teaches (chip
-  // spinner = that prompt is working, headline spinner = this one is).
+  // done / setup / failed); the pen is Custom waiting for the user, the state
+  // twin of the trait on its chip (see slotGlyph).
   const statusIcon = ((): React.JSX.Element | undefined => {
-    // The attachment gate: the confirm card IS the state, so the headline
-    // shows none — in particular not a check for the empty thread the gate
-    // leaves behind when it suspends Custom's first message.
+    // The attachment gate: the confirm card IS the state, so no glyph — not
+    // even the pen — while it holds the turn.
     if (awaitingSend) {
       return undefined;
     }
@@ -1064,7 +1065,7 @@ export function Popup(): React.JSX.Element {
         </span>
       </div>
 
-      {/* Quick slots: numbered chips (1–5, Summarize on 1). The active one is
+      {/* Quick slots: numbered chips (Summarize on 1). The active one is
           highlighted; a run outside the slots leaves none highlighted. A
           trailing button opens the full palette for custom prompts. One line
           always: the home width fits the longest built-in labels plus Custom's
@@ -1077,13 +1078,11 @@ export function Popup(): React.JSX.Element {
           }
           const active = prompt.id === payload.prompt_id;
           // Custom looks like the blank it stands for: a dashed box where the
-          // canned prompts are bare text, set a step apart, with the pen
-          // inside — the same difference the headline and the composer spell
-          // out once it is chosen. The dashes are the trait and stay in every
-          // state; colour and fill remain the state, shared with every chip,
-          // so a chosen Summarize (solid, filled) and a resting Custom (dashed,
-          // faint) never read alike. Intrinsic to the chip, so it survives
-          // any slot order.
+          // canned prompts are bare text, set a step apart. The dashes are the
+          // trait and stay in every state; colour and fill remain the state,
+          // shared with every chip, so a chosen Summarize (solid, filled) and
+          // a resting Custom (dashed, faint) never read alike. Intrinsic to
+          // the chip, so it survives any slot order.
           const custom = prompt.id === CUSTOM_PROMPT_ID;
           return (
             <button
@@ -1264,7 +1263,7 @@ export function Popup(): React.JSX.Element {
       );
     }
     // The attachment go-ahead: what will be sent is already on screen (the
-    // source view above); this card only custom whether to send it.
+    // source view above); this card only asks whether to send it.
     const confirmCard = (
       <div className="flex flex-col gap-2.5 rounded-lg bg-muted/40 px-3 py-2.5">
         <p className="text-sm">{t.popup.confirmSend}</p>
@@ -1403,8 +1402,8 @@ export function Popup(): React.JSX.Element {
                   event.preventDefault();
                   submitFollowUp(event.currentTarget);
                 }}
-                placeholder={awaitingInstruction ? t.popup.custom : t.popup.followUp}
-                aria-label={awaitingInstruction ? t.popup.custom : t.popup.followUp}
+                placeholder={composerLabel}
+                aria-label={composerLabel}
                 className={cn(
                   FIELD,
                   "max-h-32 resize-none overflow-y-auto placeholder:text-muted-foreground/60",
