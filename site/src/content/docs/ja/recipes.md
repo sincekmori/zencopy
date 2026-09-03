@@ -7,7 +7,7 @@ description: ai-sdk-catalog.json のコピペ例。1 プロバイダー構成か
 [設定画面の AI タブ](/ja/configuration/#ai)だけで使いたい方には必要ありません。
 
 `ai-sdk-catalog.json` のコピペ用スターターです。
-ファイルは[アプリ設定ディレクトリ](/ja/configuration/#config-files-for-power-users)に置きます。編集は次のトリガーから反映されます。
+ファイルは[アプリ設定ディレクトリ](/ja/configuration/#config-files-for-power-users)に置きます。手で編集した内容は、ZenCopy を再起動するか、設定画面の AI タブ（JSON）でいちど保存すると反映されます。
 
 ## 1 プロバイダー・1 モデル {#one-provider-one-model}
 
@@ -67,12 +67,12 @@ role はプロンプトとモデルを疎結合にします。
     {
       "id": "anthropic",
       "vendor": { "apiKey": "sk-ant-…" },
-      "models": [{ "id": "claude-opus-4-8" }]
+      "models": [{ "id": "claude-opus-5" }]
     }
   ],
   "roles": {
     "default": "google:gemini-3.1-flash-lite",
-    "smart": "anthropic:claude-opus-4-8"
+    "smart": "anthropic:claude-opus-5"
   }
 }
 ```

@@ -22,6 +22,7 @@
  */
 
 import rulesRaw from "../../src-tauri/rules.json?raw";
+import promptsRs from "../../src-tauri/src/prompts.rs?raw";
 import { version } from "../../package.json";
 
 // Playwright's WebKit driver crashes rendering console previews of object
@@ -63,17 +64,30 @@ if (extra !== null) {
 
 // ---- Real data from src-tauri/, served by the dev server ----------------
 
-/** The pre-installed prompts, parsed from their real .md sources. The
- *  frontmatter dialect (plain `key: value` plus `|-` blocks) mirrors the
- *  parser in src-tauri/src/prompts.rs — that file owns the format; keep in
- *  step. */
+/** The order the app lists the pre-installed prompts in: DEFAULT_PROMPTS in
+ *  src-tauri/src/prompts.rs, read off its `("zencopy-…", include_str!(…))`
+ *  entries — the glob below would hand the files over by name instead. */
+const BUILTIN_ORDER = [...promptsRs.matchAll(/\("(zencopy-[a-z]+)", include_str!/gu)].map(
+  (match) => match[1],
+);
+
+/** The pre-installed prompts, parsed from their real .md sources, in the
+ *  app's order. The frontmatter dialect (plain `key: value` plus `|-`
+ *  blocks) mirrors the parser in src-tauri/src/prompts.rs — that file owns
+ *  the format; keep in step. */
 function builtinPrompts(): Record<string, unknown>[] {
   const sources = import.meta.glob("/src-tauri/prompts/*.md", {
     query: "?raw",
     import: "default",
     eager: true,
   }) as Record<string, string>;
-  return Object.values(sources).map((raw) => {
+  return parsePrompts(Object.values(sources)).toSorted(
+    (a, b) => BUILTIN_ORDER.indexOf(a.id) - BUILTIN_ORDER.indexOf(b.id),
+  );
+}
+
+function parsePrompts(raws: string[]): { id: string; [key: string]: unknown }[] {
+  return raws.map((raw) => {
     const [, front = "", ...rest] = raw.split("---\n");
     const fields: Record<string, string> = {};
     let block: string | undefined;
