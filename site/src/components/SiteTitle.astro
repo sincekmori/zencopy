@@ -1,0 +1,40 @@
+---
+/**
+ * Starlight's site title with the brand mark inline from the brand module
+ * (src/lib/brand.ts) — no logo image files — and the title as text, the
+ * same pair as the landing header. Mirrors Starlight's own SiteTitle.astro
+ * (the same anchor and classes) so the header is otherwise unchanged.
+ */
+import { markSvg } from "../../../src/lib/brand.ts";
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a class="site-title sl-flex" href={siteTitleHref}>
+  <Fragment set:html={markSvg({ attrs: { "aria-hidden": "true" } })} />
+  <span translate="no">{siteTitle}</span>
+</a>
+
+<style>
+  @layer starlight.core {
+    .site-title {
+      align-items: center;
+      gap: 0.6rem;
+      font-size: var(--sl-text-h4);
+      font-weight: 500;
+      color: var(--sl-color-text-accent);
+      text-decoration: none;
+      white-space: nowrap;
+      min-width: 0;
+    }
+    span {
+      overflow: hidden;
+    }
+    /* The mark comes in as a string, so it carries no scope attribute. */
+    .site-title :global(svg) {
+      flex: none;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+</style>

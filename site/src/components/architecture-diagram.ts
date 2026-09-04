@@ -21,6 +21,7 @@
  *  the step badges move to the start (right) side of their labels. The brand
  *  lockup ({mark} ZenCopy) stays LTR — it is a wordmark, not prose.
  */
+import { markGroup } from "../../../src/lib/brand.ts";
 
 export type DiagramDir = "ltr" | "rtl";
 
@@ -272,12 +273,7 @@ export function architectureDiagram(l: ArchitectureLabels, dir: DiagramDir = "lt
   ${flowLabel({ x: gap1Mid, y: 138, n: 1, text: l.flowCopy })}
 
   ${box({ x: zcX, y: 116, w: centerW, h: 200 })}
-  <g transform="translate(${mx(cxZc) + ZC_ICON_DX} 155)" stroke="${ink}" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <g transform="scale(0.75)">
-      <path d="M12.22 3.39A6.5 6.5 0 0 0 3.89 11.72"/>
-      <path d="M20.32 10.77A6.5 6.5 0 1 0 20.32 18.23"/>
-    </g>
-  </g>
+  ${markGroup({ color: ink, transform: `translate(${mx(cxZc) + ZC_ICON_DX} 155) scale(0.75)` })}
   <text x="${mx(cxZc) + ZC_TEXT_DX}" y="170" font-size="${TITLE_SIZE}" font-weight="700" direction="ltr" fill="${ink}">ZenCopy</text>
   ${centered({ x: cxZc, y: 216, size: LINE_SIZE, text: l.zcStep1 })}
   ${centered({ x: cxZc, y: 240, size: LINE_SIZE, text: l.zcStep2 })}

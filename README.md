@@ -1,9 +1,8 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="src/assets/zencopy-logo-dark.svg">
-  <img src="src/assets/zencopy-logo.svg" alt="ZenCopy" width="280">
-</picture>
+<img src="https://zencopy.app/favicon.svg" alt="" width="96">
+
+# ZenCopy
 
 **Instant AI. Right on your screen.**
 

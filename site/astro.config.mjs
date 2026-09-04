@@ -91,18 +91,12 @@ export default defineConfig({
       title: "ZenCopy",
       description:
         "Instant AI. Right on your screen. A calm desktop agent that turns whatever you copy into an instant AI result.",
-      logo: {
-        // The brand SVGs live once, in the repo root's src/assets/ — the site
-        // imports them across the project boundary instead of keeping copies.
-        light: "../src/assets/zencopy-logo.svg",
-        dark: "../src/assets/zencopy-logo-dark.svg",
-        replacesTitle: true,
-      },
       social: [{ icon: "github", label: "GitHub", href: "https://github.com/sincekmori/zencopy" }],
       head: [
         // Share card for LINE / X / Slack …: Starlight already emits og:title,
         // og:description, and twitter:card, but the image must be ours.
-        // Regenerate public/og.png with `bun run brand` after editing og.svg.
+        // og.png is an endpoint (src/pages/og.png.ts): the logo over the en
+        // hero tagline, rendered at build time.
         {
           tag: "meta",
           attrs: { property: "og:image", content: "https://zencopy.app/og.png" },
@@ -404,9 +398,14 @@ export default defineConfig({
         },
       ],
       customCss: ["./src/styles/custom.css"],
-      // The active page expands into its h2 sections in the left sidebar —
-      // see src/components/Sidebar.astro.
-      components: { Sidebar: "./src/components/Sidebar.astro" },
+      components: {
+        // The active page expands into its h2 sections in the left sidebar —
+        // see src/components/Sidebar.astro.
+        Sidebar: "./src/components/Sidebar.astro",
+        // The header shows the brand mark inline from src/lib/brand.ts (the
+        // one place it is drawn) and the title as text, not a logo image.
+        SiteTitle: "./src/components/SiteTitle.astro",
+      },
       // /llms.txt, /llms-small.txt, /llms-full.txt — generated into dist/ at
       // build time (never committed), so LLMs can read the docs as Markdown.
       plugins: [starlightLlmsTxt(), starlightLinksValidator()],

@@ -4,10 +4,11 @@
  * shell (docs keep Starlight; src/pages/[lang]/index.astro serves this at
  * `/<lang>/` for every locale in LANDING_LOCALES).
  * Design language: ink on paper, hairline rules, one motif (the brand's two
- * arcs, drawn like an enso stroke), and room to breathe. No boxes, no cards.
+ * arcs, drawn in like an enso stroke), and room to breathe. No boxes, no cards.
  * Theme state is shared with Starlight via the same localStorage key.
  */
 import { getEntry } from "astro:content";
+import { markSvg } from "../../../src/lib/brand.ts";
 import HeroDemo from "./HeroDemo.astro";
 import ModifierText from "./ModifierText.astro";
 import { LANDING_COPY, LANDING_LOCALES, THEME_LABELS } from "./landing-copy.ts";
@@ -101,18 +102,7 @@ const gettingStartedHref = `/${lang}/getting-started/`;
   <body>
     <header class="top">
       <a aria-label="ZenCopy" class="brand" href={`/${lang}/`}>
-        <svg
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12.22 3.39A6.5 6.5 0 0 0 3.89 11.72"></path>
-          <path d="M20.32 10.77A6.5 6.5 0 1 0 20.32 18.23"></path>
-        </svg>
+        <Fragment set:html={markSvg({ attrs: { "aria-hidden": "true" } })} />
         <span>ZenCopy</span>
       </a>
       <nav>
@@ -192,20 +182,19 @@ const gettingStartedHref = `/${lang}/getting-started/`;
 
     <main>
       <section class="hero">
-        {/* The brand's two arcs, drawn like a single brush stroke. */}
-        <svg
-          aria-hidden="true"
-          class="enso"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12.22 3.39A6.5 6.5 0 0 0 3.89 11.72" pathLength="1"></path>
-          <path d="M20.32 10.77A6.5 6.5 0 1 0 20.32 18.23" pathLength="1"
-          ></path>
-        </svg>
+        {
+          /* The mark, its two arcs drawn in like a single brush stroke, and
+            the name beside it as text — the same pair as the headers. */
+        }
+        <div class="logo">
+          <Fragment
+            set:html={markSvg({
+              attrs: { "aria-hidden": "true" },
+              pathLength: 1,
+            })}
+          />
+          <span>ZenCopy</span>
+        </div>
         <h1>
           {
             copy.heroTitle
@@ -405,7 +394,9 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     font-weight: 500;
     letter-spacing: 0.01em;
   }
-  .brand svg {
+  /* The mark comes in as a string from the brand module, so its elements
+    carry no scope attribute — hence :global here and below. */
+  .brand :global(svg) {
     width: 1.25rem;
     height: 1.25rem;
   }
@@ -487,20 +478,29 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     text-align: center;
     padding: clamp(5rem, 14vh, 9rem) 0 clamp(4rem, 10vh, 7rem);
   }
-  .enso {
-    width: clamp(4.5rem, 10vw, 6rem);
-    height: clamp(4.5rem, 10vw, 6rem);
-    stroke-width: 1.1;
-    color: var(--ink);
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     margin-bottom: clamp(2rem, 5vh, 3.5rem);
+    color: var(--ink);
+    font-size: clamp(2.25rem, 4.5vw, 2.75rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .logo :global(svg) {
+    flex: none;
+    width: clamp(2.5rem, 5vw, 3rem);
+    height: clamp(2.5rem, 5vw, 3rem);
   }
   @media (prefers-reduced-motion: no-preference) {
-    .enso path {
+    .logo :global(.zc-mark path) {
       stroke-dasharray: 1;
       stroke-dashoffset: 1;
       animation: draw 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-    .enso path + path {
+    .logo :global(.zc-mark path + path) {
       animation-delay: 0.55s;
     }
     @keyframes draw {

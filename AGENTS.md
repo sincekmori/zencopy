@@ -22,7 +22,7 @@ Everything CI runs is scripted or is a one-liner:
 - `bun run format:check` — oxfmt, then prettier (`prettier-plugin-astro`) for `site/**/*.astro` (write with `bun run format`).
   oxfmt also formats `site/**/*.mdx` (list markers, emphasis, tables — never the line breaks of prose), so the Semantic Line Breaks policy below applies to `.mdx` as well; run `bun run format` after editing.
 - `bun run lint:toml` — Tombi with `--error-on-warnings`
-- `bun run build` — `tsc -b && vite build` (produces `dist/`)
+- `bun run build` — `bun run icons`, then `tsc -b && vite build`: produces `src-tauri/icons/` and `dist/`, the two things the Rust build embeds, so it comes before the cargo commands (as in CI)
 - `cargo fmt --manifest-path src-tauri/Cargo.toml --check`
 - `cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings`
 - `cargo test --manifest-path src-tauri/Cargo.toml`
@@ -49,6 +49,12 @@ The drivers read the popup's state off the DOM (`data-run-state` on the headline
 Locales default to the recorded ones; recording a locale needs every string the demos type (`instruction`, `concise`) in its `POPUP_RESULT_FIXTURES` entry first, and `--record` without `--locale` takes exactly those locales.
 `--keep-work` leaves each run's frames and a `report.json` (step timings, usage, replay drift) under `scratch/demo-video/`; a failed locale keeps them regardless, its `report.json` naming what stopped it.
 Needs ffmpeg 9 on PATH besides the screenshot prerequisites.
+
+The brand mark is drawn once, in [src/lib/brand.ts](src/lib/brand.ts) — the two arcs on Lucide's 24-unit grid, with functions that render them for a use (color, stroke, placement, a `pathLength` for a draw animation) as SVG strings, plus the raw geometry for React — and no brand file is committed: everything that shows it is rendered from the module when it is built, so a change to the mark is a change to that one file.
+The name beside it is always plain text in the surrounding font (never outlines): the app's `ZenCopyMark`, both site headers, the landing hero, and the docs architecture diagram inline the mark in `currentColor` and write "ZenCopy" next to it.
+The site's `favicon.svg` (the app icon, which the README shows too), `apple-touch-icon.png`, and `og.png` (the mark and the name over the en hero tagline of `landing-copy.ts`) are endpoints under [site/src/pages/](site/src/pages/), built with the site.
+[scripts/icons.ts](scripts/icons.ts) renders the app icon set and the tray glyph into `src-tauri/icons/` (gitignored) through `tauri icon`; `bun run build` runs it first and `tauri dev` runs it before the dev server, so the Rust build always embeds the current brand — after a fresh clone, run `bun run build` (or `bun run icons`) once before a bare `cargo` command.
+The dev server's tab icon is the same icon, inlined by a plugin in [vite.config.ts](vite.config.ts).
 
 Run everything relevant to your change before opening a PR.
 Windows- and Linux-side compilation is CI's job (the Rust code here is only ever compiled for macOS locally).
@@ -158,3 +164,4 @@ Keep the summary line short and factual; put the "why" and any surprising contex
 | Global trigger, tray, windows | [src-tauri/src/lib.rs](src-tauri/src/lib.rs) (wiring), [src-tauri/src/tray.rs](src-tauri/src/tray.rs), [src-tauri/src/windows.rs](src-tauri/src/windows.rs) |
 | Prompt templates              | [src-tauri/prompts/](src-tauri/prompts/) (pre-installed, embedded at build time, immutable at runtime); user prompts live in the app config dir             |
 | Homepage / docs (zencopy.app) | [site/](site/) — Astro + Starlight, deployed via Cloudflare Workers                                                                                         |
+| The brand mark and icons      | [src/lib/brand.ts](src/lib/brand.ts) — nothing else: every icon is rendered from it when the app or the site is built; the name is text                     |

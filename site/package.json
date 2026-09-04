@@ -8,7 +8,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "brand": "bun scripts/generate-brand.mjs",
     "deploy": "astro build && wrangler deploy",
     "lint": "eslint --max-warnings 0 . && astro check",
     "format": "prettier --write \"src/**/*.astro\"",

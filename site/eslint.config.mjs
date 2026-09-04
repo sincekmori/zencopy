@@ -26,10 +26,16 @@ const config = [
   },
   {
     // The architecture diagram is an SVG string computed by our own pure
-    // function from label props it XML-escapes — no user or remote input ever
-    // reaches it, so set:html is the intended form here, not an injection
-    // risk. The rule stays on everywhere else.
-    files: ["src/components/ArchitectureDiagram.astro"],
+    // function from label props it XML-escapes, and the logo in both headers
+    // and the landing hero is an SVG string from the brand module
+    // (src/lib/brand.ts) — no user or remote input ever reaches either, so
+    // set:html is the intended form here, not an injection risk. The rule
+    // stays on everywhere else.
+    files: [
+      "src/components/ArchitectureDiagram.astro",
+      "src/components/Landing.astro",
+      "src/components/SiteTitle.astro",
+    ],
     rules: {
       "astro/no-set-html-directive": "off",
     },

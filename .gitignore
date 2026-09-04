@@ -29,3 +29,7 @@ yarn-error.log*
 
 # The demo-video generator's per-run frames and reports (--keep-work)
 scratch/
+
+# The app icon set and the tray glyph, rendered from src/lib/brand.ts by
+# `bun run icons` (part of `bun run build` and of `tauri dev`)
+src-tauri/icons/

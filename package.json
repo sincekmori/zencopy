@@ -7,10 +7,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "bun run icons && tsc -b && vite build",
+    "icons": "bun scripts/icons.ts",
     "preview": "vite preview",
     "tauri": "tauri",
-    "brand": "tauri icon src/assets/zencopy-icon.svg -o src-tauri/icons && rm -rf src-tauri/icons/android src-tauri/icons/ios && bun run --cwd site brand",
     "dev-reset": "bun scripts/dev-reset.ts",
     "dev-usage": "bun scripts/dev-usage.ts",
     "lint": "oxlint --deny-warnings && bun run --cwd site lint",

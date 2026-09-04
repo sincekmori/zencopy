@@ -2,7 +2,28 @@ import path from "node:path";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
+import { iconSvg } from "./src/lib/brand.ts";
+
+/** The dev server's tab icon: the app icon from the brand module, inlined
+ *  into the page on the fly. The built app has no tab, so nothing ships. */
+function devFavicon(): Plugin {
+  return {
+    name: "zencopy:dev-favicon",
+    apply: "serve",
+    transformIndexHtml: () => [
+      {
+        tag: "link",
+        injectTo: "head",
+        attrs: {
+          rel: "icon",
+          type: "image/svg+xml",
+          href: `data:image/svg+xml,${encodeURIComponent(iconSvg())}`,
+        },
+      },
+    ],
+  };
+}
 
 // @tauri-apps/cli launches Vite, so the config is tuned for the Tauri dev flow:
 // a fixed port, no screen clearing, and ignoring the Rust source tree.
@@ -10,7 +31,7 @@ export default defineConfig({
   // React Compiler runs as a Babel preset over the same files @vitejs/plugin-react
   // handles; it auto-memoizes components and hooks at build time so we don't need
   // to reach for useMemo / useCallback / React.memo by hand.
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss()],
+  plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss(), devFavicon()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "./src"),

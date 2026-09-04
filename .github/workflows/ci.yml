@@ -49,7 +49,7 @@ jobs:
         run: bun install --frozen-lockfile --cwd site
 
       # Frontend: lint, dead-code scan, format, type-check + build (also
-      # produces dist/ for the Rust build's frontendDist).
+      # produces dist/ and src-tauri/icons/, both embedded by the Rust build).
       - run: bun run lint
       - run: bun run lint:dead
       - run: bun run format:check
