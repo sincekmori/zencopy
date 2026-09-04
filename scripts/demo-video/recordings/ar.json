@@ -1,0 +1,246 @@
+{
+  "locale": "ar",
+  "recorded": "2026-09-05T10:34:10.507Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:33:29"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "يستعرض هذا المستند بروتوكول HTCPCP التقني المخصص للتحكم في ماكينات إعداد القهوة عبر الشبكة.",
+      "tokens": {
+        "input": 467,
+        "output": 38
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "هذه الوثيقة هي مزحة تقنية نُشرت في يوم الأول من أبريل عام 1998، وهي تصف طريقة خيالية للتحكم في ماكينات صنع القهوة عبر شبكة الإنترنت.\n\nتخيل أنك تجلس في غرفتك وتريد أن تطلب من الماكينة الموجودة في المطبخ أن تبدأ في إعداد القهوة، تماماً كما تطلب من متصفح الإنترنت أن يجلب لك صفحة ويب. الطريقة التي تتحدث بها أجهزة الكمبيوتر مع بعضها البعض عبر الإنترنت تسمى \"بروتوكول\"، وهذا النص يقترح بروتوكولاً فكاهياً يسمى \"بروتوكول التحكم في إبريق القهوة عبر النص التشعبي\".\n\nإليك كيف تُفهم هذه الفكرة:\n\nأولاً، أجهزة الكمبيوتر تتفاهم بلغة معينة. لكي يفتح جهازك صفحة إلكترونية، فإنه يرسل طلباً إلى موقع ما ويستقبل رداً، وهذا ما نسميه بروتوكول نقل النص التشعبي. الفكرة في هذه الوثيقة هي استخدام نفس هذه الطريقة ولكن لإصدار أوامر لماكينة القهوة.\n\nثانياً، في ذلك الوقت، كان الناس متحمسين لفكرة ربط كل شيء في المنزل بالإنترنت، مثل الغلايات والمحامص. أراد كاتب هذه الوثيقة أن يسخر من هذا التوجه من خلال كتابة قواعد تقنية معقدة ورسمية جداً لشيء بسيط جداً وهو \"صنع فنجان قهوة\".\n\nثالثاً، يتضمن النص مصطلحات تقنية تبدو حقيقية ومقنعة، مثل ذكر \"بروتوكول إدارة الشبكة البسيط\" (Simple Network Management Protocol) الذي يستخدم فعلياً لإدارة الأجهزة، ليجعل القارئ يصدق لفترة وجيزة أن هذا الاقتراح جدي.\n\nرابعاً، هذه الوثيقة ليست قانوناً أو معياراً حقيقياً يجب على الشركات اتباعه. هي مجرد طريقة ممتعة للمبرمجين للسخرية من كيفية كتابة المعايير التقنية الجادة، ومن هوس الناس بربط الأجهزة البسيطة بشبكة الإنترنت.\n\nخلاصة القول، هذه الوثيقة هي نكتة في قالب تقني، صُممت لتضحك المبرمجين الذين يعرفون كيف تعمل الشبكات، حيث تحول عملية إعداد القهوة إلى إجراء تقني معقد لا داعي له.",
+      "tokens": {
+        "input": 773,
+        "output": 542
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "باختصار أكثر، من فضلك",
+      "reply": "هذه الوثيقة هي \"مزحة تقنية\" نُشرت عام 1998 كنوع من الدعابة بين المبرمجين. هي تصف طريقة خيالية للتحكم في ماكينة القهوة عبر الإنترنت باستخدام قواعد تقنية تشبه الطريقة التي تعمل بها مواقع الويب.\n\nالفكرة ببساطة هي محاكاة جادة للغة البرمجة لشيء بسيط مثل \"إعداد القهوة\"، للسخرية من هوس الناس في ذلك الوقت بربط كل أجهزة المنزل بالإنترنت، وهي ليست قاعدة تقنية حقيقية.",
+      "tokens": {
+        "input": 1329,
+        "output": 133
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "حول إلى جدول",
+      "reply": "| الحقل | التفاصيل |\n| :--- | :--- |\n| **اسم البروتوكول** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **رقم الطلب (RFC)** | 2324 |\n| **التاريخ** | 1 أبريل 1998 |\n| **المؤلف** | L. Masinter |\n| **الفئة** | معلوماتي (Informational) |\n| **الغرض** | التحكم في أوعية صنع القهوة ومراقبتها وتشخيص أعطالها |\n| **الأساس المنطقي** | الحاجة إلى بروتوكول موزع لتمكين التحكم عن بعد في أجهزة صنع القهوة في بيئة الحوسبة المنتشرة |",
+      "tokens": {
+        "input": 696,
+        "output": 178
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          6.228,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eيستعرض هذا المستند بروتوكول HTCPCP التقني\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 18,\"totalTokenCount\": 485,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" المخصص للتحكم في ماكينات إعداد القهوة عبر الشبكة.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPSQ2HoSe/sPIvylkH/MwMjG7EKODJr7y8U1m9q190HZvU4gdIvPa8KVJqmDRl3ACdM7tCkDZb16yl1jN9SCHvv+nLOYxrZmuf3yfIRVCQsZMMX3mxoZxAAlkaMcUmGlKhVFNWLVZPZTB9wg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "e05fa0cbec99550d139e08c9714447539857f7b5be5d45faf63d5bdbf4018ce2"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.26,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nهذه الوثيقة هي مزحة تقنية نُشرت في يوم الأول من\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 22,\"totalTokenCount\": 795,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" أبريل عام 1998، وهي تصف طريقة خيالية للتحكم في ماكينات صنع القه\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 47,\"totalTokenCount\": 820,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وة عبر شبكة الإنترنت.\\n\\nتخيل أنك تجلس في غرفتك وتريد أن تطلب من الم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 72,\"totalTokenCount\": 845,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.323,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"اكينة الموجودة في المطبخ أن تبدأ في إعداد القهوة، تماماً كما تطلب من متصفح الإنترنت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 100,\"totalTokenCount\": 873,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.409,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" أن يجلب لك صفحة ويب. الطريقة التي تتحدث بها أجهزة الكمبيوتر مع بعضها البعض عبر الإنترنت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 124,\"totalTokenCount\": 897,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.529,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" تسمى \\\"بروتوكول\\\"، وهذا النص يقترح بروتوكولاً فكاهياً يسمى \\\"بروتوكول\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 152,\"totalTokenCount\": 925,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.674,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" التحكم في إبريق القهوة عبر النص التشعبي\\\".\\n\\nإليك كيف تُفهم هذه الفكرة:\\n\\nأ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 179,\"totalTokenCount\": 952,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.697,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ولاً، أجهزة الكمبيوتر تتفاهم بلغة معينة. لكي يفتح جهازك صفحة إ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 203,\"totalTokenCount\": 976,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.785,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"لكترونية، فإنه يرسل طلباً إلى موقع ما ويستقبل رداً، وهذا ما نسميه بر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1001,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.888,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وتوكول نقل النص التشعبي. الفكرة في هذه الوثيقة هي استخدام نفس هذه الطريقة ولكن لإ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 252,\"totalTokenCount\": 1025,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          2.975,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"صدار أوامر لماكينة القهوة.\\n\\nثانياً، في ذلك الوقت، كان الناس متحمسين لف\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 278,\"totalTokenCount\": 1051,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.112,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"كرة ربط كل شيء في المنزل بالإنترنت، مثل الغلايات والمحامص. أراد كاتب هذه\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 303,\"totalTokenCount\": 1076,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.288,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" الوثيقة أن يسخر من هذا التوجه من خلال كتابة قواعد تقنية معقدة ورسمية جداً لشي\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 330,\"totalTokenCount\": 1103,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.31,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ء بسيط جداً وهو \\\"صنع فنجان قهوة\\\".\\n\\nثالثاً، يتضمن النص مصطلحات تق\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 356,\"totalTokenCount\": 1129,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.479,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"نية تبدو حقيقية ومقنعة، مثل ذكر \\\"بروتوكول إدارة الشبكة البسيط\\\" (Simple Network Management\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 384,\"totalTokenCount\": 1157,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.481,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Protocol) الذي يستخدم فعلياً لإدارة الأجهزة، ليجعل القارئ يصدق لفترة وج\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 408,\"totalTokenCount\": 1181,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.694,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"يزة أن هذا الاقتراح جدي.\\n\\nرابعاً، هذه الوثيقة ليست قانوناً أو معيار\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 432,\"totalTokenCount\": 1205,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.889,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"اً حقيقياً يجب على الشركات اتباعه. هي مجرد طريقة ممتعة للمبرمجين للسخرية من كيفية\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 458,\"totalTokenCount\": 1231,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" كتابة المعايير التقنية الجادة، ومن هوس الناس بربط الأجهزة البسيطة بشبكة الإنترنت.\\n\\nخ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 486,\"totalTokenCount\": 1259,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          3.993,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"لاصة القول، هذه الوثيقة هي نكتة في قالب تقني، صُممت لتضحك الم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 511,\"totalTokenCount\": 1284,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          4.208,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"برمجين الذين يعرفون كيف تعمل الشبكات، حيث تحول عملية إعداد القهوة إلى إجراء تقني مع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 536,\"totalTokenCount\": 1309,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          4.233,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"قد لا داعي له.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 542,\"totalTokenCount\": 1315,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ],
+        [
+          4.295,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPe6eudyxxl99MnXr86v5RXyLzwTlB9ZX/plf/F9tmrpi7x3P8QTKWjgfbdaHEHQe1wmyH5AHYgLrQZpFcZcVYCOHPYN51nPmKfZBN4C/mAMLMU2SgvD3N72feG/4Gu6P1sZxo3Ge6ZRZsqQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 542,\"totalTokenCount\": 1315,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "90306a658a2a1438428c6733b509ec26d29e80873141563146cdf09dbeefc5d1"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.884,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1331,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ],
+        [
+          1.886,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nهذه الوثيقة هي \\\"مزحة تقنية\\\" نُشرت عام\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 21,\"totalTokenCount\": 1350,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ],
+        [
+          2.011,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 1998 كنوع من الدعابة بين المبرمجين. هي تصف طريقة خيالية لل\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 45,\"totalTokenCount\": 1374,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ],
+        [
+          2.116,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"تحكم في ماكينة القهوة عبر الإنترنت باستخدام قواعد تقنية تشبه الطريقة التي تعمل بها مواقع ال\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 69,\"totalTokenCount\": 1398,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ],
+        [
+          2.203,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ويب.\\n\\nالفكرة ببساطة هي محاكاة جادة للغة البرمجة لشيء بسيط مثل \\\"إعداد\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 96,\"totalTokenCount\": 1425,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ],
+        [
+          2.368,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" القهوة\\\"، للسخرية من هوس الناس في ذلك الوقت بربط كل أجهزة المنزل بالإنترنت،\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 120,\"totalTokenCount\": 1449,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ],
+        [
+          2.409,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" وهي ليست قاعدة تقنية حقيقية.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 133,\"totalTokenCount\": 1462,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ],
+        [
+          2.454,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPedfw8Qa+tjengY/7tQp6AegWjThhwX/wCvYtSlJfWax39ZzS19o1EKJa2zIPgTGSewIHx/1tW0UN89uEnWz2yvr2oqHBLAA9AIRkUHDgu+hqwxby0HVF6DZKRnoTB812SBr3yl3u4RPKmw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 133,\"totalTokenCount\": 1462,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "4ba106cbb1b621d48d6cff167bf31dccc28610649ac86be0c31353b4149eca02"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.875,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| الحقل | التفاصيل |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 21,\"totalTokenCount\": 717,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **اسم البروتوكول** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 47,\"totalTokenCount\": 743,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"رقم الطلب (RFC)** | 2324 |\\n| **التاريخ** | 1 أبريل\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 71,\"totalTokenCount\": 767,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+        ],
+        [
+          1.907,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 1998 |\\n| **المؤلف** | L. Masinter |\\n| **الفئة\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 95,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+        ],
+        [
+          2.005,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"** | معلوماتي (Informational) |\\n| **الغرض** | التحكم في أوعية صنع القهوة ومراقبت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 123,\"totalTokenCount\": 819,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+        ],
+        [
+          2.092,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ها وتشخيص أعطالها |\\n| **الأساس المنطقي** | الحاجة إلى بروتوكول مو\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 150,\"totalTokenCount\": 846,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+        ],
+        [
+          2.276,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"زع لتمكين التحكم عن بعد في أجهزة صنع القهوة في بيئة الحوسبة المنتشرة |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 178,\"totalTokenCount\": 874,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPT5xgOCCji3dbbuYirRlW1uy2pI0iyTdsZIk25kVa+PM5e38Bh6V4zUPgBfNSv3X6wUcMOdBbkr8NZjfdF+2+Jetcqch58I1n3Nb7vkE0T9DyLdFmGE6YE2nBq5KMe5avI7XHTpzVQosTLA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 178,\"totalTokenCount\": 874,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "824a9dd0ca379584e7102c434689140e0a194580124c1af1a7ee78c94878dd3c"
+    }
+  ]
+}

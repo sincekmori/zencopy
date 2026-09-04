@@ -26,3 +26,6 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
+
+# The demo-video generator's per-run frames and reports (--keep-work)
+scratch/

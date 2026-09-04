@@ -1,0 +1,18 @@
+{
+  "video": "template.mp4",
+  "sha256": "36241651168aa359a69faf298c9839f1bedd51d627eee17f1ca955abc844c4c3",
+  "width": 1748,
+  "height": 2262,
+  "duration": 7,
+  "appear": 3.333333,
+  "popup": {
+    "x": 520,
+    "y": 2
+  },
+  "card": {
+    "x": 540,
+    "y": 18,
+    "w": 1194,
+    "h": 1098
+  }
+}

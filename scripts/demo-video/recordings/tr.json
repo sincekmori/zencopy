@@ -1,0 +1,262 @@
+{
+  "locale": "tr",
+  "recorded": "2026-09-05T10:33:26.408Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:32:48"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "Bu belge, internet üzerinden kahve makinelerini kontrol etmek, izlemek ve tanılamak amacıyla geliştirilen şaka amaçlı bir protokolü (HTCPCP) tanımlamaktadır.",
+      "tokens": {
+        "input": 467,
+        "output": 41
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "Bu metin, kahve makinelerini internet üzerinden kontrol etmek için hayali bir dil öneren eğlenceli bir şakadır. İnternet dünyasında insanlar, bilgisayarların birbirleriyle nasıl konuşacağını belirleyen kurallar bütününe \"protokol\" der. Bu belge, kahve makinelerinin internete bağlanıp nasıl kahve yapacağını veya nasıl kontrol edileceğini anlatan bir tür şaka yoluyla yazılmış kılavuzdur.\n\nİnternet dünyasında protokoller, bir web sitesini açarken bilgisayarınızın sunucuya ne göndermesi gerektiğini söyler. Örneğin, bir web sayfasını görmek için tarayıcınız \"bana bu sayfayı ver\" der. Bu metin, buna benzer bir şekilde, \"bana bir kahve yap\" veya \"kahvem hazır mı\" gibi komutları kahve makineleri için tanımlar.\n\nBu metnin yazılmasının sebebi, internetin her yere yayıldığı bir dönemde insanların her şeyi bilgisayara bağlama isteğiyle dalga geçmektir. 1990'ların sonunda insanlar internete tost makineleri veya içecek otomatları gibi cihazları bağlamaya başlamıştı. Bu belge de \"madem her şey internete bağlanıyor, o zaman kahve makineleri için de özel bir kural seti olsun\" diyerek durumu abartılı bir şekilde ele alır.\n\nYazıda geçen \"Hyper Text Coffee Pot Control Protocol\" yani \"Hiper Metin Kahve Potu Kontrol Protokolü\" ifadesi, aslında internetin temel dili olan \"Hyper Text Transfer Protocol\" (Hiper Metin Aktarım Protokolü) isimli gerçek kural setine bir göndermedir.\n\nBu belge, teknik bir standart değildir ve gerçek hayatta kullanılmaz. Bilgisayar mühendisleri, 1 Nisan şakası geleneği kapsamında her yıl böyle komik ve ciddi görünen belgeler hazırlarlar. Bu metin de 1 Nisan 1998 tarihinde yayınlanmış, bilgisayar dünyasının kendi içindeki bir şakasıdır.",
+      "tokens": {
+        "input": 773,
+        "output": 438
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "Biraz daha kısa olsun lütfen",
+      "reply": "Bu metin, internet üzerinden kahve makinesi yönetmek için hayali bir dil öneren eğlenceli bir şakadır. Bilgisayarların birbiriyle konuşma kurallarına \"protokol\" denir. Bu belge, gerçek internet kurallarıyla dalga geçerek, kahve makinelerini internete bağlamanın komik bir yolunu anlatır.\n\nİnternet dünyasında insanlar, her şeyi bilgisayara bağlama tutkusuna zaman zaman bu gibi şakalarla yanıt verirler. Metin, \"Hiper Metin Aktarım Protokolü\" (HTTP) isimli gerçek kural setinin ismini \"Hiper Metin Kahve Potu Kontrol Protokolü\" (HTCPCP) yaparak durumu abartır.\n\nBu belge gerçek bir işe yaramaz; yazılımcıların 1 Nisan şakası geleneğiyle oluşturduğu mizahi bir yazıdır. Bilgisayar dünyasında ciddi bir standart gibi görünse de, tamamen teknik bir espri niteliği taşır.",
+      "tokens": {
+        "input": 1222,
+        "output": 228
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "Tablo yap",
+      "reply": "| Başlık | Açıklama |\n| :--- | :--- |\n| **Protokol Adı** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **Yayın Tarihi** | 1 Nisan 1998 |\n| **Yazar** | L. Masinter |\n| **Kategori** | Bilgilendirme (Informational) |\n| **Temel Amaç** | Kahve makinelerinin kontrol edilmesi, izlenmesi ve tanılanması |\n| **Gerekçe** | Ubiquitous (her yerde bulunan) bilişim dünyasında kahve demleme ihtiyacı |\n| **Önceki Örnekler** | İnternete bağlı otomatlar (COKE) ve İnternet Tost Makinesi (RFC 2235) |",
+      "tokens": {
+        "input": 696,
+        "output": 187
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          4.068,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eBu belge, internet üzerinden kahve makinelerini kontrol etmek, izlemek ve tanı\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 19,\"totalTokenCount\": 486,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\n"
+        ],
+        [
+          4.096,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"lamak amacıyla geliştirilen şaka amaçlı bir protokolü (HTCPCP) tanımlamaktadır.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 41,\"totalTokenCount\": 508,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\n"
+        ],
+        [
+          4.156,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPjSVItM0fuo/hXmKL2SvR9dWy9u+tPcYjHCSgfxbVPVkL0WLY8H3JQKGPRlbeyg3h9E5xo5jiyyD2TJ/x+0wqxY/PoGjviv7P7999Praipo51leXDX40ZtVLEhvuDZlocOJlGpbjzEw1fKQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 41,\"totalTokenCount\": 508,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "b8f904a627da78517859afbc46a692af95fe82799faf317b17ae0fac65e8d6d0"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.58,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eBu metin, kahve makinelerini internet üzerinden kontrol etmek için hayali\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 18,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bir dil öneren eğlenceli bir şakadır. İnternet dünyasında insanlar, bilgisayarların birbirleriyle\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 44,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          2.701,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" nasıl konuşacağını belirleyen kurallar bütününe \\\"protokol\\\" der. Bu belge, kahve makinelerinin internete bağlan\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 71,\"totalTokenCount\": 844,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          2.827,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ıp nasıl kahve yapacağını veya nasıl kontrol edileceğini anlatan bir tür şaka yoluyla yazılmış kılavuz\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 95,\"totalTokenCount\": 868,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          2.929,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"dur.\\n\\nİnternet dünyasında protokoller, bir web sitesini açarken bilgisayarınızın sunucuya ne gönd\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 122,\"totalTokenCount\": 895,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          2.989,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ermesi gerektiğini söyler. Örneğin, bir web sayfasını görmek için tarayıcınız \\\"bana bu sayfayı ver\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 148,\"totalTokenCount\": 921,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          3.137,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\\" der. Bu metin, buna benzer bir şekilde, \\\"bana bir kahve yap\\\" veya \\\"kahvem\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 172,\"totalTokenCount\": 945,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          3.354,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" hazır mı\\\" gibi komutları kahve makineleri için tanımlar.\\n\\nBu metnin yazılmasının sebebi, internetin her\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 199,\"totalTokenCount\": 972,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          3.548,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" yere yayıldığı bir dönemde insanların her şeyi bilgisayara bağlama isteğiyle dalga geçmektir. \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 225,\"totalTokenCount\": 998,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          3.548,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"1990'ların sonunda insanlar internete tost makineleri veya içecek otomatları gibi cihazları bağlamaya başlam\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 251,\"totalTokenCount\": 1024,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          3.763,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ıştı. Bu belge de \\\"madem her şey internete bağlanıyor, o zaman kahve makineleri için de özel\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 275,\"totalTokenCount\": 1048,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          3.763,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bir kural seti olsun\\\" diyerek durumu abartılı bir şekilde ele alır.\\n\\nYazıda geçen \\\"Hyper Text Coffee\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 301,\"totalTokenCount\": 1074,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Pot Control Protocol\\\" yani \\\"Hiper Metin Kahve Potu Kontrol Protokolü\\\" ifadesi, aslında internet\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 326,\"totalTokenCount\": 1099,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          3.85,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"in temel dili olan \\\"Hyper Text Transfer Protocol\\\" (Hiper Metin Aktarım Protokolü) isimli gerçek\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 350,\"totalTokenCount\": 1123,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          4.063,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" kural setine bir göndermedir.\\n\\nBu belge, teknik bir standart değildir ve gerçek hayatta kullanılmaz. Bil\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 376,\"totalTokenCount\": 1149,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          4.169,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"gisayar mühendisleri, 1 Nisan şakası geleneği kapsamında her yıl böyle komik ve ciddi görü\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 400,\"totalTokenCount\": 1173,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          4.191,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"nen belgeler hazırlarlar. Bu metin de 1 Nisan 1998 tarihinde yayınlanmış, bilgis\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 424,\"totalTokenCount\": 1197,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          4.257,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ayar dünyasının kendi içindeki bir şakasıdır.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 438,\"totalTokenCount\": 1211,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ],
+        [
+          4.301,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPahVKbiorzMjHMdcu1KgFTuUtUTbXBx6fnPoAKnaVv2AABWWU46uYR1XSvWk2obIYZcda/Pivt7LphvIFibTAMUIQo7M99Vf4EY5lZwEOd+Y6FamwaIpUmTOsR4uqvG4wJPcWKeI4pdImTw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 438,\"totalTokenCount\": 1211,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "50f8178daf773fa1f59dc4140b54fb00ed43147c72c62e31ba9c444fb816b856"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.862,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1224,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          2.863,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nBu metin, internet üzerinden kahve makinesi yönetmek için hayali bir dil öner\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 22,\"totalTokenCount\": 1244,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          2.924,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"en eğlenceli bir şakadır. Bilgisayarların birbiriyle konuşma kurallarına \\\"protokol\\\" den\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 51,\"totalTokenCount\": 1273,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.073,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ir. Bu belge, gerçek internet kurallarıyla dalga geçerek, kahve makinelerini internete bağlamanın\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 75,\"totalTokenCount\": 1297,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.094,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" komik bir yolunu anlatır.\\n\\nİnternet dünyasında insanlar, her şeyi bilgisayara bağlama\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 99,\"totalTokenCount\": 1321,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.278,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" tutkusuna zaman zaman bu gibi şakalarla yanıt verirler. Metin, \\\"Hiper Metin Akt\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 123,\"totalTokenCount\": 1345,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"arım Protokolü\\\" (HTTP) isimli gerçek kural setinin ismini \\\"Hiper Metin Kahve Pot\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 148,\"totalTokenCount\": 1370,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.385,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"u Kontrol Protokolü\\\" (HTCPCP) yaparak durumu abartır.\\n\\nBu belge gerçek bir işe y\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 174,\"totalTokenCount\": 1396,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.432,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"aramaz; yazılımcıların 1 Nisan şakası geleneğiyle oluşturduğu mizahi bir yaz\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 198,\"totalTokenCount\": 1420,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.592,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ıdır. Bilgisayar dünyasında ciddi bir standart gibi görünse de, tamamen teknik bir espri niteliği taşır.\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 225,\"totalTokenCount\": 1447,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.679,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1450,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ],
+        [
+          3.722,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPNzBBTwZFMb3JwtwjQxDbew+kod5pE9zHW8Yd4gPmMXlJklYihCiCTim9cY8JeCcc8+JH4OaVhb7oJi8k3HVAP4sbk2GB0dhZCPNvPBG/dHUP8VYxYOT23LykDb4LP04ccRqJIQqwuOLajA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1450,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "22755f3147e4b72cdf23c5a65c2e630f4aae3f1ed1b861042679fbc960a52c9b"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.104,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Başlık | Açıklama |\\n| :--- | :---\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 19,\"totalTokenCount\": 715,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+        ],
+        [
+          1.293,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| **Protokol Adı** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 43,\"totalTokenCount\": 739,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+        ],
+        [
+          1.5,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"0) |\\n| **Yayın Tarihi** | 1 Nisan 1998 |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 67,\"totalTokenCount\": 763,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Yazar** | L. Masinter |\\n| **Kategori** | Bilgilendirme (Informational) |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 92,\"totalTokenCount\": 788,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+        ],
+        [
+          1.589,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Temel Amaç** | Kahve makinelerinin kontrol edilmesi, izlenmesi ve tanılanması |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 116,\"totalTokenCount\": 812,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+        ],
+        [
+          1.632,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Gerekçe** | Ubiquitous (her yerde bulunan) bilişim dünyasında kahve demleme ihtiy\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 141,\"totalTokenCount\": 837,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+        ],
+        [
+          1.795,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"acı |\\n| **Önceki Örnekler** | İnternete bağlı otomatlar (COKE) ve İn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 168,\"totalTokenCount\": 864,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+        ],
+        [
+          1.999,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ternet Tost Makinesi (RFC 2235) |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 187,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPMBoRfHBrl5km/t+pZhookf7EUgIpG3fVMjZE2oTkw749MuU/Z0r8iEz84krL/ly6ZG970XxaYu0CYWKHeylH2FxLh3K7TKuUg1yqd43pOrjylFNsLz5kX93sK9wmL60UUfEdKaIjjvXI2A==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 187,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "0ff91a843f10ec9c7e011ae33f502aec990d6d9843474dd4a4e812cd9a6f0d6a"
+    }
+  ]
+}

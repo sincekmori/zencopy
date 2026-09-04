@@ -46,109 +46,150 @@ export const SCREENSHOT_SCENARIOS: Record<
 
 /** The popup scenario's conversation, per locale (the copied source stays
  *  English on purpose — summarizing a foreign text in your own language is
- *  the product story, and it matches the demo videos). Embedded strings, no
- *  model call; all of this tree-shakes out of production with the rest of
- *  the scenario machinery. */
+ *  the product story, and it matches the demo videos). `instruction` and
+ *  `concise` are what the demo-video generator types (scripts/demo-video.ts):
+ *  the request in the Custom slot, and the reply under an explanation asking
+ *  for a shorter one — the two strings here that reach a model. Embedded
+ *  strings; all of this tree-shakes out of production with the rest of the
+ *  scenario machinery. */
 export const POPUP_RESULT_SOURCE =
   "HTCPCP is an April Fools' protocol for controlling coffee pots over HTTP.";
 
 export const POPUP_RESULT_FIXTURES: Record<
   string,
-  { answer: string; question: string; reply: string }
+  { answer: string; question: string; reply: string; instruction: string; concise: string }
 > = {
   en: {
     answer: "A tongue-in-cheek HTTP extension for controlling coffee pots.",
     question: "One more detail, please.",
     reply: 'It also defines the 418 "I\'m a teapot" status code.',
+    instruction: "Make a table",
+    concise: "A bit shorter, please",
   },
   ja: {
     answer: "コーヒーポットを制御するための、冗談仕立ての HTTP 拡張です。",
     question: "もう少し詳しく教えて。",
     reply: "418「I'm a teapot」というステータスコードも定義しています。",
+    instruction: "表にして",
+    concise: "もう少し簡潔に",
   },
   "zh-Hans": {
     answer: "一个用于控制咖啡壶的恶搞 HTTP 扩展协议。",
     question: "再讲一个细节。",
     reply: "它还定义了 418「I'm a teapot」状态码。",
+    instruction: "做成表格",
+    concise: "再简洁一点",
   },
   "zh-Hant": {
     answer: "一個用於控制咖啡壺的惡搞 HTTP 擴充協定。",
     question: "再講一個細節。",
     reply: "它還定義了 418「I'm a teapot」狀態碼。",
+    instruction: "做成表格",
+    concise: "再簡潔一點",
   },
   ko: {
     answer: "커피포트를 제어하기 위한 장난스러운 HTTP 확장입니다.",
     question: "조금 더 자세히 알려 줘.",
     reply: '418 "I\'m a teapot" 상태 코드도 정의하고 있습니다.',
+    instruction: "표로 만들어 줘",
+    concise: "조금 더 간결하게 해 줘",
   },
   es: {
     answer: "Una extensión humorística de HTTP para controlar cafeteras.",
     question: "Un detalle más, por favor.",
     reply: "También define el código de estado 418 «I'm a teapot».",
+    instruction: "Haz una tabla",
+    concise: "Un poco más breve, por favor",
   },
   "pt-BR": {
     answer: "Uma extensão humorística do HTTP para controlar cafeteiras.",
     question: "Mais um detalhe, por favor.",
     reply: 'Ela também define o código de status 418 "I\'m a teapot".',
+    instruction: "Faça uma tabela",
+    concise: "Um pouco mais curto, por favor",
   },
   fr: {
     answer: "Une extension humoristique de HTTP pour piloter des cafetières.",
     question: "Un détail de plus, s'il te plaît.",
     reply: "Elle définit aussi le code d'état 418 « I'm a teapot ».",
+    instruction: "Sous forme de tableau",
+    concise: "Un peu plus court, s'il te plaît",
   },
   de: {
     answer: "Eine augenzwinkernde HTTP-Erweiterung zum Steuern von Kaffeekannen.",
     question: "Noch ein Detail, bitte.",
     reply: "Sie definiert auch den Statuscode 418 „I'm a teapot“.",
+    instruction: "Als Tabelle",
+    concise: "Etwas kürzer, bitte",
   },
   it: {
     answer: "Un'estensione scherzosa di HTTP per controllare le caffettiere.",
     question: "Ancora un dettaglio, per favore.",
     reply: 'Definisce anche il codice di stato 418 "I\'m a teapot".',
+    instruction: "Fai una tabella",
+    concise: "Un po' più breve, per favore",
   },
   pl: {
     answer: "Żartobliwe rozszerzenie HTTP do sterowania ekspresami do kawy.",
     question: "Poproszę jeszcze jeden szczegół.",
     reply: "Definiuje też kod stanu 418 „I'm a teapot”.",
+    instruction: "Zrób tabelę",
+    concise: "Trochę krócej, proszę",
   },
   ru: {
     answer: "Шуточное расширение HTTP для управления кофейниками.",
     question: "Ещё одну деталь, пожалуйста.",
     reply: "Оно также определяет код состояния 418 «I'm a teapot».",
+    instruction: "Сделай таблицу",
+    concise: "Немного короче, пожалуйста",
   },
   id: {
     answer: "Ekstensi HTTP lelucon untuk mengendalikan teko kopi.",
     question: "Satu detail lagi, ya.",
     reply: 'Protokol ini juga mendefinisikan kode status 418 "I\'m a teapot".',
+    instruction: "Jadikan tabel",
+    concise: "Sedikit lebih ringkas, ya",
   },
   vi: {
     answer: "Một phần mở rộng HTTP mang tính đùa vui để điều khiển bình pha cà phê.",
     question: "Cho mình thêm một chi tiết nữa.",
     reply: 'Nó cũng định nghĩa mã trạng thái 418 "I\'m a teapot".',
+    instruction: "Làm thành bảng",
+    concise: "Ngắn gọn hơn một chút nhé",
   },
   th: {
     answer: "ส่วนขยาย HTTP เชิงล้อเล่นสำหรับควบคุมหม้อต้มกาแฟ",
     question: "ขอรายละเอียดอีกหนึ่งอย่าง",
     reply: 'ยังกำหนดรหัสสถานะ 418 "I\'m a teapot" ไว้ด้วย',
+    instruction: "ทำเป็นตาราง",
+    concise: "ขอสั้นกว่านี้อีกหน่อย",
   },
   tr: {
     answer: "Kahve demliklerini kontrol etmek için şaka amaçlı bir HTTP uzantısı.",
     question: "Bir ayrıntı daha lütfen.",
     reply: 'Ayrıca 418 "I\'m a teapot" durum kodunu da tanımlar.',
+    instruction: "Tablo yap",
+    concise: "Biraz daha kısa olsun lütfen",
   },
   ar: {
     answer: "امتداد HTTP ساخر للتحكم في أباريق القهوة.",
     question: "فضلًا، تفصيلة أخرى.",
     reply: "كما يعرّف رمز الحالة 418 «I'm a teapot».",
+    instruction: "حول إلى جدول",
+    concise: "باختصار أكثر، من فضلك",
   },
   fa: {
     answer: "یک افزونهٔ شوخی‌آمیز HTTP برای کنترل قهوه‌جوش‌ها.",
     question: "یک نکته دیگر، لطفاً.",
     reply: "همچنین کد وضعیت ۴۱۸ «I'm a teapot» را تعریف می‌کند.",
+    instruction: "به صورت جدول",
+    concise: "کمی خلاصه‌تر، لطفاً",
   },
   he: {
     answer: "הרחבת HTTP היתולית לשליטה בקנקני קפה.",
     question: "עוד פרט אחד, בבקשה.",
     reply: 'היא גם מגדירה את קוד הסטטוס 418 "I\'m a teapot".',
+    instruction: "הפוך לטבלה",
+    concise: "קצת יותר בקצרה, בבקשה",
   },
 };

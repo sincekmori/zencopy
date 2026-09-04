@@ -19,7 +19,8 @@
     "lint:toml": "tombi lint --error-on-warnings",
     "format": "oxfmt && bun run --cwd site format",
     "format:check": "oxfmt --check && bun run --cwd site format:check",
-    "screenshot": "bun scripts/screenshot.ts"
+    "screenshot": "bun scripts/screenshot.ts",
+    "demo-video": "bun scripts/demo-video.ts"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.1",

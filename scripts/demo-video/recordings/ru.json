@@ -1,0 +1,258 @@
+{
+  "locale": "ru",
+  "recorded": "2026-09-05T10:30:48.347Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:30:08"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "HTCPCP — это первоапрельский шуточный протокол для дистанционного управления кофеварками через интернет.",
+      "tokens": {
+        "input": 467,
+        "output": 29
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "Этот текст — шуточный документ, написанный в виде серьезного инженерного стандарта, чтобы показать, как компьютеры могут управлять бытовыми приборами.\n\nПредставьте, что вы хотите отправить сообщение своему кофейнику через интернет, чтобы он начал варить кофе к вашему пробуждению. Чтобы приборы понимали команды людей и других компьютеров, им нужен общий язык. Этот язык называют «протоколом».\n\nАвторы документа придумали вымышленный протокол под названием «Протокол управления гипертекстовым кофейником» (в оригинале это аббревиатура HTCPCP). Это шутка, созданная для того, чтобы посмеяться над тем, как инженеры стараются описать каждое действие в мире с помощью сложных правил.\n\nВот как это работает шаг за шагом:\n\n1. Правила общения: В интернете компьютеры общаются друг с другом по строгим правилам, которые называются протоколами. Например, когда вы открываете сайт, ваш браузер использует протокол передачи гипертекста (HTTP). Это набор команд для передачи текста и картинок.\n\n2. Смешение серьезного и несерьезного: Авторы взяли структуру настоящего инженерного документа, в которых обычно описываются важные стандарты связи, и применили её к кухонному прибору. Они представили, что приготовление кофе — это такая же задача для интернета, как и передача данных.\n\n3. Зачем это было нужно: В девяностые годы люди начали подключать к сети самые простые вещи, например, торговые автоматы с газировкой или тостеры. Это было весело, но в основном бесполезно. Этот документ высмеивает идею о том, что абсолютно каждый предмет в доме, даже кофейник, должен быть «умным» и подключенным к сети.\n\n4. Суть документа: Текст описывает, как компьютер мог бы отправлять кофейнику команды «свари кофе» или «остановись». Поскольку это шутка, в нем нет настоящих инструкций для реальной техники. Однако он имитирует язык настоящих специалистов, чтобы показать, как выглядят технические требования для создания связи между устройствами.\n\nВ конечном итоге, этот документ не является официальным правилом интернета. Это памятка для инженеров, напоминающая им, что не всё в мире нужно превращать в компьютерную программу, даже если это кажется технически возможным.",
+      "tokens": {
+        "input": 773,
+        "output": 521
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "Немного короче, пожалуйста",
+      "reply": "Этот текст — шутка, написанная в виде серьезного инженерного документа. Его авторы решили представить, как выглядели бы правила общения между компьютером и кофейником, если бы их подключили к интернету.\n\nВ сети компьютеры общаются друг с другом по строгому порядку — «протоколу». Самый известный из них — протокол передачи гипертекста (HTTP), который позволяет нам открывать сайты. Авторы придумали похожий «Протокол управления гипертекстовым кофейником» (HTCPCP), чтобы в шутливой форме описать, как можно отдавать команды кухонной технике через интернет.\n\nДокумент высмеивает моду 1990-х годов, когда инженеры начали подключать к сети всё подряд: от торговых автоматов до тостеров. Хотя текст выглядит как официальная техническая инструкция, он не является стандартом и не имеет практической силы. Это просто способ посмеяться над тем, как инженеры превращают простые повседневные задачи в сложные компьютерные правила.",
+      "tokens": {
+        "input": 1306,
+        "output": 228
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "Сделай таблицу",
+      "reply": "| Параметр | Описание |\n| :--- | :--- |\n| **Протокол** | HTCPCP/1.0 (Hyper Text Coffee Pot Control Protocol) |\n| **Дата публикации** | 1 апреля 1998 г. |\n| **Автор** | L. Masinter |\n| **Категория** | Информационная (не является стандартом) |\n| **Назначение** | Управление, мониторинг и диагностика кофеварок |\n| **Цель** | Обеспечение сетевого доступа к бытовым приборам для дистанционного приготовления кофе |",
+      "tokens": {
+        "input": 697,
+        "output": 141
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          3.517,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Me-baqT2E7y6vr0PqfnJiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eHTCPCP — это первоапрельский шуточный протокол для дистанционного\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 20,\"totalTokenCount\": 487,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Me-baqT2E7y6vr0PqfnJiQ8\"}\r\n\r\n"
+        ],
+        [
+          3.535,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" управления кофеварками через интернет.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 29,\"totalTokenCount\": 496,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Me-baqT2E7y6vr0PqfnJiQ8\"}\r\n\r\n"
+        ],
+        [
+          3.582,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPyybiri2zf9XaqMhPCRymVxArx789SR98ZZh9ZImKukdjXxpvqqQW6ZYut9pAMry5xlxmXKGMgL83z/VjijqID8IGg3EV27uZbSCI/lfraozslJEVImQcc82RzkxGCyWhWfNnMPt/Mq42AA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 29,\"totalTokenCount\": 496,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Me-baqT2E7y6vr0PqfnJiQ8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "0d3e63457021a63f4373c2a58e95d8b36a25746bff47a9c06feb9ac6ef199cc5"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          3.37,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eЭтот текст — шуточный документ, написанный в виде серьезного инженер\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 18,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          3.428,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ного стандарта, чтобы показать, как компьютеры могут управлять бытовыми приборами.\\n\\nПредставьте, что вы\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 42,\"totalTokenCount\": 815,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          3.51,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" хотите отправить сообщение своему кофейнику через интернет, чтобы он начал варить кофе к вашему пробуждению. Чтобы при\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 66,\"totalTokenCount\": 839,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          3.569,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"боры понимали команды людей и других компьютеров, им нужен общий язык. Этот язык называют «протоколом».\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 90,\"totalTokenCount\": 863,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          3.691,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n\\nАвторы документа придумали вымышленный протокол под названием «Протокол управления гипертекстовым кофейником» (\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 117,\"totalTokenCount\": 890,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          3.909,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"в оригинале это аббревиатура HTCPCP). Это шутка, созданная для того, чтобы посмеяться над тем\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 145,\"totalTokenCount\": 918,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", как инженеры стараются описать каждое действие в мире с помощью сложных правил.\\n\\nВот как это работает шаг\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 169,\"totalTokenCount\": 942,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          3.972,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" за шагом:\\n\\n1. Правила общения: В интернете компьютеры общаются друг с другом по строгим правилам,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 195,\"totalTokenCount\": 968,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.12,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" которые называются протоколами. Например, когда вы открываете сайт, ваш браузер использует протокол передачи гипертекста (HTTP). Это\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 224,\"totalTokenCount\": 997,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.228,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" набор команд для передачи текста и картинок.\\n\\n2. Смешение серьезного и несерьезного: Авто\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 249,\"totalTokenCount\": 1022,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.435,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ры взяли структуру настоящего инженерного документа, в которых обычно описываются важные стандарты связи, и применили её\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 274,\"totalTokenCount\": 1047,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.524,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" к кухонному прибору. Они представили, что приготовление кофе — это такая же задача для интернета, как и переда\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 302,\"totalTokenCount\": 1075,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.628,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ча данных.\\n\\n3. Зачем это было нужно: В девяностые годы люди начали подключать к сети самые\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 326,\"totalTokenCount\": 1099,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.732,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" простые вещи, например, торговые автоматы с газировкой или тостеры. Это было весело, но в основном\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 352,\"totalTokenCount\": 1125,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.797,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" бесполезно. Этот документ высмеивает идею о том, что абсолютно каждый предмет в доме, даже ко\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 376,\"totalTokenCount\": 1149,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          4.885,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"фейник, должен быть «умным» и подключенным к сети.\\n\\n4. Суть документа: Т\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 400,\"totalTokenCount\": 1173,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          5.036,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"екст описывает, как компьютер мог бы отправлять кофейнику команды «свари кофе» или «остановись\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 424,\"totalTokenCount\": 1197,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          5.241,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"». Поскольку это шутка, в нем нет настоящих инструкций для реальной техники. Однако он имитирует язык\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 448,\"totalTokenCount\": 1221,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          5.244,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" настоящих специалистов, чтобы показать, как выглядят технические требования для создания связи между устройствами.\\n\\nВ конечном итоге,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 474,\"totalTokenCount\": 1247,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          5.45,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" этот документ не является официальным правилом интернета. Это памятка для инженеров, напоминающая им, что не\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 499,\"totalTokenCount\": 1272,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" всё в мире нужно превращать в компьютерную программу, даже если это кажется технически возможным.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 521,\"totalTokenCount\": 1294,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          5.496,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPz0AlFb8dY1J/Cp55v3GQh+z0apFYrPDuFf4bRFQFcu8G1Hx+59G7p6QW6UujxwbNNCAQ1vIm4T8e4JLvKjG3uAyvtuz5lO0qpUaW0HDZTYuDjxRjPFZ+wZx0/ANz1nFF6ZhmnTAqA5/GZA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 521,\"totalTokenCount\": 1294,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OO-baoStHrTk1e8PtcSHyA8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "b4c2eac30d719e5adcae80595ef2bf46cecc165af2c7ab5d1c3620ddcb1204cb"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.132,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1308,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nЭтот текст — шутка, написанная в виде серьезного инженерного документа.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 20,\"totalTokenCount\": 1326,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Его авторы решили представить, как выглядели бы правила общения между компьютером и кофейником, если бы их подключили к интернету.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 49,\"totalTokenCount\": 1355,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ],
+        [
+          2.261,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n\\nВ сети компьютеры общаются друг с другом по строгому порядку — «протоколу». Самый известный из\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 74,\"totalTokenCount\": 1380,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ],
+        [
+          2.347,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" них — протокол передачи гипертекста (HTTP), который позволяет нам открывать сайты. Авторы придумали похожий\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 98,\"totalTokenCount\": 1404,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ],
+        [
+          2.538,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" «Протокол управления гипертекстовым кофейником» (HTCPCP), чтобы в шутливой форме описа\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 123,\"totalTokenCount\": 1429,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ть, как можно отдавать команды кухонной технике через интернет.\\n\\nДокумент высмеивает моду\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 147,\"totalTokenCount\": 1453,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ],
+        [
+          2.644,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 1990-х годов, когда инженеры начали подключать к сети всё подряд: от торговых автоматов до тосте\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 176,\"totalTokenCount\": 1482,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ],
+        [
+          2.854,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ров. Хотя текст выглядит как официальная техническая инструкция, он не является стандартом и не имеет практической силы. Это просто способ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 204,\"totalTokenCount\": 1510,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ],
+        [
+          2.879,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" посмеяться над тем, как инженеры превращают простые повседневные задачи в сложные компьютерные правила.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1534,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ],
+        [
+          2.921,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPudmFY8l2e9fBN+YWVXLN0yKAx8JE5mqz4sTB2VNSZy7IEMp6iDSQnB5m0aWbtOHpNE4kRN89vULnm2CPIE5MOzc+oALaunNgLaCpvz2kEh8N2JaLiiovxzC52Thenw9ts0Ar0hGaeVeOXg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1306,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1534,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1306}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Re-bau_sC6KN1e8P2OHO-A4\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "d7143add8ab8de6f8e61addd58e381b1531445b9dabb4ea39297282a243160c9"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.962,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 2,\"totalTokenCount\": 699,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Параметр | Описание |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 21,\"totalTokenCount\": 718,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\n"
+        ],
+        [
+          1.989,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **Протокол** | HTCPCP/1.0 (Hyper Text Coffee Pot Control Protocol) |\\n| **Дата публикации\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 48,\"totalTokenCount\": 745,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\n"
+        ],
+        [
+          2.077,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"** | 1 апреля 1998 г. |\\n| **Автор** | L. Masinter |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 72,\"totalTokenCount\": 769,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\n"
+        ],
+        [
+          2.137,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Категория** | Информационная (не является стандартом) |\\n| **Назначение** | У\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 99,\"totalTokenCount\": 796,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\n"
+        ],
+        [
+          2.237,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"правление, мониторинг и диагностика кофеварок |\\n| **Цель** | Обеспечение сетевого\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 123,\"totalTokenCount\": 820,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\n"
+        ],
+        [
+          2.38,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" доступа к бытовым приборам для дистанционного приготовления кофе |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 141,\"totalTokenCount\": 838,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPs666CN8g8i0UNVc/rzOc8vh0LLuOT1i5bu1qpIjePNLoIN78VitK3ywUtWQ8GQZnCWVP3oyaxQmnim4Uw2Roqx6hrVzwEFMdR+tidjPvsdGeM96qdC5oclh+bgvVvumd50pseIqSHOQoQw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 141,\"totalTokenCount\": 838,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Tu-barnPBZi6vr0PnoaskAQ\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "2787e41c9cfeccf89e30873ea2c4fb7acbe074f716d0371cd1157c7bb8929bb9"
+    }
+  ]
+}

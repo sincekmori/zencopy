@@ -1,0 +1,44 @@
+Network Working Group                                       L. Masinter
+Request for Comments: 2324                                 1 April 1998
+Category: Informational
+
+
+          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)
+
+Status of this Memo
+
+   This memo provides information for the Internet community.  It does
+   not specify an Internet standard of any kind.  Distribution of this
+   memo is unlimited.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (1998).  All Rights Reserved.
+
+Abstract
+
+   This document describes HTCPCP, a protocol for controlling,
+   monitoring, and diagnosing coffee pots.
+
+1. Rationale and Scope
+
+   There is coffee all over the world. Increasingly, in a world in which
+   computing is ubiquitous, the computists want to make coffee. Coffee
+   brewing is an art, but the distributed intelligence of the web-
+   connected world transcends art.  Thus, there is a strong, dark, rich
+   requirement for a protocol designed espressoly for the brewing of
+   coffee. Coffee is brewed using coffee pots.  Networked coffee pots
+   require a control protocol if they are to be controlled.
+
+   Increasingly, home and consumer devices are being connected to the
+   Internet. Early networking experiments demonstrated vending devices
+   connected to the Internet for status monitoring [COKE]. One of the
+   first remotely _operated_ machine to be hooked up to the Internet,
+   the Internet Toaster, (controlled via SNMP) was debuted in 1990
+   [RFC2235].
+
+   The demand for ubiquitous appliance connectivity that is causing the
+   consumption of the IPv4 address space. Consumers want remote control
+   of devices such as coffee pots so that they may wake up to freshly
+   brewed coffee, or cause coffee to be prepared at a precise time after
+   the completion of dinner preparations.

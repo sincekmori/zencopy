@@ -1,0 +1,258 @@
+{
+  "locale": "de",
+  "recorded": "2026-09-05T10:28:44.664Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:28:05"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "Das RFC 2324 definiert das HTCPCP, ein humoristisches Protokoll zur netzwerkbasierten Steuerung von Kaffeemaschinen.",
+      "tokens": {
+        "input": 467,
+        "output": 38
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "Das vorliegende Dokument ist ein humorvoller Scherz, der als technisches Regelwerk für die Steuerung von Kaffeemaschinen über das Internet geschrieben wurde. Es ist wichtig zu verstehen, dass dies kein ernsthaftes Computerprotokoll ist, sondern ein witziges Beispiel für die Art und Weise, wie Technik-Experten ihren Humor in offiziellen Dokumenten ausdrücken.\n\nStellen Sie sich vor, Sie sitzen in Ihrem Bett und möchten, dass Ihre Kaffeemaschine in der Küche bereits mit dem Brühen beginnt, während Sie noch schlafen. Damit Ihr Computer Ihrer Kaffeemaschine diesen Befehl über das Internet schicken kann, müssten sich beide Geräte in einer gemeinsamen Sprache verständigen. Diese Sprache nennen Fachleute ein Protokoll.\n\nDas Dokument beschreibt ein erfundenes Protokoll namens „Hyper Text Coffee Pot Control Protocol“, zu Deutsch etwa: „Protokoll zur Steuerung von Hypertext-Kaffeekannen“. Der Name ist eine Anspielung auf das echte „Hypertext Transfer Protocol“, das für den Aufruf von Webseiten im Internet zuständig ist.\n\nIn dem Text werden verschiedene Befehle für eine Kaffeemaschine vorgeschlagen. Zum Beispiel soll man die Maschine fragen können, ob sie gerade Kaffee kocht, oder sie anweisen können, den Brühvorgang zu starten. Die Autoren nutzen dabei eine sehr förmliche Sprache, wie sie in echten technischen Unterlagen üblich ist, um den Witz zu unterstreichen.\n\nSolche Texte werden oft am ersten April veröffentlicht. Sie sollen zeigen, dass Menschen, die mit komplexen Netzwerken arbeiten, auch Spaß an kreativen und absurden Ideen haben. Obwohl das Dokument den Anschein erweckt, ein offizieller Standard zu sein, hat es keinen wirklichen Zweck für die Technikwelt. Es ist lediglich ein spielerischer Kommentar auf den Trend, immer mehr Alltagsgegenstände mit dem Internet zu verbinden.",
+      "tokens": {
+        "input": 773,
+        "output": 401
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "Etwas kürzer, bitte",
+      "reply": "Dieses Dokument ist ein humorvoller Scherz, der vorgibt, ein technisches Regelwerk für die Steuerung von Kaffeemaschinen über das Internet zu sein. In der Fachwelt nennt man solche Regeln ein Protokoll.\n\nStellen Sie sich vor, Ihr Computer müsste Ihrer Kaffeemaschine genau sagen, wann der Kaffee fertig sein soll. Damit das funktioniert, bräuchten beide Geräte eine gemeinsame Sprache. Die Autoren haben sich diese Sprache hier als Scherz ausgedacht. Der Name „Hyper Text Coffee Pot Control Protocol“ spielt dabei mit einem echten Internet-Protokoll, das wir nutzen, um Webseiten zu laden.\n\nDas Dokument beschreibt in sehr ernstem Ton, wie man eine Kaffeemaschine per Fernzugriff einschalten oder überwachen könnte. Solche Texte werden oft am ersten April veröffentlicht, um zu zeigen, dass sich Technik-Experten gerne einen Spaß erlauben. Das Dokument hat keinen praktischen Nutzen und ist lediglich eine humorvolle Anspielung auf den Trend, immer mehr Geräte im Haushalt mit dem Internet zu verbinden.",
+      "tokens": {
+        "input": 1185,
+        "output": 221
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "Als Tabelle",
+      "reply": "| Attribut | Information |\n| :--- | :--- |\n| **RFC-Nummer** | 2324 |\n| **Datum** | 1. April 1998 |\n| **Autor** | L. Masinter |\n| **Titel** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **Kategorie** | Informationell |\n| **Zweck** | Steuerung, Überwachung und Diagnose von Kaffeemaschinen |\n| **Status** | Kein Internet-Standard |",
+      "tokens": {
+        "input": 695,
+        "output": 129
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.52,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"te6bav6nLbCPvr0PveSRuQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eDas RFC 2324 definiert das HTCPCP, ein humor\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 18,\"totalTokenCount\": 485,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"te6bav6nLbCPvr0PveSRuQ8\"}\r\n\r\n"
+        ],
+        [
+          1.71,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"istisches Protokoll zur netzwerkbasierten Steuerung von Kaffeemaschinen.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"te6bav6nLbCPvr0PveSRuQ8\"}\r\n\r\n"
+        ],
+        [
+          1.728,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPGy5jmMeh/SZ2db9/69PNFCmSiqE7+GAoM29PV+2TcKy9lWOz58f7woE3SuWXq1iCKPL20Yg/wGIBCGjAvBpz1iYOY+yN3Ge4OVWU5gf1KsVnmeflWUUIa4k6EJgrLh3WiKM2VGnvu0CPvg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"te6bav6nLbCPvr0PveSRuQ8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "719e35a874bbe30b7a14ddce90a8e06946dfc1ef8f30ed7d0fab05b3f4d565c8"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.616,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eDas vorliegende Dokument ist ein humorvoller Scherz, der als techn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 19,\"totalTokenCount\": 792,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"isches Regelwerk für die Steuerung von Kaffeemaschinen über das Internet geschrieben wurde. Es ist wichtig zu verstehen, dass dies\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 45,\"totalTokenCount\": 818,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          2.617,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" kein ernsthaftes Computerprotokoll ist, sondern ein witziges Beispiel für die Art und Weise, wie Technik-Exper\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 71,\"totalTokenCount\": 844,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          2.719,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ten ihren Humor in offiziellen Dokumenten ausdrücken.\\n\\nStellen Sie sich vor, Sie sitzen in Ihrem Bett und möchten,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 97,\"totalTokenCount\": 870,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          2.865,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" dass Ihre Kaffeemaschine in der Küche bereits mit dem Brühen beginnt, während Sie noch schlafen. Damit Ihr\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 121,\"totalTokenCount\": 894,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.028,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Computer Ihrer Kaffeemaschine diesen Befehl über das Internet schicken kann, müssten sich beide Geräte in einer gemeinsamen\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 145,\"totalTokenCount\": 918,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.071,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Sprache verständigen. Diese Sprache nennen Fachleute ein Protokoll.\\n\\nDas Dokument beschreibt ein erfundenes Protokoll namens „\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 173,\"totalTokenCount\": 946,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.225,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Hyper Text Coffee Pot Control Protocol“, zu Deutsch etwa: „Protokoll zur Steuerung von Hypertext-Kaffeek\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 198,\"totalTokenCount\": 971,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.273,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"annen“. Der Name ist eine Anspielung auf das echte „Hypertext Transfer Protocol“, das für den Aufruf von Webseiten im\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 225,\"totalTokenCount\": 998,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.423,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Internet zuständig ist.\\n\\nIn dem Text werden verschiedene Befehle für eine Kaffeemaschine vorgeschlagen. Zum Beispiel soll\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 250,\"totalTokenCount\": 1023,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.464,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" man die Maschine fragen können, ob sie gerade Kaffee kocht, oder sie anweisen können, den Brühvorgang zu starten\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 277,\"totalTokenCount\": 1050,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.637,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". Die Autoren nutzen dabei eine sehr förmliche Sprache, wie sie in echten technischen Unterlagen üblich ist, um\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 301,\"totalTokenCount\": 1074,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.66,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" den Witz zu unterstreichen.\\n\\nSolche Texte werden oft am ersten April veröffentlicht. Sie sollen zeigen, dass Menschen,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 327,\"totalTokenCount\": 1100,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.846,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" die mit komplexen Netzwerken arbeiten, auch Spaß an kreativen und absurden Ideen haben. Obwohl das Dokument den An\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 351,\"totalTokenCount\": 1124,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.85,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"schein erweckt, ein offizieller Standard zu sein, hat es keinen wirklichen Zweck für die Technikwelt. Es\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 376,\"totalTokenCount\": 1149,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.934,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ist lediglich ein spielerischer Kommentar auf den Trend, immer mehr Alltagsgegenstände mit dem Internet zu verbinden.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 401,\"totalTokenCount\": 1174,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ],
+        [
+          3.981,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP+zyC6glofLTeF3HbA8cN8fLSBVzXPvfeHzjpTeWwQn5fsWYm6YfrvON7ncFEP8FFxjMGMumHJe9bMEvqfSioKp7OlPQZ74bpwzDfD6r71DoESdqSVEu3mTQVgo/Tnp2MJLk8SUjmIj3Kvg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 401,\"totalTokenCount\": 1174,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ve6bap35NdGkvr0P8MaF0Q8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "03177050426a77d211a87581e1ef2a931e7156f608bf99bd148972db5418f73d"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.296,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1187,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nDieses Dokument ist ein humorvoller Scherz, der vorgibt, ein\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 19,\"totalTokenCount\": 1204,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          2.401,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" technisches Regelwerk für die Steuerung von Kaffeemaschinen über das Internet zu sein. In der Fachwelt nennt\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 43,\"totalTokenCount\": 1228,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          2.463,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" man solche Regeln ein Protokoll.\\n\\nStellen Sie sich vor, Ihr Computer müsste Ihrer Kaffeemaschine genau sagen,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 68,\"totalTokenCount\": 1253,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          2.609,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" wann der Kaffee fertig sein soll. Damit das funktioniert, bräuchten beide Geräte eine gemeinsame Sprache. Die Autoren haben sich\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 92,\"totalTokenCount\": 1277,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          2.651,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" diese Sprache hier als Scherz ausgedacht. Der Name „Hyper Text Coffee Pot Control Protocol“ spielt dabei mit einem\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 116,\"totalTokenCount\": 1301,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          2.817,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" echten Internet-Protokoll, das wir nutzen, um Webseiten zu laden.\\n\\nDas Dokument beschreibt in\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 140,\"totalTokenCount\": 1325,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          2.837,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" sehr ernstem Ton, wie man eine Kaffeemaschine per Fernzugriff einschalten oder überwachen könnte. Sol\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 164,\"totalTokenCount\": 1349,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          3.003,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"che Texte werden oft am ersten April veröffentlicht, um zu zeigen, dass sich Technik-Experten gerne einen Spaß erlauben. Das Dokument hat\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 192,\"totalTokenCount\": 1377,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          3.024,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" keinen praktischen Nutzen und ist lediglich eine humorvolle Anspielung auf den Trend, immer mehr Geräte im Haushalt mit dem Internet zu\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 219,\"totalTokenCount\": 1404,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          3.088,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" verbinden.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 221,\"totalTokenCount\": 1406,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ],
+        [
+          3.153,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPAsaSrScVWKpYEVWYuN21vJZtWtz79tR3IKFTOdxyxF2MmQO+IKrvso97+ZZdN3sli5DZF9rhDMk0QYnTHcKDyXFJWdve57DSiigy8fLSUhkP2ZVC5auvTdFMsGpS3mHJpVlWp6sCsp1uaQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1185,\"candidatesTokenCount\": 221,\"totalTokenCount\": 1406,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1185}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"x-6bavP3PNfBvr0P4aCF0A8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "d7ea989a7b1e7816612e87fc5efaecf8f729208ed3454ee708c51eb31af6060f"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          4.012,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 2,\"totalTokenCount\": 697,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Attribut | Information |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 21,\"totalTokenCount\": 716,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\n"
+        ],
+        [
+          4.013,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"RFC-Nummer** | 2324 |\\n| **Datum** | 1. April 199\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 47,\"totalTokenCount\": 742,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\n"
+        ],
+        [
+          4.119,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"8 |\\n| **Autor** | L. Masinter |\\n| **Titel** | Hyper Text Coffee Pot\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 71,\"totalTokenCount\": 766,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\n"
+        ],
+        [
+          4.198,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Control Protocol (HTCPCP/1.0) |\\n| **Kategorie** | Informationell |\\n| **Zwe\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 98,\"totalTokenCount\": 793,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\n"
+        ],
+        [
+          4.24,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ck** | Steuerung, Überwachung und Diagnose von Kaffeemaschinen |\\n| **Status** | Kein Internet-Standard |\\n\\u003c/\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 127,\"totalTokenCount\": 822,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\n"
+        ],
+        [
+          4.465,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 129,\"totalTokenCount\": 824,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\n"
+        ],
+        [
+          4.465,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPG+ou4AMQ9o+gxPjY8F3KXqulLJDgkELSOBfEafr8iekJwDoC5N8KdLl8d4JR2pvbHcX8QqWQxAYLMg6eZJR6/Ce0xAXkaS99NkQGOTaG967jNjyO7nzgt7EAtooVy9KgINHfKXUB11PVMg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 129,\"totalTokenCount\": 824,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O6bapOkJZKmvr0P5e7l4Q4\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "7dd8eb3ed0986b1c642b1a1f77054784b4ef0e0c77cfac256ad106a0c9d7d1a4"
+    }
+  ]
+}

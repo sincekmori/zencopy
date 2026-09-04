@@ -1,0 +1,234 @@
+{
+  "locale": "en",
+  "recorded": "2026-09-05T10:22:49.722Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:22:20"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "HTCPCP is a satirical April Fools' RFC describing a network protocol for remotely controlling coffee pots.",
+      "tokens": {
+        "input": 467,
+        "output": 25
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "The Hyper Text Coffee Pot Control Protocol is a playful joke document that describes how computers might talk to coffee makers over the internet. It matters because it uses the real rules of the internet to show how people can imagine connecting any everyday object to a network.\n\nTo understand this, think about how your web browser talks to a website. When you click a link, your computer sends a message to a distant computer asking for a page. The distant computer sends back a response that says, \"Here is the page you asked for,\" or \"I cannot find that page.\" This set of rules for talking back and forth is called a protocol.\n\nThe people who wrote this document decided to invent a similar set of rules for coffee makers. They named their set of rules the Hyper Text Coffee Pot Control Protocol. \n\nIn this imaginary system, your computer would act like a web browser, and the coffee pot would act like a website. You could use your computer to ask the coffee pot to start brewing, to stop, or to tell you how much coffee is left. \n\nThe document uses the same formal language that engineers use when they create real technical standards. For example, it explains how the coffee pot should react if you ask for coffee but the pot is already empty. It even suggests a specific error message for when the coffee pot is asked to make tea instead of coffee.\n\nThis document is not a real set of rules that computers use today. It was written in 1998 as a prank for April Fools' Day. The authors wanted to make a joke about the idea that, as computers became common, people would eventually try to connect every single device in their house to the internet, no matter how silly it might seem.",
+      "tokens": {
+        "input": 773,
+        "output": 354
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "A bit shorter, please",
+      "reply": "The Hyper Text Coffee Pot Control Protocol is a playful joke document that describes how computers could talk to coffee makers over the internet. It matters because it uses the real language of internet engineers to imagine a world where every household appliance is connected to a network.\n\nThink of a protocol as a language that two computers use to send messages back and forth. Just as your web browser asks a server for a webpage, this protocol imagines a computer asking a coffee pot to start brewing or to check the water level. It even suggests technical error codes, such as telling the computer \"I am a teapot\" if the machine is asked to brew coffee when it can only make tea.\n\nThis document is not a real set of instructions for building technology. It was written as a joke for April Fools' Day in 1998. The authors were teasing the idea that, as technology progressed, people would eventually try to connect every simple household object to the internet, even if it was not actually useful.",
+      "tokens": {
+        "input": 1138,
+        "output": 203
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "Make a table",
+      "reply": "| Property | Description |\n| :--- | :--- |\n| **Protocol Name** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **RFC Number** | 2324 |\n| **Date** | 1 April 1998 |\n| **Author** | L. Masinter |\n| **Category** | Informational |\n| **Purpose** | Controlling, monitoring, and diagnosing coffee pots |",
+      "tokens": {
+        "input": 696,
+        "output": 107
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.103,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eHTCPCP is a satirical April Fools' RFC\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 13,\"totalTokenCount\": 480,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Xe2basXXDJ6Lvr0P69iJwQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" describing a network protocol for remotely controlling coffee pots.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 25,\"totalTokenCount\": 492,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Xe2basXXDJ6Lvr0P69iJwQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP0bYrBcpCr9fan8CMhrw7nZ2OAsZaLEwrs8qfsp/xzL+nMihCfINtovGYg8cxmPAFqy/jBSXr+ao4UDdCuxZI5uwrfVIqibDH65gkx1AI3Jx+56+fjfubwTJEk1f373sPTLSGM3s15zNA9w==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 25,\"totalTokenCount\": 492,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Xe2basXXDJ6Lvr0P69iJwQ8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "ebcaf2a0f04e8938919ae2bdca2019ea644ed62e1d97a7decf2206b28e132c5b"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.04,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nThe Hyper Text Coffee Pot Control Protocol is a playful joke document that describes how computers\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 20,\"totalTokenCount\": 793,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" might talk to coffee makers over the internet. It matters because it uses the real rules of the internet to show how people can\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 45,\"totalTokenCount\": 818,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.061,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" imagine connecting any everyday object to a network.\\n\\nTo understand this, think about how your web browser talks to a website\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 69,\"totalTokenCount\": 842,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.163,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". When you click a link, your computer sends a message to a distant computer asking for a page. The distant computer sends\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 94,\"totalTokenCount\": 867,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.223,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" back a response that says, \\\"Here is the page you asked for,\\\" or \\\"I cannot find that page.\\\" This\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 118,\"totalTokenCount\": 891,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.448,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" set of rules for talking back and forth is called a protocol.\\n\\nThe people who wrote this document decided to invent a similar\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 143,\"totalTokenCount\": 916,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.469,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" set of rules for coffee makers. They named their set of rules the Hyper Text Coffee Pot Control Protocol. \\n\\nIn this imaginary\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 169,\"totalTokenCount\": 942,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.638,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" system, your computer would act like a web browser, and the coffee pot would act like a website. You could use your computer to ask the\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 198,\"totalTokenCount\": 971,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.662,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" coffee pot to start brewing, to stop, or to tell you how much coffee is left. \\n\\nThe document uses\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 222,\"totalTokenCount\": 995,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.855,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" the same formal language that engineers use when they create real technical standards. For example, it explains how the coffee pot should\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 246,\"totalTokenCount\": 1019,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.903,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" react if you ask for coffee but the pot is already empty. It even suggests a specific error message for when the coffee pot is asked\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 273,\"totalTokenCount\": 1046,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          1.986,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" to make tea instead of coffee.\\n\\nThis document is not a real set of rules that computers use today. It was\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 297,\"totalTokenCount\": 1070,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          2.047,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" written in 1998 as a prank for April Fools' Day. The authors wanted to make a joke about the idea that\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 324,\"totalTokenCount\": 1097,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          2.169,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", as computers became common, people would eventually try to connect every single device in their house to the internet, no matter how silly it\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 351,\"totalTokenCount\": 1124,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          2.252,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" might seem.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 354,\"totalTokenCount\": 1127,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          2.315,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPxUJaWllMYFQ3pmvk32Gtc+eM/c3O9Bx5JvBGwsTDdYlZ7sWYDIv9tVEeivt+PwFsFZ7u5y+vKW6llJaW2pjiWB+DUdK5QXLk0xxbaSx3qrMwh+FauF0I7/pfSN4XM+5Ymgr+Z+zEYL7ILQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 354,\"totalTokenCount\": 1127,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Ye2baoa5NdeV9tMPyZei2A8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "f64ed2d4428ad57a3bcdf369ef4562c4503c20f4a6c9d80ad3a24c7991ac8cbd"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.274,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1140,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.275,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nThe Hyper Text Coffee Pot Control Protocol is a playful joke document that describes how\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 19,\"totalTokenCount\": 1157,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.29,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" computers could talk to coffee makers over the internet. It matters because it uses the real language of internet engineers to imagine a\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 43,\"totalTokenCount\": 1181,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.376,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" world where every household appliance is connected to a network.\\n\\nThink of a protocol as a language that two computers use to send\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 68,\"totalTokenCount\": 1206,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.438,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" messages back and forth. Just as your web browser asks a server for a webpage, this protocol imagines a computer asking a coffee pot to start\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 96,\"totalTokenCount\": 1234,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.484,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" brewing or to check the water level. It even suggests technical error codes, such as telling the computer \\\"I am a teapot\\\" if\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 123,\"totalTokenCount\": 1261,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.584,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" the machine is asked to brew coffee when it can only make tea.\\n\\nThis document is not a real set of instructions\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 147,\"totalTokenCount\": 1285,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.647,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" for building technology. It was written as a joke for April Fools' Day in 1998. The authors were\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 172,\"totalTokenCount\": 1310,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.79,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" teasing the idea that, as technology progressed, people would eventually try to connect every simple household object to the internet, even\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 196,\"totalTokenCount\": 1334,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.856,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" if it was not actually useful.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 203,\"totalTokenCount\": 1341,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.856,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPvXTO/lbx5IGKHYf/skmuAuPJtVekqt5N6By7vZnNPpzTtdKwJw+EE8f8IX0kBmgGnMF+USAfu4FxTtbzmZckgRPSPJsPDWaBBoSFpXlfTCD4rFKizZlsJuaNF99KFJOtsPmMks22BcXUBQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1138,\"candidatesTokenCount\": 203,\"totalTokenCount\": 1341,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1138}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"au2bap-yH92N1e8P5ajv-Q4\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "f296eadd690af59280f87a794db894a756e8705d933b58cd9e8ea1005c66f1d5"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          0.767,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"cu2bapWoDZSi9tMPjfjSsA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Property | Description |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 20,\"totalTokenCount\": 716,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"cu2bapWoDZSi9tMPjfjSsA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Protocol Name** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **RFC\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 44,\"totalTokenCount\": 740,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"cu2bapWoDZSi9tMPjfjSsA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Number** | 2324 |\\n| **Date** | 1 April 1998 |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 68,\"totalTokenCount\": 764,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"cu2bapWoDZSi9tMPjfjSsA8\"}\r\n\r\n"
+        ],
+        [
+          0.869,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Author** | L. Masinter |\\n| **Category** | Informational |\\n| **Purpose\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 92,\"totalTokenCount\": 788,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"cu2bapWoDZSi9tMPjfjSsA8\"}\r\n\r\n"
+        ],
+        [
+          0.992,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"** | Controlling, monitoring, and diagnosing coffee pots |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 107,\"totalTokenCount\": 803,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"cu2bapWoDZSi9tMPjfjSsA8\"}\r\n\r\n"
+        ],
+        [
+          1.036,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPvAaOx1li+hbfc+hNAodXNCNWXJf7YLebjfT1/gZ5PYwv3Vr6Ivv8/PtIcBsOQ90bc2loWBNAlWf3XjCwIs0+glrRpAp+zIq2i3YPsgfGceZ6Q1Rk5vZrotWea93Cy6na85PPTRAlRV/wjw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 107,\"totalTokenCount\": 803,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"cu2bapWoDZSi9tMPjfjSsA8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "fb4504fbfd5203c3d07e9e6eb9d37321406b4a43648e2b0324b73ffaff164a85"
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "locale": "zh-Hant",
+  "recorded": "2026-09-05T10:25:03.272Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:24:23"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "本文介紹了用於遠端控制與監測聯網咖啡壺的超文本咖啡壺控制協議（HTCPCP）。",
+      "tokens": {
+        "input": 469,
+        "output": 32
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "這份文件描述了一種稱為「超文本咖啡壺控制協定」（Hyper Text Coffee Pot Control Protocol，簡稱 HTCPCP）的規則，它的作用是讓人們能透過網路來操作與檢查咖啡壺。\n\n你可以把網路協定想像成一種「共同語言」。就像兩個人要溝通必須說同一種語言，電腦設備要互相傳遞資訊，也需要遵循一套規則。我們平常用的網頁瀏覽，就是遵循名為「超文本傳輸協定」（Hyper Text Transfer Protocol，簡稱 HTTP）的規則；而這份文件則是幽默地提出，如果我們想讓咖啡壺也連上網路，就該有一套專門用來「沖煮咖啡」的指令規則。\n\n我們可以把它拆解成幾個步驟來理解：\n\n第一，網路世界的延伸。\n隨著電腦越來越普及，人們開始希望網路不只是用來傳送文字或圖片，還能連接家裡的電器。就像很久以前有人嘗試過把販賣機連上網路來查看飲料剩多少，這份文件想要表達的是，我們也可以用同樣的方法來控制咖啡壺。\n\n第二，為什麼需要這種規則？\n當咖啡壺連上網路後，它需要一種方式來「聽懂」電腦發出的指令，也要能「回覆」它的狀態。例如，如果你想在起床時聞到咖啡香，你需要能遠端告訴咖啡壺「現在開始煮咖啡」。如果咖啡壺出了問題或咖啡豆用完了，它也需要告訴你它現在的狀況。\n\n第三，這是一個玩笑性質的計畫。\n這份文件是在 1998 年的四月一日發表的，也就是愚人節。雖然它用很正式的技術語言寫成，看起來像是一份嚴肅的工業標準，但它實際上是用幽默的方式，諷刺當時人們急著把所有日常生活中的小東西都連接到網路上（也就是現在所說的「物聯網」概念）。\n\n簡單來說，這份文件雖然模擬了真正的網路通訊規則，但它的本質是一個有趣的創意練習，用來思考如果連廚房裡的咖啡機都變得像電腦一樣「聰明」且能夠連網，我們該如何與它們對話。",
+      "tokens": {
+        "input": 775,
+        "output": 478
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "再簡潔一點",
+      "reply": "這份文件是一場「愚人節」的惡作劇。\n\n作者用很嚴肅的語氣，寫了一套規則，叫做「超文本咖啡壺控制協定」。這套規則的目的是讓咖啡壺能連上網路，讓我們可以從遠處發送指令，叫咖啡壺開始煮咖啡，或是檢查它有沒有壞掉。\n\n我們可以這樣理解：\n就像電腦瀏覽網頁需要一套「共同語言」來溝通，作者開玩笑說，如果我們要用網路控制咖啡壺，也需要一套專屬的語言。\n\n雖然這份文件寫得煞有其事，其實是在諷刺當時的一種趨勢：人們總想把生活中所有的小電器都連上網路，即使有時候根本不需要這麼做。這只是一個有趣的創意練習，並不是真的要大家去執行這個標準。",
+      "tokens": {
+        "input": 1261,
+        "output": 183
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "做成表格",
+      "reply": "| 項目 | 內容 |\n| :--- | :--- |\n| **文件標題** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **RFC 編號** | 2324 |\n| **作者** | L. Masinter |\n| **發佈日期** | 1998 年 4 月 1 日 |\n| **文件類別** | Informational (資訊性) |\n| **主要目的** | 定義用於控制、監控與診斷咖啡壺的協定 |\n| **核心需求** | 因應全球對聯網家電控制的需求，實現遠端煮咖啡功能 |\n| **歷史背景** | 參考了早期網際網路自動販賣機監控與 1990 年的網際網路烤麵包機 (Internet Toaster) 實驗 |",
+      "tokens": {
+        "input": 701,
+        "output": 198
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          3.947,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 2,\"totalTokenCount\": 471,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O2bauurGr2ivr0PrdmsgQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e本文介紹了用於遠端控制與監測聯網咖啡壺的超文本\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 20,\"totalTokenCount\": 489,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O2bauurGr2ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          3.994,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"咖啡壺控制協議（HTCPCP）。\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 32,\"totalTokenCount\": 501,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O2bauurGr2ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.056,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPkpKqe2oF+NELcmRYyE0xyb6h1VOkS67HZgAquJYu7UkFehOVT7CP1EDqWh/MV60gduMfug3EhQVzHU/Jp2W2TY/g5pH3aTALMUPgfS1eem7QASeLfWEX9qFdKU8I+p2YXCm49DyGRGEn8A==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 32,\"totalTokenCount\": 501,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O2bauurGr2ivr0PrdmsgQ8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "b88ff4feb8daecf64c134bdfed151fdbc7ae5d9afb676e633421d508dbecca21"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          3.027,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 2,\"totalTokenCount\": 777,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n這份文件描述了一種稱為「超文本咖啡壺控制協定」（\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 20,\"totalTokenCount\": 795,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.067,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Hyper Text Coffee Pot Control Protocol，簡稱 HTCPCP）的規則，它的作用是讓人們能透過網路來\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 45,\"totalTokenCount\": 820,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.17,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"操作與檢查咖啡壺。\\n\\n你可以把網路協定想像成一種「共同語言」。就像兩個人要溝通必須\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 71,\"totalTokenCount\": 846,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.36,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"說同一種語言，電腦設備要互相傳遞資訊，也需要遵循一套規則。我們平常用的網頁\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 95,\"totalTokenCount\": 870,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.484,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"瀏覽，就是遵循名為「超文本傳輸協定」（Hyper Text Transfer Protocol，簡稱 HTTP）的規則\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 120,\"totalTokenCount\": 895,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.572,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"；而這份文件則是幽默地提出，如果我們想讓咖啡壺也連上網路，就該\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 144,\"totalTokenCount\": 919,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.639,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"有一套專門用來「沖煮咖啡」的指令規則。\\n\\n我們可以把它拆解成幾個步驟來理解：\\n\\n第一\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 172,\"totalTokenCount\": 947,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.835,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"，網路世界的延伸。\\n隨著電腦越來越普及，人們開始希望網路不只是用來傳送文字或圖片\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 196,\"totalTokenCount\": 971,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          3.905,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"，還能連接家裡的電器。就像很久以前有人嘗試過把販賣機連上網路來查看飲料\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 221,\"totalTokenCount\": 996,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.043,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"剩多少，這份文件想要表達的是，我們也可以用同樣的方法來控制咖啡壺。\\n\\n第二，為什麼需要這種\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 247,\"totalTokenCount\": 1022,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.154,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"規則？\\n當咖啡壺連上網路後，它需要一種方式來「聽懂」電腦發出的指令，\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 272,\"totalTokenCount\": 1047,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.296,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"也要能「回覆」它的狀態。例如，如果你想在起床時聞到咖啡香，你需要能遠端告訴咖啡\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 299,\"totalTokenCount\": 1074,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.441,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"壺「現在開始煮咖啡」。如果咖啡壺出了問題或咖啡豆用完了，它也需要告訴你它現在\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 324,\"totalTokenCount\": 1099,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.51,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"的狀況。\\n\\n第三，這是一個玩笑性質的計畫。\\n這份文件是在 1998 年\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 348,\"totalTokenCount\": 1123,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.63,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"的四月一日發表的，也就是愚人節。雖然它用很正式的技術語言寫成，看起來\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 372,\"totalTokenCount\": 1147,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.701,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"像是一份嚴肅的工業標準，但它實際上是用幽默的方式，諷刺當時人們急著把所有日常生活\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 398,\"totalTokenCount\": 1173,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.831,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"中的小東西都連接到網路上（也就是現在所說的「物聯網」概念）。\\n\\n簡單來說，這\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 424,\"totalTokenCount\": 1199,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          4.964,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"份文件雖然模擬了真正的網路通訊規則，但它的本質是一個有趣的創意練習，用來思考如果\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 448,\"totalTokenCount\": 1223,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          5.031,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"連廚房裡的咖啡機都變得像電腦一樣「聰明」且能夠連網，我們該如何與它們對\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 474,\"totalTokenCount\": 1249,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          5.123,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"話。\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 478,\"totalTokenCount\": 1253,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ],
+        [
+          5.191,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPQvBPHaPpFktW+9N1h74wC1+B01o9aykOn8MNwsLfcPl9pobJDiuwWW+SwueSONIxm9caXf7r2qsti4vfQjGX2/RYALsPGXrBsSy2IJRz+zKdaV+Q4BMHgylCqx21Is2V/zDOhQ8yUbACRQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 478,\"totalTokenCount\": 1253,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4O2bao7HBdTF1e8Pzeyj6QE\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "7963d8cccabc185879996f83d994b083901ce8c92477106cd69c24635ac1bb57"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          3.699,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1263,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n這份文件是一場「愚人節」的惡作劇。\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 20,\"totalTokenCount\": 1281,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          3.786,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"作者用很嚴肅的語氣，寫了一套規則，叫做「超文本咖啡壺控制協定」。這套\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 46,\"totalTokenCount\": 1307,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          3.9,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"規則的目的是讓咖啡壺能連上網路，讓我們可以從遠處發送指令，叫咖啡壺開始煮咖啡，\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 73,\"totalTokenCount\": 1334,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          4.072,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"或是檢查它有沒有壞掉。\\n\\n我們可以這樣理解：\\n就像電腦瀏覽網頁需要一套「共同語言」來\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 98,\"totalTokenCount\": 1359,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          4.177,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"溝通，作者開玩笑說，如果我們要用網路控制咖啡壺，也需要一套專屬的語言。\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 123,\"totalTokenCount\": 1384,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          4.241,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"雖然這份文件寫得煞有其事，其實是在諷刺當時的一種趨勢：人們總想把生活中\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 149,\"totalTokenCount\": 1410,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          4.395,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"所有的小電器都連上網路，即使有時候根本不需要這麼做。這只是一個有趣的創意練習，並\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 174,\"totalTokenCount\": 1435,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          4.438,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"不是真的要大家去執行這個標準。\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 183,\"totalTokenCount\": 1444,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ],
+        [
+          4.5,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP/F+m8vfSid2H4MUJnIv0h8IjewigeRYBB+oLapZK9LgigPWiQnpgqllhKbr3YVCdWD9ai+3XYBRENn34DmzLRoupA2KyEn9v633YZq5waQMvUg/SiYZek6dEd7THvZXUoR1kWX2acztoRg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1261,\"candidatesTokenCount\": 183,\"totalTokenCount\": 1444,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1261}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6u2barWzCtW6vr0PktWi0A8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "4c5f11f3f7edc528eb7e40ef958c1844b6a6d94ebd7ad1d3716aae820a7e8d67"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.984,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 2,\"totalTokenCount\": 703,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| 項目 | 內容 |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 21,\"totalTokenCount\": 722,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.087,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **文件標題** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 46,\"totalTokenCount\": 747,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.192,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"RFC 編號** | 2324 |\\n| **作者** | L. Masinter |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 70,\"totalTokenCount\": 771,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.339,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **發佈日期** | 1998 年 4 月 1 日 |\\n| **文件類別** | Informational\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 99,\"totalTokenCount\": 800,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.365,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" (資訊性) |\\n| **主要目的** | 定義用於控制、監控與診斷咖啡壺的\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 124,\"totalTokenCount\": 825,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.496,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"協定 |\\n| **核心需求** | 因應全球對聯網家電控制的需求，實現遠端煮咖啡功能 |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 153,\"totalTokenCount\": 854,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.645,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **歷史背景** | 參考了早期網際網路自動販賣機監控與 1990 年的\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 179,\"totalTokenCount\": 880,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.746,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"網際網路烤麵包機 (Internet Toaster) 實驗 |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 198,\"totalTokenCount\": 899,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ],
+        [
+          3.787,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPD1hAKpXBvZj126IU4MueqluFA159lg3Rptmwgx6t5xnWF9kS6Z+vN1A2yDRrRDdXv0I9x177dJcznByYSYkRZPjAjuXc6jSqOxoXvGiKUsryJIFYMLV1TVGipXMldFy7ienOK7RvI/RRSA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 701,\"candidatesTokenCount\": 198,\"totalTokenCount\": 899,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 701}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"8-2bavOLJteV9tMPyZei2A8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "c0070c459e7c22dcba1c60f0bf9761aaca4e04db0cecaf65cd834148e750507f"
+    }
+  ]
+}

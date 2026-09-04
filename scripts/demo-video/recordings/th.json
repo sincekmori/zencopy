@@ -1,0 +1,250 @@
+{
+  "locale": "th",
+  "recorded": "2026-09-05T10:32:45.606Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:32:10"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "HTCPCP คือโปรโตคอลสำหรับควบคุมและสั่งการเครื่องชงกาแฟผ่านเครือข่ายอินเทอร์เน็ต",
+      "tokens": {
+        "input": 467,
+        "output": 34
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "เอกสารฉบับนี้คือเรื่องตลกที่เขียนขึ้นในวันโกหก เพื่ออธิบายถึง \"วิธีการสื่อสาร\" ระหว่างคอมพิวเตอร์กับเครื่องชงกาแฟ\n\nลองนึกภาพว่าคุณมีเครื่องใช้ไฟฟ้าในบ้าน เช่น หลอดไฟหรือพัดลม ที่คุณสามารถกดเปิดหรือปิดได้ผ่านโทรศัพท์มือถือ เพื่อให้คอมพิวเตอร์คุยกับเครื่องใช้ไฟฟ้าเหล่านี้ได้ มันต้องมี \"ภาษา\" หรือชุดคำสั่งที่ตกลงกันไว้ล่วงหน้าว่า คำสั่งไหนหมายความว่าอะไร เช่น ถ้ากดปุ่มนี้ แปลว่า \"ต้มกาแฟเดี๋ยวนี้\"\n\nผู้เขียนเอกสารฉบับนี้ได้หยิบเอาวิธีการสื่อสารที่ใช้ในอินเทอร์เน็ตจริง ๆ มาล้อเลียน โดยสมมติว่าถ้าเราจะสร้างมาตรฐานให้คอมพิวเตอร์ควบคุมเครื่องชงกาแฟ เราจะต้องออกแบบคำสั่งอย่างไรบ้าง เช่น:\n\n1. คำสั่งสำหรับสั่งให้เครื่องเริ่มชงกาแฟ\n2. คำสั่งสำหรับสอบถามว่ากาแฟชงเสร็จหรือยัง\n3. คำสั่งสำหรับบอกให้เครื่องหยุดทำงานหรือเลิกชง\n\nสิ่งที่สำคัญที่สุดที่ต้องเข้าใจคือ เอกสารนี้ไม่ได้มีไว้ใช้งานจริง เครื่องชงกาแฟในโลกความเป็นจริงไม่สามารถรับคำสั่งตามที่ระบุไว้ในเอกสารนี้ได้ นี่เป็นเพียงการเขียนเนื้อหาเชิงเทคนิคโดยใช้ภาษาทางการของอินเทอร์เน็ต มาล้อเลียนความต้องการของคนที่อยากจะเชื่อมต่อทุกอย่างในบ้านเข้ากับอินเทอร์เน็ตไปเสียหมด \n\nสรุปสั้น ๆ คือ มันเป็นเรื่องตลกของกลุ่มนักเขียนโปรแกรมที่เขียนขึ้นเพื่อความบันเทิง โดยจำลองว่าถ้าเราจะทำให้เครื่องชงกาแฟ \"ฉลาด\" จนเล่นอินเทอร์เน็ตได้ เราจะต้องกำหนดกฎเกณฑ์การพูดคุยกันอย่างไรบ้างครับ",
+      "tokens": {
+        "input": 773,
+        "output": 398
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "ขอสั้นกว่านี้อีกหน่อย",
+      "reply": "เอกสารนี้เป็นเรื่องตลกที่เขียนขึ้นในวันโกหก เพื่อล้อเลียนความต้องการเชื่อมต่อเครื่องใช้ไฟฟ้าทุกอย่างเข้ากับอินเทอร์เน็ต\n\nในทางเทคนิค คอมพิวเตอร์สื่อสารกันด้วยภาษามาตรฐานชุดหนึ่ง ผู้เขียนจึงลองสมมติว่า ถ้าเราต้องสร้าง \"ภาษา\" สำหรับสั่งงานเครื่องชงกาแฟผ่านอินเทอร์เน็ตขึ้นมาจริงๆ เราจะต้องตั้งกฎเกณฑ์การสั่งงานอย่างไรบ้าง เช่น คำสั่งเริ่มต้มกาแฟ หรือคำสั่งเช็คว่ากาแฟเสร็จหรือยัง\n\nอย่างไรก็ตาม นี่เป็นเพียงการเขียนล้อเลียนเชิงเทคนิคเท่านั้น ไม่ใช่มาตรฐานที่ใช้งานจริงในโลกอินเทอร์เน็ตครับ",
+      "tokens": {
+        "input": 1182,
+        "output": 153
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "ทำเป็นตาราง",
+      "reply": "| หัวข้อ | รายละเอียด |\n| :--- | :--- |\n| **ชื่อโปรโตคอล** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **เลขที่เอกสาร** | RFC 2324 |\n| **วันที่ประกาศ** | 1 เมษายน 1998 |\n| **ผู้แต่ง** | L. Masinter |\n| **สถานะ** | Informational (ไม่ใช่มาตรฐานอินเทอร์เน็ต) |\n| **วัตถุประสงค์** | ควบคุม, ตรวจสอบ และวินิจฉัยเครื่องชงกาแฟผ่านเครือข่าย |\n| **ที่มา/แนวคิด** | การขยายขีดความสามารถของอุปกรณ์เครื่องใช้ไฟฟ้าในบ้านให้เชื่อมต่ออินเทอร์เน็ตได้ (Ubiquitous computing) |",
+      "tokens": {
+        "input": 697,
+        "output": 186
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.045,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eHTCPCP คือโปรโตคอลสำหรับควบคุมและสั่ง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 15,\"totalTokenCount\": 482,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qu-bapnXIPWavr0PjInXwA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"การเครื่องชงกาแฟผ่านเครือข่ายอินเทอร์เน็ต\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 34,\"totalTokenCount\": 501,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qu-bapnXIPWavr0PjInXwA8\"}\r\n\r\n"
+        ],
+        [
+          2.051,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPzGx+5CF1PB3uBCT/EwL7gLnegZsP2HdEVT0KcAlTn6NFkJHReQ7VidIuj71oLMwhSvpb8IQ5eBUS6KgJUyJGTIu9wFFZlw8Lr6f7kEc3M1cZZL5wmZkRU1q78XyJjoTlzIPrzvEPehvSeQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 34,\"totalTokenCount\": 501,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qu-bapnXIPWavr0PjInXwA8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "f690dc08450ceae538942fd1392e01dadbf431916743288cadc90843a946d655"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.039,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eเอกสารฉบับนี้คือเรื่องตลกที่เขียนขึ้นในวัน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 18,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.138,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"โกหก เพื่ออธิบายถึง \\\"วิธีการสื่อสาร\\\" ระหว่างคอมพิวเตอร์กับเครื่องชงกาแฟ\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 43,\"totalTokenCount\": 816,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.222,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ลองนึกภาพว่าคุณมีเครื่องใช้ไฟฟ้าในบ้าน เช่น หลอดไฟหรือพัดลม ที่คุณสามารถกด\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 67,\"totalTokenCount\": 840,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.305,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เปิดหรือปิดได้ผ่านโทรศัพท์มือถือ เพื่อให้คอมพิวเตอร์คุยกับเครื่องใช้ไฟฟ้าเหล่านี้ได้ มัน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 91,\"totalTokenCount\": 864,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.449,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ต้องมี \\\"ภาษา\\\" หรือชุดคำสั่งที่ตกลงกันไว้ล่วงหน้าว่า คำสั่งไหนหมายความว่าอะไร เช่น\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 118,\"totalTokenCount\": 891,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.49,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ถ้ากดปุ่มนี้ แปลว่า \\\"ต้มกาแฟเดี๋ยวนี้\\\"\\n\\nผู้เขียนเอกสารฉบับนี้ได้\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 144,\"totalTokenCount\": 917,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.651,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"หยิบเอาวิธีการสื่อสารที่ใช้ในอินเทอร์เน็ตจริง ๆ มาล้อเลียน โดยสมมติว่าถ้าเรา\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 172,\"totalTokenCount\": 945,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.856,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"จะสร้างมาตรฐานให้คอมพิวเตอร์ควบคุมเครื่องชงกาแฟ เราจะต้องออกแบบคำสั่งอย่างไรบ้าง เช่น:\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 196,\"totalTokenCount\": 969,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          2.897,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"1. คำสั่งสำหรับสั่งให้เครื่องเริ่มชงกาแฟ\\n2. คำสั่งสำหรับสอบถามว่ากาแฟช\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 221,\"totalTokenCount\": 994,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.068,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"งเสร็จหรือยัง\\n3. คำสั่งสำหรับบอกให้เครื่องหยุดทำงานหรือเลิกชง\\n\\nสิ่งที่สำคัญ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 245,\"totalTokenCount\": 1018,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ที่สุดที่ต้องเข้าใจคือ เอกสารนี้ไม่ได้มีไว้ใช้งานจริง เครื่องชงกาแฟในโลกความเป็นจริงไม่สามารถรับ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 270,\"totalTokenCount\": 1043,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.158,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"คำสั่งตามที่ระบุไว้ในเอกสารนี้ได้ นี่เป็นเพียงการเขียนเนื้อหาเชิงเทคนิคโดยใช้ภาษา\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 295,\"totalTokenCount\": 1068,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.224,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ทางการของอินเทอร์เน็ต มาล้อเลียนความต้องการของคนที่อยากจะเชื่อมต่อทุกอย่างในบ้านเข้า\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 320,\"totalTokenCount\": 1093,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.375,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"กับอินเทอร์เน็ตไปเสียหมด \\n\\nสรุปสั้น ๆ คือ มันเป็นเรื่องตลกของกลุ่ม\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 344,\"totalTokenCount\": 1117,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.466,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"นักเขียนโปรแกรมที่เขียนขึ้นเพื่อความบันเทิง โดยจำลองว่าถ้าเราจะทำให้เครื่องชงกาแฟ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 369,\"totalTokenCount\": 1142,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.673,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" \\\"ฉลาด\\\" จนเล่นอินเทอร์เน็ตได้ เราจะต้องกำหนดกฎเกณฑ์การพูดคุยกันอย่างไรบ้าง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 394,\"totalTokenCount\": 1167,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.718,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ครับ\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 398,\"totalTokenCount\": 1171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          3.781,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPLYxwwF6cjQHAkntmXWBb7aPMwtKfUCdo4tMzPN24/7TMewMdMTidM0nheCk26Fi+p7xfbXHO6RCEO4JXSUMTJPRE54UZ2fXVuec/YgraSOVFRGz4iRG4vbQB1H3sWX7TsTNuJ8eBIk45FQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 398,\"totalTokenCount\": 1171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "7e83b70c2992b0c799a0bc73c896c8c6b10e1640b8f16f4f01476147fa40342a"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.529,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1184,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nเอกสารนี้เป็นเรื่องตลกที่เขียนขึ้นในวันโกหก\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 19,\"totalTokenCount\": 1201,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ],
+        [
+          1.552,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" เพื่อล้อเลียนความต้องการเชื่อมต่อเครื่องใช้ไฟฟ้าทุกอย่างเข้ากับอินเทอร์เน็ต\\n\\nในทาง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 43,\"totalTokenCount\": 1225,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ],
+        [
+          1.635,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เทคนิค คอมพิวเตอร์สื่อสารกันด้วยภาษามาตรฐานชุดหนึ่ง ผู้เขียนจึงลองสมมติว่า ถ้าเราต้อง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 68,\"totalTokenCount\": 1250,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ],
+        [
+          1.782,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"สร้าง \\\"ภาษา\\\" สำหรับสั่งงานเครื่องชงกาแฟผ่านอินเทอร์เน็ตขึ้นมาจริงๆ เราจะต้องตั้ง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 92,\"totalTokenCount\": 1274,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ],
+        [
+          1.866,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"กฎเกณฑ์การสั่งงานอย่างไรบ้าง เช่น คำสั่งเริ่มต้มกาแฟ หรือคำสั่งเช็คว่ากาแฟเสร็จหรือ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 119,\"totalTokenCount\": 1301,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ],
+        [
+          2.018,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ยัง\\n\\nอย่างไรก็ตาม นี่เป็นเพียงการเขียนล้อเลียนเชิงเทคนิคเท่านั้น ไม่ใช่มาตรฐานที่ใช้งานจริงในโลกอิน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 145,\"totalTokenCount\": 1327,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ],
+        [
+          2.083,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เทอร์เน็ตครับ\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 153,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ],
+        [
+          2.145,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPrt7TYxcfEhvnpJVprff3IEBr/PLRxfDY8i4hD4Bu9pas3DfJ8Tvmq6VOPJgAsK3ClfutxYbk/oC2Nhc3lWUxZwEfEz5E87ex4FcUKy4MMr6KLcYY8GgX1JpKikVI3aNhCRrRJXjBkT0hEg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 153,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "230209615c9314e12350c5c3cabef44e32eed03fa5dd17d9114d6e59aea60a30"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          4.074,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 2,\"totalTokenCount\": 699,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| หัวข้อ | รายละเอียด |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 22,\"totalTokenCount\": 719,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.089,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ชื่อโปรโตคอล** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 48,\"totalTokenCount\": 745,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.155,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เลขที่เอกสาร** | RFC 2324 |\\n| **วันที่ประกาศ** | 1 เมษายน 199\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 77,\"totalTokenCount\": 774,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.283,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"8 |\\n| **ผู้แต่ง** | L. Masinter |\\n| **สถานะ** | Informational (\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 101,\"totalTokenCount\": 798,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.389,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ไม่ใช่มาตรฐานอินเทอร์เน็ต) |\\n| **วัตถุประสงค์** | ควบคุม, ตรวจสอบ และวิน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 128,\"totalTokenCount\": 825,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.45,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ิจฉัยเครื่องชงกาแฟผ่านเครือข่าย |\\n| **ที่มา/แนวคิด** | การ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 153,\"totalTokenCount\": 850,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.598,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ขยายขีดความสามารถของอุปกรณ์เครื่องใช้ไฟฟ้าในบ้านให้เชื่อมต่ออินเทอร์เน็ตได้ (Ub\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 177,\"totalTokenCount\": 874,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"iquitous computing) |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 186,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ],
+        [
+          4.641,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPbpzv6nBn6xDQ0zZng+INordAUytULrhJ1feHDL+1NRHAp+05+nS8giaAN8BHpHEzYyr88Z3JNFEVC/sYpslVJvzaK72bScba9S+HjyZi/KXph6ZF/4eO+0zQzlRGgFscCemvA3oNzMS+1w==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 186,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "4f75cf189bee816a44908862e85c085c0819ec45c1e4e24cdaa3c540d64b6e86"
+    }
+  ]
+}

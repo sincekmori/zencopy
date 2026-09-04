@@ -1,0 +1,258 @@
+{
+  "locale": "zh-Hans",
+  "recorded": "2026-09-05T10:24:20.914Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:23:44"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "RFC 2324定义了一种用于远程控制和监测联网咖啡壶的协议（HTCPCP）。",
+      "tokens": {
+        "input": 469,
+        "output": 29
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "这份文档名为“超文本咖啡壶控制协议”，它的核心是一个针对计算机网络的玩笑。这份文件看似在制定一套让互联网控制咖啡机的标准，实际上它是在模仿真正的技术文档，以此来展现程序员的幽默感。\n\n我们可以把它想象成一份“给咖啡机写的指令手册”。\n\n在互联网上，计算机之间需要用某种大家都懂的语言来沟通。这种沟通规则被称为“协议”。比如，当你用浏览器看网页时，你的电脑和存放网页的服务器之间就是用一套名为“超文本传输协议”的规则来对话的。\n\n这份文档的作者模仿了这些真正的协议规则，写出了一套专门给咖啡机用的规则。\n\n以下是它是如何运作的：\n\n第一，它模仿了真实的互联网格式。文档里写了一些很正式的话，比如“这不属于互联网标准”，还有一些复杂的代码术语。这些术语本来是用来管理电脑数据的，但作者把它们强行用在了煮咖啡这件事上。\n\n第二，它提出了一个虚构的场景。作者认为，既然互联网能连接电脑，为什么不能连接咖啡壶呢？他设想人们可以通过电脑给家里的咖啡机下指令，比如“现在开始煮咖啡”或者“把咖啡设定在吃完晚饭后煮好”。\n\n第三，它实际上是一个愚人节玩笑。这份文档发布于 1998 年的 4 月 1 日。在编程和互联网社区中，这种幽默很常见。人们通过写一些一本正经的“技术标准”来打趣，用严肃的口吻去讨论一些完全没必要用计算机网络解决的小事。\n\n简单来说，这份文档并不是为了让你真的能用电脑控制咖啡机。它是一场文字游戏，作者借用严谨的技术语言，表达了人们希望把身边一切生活琐事都连接到互联网上的那种异想天开的想法。它提醒人们，虽然互联网改变了世界，但有时候技术也可以被用来仅仅为了好玩。",
+      "tokens": {
+        "input": 775,
+        "output": 424
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "再简洁一点",
+      "reply": "这份文档是互联网上的一个著名玩笑。它模仿正经的计算机技术标准，写出了一套专门用来“控制咖啡壶”的通讯规则。\n\n在互联网中，电脑之间为了互相交流，会使用一套共同遵守的语言，这叫“协议”。作者借用了这种严肃的沟通格式，假装咖啡机也需要通过网络来“对话”。\n\n这个文档发布于 1998 年的 4 月 1 日，也就是愚人节。它的主要目的不是为了真的让大家用电脑煮咖啡，而是为了展现程序员的幽默感：用极其严谨的科学语言，去讨论一件完全不需要电脑参与的家务事。\n\n简单来说，它就像是用写论文的口吻，去写了一份如何使用自动咖啡机的搞笑说明书。它提醒人们，互联网虽然强大，但也完全可以用来开个玩笑。",
+      "tokens": {
+        "input": 1207,
+        "output": 194
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "做成表格",
+      "reply": "| 项目 | 内容 |\n| :--- | :--- |\n| **协议名称** | 超文本咖啡壶控制协议 (HTCPCP/1.0) |\n| **RFC 编号** | 2324 |\n| **发布日期** | 1998年4月1日 |\n| **作者** | L. Masinter |\n| **类别** | 信息类 (Informational) |\n| **核心用途** | 用于控制、监控及诊断联网咖啡壶 |\n| **开发背景** | 随着计算设备的普及，用户需求推动了家用电器（如咖啡壶）的远程网络控制与自动化 |",
+      "tokens": {
+        "input": 700,
+        "output": 148
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.804,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 2,\"totalTokenCount\": 471,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"se2barewFeXprfcP-Z7FKQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eRFC 2324定义了一种用于远程控制和监测联网咖啡壶的协议\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 21,\"totalTokenCount\": 490,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"se2barewFeXprfcP-Z7FKQ\"}\r\n\r\n"
+        ],
+        [
+          1.85,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"（HTCPCP）。\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 29,\"totalTokenCount\": 498,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"se2barewFeXprfcP-Z7FKQ\"}\r\n\r\n"
+        ],
+        [
+          1.891,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPVhIiRpIT8D6mO094mYFFn0Bnpl09NWkrNR8guH8qyy13swIYlj5qOIoCu5TKCPHpEjJ14971HxJA+VckvXE0eOHws4WImmc+bmQfEm0S/aAgpfL30gutgSO/MGDz5iJd4sy62NYQigrwdw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 469,\"candidatesTokenCount\": 29,\"totalTokenCount\": 498,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 469}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"se2barewFeXprfcP-Z7FKQ\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "1439b94860b6fbd3a45167083002e185d7758d219d4498e9eec8744e840bf759"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.559,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 2,\"totalTokenCount\": 777,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e这份文档名为“超文本咖啡壶控制协议”，它的核心是一个针对\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 18,\"totalTokenCount\": 793,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          2.701,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"计算机网络的玩笑。这份文件看似在制定一套让互联网控制咖啡机的标准，实际上它是在模仿真正的技术文档\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 42,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          2.906,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"，以此来展现程序员的幽默感。\\n\\n我们可以把它想象成一份“给咖啡机写的指令手册”。\\n\\n在互联网\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 69,\"totalTokenCount\": 844,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          3.029,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"上，计算机之间需要用某种大家都懂的语言来沟通。这种沟通规则被称为“协议”。比如，当你\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 93,\"totalTokenCount\": 868,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          3.18,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"用浏览器看网页时，你的电脑和存放网页的服务器之间就是用一套名为“超文本传输协议”\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 117,\"totalTokenCount\": 892,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          3.291,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"的规则来对话的。\\n\\n这份文档的作者模仿了这些真正的协议规则，写出了一套专门给\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 141,\"totalTokenCount\": 916,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          3.359,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"咖啡机用的规则。\\n\\n以下是它是如何运作的：\\n\\n第一，它模仿了真实的互联网格式。文档里写了一些\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 168,\"totalTokenCount\": 943,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          3.534,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"很正式的话，比如“这不属于互联网标准”，还有一些复杂的代码术语。这些术语本来是\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 192,\"totalTokenCount\": 967,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          3.671,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"用来管理电脑数据的，但作者把它们强行用在了煮咖啡这件事上。\\n\\n第二，它提出了一个虚构的场景\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 220,\"totalTokenCount\": 995,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          3.827,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"。作者认为，既然互联网能连接电脑，为什么不能连接咖啡壶呢？他设想人们可以通过电脑给\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 244,\"totalTokenCount\": 1019,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.045,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"家里的咖啡机下指令，比如“现在开始煮咖啡”或者“把咖啡设定在吃完晚饭后\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 269,\"totalTokenCount\": 1044,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"煮好”。\\n\\n第三，它实际上是一个愚人节玩笑。这份文档发布于 1998 年\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 293,\"totalTokenCount\": 1068,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.253,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"的 4 月 1 日。在编程和互联网社区中，这种幽默很常见。人们通过写一些一本\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 319,\"totalTokenCount\": 1094,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.453,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"正经的“技术标准”来打趣，用严肃的口吻去讨论一些完全没必要用计算机网络\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 344,\"totalTokenCount\": 1119,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.5,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"解决的小事。\\n\\n简单来说，这份文档并不是为了让你真的能用电脑控制咖啡机。它是一场\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 368,\"totalTokenCount\": 1143,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.704,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"文字游戏，作者借用严谨的技术语言，表达了人们希望把身边一切生活琐事都连接到互联网上的\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 394,\"totalTokenCount\": 1169,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.86,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"那种异想天开的想法。它提醒人们，虽然互联网改变了世界，但有时候技术也可以被用来仅仅\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 418,\"totalTokenCount\": 1193,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.883,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"为了好玩。\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 424,\"totalTokenCount\": 1199,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ],
+        [
+          4.954,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPi9vY1WetVAEfgNBebovFAQanV3Z+Im6a7vCQUDlBbU4h+MUgOFo+D1LBLdraYCJ0tNgDyyM8yZOTdiqfO5oWP49BfERfw79jqsgWdmhfJaT/8ecAwpuMndZ0otNNkhSJIT4MSa/GF+e5BQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 775,\"candidatesTokenCount\": 424,\"totalTokenCount\": 1199,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 775}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"t-2bapD3AfjhrfcPodnB-Qg\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "7802f2b6f673166b2636d30e496f468dabec2cbaa919378d75180d47b12f3add"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          3.831,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1209,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n这份文档是互联网上的一个著名玩笑。它模仿正经的计算机技术标准\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 21,\"totalTokenCount\": 1228,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          3.919,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"，写出了一套专门用来“控制咖啡壶”的通讯规则。\\n\\n在互联网中，电脑之间为了\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 45,\"totalTokenCount\": 1252,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          4.039,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"互相交流，会使用一套共同遵守的语言，这叫“协议”。作者借用了这种严肃的沟通格式\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 69,\"totalTokenCount\": 1276,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          4.227,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"，假装咖啡机也需要通过网络来“对话”。\\n\\n这个文档发布于 1998 年的 4 月 \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 98,\"totalTokenCount\": 1305,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          4.268,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"1 日，也就是愚人节。它的主要目的不是为了真的让大家用电脑煮咖啡，而是为了展现程序员\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 123,\"totalTokenCount\": 1330,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          4.449,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"的幽默感：用极其严谨的科学语言，去讨论一件完全不需要电脑参与的家务事\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 147,\"totalTokenCount\": 1354,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          4.492,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"。\\n\\n简单来说，它就像是用写论文的口吻，去写了一份如何使用自动咖啡机的搞笑\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 171,\"totalTokenCount\": 1378,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          4.603,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"说明书。它提醒人们，互联网虽然强大，但也完全可以用来开个玩笑。\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 194,\"totalTokenCount\": 1401,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ],
+        [
+          4.651,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPH3qT4a/ntaWmYzxYkDdlPOE73vw3D5Pxjxijr8aQwQlxjHN+R1Cjs+6X5vkMQn5eRLEBIChv4wbVcDZjcgW1ZP7yv+yFCzUrz0/PNqjVOAVXYbEKLxorJ/mXbyEi9fEwJpdKE4rwhSFpQQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1207,\"candidatesTokenCount\": 194,\"totalTokenCount\": 1401,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1207}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wO2bauecO7bVrfcPyMS8gQE\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "0a93d38f63297c3231c4f0204a13b89e62786e133029fe537098054110133a8f"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.798,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 2,\"totalTokenCount\": 702,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| 项目 | 内容 |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 20,\"totalTokenCount\": 720,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"协议名称** | 超文本咖啡壶控制协议 (HTCPCP/1.0) |\\n| **RFC\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 44,\"totalTokenCount\": 744,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\n"
+        ],
+        [
+          1.885,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 编号** | 2324 |\\n| **发布日期** | 1998年4月\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 69,\"totalTokenCount\": 769,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\n"
+        ],
+        [
+          1.99,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"1日 |\\n| **作者** | L. Masinter |\\n| **类别** | 信息类 (Informational) |\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 97,\"totalTokenCount\": 797,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\n"
+        ],
+        [
+          2.201,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"| **核心用途** | 用于控制、监控及诊断联网咖啡壶 |\\n| **开发背景** | 随着\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 122,\"totalTokenCount\": 822,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\n"
+        ],
+        [
+          2.22,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"计算设备的普及，用户需求推动了家用电器（如咖啡壶）的远程网络控制与自动化 |\\n\\u003c/\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 146,\"totalTokenCount\": 846,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\n"
+        ],
+        [
+          2.308,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 148,\"totalTokenCount\": 848,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\n"
+        ],
+        [
+          2.351,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPS5Ql2nkjGmLGq5bsSQKnL9HfSKSy7jWadKUBG/wKCCgrAkR4B6KzSl6rgInh8M6TmGOM+ywHzFPxqLxgzjxc8Lejvyy1eSLTnZU8ohKGs96sAcxEturIU0S0xCmiYJIQdIdXHv+jeWFa1Q==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 148,\"totalTokenCount\": 848,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"yu2batrfI-Wu2roPquKpEA\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "e86e3e94008257c5e0c02469abe826cb80bf1c649ef0124b1da8f4f80741ccfe"
+    }
+  ]
+}

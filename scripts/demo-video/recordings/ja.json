@@ -1,0 +1,250 @@
+{
+  "locale": "ja",
+  "recorded": "2026-09-05T09:50:46.264Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 18:50:18"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "コーヒーポットを遠隔操作するための通信プロトコル「HTCPCP」を定義したエイプリルフールのジョークRFCである。",
+      "tokens": {
+        "input": 467,
+        "output": 33
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "これは、インターネットを使ってコーヒーメーカーを遠隔操作するための「冗談のようなルールブック」です。\n\nインターネットの世界には、「通信プロトコル（通信規約）」というルールがあります。これは、コンピューター同士が会話をするための共通言語のようなものです。例えば、ウェブサイトを見る時やメールを送る時、みんなが同じルールを守ることで、世界中のコンピューターが正しく情報をやり取りできます。\n\nこの文書は、そのルールの仕組みを借りて、「もしコーヒーメーカーをインターネットにつなぐなら、こんな命令が必要だよね」というアイデアを真面目な書き方でまとめたものです。\n\n想像してみてください。あなたはベッドの中にいて、キッチンまで行かずにコーヒーを淹れたいと思っています。その時、あなたのスマホからコーヒーメーカーに、「コーヒーを淹れて」という指示を送る必要があります。\n\nこの文書では、そうした命令のために、ウェブサイトを見るときに使われる「ハイパーテキスト転送プロトコル（HTTP）」という仕組みを少しだけ変えて、「ハイパーテキスト・コーヒーポット・コントロール・プロトコル（HTCPCP）」という名前のルールを作りました。\n\n具体的には、このようなことが書かれています。\n\n・「コーヒーを淹れて」と頼むための命令。\n・「コーヒーができたよ」と返事をするための仕組み。\n・もしコーヒー豆が切れていたら、「豆がないよ」とエラーを伝える方法。\n\nこの文書は、1998年の4月1日、つまり「エイプリルフール」に発表されました。当時の技術者たちが、コンピューターやインターネットという難しい技術を、身近な家電に応用することを楽しんで考えた、遊び心のあるジョークです。\n\n世界を動かすような本当の技術ではありませんが、インターネットの歴史において「どんなことでもルールを作ってつなげてしまおう」という当時の技術者たちの面白い文化を象徴する、有名な記録の一つとなっています。",
+      "tokens": {
+        "input": 773,
+        "output": 399
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "もう少し簡潔に",
+      "reply": "これは、インターネットを使ってコーヒーメーカーを操作するための、冗談で作られた架空のルールブックです。\n\nインターネットには、コンピューター同士がやり取りするための「通信プロトコル」という共通のルールがあります。この文書は、ウェブサイトを見るためのルールをわざと真似て、「コーヒーを淹れるための指示を出すとしたら？」というアイデアを、わざと難しい言葉を使って真面目に書いたものです。\n\n例えば、朝ベッドにいながらスマホでコーヒーメーカーに「コーヒーを淹れて」と命じたり、豆が切れていないか確認したりする様子を、技術的な仕組みとして提案しています。\n\nこの文書は1998年の4月1日、つまりエイプリルフールに公開されました。当時、身の回りのあらゆるものをインターネットにつなごうという遊び心が流行しており、技術者たちがジョークとして楽しんだものです。実際に使われることはありませんが、インターネットの歴史に残る有名な冗談の一つです。",
+      "tokens": {
+        "input": 1180,
+        "output": 205
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "表にして",
+      "reply": "| 項目 | 内容 |\n| :--- | :--- |\n| RFC番号 | 2324 |\n| タイトル | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| 発行日 | 1998年4月1日 |\n| 著者 | L. Masinter |\n| カテゴリ | Informational（情報提供） |\n| 目的 | コーヒーメーカーの制御、監視、および診断のためのプロトコル定義 |\n| 背景 | ユビキタスコンピューティング環境におけるコーヒーメーカーのネットワーク接続需要への対応 |",
+      "tokens": {
+        "input": 695,
+        "output": 135
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "bodySha256": "a0e845cfe574477f1d9c1f3fc046947ff08bfe280a0a7d7a491f31124bfe961b",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.745,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2uWbavTGNrPlrfcP0ejFuAc\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eコーヒーポットを遠隔操作するための通信プロトコル「HTCPCP」を定義\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 21,\"totalTokenCount\": 488,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2uWbavTGNrPlrfcP0ejFuAc\"}\r\n\r\n"
+        ],
+        [
+          1.794,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"したエイプリルフールのジョークRFCである。\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 33,\"totalTokenCount\": 500,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2uWbavTGNrPlrfcP0ejFuAc\"}\r\n\r\n"
+        ],
+        [
+          1.851,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPEBhBg5RRnY1Xc+lqEN9pc1eid7vrLJbM3ni1rqJc1I9bdH7HL9eCoBhBAqwEtzVKGBiakChXhn/O/Jx6jDKehqnfQj6c/tnl2jj3N2P91naFLMivbVYYju6WXP6VLzIXhAb0BPWbTuaidg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 33,\"totalTokenCount\": 500,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2uWbavTGNrPlrfcP0ejFuAc\"}\r\n\r\n"
+        ]
+      ]
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "bodySha256": "904a12cc3c9edbbc32acfca45319229bc670490127f0d75793bbf3054dd072ec",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          0.881,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nこれは、インターネットを使ってコーヒーメーカーを遠隔操作するための「冗談のような\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 19,\"totalTokenCount\": 792,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ルールブック」です。\\n\\nインターネットの世界には、「通信プロトコル（通信規約）」というルールがあります。これは\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 43,\"totalTokenCount\": 816,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          0.923,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"、コンピューター同士が会話をするための共通言語のようなものです。例えば、ウェブサイトを見る時やメールを送る時、\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 68,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.064,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"みんなが同じルールを守ることで、世界中のコンピューターが正しく情報をやり取りできます。\\n\\nこの文書は、そのル\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 95,\"totalTokenCount\": 868,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.147,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ールの仕組みを借りて、「もしコーヒーメーカーをインターネットにつなぐなら、こんな命令が必要だよね」というアイデア\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 119,\"totalTokenCount\": 892,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.295,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"を真面目な書き方でまとめたものです。\\n\\n想像してみてください。あなたはベッドの中にいて、キッチンまで行かずに\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 145,\"totalTokenCount\": 918,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.506,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"コーヒーを淹れたいと思っています。その時、あなたのスマホからコーヒーメーカーに、「コーヒーを淹れて」という指示を送る必要があります\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 172,\"totalTokenCount\": 945,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.528,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"。\\n\\nこの文書では、そうした命令のために、ウェブサイトを見るときに使われる「ハイパーテキスト転送プロトコル（HTTP\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 200,\"totalTokenCount\": 973,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.657,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"）」という仕組みを少しだけ変えて、「ハイパーテキスト・コーヒーポット・コントロール・プロトコル（HTCPCP）」という名前\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1001,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.76,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"のルールを作りました。\\n\\n具体的には、このようなことが書かれています。\\n\\n・「コーヒーを淹れて」と\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 252,\"totalTokenCount\": 1025,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.911,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"頼むための命令。\\n・「コーヒーができたよ」と返事をするための仕組み。\\n・もしコーヒー\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 276,\"totalTokenCount\": 1049,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.937,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"豆が切れていたら、「豆がないよ」とエラーを伝える方法。\\n\\nこの文書は、1998年の\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 302,\"totalTokenCount\": 1075,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          2.044,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"4月1日、つまり「エイプリルフール」に発表されました。当時の技術者たちが、コンピューターやインターネットという\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 328,\"totalTokenCount\": 1101,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          2.154,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"難しい技術を、身近な家電に応用することを楽しんで考えた、遊び心のあるジョークです。\\n\\n世界\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 353,\"totalTokenCount\": 1126,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          2.281,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"を動かすような本当の技術ではありませんが、インターネットの歴史において「どんなことでもルールを作ってつなげて\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 377,\"totalTokenCount\": 1150,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          2.373,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"しまおう」という当時の技術者たちの面白い文化を象徴する、有名な記録の一つとなっています。\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 399,\"totalTokenCount\": 1172,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ],
+        [
+          2.438,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPNoI0r44Za9x5j5Ad+NBFNwzhwLXAu5ytNtn3g3Usoz0Be5dKhxW07NJuqxIxnTHoRmGDgNRV/PNDi1HDgllDSv049lZ7DyunZ386yhljbhzUi+OEXuEpQxTHjK4D48Sbq3WNH7v3Cnw4xQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 399,\"totalTokenCount\": 1172,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4OWbauzAIsXL2roPksKNgQE\"}\r\n\r\n"
+        ]
+      ]
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "bodySha256": "dda23ab8c4b8e7c166ba8e556fb95fe6ddbcf325715119fee0db4607fb1308df",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          0.751,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1182,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nこれは、インターネットを使ってコーヒーメーカーを操作するための、冗談で作られた架\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 19,\"totalTokenCount\": 1199,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          0.814,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"空のルールブックです。\\n\\nインターネットには、コンピューター同士がやり取りするための「通信プロトコル」という共通\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 44,\"totalTokenCount\": 1224,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          0.937,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"のルールがあります。この文書は、ウェブサイトを見るためのルールをわざと真似て、「コーヒーを淹れるための指示\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 70,\"totalTokenCount\": 1250,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.064,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"を出すとしたら？」というアイデアを、わざと難しい言葉を使って真面目に書いたものです。\\n\\n例えば、朝ベッド\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 96,\"totalTokenCount\": 1276,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.252,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"にいながらスマホでコーヒーメーカーに「コーヒーを淹れて」と命じたり、豆が切れていないか\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 120,\"totalTokenCount\": 1300,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.294,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"確認したりする様子を、技術的な仕組みとして提案しています。\\n\\nこの文書は1998年の4月1日、\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 147,\"totalTokenCount\": 1327,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.398,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"つまりエイプリルフールに公開されました。当時、身の回りのあらゆるものをインターネットにつなごうという遊び心が流行\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 173,\"totalTokenCount\": 1353,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.462,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"しており、技術者たちがジョークとして楽しんだものです。実際に使われることはありませんが、インターネットの歴史に残る有名な\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 198,\"totalTokenCount\": 1378,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.526,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"冗談の一つです。\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 205,\"totalTokenCount\": 1385,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ],
+        [
+          1.569,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPpZlWiDMuQnNuKjvDnKfHT3ghQKXnYv4hH6yTBjQCG7RcZUYc2J1WZadBzpypoidBMVQF89blSsCHC/02rdhu8XZKS/+z3XJ95XVm/yPFn/zmhfZqA2otPTeECe2mh6lN/vTn3N9GvNe5YA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1180,\"candidatesTokenCount\": 205,\"totalTokenCount\": 1385,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1180}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"6OWbapakD8XL2roPkcKNgQE\"}\r\n\r\n"
+        ]
+      ]
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "bodySha256": "ec5916f1a3306d914f15aa465e1300a58a317a474a0fc677eda72c37d26cc8d2",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          0.944,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 2,\"totalTokenCount\": 697,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| 項目 | 内容 |\\n| :--- | :--- |\\n| RFC番号 |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 23,\"totalTokenCount\": 718,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 2324 |\\n| タイトル | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 50,\"totalTokenCount\": 745,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\n"
+        ],
+        [
+          1.008,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| 発行日 | 1998年4月1日 |\\n| 著者 | L. Masinter\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 76,\"totalTokenCount\": 771,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\n"
+        ],
+        [
+          1.071,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| カテゴリ | Informational（情報提供） |\\n| 目的 | コーヒーメーカーの制御、監視、および\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 102,\"totalTokenCount\": 797,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\n"
+        ],
+        [
+          1.151,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"診断のためのプロトコル定義 |\\n| 背景 | ユビキタスコンピューティング環境におけるコーヒーメーカーのネットワーク\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 126,\"totalTokenCount\": 821,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\n"
+        ],
+        [
+          1.255,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"接続需要への対応 |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 135,\"totalTokenCount\": 830,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\n"
+        ],
+        [
+          1.258,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP5eO1u65wqSct3LxYi4dA1SqmMJrRA5r3EVWsBL2CoXo9URgxHNlQ+aiYEqnOQt57MX+Qys4b/H4n+y5pl4tyMACQF1JbgJtZxFEkY96BPHQ8wFQoVmBS0RIzZe/Swl89ke4b0XeZSDYItQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 695,\"candidatesTokenCount\": 135,\"totalTokenCount\": 830,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 695}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7uWbapeJJsbPrfcPoOzWKQ\"}\r\n\r\n"
+        ]
+      ]
+    }
+  ]
+}

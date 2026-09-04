@@ -1,0 +1,226 @@
+{
+  "locale": "fr",
+  "recorded": "2026-09-05T10:28:02.441Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:27:17"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "Le protocole HTCPCP définit une norme humoristique pour le contrôle à distance des cafetières via Internet.",
+      "tokens": {
+        "input": 467,
+        "output": 28
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "Le Protocole de Contrôle de Cafetière par Hypertexte (HTCPCP) est une blague informatique écrite en 1998 pour se moquer de la façon dont les experts décrivent les règles de communication sur Internet.\n\nImaginez que vous voulez demander à un ami de vous préparer un café par message. Pour que votre ami comprenne exactement ce que vous voulez, vous devez utiliser des règles précises. Vous devez dire « prépare le café », attendre une réponse, et savoir quoi faire si la cafetière est en panne.\n\nSur Internet, les ordinateurs utilisent des règles de communication appelées « protocoles ». Ce document invente un protocole pour des cafetières connectées à Internet.\n\nVoici pourquoi ce texte existe :\n\n1. Les experts en informatique aiment créer des documents officiels très sérieux pour expliquer comment les ordinateurs doivent se parler.\n2. En 1998, les gens commençaient à vouloir connecter tous les appareils de la maison à Internet. \n3. Les auteurs ont voulu s'amuser en écrivant un manuel extrêmement sérieux et détaillé pour quelque chose d'aussi simple qu'une machine à café.\n\nLe nom du protocole, « Hyper Text Coffee Pot Control Protocol », joue sur le nom du protocole « Hyper Text Transfer Protocol » (HTTP), qui est la règle principale utilisée pour charger des pages sur le web.\n\nCe document n'est pas une vraie règle technique. Il n'a jamais été prévu pour être utilisé par de vraies machines. C'est une parodie humoristique, publiée le 1er avril, jour des farces, pour montrer que même dans le monde très sérieux des réseaux informatiques, les gens peuvent avoir de l'humour.",
+      "tokens": {
+        "input": 773,
+        "output": 366
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "Un peu plus court, s'il te plaît",
+      "reply": "Le Protocole de Contrôle de Cafetière par Hypertexte (HTCPCP) est une blague informatique publiée le 1er avril 1998.\n\nC'est une parodie des documents techniques officiels qui expliquent comment les ordinateurs communiquent entre eux sur Internet. Les auteurs ont imaginé des règles très sérieuses et complexes pour commander une cafetière à distance, en imitant le langage habituel des ingénieurs. \n\nLe nom du protocole lui-même est une plaisanterie : il imite le nom du protocole HTTP (le langage standard utilisé par tous les sites web) en remplaçant « Transfert » par « Cafetière ».\n\nCe texte n'a jamais été une vraie règle technique. Il servait simplement à faire rire les informaticiens en montrant qu'ils étaient capables de décrire une machine à café avec la même précision froide qu'un système informatique mondial.",
+      "tokens": {
+        "input": 1154,
+        "output": 195
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "Sous forme de tableau",
+      "reply": "| Catégorie | Détails |\n| :--- | :--- |\n| **Protocole** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **RFC** | 2324 |\n| **Date** | 1er avril 1998 |\n| **Auteur** | L. Masinter |\n| **Objet** | Contrôle, surveillance et diagnostic des cafetières |\n| **Statut** | Informationnel (non standard) |\n| **Contexte** | Ubiquité de l'informatique et nécessité de contrôler les appareils domestiques à distance |",
+      "tokens": {
+        "input": 697,
+        "output": 144
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          2.024,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hu6bavKhEL2N1e8PlvWYyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eLe protocole HTCPCP définit une norme humoristique pour le contrôle à\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 18,\"totalTokenCount\": 485,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hu6bavKhEL2N1e8PlvWYyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" distance des cafetières via Internet.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 28,\"totalTokenCount\": 495,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hu6bavKhEL2N1e8PlvWYyA8\"}\r\n\r\n"
+        ],
+        [
+          2.074,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPV03mBkM7npFoYWL3ne7YYZLzYCUSADlpUcvm3JJ537vP12jA2rLvs8O26G/8uQjEpByVBdJsL+QUq4CFofI03neRVOAGbILyf7BSwK5+nXawsU8nvBoQ6QYXRez2HAN8jQUnmQWejg4YPA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 28,\"totalTokenCount\": 495,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hu6bavKhEL2N1e8PlvWYyA8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "fe0b2d23e073c9a785ac1964cce62cb17ab8b4f9d3f8d47851324ad9c57d4c05"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          4.334,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eLe Protocole de Contrôle de Cafetière par Hypertexte (HTCPCP\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 19,\"totalTokenCount\": 792,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          4.354,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \") est une blague informatique écrite en 1998 pour se moquer de la façon dont les experts déc\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 43,\"totalTokenCount\": 816,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          4.416,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"rivent les règles de communication sur Internet.\\n\\nImaginez que vous voulez demander à un ami de vous préparer un café\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 67,\"totalTokenCount\": 840,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          4.539,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" par message. Pour que votre ami comprenne exactement ce que vous voulez, vous devez utiliser des règles précises. Vous devez dire\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 93,\"totalTokenCount\": 866,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          4.651,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" « prépare le café », attendre une réponse, et savoir quoi faire si la cafetière est en panne.\\n\\nSur\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 117,\"totalTokenCount\": 890,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          4.857,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Internet, les ordinateurs utilisent des règles de communication appelées « protocoles ». Ce document invente un protocole pour des\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 142,\"totalTokenCount\": 915,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.064,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" cafetières connectées à Internet.\\n\\nVoici pourquoi ce texte existe :\\n\\n1. Les experts en informatique aiment créer\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 167,\"totalTokenCount\": 940,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" des documents officiels très sérieux pour expliquer comment les ordinateurs doivent se parler.\\n2. En 1998,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 193,\"totalTokenCount\": 966,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.154,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" les gens commençaient à vouloir connecter tous les appareils de la maison à Internet. \\n3. Les auteurs ont\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 217,\"totalTokenCount\": 990,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.219,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" voulu s'amuser en écrivant un manuel extrêmement sérieux et détaillé pour quelque chose d'aussi simple qu'une machine\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 243,\"totalTokenCount\": 1016,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.345,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" à café.\\n\\nLe nom du protocole, « Hyper Text Coffee Pot Control Protocol », joue sur le nom du prot\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 267,\"totalTokenCount\": 1040,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.569,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ocole « Hyper Text Transfer Protocol » (HTTP), qui est la règle principale utilisée pour charger des pages sur le web.\\n\\nCe\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 293,\"totalTokenCount\": 1066,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.69,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" document n'est pas une vraie règle technique. Il n'a jamais été prévu pour être utilisé par de vraies machines. C'\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 321,\"totalTokenCount\": 1094,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.69,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"est une parodie humoristique, publiée le 1er avril, jour des farces, pour montrer que même dans le monde très\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 348,\"totalTokenCount\": 1121,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ],
+        [
+          5.876,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" sérieux des réseaux informatiques, les gens peuvent avoir de l'humour.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 366,\"totalTokenCount\": 1139,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPVt+u8RULDHD2czSdfcV/ZhO+OnZs3O4Fqm5C3odkpnTz6Ly+BKpBN8FKJaOSwzVIlzNZbEvqKNLDeelO4RC+r0aQMILvWoAYse2fXApGFb1IEJiIYayEktUblFnZnUbIBfoQHpOhgbzMCA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 366,\"totalTokenCount\": 1139,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"i-6batijOdGN1e8P3qip0Qw\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "7f6b3427e9686e8656809aebc37754c31df6f5483f151cd68f2a4d20fbf449a5"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          5.426,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1156,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nLe Protocole de Contrôle de Cafetière par Hypertexte (HTCPCP\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 20,\"totalTokenCount\": 1174,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \") est une blague informatique publiée le 1er avril 1998.\\n\\nC'est une parodie des\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 46,\"totalTokenCount\": 1200,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\n"
+        ],
+        [
+          5.491,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" documents techniques officiels qui expliquent comment les ordinateurs communiquent entre eux sur Internet. Les auteurs ont imaginé des\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 70,\"totalTokenCount\": 1224,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\n"
+        ],
+        [
+          5.62,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" règles très sérieuses et complexes pour commander une cafetière à distance, en imitant le langage habituel des ingénieurs. \\n\\nLe\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 99,\"totalTokenCount\": 1253,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\n"
+        ],
+        [
+          5.676,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" nom du protocole lui-même est une plaisanterie : il imite le nom du protocole HTTP (le langage standard utilisé par\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 126,\"totalTokenCount\": 1280,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\n"
+        ],
+        [
+          5.84,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" tous les sites web) en remplaçant « Transfert » par « Cafetière ».\\n\\nCe texte n'a jamais été une\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 153,\"totalTokenCount\": 1307,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" vraie règle technique. Il servait simplement à faire rire les informaticiens en montrant qu'ils étaient capables de décrire\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 179,\"totalTokenCount\": 1333,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\n"
+        ],
+        [
+          6.045,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" une machine à café avec la même précision froide qu'un système informatique mondial.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 195,\"totalTokenCount\": 1349,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP9HFgUreViNTH6n4T8ybPeO8lerOO3YU8qfLMOujhNVqiMHme3zeFI836jR5A+ASsUEb/6cGBsYr3c1JQOigloWAOfi6OZPXRkxO+5KvZvCyOuymh58rCUeHXEZfCa5YpCqD0Ggeo9C2L2g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1154,\"candidatesTokenCount\": 195,\"totalTokenCount\": 1349,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1154}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"me6bapLMDujp1e8Pz_W7oA8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "c45e85df5cb5bc87f503e4ad86a6b5ec6ebcec5bd06b9b2908d07a580b1209b9"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          4.246,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 2,\"totalTokenCount\": 699,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\n"
+        ],
+        [
+          4.267,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Catégorie | Détails |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 22,\"totalTokenCount\": 719,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\n"
+        ],
+        [
+          4.356,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **Protocole** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 46,\"totalTokenCount\": 743,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\n"
+        ],
+        [
+          4.439,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"RFC** | 2324 |\\n| **Date** | 1er avril 1998 |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 71,\"totalTokenCount\": 768,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\n"
+        ],
+        [
+          4.575,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Auteur** | L. Masinter |\\n| **Objet** | Contrôle, surveillance et diagnostic des cafetières\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 99,\"totalTokenCount\": 796,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\n"
+        ],
+        [
+          4.637,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| **Statut** | Informationnel (non standard) |\\n| **Contexte** | Ubiquité de\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 125,\"totalTokenCount\": 822,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\n"
+        ],
+        [
+          4.781,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" l'informatique et nécessité de contrôler les appareils domestiques à distance |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 144,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPXv3lCvRCZinDtwBzQi4XTRD+z+CbS0RHsQyDWMJl8xHRpSP+MjuFOXGq9i1LYlOHIhueDEWP7T5i7klY81LXvU3Ec8KYQmiR9r0/bizfCg/AYOBB+kpRNLgx6/b5h6NeGjRJnKngGwasnQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 144,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"pe6bat_fNqeU9tMPqMrQyQ8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "818b2f08aaf6d19ce73de734baad1830922bb07b5277c8b9169d1c4e71e0d750"
+    }
+  ]
+}

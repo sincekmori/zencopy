@@ -1,0 +1,282 @@
+{
+  "locale": "fa",
+  "recorded": "2026-09-05T10:34:49.397Z",
+  "model": "google:gemini-3.1-flash-lite",
+  "capture": {
+    "kind": "text",
+    "source": {
+      "kind": "text",
+      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+    },
+    "prompt_id": "zencopy-summarize",
+    "label": "Summarize",
+    "role": "default",
+    "instructions": "Summarize the input to its essence in one short sentence, in {{ locale | language_name }}; output only the summary, no preamble.",
+    "prompt": "{{ text }}",
+    "vars": {
+      "markup": "",
+      "format": "",
+      "file_name": "",
+      "file_names": "",
+      "file_paths": "",
+      "app_name": "Google Chrome",
+      "exec_name": "Google Chrome",
+      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
+      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "process_id": "4242",
+      "now": "2026-09-05 19:34:13"
+    },
+    "runnable": true
+  },
+  "turns": [
+    {
+      "demo": "summarize",
+      "prompt": "zencopy-summarize",
+      "reply": "این سند پروتکل HTCPCP را برای کنترل و نظارت بر قهوه‌سازها از طریق شبکه معرفی می‌کند.",
+      "tokens": {
+        "input": 467,
+        "output": 30
+      }
+    },
+    {
+      "demo": "explain",
+      "prompt": "zencopy-explain",
+      "reply": "این متن درباره‌ی یک «پروتکل کنترل قوری قهوه در محیط ابرمتن» است. این یک شوخی فنی است که در دنیای اینترنت ساخته شده تا به ما یادآوری کند که نباید هر چیزی را که در کامپیوتر می‌بینیم، لزوماً جدی بگیریم.\n\nپروتکل در دنیای کامپیوتر، مانند یک زبان مشترک یا مجموعه‌ای از قوانین است. وقتی دو کامپیوتر می‌خواهند با هم حرف بزنند، باید از یک زبان مشخص استفاده کنند تا حرف یکدیگر را بفهمند. برای مثال، وقتی شما آدرس یک وب‌سایت را در مرورگر خود می‌زنید، مرورگر از پروتکلی استفاده می‌کند تا آن صفحه را از سرورِ دوردست بگیرد و به شما نشان دهد.\n\nنویسنده‌ی این متن، همین ایده را به شوخی برای کنترل کردن قوری‌های قهوه به کار برده است. تصور کنید قهوه‌ساز شما به اینترنت وصل باشد. این متن می‌گوید اگر بخواهیم از راه دور و از طریق اینترنت به قهوه‌ساز دستور بدهیم که «قهوه را دم کن»، به یک زبان یا پروتکل خاص نیاز داریم. نویسنده اسم این پروتکل خیالی را «اچ‌تی‌سی‌پی‌سی‌پی» (HTCPCP) گذاشته است.\n\nاین متن در واقع یک «درخواست برای نظر» یا «آر‌اف‌سی» (RFC) است. «آر‌اف‌سی»ها معمولاً سندهای مهمی هستند که استانداردهای واقعی اینترنت را تعیین می‌کنند. اما این متنِ خاص، در روز اول آوریل منتشر شده است. در کشورهای غربی، اول آوریل روزی است که مردم با هم شوخی می‌کنند و دروغ‌های بی‌ضرر می‌گویند. بنابراین، این سند برای خنداندنِ برنامه‌نویس‌ها و متخصصان شبکه نوشته شده است تا نشان دهد که می‌توان با استفاده از همان قوانینِ ساختِ وب، حتی برای دم کردن قهوه هم دستورالعمل نوشت.\n\nدر اصل، این متن هیچ کاراییِ واقعی ندارد و هیچ شرکتی برای ساخت قهوه‌ساز از آن استفاده نمی‌کند. این فقط یک تمرین ذهنی است که می‌پرسد: «اگر قرار باشد همه‌چیز در دنیا به اینترنت وصل باشد، آیا باید برای قهوه‌ساز هم یک زبانِ مخصوص اختراع کنیم؟» پاسخِ جدی این است که خیر، اما نوشتنِ قواعدِ آن به شکلی که شبیه به قوانینِ جدیِ اینترنت باشد، برای افراد اهل فن، بسیار سرگرم‌کننده است.",
+      "tokens": {
+        "input": 773,
+        "output": 562
+      }
+    },
+    {
+      "demo": "follow-up",
+      "prompt": "zencopy-explain",
+      "message": "کمی خلاصه‌تر، لطفاً",
+      "reply": "این متن یک شوخیِ فنی است که در روز اول آوریل (روز دروغ‌گویی و شوخی در غرب) نوشته شده است.\n\nدر دنیای اینترنت، «پروتکل» مجموعه‌ای از قوانین است که باعث می‌شود کامپیوترها با هم حرف بزنند. نویسنده در این متن، به شوخی یک پروتکل خیالی برای «کنترل قوری قهوه‌ساز از راه دور» طراحی کرده است. او می‌گوید چون همه وسایل خانه در حال وصل شدن به اینترنت هستند، پس باید زبانی هم برای دستور دادن به قهوه‌ساز وجود داشته باشد.\n\nاین سند هیچ اعتبار فنی ندارد و قرار نیست قهوه‌سازها واقعاً با این روش کار کنند. هدف اصلی آن فقط سرگرم کردنِ مهندسان کامپیوتر و نشان دادنِ این نکته است که می‌توان قوانینِ پیچیده اینترنت را به شکل طنز برای کارهای ساده‌ای مثل دم کردن قهوه به کار برد.",
+      "tokens": {
+        "input": 1347,
+        "output": 211
+      }
+    },
+    {
+      "demo": "custom",
+      "prompt": "zencopy-custom",
+      "message": "به صورت جدول",
+      "reply": "| عنوان | توضیحات |\n| :--- | :--- |\n| **نام پروتکل** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **شماره RFC** | 2324 |\n| **تاریخ انتشار** | ۱ آوریل ۱۹۹۸ |\n| **نویسنده** | L. Masinter |\n| **هدف** | کنترل، نظارت و تشخیص وضعیت قهوه‌سازهای متصل به شبکه |\n| **وضعیت** | Informational (اطلاع‌رسانی - غیر استاندارد) |\n| **دلیل ایجاد** | نیاز به کنترل از راه دور دستگاه‌های خانگی (مانند قهوه‌ساز) در دنیای متصل به اینترنت |",
+      "tokens": {
+        "input": 696,
+        "output": 167
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          4.757,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          4.76,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eاین سند پروتکل HTCPCP را برای کنترل و نظارت بر قه\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 18,\"totalTokenCount\": 485,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          4.862,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وه\\u200cسازها از طریق شبکه معرفی می\\u200cکند.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 30,\"totalTokenCount\": 497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
+        ],
+        [
+          4.905,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP8uTpAGdu83Bz/xhWnejAqokwA/7F4uEnKi1zJzaGZntlFOTZZUtTytJ6bkFWxx9tdWLfZLeGPrEfelakfklOzdZexZ+6CeYPznpQs9sKUKkNrcTQtK4ErSvk3A5M3BbGyu8UhlCl2XY6Bg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 30,\"totalTokenCount\": 497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "2dcfe444a1e040e769cd98575005da07bd6d2c14bdf77fd466f854b267756f99"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.808,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nاین متن درباره\\u200cی یک «پروتکل کنترل قوری قهوه در محیط\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 20,\"totalTokenCount\": 793,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ابرمتن» است. این یک شوخی فنی است که در دنیای اینترنت ساخته شده تا به ما یاد\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 44,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          1.851,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"آوری کند که نباید هر چیزی را که در کامپیوتر می\\u200cبینیم، لزوماً جدی ب\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 69,\"totalTokenCount\": 842,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          1.956,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"گیریم.\\n\\nپروتکل در دنیای کامپیوتر، مانند یک زبان مشترک یا مجموعه\\u200cای از قوانین\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 94,\"totalTokenCount\": 867,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          2.096,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" است. وقتی دو کامپیوتر می\\u200cخواهند با هم حرف بزنند، باید از یک زبان مشخص استفاده کنند تا حرف\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 121,\"totalTokenCount\": 894,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          2.325,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" یکدیگر را بفهمند. برای مثال، وقتی شما آدرس یک وب\\u200cسایت را در مرورگر خود می\\u200cزنید،\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 150,\"totalTokenCount\": 923,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          2.352,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" مرورگر از پروتکلی استفاده می\\u200cکند تا آن صفحه را از سرورِ دوردست بگیرد و به شما نشان دهد.\\n\\nنو\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 177,\"totalTokenCount\": 950,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          2.48,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"یسنده\\u200cی این متن، همین ایده را به شوخی برای کنترل کردن قوری\\u200cهای قهوه به کار بر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 201,\"totalTokenCount\": 974,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          2.59,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ده است. تصور کنید قهوه\\u200cساز شما به اینترنت وصل باشد. این متن می\\u200cگوید اگر بخواهیم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 225,\"totalTokenCount\": 998,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          2.741,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" از راه دور و از طریق اینترنت به قهوه\\u200cساز دستور بدهیم که «قهوه را دم کن»، به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 250,\"totalTokenCount\": 1023,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          2.871,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" یک زبان یا پروتکل خاص نیاز داریم. نویسنده اسم این پروتکل خیالی را «اچ\\u200cتی\\u200cسی\\u200c\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 276,\"totalTokenCount\": 1049,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.025,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"پی\\u200cسی\\u200cپی» (HTCPCP) گذاشته است.\\n\\nاین متن در واقع یک «درخواست برای نظر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 302,\"totalTokenCount\": 1075,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.153,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"» یا «آر\\u200cاف\\u200cسی» (RFC) است. «آر\\u200cاف\\u200cسی»ها\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 326,\"totalTokenCount\": 1099,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.343,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" معمولاً سندهای مهمی هستند که استانداردهای واقعی اینترنت را تعیین می\\u200cکنند. اما این متنِ خاص، در روز اول آ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 354,\"totalTokenCount\": 1127,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.366,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وریل منتشر شده است. در کشورهای غربی، اول آوریل روزی است که مردم با هم شوخی می\\u200cکنند\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 379,\"totalTokenCount\": 1152,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.56,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" و دروغ\\u200cهای بی\\u200cضرر می\\u200cگویند. بنابراین، این سند برای خنداندنِ برنامه\\u200cنویس\\u200cها\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 406,\"totalTokenCount\": 1179,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.664,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" و متخصصان شبکه نوشته شده است تا نشان دهد که می\\u200cتوان با استفاده از همان قوانینِ ساختِ وب، حتی برای دم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 431,\"totalTokenCount\": 1204,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.664,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" کردن قهوه هم دستورالعمل نوشت.\\n\\nدر اصل، این متن هیچ کاراییِ واقعی ندارد و هیچ شر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 455,\"totalTokenCount\": 1228,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.709,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"کتی برای ساخت قهوه\\u200cساز از آن استفاده نمی\\u200cکند. این فقط یک تمرین ذهنی است که می\\u200c\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 479,\"totalTokenCount\": 1252,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          3.964,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"پرسد: «اگر قرار باشد همه\\u200cچیز در دنیا به اینترنت وصل باشد، آیا باید برای قهوه\\u200cساز هم یک زبان\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 508,\"totalTokenCount\": 1281,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ِ مخصوص اختراع کنیم؟» پاسخِ جدی این است که خیر، اما نوشتنِ قواعدِ آن به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 532,\"totalTokenCount\": 1305,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          4.162,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" شکلی که شبیه به قوانینِ جدیِ اینترنت باشد، برای افراد اهل فن، بسیار سرگرم\\u200cکننده\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 558,\"totalTokenCount\": 1331,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" است.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 562,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ],
+        [
+          4.223,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPOIqVbyCt/1QL7Q83jOT98XMjOuHd/9jcOHSFv5ykpU6pzFw4uPECk9f/VMVV4a6ntbnFcWD9FvVhmeUtl0pgU5H2XFDeR0vLsQWD+fAYOasn6ovLEF6UNUgZyLcQn3R3YP39bdpeYO129Q==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 562,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "19402690083281506d3750f2f4cd83f642b7adba5a41862c17b97750fda312f3"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          1.183,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1349,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.225,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nاین متن یک شوخیِ فنی است که در روز اول آوریل (\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 20,\"totalTokenCount\": 1367,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.357,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"روز دروغ\\u200cگویی و شوخی در غرب) نوشته شده است.\\n\\nدر دنیای اینترنت، «\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 44,\"totalTokenCount\": 1391,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.461,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"پروتکل» مجموعه\\u200cای از قوانین است که باعث می\\u200cشود کامپیوترها با هم حرف بزنند. نویسنده در این متن\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 73,\"totalTokenCount\": 1420,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.508,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"، به شوخی یک پروتکل خیالی برای «کنترل قوری قهوه\\u200cساز از راه دور» طراحی کرده است. او می\\u200c\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 102,\"totalTokenCount\": 1449,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.591,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"گوید چون همه وسایل خانه در حال وصل شدن به اینترنت هستند، پس باید زبانی هم برای دستور دادن به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 126,\"totalTokenCount\": 1473,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.699,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" قهوه\\u200cساز وجود داشته باشد.\\n\\nاین سند هیچ اعتبار فنی ندارد و قرار نیست قهوه\\u200cسازها واقع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 150,\"totalTokenCount\": 1497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.806,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"اً با این روش کار کنند. هدف اصلی آن فقط سرگرم کردنِ مهندسان کامپیوتر و نشان دادنِ این\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 177,\"totalTokenCount\": 1524,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          1.872,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" نکته است که می\\u200cتوان قوانینِ پیچیده اینترنت را به شکل طنز برای کارهای ساده\\u200cای مثل دم کردن قهوه به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 204,\"totalTokenCount\": 1551,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          2,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" کار برد.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 211,\"totalTokenCount\": 1558,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ],
+        [
+          2.003,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP5NRG3/KMqqmTbx46ueWomF9gKsNHBK0MKWHLnyf4DUQ0EcOglRkYunv1VxOCSQXu4dwxAbDm4ZQh6aXyXeTsbG0LnhLIJlSq/oy62yqLluLlhw5DB3kbG0XmjoocVh7Uw/F/EpW/AsO9hA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 211,\"totalTokenCount\": 1558,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "29de49b51b10f7cdd11cfd991ba9d6a67c75dc2de8200c3d4b4fab9f2339367c"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          0.945,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| عنوان | توضیحات |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 20,\"totalTokenCount\": 716,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **نام پروتکل** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 45,\"totalTokenCount\": 741,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+        ],
+        [
+          0.969,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"شماره RFC** | 2324 |\\n| **تاریخ انتشار** | ۱ آوریل ۱۹۹۸\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 70,\"totalTokenCount\": 766,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+        ],
+        [
+          1.072,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| **نویسنده** | L. Masinter |\\n| **هدف** | کنترل، نظارت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 94,\"totalTokenCount\": 790,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+        ],
+        [
+          1.198,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" و تشخیص وضعیت قهوه\\u200cسازهای متصل به شبکه |\\n| **وضعیت** | Informational (اطلاع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 119,\"totalTokenCount\": 815,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+        ],
+        [
+          1.354,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u200cرسانی - غیر استاندارد) |\\n| **دلیل ایجاد** | نیاز به کنترل از راه دور دستگاه\\u200cهای خان\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 145,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+        ],
+        [
+          1.397,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"گی (مانند قهوه\\u200cساز) در دنیای متصل به اینترنت |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 167,\"totalTokenCount\": 863,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+        ],
+        [
+          1.459,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP3swjelncGLCchuc0a/QAdX9ByCkeycX9G7QzzcqptrzhmiRnc2i5Rm6EPsh5p6tJDpaz6mm0wmENsjY/cYHLEHo2FfN/Hk8QaUPFMkdHaWhqGxu07EOZ+y53xD86F5mw55B7/PWQi7mtRQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 167,\"totalTokenCount\": 863,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "7a57c31fb58a60f35bf4b2258d05b8e45ce595623a1b8ccf2e094b271338ba3e"
+    }
+  ]
+}

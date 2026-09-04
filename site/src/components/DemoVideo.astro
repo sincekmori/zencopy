@@ -1,29 +1,31 @@
 ---
-// One demo video embed for the docs pages. Demos are portrait screen captures
-// (/public/<locale>/demo/<demo>.mp4 with a matching .jpg poster), so the
-// dimensions live here, once. Only the locales in RECORDED have their own
-// recordings; every other locale serves the English one — the app in the
-// video just speaks English there. The slot is the localized fallback link
-// text for browsers that cannot play the video.
-const RECORDED = ["en", "ja"];
+// One demo video embed for the docs pages. Every locale has its own demos
+// (/public/<locale>/demo/<demo>.mp4 with a matching .jpg poster), generated
+// by `bun run demo-video` (scripts/demo-video.ts) — the popup in the video
+// speaks the page's language. The frame sizes are the generator's, so they
+// live here, once: the summarize demo is the template recording (the
+// browser page being copied), the others the popup window alone at 2×. The
+// slot is the localized fallback link text for browsers that cannot play
+// the video.
 interface Props {
-  demo: "summarize";
+  demo: "summarize" | "explain" | "follow-up" | "custom";
   locale: string;
 }
 const { demo, locale } = Astro.props;
-const base = `/${RECORDED.includes(locale) ? locale : "en"}/demo/${demo}`;
+const base = `/${locale}/demo/${demo}`;
+const [width, height] = demo === "summarize" ? [1748, 2262] : [1230, 1240];
 ---
 
 <video
   class="demo-video"
   controls
-  height="2262"
+  height={height}
   muted
   playsinline
   poster={`${base}.jpg`}
   preload="metadata"
   src={`${base}.mp4`}
-  width="1748"
+  width={width}
 >
   <a href={`${base}.mp4`}><slot /></a>
 </video>

@@ -8,5 +8,6 @@
     "site": {
       "entry": ["src/scripts/*.ts"]
     }
-  }
+  },
+  "ignoreBinaries": ["ffmpeg"]
 }
