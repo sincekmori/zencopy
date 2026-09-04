@@ -76,8 +76,8 @@ fn read_entry(
 /// each closing a line. The shared shape of the docx and pptx walks.
 fn collect_text_runs(
     xml: &[u8],
-    tag: &[u8],
-    break_after: &[u8],
+    tag: &str,
+    break_after: &str,
 ) -> Result<String, Box<dyn std::error::Error>> {
     use quick_xml::events::Event;
 
@@ -99,7 +99,7 @@ fn collect_text_runs(
                     }
                 }
             }
-            Event::Text(text) if in_run => out.push_str(&text.xml10_content()?),
+            Event::Text(text) if in_run => out.push_str(&text.xml10_content()),
             Event::Eof => break,
             _ => {}
         }
@@ -113,7 +113,7 @@ fn extract_docx(
     mut archive: zip::ZipArchive<Cursor<&[u8]>>,
 ) -> Result<String, Box<dyn std::error::Error>> {
     let xml = read_entry(&mut archive, "word/document.xml")?;
-    collect_text_runs(&xml, b"t", b"p")
+    collect_text_runs(&xml, "t", "p")
 }
 
 /// pptx: every slide's text in slide order, slides separated by a blank line.
@@ -137,7 +137,7 @@ fn extract_pptx(
     let mut parts = Vec::new();
     for (_, name) in &slides {
         let xml = read_entry(&mut archive, name)?;
-        let text = collect_text_runs(&xml, b"t", b"p")?;
+        let text = collect_text_runs(&xml, "t", "p")?;
         if !text.trim().is_empty() {
             parts.push(text.trim_end().to_string());
         }
