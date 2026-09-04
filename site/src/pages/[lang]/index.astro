@@ -1,0 +1,21 @@
+---
+// The landing page, one route for every locale: `/<lang>/` is this page, and
+// everything deeper (`/<lang>/getting-started/`, …) stays with Starlight — a
+// named parameter outranks its catch-all (`[...slug]`) when routes match. The
+// locales are LANDING_LOCALES, the list the docs config and the landing copy
+// already share, so a new language is a new entry there, never a page file.
+import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
+import Landing from "../../components/Landing.astro";
+import { LANDING_LOCALES } from "../../components/landing-copy.ts";
+
+export const getStaticPaths = (() =>
+  LANDING_LOCALES.map(({ code }) => ({
+    params: { lang: code },
+  }))) satisfies GetStaticPaths;
+
+const { lang } = Astro.params as InferGetStaticParamsType<
+  typeof getStaticPaths
+>;
+---
+
+<Landing lang={lang} />

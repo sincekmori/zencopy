@@ -19,7 +19,7 @@ const config = [
     // The landing ships no JS bundle by design, and two of its scripts must
     // run before first paint (theme restore, locale redirect) — inline is the
     // correct form there, not an accident. The rule stays on everywhere else.
-    files: ["src/pages/index.astro", "src/components/Landing.astro"],
+    files: ["src/components/Landing.astro"],
     rules: {
       "astro/no-unsafe-inline-scripts": "off",
     },
