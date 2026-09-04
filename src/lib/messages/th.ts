@@ -112,7 +112,7 @@ export const th: Messages = {
     open: "เปิด",
   },
   about: {
-    tagline: "คัดลอกสองครั้ง จัดการทันที",
+    tagline: "AI ทันใจ บนหน้าจอที่คุณใช้งาน",
     update: (version) => `อัปเดตเป็น v${version} แล้วรีสตาร์ตแอป`,
     updateRestart: (version) => `รีสตาร์ตแอปเพื่ออัปเดตเป็น v${version}`,
     updating: "กำลังอัปเดต…",

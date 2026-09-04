@@ -1,0 +1,318 @@
+---
+title: 設定ファイル（上級者向け）
+description: 設定ディレクトリの ai-sdk-catalog.json / rules.json / prompts/*.md の形式、テンプレート変数、コピペ用の設定例、ログの場所。画面の設定だけで足りる人には不要です。
+---
+
+import CopyTwice from "../../../components/CopyTwice.astro";
+
+このページは、設定ファイルをテキストエディタで直接書く人のためのものです（設定画面の AI タブで「JSON」を選ぶと出る「設定例を見る」も、ここに来ます）。
+画面の設定だけで足りる人には要りません。
+
+## 設定ファイルの場所 {#config-files-for-power-users}
+
+ZenCopy は、ユーザーごとのアプリ設定ディレクトリにあるファイルを読みます。
+
+| OS      | パス                                        |
+| ------- | ------------------------------------------- |
+| Windows | `%APPDATA%\app.zencopy`                     |
+| macOS   | `~/Library/Application Support/app.zencopy` |
+| Linux   | `~/.config/app.zencopy`                     |
+
+正確なパスは、起動時のログに `config dir` として 1 行出ます。
+
+読まれるファイルは 3 つで、編集が効くタイミングはファイルごとに違います。
+
+| ファイル              | 役割                                                    | 編集が反映されるとき                                              |
+| --------------------- | ------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ai-sdk-catalog.json` | プロバイダーと、role からモデルへの対応。API キーもここ | 設定画面の AI タブで保存したとき、または ZenCopy を再起動したとき |
+| `rules.json`          | どの種類のコピーにどのプロンプトを使うか                | 次の <CopyTwice /> から                                           |
+| `prompts/*.md`        | 自作プロンプト（1 ファイルが 1 プロンプト）             | 次の <CopyTwice /> から                                           |
+
+`ai-sdk-catalog.json` だけタイミングが違うのは、読み込んだ内容をメモリに保持し、設定画面の保存を合図に捨てるからです。
+`rules.json` と `prompts/` は、<CopyTwice /> のたびに読み直されます。
+
+振り分けとプロンプトの既定値はアプリに埋め込まれています。
+`rules.json` があれば既定と合成されず丸ごと置き換わり（kind の行を省くと、その種類はプロンプトを選ぶまで何も送られません）、`prompts/` は追加専用です（組み込みと同じ id を名乗るファイルは無視されます）。
+
+## ai-sdk-catalog.json {#ai-sdk-catalogjson}
+
+設定画面の AI タブ（JSON を含む）が読み書きしているのは、このファイルです。
+`providers` に接続先と API キーを、`roles` に role 名からモデルへの対応を書きます。
+プロンプトは role 名だけを持つので、モデルの差し替えはこのファイルの 1 か所で済みます。
+
+ファイル形式の本家は [ai-sdk-catalog](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog#readme) です。
+全フィールドの説明はそちらにあり、[`examples/`](https://github.com/sincekmori/ai-sdk-utils/tree/main/packages/catalog/examples) には 3 サイズの設定例が揃っています。
+ZenCopy 側の要件は 1 つだけで、`roles` に `default` を含めることです。
+フロントマターで role を指定しないプロンプトはすべて `default` のモデルに送られ、設定画面の「テスト」も `default` に接続します。
+
+API キーはこのファイルに直接書きます（設定画面が書くのも同じ形です）。
+環境変数は読みません。
+GUI アプリはシェルではなく OS から起動されるので、`.zshrc` などで export した変数はそもそも届かないからです。
+
+ファイルは読み込みのたびにスキーマ検証されます。
+壊れた編集は黙って失敗せず、ポップアップに「ai-sdk-catalog.json が不正です。設定の AI（JSON）で修正してください。」と出ます。
+設定画面は JSON タブで開き、「JSON が不正です。」か「JSON としては正しいものの、設定の形式に合っていません。詳細はログを確認してください。」を表示します。
+どこが壊れているかは[ログ](#logs)に残ります。
+
+### 設定画面の JSON タブに貼る {#use-a-gateway-config}
+
+ファイルを開かずに、同じ内容を設定画面の AI タブから貼ることもできます。
+
+1. 「プロバイダー」で「JSON」を選びます。
+2. 編集欄をクリックします。
+   すでにキーが入っているときは欄がぼかされていて、クリックすると読める状態になります。
+   中身をすべて選択して（Ctrl/⌘ + A）、貼り替えます。
+3. 「テスト」を押します。
+   「接続できました」と出れば完了で、貼った内容はこのとき保存されます。
+
+貼った JSON に API キーが含まれていると、その部分が伏せ字になり、欄全体がぼかされます。
+画面を共有していても映らないためです。
+編集し直すときは、欄（目のアイコン）をクリックすると読める状態になり、ほかの場所をクリックすると元に戻ります。
+形式が違うと、「JSON が不正です。」か「JSON としては正しいものの、設定の形式に合っていません。詳細はログを確認してください。」と出ます。
+
+### プロバイダー 1 つ、モデル 1 つ {#one-provider-one-model}
+
+設定画面が書くのと同じ形で、ほとんどの人はこれで全部です。
+
+```json
+{
+  "$schema": "https://cdn.jsdelivr.net/npm/ai-sdk-catalog/schema.json",
+  "providers": [
+    {
+      "id": "openai",
+      "vendor": { "apiKey": "sk-…" },
+      "models": [{ "id": "gpt-5.6-luna" }]
+    }
+  ],
+  "roles": {
+    "default": "openai:gpt-5.6-luna"
+  }
+}
+```
+
+`$schema` の行は省略できます。
+JSON Schema を理解するエディタなら、この行があると入力中に検証と補完が効きます。
+
+### 自分のパソコンの中だけで動く AI {#run-a-local-ai}
+
+Ollama のようなローカル AI につなぐと、コピーした内容が一切パソコンの外に出ません。
+そのぶん、速さと賢さはパソコンの性能なりになります。
+
+設定画面だけでもつなげます。
+Ollama を入れてモデルを 1 つダウンロードしたら、設定画面の AI タブの「プロバイダー」で「OpenAI 互換」を選び、次の 2 つを書いて「保存」と「テスト」を押します。
+
+- **ベース URL**：`http://localhost:11434/v1`
+- **デフォルトモデル**：Ollama でダウンロードしたモデル名（例: `gemma4:e4b`）
+
+「接続できませんでした。…」と出たら、この 2 つの綴りを確かめます。
+
+### 同じ設定をファイルで書く {#local-ollama--nothing-leaves-your-machine}
+
+上の設定をファイルで書くと、こうなります。
+
+```json
+{
+  "providers": [
+    {
+      "id": "ollama",
+      "vendor": { "id": "openai-compatible", "baseURL": "http://localhost:11434/v1" },
+      "models": [{ "id": "gemma4:e4b" }]
+    }
+  ],
+  "roles": {
+    "default": "ollama:gemma4:e4b"
+  }
+}
+```
+
+OpenAI 互換のエンドポイントなら、何でも同じ書き方です。
+LM Studio でも llama.cpp でもゲートウェイでも、`vendor` の `baseURL` を変えるだけで、必要なら隣に `apiKey` を足します。
+role の `"provider:model"` は最初の `:` で分割されるので、モデル ID にコロンを含む `"ollama:gemma4:e4b"` もそのまま書けます。
+
+### role を 2 つに分ける {#two-roles-fast-by-default-smart-on-demand}
+
+role はプロンプトとモデルを疎結合にします。
+プロンプトはフロントマターに `role: smart` のように role 名だけを持ち、それがどのモデルを指すかはここで決めます。
+普段の「要約」は速くて安いモデルに、要所の自作プロンプトだけ賢いモデルに、という使い分けが、プロンプトに触れずにできます。
+
+```json
+{
+  "providers": [
+    {
+      "id": "google",
+      "vendor": { "apiKey": "AIza…" },
+      "models": [{ "id": "gemini-3.1-flash-lite" }]
+    },
+    {
+      "id": "anthropic",
+      "vendor": { "apiKey": "sk-ant-…" },
+      "models": [{ "id": "claude-opus-5" }]
+    }
+  ],
+  "roles": {
+    "default": "google:gemini-3.1-flash-lite",
+    "smart": "anthropic:claude-opus-5"
+  }
+}
+```
+
+## rules.json {#rules-json-file}
+
+どの種類のコピーにどのプロンプトを使うかを決めるファイルです。
+種類（kind）ごとの対応と、それより優先される `overrides` の 2 段でできています。
+
+kind は `text`、`image`、`files` の 3 つで、書式付きのコピーは `text` として扱われます。
+既定では `text` が「要約」（`zencopy-summarize`）、`image` と `files` が「解説」（`zencopy-explain`）です。
+設定画面の「振り分け」が読み書きしているのもこのファイルで、種類ごとの対応と、「新しいルール」で作る `overrides` の両方がここに入ります。
+「実行しない」を選ぶと、その kind のキーがファイルから消えます（キーのない kind は、<CopyTwice /> のあとプロンプトを選ぶまで何も送られません）。
+
+```json
+{
+  "text": "zencopy-summarize",
+  "image": "zencopy-explain",
+  "files": "zencopy-explain",
+  "overrides": [
+    { "when": { "app_name": "Slack", "min_chars": 200 }, "prompt": "decisions-only" },
+    { "when": { "file_name": "*.pdf" }, "prompt": "contract-check" }
+  ]
+}
+```
+
+`decisions-only` や `contract-check` のような自作プロンプトの id は、[`prompts/*.md`](#promptsmd) のフロントマターの `id` です。
+
+`overrides` は上から順に試され、最初に `when` が一致したルールの `prompt` が使われます。
+どれも一致しなければ、kind ごとの対応に落ちます。
+`when` に書いた条件はすべて満たす必要があり（AND）、条件を 1 つも持たない `when` はすべてのコピーに一致します。
+
+| 条件                                           | 一致のしかた                                                                                                                      |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `kind`                                         | `text`、`image`、`files` のいずれかに完全一致                                                                                     |
+| `app_name`、`exec_name`、`window_title`、`url` | `*` ワイルドカード。大文字小文字を区別します                                                                                      |
+| `file_name`                                    | コピーしたすべてのファイル名が一致するワイルドカード（例: `*.pdf`）。大文字小文字は区別せず、`files` 以外のコピーには一致しません |
+| `min_chars`、`max_chars`                       | コピーしたテキストの文字数の下限と上限                                                                                            |
+
+文字列の条件の名前は、[テンプレート変数](#promptsmd)と同じです。
+実際に何が入るかも、テンプレート変数と同じ方法で確かめられます。
+
+`image` と `files` のコピーでは、内容そのものがモデルに送られます。
+1 回あたりの合計は 10 MB までで、超えると「サイズが大きすぎて送信できません（上限は 1 回あたり 10 MB です）。」と出ます。
+ファイルの種類は拡張子ではなく中身から判定され、種類ごとに送られ方が違います。
+
+- **画像、PDF、音声**：そのまま添付されます。
+- **テキストファイル**（Markdown、ソースコード、CSV など）：`{{ text }}` に入り、内容をコピーした場合とまったく同じに扱われます。
+  複数のファイルは区切り線でつないで 1 つの `{{ text }}` になります。
+- **Word、Excel、PowerPoint**：文字だけを抜き出して、テキストファイルと同じ扱いになります。
+  レイアウトや画像は送られません。
+- **どれでもないもの**：ファイル名つきで「モデルに送信できない種類のファイルです。」と表示され、送られません。
+
+テキストの文字コードは自動判定され、Shift_JIS や UTF-16 のような古い形式も UTF-8 に変換されます。
+モデルがファイルを区別できるように、内容と一緒にフルパスも送られます。
+画像、PDF、音声は送信前にポップアップが確認します（テキストファイルと Office 文書は確認なしで送られます）。
+この確認は、確認カードの「今後は確認しない（設定で変更できます）」か、設定 → 一般の「画像・ファイルの送信前に確認」でオフにできます。
+
+## prompts/\*.md {#promptsmd}
+
+1 ファイルが 1 プロンプトで、YAML フロントマターと [Liquid](https://liquidjs.com) のプロンプト本文からなります。
+`instructions` がシステムプロンプト、本文がユーザーメッセージになり、どちらも Liquid テンプレートとして描画されてからモデルに渡ります。
+この 1 ファイルがそのまま共有形式でもあります。
+設定 → プロンプトの「エクスポート（.md）」のアイコンが書き出すのはこの形式で、「インポート」は本文の貼り付けかファイル選択で受け取ります。
+
+```markdown
+---
+id: three-lines
+label: 3 行まとめ
+role: default
+instructions: あなたは簡潔なアシスタントです。
+---
+
+次の内容を {{ locale | language_name }} で 3 行に要約してください:
+
+{{ text }}
+```
+
+| フロントマター | 意味                                                                                                                                      |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | `rules.json` から参照される名前。省略時はファイル名（拡張子なし）。接頭辞 `zencopy-` は組み込み専用で、これを名乗るファイルは無視されます |
+| `label`        | ポップアップと設定画面に表示される名前。省略時は `id`                                                                                     |
+| `role`         | 送り先のモデルを決める `ai-sdk-catalog.json` の role。省略時は `default`                                                                  |
+| `instructions` | システムプロンプト（Liquid テンプレート）。省略可                                                                                         |
+
+テンプレート変数の一覧です。
+例は、ブラウザで段落をコピーした場合の値です。
+
+| 変数                 | 例                                                      |
+| -------------------- | ------------------------------------------------------- |
+| `{{ text }}`         | コピーした本文（HTML のリッチコピーは Markdown に変換） |
+| `{{ markup }}`       | リッチコピー時の HTML/RTF ソース                        |
+| `{{ format }}`       | `html`（または `rtf`。プレーンコピーでは空）            |
+| `{{ file_name }}`    | `report.pdf`（コピーした最初のファイル名）              |
+| `{{ file_names }}`   | コピーしたすべてのファイル名（1 行に 1 つ）             |
+| `{{ file_paths }}`   | コピーしたすべてのファイルのフルパス（1 行に 1 つ）     |
+| `{{ app_name }}`     | `Safari`                                                |
+| `{{ exec_name }}`    | `Safari` / `chrome.exe`                                 |
+| `{{ exec_path }}`    | `/Applications/Safari.app/Contents/MacOS/Safari`        |
+| `{{ window_title }}` | `料金プラン – Example`                                  |
+| `{{ url }}`          | `https://example.com/pricing`（ブラウザのときのみ）     |
+| `{{ process_id }}`   | `8123`                                                  |
+| `{{ now }}`          | `2026-07-08 20:15:00`                                   |
+| `{{ locale }}`       | `ja`                                                    |
+
+さらに ZenCopy 独自のフィルタが 2 つあります。
+`{{ locale | language_name }}` は「ja」ではなく「Japanese」と展開され、プロンプトとして自然に読めます。
+`{{ text | language_of }}` は、コピーした文章が何語で書かれているかを「Japanese」のような英語名で返します（判定できないときは空文字）。
+コピーした文章の言語によって、AI への指示を変えたいときに使えます。
+
+実際にどんな値が入るかは、設定 → 一般の「テンプレート変数を表示」をオンにすると確かめられます。
+毎回の <CopyTwice /> のあと、ポップアップに「テンプレート変数」という折りたたみが出て、そのコピーの変数が JSON で見えます（`text` と `markup` は「コピーした内容」の欄に見えているので省かれます）。
+
+名前と指示だけの簡単なプロンプトは、設定画面の「新しいプロンプト」からも作れます。
+書き出されるのは、まさにこの形式のファイルです。
+
+### 高度なテンプレート {#advanced-templating}
+
+`instructions` と本文は、どちらも完全な [LiquidJS](https://liquidjs.com/tags/overview.html) テンプレートで、条件分岐、ループ、[フィルター](https://liquidjs.com/filters/overview.html)がすべて使えます。
+1 つのプロンプトの中で、コピー元に応じて AI への指示を変えることもできます。
+
+```markdown
+---
+id: context-aware
+label: 文脈で切り替え
+---
+
+{% if url contains "github.com" %}
+このコードをレビューして、最大のリスクを 1 つ指摘してください:
+{% elsif app_name == "Slack" %}
+このチャットのスレッドを 2 行で要約してください:
+{% else %}
+これを {{ locale | language_name }} で説明してください:
+{% endif %}
+
+{{ text | truncate: 8000 }}
+```
+
+### プロンプト作りごと AI に任せる {#let-an-ai-write-the-prompt}
+
+プロンプトの作成そのものを、普段使っている AI チャットに任せることもできます。
+次の文を貼り付けて、空欄を埋めてください。
+
+```text
+https://zencopy.app/llms-full.txt を読んでください。これは、プロンプトのファイル形式、テンプレート変数、振り分けの仕組みを含むZenCopyの完全なドキュメントです。その後、コピーした内容に次のことをしてもらうZenCopyプロンプトを作成してください：[やりたいこと]。ZenCopyの「設定 → プロンプト → インポート」にそのまま貼り付けられるように、フロントマター付きの完全なプロンプトファイル（Markdown）を1つのコードブロックで出力してください。そのプロンプトが特定のアプリや特定のサイトでのみ機能する場合は、どの振り分けルールを設定すべきかを説明する文章を1文追加してください。
+```
+
+返ってきたコードブロックは、そのまま設定 → プロンプトの「インポート」に貼り付けられます。
+ドキュメントで解決できない疑問（「ZenCopy でこんなことできる？」など）は、[ワンクリックで関連ソースをパック](https://repomix.com/?repo=sincekmori%2Fzencopy&format=markdown&removeComments=true&include=src-tauri%2F%2A%2A%2Csrc%2F%2A%2A%2Csite%2Fsrc%2Fcontent%2Fdocs%2Fen%2F%2A%2A%2CREADME.md&ignore=%2A%2A%2FCargo.lock%2Csrc%2Flib%2Fmessages%2Far.ts%2Csrc%2Flib%2Fmessages%2Fde.ts%2Csrc%2Flib%2Fmessages%2Fes.ts%2Csrc%2Flib%2Fmessages%2Ffa.ts%2Csrc%2Flib%2Fmessages%2Ffr.ts%2Csrc%2Flib%2Fmessages%2Fhe.ts%2Csrc%2Flib%2Fmessages%2Fid.ts%2Csrc%2Flib%2Fmessages%2Fit.ts%2Csrc%2Flib%2Fmessages%2Fko.ts%2Csrc%2Flib%2Fmessages%2Fpl.ts%2Csrc%2Flib%2Fmessages%2Fpt-br.ts%2Csrc%2Flib%2Fmessages%2Fru.ts%2Csrc%2Flib%2Fmessages%2Fth.ts%2Csrc%2Flib%2Fmessages%2Ftr.ts%2Csrc%2Flib%2Fmessages%2Fvi.ts%2Csrc%2Flib%2Fmessages%2Fzh-hans.ts%2Csrc%2Flib%2Fmessages%2Fzh-hant.ts)して、パックしたものを同じ AI に渡してください。
+
+## ログ {#logs}
+
+ログのフォルダは、常駐アイコンのメニューの「ZenCopy について」にある「ログ」で開きます。
+
+| OS      | パス                              |
+| ------- | --------------------------------- |
+| Windows | `%LOCALAPPDATA%\app.zencopy\logs` |
+| macOS   | `~/Library/Logs/app.zencopy/`     |
+| Linux   | `~/.local/share/app.zencopy/logs` |
+
+ログには、コピーした内容も API キーも残りません。
+秘密情報とモデルに送る本文は、書き込む前に伏せ字（redact）にされます。
+ファイルは約 5 MB で切り替わり、1 つ前のファイルだけが残ります。
+開発ビルドでは、同じ内容がターミナルにも出ます。

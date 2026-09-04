@@ -243,9 +243,11 @@ export function PromptsSettings(): React.JSX.Element {
     });
   };
 
-  // The template guide on zencopy.app, in the user's language.
+  // The template guide on zencopy.app, in the user's language: the
+  // prompt-file section of the config-files page (its anchor is the same in
+  // every locale).
   const openTemplateDocs = (): void => {
-    void invoke("open_url", { url: siteUrl(locale, "configuration/") });
+    void invoke("open_url", { url: siteUrl(locale, "recipes/#promptsmd") });
   };
 
   // Turn whatever is in the instruction field (a rough "what I want", any

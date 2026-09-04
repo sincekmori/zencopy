@@ -1,12 +1,12 @@
 {
   "locale": "he",
-  "recorded": "2026-09-05T10:35:22.562Z",
+  "recorded": "2026-09-06T12:28:54.650Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:34:52"
+      "now": "2026-09-06 21:28:26"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "פרוטוקול ה-HTCPCP מגדיר תקן הומוריסטי לשליטה מרחוק במכונות קפה באמצעות האינטרנט.",
+      "reply": "פגישת ההנהלה נדחתה ל-9 באוקטובר, ויש להגיש את הצעת המחיר המעודכנת עד ה-30 בספטמבר בצירוף הדגמה של לוח הבקרה.",
       "tokens": {
-        "input": 467,
-        "output": 41
+        "input": 169,
+        "output": 61
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "המסמך הזה הוא בדיחה שנכתבה בצורה רשמית, והוא מציע דרך דמיונית לשלוט במכונת קפה דרך האינטרנט.\n\nכדי להבין את זה, חשבו על הדרך שבה המחשב שלכם מדבר עם אתרי אינטרנט. כשאנחנו גולשים, המחשב שולח הוראות לאתר ולו אומר מה להציג לנו. ההוראות האלה נקראות \"פרוטוקול\" – כלומר, רשימה של חוקים שמגדירים איך שני צדדים צריכים לדבר זה עם זה כדי להבין אחד את השני.\n\nהמסמך הזה ממציא פרוטוקול חדש בשם \"פרוטוקול בקרת קומקום היפר-טקסט\". השם הזה הוא משחק מילים על הדרך שבה דפי אינטרנט עובדים. הרעיון הוא שאם אפשר להשתמש באינטרנט כדי לקרוא חדשות או לשלוח דואר, אולי אפשר להשתמש באותן שיטות כדי להגיד למכונת קפה להתחיל לעבוד מהמיטה או מהמשרד.\n\nהכותב לוקח את השפה שמשמשת לניהול רשתות מחשבים כבדות ורציניות, ומשתמש בה כדי לדבר על קפה. למשל, הוא כותב על הצורך ב\"תקשורת בין מכשירים\" כדי שאנשים יוכלו לקבל קפה טרי בדיוק כשהם מתעוררים.\n\nחשוב לדעת שזה לא מסמך טכני אמיתי. הוא פורסם ב-1 באפריל, שהוא יום שבו נהוג בעולם הטכנולוגיה לפרסם בדיחות מתוחכמות. המסמך לא נועד לשימוש, והוא לא קובע תקן שאף מכונת קפה בעולם באמת עובדת לפיו. זו פשוט דרך הומוריסטית של מומחי מחשבים לצחוק על העובדה שאנשים מנסים לחבר כל מכשיר חשמלי בבית לאינטרנט, גם אם אין בכך באמת צורך.",
+      "reply": "ההודעה הזו היא בקשה לעדכון של תוכנית עבודה. היא חשובה כי היא משנה את לוח הזמנים של פגישה חשובה ומוסיפה לה חלק חדש.\n\nהנה מה שקורה שלב אחר שלב:\n\nהפגישה שבה המנהלים בודקים את ההצעה נדחתה. במקום להיפגש ב-2 באוקטובר, הם ייפגשו ב-9 באוקטובר. הסיבה לדחייה היא ששני מנהלים לא יהיו במשרד בתאריך המקורי.\n\nהשולח מבקש לקבל מסמך מחירים מעודכן עד ה-30 בספטמבר. המטרה היא לתת למנהלים זמן לעבור על המסמך לפני שהפגישה מתחילה.\n\nבנוסף, השולח מבקש להוסיף לחלק של הפגישה הצגה חיה של לוח הבקרה. לוח בקרה הוא מסך במחשב שמציג נתונים ומספרים חשובים בצורה ברורה. ההצגה הזו צריכה להימשך רבע שעה.\n\nבסוף ההודעה, השולח מבקש לדעת אם התאריכים והתוספות האלו מתאימים לצד השני. אם זה מתאים, אפשר להתקדם לפי התוכנית החדשה.",
       "tokens": {
-        "input": 773,
-        "output": 514
+        "input": 475,
+        "output": 320
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "קצת יותר בקצרה, בבקשה",
-      "reply": "המסמך הזה הוא בדיחה משעשעת שנכתבה כרשימה טכנית רשמית. הוא מציע \"פרוטוקול\" – כלומר קבוצת חוקים – שבאמצעותו אנשים יוכלו להפעיל מכונת קפה מרחוק דרך האינטרנט.\n\nהכותב משתמש בשפה של עולם המחשבים כדי לתאר משימה יומיומית ופשוטה כמו הכנת קפה, כאילו מדובר בפעולה טכנולוגית מסובכת. המסמך פורסם ב-1 באפריל, יום שבו אנשים נוהגים להמציא בדיחות מתוחכמות, והוא נועד להצחיק את מי שעוסק במחשבים. אין בו שום הנחיה אמיתית ואיש לא באמת משתמש בזה כדי להכין קפה; זו פשוט דרך הומוריסטית לצחוק על הנטייה לחבר כל מכשיר חשמלי בבית לאינטרנט.",
+      "reply": "ההודעה הזו היא בקשה לעדכון תוכנית עבודה לקראת פגישה עם מנהלים.\n\nהנה עיקרי הדברים:\nהפגישה נדחתה מה-2 באוקטובר ל-9 באוקטובר, כי חלק מהמשתתפים לא יהיו זמינים.\n\nכדי להתכונן לפגישה, הם מבקשים לקבל עד ה-30 בספטמבר דף מחירים חדש ומעודכן.\n\nהם מבקשים להוסיף לפגישה גם הדגמה של רבע שעה שמציגה איך לוח הבקרה שלהם עובד.\n\nהם מבקשים אישור לכך שהזמנים האלו מתאימים גם לך.",
       "tokens": {
-        "input": 1301,
-        "output": 246
+        "input": 809,
+        "output": 178
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "הפוך לטבלה",
-      "reply": "| כותרת | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| :--- | :--- |\n| **מספר RFC** | 2324 |\n| **תאריך פרסום** | 1 באפריל 1998 |\n| **מחבר** | L. Masinter |\n| **קטגוריה** | Informational |\n| **מטרה** | הגדרת פרוטוקול לשליטה, ניטור ואבחון של מכונות קפה |\n| **הקשר טכנולוגי** | ניצול חיבור מכשירי חשמל ביתיים לרשת האינטרנט (כמו ה-Internet Toaster) |\n| **דרישה** | צורך טכני בשליטה מרחוק במכונות קפה להכנת קפה מתוזמן |",
+      "reply": "| נושא | פרטים |\n| :--- | :--- |\n| **סיבת דחיית הפגישה** | שני דירקטורים יהיו בנסיעה |\n| **תאריך סקירת ההנהלה החדש** | 9 באוקטובר (במקום ה-2 באוקטובר) |\n| **פעולה נדרשת (תמחור)** | שליחת גיליון מחירים מעודכן עד ה-30 בספטמבר |\n| **תוספת לסדר היום** | הדגמה בת 15 דקות של לוח הבקרה (Reporting Dashboard) |",
       "tokens": {
-        "input": 700,
-        "output": 201
+        "input": 350,
+        "output": 147
       }
     }
   ],
@@ -77,11 +77,19 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.04,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TPCbapnYKIj91e8P0ey8-AM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eפרוטוקול ה-HTCPCP מגדיר תקן ה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 19,\"totalTokenCount\": 486,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TPCbapnYKIj91e8P0ey8-AM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ומוריסטי לשליטה מרחוק במכונות קפה באמצעות האינטרנט.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 41,\"totalTokenCount\": 508,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TPCbapnYKIj91e8P0ey8-AM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPM31ztQ/5iFdte1+LeKqeBG/NOuXM2y8cU7Zetvsv+uajl6Qu/8gR3kIqXOtIoMeYllHECVDUGY16vwPUJGB7BwPUTIppuQR4a8b/PmDJQ+8Sw+QR0nH1fJYGNGDhAokRpnbKJ13qc27VFg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 41,\"totalTokenCount\": 508,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TPCbapnYKIj91e8P0ey8-AM\"}\r\n\r\n"
+          1.284,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eפגישת ההנהלה נדחתה ל\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 14,\"totalTokenCount\": 183,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"alydaqPfKbTk1e8PtcSHyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"-9 באוקטובר, ויש להגיש את הצעת המחיר המעודכנת עד\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 38,\"totalTokenCount\": 207,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"alydaqPfKbTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          1.333,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ה-30 בספטמבר בצירוף הדגמה של לוח הבקרה.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 61,\"totalTokenCount\": 230,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"alydaqPfKbTk1e8PtcSHyA8\"}\r\n\r\n"
+        ],
+        [
+          1.395,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP5jh90SNq0TNHkuFVuRfLKbWBPIBccYNZ/vZZ+VRF9AucrbDWQjrLFthlrg79XFeuFFA3eHmNvoYByaZOlsNaRz3COhWEuMDmpNHSHaCLgdHOzqGOl0sBsdqD0yLKg/6t2BzlvOOtJSyMjQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 61,\"totalTokenCount\": 230,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"alydaqPfKbTk1e8PtcSHyA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "8dd8fbb279e93196aedb30e1aa085b2c6a3e865c28ae21fa48602edbf3e0822b"
+      "bodySha256": "46639da0e891231178b687123df4d34ee7939d1ddf6c8b3e32b265a96238a2ec"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -90,140 +98,55 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          0.982,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nהמסמך הזה הוא בדיחה שנכתבה בצורה ר\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 18,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"שמית, והוא מציע דרך דמיונית לשלוט במכונת קפה דרך האינט\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 44,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
+          0.822,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nההודעה הזו היא בקשה לעדכון של תוכנית עבודה.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 23,\"totalTokenCount\": 498,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.123,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"רנט.\\n\\nכדי להבין את זה, חשבו על הדרך שבה המחשב שלכם מד\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 68,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
+          0.865,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" היא חשובה כי היא משנה את לוח הזמנים של פגישה חשובה ומוסיפה לה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 47,\"totalTokenCount\": 522,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.203,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"בר עם אתרי אינטרנט. כשאנחנו גולשים, המחשב שולח הור\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 92,\"totalTokenCount\": 865,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          1.384,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"אות לאתר ולו אומר מה להציג לנו. ההוראות האלה נקראות \\\"פרוטוקול\\\" –\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 121,\"totalTokenCount\": 894,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" כלומר, רשימה של חוקים שמגדירים איך שני צדדים צריכים לדבר זה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 146,\"totalTokenCount\": 919,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          1.443,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" עם זה כדי להבין אחד את השני.\\n\\nהמסמך הזה ממציא פרוטוקול חדש בשם \\\"פ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 174,\"totalTokenCount\": 947,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          1.586,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"רוטוקול בקרת קומקום היפר-טקסט\\\". השם הזה הוא משחק מ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 198,\"totalTokenCount\": 971,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          1.627,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ילים על הדרך שבה דפי אינטרנט עובדים. הרעיון הוא שאם אפשר לה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 223,\"totalTokenCount\": 996,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          1.892,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"שתמש באינטרנט כדי לקרוא חדשות או לשלוח דואר, אולי אפשר להשתמש\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 249,\"totalTokenCount\": 1022,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          1.936,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" באותן שיטות כדי להגיד למכונת קפה להתחיל לעבוד מהמיטה או מה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 273,\"totalTokenCount\": 1046,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.106,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"משרד.\\n\\nהכותב לוקח את השפה שמשמשת לניהול רשתות מח\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 298,\"totalTokenCount\": 1071,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.127,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"שבים כבדות ורציניות, ומשתמש בה כדי לדבר על קפה. למשל,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 323,\"totalTokenCount\": 1096,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.3,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" הוא כותב על הצורך ב\\\"תקשורת בין מכשירים\\\" כדי שאנשים יוכלו לק\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 349,\"totalTokenCount\": 1122,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.341,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"בל קפה טרי בדיוק כשהם מתעוררים.\\n\\nחשוב לדעת שזה לא מס\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 374,\"totalTokenCount\": 1147,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.515,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"מך טכני אמיתי. הוא פורסם ב-1 באפריל, שהוא יום ש\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 398,\"totalTokenCount\": 1171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.537,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"בו נהוג בעולם הטכנולוגיה לפרסם בדיחות מתוחכמות. המס\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 422,\"totalTokenCount\": 1195,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.708,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"מך לא נועד לשימוש, והוא לא קובע תקן שאף מכונת קפה בע\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 446,\"totalTokenCount\": 1219,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          2.771,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ולם באמת עובדת לפיו. זו פשוט דרך הומוריסטית של מומחי מחשבים לצ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 473,\"totalTokenCount\": 1246,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          3.018,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"חוק על העובדה שאנשים מנסים לחבר כל מכשיר חשמלי בבית לא\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 497,\"totalTokenCount\": 1270,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          3.039,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ינטרנט, גם אם אין בכך באמת צורך.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 514,\"totalTokenCount\": 1287,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ],
-        [
-          3.086,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP7e+JzSWF+r4Yrvasen2alD62M433tfNdQOlwoXk69YEwl0rvDMP82NXRjdhdGpxmPQqcfFjLzoMD6rUo1Bqs0+aU4upbNWJ3iE5bmcuiJlifBPPxlarpP6ATcybn2axKOQb1smrbiSMu7A==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 514,\"totalTokenCount\": 1287,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"UfCbasLIG6KN1e8P2OHO-A4\"}\r\n\r\n"
-        ]
-      ],
-      "bodySha256": "7bdacb45fb11d342405e79a206fcb12e7274d5d3ff74fdc04b9151deb3f8aa4a"
-    },
-    {
-      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
-      "method": "POST",
-      "status": 200,
-      "contentType": "text/event-stream",
-      "chunks": [
-        [
-          1.066,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1303,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nהמסמך הזה הוא בדיחה משעשעת שנכתבה כרשי\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 22,\"totalTokenCount\": 1323,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          0.969,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" חלק חדש.\\n\\nהנה מה שקורה שלב אחר שלב:\\n\\nהפגישה שבה המנהלים ב\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 75,\"totalTokenCount\": 550,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
           1.071,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"מה טכנית רשמית. הוא מציע \\\"פרוטוקול\\\" – כלומר קבו\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 46,\"totalTokenCount\": 1347,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ודקים את ההצעה נדחתה. במקום להיפגש ב-2 באוקטובר,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 100,\"totalTokenCount\": 575,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.176,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"צת חוקים – שבאמצעותו אנשים יוכלו להפעיל מכונת קפה מרחוק דר\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 71,\"totalTokenCount\": 1372,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.232,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" הם ייפגשו ב-9 באוקטובר. הסיבה לדחייה היא ששני מנהלים לא יה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 127,\"totalTokenCount\": 602,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.298,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ך האינטרנט.\\n\\nהכותב משתמש בשפה של עולם המחשבים כדי לתאר מ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 96,\"totalTokenCount\": 1397,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.252,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"יו במשרד בתאריך המקורי.\\n\\nהשולח מבקש לקבל מסמך\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 151,\"totalTokenCount\": 626,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.441,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"שימה יומיומית ופשוטה כמו הכנת קפה, כאילו מדובר בפעולה טכנ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 123,\"totalTokenCount\": 1424,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.439,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" מחירים מעודכן עד ה-30 בספטמבר. המטרה היא לתת למנהלים זמן\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 175,\"totalTokenCount\": 650,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" לעבור על המסמך לפני שהפגישה מתחילה.\\n\\nבנוסף, השולח מבקש להו\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 203,\"totalTokenCount\": 678,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.507,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ולוגית מסובכת. המסמך פורסם ב-1 באפריל, יום שבו אנשים נוה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 150,\"totalTokenCount\": 1451,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.543,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"סיף לחלק של הפגישה הצגה חיה של לוח הבקרה. לוח בקרה הוא מס\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 228,\"totalTokenCount\": 703,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.674,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"גים להמציא בדיחות מתוחכמות, והוא נועד להצחיק את מי שע\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 174,\"totalTokenCount\": 1475,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.65,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ך במחשב שמציג נתונים ומספרים חשובים בצורה ברורה. ההצגה הזו צ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 256,\"totalTokenCount\": 731,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.777,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"וסק במחשבים. אין בו שום הנחיה אמיתית ואיש לא באמת משתמש בזה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 201,\"totalTokenCount\": 1502,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.74,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ריכה להימשך רבע שעה.\\n\\nבסוף ההודעה, השולח מבקש\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 280,\"totalTokenCount\": 755,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.884,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" כדי להכין קפה; זו פשוט דרך הומוריסטית לצחוק על הנטייה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 225,\"totalTokenCount\": 1526,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.786,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" לדעת אם התאריכים והתוספות האלו מתאימים לצד השני. אם זה מת\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 304,\"totalTokenCount\": 779,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ],
         [
-          1.988,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" לחבר כל מכשיר חשמלי בבית לאינטרנט.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 246,\"totalTokenCount\": 1547,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
-        ],
-        [
-          2.031,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPjWs8xchjtPeuNO3djHoTBylWdUkQva4c3zW8oZZuBfRulcJ8YNhB8C/dc6+U19xgrc2EPfPoZF3cGf2//XtsfShtnz+BbXkRMV3ZAw1L4Q+tH9vp69fJrspI8oWyHW9FEVkk6Q63lR6q1g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1301,\"candidatesTokenCount\": 246,\"totalTokenCount\": 1547,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1301}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W_Cbasy7BNfBvr0P4aCF0A8\"}\r\n\r\n"
+          1.948,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"אים, אפשר להתקדם לפי התוכנית החדשה.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 320,\"totalTokenCount\": 795,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP9bkZg3mIYmx/0shTH/3HDoIhndpV/KHlz1BUEmN11h7TpmsMt8Ic7Tcpj8E4CAu9QkPT94f5SNTvhetncY2iuqTc/O55tz/j1AkfORIQfMjuxukO25H1gTRIbitXYs8+WgA5tdwe3O0dpA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 320,\"totalTokenCount\": 795,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b1ydapeQMZf71e8PkrP-cA\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "b6cb9acfaa4f812835f7869c4d1eb104c2029f180d2ef346de920fe854db9757"
+      "bodySha256": "e1ae4f107b2e97d2dd255deb7b982e00e089de7d55c0c6e2ebeda2aa98460658"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -232,39 +155,60 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          0.878,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 2,\"totalTokenCount\": 702,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| כותרת | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 22,\"totalTokenCount\": 722,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"0) |\\n| :--- | :--- |\\n| **מספר RFC** | 2324 |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 49,\"totalTokenCount\": 749,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
+          0.989,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 2,\"totalTokenCount\": 811,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nההודעה הזו היא בקשה לעדכון תוכנית עבודה\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 21,\"totalTokenCount\": 830,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" לקראת פגישה עם מנהלים.\\n\\nהנה עיקרי הדברים:\\nהפגישה נדחת\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 49,\"totalTokenCount\": 858,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ה מה-2 באוקטובר ל-9 באוקטובר, כי חלק מהמשתתפים לא יהיו\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 75,\"totalTokenCount\": 884,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\n"
         ],
         [
-          0.965,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **תאריך פרסום** | 1 באפריל 1998 |\\n| **מחבר\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 74,\"totalTokenCount\": 774,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
+          1.074,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" זמינים.\\n\\nכדי להתכונן לפגישה, הם מבקשים לקבל עד ה-30 בספט\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 103,\"totalTokenCount\": 912,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\n"
         ],
         [
-          1.107,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"** | L. Masinter |\\n| **קטגוריה** | Informational |\\n| **מטרה**\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 99,\"totalTokenCount\": 799,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
+          1.159,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"מבר דף מחירים חדש ומעודכן.\\n\\nהם מבקשים להוסיף לפגישה גם\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 129,\"totalTokenCount\": 938,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\n"
         ],
         [
-          1.289,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" | הגדרת פרוטוקול לשליטה, ניטור ואבחון של מכונות קפה |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 124,\"totalTokenCount\": 824,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **הקשר טכנולוגי** | ניצול חיבור מכשירי חשמל ביתיים לרשת האי\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 150,\"totalTokenCount\": 850,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
+          1.221,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" הדגמה של רבע שעה שמציגה איך לוח הבקרה שלהם עובד.\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 153,\"totalTokenCount\": 962,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\n"
         ],
         [
-          1.391,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"נטרנט (כמו ה-Internet Toaster) |\\n| **דרישה** | צורך ט\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 174,\"totalTokenCount\": 874,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
+          1.287,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"הם מבקשים אישור לכך שהזמנים האלו מתאימים גם לך.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 178,\"totalTokenCount\": 987,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\n"
         ],
         [
-          1.481,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"כני בשליטה מרחוק במכונות קפה להכנת קפה מתוזמן |\\n\\u003c/result\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 200,\"totalTokenCount\": 900,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
-        ],
-        [
-          1.583,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 201,\"totalTokenCount\": 901,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
-        ],
-        [
-          1.62,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPF4xpXnrfrWNaoAwFUGlK+seZkVZdmuM2SXXGn1wMu9ajHq1O9Qqr0WDrFli1RpdC79NfThvJB4/u5X4msc0quVruxSYYP7J9NqrVY9ggNk1nd2W6/L+QV3XK8JWhIVGPsnQFbD2MBC+pSw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 201,\"totalTokenCount\": 901,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"YvCbavTVIY6lvr0PlLPryA8\"}\r\n\r\n"
+          1.332,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPGHRsaRfaREjOLVnN64JA4lFrNtgknPOPek+YloHBNWXue73CexRW4bBM9VkXn3WbcAPDcCycgdMcIJAbIjCX3mBshONgCB/C1Jj2gohwRkAO4WrYsUH5YxedmoID8fZVt1Sp4iTxY4ixFg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 809,\"candidatesTokenCount\": 178,\"totalTokenCount\": 987,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 809}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eFydatS4GvKZ0-kPn-bViAw\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "4f1829fdfbbc22045555704761289fab37c4d24b88f19e84e1a757d0fbbdc54d"
+      "bodySha256": "005f2da4a64a2406ae3dc069dacfeb8ba609839acd1950dc4d07f78dc396a8c4"
+    },
+    {
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
+      "method": "POST",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "chunks": [
+        [
+          0.716,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 2,\"totalTokenCount\": 352,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| נושא | פרטים |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 22,\"totalTokenCount\": 372,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"סיבת דחיית הפגישה** | שני דירקטורים יהיו בנסיעה |\\n| **ת\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 48,\"totalTokenCount\": 398,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\n"
+        ],
+        [
+          0.847,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"אריך סקירת ההנהלה החדש** | 9 באוקטובר (במקום ה-2 באוקטובר\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 77,\"totalTokenCount\": 427,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\n"
+        ],
+        [
+          0.929,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \") |\\n| **פעולה נדרשת (תמחור)** | שליחת גיליון מחירים מע\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 101,\"totalTokenCount\": 451,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\n"
+        ],
+        [
+          1.131,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ודכן עד ה-30 בספטמבר |\\n| **תוספת לסדר היום** | הדגמה בת\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 127,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 15 דקות של לוח הבקרה (Reporting Dashboard) |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 147,\"totalTokenCount\": 497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\n"
+        ],
+        [
+          1.156,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP5o8Q8oqVzLJk84zH1gVB1o3LQo8HVxf/UBNQBYoQqtoeOf41TVv8Qp3NOlTVBcvKDDvre9KjO5BU3Q9vK33xoa+uJoSV1w8U5CHcHn7k/m975IrZRYjI/2nVfVSzK6ZC0XhJ004N40shwA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 147,\"totalTokenCount\": 497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"f1ydasjGFqHbvr0Px7KFiQ8\"}\r\n\r\n"
+        ]
+      ],
+      "bodySha256": "60553f8be25f0c90514db19449605509af23487f71bfebbc9864dc955546893a"
     }
   ]
 }

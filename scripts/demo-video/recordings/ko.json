@@ -1,12 +1,12 @@
 {
   "locale": "ko",
-  "recorded": "2026-09-05T10:25:45.713Z",
+  "recorded": "2026-09-06T12:20:39.352Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:25:06"
+      "now": "2026-09-06 21:20:06"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "커피포트를 네트워크로 제어, 모니터링 및 진단하기 위한 가상의 통신 규약인 HTCPCP에 관한 문서입니다.",
+      "reply": "리더십 검토 일정이 10월 9일로 연기됨에 따라 9월 30일까지 수정된 가격표 제출과 15분 대시보드 시연 추가를 요청드립니다.",
       "tokens": {
-        "input": 467,
-        "output": 38
+        "input": 169,
+        "output": 53
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "이 문서는 인터넷을 통해 커피 머신을 원격으로 조종하기 위한 '하이퍼 텍스트 커피 팟 제어 프로토콜(Hyper Text Coffee Pot Control Protocol, HTCPCP)'이라는 약속을 설명합니다. 이는 사람들이 인터넷에 연결된 기기를 멀리서도 켜거나 끄고, 커피가 다 되었는지 확인하고 싶어 하는 마음을 담은 일종의 농담 같은 규칙입니다.\n\n컴퓨터들은 서로 대화를 나눌 때 정해진 규칙을 따릅니다. 이를 프로토콜이라고 합니다. 우리가 인터넷 웹사이트를 볼 때 사용하는 '하이퍼 텍스트 전송 프로토콜(Hyper Text Transfer Protocol, HTTP)'이라는 규칙이 있는데, 이 문서는 그 이름을 재치 있게 바꾸어 커피 머신을 위한 규칙을 만든 것입니다.\n\n이 문서가 왜 중요한지 이해하기 위해 먼저 '인터넷 연결'을 생각해 봅시다. 지금은 냉장고나 세탁기 같은 가전제품도 인터넷에 연결되어 휴대폰으로 조종합니다. 하지만 1998년 당시에는 이런 생각이 매우 새롭고 엉뚱한 것이었습니다. \n\n이 문서의 핵심은 다음과 같습니다.\n\n1. 사람들은 이제 커피 머신도 인터넷에 연결하길 원합니다. 예를 들어, 침대에서 일어나기 전에 따뜻한 커피를 미리 준비하고 싶어 합니다.\n2. 기기를 조종하려면 서로 알아들을 수 있는 공통의 약속이 필요합니다. 컴퓨터끼리 \"커피를 내려라\", \"지금 상태가 어떠냐\"라고 물을 수 있는 명령어 세트가 있어야 합니다.\n3. 이 문서는 그 명령어를 어떤 방식으로 주고받을지 설명합니다. 예를 들어, 커피 머신이 고장 났거나 커피가 다 떨어졌을 때, 컴퓨터가 어떻게 이를 알아챌지 정해두는 것입니다.\n\n다만, 이 문서는 진짜 표준 규칙이 아닙니다. 실제 인터넷 기기를 만들 때 지켜야 하는 법 같은 것이 아니라, 컴퓨터를 다루는 사람들이 모여서 만든 아주 유머러스한 장난입니다. \n\n결론적으로, 이 문서는 우리가 일상에서 쓰는 모든 기기가 인터넷으로 연결되는 세상이 오면 어떤 일이 벌어질지, 그리고 기기를 조종하는 규칙을 만드는 것이 얼마나 재미있고 흥미로운 일인지를 보여주기 위해 작성된 글입니다.",
+      "reply": "이 글은 상대방에게 일정을 바꾸고 새로운 부탁을 하기 위해 보낸 비즈니스 이메일입니다. 핵심은 회의 날짜가 뒤로 밀렸으니, 그에 맞춰 필요한 서류를 조금 더 늦게 보내달라는 요청입니다.\n\n이 이메일의 내용을 하나씩 살펴보겠습니다.\n\n첫 번째로, 원래 10월 2일에 하기로 했던 '리더십 검토 회의'를 10월 9일로 바꾸기로 했습니다. 두 명의 이사가 그 기간에 출장을 가야 하기 때문입니다.\n\n두 번째로, 회의에 필요한 '수정된 가격표'를 9월 30일까지 보내달라고 부탁했습니다. 회의에 참석할 사람들이 미리 읽어보고 준비할 자료인 '사전 읽기 자료'에 포함해야 하기 때문입니다.\n\n세 번째로, 회의 시간에 '보고 대시보드'를 보여주는 15분짜리 시연을 추가하고 싶어 합니다. '보고 대시보드'란 회사에서 일어나는 일들을 알기 쉽게 숫자나 그래프로 정리해 보여주는 화면을 말합니다.\n\n마지막으로, 상대방이 15분 동안 시연을 할 수 있는 상황인지, 이 새로운 계획이 괜찮은지 물어보며 글을 마쳤습니다.\n\n요약하자면, 이 이메일은 회의 날짜 변경을 알리고, 그 회의를 더 잘 준비하기 위해 서류 제출 기한 조정과 발표 시간 추가를 요청하는 문서입니다.",
       "tokens": {
-        "input": 773,
-        "output": 507
+        "input": 475,
+        "output": 334
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "조금 더 간결하게 해 줘",
-      "reply": "이 문서는 인터넷으로 커피 머신을 원격 조종하기 위해 만든 가상의 약속인 '하이퍼 텍스트 커피 팟 제어 프로토콜(Hyper Text Coffee Pot Control Protocol, HTCPCP)'을 설명합니다. \n\n우리가 인터넷 웹사이트를 볼 때 '하이퍼 텍스트 전송 프로토콜(Hyper Text Transfer Protocol, HTTP)'이라는 규칙을 쓰듯, 이 문서도 커피 머신을 켜거나 상태를 확인하는 규칙을 똑같은 방식으로 장난스럽게 만든 것입니다.\n\n이 문서의 핵심은 다음과 같습니다.\n\n1. 사람들은 이제 침대에서 일어나기 전에 미리 커피를 내리는 등 기기를 멀리서 조종하고 싶어 합니다.\n2. 기기를 조종하려면 컴퓨터가 서로 알아들을 수 있는 공통된 언어(규칙)가 필요합니다.\n3. 이 문서는 실제 표준이 아닙니다. 컴퓨터 기술자들이 인터넷의 발전과 기기 연결을 축하하며 만든 유머러스한 창작물입니다.\n\n즉, 이 문서는 모든 가전제품이 인터넷으로 연결되는 미래를 상상하며, 기기를 다루는 규칙을 재미있게 표현해 본 것입니다.",
+      "reply": "이 이메일은 회의 일정이 바뀌어 업무 일정을 조정하자는 내용입니다.\n\n1. **회의 연기**: 이사들의 출장으로 원래 10월 2일이었던 회의를 10월 9일로 옮겼습니다.\n2. **서류 요청**: 회의 전에 미리 읽어볼 자료를 준비해야 하니, 수정된 가격표를 9월 30일까지 보내달라고 요청했습니다.\n3. **시연 추가**: 회의 시간에 숫자와 그래프를 보여주는 보고 화면(대시보드)을 15분 동안 직접 보여주기를 원합니다.\n\n상대방이 이 일정에 맞춰서 준비할 수 있는지 확인하는 것이 이 이메일의 목적입니다.",
       "tokens": {
-        "input": 1292,
-        "output": 259
+        "input": 822,
+        "output": 170
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "표로 만들어 줘",
-      "reply": "| 항목 | 내용 |\n| :--- | :--- |\n| **문서 번호** | RFC 2324 |\n| **제목** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **발행일** | 1998년 4월 1일 |\n| **저자** | L. Masinter |\n| **카테고리** | 정보 제공용 (Informational) |\n| **목적** | 커피 포트를 제어, 모니터링 및 진단하기 위한 프로토콜 기술 |\n| **핵심 내용** | 유비쿼터스 컴퓨팅 환경에서 네트워크로 연결된 커피 포트를 원격 제어하기 위한 프로토콜 정의 |",
+      "reply": "| 구분 | 내용 |\n| :--- | :--- |\n| **요청 사항** | 수정된 가격표 제출 (9월 30일까지) |\n| **주요 변경 사항** | 리더십 검토 일정 변경 (10월 2일 → 10월 9일) |\n| **추가 요청** | 리포팅 대시보드 15분 데모 추가 |\n| **비고** | 이사급 2명의 출장으로 인한 일정 조정 |",
       "tokens": {
-        "input": 698,
-        "output": 171
+        "input": 348,
+        "output": 119
       }
     }
   ],
@@ -77,11 +77,19 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          4.95,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Au6baq_wMPXKrfcPzc3J8A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e커피포트를 네트워크로 제어, 모니터링 및 진단\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 19,\"totalTokenCount\": 486,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Au6baq_wMPXKrfcPzc3J8A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"하기 위한 가상의 통신 규약인 HTCPCP에 관한 문서입니다.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Au6baq_wMPXKrfcPzc3J8A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPgzOQM77mbaif8QTgvuIWojtRiTxnR3tCqe3l8Hi/oe4U516XX84UuDKNluELZmDWsR0PX0xw2CriOB0L/Szyho9q+Sv9RuJ7WeKT3ub3cX/ZezHrF9l0W69zQY5WK1ghDZl59idbBtXntA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Au6baq_wMPXKrfcPzc3J8A8\"}\r\n\r\n"
+          2.053,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003e리더십 검토 일정이 10월 9일\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 17,\"totalTokenCount\": 186,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"dlqdauSVHpaV9tMPvL7H-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"로 연기됨에 따라 9월 30일까지 수정된 가격표 제출과 15분 대\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 41,\"totalTokenCount\": 210,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"dlqdauSVHpaV9tMPvL7H-A4\"}\r\n\r\n"
+        ],
+        [
+          2.156,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"시보드 시연 추가를 요청드립니다.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 53,\"totalTokenCount\": 222,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"dlqdauSVHpaV9tMPvL7H-A4\"}\r\n\r\n"
+        ],
+        [
+          2.199,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPOmPMVJhL96ryzQ3V6Jg/vzqyJ8m93gCrdSuOvobrrhzC7SY2rhk55Dq/Z6LJ7/53SjJAUG4LeYcs9Ieah6eiHc96BndJ7XhZ3j0XJn3eMVMTYvkzj0RRaaYaGuFC80x5BMRfGjIWQZJSNA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 53,\"totalTokenCount\": 222,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"dlqdauSVHpaV9tMPvL7H-A4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "556416ec6d44ba9d1a94ceb71b73b163627160b58fb93f98d7350af697d3b8f4"
+      "bodySha256": "2c5cc80877b3855cc85d65fcd3e137e3c67dcabff3f28aab357ef9df4fc87a24"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -90,91 +98,59 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.418,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n이 문서는 인터넷을 통해 커피 머신을 원격으로 조종\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 19,\"totalTokenCount\": 792,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.048,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n이 글은 상대방에게 일정을 바꾸고 새로운 부탁을 하기\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 18,\"totalTokenCount\": 493,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 위해 보낸 비즈니스 이메일입니다. 핵심은 회의 날짜가 뒤로 밀렸으니, 그\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 43,\"totalTokenCount\": 518,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          2.438,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"하기 위한 '하이퍼 텍스트 커피 팟 제어 프로토콜(Hyper Text Coffee Pot Control Protocol,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 43,\"totalTokenCount\": 816,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.148,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"에 맞춰 필요한 서류를 조금 더 늦게 보내달라는 요청입니다.\\n\\n이 이메일의 내용을 하나씩\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 69,\"totalTokenCount\": 544,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          2.54,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" HTCPCP)'이라는 약속을 설명합니다. 이는 사람들이 인터넷에 연결된 기기를 멀리서도 켜거나\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 69,\"totalTokenCount\": 842,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.195,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 살펴보겠습니다.\\n\\n첫 번째로, 원래 10월 2일에 하기로 했던 '리더십 검\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 93,\"totalTokenCount\": 568,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          2.623,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 끄고, 커피가 다 되었는지 확인하고 싶어 하는 마음을 담은 일종의 농담 같은\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 93,\"totalTokenCount\": 866,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.259,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"토 회의'를 10월 9일로 바꾸기로 했습니다. 두 명의 이사가 그 기간에 출장을\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 120,\"totalTokenCount\": 595,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          2.825,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 규칙입니다.\\n\\n컴퓨터들은 서로 대화를 나눌 때 정해진 규칙을 따릅니다. 이를 프로\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 118,\"totalTokenCount\": 891,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.462,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 가야 하기 때문입니다.\\n\\n두 번째로, 회의에 필요한 '수정된 가격표'를 \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 144,\"totalTokenCount\": 619,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          2.849,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"토콜이라고 합니다. 우리가 인터넷 웹사이트를 볼 때 사용하는 '하이퍼 텍스트 전송 프로토콜(Hyper Text Transfer Protocol\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 147,\"totalTokenCount\": 920,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.666,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"9월 30일까지 보내달라고 부탁했습니다. 회의에 참석할 사람들이 미리 읽어보고 준비할 자료인 '사\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 172,\"totalTokenCount\": 647,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"전 읽기 자료'에 포함해야 하기 때문입니다.\\n\\n세 번째로, 회의 시간에 '보고 대시보드'를\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 200,\"totalTokenCount\": 675,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          2.978,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", HTTP)'이라는 규칙이 있는데, 이 문서는 그 이름을 재치 있게 바꾸어 커피 머신을 위한 규칙을 만든\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 173,\"totalTokenCount\": 946,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.833,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 보여주는 15분짜리 시연을 추가하고 싶어 합니다. '보고 대시보드'란 회사\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 226,\"totalTokenCount\": 701,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          3.078,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 것입니다.\\n\\n이 문서가 왜 중요한지 이해하기 위해 먼저 '인터넷 연결'을 생각해 봅시다. 지금\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 197,\"totalTokenCount\": 970,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.856,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"에서 일어나는 일들을 알기 쉽게 숫자나 그래프로 정리해 보여주는 화면을 말합니다.\\n\\n마지막으로\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 252,\"totalTokenCount\": 727,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          3.227,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"은 냉장고나 세탁기 같은 가전제품도 인터넷에 연결되어 휴대폰으로 조종합니다. 하지만 \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 223,\"totalTokenCount\": 996,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          1.93,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", 상대방이 15분 동안 시연을 할 수 있는 상황인지, 이 새로운 계획이 괜찮은지 물어보\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 280,\"totalTokenCount\": 755,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          3.316,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"1998년 당시에는 이런 생각이 매우 새롭고 엉뚱한 것이었습니다. \\n\\n이 문서\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 247,\"totalTokenCount\": 1020,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          2.056,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"며 글을 마쳤습니다.\\n\\n요약하자면, 이 이메일은 회의 날짜 변경을\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 304,\"totalTokenCount\": 779,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          3.531,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"의 핵심은 다음과 같습니다.\\n\\n1. 사람들은 이제 커피 머신도 인터넷에 연결하길 원합니다. 예를 들어\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 273,\"totalTokenCount\": 1046,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", 침대에서 일어나기 전에 따뜻한 커피를 미리 준비하고 싶어 합니다.\\n2. 기기를 조종\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 299,\"totalTokenCount\": 1072,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          2.173,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 알리고, 그 회의를 더 잘 준비하기 위해 서류 제출 기한 조정과 발표 시간 추가를 요청하는 문서\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 330,\"totalTokenCount\": 805,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          3.555,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"하려면 서로 알아들을 수 있는 공통의 약속이 필요합니다. 컴퓨터끼리 \\\"커피를 내려라\\\", \\\"지금\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 326,\"totalTokenCount\": 1099,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          2.221,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"입니다.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 334,\"totalTokenCount\": 809,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ],
         [
-          3.659,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 상태가 어떠냐\\\"라고 물을 수 있는 명령어 세트가 있어야 합니다.\\n3. 이 문서는 그\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 351,\"totalTokenCount\": 1124,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          3.75,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 명령어를 어떤 방식으로 주고받을지 설명합니다. 예를 들어, 커피 머신이 고장 났거나 커피\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 375,\"totalTokenCount\": 1148,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          3.815,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"가 다 떨어졌을 때, 컴퓨터가 어떻게 이를 알아챌지 정해두는 것입니다.\\n\\n다만, 이 문\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 401,\"totalTokenCount\": 1174,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          3.984,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"서는 진짜 표준 규칙이 아닙니다. 실제 인터넷 기기를 만들 때 지켜야 하는 법 같은 것이 아니라, 컴퓨터를\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 426,\"totalTokenCount\": 1199,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          4.076,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 다루는 사람들이 모여서 만든 아주 유머러스한 장난입니다. \\n\\n결론적으로, 이 문\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 451,\"totalTokenCount\": 1224,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          4.162,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"서는 우리가 일상에서 쓰는 모든 기기가 인터넷으로 연결되는 세상이 오면 어떤 일이 벌어질지,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 475,\"totalTokenCount\": 1248,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          4.268,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 그리고 기기를 조종하는 규칙을 만드는 것이 얼마나 재미있고 흥미로운 일인지를 보여주기 위해 작성된 글\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 502,\"totalTokenCount\": 1275,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          4.422,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"입니다.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 507,\"totalTokenCount\": 1280,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
-        ],
-        [
-          4.444,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPID6ADFrBUYAOYhI+COZYKNSLAJj+6PJu5IsDC8l/UIcSZCggP6jkxOtofyXC+PqdN3phKRalwGf+fmwggJ14NhzlOkmn2YBGwxL6amtLT41RBqUiUFptC2mOTJ1R9g0Ntf2K6msH2zOyjw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 507,\"totalTokenCount\": 1280,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"C-6bauzVF_jhrfcPodnB-Qg\"}\r\n\r\n"
+          2.264,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPshkLsBflbdroCBC0DSznJwU9eKz0ga2YxEkYShEbSlX8RSDcA2Y3NtqwyZ8kiFDaRu8+D49AE5b62u5FtBa27bO5qxa8iIqpf8SGA7JADPHCKUdnn6nlCje1N4NkrRXNye3rXguLVUS8lQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 334,\"totalTokenCount\": 809,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"fFqdatX-Cre2vr0P8LC42Q8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "44bc050c6ff60530c1189c207877735841988294a21fc17f18b490aa7cbd7409"
+      "bodySha256": "70370009be04b38065a3484bc1c1bf17a45cae7c761be24bff066ad218ffc981"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -183,51 +159,35 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.859,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1294,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n이 문서는 인터넷으로 커피 머신을 원격 조종하기 위해\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 19,\"totalTokenCount\": 1311,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
+          4.666,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 2,\"totalTokenCount\": 824,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n이 이메일은 회의 일정이 바뀌어 업무 일정을\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 18,\"totalTokenCount\": 840,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 조정하자는 내용입니다.\\n\\n1. **회의 연기**: 이사들의 출장으로 원래 10월 2\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 45,\"totalTokenCount\": 867,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\n"
         ],
         [
-          2.924,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 만든 가상의 약속인 '하이퍼 텍스트 커피 팟 제어 프로토콜(Hyper Text Coffee Pot Control\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 45,\"totalTokenCount\": 1337,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
+          4.667,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"일이었던 회의를 10월 9일로 옮겼습니다.\\n2. **서류 요청**: 회\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 72,\"totalTokenCount\": 894,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\n"
         ],
         [
-          3.009,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Protocol, HTCPCP)'을 설명합니다. \\n\\n우리가 인터넷 웹사이트를 볼 때 '하이퍼 텍스트 전\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 72,\"totalTokenCount\": 1364,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
+          4.759,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"의 전에 미리 읽어볼 자료를 준비해야 하니, 수정된 가격표를 9월 30일까지 보내달라고 요청\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 101,\"totalTokenCount\": 923,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\n"
         ],
         [
-          3.183,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"송 프로토콜(Hyper Text Transfer Protocol, HTTP)'이라는 규칙을 쓰듯, 이 문서도 커피 머신을 \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 98,\"totalTokenCount\": 1390,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"켜거나 상태를 확인하는 규칙을 똑같은 방식으로 장난스럽게 만든 것입니다.\\n\\n이 문서의 핵심은 다음과 같습니다.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 125,\"totalTokenCount\": 1417,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
+          4.886,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"했습니다.\\n3. **시연 추가**: 회의 시간에 숫자와 그래프를 보여주는 보고 화면(대시보드)을 \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 130,\"totalTokenCount\": 952,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\n"
         ],
         [
-          3.288,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n\\n1. 사람들은 이제 침대에서 일어나기 전에 미리 커피를 내리는 등 기기를 멀리서 조\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 149,\"totalTokenCount\": 1441,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
+          4.997,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"15분 동안 직접 보여주기를 원합니다.\\n\\n상대방이 이 일정에 맞춰서 준비할 수 있는지 확인하는\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 157,\"totalTokenCount\": 979,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\n"
         ],
         [
-          3.36,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"종하고 싶어 합니다.\\n2. 기기를 조종하려면 컴퓨터가 서로 알아들을 수 있는 공통된 언어(\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 176,\"totalTokenCount\": 1468,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
+          5.102,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 것이 이 이메일의 목적입니다.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 170,\"totalTokenCount\": 992,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\n"
         ],
         [
-          3.502,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"규칙)가 필요합니다.\\n3. 이 문서는 실제 표준이 아닙니다. 컴퓨터 기술자들이 인터넷의 발전과 기\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 203,\"totalTokenCount\": 1495,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
-        ],
-        [
-          3.507,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"기 연결을 축하하며 만든 유머러스한 창작물입니다.\\n\\n즉, 이 문서는 모든 가전제품\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 229,\"totalTokenCount\": 1521,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
-        ],
-        [
-          3.567,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"이 인터넷으로 연결되는 미래를 상상하며, 기기를 다루는 규칙을 재미있게 표현해 본 것입니다.\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 256,\"totalTokenCount\": 1548,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
-        ],
-        [
-          3.694,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 259,\"totalTokenCount\": 1551,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
-        ],
-        [
-          3.716,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPOtPyeoN7uHr1Fln9ETojhlnWq1MZzzT+r9452Nb4vlRrIPUrkvn/GESCOoXbEo89KdK0ywbB129YXvgWRmFtOcTDovrCXKpyGr5e9KiD6xEMCMQFHmzscDbPeoF2aXPNkRa5DHgQKC2V9g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1292,\"candidatesTokenCount\": 259,\"totalTokenCount\": 1551,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1292}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Fe6baqfnLOXprfcP-Z7FKQ\"}\r\n\r\n"
+          5.152,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPAChQXowaHhmgfXKO+QebRlkxMf11KqjT57WxzD3MYhoq0qQ9yIEF1E0gU89Mb/WD9drHqrEej8V+VUg36AeiIyA8sYWy4AtviwuZb/+KLtBobfw3Zq7RkrUn4LTQ/JB4zZ1tBxo6E8DHCQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 822,\"candidatesTokenCount\": 170,\"totalTokenCount\": 992,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 822}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"g1qdauzGMc63vr0PxtrgwA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "2b9e6662757a2a43cc5be442ddffdbad49fdf2f7a5a970790215225f69579189"
+      "bodySha256": "5a4c26acb469eefb8cfa2f1b4365ba18156e34f03c99ff817310747895702764"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -236,39 +196,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.341,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 2,\"totalTokenCount\": 700,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| 항목 | 내용 |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 20,\"totalTokenCount\": 718,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
+          1.367,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 348,\"candidatesTokenCount\": 2,\"totalTokenCount\": 350,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 348}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"jlqdasakEry6vr0PqfnJiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| 구분 | 내용 |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 348,\"candidatesTokenCount\": 20,\"totalTokenCount\": 368,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 348}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"jlqdasakEry6vr0PqfnJiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"요청 사항** | 수정된 가격표 제출 (9월 30일까지) |\\n| **주요 변경 사항** |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 348,\"candidatesTokenCount\": 48,\"totalTokenCount\": 396,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 348}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"jlqdasakEry6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          2.348,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"문서 번호** | RFC 2324 |\\n| **제목** | Hyper Text Coffee Pot Control Protocol (HTCPCP\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 49,\"totalTokenCount\": 747,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
+          1.411,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 리더십 검토 일정 변경 (10월 2일 → 10월 9일) |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 348,\"candidatesTokenCount\": 74,\"totalTokenCount\": 422,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 348}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"jlqdasakEry6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          2.432,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"/1.0) |\\n| **발행일** | 1998년 4월 1일 |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 78,\"totalTokenCount\": 776,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
+          1.471,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **추가 요청** | 리포팅 대시보드 15분 데모 추가 |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 348,\"candidatesTokenCount\": 98,\"totalTokenCount\": 446,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 348}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"jlqdasakEry6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          2.521,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **저자** | L. Masinter |\\n| **카테고리** | 정보 제공용 (Informational) |\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 106,\"totalTokenCount\": 804,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
+          1.591,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"비고** | 이사급 2명의 출장으로 인한 일정 조정 |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 348,\"candidatesTokenCount\": 119,\"totalTokenCount\": 467,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 348}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"jlqdasakEry6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          2.661,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"| **목적** | 커피 포트를 제어, 모니터링 및 진단하기 위한 프로토콜 기술\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 131,\"totalTokenCount\": 829,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
-        ],
-        [
-          2.748,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| **핵심 내용** | 유비쿼터스 컴퓨팅 환경에서 네트워크로 연결된 커피 포트를\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 156,\"totalTokenCount\": 854,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
-        ],
-        [
-          2.81,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 원격 제어하기 위한 프로토콜 정의 |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 171,\"totalTokenCount\": 869,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
-        ],
-        [
-          2.869,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPYz2wZxjNYr5bWv3APDGiLbtLvdBuuYXchX6YAfShSzTRBGcGsuBGR2Ccf4f8D/4ADFXF9RtGbUOQKQ6XKi4jDCuDvE6V8pfWHNdGG4ZSin9ygBKSgKkoTi+67ah0GLU6MbEl9keslXF53g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 698,\"candidatesTokenCount\": 171,\"totalTokenCount\": 869,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 698}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Hu6barOFLp_KrfcPopvv-Ac\"}\r\n\r\n"
+          1.636,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP7aOVT4PaoWkAd+afSXMM8xpSOWJ3K3Tidzc7l8019A2QBfyWi23aH/tbbqx6iKBqTme7U+DMQtGZfTZNg/GMftKk/POWCLxBsDDf5sabstwvH32Xq6wf7s0/2ilWFNSIGarJEgUHoHEuIA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 348,\"candidatesTokenCount\": 119,\"totalTokenCount\": 467,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 348}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"jlqdasakEry6vr0PqfnJiQ8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "b7b1da03ed9bb31fb368249e9a52d1882c4ca77ca22196fa2d4d48db1b8d7d89"
+      "bodySha256": "6249fd839daf8afe8717f1dbcbe2e54fa22fb595bfbfa928c25eee1d3c527a33"
     }
   ]
 }

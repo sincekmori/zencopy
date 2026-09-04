@@ -1,13 +1,12 @@
-// The docs' demo videos, generated end to end — no screen recording per
-// locale. A human records ONE template once (scripts/demo-video/template.mp4:
-// the browser page being selected and copied twice, the popup appearing top
-// right); everything the popup shows is then produced here: the popup is
-// driven through the Tauri-mocking harness (screenshot.html) in headless
-// WebKit, its window is captured as 2× frames with a transparent background
-// (card, shadow, and all), and those frames become the videos — the first
-// demo composited over the template from the moment its own popup appears
-// (that popup is never seen: the recording covers it, shadow included), the
-// rest over a plain backdrop, the popup alone.
+// The docs' demo videos, generated end to end — no screen recording at all.
+// The popup is driven through the Tauri-mocking harness (screenshot.html) in
+// headless WebKit, its window is captured as 2× frames with a transparent
+// background (card, shadow, and all), and those frames become the videos: the
+// first demo composited over a page WebKit renders as well — the guide's
+// sample email open in a plain, unbranded mail client (scripts/demo-video/
+// mail.html around scripts/demo-video/source.txt, the file the guide embeds
+// too), selected before the eye, the popup landing top right — and the rest
+// over a plain backdrop, the popup alone.
 //
 // The model's answers are real once: `--record` runs the session against
 // Gemini and keeps everything in scripts/demo-video/recordings/<locale>.json
@@ -16,56 +15,56 @@
 // (the harness answers the app's model calls from it, chunk by chunk at the
 // recorded times), so the same videos come out of any later run with no
 // model call — and of a changed popup, since the product side is live. The
-// texts in the file are the content: edit the copied text, a typed message,
-// or a reply there and the next replay shows the edit.
+// texts in the file are the content: edit a typed message or a reply there
+// and the next replay shows the edit; the copied text is source.txt's, and a
+// replay refuses to run until the two agree again.
 //
 // Usage: bun run demo-video [--locale <code>] [--record] [--out <root>] [--keep-work]
-//        bun run demo-video --measure
 // The demos (scripts/demo-video/demos.ts) are one session per locale; each
 // lands at <root>/<locale>/demo/<demo>.mp4 plus a poster .jpg (default root
 // site/public, what DemoVideo.astro serves). Locales default to the recorded
 // ones; with --record, to those whose POPUP_RESULT_FIXTURES carry every
-// string the demos type. --measure re-derives template.json (when and where
-// the template's popup appears) from template.mp4 — run it after re-recording
-// the template.
+// string the demos type.
 //
-// Prerequisites: `bunx playwright install webkit`, ffmpeg/ffprobe 9 on PATH,
-// and for --record GEMINI_API_KEY in the environment (`source ~/.zshrc`). A
-// dev server on :1420 is reused when already running, started (and stopped)
+// Prerequisites: `bunx playwright install webkit`, ffmpeg 9 on PATH, and for
+// --record GEMINI_API_KEY in the environment (`source ~/.zshrc`). A dev
+// server on :1420 is reused when already running, started (and stopped)
 // otherwise.
 /* oxlint-disable no-await-in-loop, no-underscore-dangle -- deliberately
    sequential: frames are captured one after another, steps wait on the popup,
-   and locales share the one dev server; the dunder names are Tauri's IPC
-   global and the harness's driver global, spoken as they are. */
-import { type ChildProcess, spawn, spawnSync } from "node:child_process";
+   and locales share the one dev server; the dunder name is Tauri's IPC
+   global, spoken as it is. */
+import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
-import { type Browser, type Page, webkit } from "playwright";
-import { LOCALES } from "../src/lib/messages/index.ts";
+import { promisify } from "node:util";
+import { type Browser, type Locator, type Page, webkit } from "playwright";
 import { extractResult, stripResultTags, wrapResult } from "../src/lib/protocol.ts";
+import { GEMINI_DEFAULT_MODEL, geminiQuickCatalog } from "../src/lib/quickstart.ts";
 import { POPUP_RESULT_FIXTURES, SCREENSHOT_SCENARIOS } from "../src/lib/screenshot-scenarios.ts";
-import type { Exchange } from "../src/screenshot/exchange.ts";
-import { DEMOS } from "./demo-video/demos.ts";
+import type { ModelCall } from "../src/screenshot/model-call.ts";
+import { type Demo, DEMOS, FRAMES, VIDEO_SCALE } from "./demo-video/demos.ts";
+import {
+  ensureDevServer,
+  harnessUrl,
+  localesMatching,
+  ROOT,
+  seedHarness,
+  takeFlag,
+  takeSwitch,
+} from "./harness-driver.ts";
 
-const ROOT = join(import.meta.dirname, "..");
 const HERE = join(import.meta.dirname, "demo-video");
-const DEV_URL = "http://localhost:1420";
-const MODEL = "gemini-3.1-flash-lite";
-/** The recording's frame-rate cap: a 2× PNG of the popup takes ~17 ms in
- *  WebKit, so this is what the machine actually sustains. */
-const CAPTURE_FPS = 50;
-/** The finished video's frame rate and quality: a docs page streams these,
- *  and every regeneration lands dozens of them in the repository, so half
- *  the capture rate and a moderate CRF (≈1 MB for a 10 s demo) rather than
- *  the capture rate itself. */
-const OUTPUT_FPS = 30;
+/** The frame rate, capture and output alike: a docs page streams these and
+ *  every regeneration lands dozens of them in the repository, so 30 and a
+ *  moderate CRF (≈1 MB for a 10 s demo). A 2× PNG of the popup takes ~17 ms
+ *  in WebKit, so the capture keeps the pace; a frame identical to the one
+ *  before it is kept once and shown for both. */
+const FPS = 30;
 const OUTPUT_CRF = "22";
 const TYPING_DELAY_MS = 90;
-/** The popup's own margin around its card (`max-compact:p-2`, 8 CSS px). */
-const CARD_MARGIN_CSS = 8;
-const SCALE = 2;
 /** Behind the popup-only demos: a plain light gray (zinc-100), a shade off
  *  the card so its border and shadow read. */
 const BACKDROP = "0xF4F4F5";
@@ -73,301 +72,170 @@ const BACKDROP = "0xF4F4F5";
 // ---- CLI ------------------------------------------------------------------
 
 const args = process.argv.slice(2);
-function takeFlag(flag: string): string | undefined {
-  const index = args.indexOf(flag);
-  if (index === -1 || args[index + 1] === undefined) {
-    return undefined;
-  }
-  const [, value] = args.splice(index, 2);
-  return value;
-}
-function takeSwitch(flag: string): boolean {
-  const index = args.indexOf(flag);
-  if (index === -1) {
-    return false;
-  }
-  args.splice(index, 1);
-  return true;
-}
-const measureOnly = takeSwitch("--measure");
-const recordMode = takeSwitch("--record");
-const keepWork = takeSwitch("--keep-work");
-const outRoot = takeFlag("--out") ?? join(ROOT, "site", "public");
-const onlyLocale = takeFlag("--locale");
+const recordMode = takeSwitch(args, "--record");
+const keepWork = takeSwitch(args, "--keep-work");
+const outRoot = takeFlag(args, "--out") ?? join(ROOT, "site", "public");
+const onlyLocale = takeFlag(args, "--locale");
 if (args.length > 0) {
   console.error(`unknown arguments: ${args.join(" ")}`);
   process.exit(1);
 }
 
-const TEMPLATE = join(HERE, "template.mp4");
-const MANIFEST = join(HERE, "template.json");
 const SOURCE = join(HERE, "source.txt");
+const MAIL_TEMPLATE = join(HERE, "mail.html");
 const RECORDINGS = join(HERE, "recordings");
 const popupViewport = SCREENSHOT_SCENARIOS["popup"]?.viewport;
-if (popupViewport === undefined) {
-  throw new Error("the popup scenario must declare its viewport");
+if (popupViewport?.width !== FRAMES.popup.width || popupViewport.height !== FRAMES.popup.height) {
+  throw new Error(
+    "the popup frame in scripts/demo-video/demos.ts must be the popup scenario's viewport (src/lib/screenshot-scenarios.ts)",
+  );
 }
-const WINDOW = { w: popupViewport.width * SCALE, h: popupViewport.height * SCALE };
+const WINDOW = { w: FRAMES.popup.width * VIDEO_SCALE, h: FRAMES.popup.height * VIDEO_SCALE };
 
-// ---- ffmpeg helpers ---------------------------------------------------------
+// ---- ffmpeg ---------------------------------------------------------------------
 
-function run(command: string, commandArgs: string[]): string {
-  const result = spawnSync(command, commandArgs, { encoding: "utf8", maxBuffer: 1 << 28 });
-  if (result.status !== 0) {
-    throw new Error(`${command} ${commandArgs.join(" ")}\n${result.stderr}`);
+const execFileAsync = promisify(execFile);
+
+/** Run ffmpeg quietly; fails with what it said. */
+async function ffmpeg(ffmpegArgs: string[]): Promise<void> {
+  try {
+    await execFileAsync("ffmpeg", ["-v", "error", "-y", ...ffmpegArgs], { maxBuffer: 1 << 24 });
+  } catch (error) {
+    const stderr = (error as { stderr?: string }).stderr ?? "";
+    throw new Error(`ffmpeg ${ffmpegArgs.join(" ")}\n${stderr}`, { cause: error });
   }
-  return result.stdout;
-}
-
-function sha256(path: string): string {
-  return createHash("sha256").update(readFileSync(path)).digest("hex");
 }
 
 function sha256Text(text: string): string {
   return createHash("sha256").update(text).digest("hex");
 }
 
-// ---- --measure: when and where the template's popup appears -----------------
-
-interface Manifest {
-  video: string;
-  sha256: string;
-  width: number;
-  height: number;
-  duration: number;
-  /** Seconds into the template at which its popup appears. */
-  appear: number;
-  /** Where the recording's window goes, in the template's pixels. */
-  popup: { x: number; y: number };
-  /** The template popup's card, border included — the measurement's basis. */
-  card: { x: number; y: number; w: number; h: number };
+/** A captured moment: when (seconds into its timeline), and the file that
+ *  shows it — one file for a run of identical frames. */
+interface Frame {
+  at: number;
+  file: string;
 }
 
-/** Whether `line[i..i+RUN)` is all card-interior bright. */
-function brightRunAt(line: number[], i: number): boolean {
-  const BRIGHT = 248;
-  const RUN = 8;
-  if (i + RUN > line.length) {
-    return false;
-  }
-  for (let k = 0; k < RUN; k += 1) {
-    if (line[i + k]! < BRIGHT) {
-      return false;
-    }
-  }
-  return true;
-}
-
-/** Whether a luma is the card border's (the hairline between page and card). */
-function isBorder(luma: number): boolean {
-  return luma >= 195 && luma <= 240;
-}
-
-/** Index of the first pixel starting a bright run (the card interior) that a
- *  border-coloured pixel precedes; -1 when none. */
-function firstBrightRun(line: number[]): number {
-  for (let i = 1; i < line.length; i += 1) {
-    if (isBorder(line[i - 1]!) && brightRunAt(line, i)) {
-      return i;
-    }
-  }
-  return -1;
-}
-
-/** Border-coloured pixels walking outward from the interior edge, until the
- *  shadow (a luma jump > 6) begins. */
-function borderWidth(lineOutward: number[]): number {
-  let n = 0;
-  let previous: number | undefined;
-  for (const v of lineOutward) {
-    if (isBorder(v) && (previous === undefined || Math.abs(v - previous) <= 6)) {
-      n += 1;
-      previous = v;
+/** A concat-demuxer list: each file shown for its duration, a run of the
+ *  same file as one entry. The demuxer times an entry by the next one's
+ *  start, and ffmpeg gives the stream's last frame the length of the gap
+ *  before it (which the fps filter then holds it for), so the picture the
+ *  list ends on is listed twice more, a frame apart: its hold is the
+ *  entry's, and the stream ends a frame after it. */
+function concatLines(entries: { file: string; duration: number }[]): string {
+  const merged: { file: string; duration: number }[] = [];
+  for (const entry of entries) {
+    const last = merged.at(-1);
+    if (last?.file === entry.file) {
+      last.duration += entry.duration;
     } else {
-      break;
+      merged.push({ ...entry });
     }
   }
-  return n;
+  const tail = merged.at(-1);
+  if (tail === undefined) {
+    return "";
+  }
+  const frame = 1 / FPS;
+  tail.duration = Math.max(frame, tail.duration - frame);
+  const lines = [
+    ...merged,
+    { file: tail.file, duration: frame },
+    { file: tail.file, duration: frame },
+  ].flatMap(({ file, duration }) => [`file '${file}'`, `duration ${duration.toFixed(4)}`]);
+  return `${lines.join("\n")}\n`;
 }
 
-async function measureTemplate(): Promise<Manifest> {
-  const probe = JSON.parse(
-    run("ffprobe", [
-      "-v",
-      "error",
-      "-select_streams",
-      "v:0",
-      "-show_entries",
-      "stream=width,height",
-      "-show_entries",
-      "frame=pts_time",
-      "-of",
-      "json",
-      TEMPLATE,
-    ]),
-  ) as { streams: { width: number; height: number }[]; frames: { pts_time: string }[] };
-  const stream = probe.streams[0];
-  if (stream === undefined) {
-    throw new Error("template.mp4 has no video stream");
-  }
-  const { width, height } = stream;
-  const pts = probe.frames.map((frame) => Number(frame.pts_time));
-  const frameBytes = width * height;
-  // Gray frames stream out of ffmpeg one after another; only the first, the
-  // one before the popup appears, and the last are kept.
-  const decoder = spawn("ffmpeg", [
-    "-v",
-    "error",
-    "-i",
-    TEMPLATE,
-    "-fps_mode",
-    "passthrough",
-    "-f",
-    "rawvideo",
-    "-pix_fmt",
-    "gray",
-    "-",
-  ]);
-  // The tab-bar strip in the right half: static until the card lands on it.
-  const strip = { x: Math.floor(width / 2), y: 0, w: width - Math.floor(width / 2), h: 120 };
-  const stripDiff = (a: Uint8Array, b: Uint8Array): number => {
-    let sum = 0;
-    for (let y = strip.y; y < strip.y + strip.h; y += 1) {
-      const row = y * width;
-      for (let x = strip.x; x < strip.x + strip.w; x += 1) {
-        sum += Math.abs(a[row + x]! - b[row + x]!);
-      }
-    }
-    return sum / (strip.w * strip.h);
-  };
-  let first: Uint8Array | undefined;
-  let previous: Uint8Array | undefined;
-  let before: Uint8Array | undefined;
-  let last: Uint8Array | undefined;
-  let appear = -1;
-  let index = 0;
-  let pending: Buffer<ArrayBufferLike> = Buffer.alloc(0);
-  for await (const chunk of decoder.stdout as AsyncIterable<Buffer>) {
-    pending = pending.length === 0 ? chunk : Buffer.concat([pending, chunk]);
-    while (pending.length >= frameBytes) {
-      const frame = new Uint8Array(pending.subarray(0, frameBytes));
-      pending = pending.subarray(frameBytes);
-      first ??= frame;
-      if (appear === -1 && stripDiff(frame, first) > 8) {
-        appear = index;
-        before = previous;
-      }
-      previous = frame;
-      last = frame;
-      index += 1;
-    }
-  }
-  if (first === undefined || last === undefined || before === undefined || appear === -1) {
-    throw new Error("could not find the frame where the template's popup appears");
-  }
-  if (index !== pts.length) {
-    throw new Error(`decoded ${index} frames but ffprobe listed ${pts.length}`);
-  }
-  // Where it landed: pixels that changed between the frame before and the
-  // last frame, eroded with a 9×9 box so text and the cursor vanish and the
-  // card (with its shadow band) survives; its bounding box, then a scan
-  // inward along the box's median lines to the card's interior.
-  const K = 9;
-  const MARGIN = 12;
-  const integral = new Int32Array((width + 1) * (height + 1));
-  for (let y = 0; y < height; y += 1) {
-    let rowSum = 0;
-    for (let x = 0; x < width; x += 1) {
-      rowSum += Math.abs(last[y * width + x]! - before[y * width + x]!) > 12 ? 1 : 0;
-      integral[(y + 1) * (width + 1) + (x + 1)] = integral[y * (width + 1) + (x + 1)]! + rowSum;
-    }
-  }
-  let top = height;
-  let bottom = -1;
-  let left = width;
-  let right = -1;
-  for (let y = 0; y + K <= height; y += 1) {
-    for (let x = Math.floor(width / 4); x + K <= width; x += 1) {
-      const sum =
-        integral[(y + K) * (width + 1) + (x + K)]! -
-        integral[y * (width + 1) + (x + K)]! -
-        integral[(y + K) * (width + 1) + x]! +
-        integral[y * (width + 1) + x]!;
-      if (sum === K * K) {
-        top = Math.min(top, y);
-        bottom = Math.max(bottom, y);
-        left = Math.min(left, x);
-        right = Math.max(right, x);
-      }
-    }
-  }
-  if (bottom === -1) {
-    throw new Error("no popup-sized change found in the template");
-  }
-  top = Math.max(0, top - MARGIN);
-  left = Math.max(0, left - MARGIN);
-  bottom = Math.min(height - 1, bottom + K - 1 + MARGIN);
-  right = Math.min(width - 1, right + K - 1 + MARGIN);
-  const ym = Math.floor((top + bottom) / 2);
-  const xm = Math.floor((left + right) / 2);
-  const row = (y: number, from: number, to: number): number[] =>
-    Array.from({ length: to - from + 1 }, (_, i) => last[y * width + from + i]!);
-  const column = (x: number, from: number, to: number): number[] =>
-    Array.from({ length: to - from + 1 }, (_, i) => last[(from + i) * width + x]!);
-  const scans = {
-    left: firstBrightRun(row(ym, left, right)),
-    right: firstBrightRun(row(ym, left, right).toReversed()),
-    top: firstBrightRun(column(xm, top, bottom)),
-    bottom: firstBrightRun(column(xm, top, bottom).toReversed()),
-  };
-  if (Object.values(scans).some((v) => v === -1)) {
-    throw new Error(`could not find the card's interior edges: ${JSON.stringify(scans)}`);
-  }
-  const il = left + scans.left;
-  const ir = right - scans.right;
-  const it = top + scans.top;
-  const ib = bottom - scans.bottom;
-  const border = {
-    left: borderWidth(row(ym, 0, il - 1).toReversed()),
-    right: borderWidth(row(ym, ir + 1, width - 1)),
-    top: borderWidth(column(xm, 0, it - 1).toReversed()),
-    bottom: borderWidth(column(xm, ib + 1, height - 1)),
-  };
-  // The card's 1 CSS px border is SCALE pixels thick in a recording at the
-  // scale the overlay is rendered at — anything else is a recording at
-  // another scale, which the overlay would not fit.
-  if (Object.values(border).some((v) => v !== SCALE)) {
-    throw new Error(
-      `the template's card border is ${JSON.stringify(border)} px thick; expected ${SCALE} (a ${SCALE}× recording)`,
+// ---- The page: the mail the first demo copies, rendered and selected ------------
+
+/** The frame the page stage is filmed in (CSS px; ×VIDEO_SCALE in pixels).
+ *  Landscape: the mail on the left, the popup on the right, so the copy and
+ *  its answer are seen side by side. */
+const PAGE = FRAMES.page;
+/** The page's own beats before the popup: the mail as it is, the selection
+ *  sweeping over it, the mail selected — then the popup appears. */
+const PAGE_BEATS = { still: 0.6, select: 1.4, selected: 0.4 };
+/** Seconds into the video at which the popup appears. */
+const APPEAR = PAGE_BEATS.still + PAGE_BEATS.select + PAGE_BEATS.selected;
+/** Where the popup window lands: the frame's top-right corner (the app pins
+ *  the popup to the work area's top-right; the window's own margin keeps the
+ *  card off the edges). */
+const POPUP_AT = { x: PAGE.width * VIDEO_SCALE - WINDOW.w, y: 0 };
+/** The mail's subject: the reading pane's heading, the inbox row's, and the
+ *  window title the capture carries. */
+const SUBJECT = "Updated proposal and review date";
+
+function escapeHtml(text: string): string {
+  return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+}
+
+/** The source's paragraphs: blank lines separate them, and the lines of one
+ *  are one sentence each. */
+function paragraphsOf(source: string): string[] {
+  return source
+    .trim()
+    .split(/\n\s*\n/u)
+    .map((paragraph) => paragraph.split("\n").join(" "));
+}
+
+/** The sample email as a page: scripts/demo-video/mail.html with the mail's
+ *  own parts filled in — the subject, the inbox row's preview (the opening,
+ *  greeting and sign-off skipped, cut at a word), the body. */
+function mailPage(source: string): string {
+  const paragraphs = paragraphsOf(source);
+  const opening = paragraphs
+    .filter((paragraph) => !paragraph.endsWith(","))
+    .join(" ")
+    .slice(0, 64);
+  const cut = opening.lastIndexOf(" ");
+  const snippet = cut === -1 ? opening : opening.slice(0, cut);
+  return readFileSync(MAIL_TEMPLATE, "utf8")
+    .replaceAll("{{subject}}", escapeHtml(SUBJECT))
+    .replaceAll("{{snippet}}", escapeHtml(snippet))
+    .replaceAll(
+      "{{paragraphs}}",
+      paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join(""),
     );
+}
+
+function pageFrameName(index: number): string {
+  return `page-${String(index + 1).padStart(5, "0")}.png`;
+}
+
+/** Render the page's frames up to the moment the popup appears, into `dir`
+ *  — one file per distinct picture: the still and the selected mail are one
+ *  frame each, however long they hold. Once per run — the page is the same
+ *  for every locale. */
+async function renderPage(browser: Browser, dir: string): Promise<Frame[]> {
+  rmSync(dir, { recursive: true, force: true });
+  mkdirSync(dir, { recursive: true });
+  const context = await browser.newContext({
+    viewport: PAGE,
+    deviceScaleFactor: VIDEO_SCALE,
+    colorScheme: "light",
+  });
+  try {
+    const page = await context.newPage();
+    await page.setContent(mailPage(readFileSync(SOURCE, "utf8")));
+    const frames: Frame[] = [];
+    let shown: { fraction: number; file: string } | undefined;
+    while (frames.length / FPS < APPEAR) {
+      const at = frames.length / FPS;
+      const fraction = Math.min(1, Math.max(0, (at - PAGE_BEATS.still) / PAGE_BEATS.select));
+      if (shown === undefined || shown.fraction !== fraction) {
+        await page.evaluate((f) => {
+          (globalThis as { select?: (fraction: number) => void }).select?.(f);
+        }, fraction);
+        shown = { fraction, file: pageFrameName(frames.length) };
+        writeFileSync(join(dir, shown.file), await page.screenshot({ type: "png", caret: "hide" }));
+      }
+      frames.push({ at, file: shown.file });
+    }
+    return frames;
+  } finally {
+    await context.close();
   }
-  const card = {
-    x: il - border.left,
-    y: it - border.top,
-    w: ir + border.right - (il - border.left) + 1,
-    h: ib + border.bottom - (it - border.top) + 1,
-  };
-  // The popup window is the card plus its margin on every side; the
-  // recording's window has the same margin, so it goes where the template's
-  // window was — anchored at the card's top-right corner (the app pins the
-  // popup to the work area's top-right).
-  const margin = CARD_MARGIN_CSS * SCALE;
-  const popup = { x: card.x + card.w + margin - WINDOW.w, y: card.y - margin };
-  const appearAt = pts[appear];
-  const duration = pts.at(-1);
-  if (appearAt === undefined || duration === undefined) {
-    throw new Error("ffprobe listed no frame timestamps");
-  }
-  return {
-    video: "template.mp4",
-    sha256: sha256(TEMPLATE),
-    width,
-    height,
-    duration,
-    appear: appearAt,
-    popup,
-    card,
-  };
 }
 
 // ---- The session: the popup, driven and captured ------------------------------
@@ -395,13 +263,13 @@ interface Recording {
    *  and shape of each reply, and the hash of each request for telling a
    *  changed one. Attempts the SDK retried are not kept: a replay need not
    *  wait through them. */
-  exchanges: RecordedExchange[];
+  exchanges: RecordedCall[];
 }
 
-/** A recorded model call: the harness's exchange with the request body
+/** A recorded model call: the harness's record with the request body
  *  reduced to its hash — enough to tell a changed request from the same
  *  one, without repeating the thread once per call. */
-interface RecordedExchange extends Omit<Exchange, "body"> {
+interface RecordedCall extends Omit<ModelCall, "body"> {
   bodySha256: string;
 }
 
@@ -420,16 +288,17 @@ interface Turn {
 
 /** One session's trace: frames on disk, and where in time everything is. */
 interface Session {
-  /** Every captured frame's time, seconds since the capture landed;
-   *  frame-<n>.png in the work directory, 1-based. */
-  frames: number[];
-  /** Each demo's span in that timeline, in order. */
-  demos: { name: string; start: number; end: number }[];
+  /** Every captured moment, seconds since the capture landed, and its file
+   *  in the work directory. */
+  frames: Frame[];
+  /** Each demo's span in that timeline, in order, and what it plays over. */
+  demos: { name: string; stage: Demo["stage"]; start: number; end: number }[];
   /** Each step's moment. */
   timeline: { at: number; demo: string; step: string }[];
-  /** Each model call's demo and typed message, in call order. */
-  calls: { demo: string; message?: string | undefined }[];
-  exchanges: Exchange[];
+  /** Each settled run's demo and typed message, in order. */
+  runs: { demo: string; message?: string | undefined }[];
+  /** The model calls, as they went over `fetch`. */
+  exchanges: ModelCall[];
   usage: { prompt?: string; model?: string; tokens?: unknown }[];
   errors: string[];
 }
@@ -465,13 +334,12 @@ async function openPopup(page: Page, locale: string, errors: string[]): Promise<
   page.on("requestfailed", (request) => {
     errors.push(`requestfailed: ${request.url()} ${request.failure()?.errorText ?? ""}`);
   });
-  const query = new URLSearchParams({ locale, window: "popup" });
-  await page.goto(`${DEV_URL}/screenshot.html?${query.toString()}`, { waitUntil: "networkidle" });
+  await page.goto(harnessUrl({ locale, window: "popup" }), { waitUntil: "networkidle" });
 }
 
 /** The capture, as Rust would send it: the Summarize prompt over the source
- *  text, with the template variables a Chrome copy carries. */
-async function buildCapture(page: Page): Promise<Record<string, unknown>> {
+ *  text, with the template variables a mail client's copy carries. */
+async function buildCapture(page: Page, text: string): Promise<Record<string, unknown>> {
   const prompts = await page.evaluate(() =>
     (
       globalThis as unknown as {
@@ -480,7 +348,6 @@ async function buildCapture(page: Page): Promise<Record<string, unknown>> {
     ).__TAURI_INTERNALS__.invoke("list_prompts_ui"),
   );
   const summarize = frontmatterPrompt(prompts, "zencopy-summarize");
-  const text = readFileSync(SOURCE, "utf8");
   const now = new Date();
   return {
     kind: "text",
@@ -497,11 +364,11 @@ async function buildCapture(page: Page): Promise<Record<string, unknown>> {
       file_name: "",
       file_names: "",
       file_paths: "",
-      app_name: "Google Chrome",
-      exec_name: "Google Chrome",
-      exec_path: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      window_title: "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      url: "https://www.rfc-editor.org/rfc/rfc2324.html",
+      app_name: "Mail",
+      exec_name: "Mail",
+      exec_path: "",
+      window_title: SUBJECT,
+      url: "",
       process_id: "4242",
       now: `${now.getFullYear()}-${two(now.getMonth() + 1)}-${two(now.getDate())} ${two(now.getHours())}:${two(now.getMinutes())}:${two(now.getSeconds())}`,
     },
@@ -571,11 +438,14 @@ async function runSession(job: {
 
   // The frame poller: 2× PNGs with a transparent background (the popup's
   // window is transparent; the card and its shadow carry their own alpha),
-  // written as they come, each with its moment.
-  const frames: number[] = [];
+  // each with its moment — written when the picture changed, else noted as
+  // the previous file shown a moment longer.
+  const frames: Frame[] = [];
   const capturing = { on: false };
   let poller: Promise<void> | undefined;
   const poll = async (): Promise<void> => {
+    let previous: { png: Buffer; file: string } | undefined;
+    let written = 0;
     while (capturing.on) {
       const at = performance.now();
       const png = await page.screenshot({
@@ -584,86 +454,104 @@ async function runSession(job: {
         caret: "initial",
         animations: "allow",
       });
-      writeFileSync(join(workDir, frameName(frames.length)), png);
-      frames.push((at - (started ?? at)) / 1000);
+      if (previous === undefined || !png.equals(previous.png)) {
+        previous = { png, file: frameName(written) };
+        written += 1;
+        writeFileSync(join(workDir, previous.file), png);
+      }
+      frames.push({ at: (at - (started ?? at)) / 1000, file: previous.file });
       const spent = performance.now() - at;
-      if (spent < 1000 / CAPTURE_FPS) {
-        await sleep(1000 / CAPTURE_FPS - spent);
+      if (spent < 1000 / FPS) {
+        await sleep(1000 / FPS - spent);
       }
     }
   };
-  const headline = page.locator("div.font-semibold");
-  const spinner = headline.locator("svg.lucide-loader-circle");
+  // The popup's state, read off its headline (`data-run-state`, see
+  // popup.tsx) — not off the glyphs that show it.
+  const inState = (...states: string[]): Locator =>
+    page.locator(states.map((state) => `[data-run-state="${state}"]`).join(", ")).first();
   const settled = async (): Promise<void> => {
-    await spinner.waitFor({ timeout: 15_000 });
-    const outcome = headline.locator("svg.lucide-check, svg.lucide-triangle-alert").first();
-    await outcome.waitFor({ timeout: 120_000 });
-    if (
-      (await outcome.evaluate((node) => node.classList.contains("lucide-triangle-alert"))) === true
-    ) {
-      const reason = (await page.locator(".prose, p.text-destructive").last().textContent()) ?? "";
-      throw new Error(`the model run failed: ${reason}`);
+    await inState("running").waitFor({ timeout: 15_000 });
+    // A demo's reply is a few seconds of streaming; this is a ceiling for a
+    // recording's network, not a wait anyone should sit through.
+    const outcome = inState("done", "failed", "setup");
+    await outcome.waitFor({ timeout: 45_000 });
+    const state = await outcome.getAttribute("data-run-state");
+    if (state !== "done") {
+      const reason = (await page.locator("[data-turn-status]").last().textContent()) ?? "";
+      throw new Error(`the run ended in the popup's ${state} state: ${reason}`);
     }
   };
   const composer = page.locator("textarea");
 
   const timeline: Session["timeline"] = [];
-  const calls: Session["calls"] = [];
+  const runs: Session["runs"] = [];
   const demos: Session["demos"] = [];
-  // What was typed since the last call settled — the next call's message.
+  // What was typed since the last run settled — the next run's message.
   let typed: string | undefined;
-  for (const demo of DEMOS) {
-    const start = since();
-    for (const step of demo.steps) {
-      timeline.push({ at: since(), demo: demo.name, step: Object.values(step).join(" ") });
-      switch (step.kind) {
-        case "capture": {
-          await deliverCapture(page, capture);
-          started = performance.now();
-          capturing.on = true;
-          poller = poll();
-          break;
-        }
-        case "settled": {
-          await settled();
-          calls.push({ demo: demo.name, message: typed });
-          typed = undefined;
-          break;
-        }
-        case "slot": {
-          await page.keyboard.press(step.key);
-          await page
-            .locator("textarea:focus, div.font-semibold svg.lucide-loader-circle")
-            .first()
-            .waitFor({ timeout: 5000 });
-          break;
-        }
-        case "press": {
-          await page.keyboard.press(step.key);
-          break;
-        }
-        case "type": {
-          const text = messages?.[calls.length] ?? fixture[step.text];
-          if ((await page.locator("textarea:focus").count()) === 0) {
-            await composer.click();
+  const perform = async (): Promise<void> => {
+    for (const demo of DEMOS) {
+      const start = since();
+      for (const step of demo.steps) {
+        timeline.push({ at: since(), demo: demo.name, step: Object.values(step).join(" ") });
+        switch (step.kind) {
+          case "capture": {
+            await deliverCapture(page, capture);
+            started = performance.now();
+            capturing.on = true;
+            poller = poll();
+            break;
           }
-          await page.keyboard.type(text, { delay: TYPING_DELAY_MS });
-          typed = text;
-          break;
-        }
-        case "hold": {
-          await sleep(step.seconds * 1000);
-          break;
-        }
-        default: {
-          step satisfies never;
+          case "settled": {
+            await settled();
+            runs.push({ demo: demo.name, message: typed });
+            typed = undefined;
+            break;
+          }
+          case "slot": {
+            await page.keyboard.press(step.key);
+            await page
+              .locator('textarea:focus, [data-run-state="running"]')
+              .first()
+              .waitFor({ timeout: 5000 });
+            break;
+          }
+          case "press": {
+            await page.keyboard.press(step.key);
+            break;
+          }
+          case "type": {
+            const text = messages?.[runs.length] ?? fixture[step.text];
+            if ((await page.locator("textarea:focus").count()) === 0) {
+              await composer.click();
+            }
+            await page.keyboard.type(text, { delay: TYPING_DELAY_MS });
+            typed = text;
+            break;
+          }
+          case "hold": {
+            await sleep(step.seconds * 1000);
+            break;
+          }
+          default: {
+            step satisfies never;
+          }
         }
       }
+      demos.push({ name: demo.name, stage: demo.stage, start, end: since() });
     }
-    demos.push({ name: demo.name, start, end: since() });
+  };
+  try {
+    await perform();
+  } finally {
+    // Whatever ended the session, the poller ends with it: a frame in
+    // flight completes (the context is still open here), and nothing is
+    // left to reject later.
+    capturing.on = false;
+    await poller?.catch((error: unknown) => {
+      errors.push(`poller: ${error instanceof Error ? error.message : String(error)}`);
+    });
   }
-  capturing.on = false;
-  await poller;
   const harness = await page.evaluate(
     () =>
       (globalThis as unknown as { __zencopyHarness: Partial<Pick<Session, "exchanges" | "usage">> })
@@ -673,7 +561,7 @@ async function runSession(job: {
     frames,
     demos,
     timeline,
-    calls,
+    runs,
     exchanges: harness.exchanges ?? [],
     usage: harness.usage ?? [],
     errors,
@@ -725,9 +613,9 @@ function textParts(event: unknown): { text: string }[] {
 
 /** The reply as the popup shows it, read off the stream's events, the
  *  protocol's result tags taken off. */
-function replyOf(exchange: { chunks: [number, string][] }): string {
+function replyOf(call: { chunks: [number, string][] }): string {
   let text = "";
-  for (const event of eventsOf(exchange.chunks)) {
+  for (const event of eventsOf(call.chunks)) {
     for (const part of textParts(JSON.parse(event.data))) {
       text += part.text;
     }
@@ -771,86 +659,107 @@ function rewritten(chunks: [number, string][], reply: string): [number, string][
 /** The streams a replay serves: the recorded ones, each rewritten to carry
  *  the transcript's reply wherever that was edited since — the transcript
  *  is what a human edits, the stream is how it reaches the popup. */
-function replayStreams(recording: Recording): RecordedExchange[] {
-  const streams: RecordedExchange[] = [];
-  for (const [index, exchange] of recording.exchanges.entries()) {
+function replayStreams(recording: Recording): RecordedCall[] {
+  const streams: RecordedCall[] = [];
+  for (const [index, call] of recording.exchanges.entries()) {
     const reply = recording.turns[index]?.reply;
     streams.push(
-      reply === undefined || replyOf(exchange) === reply
-        ? exchange
-        : { ...exchange, chunks: rewritten(exchange.chunks, reply) },
+      reply === undefined || replyOf(call) === reply
+        ? call
+        : { ...call, chunks: rewritten(call.chunks, reply) },
     );
   }
   return streams;
 }
 
-function isSuccess(exchange: Exchange): boolean {
-  return exchange.status >= 200 && exchange.status < 300;
+function isSuccess(call: ModelCall): boolean {
+  return call.status >= 200 && call.status < 300;
 }
 
 /** The recording's view of the session: the calls that answered (the SDK
  *  retries a request the server refused — 408, 429, 5xx — up to twice, and
  *  a settled run may have needed that), one per settled run, and the
  *  transcript read off them. */
-function recordedCalls(session: Session): { turns: Turn[]; exchanges: RecordedExchange[] } {
-  const { calls, usage } = session;
-  const answers = session.exchanges.filter((exchange) => isSuccess(exchange));
-  if (calls.length !== answers.length || calls.length !== usage.length) {
+function recordedCalls(session: Session): { turns: Turn[]; exchanges: RecordedCall[] } {
+  const { runs, usage } = session;
+  const answers = session.exchanges.filter((call) => isSuccess(call));
+  if (runs.length !== answers.length || runs.length !== usage.length) {
     throw new Error(
-      `${calls.length} runs settled, but ${answers.length} model calls succeeded (${session.exchanges.length} went out) and ${usage.length} usage records landed`,
+      `${runs.length} runs settled, but ${answers.length} model calls succeeded (${session.exchanges.length} went out) and ${usage.length} usage records landed`,
     );
   }
-  const turns = calls.map((call, index) => {
+  const turns = runs.map((run, index) => {
     const answered = answers[index];
     const record = usage[index];
     if (answered === undefined || record === undefined) {
       throw new Error("unreachable: the lengths were checked");
     }
     return {
-      demo: call.demo,
+      demo: run.demo,
       prompt: record.prompt ?? "",
-      message: call.message,
+      message: run.message,
       reply: replyOf(answered),
       tokens: record.tokens,
     };
   });
-  return { turns, exchanges: answers.map((exchange) => withoutBody(exchange)) };
+  return { turns, exchanges: answers.map((call) => withoutBody(call)) };
 }
 
-function withoutBody(exchange: Exchange): RecordedExchange {
-  const { body, ...rest } = exchange;
+function withoutBody(call: ModelCall): RecordedCall {
+  const { body, ...rest } = call;
   return { ...rest, bodySha256: sha256Text(body) };
 }
 
 // ---- Compositing --------------------------------------------------------------
 
+/** A demo's slice of the session as a concat list: its frames, and how long
+ *  the video runs. */
+interface Span {
+  listFile: string;
+  duration: number;
+}
+
+interface Output {
+  mp4: string;
+  jpg: string;
+}
+
 /** The frames a demo spans, concat-demuxer style: the one on screen when the
  *  demo starts (the last captured before then), then every frame until it
  *  ends, each shown until the next arrived — the last until the end. */
-function concatList(session: Session, demo: Session["demos"][number], workDir: string): string {
+function concatList(session: Session, demo: Session["demos"][number], workDir: string): Span {
   const { frames } = session;
   const first = Math.max(
     0,
-    frames.findLastIndex((at) => at <= demo.start),
+    frames.findLastIndex((frame) => frame.at <= demo.start),
   );
-  const lines: string[] = [];
-  let last = first;
-  for (let index = first; index < frames.length && (frames[index] ?? 0) < demo.end; index += 1) {
-    const shownFrom = Math.max(frames[index] ?? 0, demo.start);
-    const shownUntil = Math.min(frames[index + 1] ?? demo.end, demo.end);
-    lines.push(`file '${frameName(index)}'`, `duration ${(shownUntil - shownFrom).toFixed(4)}`);
-    last = index;
+  const entries: { file: string; duration: number }[] = [];
+  for (let index = first; index < frames.length; index += 1) {
+    const frame = frames[index];
+    if (frame === undefined || frame.at >= demo.end) {
+      break;
+    }
+    const shownFrom = Math.max(frame.at, demo.start);
+    const shownUntil = Math.min(frames[index + 1]?.at ?? demo.end, demo.end);
+    entries.push({ file: frame.file, duration: shownUntil - shownFrom });
   }
-  lines.push(`file '${frameName(last)}'`);
   const listFile = join(workDir, `${demo.name}.txt`);
-  writeFileSync(listFile, `${lines.join("\n")}\n`);
-  return listFile;
+  writeFileSync(listFile, concatLines(entries));
+  return { listFile, duration: entries.reduce((sum, entry) => sum + entry.duration, 0) };
 }
 
 /** The frames as an overlay stream: 2× RGBA PNGs to bt709 yuva, starting
  *  `delay` seconds into the base. */
 function overlayFilter(delay: number): string {
-  return `[1:v]fps=${OUTPUT_FPS},scale=out_color_matrix=bt709:out_range=tv:flags=lanczos,format=yuva420p,setpts=PTS+${delay}/TB[ov]`;
+  return `[1:v]fps=${FPS},scale=out_color_matrix=bt709:out_range=tv:flags=lanczos,format=yuva420p,setpts=PTS+${delay}/TB[ov]`;
+}
+
+/** The poster, off the composited stream `[pv]`: the frame 0.2 s before
+ *  the video ends — the demo's closing hold, the answer on screen, which is
+ *  what a page should show before anyone presses play — at half size, like
+ *  the shots the docs embed. */
+function posterFilter(end: number, width: number): string {
+  return `[pv]select='gte(t,${Math.max(0, end - 0.2).toFixed(3)})',scale=${width}:-2[p]`;
 }
 
 /** The encode a docs page streams. */
@@ -878,125 +787,106 @@ const ENCODE = [
   "+faststart",
 ];
 
-/** The poster: the first frame at half size, like the shots the docs embed. */
-function poster(mp4: string, jpg: string, width: number): void {
-  run("ffmpeg", [
-    "-v",
-    "error",
-    "-y",
-    "-i",
-    mp4,
-    "-vf",
-    `select=eq(n\\,0),scale=${width}:-2`,
+/** One ffmpeg run per demo: the composited stream `[v]` to the docs' encode
+ *  as the mp4, and its poster frame `[p]` as the jpg. */
+async function compose(inputs: string[], filter: string, out: Output): Promise<void> {
+  await ffmpeg([
+    ...inputs,
+    "-filter_complex",
+    filter,
+    ...ENCODE,
+    out.mp4,
+    "-map",
+    "[p]",
     "-frames:v",
     "1",
     "-q:v",
     "2",
-    jpg,
+    out.jpg,
   ]);
 }
 
-/** The first demo: over the template, from the moment its popup appears; the
- *  template runs on until the demo ends (its last frame held). */
-function composeOverTemplate(
-  manifest: Manifest,
-  span: { listFile: string; duration: number },
-  out: { mp4: string; jpg: string },
-): void {
-  const pad = Math.max(0, manifest.appear + span.duration - manifest.duration + 1);
+/** The first demo: over the page — its frames until the popup appears, then
+ *  its last frame held for the rest of the demo (and a second more, so the
+ *  overlay is what ends the video). */
+async function composeOverPage(
+  mail: { dir: string; frames: Frame[] },
+  span: Span,
+  out: Output,
+): Promise<void> {
+  const entries = mail.frames.map((frame, index) => ({
+    file: join(mail.dir, frame.file),
+    duration: (mail.frames[index + 1]?.at ?? APPEAR) - frame.at,
+  }));
+  const last = entries.at(-1);
+  if (last === undefined) {
+    throw new Error("the page has no frames");
+  }
+  const baseList = `${span.listFile}.page.txt`;
+  writeFileSync(
+    baseList,
+    concatLines([...entries, { file: last.file, duration: span.duration + 1 }]),
+  );
   const filter = [
-    `[0:v]fps=${OUTPUT_FPS},tpad=stop_mode=clone:stop_duration=${pad.toFixed(3)}[base]`,
-    overlayFilter(manifest.appear),
-    `[base][ov]overlay=x=${manifest.popup.x}:y=${manifest.popup.y}:eof_action=endall:format=yuv420[v]`,
+    `[0:v]fps=${FPS}[base]`,
+    overlayFilter(APPEAR),
+    `[base][ov]overlay=x=${POPUP_AT.x}:y=${POPUP_AT.y}:eof_action=endall:format=yuv420,split[v][pv]`,
+    posterFilter(APPEAR + span.duration, PAGE.width),
   ].join(";");
-  run("ffmpeg", [
-    "-v",
-    "error",
-    "-y",
-    "-i",
-    TEMPLATE,
-    "-f",
-    "concat",
-    "-safe",
-    "0",
-    "-i",
-    span.listFile,
-    "-filter_complex",
+  await compose(
+    [
+      "-f",
+      "concat",
+      "-safe",
+      "0",
+      "-i",
+      baseList,
+      "-f",
+      "concat",
+      "-safe",
+      "0",
+      "-i",
+      span.listFile,
+    ],
     filter,
-    ...ENCODE,
-    out.mp4,
-  ]);
-  poster(out.mp4, out.jpg, Math.round(manifest.width / SCALE));
+    out,
+  );
 }
 
 /** The other demos: the popup's window alone, over the backdrop. */
-function composeAlone(listFile: string, out: { mp4: string; jpg: string }): void {
+async function composeAlone(span: Span, out: Output): Promise<void> {
   const filter = [
     overlayFilter(0),
-    `[0:v][ov]overlay=x=0:y=0:eof_action=endall:format=yuv420[v]`,
+    `[0:v][ov]overlay=x=0:y=0:eof_action=endall:format=yuv420,split[v][pv]`,
+    posterFilter(span.duration, WINDOW.w / VIDEO_SCALE),
   ].join(";");
-  run("ffmpeg", [
-    "-v",
-    "error",
-    "-y",
-    "-f",
-    "lavfi",
-    "-i",
-    `color=c=${BACKDROP}:s=${WINDOW.w}x${WINDOW.h}:r=${OUTPUT_FPS}`,
-    "-f",
-    "concat",
-    "-safe",
-    "0",
-    "-i",
-    listFile,
-    "-filter_complex",
+  await compose(
+    [
+      "-f",
+      "lavfi",
+      "-i",
+      `color=c=${BACKDROP}:s=${WINDOW.w}x${WINDOW.h}:r=${FPS}`,
+      "-f",
+      "concat",
+      "-safe",
+      "0",
+      "-i",
+      span.listFile,
+    ],
     filter,
-    ...ENCODE,
-    out.mp4,
-  ]);
-  poster(out.mp4, out.jpg, WINDOW.w / SCALE);
+    out,
+  );
 }
 
 // ---- Main ----------------------------------------------------------------------
-
-if (measureOnly) {
-  const manifest = await measureTemplate();
-  writeFileSync(MANIFEST, `${JSON.stringify(manifest, undefined, 2)}\n`);
-  console.log(
-    `template.json: popup appears at ${manifest.appear}s, window at (${manifest.popup.x}, ${manifest.popup.y}), card ${manifest.card.w}×${manifest.card.h}`,
-  );
-  process.exit(0);
-}
 
 const apiKey = process.env["GEMINI_API_KEY"];
 if (recordMode && (apiKey === undefined || apiKey === "")) {
   console.error("--record needs GEMINI_API_KEY in the environment (source ~/.zshrc)");
   process.exit(1);
 }
-if (!existsSync(MANIFEST)) {
-  console.error(
-    "scripts/demo-video/template.json is missing — run `bun run demo-video --measure` first",
-  );
-  process.exit(1);
-}
-const manifest = JSON.parse(readFileSync(MANIFEST, "utf8")) as Manifest;
-if (manifest.sha256 !== sha256(TEMPLATE)) {
-  console.error(
-    "template.mp4 changed since template.json was measured — run `bun run demo-video --measure`",
-  );
-  process.exit(1);
-}
-
 const recordingFile = (locale: string): string => join(RECORDINGS, `${locale.toLowerCase()}.json`);
-const locales = LOCALES.map((entry) => entry.value).filter(
-  (value) => onlyLocale === undefined || value.toLowerCase() === onlyLocale.toLowerCase(),
-);
-if (locales.length === 0) {
-  console.error(
-    `unknown locale "${onlyLocale}" — known: ${LOCALES.map((entry) => entry.value).join(", ")}`,
-  );
-  process.exit(1);
-}
+const locales = localesMatching(onlyLocale);
 // What a locale needs before its session can run: the strings the demos
 // type, for a recording; the recording itself, for a replay.
 const typed = new Set(
@@ -1021,37 +911,17 @@ if (skipped.length > 0) {
   console.log(`skipped ${list} — ${why}`);
 }
 
-async function devServerRunning(): Promise<boolean> {
-  try {
-    await fetch(`${DEV_URL}/screenshot.html`, { method: "HEAD" });
-    return true;
-  } catch {
-    return false;
-  }
-}
-let devServer: ChildProcess | undefined;
-// Its own process group, so stopping it also stops the vite it spawns.
-const stopDevServer = (): void => {
-  if (devServer?.pid !== undefined) {
-    try {
-      process.kill(-devServer.pid, "SIGTERM");
-    } catch {
-      // already gone
-    }
-    devServer = undefined;
-  }
-};
-process.on("SIGINT", () => {
-  stopDevServer();
-  process.exit(130);
-});
-
 const workRoot = join(ROOT, "scratch", "demo-video");
 const failures: string[] = [];
 
 /** One locale: the session, recorded or replayed, cut into its videos.
- *  Throws on any failure. */
-async function generateOne(browser: Browser, locale: string): Promise<void> {
+ *  Throws on any failure — the work directory stays, its report.json naming
+ *  what stopped it. */
+async function generateOne(
+  browser: Browser,
+  mail: { dir: string; frames: Frame[] },
+  locale: string,
+): Promise<void> {
   const folder = locale.toLowerCase();
   const workDir = join(workRoot, folder);
   rmSync(workDir, { recursive: true, force: true });
@@ -1061,33 +931,48 @@ async function generateOne(browser: Browser, locale: string): Promise<void> {
   const recording = recordMode
     ? undefined
     : (JSON.parse(readFileSync(recordingFile(locale), "utf8")) as Recording);
+  const mode = recording === undefined ? "record" : "replay";
+  const source = readFileSync(SOURCE, "utf8");
+  if (recording !== undefined) {
+    // One mail: the page behind the first demo is rendered from the file,
+    // the popup shows the recording's copy of it, and the video must not
+    // show two texts.
+    const recordedText = (recording.capture["source"] as { text?: unknown }).text;
+    if (recordedText !== source) {
+      throw new Error(
+        `scripts/demo-video/source.txt is not the mail ${recordingFile(locale)} was recorded with — re-record with --record, or put the recorded text back in the file`,
+      );
+    }
+  }
   // The catalog: the real key for a recording; a replay's calls never leave
   // the page, so a placeholder — and the model the recording names, so the
-  // requests are the recorded ones even after MODEL moves on.
-  const [provider = "google", model = MODEL] = (recording?.model ?? `google:${MODEL}`).split(":");
+  // requests are the recorded ones even after the default moves on.
+  const [provider = "google", model = GEMINI_DEFAULT_MODEL] = (
+    recording?.model ?? `google:${GEMINI_DEFAULT_MODEL}`
+  ).split(":");
+  if (provider !== "google") {
+    throw new Error(
+      `${recordingFile(locale)} was recorded against ${provider} — the generator speaks Gemini only`,
+    );
+  }
   const key = recording === undefined ? apiKey : undefined;
-  const catalog = {
-    providers: [{ id: provider, vendor: { apiKey: key ?? "replay" }, models: [{ id: model }] }],
-    roles: { default: `${provider}:${model}` },
-  };
+  const catalog = geminiQuickCatalog(key ?? "replay", model);
   const context = await browser.newContext({
     viewport: popupViewport,
-    deviceScaleFactor: SCALE,
+    deviceScaleFactor: VIDEO_SCALE,
     colorScheme: "light",
   });
-  // The catalog rides a page global, never a URL: it holds the key.
-  await context.addInitScript(
-    (seed: unknown) => {
-      (globalThis as { __zencopyHarness?: unknown }).__zencopyHarness = seed;
-    },
-    { catalog, ...(recording === undefined ? {} : { replay: replayStreams(recording) }) },
-  );
+  // The catalog rides the harness's global, never a URL: it holds the key.
+  await seedHarness(context, {
+    catalog,
+    ...(recording === undefined ? {} : { replay: replayStreams(recording) }),
+  });
   const startedAt = performance.now();
+  const errors: string[] = [];
   try {
     const page = await context.newPage();
-    const errors: string[] = [];
     await openPopup(page, locale, errors);
-    const live = await buildCapture(page);
+    const live = await buildCapture(page, source);
     const capture = recording === undefined ? live : replayCapture(live, recording.capture);
     const session = await runSession({
       page,
@@ -1097,27 +982,30 @@ async function generateOne(browser: Browser, locale: string): Promise<void> {
       workDir,
       errors,
     });
-    session.demos.forEach((demo, index) => {
-      const listFile = concatList(session, demo, workDir);
-      const out = { mp4: join(outDir, `${demo.name}.mp4`), jpg: join(outDir, `${demo.name}.jpg`) };
-      if (index === 0) {
-        composeOverTemplate(manifest, { listFile, duration: demo.end - demo.start }, out);
-      } else {
-        composeAlone(listFile, out);
-      }
-      console.log(`ok ${folder}/demo/${demo.name}.mp4 (${(demo.end - demo.start).toFixed(1)}s)`);
-    });
+    // The four encodes are independent: one ffmpeg each, side by side.
+    await Promise.all(
+      session.demos.map(async (demo) => {
+        const span = concatList(session, demo, workDir);
+        const out = {
+          mp4: join(outDir, `${demo.name}.mp4`),
+          jpg: join(outDir, `${demo.name}.jpg`),
+        };
+        await (demo.stage === "page" ? composeOverPage(mail, span, out) : composeAlone(span, out));
+        console.log(`ok ${folder}/demo/${demo.name}.mp4 (${span.duration.toFixed(1)}s)`);
+      }),
+    );
     // The recording, or how far the replayed session strayed from it: a
     // request that no longer matches means the prompt or its context changed
-    // since — the reply shown is still the recorded one.
+    // since — the reply shown is still the recorded one — and fewer calls
+    // than recorded means the demos themselves changed.
     let drift: number[] = [];
     if (recording === undefined) {
       const { turns, exchanges } = recordedCalls(session);
       const kept: Recording = {
         locale,
         recorded: new Date().toISOString(),
-        model: session.usage[0]?.model ?? `google:${MODEL}`,
-        capture: recordedCapture(capture as Record<string, unknown>),
+        model: session.usage[0]?.model ?? `google:${GEMINI_DEFAULT_MODEL}`,
+        capture: recordedCapture(capture),
         turns,
         exchanges,
       };
@@ -1129,18 +1017,23 @@ async function generateOne(browser: Browser, locale: string): Promise<void> {
       writeFileSync(recordingFile(locale), text);
       console.log(`   recorded ${turns.length} turns to ${recordingFile(locale)}`);
     } else {
-      drift = session.exchanges.flatMap((exchange, index) =>
-        sha256Text(exchange.body) === recording.exchanges[index]?.bodySha256 ? [] : [index + 1],
+      drift = session.exchanges.flatMap((call, index) =>
+        sha256Text(call.body) === recording.exchanges[index]?.bodySha256 ? [] : [index + 1],
       );
       if (drift.length > 0) {
         console.log(
-          `   note: model call ${drift.join(", ")} sent a request the recording (${recording.recorded}) never saw — a prompt changed since, or the copied text, a message, or an earlier reply was edited in it; the replies shown are the recorded ones (re-record with --record to have the model answer the new request)`,
+          `   note: model call ${drift.join(", ")} sent a request the recording (${recording.recorded}) never saw — a prompt changed since, or a message or an earlier reply was edited in it; the replies shown are the recorded ones (re-record with --record to have the model answer the new request)`,
+        );
+      }
+      if (session.exchanges.length < recording.exchanges.length) {
+        console.log(
+          `   note: the recording (${recording.recorded}) holds ${recording.exchanges.length} model calls and this session made ${session.exchanges.length} — the demos changed since; re-record with --record`,
         );
       }
     }
     writeFileSync(
       join(workDir, "report.json"),
-      `${JSON.stringify({ locale: folder, mode: recording === undefined ? "record" : "replay", ...session, frames: session.frames.length, exchanges: undefined, drift }, undefined, 2)}\n`,
+      `${JSON.stringify({ locale: folder, mode, ...session, frames: session.frames.length, exchanges: undefined, drift }, undefined, 2)}\n`,
     );
     const seconds = ((performance.now() - startedAt) / 1000).toFixed(1);
     console.log(`   ${folder}: ${session.frames.length} frames, ${seconds}s`);
@@ -1150,15 +1043,25 @@ async function generateOne(browser: Browser, locale: string): Promise<void> {
     if (!keepWork) {
       rmSync(workDir, { recursive: true, force: true });
     }
+  } catch (error) {
+    // The failed locale's work stays; the report says what stopped it.
+    writeFileSync(
+      join(workDir, "report.json"),
+      `${JSON.stringify({ locale: folder, mode, failed: error instanceof Error ? error.message : String(error), errors }, undefined, 2)}\n`,
+    );
+    throw error;
   } finally {
     await context.close();
   }
 }
 
-async function generateAll(browser: Browser): Promise<void> {
+async function generateAll(
+  browser: Browser,
+  mail: { dir: string; frames: Frame[] },
+): Promise<void> {
   for (const locale of locales.filter((entry) => !skipped.includes(entry))) {
     try {
-      await generateOne(browser, locale);
+      await generateOne(browser, mail, locale);
     } catch (error) {
       failures.push(`${locale}: ${error instanceof Error ? error.message : String(error)}`);
       console.error(`FAILED ${locale} — work kept at ${join(workRoot, locale.toLowerCase())}`);
@@ -1166,20 +1069,18 @@ async function generateAll(browser: Browser): Promise<void> {
   }
 }
 
+const stopDevServer = await ensureDevServer();
 try {
-  if (await devServerRunning()) {
-    console.log("reusing the running dev server");
-  } else {
-    devServer = spawn("bun", ["run", "dev"], { cwd: ROOT, stdio: "ignore", detached: true });
-    for (let attempt = 0; attempt < 80 && !(await devServerRunning()); attempt += 1) {
-      await sleep(250);
-    }
-  }
   const browser = await webkit.launch();
+  const pageDir = join(workRoot, "page");
   try {
-    await generateAll(browser);
+    const mail = { dir: pageDir, frames: await renderPage(browser, pageDir) };
+    await generateAll(browser, mail);
   } finally {
     await browser.close();
+    if (!keepWork) {
+      rmSync(pageDir, { recursive: true, force: true });
+    }
   }
 } finally {
   stopDevServer();

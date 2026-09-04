@@ -41,7 +41,7 @@
 import rulesRaw from "../../src-tauri/rules.json?raw";
 import promptsRs from "../../src-tauri/src/prompts.rs?raw";
 import { version } from "../../package.json";
-import type { Exchange } from "./exchange.ts";
+import type { ModelCall } from "./model-call.ts";
 
 // Playwright's WebKit driver crashes rendering console previews of object
 // arguments — stringify everything the page logs.
@@ -147,14 +147,14 @@ interface HarnessGlobal {
   /** Out: every `record_usage` call's arguments (prompt, kind, model,
    *  tokens), so a driver can report what its real model calls cost. */
   usage?: unknown[];
-  /** Out: the model calls, as they went over `fetch` (see {@link Exchange}). */
-  exchanges?: Exchange[];
+  /** Out: the model calls, as they went over `fetch` (see {@link ModelCall}). */
+  exchanges?: ModelCall[];
   /** In: recorded responses to answer the app's model calls with, in order. */
   replay?: Replay[];
 }
 
-/** What a replayed call needs of an {@link Exchange}: the response. */
-type Replay = Pick<Exchange, "status" | "contentType" | "chunks">;
+/** What a replayed call needs of a {@link ModelCall}: the response. */
+type Replay = Pick<ModelCall, "status" | "contentType" | "chunks">;
 
 const harnessHost = globalThis as { __zencopyHarness?: HarnessGlobal };
 const harness: HarnessGlobal = harnessHost.__zencopyHarness ?? {};
@@ -175,7 +175,7 @@ const seconds = (since: number): number => Number(((performance.now() - since) /
 
 /** The response's body passed through as it arrives, each chunk also noted
  *  on the exchange with its arrival time. */
-function recordedBody(response: Response, record: Exchange, startedAt: number): Response {
+function recordedBody(response: Response, record: ModelCall, startedAt: number): Response {
   const source = response.body;
   if (source === null) {
     return response;
@@ -258,7 +258,7 @@ globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise
   // A key travels as a header here, never in the URL — but a URL is what
   // gets written down, so make sure by construction.
   url.searchParams.delete("key");
-  const record: Exchange = {
+  const record: ModelCall = {
     url: url.href,
     method: request.method,
     body: await request.clone().text(),

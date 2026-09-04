@@ -111,7 +111,7 @@ export const zhHans: Messages = {
     open: "打开",
   },
   about: {
-    tagline: "复制两次，立即处理。",
+    tagline: "当前屏幕，AI 立现。",
     update: (version) => `更新到 v${version} 并重启应用`,
     updateRestart: (version) => `重启应用以更新到 v${version}`,
     updating: "正在更新…",

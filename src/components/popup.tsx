@@ -153,6 +153,7 @@ function Turn({
       {turn.text &&
         (failed || setup ? (
           <p
+            data-turn-status={failed ? "failed" : "setup"}
             className={cn(
               "text-sm wrap-break-word whitespace-pre-wrap",
               failed && "text-destructive",
@@ -1000,32 +1001,50 @@ export function Popup(): React.JSX.Element {
   // names a deleted prompt. Positions are preserved (the number IS the slot),
   // so a gone prompt leaves a gap rather than shifting the rest.
   const quickSlots = quickIds.map((id) => prompts.find((entry) => entry.id === id));
-  // The status glyph for the headline (waiting for your input / running /
-  // done / setup / failed); the pen is Custom waiting for the user, the state
-  // twin of the trait on its chip (see slotGlyph).
-  const statusIcon = ((): React.JSX.Element | undefined => {
-    // The attachment gate: the confirm card IS the state, so no glyph — not
-    // even the pen — while it holds the turn.
+  // The run, as one word: what the headline's status glyph shows, and what
+  // the screenshot harness's drivers read off the DOM (`data-run-state`)
+  // rather than guessing from glyphs. The attachment gate holding the turn
+  // (confirm — the card IS the state, so no glyph, not even the pen), Custom
+  // waiting for your words (compose — the pen, the state twin of the trait
+  // on its chip, see slotGlyph), running, done, setup (nothing configured,
+  // or a config the app cannot read), failed, else idle.
+  const runState = (():
+    | "confirm"
+    | "compose"
+    | "running"
+    | "done"
+    | "setup"
+    | "failed"
+    | "idle" => {
     if (awaitingSend) {
-      return undefined;
+      return "confirm";
     }
     if (awaitingInstruction) {
-      return <PenLine className="size-4 shrink-0" />;
+      return "compose";
     }
     if (running) {
-      return <LoaderCircle className="size-4 shrink-0 animate-spin" />;
+      return "running";
     }
     if (done && result.ok) {
-      return <Check className="size-4 shrink-0" />;
+      return "done";
     }
     if (setup) {
-      return <Settings className="size-4 shrink-0" />;
+      return "setup";
     }
     if (failed) {
-      return <TriangleAlert className="size-4 shrink-0" />;
+      return "failed";
     }
-    return undefined;
+    return "idle";
   })();
+  const statusIcon = {
+    confirm: undefined,
+    compose: <PenLine className="size-4 shrink-0" />,
+    running: <LoaderCircle className="size-4 shrink-0 animate-spin" />,
+    done: <Check className="size-4 shrink-0" />,
+    setup: <Settings className="size-4 shrink-0" />,
+    failed: <TriangleAlert className="size-4 shrink-0" />,
+    idle: undefined,
+  }[runState];
 
   // A chip's trailing slot, one glyph at most: a background prompt still
   // streaming announces itself (so "switch away and come back later" is a
@@ -1053,6 +1072,7 @@ export function Popup(): React.JSX.Element {
           label carries the "-ing" via the spinner + ellipsis, so no per-prompt
           verb form is needed (works for custom labels too). */}
       <div
+        data-run-state={runState}
         className={cn(
           "flex items-center gap-2 text-sm font-semibold",
           failed ? "text-destructive" : "text-foreground",

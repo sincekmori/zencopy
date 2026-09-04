@@ -1,7 +1,7 @@
 [package]
 name = "zencopy"
 version = "0.15.0"
-description = "ZenCopy — copy twice, act instantly"
+description = "ZenCopy — instant AI, right on your screen"
 license = "Apache-2.0"
 edition = "2024"
 

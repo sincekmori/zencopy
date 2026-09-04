@@ -124,7 +124,7 @@ export const ja: Messages = {
     open: "開く",
   },
   about: {
-    tagline: "コピー2回で、すぐに処理。",
+    tagline: "今いる画面に、すぐ AI。",
     update: (version) => `v${version} にアップデートしてアプリを再起動`,
     updateRestart: (version) => `アプリを再起動して v${version} にアップデート`,
     updating: "アップデート中…",

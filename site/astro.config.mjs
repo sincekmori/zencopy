@@ -8,6 +8,59 @@ import starlightLinksValidator from "starlight-links-validator";
 import starlightLlmsTxt from "starlight-llms-txt";
 import { LANDING_LOCALES } from "./src/components/landing-copy.ts";
 
+// A soft line break inside a paragraph renders as a space. Between English
+// words that is the point; after a Japanese (or Chinese) sentence it is a
+// visible gap, and the docs keep one sentence per line on purpose (Semantic
+// Line Breaks). So a break is dropped wherever the character before it or
+// the character after it is CJK — an ideograph, kana, or fullwidth
+// punctuation, so 「回。」 followed by 「10 分」 joins too — and kept
+// everywhere else (Korean spaces its words, so Hangul is deliberately not in
+// the class). Prose only: code blocks, inline code, raw HTML and MDX
+// expressions keep every newline they have.
+const CJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\u3000-\u303F\uFF00-\uFFEF]/u;
+/** @typedef {{ type: string, value?: string, children?: TextTree[] }} TextTree */
+/**
+ * The first (`edge` = 0) or last (`edge` = -1) character of a node's text.
+ * @param {TextTree | undefined} node
+ * @param {0 | -1} edge
+ * @returns {string}
+ */
+function edgeChar(node, edge) {
+  if (node === undefined) {
+    return "";
+  }
+  if (typeof node.value === "string") {
+    return node.value.at(edge) ?? "";
+  }
+  const children = node.children ?? [];
+  return edgeChar(children.at(edge), edge);
+}
+/**
+ * @param {TextTree} node
+ * @param {TextTree | undefined} parent
+ * @param {number} index
+ */
+function joinCjkLines(node, parent, index) {
+  const { value } = node;
+  if (node.type === "text" && typeof value === "string") {
+    const siblings = parent?.children ?? [];
+    node.value = value.replaceAll("\n", (_match, offset) => {
+      const before = offset > 0 ? value[offset - 1] : edgeChar(siblings[index - 1], -1);
+      const after =
+        offset + 1 < value.length ? value[offset + 1] : edgeChar(siblings[index + 1], 0);
+      return CJK.test(before ?? "") || CJK.test(after ?? "") ? "" : "\n";
+    });
+    return;
+  }
+  (node.children ?? []).forEach((child, childIndex) => {
+    joinCjkLines(child, node, childIndex);
+  });
+}
+/** @returns {(tree: TextTree) => void} */
+const remarkJoinCjkLines = () => (tree) => {
+  joinCjkLines(tree, undefined, 0);
+};
+
 // Derived from LANDING_LOCALES so the docs and the landing page share one
 // locale list (code, label, lang, dir) — and one order.
 const locales = Object.fromEntries(
@@ -26,7 +79,7 @@ export default defineConfig({
       // (`## 見出し {#english-slug}`), so section links are locale-invariant;
       // English keeps auto-generated slugs, and starlight-links-validator
       // fails the build wherever a rename leaves a stale anchor behind.
-      remarkPlugins: [remarkHeadingId],
+      remarkPlugins: [remarkHeadingId, remarkJoinCjkLines],
       // External links leave the docs in a new tab; in-site navigation stays
       // in the same tab. rel guards the opener even where browsers don't
       // imply it.
@@ -37,7 +90,7 @@ export default defineConfig({
     starlight({
       title: "ZenCopy",
       description:
-        "Copy twice, act instantly. A calm desktop agent that turns whatever you copy into an instant AI result.",
+        "Instant AI. Right on your screen. A calm desktop agent that turns whatever you copy into an instant AI result.",
       logo: {
         // The brand SVGs live once, in the repo root's src/assets/ — the site
         // imports them across the project boundary instead of keeping copies.
@@ -58,7 +111,10 @@ export default defineConfig({
         { tag: "meta", attrs: { property: "og:image:height", content: "630" } },
         {
           tag: "meta",
-          attrs: { property: "og:image:alt", content: "ZenCopy — Copy twice, act instantly." },
+          attrs: {
+            property: "og:image:alt",
+            content: "ZenCopy — Instant AI. Right on your screen.",
+          },
         },
         {
           tag: "meta",
@@ -66,10 +122,12 @@ export default defineConfig({
         },
         { tag: "link", attrs: { rel: "apple-touch-icon", href: "/apple-touch-icon.png" } },
         // Progressive enhancement for the visitor's OS: elements marked
-        // data-os-modifier show their own key (⌘ or Ctrl), and the "os"
-        // synced tabs get pre-selected on first visit (a manual choice then
-        // wins — Starlight persists it under the same key). Other OSes and
-        // no-JS keep the combined "Ctrl/⌘" fallback and the first tab.
+        // data-os-modifier show their own key (⌘ or Ctrl), elements with
+        // data-os-windows / -mac / -linux (the OsText component) show their
+        // own variant of a phrase, and the "os" synced tabs get pre-selected
+        // on first visit (a manual choice then wins — Starlight persists it
+        // under the same key). Other OSes and no-JS keep the combined
+        // fallback wording and the first tab.
         {
           tag: "script",
           content: [
@@ -79,12 +137,22 @@ export default defineConfig({
             "  const isLinux = /Linux|X11/.test(ua) && !/Android/.test(ua);",
             "  if (!isMac && !isLinux && !/Windows/.test(ua)) return;",
             '  const tabKey = "starlight-synced-tabs__os";',
-            "  if (!localStorage.getItem(tabKey)) {",
-            '    localStorage.setItem(tabKey, isMac ? "macOS" : isLinux ? "Linux" : "Windows");',
+            "  try {",
+            "    if (!localStorage.getItem(tabKey)) {",
+            '      localStorage.setItem(tabKey, isMac ? "macOS" : isLinux ? "Linux" : "Windows");',
+            "    }",
+            "  } catch {",
+            "    // Storage blocked (Safari with cookies off, some sandboxes): the",
+            "    // tabs keep their first pane; the wording below still swaps.",
             "  }",
             "  const swap = () => {",
             '    for (const el of document.querySelectorAll("[data-os-modifier]")) {',
             '      el.textContent = isMac ? "⌘" : "Ctrl";',
+            "    }",
+            '    const os = isMac ? "mac" : isLinux ? "linux" : "windows";',
+            '    for (const el of document.querySelectorAll("[data-os-windows]")) {',
+            '      const own = el.getAttribute("data-os-" + os);',
+            "      if (own) el.textContent = own;",
             "    }",
             "  };",
             '  if (document.readyState === "loading") {',
@@ -140,8 +208,8 @@ export default defineConfig({
         },
       ],
       // No root locale: every app locale lives under /<code>/, and the bare /
-      // is a custom page that redirects by browser language
-      // (src/pages/index.astro).
+      // is answered by the Cloudflare Worker (worker.ts) with a 302 to the
+      // locale matching the visitor's Accept-Language.
       defaultLocale: "en",
       locales,
       sidebar: [
@@ -194,30 +262,6 @@ export default defineConfig({
           slug: "configuration",
         },
         {
-          label: "Recipes",
-          translations: {
-            ar: "الوصفات",
-            de: "Rezepte",
-            es: "Recetas",
-            fa: "نمونه‌های آماده",
-            fr: "Recettes",
-            he: "מתכונים",
-            id: "Resep",
-            it: "Ricette",
-            ja: "レシピ集",
-            ko: "레시피",
-            pl: "Przepisy",
-            "pt-BR": "Receitas",
-            ru: "Рецепты",
-            th: "สูตรสำเร็จ",
-            tr: "Tarifler",
-            vi: "Cấu hình mẫu",
-            "zh-CN": "配置示例",
-            "zh-TW": "設定範例",
-          },
-          slug: "recipes",
-        },
-        {
           label: "FAQ",
           translations: {
             ar: "الأسئلة الشائعة",
@@ -260,6 +304,30 @@ export default defineConfig({
         // The Svelte-style wink at machine readers: the sidebar entry is
         // the page title, a first-person self-identification.
         {
+          label: "Recipes",
+          translations: {
+            ar: "الوصفات",
+            de: "Rezepte",
+            es: "Recetas",
+            fa: "نمونه‌های آماده",
+            fr: "Recettes",
+            he: "מתכונים",
+            id: "Resep",
+            it: "Ricette",
+            ja: "設定ファイル（上級者向け）",
+            ko: "레시피",
+            pl: "Przepisy",
+            "pt-BR": "Receitas",
+            ru: "Рецепты",
+            th: "สูตรสำเร็จ",
+            tr: "Tarifler",
+            vi: "Cấu hình mẫu",
+            "zh-CN": "配置示例",
+            "zh-TW": "設定範例",
+          },
+          slug: "recipes",
+        },
+        {
           label: "Are you an LLM?",
           translations: {
             ar: "هل أنت LLM؟",
@@ -270,7 +338,7 @@ export default defineConfig({
             he: "האם אתה LLM?",
             id: "Apakah Anda LLM?",
             it: "Sei un LLM?",
-            ja: "あなたは LLM ですか？",
+            ja: "AI 向けの資料",
             ko: "혹시 LLM이신가요?",
             pl: "Czy jesteś LLM-em?",
             "pt-BR": "Você é um LLM?",

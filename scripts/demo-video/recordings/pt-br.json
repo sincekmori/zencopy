@@ -1,12 +1,12 @@
 {
   "locale": "pt-BR",
-  "recorded": "2026-09-05T10:27:14.847Z",
+  "recorded": "2026-09-06T12:21:50.109Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:26:35"
+      "now": "2026-09-06 21:21:19"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "O documento descreve o HTCPCP, um protocolo fictício criado para controlar e monitorar cafeteiras via rede.",
+      "reply": "A reunião de liderança foi adiada para 9 de outubro, sendo solicitado o envio da nova proposta até 30 de setembro e a inclusão de uma demonstração de dashboard.",
       "tokens": {
-        "input": 468,
-        "output": 30
+        "input": 170,
+        "output": 43
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "O \"Protocolo de Controle de Cafeteira por Hipertexto\" (HTCPCP, do inglês Hyper Text Coffee Pot Control Protocol) é uma brincadeira feita por engenheiros da internet. Ele foi criado em primeiro de abril para fazer graça com as regras complexas que usamos para fazer computadores conversarem entre si.\n\nImagine que você quer pedir para uma pessoa trazer um copo de água. Você precisa usar uma língua que ela entenda e seguir certos passos: pedir \"por favor\", esperar a resposta e confirmar o pedido. Na computação, essas regras de conversa chamam-se \"protocolo\". O protocolo mais comum na internet é o que usamos para abrir sites, chamado HTTP (Protocolo de Transferência de Hipertexto).\n\nOs autores desse documento decidiram escrever um protocolo novo, usando o mesmo formato dos manuais técnicos reais, mas para uma tarefa absurda: controlar uma cafeteira pela internet.\n\nAqui está o que você precisa saber sobre essa brincadeira:\n\n1. A ideia principal: Eles fingiram que a cafeteira precisa de um \"idioma\" oficial para receber ordens do computador, como \"ligar\", \"desligar\" ou \"me dê um café\".\n2. Por que isso existe: Naquela época, as pessoas estavam começando a conectar objetos comuns, como torradeiras e máquinas de refrigerante, à rede. O texto brinca com essa ideia de que, no futuro, tudo teria que estar conectado à internet, até o ponto de ser ridículo.\n3. O tom do texto: O documento usa palavras técnicas muito sérias para descrever algo que não serve para nada na prática. Ele é um exemplo de humor de \"cultura hacker\", que é como os programadores se divertem criando piadas internas dentro de documentos oficiais da internet.\n\nEm resumo, não existe um equipamento real que siga esse protocolo. O texto serve apenas para mostrar como as regras de comunicação na internet são estruturadas, usando o exemplo inusitado de uma cafeteira para tornar o assunto técnico um pouco mais leve.",
+      "reply": "Esta mensagem é um pedido de mudança em um plano de trabalho entre duas empresas. O objetivo principal é alinhar as datas de uma reunião importante e ajustar os materiais que serão apresentados nela.\n\nAqui está o que está acontecendo, passo a passo:\n\nPrimeiro, a reunião de decisão foi adiada. Ela estava marcada para o dia 2 de outubro, mas agora acontecerá no dia 9 de outubro. Isso aconteceu porque duas pessoas importantes da empresa, chamadas de diretores, estarão viajando na data anterior.\n\nSegundo, a pessoa que enviou a mensagem precisa de um novo documento de preços. Ela pede que este documento seja enviado até o dia 30 de setembro. A razão disso é que os líderes da empresa gostam de ler todos os documentos antes da reunião começar. O termo \"pre-read\", que aparece na mensagem, significa exatamente isso: uma leitura feita antes do encontro para que todos já saibam do assunto.\n\nTerceiro, eles querem aumentar a reunião. Eles pediram para incluir uma demonstração de 15 minutos do painel de relatórios. Este painel, chamado de \"reporting dashboard\" em inglês, é uma tela ou sistema onde a empresa consegue ver, de forma visual, os dados e os resultados do trabalho que está sendo feito.\n\nPor fim, o remetente pergunta se essas novas datas e tarefas funcionam para você. Ele precisa saber se você tem tempo disponível para fazer essa demonstração e entregar o documento no prazo pedido.",
       "tokens": {
-        "input": 774,
-        "output": 431
+        "input": 476,
+        "output": 314
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "Um pouco mais curto, por favor",
-      "reply": "O \"Protocolo de Controle de Cafeteira por Hipertexto\" é uma brincadeira técnica criada por engenheiros da internet. Ele foi escrito no formato de um documento oficial, mas com o objetivo de fazer rir, e não de funcionar de verdade.\n\nImagine que, para um computador falar com outro, eles precisam seguir regras de etiqueta chamadas \"protocolo\". O protocolo mais comum da internet é o HTTP, que usamos para carregar sites. Os autores decidiram escrever um protocolo falso, imitando o HTTP, para dar ordens a uma cafeteira.\n\nA ideia surgiu em 1998, quando as pessoas começaram a conectar aparelhos domésticos à internet. Os autores quiseram ironizar esse movimento, sugerindo que, se tudo estivesse conectado, precisaríamos até de regras específicas para passar café remotamente.\n\nÉ um exemplo de humor entre programadores: eles usam uma linguagem super séria e formal para descrever algo absurdo. Não existe tecnologia real por trás disso; é apenas uma piada interna do mundo da informática que se tornou famosa como um lembrete de que o mundo da tecnologia também tem senso de humor.",
+      "reply": "Esta mensagem é um pedido para ajustar os preparativos de uma reunião importante. O objetivo é garantir que os documentos e as apresentações estejam prontos antes do encontro.\n\nAqui estão os pontos principais:\n\nA reunião de decisão foi adiada do dia 2 para o dia 9 de outubro, porque dois diretores estarão viajando.\n\nO remetente pede uma nova tabela de preços até o dia 30 de setembro. Eles precisam disso para o \"pre-read\", que é o material enviado antes da reunião para que todos possam estudar o assunto com antecedência.\n\nEles também pedem para incluir uma demonstração de 15 minutos de um painel de relatórios. Este painel é uma ferramenta visual que mostra dados e resultados do projeto.\n\nPor fim, a pessoa quer saber se você concorda com essas mudanças e se consegue cumprir esses prazos.",
       "tokens": {
-        "input": 1216,
-        "output": 247
+        "input": 801,
+        "output": 189
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "Faça uma tabela",
-      "reply": "| Informação | Detalhe |\n| :--- | :--- |\n| **RFC** | 2324 |\n| **Data** | 1 de abril de 1998 |\n| **Autor** | L. Masinter |\n| **Título** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **Categoria** | Informativo |\n| **Objetivo** | Controlar, monitorar e diagnosticar cafeteiras via rede |",
+      "reply": "| Item | Descrição / Ação | Prazo |\n| :--- | :--- | :--- |\n| Revisão da liderança | Nova data agendada | 9 de outubro |\n| Planilha de preços | Enviar versão revisada | 30 de setembro |\n| Demonstração | Dashboard de relatórios (15 min) | A confirmar |",
       "tokens": {
-        "input": 700,
-        "output": 116
+        "input": 350,
+        "output": 88
       }
     }
   ],
@@ -77,15 +77,19 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          5.05,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 468,\"candidatesTokenCount\": 2,\"totalTokenCount\": 470,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 468}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XO6baoSuBJi6vr0PzYuuMA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eO documento descreve o HTCPCP, um protocolo fictício criado para controlar\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 468,\"candidatesTokenCount\": 19,\"totalTokenCount\": 487,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 468}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XO6baoSuBJi6vr0PzYuuMA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" e monitorar cafeteiras via rede.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 468,\"candidatesTokenCount\": 30,\"totalTokenCount\": 498,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 468}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XO6baoSuBJi6vr0PzYuuMA\"}\r\n\r\n"
+          0.982,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 170,\"candidatesTokenCount\": 2,\"totalTokenCount\": 172,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 170}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"v1qdauKbKuSi9tMPpKLz4AM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eA reunião de liderança foi adiada para 9 de outubro, sendo\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 170,\"candidatesTokenCount\": 18,\"totalTokenCount\": 188,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 170}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"v1qdauKbKuSi9tMPpKLz4AM\"}\r\n\r\n"
         ],
         [
-          5.078,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP02L1+/xA8+lgExI1HgiXXqNFDhU/4tSpT+WegP8ANlS5OCyJiKTz3KyvTjHMXbLX5nB32AiUUg5JR7mlW/oMso6YeZr50F9wpetQ0hvCa7RK+xYAKxVXoGa+TVXSUzwgg7b7cdjb/7+mvg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 468,\"candidatesTokenCount\": 30,\"totalTokenCount\": 498,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 468}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XO6baoSuBJi6vr0PzYuuMA\"}\r\n\r\n"
+          1.048,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" solicitado o envio da nova proposta até 30 de setembro e a inclusão de uma demonstração de dashboard.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 170,\"candidatesTokenCount\": 43,\"totalTokenCount\": 213,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 170}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"v1qdauKbKuSi9tMPpKLz4AM\"}\r\n\r\n"
+        ],
+        [
+          1.09,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPE2D668/kp74InC1HEZKMVYrTWgUD+wUwOT5pPOxVS7snfCpBu51eoxiRst216TE6yr1GVeXhMJ7QD0Gp1hzC4+YbE16BnCU5eehuob1x2n9qfXUEfolhiHmH2u/yyE+ILVBdcuhhaqc2Gw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 170,\"candidatesTokenCount\": 43,\"totalTokenCount\": 213,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 170}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"v1qdauKbKuSi9tMPpKLz4AM\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "c50830dbad69bd3110223e5e949257af44e21b28081201bab956a32a354426f1"
+      "bodySha256": "ce098459bc7696bc861d526d2ec15f2671e403937d2c20734b2faa17d7abd7cf"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -94,75 +98,59 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.658,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 2,\"totalTokenCount\": 776,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nO \\\"Protocolo de Controle de Cafeteira por Hipertexto\\\" (HTCP\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 22,\"totalTokenCount\": 796,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          0.941,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 2,\"totalTokenCount\": 478,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nEsta mensagem é um pedido de mudança em um plano de trabalho entre duas\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 18,\"totalTokenCount\": 494,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          1.861,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"CP, do inglês Hyper Text Coffee Pot Control Protocol) é uma brincadeira feita por engenheiros da internet. Ele foi\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 46,\"totalTokenCount\": 820,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          0.986,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" empresas. O objetivo principal é alinhar as datas de uma reunião importante e ajustar os materiais que serão apresentados nela.\\n\\nAqui\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 45,\"totalTokenCount\": 521,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          1.877,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" criado em primeiro de abril para fazer graça com as regras complexas que usamos para fazer computadores conversarem entre si.\\n\\nImagine\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 72,\"totalTokenCount\": 846,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.141,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" está o que está acontecendo, passo a passo:\\n\\nPrimeiro, a reunião de decisão foi adiada. Ela\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 69,\"totalTokenCount\": 545,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          2.08,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" que você quer pedir para uma pessoa trazer um copo de água. Você precisa usar uma língua que ela entenda e seguir certos\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 98,\"totalTokenCount\": 872,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.185,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" estava marcada para o dia 2 de outubro, mas agora acontecerá no dia 9 de outubro. Isso aconteceu porque duas\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 94,\"totalTokenCount\": 570,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          2.182,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" passos: pedir \\\"por favor\\\", esperar a resposta e confirmar o pedido. Na computação, essas regras de conversa cham\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 122,\"totalTokenCount\": 896,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.266,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" pessoas importantes da empresa, chamadas de diretores, estarão viajando na data anterior.\\n\\nSegundo, a pessoa\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 118,\"totalTokenCount\": 594,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          2.284,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"am-se \\\"protocolo\\\". O protocolo mais comum na internet é o que usamos para abrir sites, chamado HTTP (Protocol\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 147,\"totalTokenCount\": 921,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.435,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" que enviou a mensagem precisa de um novo documento de preços. Ela pede que este documento seja enviado até o dia 30 de setembro\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 146,\"totalTokenCount\": 622,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". A razão disso é que os líderes da empresa gostam de ler todos os documentos antes da reunião começar. O termo\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 170,\"totalTokenCount\": 646,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          2.349,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"o de Transferência de Hipertexto).\\n\\nOs autores desse documento decidiram escrever um protocolo novo, usando o mesmo formato\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 172,\"totalTokenCount\": 946,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.643,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" \\\"pre-read\\\", que aparece na mensagem, significa exatamente isso: uma leitura feita antes do encontro para que todos já saibam do\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 198,\"totalTokenCount\": 674,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          2.579,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" dos manuais técnicos reais, mas para uma tarefa absurda: controlar uma cafeteira pela internet.\\n\\nAqui está o que você\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 199,\"totalTokenCount\": 973,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" precisa saber sobre essa brincadeira:\\n\\n1. A ideia principal: Eles fingiram que a cafeteira precisa de um \\\"\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 225,\"totalTokenCount\": 999,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.707,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" assunto.\\n\\nTerceiro, eles querem aumentar a reunião. Eles pediram para incluir uma demonstração de 15 minutos do painel\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 227,\"totalTokenCount\": 703,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          2.885,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"idioma\\\" oficial para receber ordens do computador, como \\\"ligar\\\", \\\"desligar\\\" ou \\\"me\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 249,\"totalTokenCount\": 1023,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" dê um café\\\".\\n2. Por que isso existe: Naquela época, as pessoas estavam começando a conectar objetos comuns\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 273,\"totalTokenCount\": 1047,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.858,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" de relatórios. Este painel, chamado de \\\"reporting dashboard\\\" em inglês, é uma tela ou sistema onde a empresa consegue\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 253,\"totalTokenCount\": 729,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          2.925,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", como torradeiras e máquinas de refrigerante, à rede. O texto brinca com essa ideia de que, no\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 298,\"totalTokenCount\": 1072,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.864,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ver, de forma visual, os dados e os resultados do trabalho que está sendo feito.\\n\\nPor fim, o rem\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 277,\"totalTokenCount\": 753,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          3.054,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" futuro, tudo teria que estar conectado à internet, até o ponto de ser ridículo.\\n3. O tom do\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 322,\"totalTokenCount\": 1096,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          2.032,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"etente pergunta se essas novas datas e tarefas funcionam para você. Ele precisa saber se você tem tempo disponível para fazer essa demonstração e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 305,\"totalTokenCount\": 781,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          3.136,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" texto: O documento usa palavras técnicas muito sérias para descrever algo que não serve para nada na prática. Ele é um exemplo\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 348,\"totalTokenCount\": 1122,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          2.121,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" entregar o documento no prazo pedido.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 314,\"totalTokenCount\": 790,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ],
         [
-          3.406,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" de humor de \\\"cultura hacker\\\", que é como os programadores se divertem criando piadas internas dentro de documentos oficiais da internet.\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 377,\"totalTokenCount\": 1151,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
-        ],
-        [
-          3.427,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Em resumo, não existe um equipamento real que siga esse protocolo. O texto serve apenas para mostrar como as regras de comunicação\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 401,\"totalTokenCount\": 1175,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
-        ],
-        [
-          3.617,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" na internet são estruturadas, usando o exemplo inusitado de uma cafeteira para tornar o assunto técnico um\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 425,\"totalTokenCount\": 1199,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
-        ],
-        [
-          3.704,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" pouco mais leve.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 431,\"totalTokenCount\": 1205,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
-        ],
-        [
-          3.744,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPQnJFxH/7aqMMhzFaoyJgc5NXPPDTtW8kuLglTE24uIIYpVxIWhhOk5J57jAEtQqwTXVCwW1XhaEUVoKG5sZuKfvV6DQSwiAV0wr3c6IKinIHpGscptmTRkjlGaWcNhIqS5HVsOBml8P8fw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 774,\"candidatesTokenCount\": 431,\"totalTokenCount\": 1205,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 774}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ZO6batTgK9qi9tMPxqGm-Aw\"}\r\n\r\n"
+          2.164,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP6bwz6SHo55r/lYVCTKxDHgmvxHeVcDxh6P3SDrvyAOnp+WxZo6wvklkokelW7niGV6MZJBy9alkfhjhRl2oKbwNN0AiXPo/d7KFBfq0AZ5yfX7qncfvwF4cVXnxWtpN5NhNAvkR+nyHdFg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 476,\"candidatesTokenCount\": 314,\"totalTokenCount\": 790,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 476}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"xFqdaqbjHIii9tMP-MmxoQ4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "767dad98f1bef0aa30d8704d3124bf2e30e163c1d1598c02a306fd9c718e5f4c"
+      "bodySha256": "f815764c6191cf287f20926999d3925a7f55cd37f6632a1134ca671b2eb2a77d"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -171,47 +159,43 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.64,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1218,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nO \\\"Protocolo de Controle de Cafeteira por Hipertexto\\\" é\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 20,\"totalTokenCount\": 1236,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" uma brincadeira técnica criada por engenheiros da internet. Ele foi escrito no formato de um documento oficial, mas com o objetivo de fazer r\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 48,\"totalTokenCount\": 1264,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          0.605,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 2,\"totalTokenCount\": 803,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nEsta mensagem é um pedido para ajustar os preparativos de uma reunião importante.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 19,\"totalTokenCount\": 820,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          1.656,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ir, e não de funcionar de verdade.\\n\\nImagine que, para um computador falar com outro, eles precisam seguir regras de etiqueta\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 74,\"totalTokenCount\": 1290,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          0.664,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" O objetivo é garantir que os documentos e as apresentações estejam prontos antes do encontro.\\n\\nAqui estão os pontos principais:\\n\\nA\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 46,\"totalTokenCount\": 847,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          1.801,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" chamadas \\\"protocolo\\\". O protocolo mais comum da internet é o HTTP, que usamos para carregar sites. Os\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 98,\"totalTokenCount\": 1314,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          0.725,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" reunião de decisão foi adiada do dia 2 para o dia 9 de outubro, porque dois diretores estarão viajando.\\n\\nO\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 75,\"totalTokenCount\": 876,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          1.925,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" autores decidiram escrever um protocolo falso, imitando o HTTP, para dar ordens a uma cafeteira.\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 122,\"totalTokenCount\": 1338,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          0.793,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" remetente pede uma nova tabela de preços até o dia 30 de setembro. Eles precisam disso para o \\\"pre-\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 101,\"totalTokenCount\": 902,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          2.051,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"A ideia surgiu em 1998, quando as pessoas começaram a conectar aparelhos domésticos à internet. Os autores\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 148,\"totalTokenCount\": 1364,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          0.914,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"read\\\", que é o material enviado antes da reunião para que todos possam estudar o assunto com antecedência.\\n\\nEles também ped\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 127,\"totalTokenCount\": 928,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          2.087,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" quiseram ironizar esse movimento, sugerindo que, se tudo estivesse conectado, precisaríamos até de regras específicas para passar\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 173,\"totalTokenCount\": 1389,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          0.976,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"em para incluir uma demonstração de 15 minutos de um painel de relatórios. Este painel é uma ferramenta\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 152,\"totalTokenCount\": 953,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          2.254,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" café remotamente.\\n\\nÉ um exemplo de humor entre programadores: eles usam uma linguagem super séria e formal\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 197,\"totalTokenCount\": 1413,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          1.081,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" visual que mostra dados e resultados do projeto.\\n\\nPor fim, a pessoa quer saber se você concorda com essas mudanças\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 176,\"totalTokenCount\": 977,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          2.273,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" para descrever algo absurdo. Não existe tecnologia real por trás disso; é apenas uma piada interna do mundo da informática\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 222,\"totalTokenCount\": 1438,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          1.142,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" e se consegue cumprir esses prazos.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 189,\"totalTokenCount\": 990,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ],
         [
-          2.402,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" que se tornou famosa como um lembrete de que o mundo da tecnologia também tem senso de humor.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 247,\"totalTokenCount\": 1463,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
-        ],
-        [
-          2.464,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPWTUhuFHzcf9TlgBwD2+G8qlGOpuiuh88wwWMvnjiW1CpYcq5MuANaEKsadSBiGhDCI2Kp3PQjeGdkkd7QD2d+PhGx4pXG9dblqBLXacWmBSP/DW9dvMiNB6PzqnDcUKp5XDbUIr4Dddw5g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1216,\"candidatesTokenCount\": 247,\"totalTokenCount\": 1463,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1216}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"b-6bauGNJN2N1e8P5ajv-Q4\"}\r\n\r\n"
+          1.187,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPjoeEXPVSgeglwc6SOirCgOVlcCUot+pgMNFcpsVvsDP2KhYGRMSaXMp//MV6iPsos3pZBWFi1Sga5gPLs3zWkFEun6HNI+7ixxAtucVOt1Ux+E/QDd/4duBtFrDGUFkVcyW+v+WnQpn7TA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 801,\"candidatesTokenCount\": 189,\"totalTokenCount\": 990,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 801}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zVqdatWiM46lvr0PlLPryA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "dec0336c3a3331ccf305674dae0ba3d334db715ca524874f3bf0bde35747af7d"
+      "bodySha256": "f0da4ad734c5e3dcd70710e4c8abfa15214984b26d5e2c7fdaba5dae747754a8"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -220,31 +204,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.788,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 2,\"totalTokenCount\": 702,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eO6bas26GaXbvr0Pp8_kgA8\"}\r\n\r\n"
+          2.147,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 2,\"totalTokenCount\": 352,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1VqdauBH5JW-vQ_qhvORDw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Item | Descrição / Ação | Prazo |\\n| :---\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 20,\"totalTokenCount\": 370,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1VqdauBH5JW-vQ_qhvORDw\"}\r\n\r\n"
         ],
         [
-          2.79,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Informação | Detalhe |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 23,\"totalTokenCount\": 723,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eO6bas26GaXbvr0Pp8_kgA8\"}\r\n\r\n"
+          2.188,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" | :--- | :--- |\\n| Revisão da liderança | Nova data agendada | 9 de\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 44,\"totalTokenCount\": 394,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1VqdauBH5JW-vQ_qhvORDw\"}\r\n\r\n"
         ],
         [
-          2.83,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"RFC** | 2324 |\\n| **Data** | 1 de abril de 1998 |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 51,\"totalTokenCount\": 751,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eO6bas26GaXbvr0Pp8_kgA8\"}\r\n\r\n"
+          2.295,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" outubro |\\n| Planilha de preços | Enviar versão revisada | 30 de setembro |\\n| Demon\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 68,\"totalTokenCount\": 418,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1VqdauBH5JW-vQ_qhvORDw\"}\r\n\r\n"
         ],
         [
-          2.914,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **Autor** | L. Masinter |\\n| **Título** | Hyper Text Coffee Pot Control Protocol (HTCP\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 75,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eO6bas26GaXbvr0Pp8_kgA8\"}\r\n\r\n"
+          2.414,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"stração | Dashboard de relatórios (15 min) | A confirmar |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 88,\"totalTokenCount\": 438,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1VqdauBH5JW-vQ_qhvORDw\"}\r\n\r\n"
         ],
         [
-          3.016,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"CP/1.0) |\\n| **Categoria** | Informativo |\\n| **Objetivo** | Controlar,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 101,\"totalTokenCount\": 801,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eO6bas26GaXbvr0Pp8_kgA8\"}\r\n\r\n"
-        ],
-        [
-          3.158,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" monitorar e diagnosticar cafeteiras via rede |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 116,\"totalTokenCount\": 816,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eO6bas26GaXbvr0Pp8_kgA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPnh4X4gn1Vq+JpSOzogFGB/sUzvcgJSHEvHXaInNfEayIt24O9kSzjlXJD/EkblTqnCbM5ymf2YX2pee9huxbfNb0tVZdQ2EP/HRpACY7tIwsnMrbRfFgLzy58tddz312D+HCWDfaeDqctg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 700,\"candidatesTokenCount\": 116,\"totalTokenCount\": 816,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 700}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"eO6bas26GaXbvr0Pp8_kgA8\"}\r\n\r\n"
+          2.459,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP6VuWVS1S8hEYhIn4AjFtWnSPiHHdXl9V4LZTve5rqeHjLq+hfkn6Y+omanJjXHCZ494kNx8c5YEJh0widHKHSRkIkGbmCwFCJB7MNoF2EIY4PRwZOWcjQDRLjEk9js4wS9nfHjdUzIDa9Q==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 350,\"candidatesTokenCount\": 88,\"totalTokenCount\": 438,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 350}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1VqdauBH5JW-vQ_qhvORDw\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "45322b34e407ad57b279c440d413062cc26d7e7ff6bc6ea3f72b699b74a476be"
+      "bodySha256": "5fea74596c5b9fa5aed11edff68cacfa60f7285ce0b60adc886c226c2735f9a6"
     }
   ]
 }

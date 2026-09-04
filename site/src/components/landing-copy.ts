@@ -54,30 +54,30 @@ export const LANDING_LOCALES: LandingLocale[] = [
 export const LANDING_COPY: Record<string, LandingCopy> = {
   ar: {
     description:
-      "وكيل مقيم هادئ يستدعي محادثة ذكاء اصطناعي فوق أي تطبيق. الإشارة: انسخ مرتين. الإجابة الأولى تنطلق مما نسخته — والباقي محادثة.",
+      "رسائل بريد بلغة أجنبية، محادثات طويلة، شاشات أخطاء مبهمة. حدد النص واضغط {mod} + C + C لتحصل على ذكاء اصطناعي فوري على شاشتك مباشرة. تلخيص، شرح، ترجمة، وتنقيح. مجاني تمامًا، وما تنسخه لا يصل إلا إلى الذكاء الاصطناعي الذي ربطته.",
     docs: "الوثائق",
-    heroTitle: "انسخ مرتين،\nونفّذ فورًا.",
-    metaTitle: "ZenCopy — انسخ مرتين، ونفّذ فورًا.",
-    note: "مجاني · Apache-2.0 · Windows وmacOS وLinux",
+    heroTitle: "ذكاء اصطناعي فوري.\nعلى شاشتك مباشرة.",
+    metaTitle: "ZenCopy — ذكاء اصطناعي فوري. على شاشتك مباشرة.",
+    note: "مجاني · مفتوح المصدر · Windows وmacOS وLinux",
     demoAria: "كيف يعمل",
     demoCaption:
-      "انسخ ثم اضغط C مرة أخرى. تظهر إجابة الذكاء الاصطناعي في مكانها — وتستمر المحادثة هناك مباشرة.",
+      "حدد رسالة بريد إلكتروني بالإنجليزية واضغط {mod} + C + C. سيظهر ملخص باللغة العربية على الفور. هذا مجرد نموذج مما يمكن لـ ZenCopy فعله.",
     features: [
       {
-        title: "لا بحث عن الذكاء الاصطناعي",
-        body: "في المتصفح أو في Slack، يظهر الذكاء الاصطناعي فوق ما تنظر إليه الآن.",
+        title: "شرح، ترجمة، تنقيح.",
+        body: "شرح للمصطلحات، ترجمة للقطات الشاشة، صياغة منقحة لرسائل الدردشة والبريد. أي شيء يمكنك نسخه.",
       },
       {
-        title: "كل ما يمكنك نسخه",
-        body: "نص وصور وملفات. يمكنك حتى أن تتحدث إلى لقطة شاشة.",
+        title: "كل ما عليك تعلّمه هو {mod} + C + C.",
+        body: "اضبط الإعدادات مرة واحدة في البداية، ثم اضغط {mod} + C + C متى احتجت إليها. في المتصفح أو في Slack، على الشاشة نفسها التي تعمل عليها.",
       },
       {
-        title: "أحضر نموذجك الخاص",
-        body: "OpenAI أو Google أو Anthropic أو بوابة شركة أو Ollama المحلي — يُبدَّل من مكان واحد.",
+        title: "مجاني تمامًا.",
+        body: "تطبيق ZenCopy مجاني، والذكاء الاصطناعي مجاني أيضًا مع باقة Gemini المجانية. وإن كان لديك مفتاح API لـ GPT أو Claude، يمكنك التبديل إليه في أي وقت.",
       },
       {
-        title: "خصوصية بالتصميم",
-        body: "لا حساب ولا قياس عن بُعد ولا خادم وسيط. المحتوى والمفاتيح لا يذهبان إلا حيث توجّههما أنت.",
+        title: "لا يصل إلا إلى الذكاء الاصطناعي الخاص بك.",
+        body: "ما تنسخه يُرسل مباشرةً إلى الذكاء الاصطناعي الذي ربطته. لا يملك ZenCopy خوادم خاصة به، ولأنه مفتوح المصدر، يمكن لأي شخص التحقق من ذلك.",
       },
     ],
     philosophy: "أفضل أداة هي التي تنسى وجودها.",
@@ -86,30 +86,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   de: {
     description:
-      "Ein ruhiger, ständig bereiter Agent, der über jeder App ein KI-Gespräch herbeiruft. Das Signal: zweimal kopieren. Die erste Antwort entsteht aus dem, was du kopiert hast — der Rest ist ein Gespräch.",
+      "E-Mails in fremden Sprachen, lange Threads, kryptische Fehlermeldungen. Markieren, {mod} + C + C drücken – und schon ist KI da, direkt auf dem Bildschirm. Zusammenfassungen, Erklärungen, Übersetzungen, Feinschliff. Komplett kostenlos, und das Kopierte erreicht nur die verbundene KI.",
     docs: "Doku",
-    heroTitle: "Zweimal kopieren,\nsofort handeln.",
-    metaTitle: "ZenCopy — Zweimal kopieren, sofort handeln.",
-    note: "Kostenlos · Apache-2.0 · Windows, macOS & Linux",
+    heroTitle: "Sofort KI.\nDirekt auf dem Bildschirm.",
+    metaTitle: "ZenCopy — Sofort KI. Direkt auf dem Bildschirm.",
+    note: "Kostenlos · Open Source · Windows, macOS & Linux",
     demoAria: "So funktioniert es",
     demoCaption:
-      "Kopiere etwas und drücke noch einmal C. Die Antwort der KI erscheint auf der Stelle — und das Gespräch geht genau dort weiter.",
+      "Eine englische E-Mail auswählen und {mod} + C + C drücken. Sofort erscheint eine deutsche Zusammenfassung. Nur eine der Möglichkeiten mit ZenCopy.",
     features: [
       {
-        title: "Keine Suche nach deiner KI",
-        body: "Im Browser oder in Slack — die KI erscheint über dem, was du gerade ansiehst.",
+        title: "Erklären. Übersetzen. Überarbeiten.",
+        body: "Ein Fachbegriff erklärt, ein Screenshot übersetzt, ein Chat oder eine E-Mail überarbeitet. Alles, was sich kopieren lässt.",
       },
       {
-        title: "Alles, was du kopieren kannst",
-        body: "Text, Bilder, Dateien. Du kannst sogar mit einem Screenshot reden.",
+        title: "Mehr als {mod} + C + C gibt es nicht zu lernen.",
+        body: "Einmal einrichten, danach einfach {mod} + C + C drücken, wann immer nötig. Im Browser oder in Slack, direkt auf dem aktuellen Bildschirm.",
       },
       {
-        title: "Bring dein eigenes Modell mit",
-        body: "OpenAI, Google, Anthropic, ein Firmen-Gateway oder lokales Ollama — an einer Stelle ausgetauscht.",
+        title: "Komplett kostenlos.",
+        body: "ZenCopy ist kostenlos und die KI auch: mit der Gratis-Stufe von Gemini. Wer einen API-Key für GPT oder Claude hat, kann jederzeit wechseln.",
       },
       {
-        title: "Privat von Grund auf",
-        body: "Kein Konto, keine Telemetrie, kein Relay-Server. Inhalte und Schlüssel gehen nur dorthin, wohin du sie schickst.",
+        title: "Erreicht nur Ihre KI.",
+        body: "Was Sie kopieren, geht direkt an die verbundene KI. ZenCopy betreibt keine eigenen Server und ist Open Source – der Code liegt für jeden offen.",
       },
     ],
     philosophy: "Das beste Werkzeug ist das, von dem du vergisst, dass es da ist.",
@@ -118,30 +118,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   en: {
     description:
-      "A calm resident agent that summons an AI conversation on top of any app. The signal: copy twice. The first answer starts from what you copied — the rest is a conversation.",
+      "Emails in another language, long threads, cryptic error screens. Select, press {mod} + C + C, and there it is: instant AI, right on your screen. Summaries, explanations, translations, polished drafts. Completely free, and what you copy reaches only the AI you connected.",
     docs: "Docs",
-    heroTitle: "Copy twice,\nact instantly.",
-    metaTitle: "ZenCopy — Copy twice, act instantly.",
-    note: "Free · Apache-2.0 · Windows, macOS & Linux",
+    heroTitle: "Instant AI.\nRight on your screen.",
+    metaTitle: "ZenCopy — Instant AI. Right on your screen.",
+    note: "Free · Open source · Windows, macOS & Linux",
     demoAria: "how it works",
     demoCaption:
-      "Copy, then press C once more. The AI's answer appears on the spot — and the conversation continues right there.",
+      "Select an email and press {mod} + C + C. A summary appears right away. Just one of the things ZenCopy can do.",
     features: [
       {
-        title: "No hunting for your AI",
-        body: "In the browser or in Slack, the AI appears over whatever you are looking at.",
+        title: "Explain. Translate. Polish.",
+        body: "A term explained, a screenshot translated, a chat message or an email polished. Anything you can copy.",
       },
       {
-        title: "Anything you can copy",
-        body: "Text, images, files. You can even talk to a screenshot.",
+        title: "All you learn is {mod} + C + C.",
+        body: "Set it up once. From then on, press {mod} + C + C whenever you need it. In your browser or in Slack, right on the screen you're on.",
       },
       {
-        title: "Bring your own model",
-        body: "OpenAI, Google, Anthropic, a corporate gateway, or local Ollama — swapped in one place.",
+        title: "Completely free.",
+        body: "ZenCopy is free, and so is the AI: Gemini's free tier. Have an API key for GPT or Claude? Switch to it anytime.",
       },
       {
-        title: "Private by design",
-        body: "No account, no telemetry, no relay server. Content and keys go only where you point them.",
+        title: "Only your AI gets it.",
+        body: "What you copy goes straight to the AI you connected. ZenCopy has no server of its own, and it is open source, so anyone can check.",
       },
     ],
     philosophy: "The best tool is the one you forget is there.",
@@ -150,30 +150,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   es: {
     description:
-      "Un agente residente y sereno que invoca una conversación con la IA sobre cualquier aplicación. La señal: copiar dos veces. La primera respuesta parte de lo que copiaste — el resto es una conversación.",
+      "Correos en otros idiomas, hilos interminables, crípticas pantallas de error. Selecciona, pulsa {mod} + C + C y listo: IA al instante, directo en tu pantalla. Resúmenes, explicaciones, traducciones y textos pulidos. Totalmente gratis, y lo que copias solo llega a la IA que conectaste.",
     docs: "Documentación",
-    heroTitle: "Copia dos veces,\nactúa al instante.",
-    metaTitle: "ZenCopy — Copia dos veces, actúa al instante.",
-    note: "Gratis · Apache-2.0 · Windows, macOS y Linux",
+    heroTitle: "IA al instante.\nDirecto en tu pantalla.",
+    metaTitle: "ZenCopy — IA al instante. Directo en tu pantalla.",
+    note: "Gratis · Código abierto · Windows, macOS y Linux",
     demoAria: "cómo funciona",
     demoCaption:
-      "Copia y pulsa C una vez más. La respuesta de la IA aparece en el acto — y la conversación continúa ahí mismo.",
+      "Selecciona un correo en inglés y pulsa {mod} + C + C. Aparece al instante un resumen en español. Es solo una de las cosas que ZenCopy puede hacer.",
     features: [
       {
-        title: "Sin ir a buscar a tu IA",
-        body: "En el navegador o en Slack, la IA aparece sobre lo que estés mirando.",
+        title: "Explicar. Traducir. Pulir.",
+        body: "Un término explicado, una captura traducida, un mensaje de chat o un correo pulido. Todo lo que puedas copiar.",
       },
       {
-        title: "Todo lo que puedas copiar",
-        body: "Texto, imágenes, archivos. Hasta puedes hablar con una captura de pantalla.",
+        title: "Solo tienes que aprender {mod} + C + C.",
+        body: "Configúralo una sola vez. A partir de ahí, pulsa {mod} + C + C cuando lo necesites. En el navegador o en Slack, justo en la pantalla en la que estás.",
       },
       {
-        title: "Trae tu propio modelo",
-        body: "OpenAI, Google, Anthropic, una pasarela corporativa u Ollama local — se cambia en un solo lugar.",
+        title: "Completamente gratis.",
+        body: "ZenCopy es gratis y la IA también, con el plan gratuito de Gemini. ¿Tienes una clave de API para GPT o Claude? Cambia a ella cuando quieras.",
       },
       {
-        title: "Privado por diseño",
-        body: "Sin cuenta, sin telemetría, sin servidor intermedio. El contenido y las claves van solo a donde tú indiques.",
+        title: "Solo llega a tu IA.",
+        body: "Lo que copias va directo a la IA que hayas conectado. ZenCopy no tiene servidores propios y es de código abierto, así que cualquiera puede comprobarlo.",
       },
     ],
     philosophy: "La mejor herramienta es la que olvidas que está ahí.",
@@ -182,30 +182,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   fa: {
     description:
-      "عاملی مقیم و آرام که روی هر برنامه‌ای گفتگو با هوش مصنوعی را احضار می‌کند. علامت: دو بار کپی. پاسخ نخست از همان چیزی که کپی کرده‌اید آغاز می‌شود — باقی‌اش یک گفتگو است.",
+      "ایمیل‌هایی به زبان دیگر، گفتگوهای طولانی، پیام‌های خطای مبهم. متن را انتخاب کنید، {mod} + C + C را بزنید و تمام: هوش مصنوعی فوری، درست روی صفحه شما. خلاصه‌سازی، توضیح، ترجمه و ویرایش. کاملاً رایگان، و آنچه کپی می‌کنید فقط به هوش مصنوعی متصل‌شده می‌رسد.",
     docs: "مستندات",
-    heroTitle: "دو بار کپی کنید،\nبی‌درنگ اقدام کنید.",
-    metaTitle: "ZenCopy — دو بار کپی کنید، بی‌درنگ اقدام کنید.",
-    note: "رایگان · Apache-2.0 · Windows، macOS و Linux",
+    heroTitle: "هوش مصنوعی فوری.\nدرست روی صفحه شما.",
+    metaTitle: "ZenCopy — هوش مصنوعی فوری. درست روی صفحه شما.",
+    note: "رایگان · متن‌باز · Windows، macOS و Linux",
     demoAria: "طرز کار",
     demoCaption:
-      "کپی کنید و یک بار دیگر C را فشار دهید. پاسخ هوش مصنوعی همان‌جا ظاهر می‌شود — و گفتگو همان‌جا ادامه می‌یابد.",
+      "یک ایمیل انگلیسی را انتخاب کنید و {mod} + C + C را فشار دهید. بلافاصله خلاصه‌ای به فارسی ظاهر می‌شود. این فقط یکی از کارهایی است که ZenCopy انجام می‌دهد.",
     features: [
       {
-        title: "دنبال هوش مصنوعی نگردید",
-        body: "در مرورگر یا در Slack، هوش مصنوعی روی همان چیزی ظاهر می‌شود که به آن نگاه می‌کنید.",
+        title: "توضیح، ترجمه، ویرایش.",
+        body: "توضیح یک اصطلاح، ترجمه اسکرین‌شات، ویرایش پیام چت یا ایمیل. هر چیزی که بتوان کپی کرد.",
       },
       {
-        title: "هر چیزی که بتوان کپی کرد",
-        body: "متن، تصویر، فایل. حتی می‌توانید با یک اسکرین‌شات گفتگو کنید.",
+        title: "تنها چیزی که باید یاد بگیرید: {mod} + C + C.",
+        body: "تنظیمات فقط یک‌بار انجام می‌شود. پس از آن، هر زمان نیاز داشتید {mod} + C + C را بزنید. در مرورگر یا در Slack، درست روی همان صفحه‌ای که هستید.",
       },
       {
-        title: "مدل خودتان را بیاورید",
-        body: "OpenAI، Google، Anthropic، گیت‌وی سازمانی یا Ollama محلی — همه از یک جا قابل تعویض.",
+        title: "کاملاً رایگان.",
+        body: "ZenCopy رایگان است و هوش مصنوعی هم همین‌طور، با طرح رایگان Gemini. اگر کلید API برای GPT یا Claude دارید، هر زمان بخواهید می‌توانید به آن جابه‌جا شوید.",
       },
       {
-        title: "حریم خصوصی در ذات طراحی",
-        body: "بدون حساب کاربری، بدون تله‌متری، بدون سرور واسطه. محتوا و کلیدها فقط به جایی می‌روند که خودتان تعیین کرده‌اید.",
+        title: "فقط به هوش مصنوعی شما می‌رسد.",
+        body: "آنچه کپی می‌کنید مستقیماً به هوش مصنوعی متصل‌شده ارسال می‌شود. ZenCopy هیچ سروری از خود ندارد و متن‌باز است، بنابراین هر کسی می‌تواند آن را بررسی کند.",
       },
     ],
     philosophy: "بهترین ابزار آن است که فراموش کنید وجود دارد.",
@@ -214,30 +214,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   fr: {
     description:
-      "Un agent résident et serein qui invoque une conversation avec l'IA par-dessus n'importe quelle application. Le signal : copier deux fois. La première réponse part de ce que vous avez copié — la suite est une conversation.",
+      "E-mails en langue étrangère, longs fils de discussion, messages d'erreur obscurs. Sélectionnez, appuyez sur {mod} + C + C et l'IA apparaît instantanément sur votre écran. Résumés, explications, traductions, textes peaufinés. Entièrement gratuit, et ce que vous copiez n'est transmis qu'à votre IA.",
     docs: "Documentation",
-    heroTitle: "Copiez deux fois,\nagissez aussitôt.",
-    metaTitle: "ZenCopy — Copiez deux fois, agissez aussitôt.",
-    note: "Gratuit · Apache-2.0 · Windows, macOS & Linux",
+    heroTitle: "L'IA instantanée.\nDirectement sur votre écran.",
+    metaTitle: "ZenCopy — L'IA instantanée. Directement sur votre écran.",
+    note: "Gratuit · Open source · Windows, macOS & Linux",
     demoAria: "comment ça marche",
     demoCaption:
-      "Copiez, puis appuyez une fois de plus sur C. La réponse de l'IA apparaît sur-le-champ — et la conversation se poursuit au même endroit.",
+      "Sélectionnez un e-mail en anglais et appuyez sur {mod} + C + C. Un résumé en français s'affiche immédiatement. Ce n'est qu'un aperçu de ce que peut faire ZenCopy.",
     features: [
       {
-        title: "Plus besoin d'aller chercher votre IA",
-        body: "Dans le navigateur ou dans Slack, l'IA apparaît par-dessus ce que vous regardez.",
+        title: "Expliquer. Traduire. Peaufiner.",
+        body: "Un terme expliqué, une capture d'écran traduite, un message ou un e-mail peaufiné. Tout ce qui se copie.",
       },
       {
-        title: "Tout ce que vous pouvez copier",
-        body: "Texte, images, fichiers. Vous pouvez même parler à une capture d'écran.",
+        title: "Il suffit de retenir {mod} + C + C.",
+        body: "Une configuration unique. Ensuite, appuyez sur {mod} + C + C dès que vous en avez besoin. Dans votre navigateur ou dans Slack, directement sur l'écran où vous travaillez.",
       },
       {
-        title: "Apportez votre propre modèle",
-        body: "OpenAI, Google, Anthropic, une passerelle d'entreprise ou Ollama en local — interchangeables en un seul endroit.",
+        title: "Totalement gratuit.",
+        body: "ZenCopy est gratuit, et l'IA aussi grâce à l'offre gratuite de Gemini. Vous avez une clé API pour GPT ou Claude ? Basculez dessus à tout moment.",
       },
       {
-        title: "Privé par conception",
-        body: "Pas de compte, pas de télémétrie, pas de serveur relais. Contenu et clés ne vont que là où vous les envoyez.",
+        title: "Seule votre IA le reçoit.",
+        body: "Ce que vous copiez est envoyé directement à l'IA connectée. ZenCopy ne dispose d'aucun serveur et le projet est open source : tout le monde peut vérifier.",
       },
     ],
     philosophy: "Le meilleur outil est celui dont on oublie la présence.",
@@ -246,30 +246,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   he: {
     description:
-      "סוכן רקע רגוע שמזמן שיחה עם AI מעל כל אפליקציה. האות: מעתיקים פעמיים. התשובה הראשונה מתחילה ממה שהעתקתם — וכל השאר הוא שיחה.",
+      "מיילים בשפה זרה, שרשורים ארוכים, מסכי שגיאה מסתוריים. מסמנים, לוחצים על {mod} + C + C, והנה זה: AI מיידי, ישר על המסך שלך. סיכומים, הסברים, תרגומים וטיוטות מלוטשות. חינם לחלוטין, ומה שמועתק מגיע אך ורק ל-AI שחיברתם.",
     docs: "תיעוד",
-    heroTitle: "מעתיקים פעמיים,\nפועלים מיד.",
-    metaTitle: "ZenCopy — מעתיקים פעמיים, פועלים מיד.",
-    note: "חינם · Apache-2.0 · Windows‏, macOS ו‑Linux",
+    heroTitle: "‏AI מיידי.\nישירות על המסך שלך.",
+    metaTitle: "ZenCopy — ‏AI מיידי. ישירות על המסך שלך.",
+    note: "חינם · קוד פתוח · Windows‏, macOS ו‑Linux",
     demoAria: "איך זה עובד",
     demoCaption:
-      "מעתיקים, ואז מקישים C פעם אחת נוספת. תשובת ה‑AI מופיעה בו במקום — והשיחה ממשיכה ממש שם.",
+      "בוחרים מייל באנגלית ולוחצים על {mod} + C + C. סיכום בעברית מופיע מיד. זו רק אחת מהיכולות של ZenCopy.",
     features: [
       {
-        title: "בלי לחפש את ה‑AI",
-        body: "בדפדפן או ב‑Slack, ה‑AI מופיע מעל מה שאתם מסתכלים עליו עכשיו.",
+        title: "הסבר. תרגום. ליטוש.",
+        body: "הסבר למונח מקצועי, תרגום צילום מסך, ניסוח מלוטש להודעה או למייל. כל מה שאפשר להעתיק.",
       },
       {
-        title: "כל מה שאפשר להעתיק",
-        body: "טקסט, תמונות, קבצים. אפשר אפילו לדבר עם צילום מסך.",
+        title: "כל מה שצריך לזכור זה {mod} + C + C.",
+        body: "מגדירים פעם אחת בלבד. מעכשיו, לוחצים על {mod} + C + C בכל פעם שצריך. בדפדפן או ב-Slack, ישר על המסך שבו אתם נמצאים.",
       },
       {
-        title: "הביאו מודל משלכם",
-        body: "OpenAI‏, Google‏, Anthropic, שער ארגוני או Ollama מקומי — ניתנים להחלפה במקום אחד.",
+        title: "חינם לחלוטין.",
+        body: "תוכנת ZenCopy חינמית לגמרי, וכך גם ה-AI: השכבה החינמית של Gemini. יש לכם מפתח API עבור GPT או Claude? אפשר לעבור אליו בכל רגע.",
       },
       {
-        title: "פרטי מעצם התכנון",
-        body: "בלי חשבון, בלי טלמטריה, בלי שרת מתווך. תוכן ומפתחות הולכים רק לאן שאתם מכוונים אותם.",
+        title: "מגיע רק ל-AI שלך.",
+        body: "מה שאתם מעתיקים נשלח ישירות ל-AI שחיברתם. ל-ZenCopy אין שרתים משלה, ומכיוון שמדובר בקוד פתוח, כל אחד יכול לוודא זאת.",
       },
     ],
     philosophy: "הכלי הטוב ביותר הוא זה ששוכחים שהוא בכלל שם.",
@@ -278,30 +278,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   id: {
     description:
-      "Agen tenang yang selalu siaga, memanggil percakapan AI di atas aplikasi apa pun. Sinyalnya: salin dua kali. Jawaban pertama berangkat dari apa yang kamu salin — selebihnya adalah percakapan.",
+      "Email berbahasa asing, utas panjang, layar eror yang membingungkan. Pilih, tekan {mod} + C + C, dan AI seketika hadir langsung di layar Anda. Ringkasan, penjelasan, terjemahan, draf rapi. Sepenuhnya gratis, dan apa yang disalin hanya sampai ke AI yang Anda hubungkan.",
     docs: "Dokumentasi",
-    heroTitle: "Salin dua kali,\nlangsung beraksi.",
-    metaTitle: "ZenCopy — Salin dua kali, langsung beraksi.",
-    note: "Gratis · Apache-2.0 · Windows, macOS & Linux",
+    heroTitle: "AI seketika.\nLangsung di layar Anda.",
+    metaTitle: "ZenCopy — AI seketika. Langsung di layar Anda.",
+    note: "Gratis · Sumber terbuka · Windows, macOS & Linux",
     demoAria: "cara kerjanya",
     demoCaption:
-      "Salin, lalu tekan C sekali lagi. Jawaban AI muncul saat itu juga — dan percakapan berlanjut di tempat yang sama.",
+      "Pilih email berbahasa Inggris lalu tekan {mod} + C + C. Ringkasan dalam bahasa Indonesia langsung muncul seketika. Ini baru satu dari sekian banyak kemampuan ZenCopy.",
     features: [
       {
-        title: "Tak perlu mencari AI-mu",
-        body: "Di browser maupun di Slack, AI muncul di atas apa pun yang sedang kamu lihat.",
+        title: "Jelaskan. Terjemahkan. Rapikan.",
+        body: "Penjelasan istilah, terjemahan tangkapan layar, atau polesan untuk pesan obrolan dan email. Apa pun yang bisa disalin.",
       },
       {
-        title: "Apa pun yang bisa kamu salin",
-        body: "Teks, gambar, berkas. Kamu bahkan bisa mengobrol dengan tangkapan layar.",
+        title: "Cukup ingat {mod} + C + C.",
+        body: "Atur sekali di awal. Setelah itu, tekan {mod} + C + C kapan pun dibutuhkan. Di peramban atau di Slack, langsung di layar tempat Anda bekerja.",
       },
       {
-        title: "Bawa modelmu sendiri",
-        body: "OpenAI, Google, Anthropic, gateway perusahaan, atau Ollama lokal — diganti di satu tempat.",
+        title: "Sepenuhnya gratis.",
+        body: "ZenCopy gratis, begitu juga AI-nya berkat paket gratis Gemini. Punya kunci API untuk GPT atau Claude? Anda bisa beralih kapan saja.",
       },
       {
-        title: "Privat sejak dirancang",
-        body: "Tanpa akun, tanpa telemetri, tanpa server perantara. Konten dan kunci hanya pergi ke tujuan yang kamu tentukan.",
+        title: "Hanya diterima oleh AI Anda.",
+        body: "Teks yang disalin langsung dikirim ke AI yang Anda hubungkan. ZenCopy tidak memiliki server sendiri, dan sifatnya sumber terbuka sehingga siapa pun bisa memeriksanya.",
       },
     ],
     philosophy: "Alat terbaik adalah alat yang membuatmu lupa bahwa ia ada.",
@@ -310,30 +310,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   it: {
     description:
-      "Un agente residente e tranquillo che evoca una conversazione con l'IA sopra qualsiasi app. Il segnale: copiare due volte. La prima risposta parte da ciò che hai copiato — il resto è una conversazione.",
+      "Email in lingue straniere, thread infiniti, schermate di errore incomprensibili. Seleziona, premi {mod} + C + C ed ecco un'IA all'istante, direttamente sul tuo schermo. Riassunti, spiegazioni, traduzioni e testi rifiniti. Completamente gratis, e ciò che copi raggiunge solo l'IA che hai collegato.",
     docs: "Documentazione",
-    heroTitle: "Copia due volte,\nagisci all'istante.",
-    metaTitle: "ZenCopy — Copia due volte, agisci all'istante.",
-    note: "Gratuito · Apache-2.0 · Windows, macOS e Linux",
+    heroTitle: "IA all'istante.\nDirettamente sul tuo schermo.",
+    metaTitle: "ZenCopy — IA all'istante. Direttamente sul tuo schermo.",
+    note: "Gratuito · Open source · Windows, macOS e Linux",
     demoAria: "come funziona",
     demoCaption:
-      "Copia, poi premi C ancora una volta. La risposta dell'IA appare sul posto — e la conversazione continua lì.",
+      "Seleziona un'email in inglese e premi {mod} + C + C. Un riassunto in italiano compare all'istante. È solo una delle cose che ZenCopy sa fare.",
     features: [
       {
-        title: "Niente più caccia alla tua IA",
-        body: "Nel browser o su Slack, l'IA appare sopra ciò che stai guardando.",
+        title: "Spiega. Traduci. Rifinisci.",
+        body: "Un termine spiegato, uno screenshot tradotto, un messaggio o un'email rifinita. Tutto ciò che puoi copiare.",
       },
       {
-        title: "Tutto ciò che puoi copiare",
-        body: "Testo, immagini, file. Puoi persino parlare con uno screenshot.",
+        title: "Tutto ciò che serve è {mod} + C + C.",
+        body: "Configuralo una volta sola. Poi premi {mod} + C + C ogni volta che ti serve. Nel browser o su Slack, direttamente sullo schermo su cui ti trovi.",
       },
       {
-        title: "Porta il tuo modello",
-        body: "OpenAI, Google, Anthropic, un gateway aziendale o Ollama in locale — si cambia in un unico posto.",
+        title: "Completamente gratuito.",
+        body: "ZenCopy è gratis, e lo è anche l'IA grazie al piano free di Gemini. Hai una chiave API per GPT o Claude? Puoi passare a loro in qualsiasi momento.",
       },
       {
-        title: "Privato per progettazione",
-        body: "Nessun account, nessuna telemetria, nessun server intermedio. Contenuti e chiavi vanno solo dove li indirizzi tu.",
+        title: "Arriva solo alla tua IA.",
+        body: "Ciò che copi va dritto all'IA che hai collegato. ZenCopy non ha server propri ed è open source, quindi chiunque può verificarlo.",
       },
     ],
     philosophy: "Lo strumento migliore è quello di cui dimentichi l'esistenza.",
@@ -342,30 +342,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   ja: {
     description:
-      "どのアプリの上でも、すぐに AI との会話を呼び出せる静かな常駐エージェント。合図はコピー 2 回。最初の答えはコピーした内容から自動で、続きはそのまま会話で。",
+      "外国語のメールも、長いスレッドも、謎のエラー画面も。選んで {mod} + C + C、今いる画面にすぐ AI。要約、解説、翻訳、清書。完全に無料で、コピーした内容はあなたがつないだ AI にしか届きません。",
     docs: "ドキュメント",
-    heroTitle: "二度コピー、\nすぐ実行。",
-    metaTitle: "ZenCopy — 二度コピー、すぐ実行。",
-    note: "無料 · Apache-2.0 · Windows, macOS & Linux",
+    heroTitle: "今いる画面に、\nすぐ AI。",
+    metaTitle: "ZenCopy — 今いる画面に、すぐ AI。",
+    note: "無料 · オープンソース · Windows, macOS & Linux",
     demoAria: "しくみ",
     demoCaption:
-      "コピーしたら、もう一度 C。AI の答えがその場に現れて、そのまま会話を続けられます。",
+      "英語のメールを選んで {mod} + C + C。すぐに日本語の要約が表示されます。ZenCopy でできることの、ひとつです。",
     features: [
       {
-        title: "AI を探しに行かない",
-        body: "ブラウザでも Slack でも、今見ている画面の上に AI が現れます。",
+        title: "解説も、翻訳も、清書も。",
+        body: "専門用語の解説、スクリーンショットの翻訳、チャットやメールの清書。コピーできるものなら、何でも。",
       },
       {
-        title: "コピーできるものなら何でも",
-        body: "テキスト、画像、ファイル。スクリーンショットと会話することもできます。",
+        title: "覚えるのは {mod} + C + C だけ。",
+        body: "設定は最初に一度。あとは使いたいときに {mod} + C + C するだけ。ブラウザでも Slack でも、今いる画面でそのまま使えます。",
       },
       {
-        title: "モデルは自分で選ぶ",
-        body: "OpenAI・Google・Anthropic・社内ゲートウェイ・ローカルの Ollama。差し替えは一箇所で。",
+        title: "完全に無料。",
+        body: "ZenCopy は無料。AI は無料の Gemini が使えます。GPT や Claude の API キーがあれば、そちらにも切り替えられます。",
       },
       {
-        title: "プライバシー最優先の設計",
-        body: "アカウントもテレメトリも中継サーバーもなし。内容とキーは、あなたが決めた先にしか行きません。",
+        title: "届くのは、あなたの AI だけ。",
+        body: "コピーした内容は、あなたがつないだ AI へ直接送られます。ZenCopy 側にサーバーはありません。オープンソースなので、中身は誰でも確かめられます。",
       },
     ],
     philosophy: "最良の道具は、そこにあることを忘れさせる。",
@@ -374,30 +374,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   ko: {
     description:
-      "어떤 앱 위에서든 곧바로 AI와의 대화를 불러내는 차분한 상주 에이전트. 신호는 복사 두 번. 첫 답은 복사한 내용에서 자동으로 시작되고, 그다음은 그대로 대화입니다.",
+      "외국어 이메일, 긴 스레드, 난해한 오류 화면도. 선택하고 {mod} + C + C, 지금 있는 화면에 바로 AI. 요약, 설명, 번역, 다듬기까지. 완전히 무료이며, 복사한 내용은 연결한 AI에만 전달됩니다.",
     docs: "문서",
-    heroTitle: "두 번 복사하면,\n즉시 처리.",
-    metaTitle: "ZenCopy — 두 번 복사하면, 즉시 처리.",
-    note: "무료 · Apache-2.0 · Windows, macOS & Linux",
+    heroTitle: "지금 있는 화면에,\n바로 AI.",
+    metaTitle: "ZenCopy — 지금 있는 화면에, 바로 AI.",
+    note: "무료 · 오픈 소스 · Windows, macOS & Linux",
     demoAria: "작동 방식",
     demoCaption:
-      "복사한 다음 C를 한 번 더. AI의 답이 그 자리에 나타나고, 대화는 거기서 그대로 이어집니다.",
+      "영어 이메일을 선택하고 {mod} + C + C. 곧바로 한국어 요약이 나타납니다. ZenCopy로 할 수 있는 일 중 하나입니다.",
     features: [
       {
-        title: "AI를 찾아다니지 않아도",
-        body: "브라우저에서든 Slack에서든, 지금 보고 있는 화면 위에 AI가 나타납니다.",
+        title: "설명도, 번역도, 다듬기도.",
+        body: "전문 용어 설명, 스크린샷 번역, 메신저나 이메일 다듬기까지. 복사할 수 있는 것이라면 무엇이든.",
       },
       {
-        title: "복사할 수 있는 것이라면 무엇이든",
-        body: "텍스트, 이미지, 파일. 스크린샷과 대화할 수도 있습니다.",
+        title: "기억할 것은 {mod} + C + C뿐.",
+        body: "설정은 처음에 한 번. 필요할 때마다 {mod} + C + C만 누르면 됩니다. 브라우저든 Slack이든, 지금 보고 있는 화면에서 그대로 쓸 수 있습니다.",
       },
       {
-        title: "원하는 모델을 직접",
-        body: "OpenAI, Google, Anthropic, 사내 게이트웨이, 로컬 Ollama — 한 곳에서 바꿔 끼웁니다.",
+        title: "완전 무료.",
+        body: "ZenCopy는 무료입니다. AI 역시 Gemini 무료 플랜으로 이용할 수 있습니다. GPT나 Claude의 API 키가 있다면 언제든 전환할 수 있습니다.",
       },
       {
-        title: "설계부터 프라이빗",
-        body: "계정도, 텔레메트리도, 중계 서버도 없습니다. 내용과 키는 사용자가 지정한 곳으로만 갑니다.",
+        title: "전달되는 곳은 오직 연결한 AI뿐.",
+        body: "복사한 내용은 연결한 AI로 직접 전송됩니다. ZenCopy에는 자체 서버가 없습니다. 오픈 소스이므로 누구나 안을 들여다보고 확인할 수 있습니다.",
       },
     ],
     philosophy: "가장 좋은 도구는 있다는 것조차 잊게 되는 도구입니다.",
@@ -406,30 +406,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   pl: {
     description:
-      "Spokojny agent działający w tle, który przywołuje rozmowę z AI nad dowolną aplikacją. Sygnał: skopiuj dwa razy. Pierwsza odpowiedź powstaje z tego, co skopiujesz — reszta to już rozmowa.",
+      "Maile w obcym języku, tasiemcowe wątki, tajemnicze błędy na ekranie. Zaznacz, wciśnij {mod} + C + C i gotowe: błyskawiczne AI bezpośrednio na Twoim ekranie. Podsumowania, wyjaśnienia, tłumaczenia, dopracowane teksty. Całkowicie za darmo, a kopiowana treść trafia wyłącznie do połączonego AI.",
     docs: "Dokumentacja",
-    heroTitle: "Skopiuj dwa razy,\ndziałaj od razu.",
-    metaTitle: "ZenCopy — Skopiuj dwa razy, działaj od razu.",
-    note: "Za darmo · Apache-2.0 · Windows, macOS i Linux",
+    heroTitle: "Błyskawiczne AI.\nProsto na Twoim ekranie.",
+    metaTitle: "ZenCopy — Błyskawiczne AI. Prosto na Twoim ekranie.",
+    note: "Za darmo · Open source · Windows, macOS i Linux",
     demoAria: "jak to działa",
     demoCaption:
-      "Skopiuj, a potem naciśnij C jeszcze raz. Odpowiedź AI pojawia się na miejscu — a rozmowa toczy się dalej właśnie tam.",
+      "Zaznacz angielskiego maila i wciśnij {mod} + C + C. Od razu pojawi się podsumowanie po polsku. To tylko jedna z możliwości ZenCopy.",
     features: [
       {
-        title: "Żadnego szukania AI",
-        body: "W przeglądarce czy na Slacku — AI pojawia się nad tym, na co właśnie patrzysz.",
+        title: "Wyjaśnij. Przetłumacz. Dopracuj.",
+        body: "Wyjaśniony termin, przetłumaczony zrzut ekranu, dopracowana wiadomość lub e-mail. Wszystko, co możesz skopiować.",
       },
       {
-        title: "Wszystko, co da się skopiować",
-        body: "Tekst, obrazy, pliki. Możesz porozmawiać nawet ze zrzutem ekranu.",
+        title: "Wystarczy zapamiętać {mod} + C + C.",
+        body: "Konfigurujesz raz. Potem wciskasz {mod} + C + C za każdym razem, gdy tego potrzebujesz. W przeglądarce czy na Slacku, bezpośrednio na aktywnym ekranie.",
       },
       {
-        title: "Twój własny model",
-        body: "OpenAI, Google, Anthropic, brama firmowa albo lokalny Ollama — do podmiany w jednym miejscu.",
+        title: "Całkowicie za darmo.",
+        body: "ZenCopy nic nie kosztuje, podobnie jak AI dzięki bezpłatnemu pakietowi Gemini. Masz klucz API do GPT lub Claude? Możesz się na nie przełączyć w dowolnej chwili.",
       },
       {
-        title: "Prywatny z założenia",
-        body: "Bez konta, bez telemetrii, bez serwera pośredniczącego. Treść i klucze trafiają tylko tam, gdzie je skierujesz.",
+        title: "Trafia wyłącznie do Twojego AI.",
+        body: "To, co kopiujesz, trafia prosto do podłączonego AI. ZenCopy nie ma własnych serwerów i jest oprogramowaniem open source, więc każdy może to sprawdzić.",
       },
     ],
     philosophy: "Najlepsze narzędzie to takie, o którego istnieniu zapominasz.",
@@ -438,30 +438,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   "pt-br": {
     description:
-      "Um agente residente e tranquilo que invoca uma conversa com a IA por cima de qualquer aplicativo. O sinal: copiar duas vezes. A primeira resposta parte do que você copiou — o resto é conversa.",
+      "E-mails em outro idioma, conversas longas, telas de erro indecifráveis. Selecione, pressione {mod} + C + C e pronto: IA na hora, direto na sua tela. Resumos, explicações, traduções e textos aprimorados. Totalmente gratuito, e o conteúdo copiado vai apenas para a IA que você conectou.",
     docs: "Documentação",
-    heroTitle: "Copie duas vezes,\naja na hora.",
-    metaTitle: "ZenCopy — Copie duas vezes, aja na hora.",
-    note: "Gratuito · Apache-2.0 · Windows, macOS e Linux",
+    heroTitle: "IA na hora.\nDireto na sua tela.",
+    metaTitle: "ZenCopy — IA na hora. Direto na sua tela.",
+    note: "Gratuito · Código aberto · Windows, macOS e Linux",
     demoAria: "como funciona",
     demoCaption:
-      "Copie e pressione C mais uma vez. A resposta da IA aparece na hora — e a conversa continua ali mesmo.",
+      "Selecione um e-mail em inglês e pressione {mod} + C + C. Um resumo em português aparece na hora. Essa é apenas uma das coisas que o ZenCopy pode fazer.",
     features: [
       {
-        title: "Sem ir atrás da sua IA",
-        body: "No navegador ou no Slack, a IA aparece por cima do que você está vendo.",
+        title: "Explicar. Traduzir. Aprimorar.",
+        body: "Um termo explicado, uma captura de tela traduzida, uma mensagem ou um e-mail aprimorado. Tudo o que puder ser copiado.",
       },
       {
-        title: "Tudo o que dá para copiar",
-        body: "Texto, imagens, arquivos. Dá até para conversar com uma captura de tela.",
+        title: "Tudo o que você precisa aprender é {mod} + C + C.",
+        body: "Configure uma única vez. A partir daí, pressione {mod} + C + C sempre que precisar. No navegador ou no Slack, direto na tela em que você estiver.",
       },
       {
-        title: "Use o modelo que quiser",
-        body: "OpenAI, Google, Anthropic, um gateway corporativo ou Ollama local — trocados em um único lugar.",
+        title: "Totalmente gratuito.",
+        body: "O ZenCopy é gratuito, e a IA também: com o plano grátis do Gemini. Tem uma chave de API do GPT ou Claude? Troque quando quiser.",
       },
       {
-        title: "Privado por concepção",
-        body: "Sem conta, sem telemetria, sem servidor intermediário. Conteúdo e chaves vão só para onde você apontar.",
+        title: "Só a sua IA recebe.",
+        body: "O que você copia vai direto para a IA conectada. O ZenCopy não tem servidores próprios e é de código aberto, então qualquer pessoa pode conferir.",
       },
     ],
     philosophy: "A melhor ferramenta é aquela que você esquece que está ali.",
@@ -470,30 +470,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   ru: {
     description:
-      "Спокойный агент, живущий в фоне и вызывающий разговор с ИИ поверх любого приложения. Сигнал — скопировать дважды. Первый ответ начинается с того, что вы скопировали, а дальше — обычный разговор.",
+      "Письма на иностранном языке, длинные переписки, непонятные экраны с ошибками. Выделите текст, нажмите {mod} + C + C — и мгновенный ИИ прямо на вашем экране. Краткие выжимки, объяснения, переводы и отредактированные тексты. Полностью бесплатно, а скопированное попадает только в подключённый вами ИИ.",
     docs: "Документация",
-    heroTitle: "Скопируйте дважды —\nдействуйте сразу.",
-    metaTitle: "ZenCopy — Скопируйте дважды — действуйте сразу.",
-    note: "Бесплатно · Apache-2.0 · Windows, macOS и Linux",
+    heroTitle: "Мгновенный ИИ.\nПрямо на вашем экране.",
+    metaTitle: "ZenCopy — Мгновенный ИИ. Прямо на вашем экране.",
+    note: "Бесплатно · Открытый исходный код · Windows, macOS и Linux",
     demoAria: "как это работает",
     demoCaption:
-      "Скопируйте, затем нажмите C ещё раз. Ответ ИИ появляется на месте — и разговор продолжается прямо там.",
+      "Выделите письмо на английском и нажмите {mod} + C + C. Краткий пересказ на русском языке появится моментально. Это лишь одна из возможностей ZenCopy.",
     features: [
       {
-        title: "Не нужно искать свой ИИ",
-        body: "В браузере или в Slack — ИИ появляется поверх того, на что вы смотрите.",
+        title: "Объяснение. Перевод. Редактура.",
+        body: "Объяснить незнакомый термин, перевести скриншот, отредактировать сообщение или письмо. Всё, что можно скопировать.",
       },
       {
-        title: "Всё, что можно скопировать",
-        body: "Текст, изображения, файлы. Можно поговорить даже со скриншотом.",
+        title: "Всё, что нужно запомнить, — {mod} + C + C.",
+        body: "Настройте один раз. Дальше просто нажимайте {mod} + C + C при необходимости. В браузере или в Slack — прямо на том экране, где вы находитесь.",
       },
       {
-        title: "Ваша собственная модель",
-        body: "OpenAI, Google, Anthropic, корпоративный шлюз или локальная Ollama — переключаются в одном месте.",
+        title: "Полностью бесплатно.",
+        body: "ZenCopy бесплатен, и ИИ тоже — на бесплатном тарифе Gemini. Есть API-ключ от GPT или Claude? Переключитесь на них в любой момент.",
       },
       {
-        title: "Конфиденциальность по замыслу",
-        body: "Ни аккаунта, ни телеметрии, ни промежуточного сервера. Содержимое и ключи идут только туда, куда вы укажете.",
+        title: "Получает только ваш ИИ.",
+        body: "Скопированное отправляется напрямую в подключённый вами ИИ. У ZenCopy нет собственных серверов, а открытый исходный код позволяет любому в этом убедиться.",
       },
     ],
     philosophy: "Лучший инструмент — тот, о существовании которого вы забываете.",
@@ -502,29 +502,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   th: {
     description:
-      "เอเจนต์ประจำเครื่องแสนสงบที่เรียกบทสนทนากับ AI ขึ้นมาบนแอปใดก็ได้ สัญญาณคือการคัดลอกสองครั้ง คำตอบแรกเริ่มจากสิ่งที่คุณคัดลอกโดยอัตโนมัติ — ที่เหลือคือการสนทนา",
+      "อีเมลภาษาต่างประเทศ เธรดยาวเหยียด หน้าจอแจ้งเตือนข้อผิดพลาดที่เข้าใจยาก เพียงเลือกแล้วกด {mod} + C + C ก็เรียกใช้ AI ทันใจได้บนหน้าจอของคุณ สรุปความ อธิบาย แปล ขัดเกลาเนื้อหา ใช้งานได้ฟรีทั้งหมด และสิ่งที่คัดลอกจะส่งตรงไปยัง AI ที่คุณเชื่อมต่อไว้เท่านั้น",
     docs: "เอกสาร",
-    heroTitle: "คัดลอกสองครั้ง\nจัดการทันที",
-    metaTitle: "ZenCopy — คัดลอกสองครั้ง จัดการทันที",
-    note: "ฟรี · Apache-2.0 · Windows, macOS และ Linux",
+    heroTitle: "AI ทันใจ\nบนหน้าจอที่คุณใช้งาน",
+    metaTitle: "ZenCopy — AI ทันใจ บนหน้าจอที่คุณใช้งาน",
+    note: "ฟรี · โอเพ่นซอร์ส · Windows, macOS และ Linux",
     demoAria: "วิธีการทำงาน",
-    demoCaption: "คัดลอก แล้วกด C อีกครั้ง คำตอบของ AI ปรากฏขึ้นตรงนั้นทันที — และสนทนาต่อได้ตรงนั้นเลย",
+    demoCaption:
+      "เลือกอีเมลภาษาอังกฤษแล้วกด {mod} + C + C สรุปภาษาไทยจะแสดงขึ้นมาทันที นี่เป็นเพียงหนึ่งในสิ่งมากมายที่ ZenCopy ทำได้",
     features: [
       {
-        title: "ไม่ต้องไปตามหา AI",
-        body: "ไม่ว่าในเบราว์เซอร์หรือใน Slack AI จะปรากฏขึ้นบนสิ่งที่คุณกำลังดูอยู่",
+        title: "อธิบาย แปล ขัดเกลา",
+        body: "อธิบายคำศัพท์เฉพาะทาง แปลภาพถ่ายหน้าจอ หรือขัดเกลาข้อความแช็ตและอีเมล อะไรก็ตามที่คุณคัดลอกได้",
       },
       {
-        title: "อะไรก็ได้ที่คุณคัดลอกได้",
-        body: "ข้อความ รูปภาพ ไฟล์ คุณคุยกับภาพหน้าจอได้ด้วยซ้ำ",
+        title: "จำแค่ {mod} + C + C ก็พอ",
+        body: "ตั้งค่าเพียงครั้งเดียว จากนั้นกด {mod} + C + C เมื่อใดก็ตามที่ต้องการ ไม่ว่าจะอยู่ในเบราว์เซอร์หรือ Slack ก็ใช้งานบนหน้าจอเดิมได้ทันที",
       },
       {
-        title: "ใช้โมเดลของคุณเอง",
-        body: "OpenAI, Google, Anthropic, เกตเวย์องค์กร หรือ Ollama ในเครื่อง — สลับได้จากที่เดียว",
+        title: "ใช้งานได้ฟรีโดยสมบูรณ์",
+        body: "ZenCopy ใช้งานได้ฟรี เช่นเดียวกับ AI ผ่านแพ็กเกจฟรีของ Gemini หากมีคีย์ API ของ GPT หรือ Claude ก็สลับไปใช้งานได้ตลอดเวลา",
       },
       {
-        title: "เป็นส่วนตัวโดยการออกแบบ",
-        body: "ไม่มีบัญชี ไม่มี telemetry ไม่มีเซิร์ฟเวอร์ตัวกลาง เนื้อหาและคีย์ไปเฉพาะที่ที่คุณกำหนดเท่านั้น",
+        title: "ส่งตรงถึง AI ของคุณเท่านั้น",
+        body: "สิ่งที่คุณคัดลอกจะถูกส่งตรงไปยัง AI ที่คุณเชื่อมต่อไว้ ZenCopy ไม่มีเซิร์ฟเวอร์ของตัวเอง และเป็นโอเพนซอร์สที่ใครก็สามารถตรวจสอบได้",
       },
     ],
     philosophy: "เครื่องมือที่ดีที่สุด คือเครื่องมือที่คุณลืมไปเลยว่ามันอยู่ตรงนั้น",
@@ -533,30 +534,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   tr: {
     description:
-      "Arka planda sessizce bekleyen ve her uygulamanın üzerinde bir AI sohbeti çağıran sakin bir asistan. İşaret: iki kez kopyala. İlk yanıt kopyaladığın şeyden yola çıkar — gerisi bir sohbet.",
+      "Yabancı dilde e-postalar, uzayıp giden yazışmalar, karmaşık hata ekranları. Seçin, {mod} + C + C tuşlarına basın; doğrudan ekranınızda anlık AI hazır. Özetler, açıklamalar, çeviriler, düzenlenmiş metinler. Tamamen ücretsizdir ve kopyaladığınız içerik sadece bağladığınız AI servisine ulaşır.",
     docs: "Belgeler",
-    heroTitle: "İki kez kopyala,\nanında harekete geç.",
-    metaTitle: "ZenCopy — İki kez kopyala, anında harekete geç.",
-    note: "Ücretsiz · Apache-2.0 · Windows, macOS ve Linux",
+    heroTitle: "Anlık AI.\nDoğrudan ekranınızda.",
+    metaTitle: "ZenCopy — Anlık AI. Doğrudan ekranınızda.",
+    note: "Ücretsiz · Açık kaynak · Windows, macOS ve Linux",
     demoAria: "nasıl çalışır",
     demoCaption:
-      "Kopyala, sonra C'ye bir kez daha bas. AI'ın yanıtı olduğu yerde belirir — ve sohbet tam orada devam eder.",
+      "İngilizce bir e-postayı seçin ve {mod} + C + C tuşlarına basın. Türkçe özet anında ekrana gelir. Bu, ZenCopy ile yapabileceklerinizden sadece biri.",
     features: [
       {
-        title: "AI'ını aramak yok",
-        body: "Tarayıcıda ya da Slack'te — AI, baktığın şeyin üzerinde belirir.",
+        title: "Açıkla. Çevir. İyileştir.",
+        body: "Bir terimin açıklaması, ekran görüntüsünün çevirisi, mesaj veya e-postanın iyileştirilmiş hali. Kopyalayabildiğiniz her şey.",
       },
       {
-        title: "Kopyalayabildiğin her şey",
-        body: "Metin, görseller, dosyalar. Bir ekran görüntüsüyle bile konuşabilirsin.",
+        title: "Öğrenmeniz gereken tek şey: {mod} + C + C.",
+        body: "Bir kez ayarlayın. Sonrasında ne zaman gerekirse {mod} + C + C tuşlarına basın. Tarayıcıda veya Slack'te, doğrudan çalıştığınız ekranda.",
       },
       {
-        title: "Kendi modelini getir",
-        body: "OpenAI, Google, Anthropic, kurumsal bir ağ geçidi ya da yerel Ollama — hepsi tek yerden değiştirilir.",
+        title: "Tamamen ücretsiz.",
+        body: "ZenCopy ücretsizdir; Gemini'ın ücretsiz planı sayesinde AI da öyle. GPT veya Claude API anahtarınız mı var? Dilediğiniz an geçiş yapabilirsiniz.",
       },
       {
-        title: "Tasarımı gereği gizli",
-        body: "Hesap yok, telemetri yok, aktarma sunucusu yok. İçerik ve anahtarlar yalnızca senin gösterdiğin yere gider.",
+        title: "Yalnızca bağladığınız AI görür.",
+        body: "Kopyaladığınız içerik doğrudan bağladığınız AI servisine iletilir. ZenCopy'nin kendi sunucusu yoktur ve açık kaynaklıdır; dileyen herkes inceleyebilir.",
       },
     ],
     philosophy: "En iyi araç, orada olduğunu unuttuğun araçtır.",
@@ -565,30 +566,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   vi: {
     description:
-      "Một trợ lý thường trực tĩnh lặng, triệu hồi cuộc trò chuyện với AI ngay trên bất kỳ ứng dụng nào. Tín hiệu là sao chép hai lần. Câu trả lời đầu tiên tự bắt đầu từ nội dung bạn sao chép — phần còn lại là một cuộc trò chuyện.",
+      "Email tiếng nước ngoài, luồng trao đổi dài, thông báo lỗi khó hiểu. Chọn nội dung, nhấn {mod} + C + C và AI tức thời xuất hiện ngay trên màn hình của bạn. Tóm tắt, giải thích, dịch thuật, trau chuốt câu từ. Hoàn toàn miễn phí, và nội dung sao chép chỉ gửi tới AI bạn đã kết nối.",
     docs: "Tài liệu",
-    heroTitle: "Sao chép hai lần,\nxử lý tức thì.",
-    metaTitle: "ZenCopy — Sao chép hai lần, xử lý tức thì.",
-    note: "Miễn phí · Apache-2.0 · Windows, macOS & Linux",
+    heroTitle: "AI tức thời.\nNgay trên màn hình của bạn.",
+    metaTitle: "ZenCopy — AI tức thời. Ngay trên màn hình của bạn.",
+    note: "Miễn phí · Mã nguồn mở · Windows, macOS & Linux",
     demoAria: "cách hoạt động",
     demoCaption:
-      "Sao chép, rồi nhấn C thêm một lần. Câu trả lời của AI hiện ra ngay tại chỗ — và cuộc trò chuyện tiếp tục ngay ở đó.",
+      "Chọn một email tiếng Anh rồi nhấn {mod} + C + C. Bản tóm tắt bằng tiếng Việt sẽ xuất hiện ngay lập tức. Đây chỉ là một trong những điều ZenCopy có thể làm.",
     features: [
       {
-        title: "Không phải đi tìm AI",
-        body: "Trong trình duyệt hay trong Slack, AI hiện ra ngay trên thứ bạn đang nhìn.",
+        title: "Giải thích. Dịch. Trau chuốt.",
+        body: "Giải thích thuật ngữ, dịch ảnh chụp màn hình, trau chuốt tin nhắn hay email. Bất cứ thứ gì bạn có thể sao chép.",
       },
       {
-        title: "Bất cứ thứ gì bạn sao chép được",
-        body: "Văn bản, hình ảnh, tệp. Bạn thậm chí có thể trò chuyện với một ảnh chụp màn hình.",
+        title: "Chỉ cần nhớ {mod} + C + C.",
+        body: "Thiết lập một lần duy nhất. Từ đó về sau, chỉ cần nhấn {mod} + C + C mỗi khi cần. Trong trình duyệt hay trên Slack, ngay trên màn hình bạn đang xem.",
       },
       {
-        title: "Tự chọn mô hình của bạn",
-        body: "OpenAI, Google, Anthropic, gateway công ty, hay Ollama chạy tại máy — đổi tất cả ở một nơi.",
+        title: "Hoàn toàn miễn phí.",
+        body: "ZenCopy hoàn toàn miễn phí, và AI cũng vậy với gói miễn phí của Gemini. Bạn có khóa API của GPT hoặc Claude? Có thể chuyển đổi bất cứ lúc nào.",
       },
       {
-        title: "Riêng tư ngay từ khâu thiết kế",
-        body: "Không tài khoản, không telemetry, không máy chủ trung gian. Nội dung và khóa chỉ đi đến nơi bạn chỉ định.",
+        title: "Chỉ AI của bạn nhận được.",
+        body: "Nội dung bạn sao chép được gửi thẳng tới AI bạn đã kết nối. ZenCopy không có máy chủ riêng và là mã nguồn mở, ai cũng có thể kiểm tra.",
       },
     ],
     philosophy: "Công cụ tốt nhất là công cụ bạn quên mất rằng nó đang ở đó.",
@@ -597,29 +598,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   "zh-hans": {
     description:
-      "一款安静的常驻助手，在任何应用之上随时唤出与 AI 的对话。信号是复制两次。第一条回答从你复制的内容自动开始 — 接下来就是一场对话。",
+      "外语邮件、冗长讨论串、晦涩的报错界面。划选内容，按下 {mod} + C + C，当前屏幕，AI 立现。总结、解释、翻译、润色。完全免费，复制的内容仅直达你连接的 AI。",
     docs: "文档",
-    heroTitle: "复制两次，\n立即处理。",
-    metaTitle: "ZenCopy — 复制两次，立即处理。",
-    note: "免费 · Apache-2.0 · Windows、macOS 和 Linux",
+    heroTitle: "当前屏幕，\nAI 立现。",
+    metaTitle: "ZenCopy — 当前屏幕，AI 立现。",
+    note: "免费 · 开源 · Windows、macOS 和 Linux",
     demoAria: "运作方式",
-    demoCaption: "复制之后再按一次 C。AI 的回答当场出现 — 对话就在原地继续。",
+    demoCaption:
+      "划选一封英文邮件并按下 {mod} + C + C，中文总结即刻呈现。这只是 ZenCopy 的本领之一。",
     features: [
       {
-        title: "不用再去找 AI",
-        body: "在浏览器里也好，在 Slack 里也好，AI 就出现在你正看着的画面上。",
+        title: "解释、翻译、润色。",
+        body: "解释生僻术语，翻译屏幕截图，润色聊天消息或邮件。凡能复制，皆可处理。",
       },
       {
-        title: "能复制的，都能处理",
-        body: "文本、图片、文件。你甚至可以和一张截图对话。",
+        title: "只需记住 {mod} + C + C。",
+        body: "一次配置，随处可用。需要时轻按 {mod} + C + C，无论在浏览器还是 Slack 中，直接在当前屏幕即刻响应。",
       },
       {
-        title: "自带模型",
-        body: "OpenAI、Google、Anthropic、企业网关或本地 Ollama — 在一处即可切换。",
+        title: "完全免费。",
+        body: "ZenCopy 完全免费，搭配 Gemini 免费额度，AI 同样零成本。手头有 GPT 或 Claude 的 API 密钥？随时随心切换。",
       },
       {
-        title: "为隐私而设计",
-        body: "无账号、无遥测、无中转服务器。内容和密钥只去你指定的地方。",
+        title: "数据只直达你的 AI。",
+        body: "复制的内容直接发送给你连接的 AI。ZenCopy 没有自己的服务器，且完全开源，任何人皆可查验。",
       },
     ],
     philosophy: "最好的工具，是让你忘了它存在的那一个。",
@@ -628,29 +630,30 @@ export const LANDING_COPY: Record<string, LandingCopy> = {
   },
   "zh-hant": {
     description:
-      "一款沉靜的常駐代理程式，在任何應用程式之上隨時喚出與 AI 的對話。訊號是複製兩次。第一個回答由你複製的內容自動開始——接下來就是一場對話。",
+      "外語信件、冗長討論串、晦澀的錯誤畫面。選取內容，按下 {mod} + C + C，當前螢幕，AI 立現。摘要、解說、翻譯、潤飾。完全免費，複製的內容僅直達您串接的 AI。",
     docs: "文件",
-    heroTitle: "複製兩次，\n立即處理。",
-    metaTitle: "ZenCopy — 複製兩次，立即處理。",
-    note: "免費 · Apache-2.0 · Windows、macOS 與 Linux",
+    heroTitle: "當前螢幕，\nAI 立現。",
+    metaTitle: "ZenCopy — 當前螢幕，AI 立現。",
+    note: "免費 · 開源 · Windows、macOS 與 Linux",
     demoAria: "運作方式",
-    demoCaption: "複製之後再按一次 C。AI 的回答當場出現——對話就在原地繼續。",
+    demoCaption:
+      "選取一封英文信件並按下 {mod} + C + C，中文摘要隨即呈現。這只是 ZenCopy 能做到的其中一件事。",
     features: [
       {
-        title: "不必再去找 AI",
-        body: "在瀏覽器或 Slack 裡，AI 都會出現在你正看著的畫面上。",
+        title: "解說、翻譯、潤飾。",
+        body: "專業術語解說、螢幕截圖翻譯、聊天訊息或信件潤飾。凡能複製，皆可處理。",
       },
       {
-        title: "能複製的都可以",
-        body: "文字、圖片、檔案。你甚至可以和一張螢幕截圖對話。",
+        title: "只需記住 {mod} + C + C。",
+        body: "設定只需一次。之後每當需要，按一下 {mod} + C + C 即可。無論在瀏覽器或 Slack，直接在當前螢幕使用。",
       },
       {
-        title: "自帶你的模型",
-        body: "OpenAI、Google、Anthropic、企業閘道或本機 Ollama——都在同一個地方切換。",
+        title: "完全免費。",
+        body: "ZenCopy 完全免費，搭配 Gemini 的免費方案，AI 同樣零負擔。若有 GPT 或 Claude 的 API 金鑰，亦可隨時切換。",
       },
       {
-        title: "從設計上保護隱私",
-        body: "沒有帳號、沒有遙測、沒有中繼伺服器。內容與金鑰只會送到你指定的地方。",
+        title: "資料只直達您的 AI。",
+        body: "複製的內容直接傳送至您串接的 AI。ZenCopy 沒有自己的伺服器，且程式碼完全開源，任何人皆可檢驗。",
       },
     ],
     philosophy: "最好的工具，是讓你忘了它存在的那一個。",

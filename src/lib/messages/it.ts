@@ -123,7 +123,7 @@ export const it: Messages = {
     open: "Apri",
   },
   about: {
-    tagline: "Copia due volte, agisci all'istante.",
+    tagline: "IA all'istante. Direttamente sul tuo schermo.",
     update: (version) => `Aggiorna alla v${version} e riavvia l'app`,
     updateRestart: (version) => `Riavvia l'app per aggiornare alla v${version}`,
     updating: "Aggiornamento…",

@@ -120,7 +120,7 @@ export const en: Messages = {
     open: "Open",
   },
   about: {
-    tagline: "Copy twice, act instantly.",
+    tagline: "Instant AI. Right on your screen.",
     update: (version) => `Update to v${version} and restart the app`,
     updateRestart: (version) => `Restart the app to update to v${version}`,
     updating: "Updating…",

@@ -116,7 +116,7 @@ export const he: Messages = {
     open: "פתיחה",
   },
   about: {
-    tagline: "מעתיקים פעמיים, פועלים מיד.",
+    tagline: "‏AI מיידי. ישירות על המסך שלך.",
     update: (version) => `עדכון ל‑v${version} והפעלת האפליקציה מחדש`,
     updateRestart: (version) => `הפעלת האפליקציה מחדש לעדכון ל‑v${version}`,
     updating: "מעדכן…",

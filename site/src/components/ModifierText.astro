@@ -1,0 +1,23 @@
+---
+/**
+ * A landing copy string with `{mod}` where the visitor's modifier key goes:
+ * Ctrl, swapped to ⌘ by the landing's inline script once it has seen a Mac —
+ * so `{mod} + C + C` reads as the visitor's own signal. No-JS and other
+ * OSes keep Ctrl, and so does the meta description, where only text can go
+ * (Landing.astro substitutes it there).
+ */
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+const parts = text.split("{mod}");
+---
+
+{
+  parts.map((part, index) => (
+    <>
+      {index > 0 && <span data-os-modifier>Ctrl</span>}
+      {part}
+    </>
+  ))
+}

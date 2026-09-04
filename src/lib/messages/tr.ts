@@ -123,7 +123,7 @@ export const tr: Messages = {
     open: "Aç",
   },
   about: {
-    tagline: "İki kez kopyala, anında harekete geç.",
+    tagline: "Anlık AI. Doğrudan ekranınızda.",
     update: (version) => `v${version} sürümüne güncelle ve uygulamayı yeniden başlat`,
     updateRestart: (version) => `v${version} sürümüne güncellemek için uygulamayı yeniden başlat`,
     updating: "Güncelleniyor…",

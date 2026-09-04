@@ -2,22 +2,36 @@
 // One demo video embed for the docs pages. Every locale has its own demos
 // (/public/<locale>/demo/<demo>.mp4 with a matching .jpg poster), generated
 // by `bun run demo-video` (scripts/demo-video.ts) — the popup in the video
-// speaks the page's language. The frame sizes are the generator's, so they
-// live here, once: the summarize demo is the template recording (the
-// browser page being copied), the others the popup window alone at 2×. The
+// speaks the page's language. What a demo plays over and the frame it is
+// filmed in are the generator's declarations (scripts/demo-video/demos.ts):
+// the mail page with the popup beside it (landscape, shown at the column's
+// full width), or the popup window alone (portrait, capped narrower). The
 // slot is the localized fallback link text for browsers that cannot play
 // the video.
+import {
+  DEMOS,
+  FRAMES,
+  VIDEO_SCALE,
+} from "../../../scripts/demo-video/demos.ts";
+
 interface Props {
-  demo: "summarize" | "explain" | "follow-up" | "custom";
+  demo: string;
   locale: string;
 }
 const { demo, locale } = Astro.props;
+const declared = DEMOS.find((entry) => entry.name === demo);
+if (declared === undefined) {
+  throw new Error(`no demo named "${demo}" — see scripts/demo-video/demos.ts`);
+}
 const base = `/${locale}/demo/${demo}`;
-const [width, height] = demo === "summarize" ? [1748, 2262] : [1230, 1240];
+const wide = declared.stage === "page";
+const frame = FRAMES[declared.stage];
+const width = frame.width * VIDEO_SCALE;
+const height = frame.height * VIDEO_SCALE;
 ---
 
 <video
-  class="demo-video"
+  class:list={["demo-video", { wide }]}
   controls
   height={height}
   muted

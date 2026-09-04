@@ -17,15 +17,15 @@ export const GEMINI_DEFAULT_MODEL = "gemini-3.1-flash-lite";
 // URL to the installed ai-sdk-catalog so the hints always match the runtime.
 export const SCHEMA_URL = `https://cdn.jsdelivr.net/npm/ai-sdk-catalog@${catalogVersion}/schema.json`;
 
-/** A complete, valid-by-construction catalog from one Gemini key. */
-export function geminiQuickCatalog(apiKey: string): string {
+/** A complete, valid-by-construction catalog from one Gemini key — the
+ *  default model, unless a caller names another Gemini one (the demo
+ *  generator replays a recording against the model it was made with). */
+export function geminiQuickCatalog(apiKey: string, model = GEMINI_DEFAULT_MODEL): string {
   return JSON.stringify(
     {
       $schema: SCHEMA_URL,
-      providers: [
-        { id: "google", vendor: { apiKey: apiKey.trim() }, models: [{ id: GEMINI_DEFAULT_MODEL }] },
-      ],
-      roles: { default: `google:${GEMINI_DEFAULT_MODEL}` },
+      providers: [{ id: "google", vendor: { apiKey: apiKey.trim() }, models: [{ id: model }] }],
+      roles: { default: `google:${model}` },
     },
     undefined,
     2,

@@ -9,7 +9,12 @@
  */
 import { getEntry } from "astro:content";
 import HeroDemo from "./HeroDemo.astro";
+import ModifierText from "./ModifierText.astro";
 import { LANDING_COPY, LANDING_LOCALES, THEME_LABELS } from "./landing-copy.ts";
+
+// Where only text can go (the meta description), the copy's `{mod}` is Ctrl —
+// in prose, ModifierText renders it as the span the script below swaps.
+const plain = (text: string): string => text.replaceAll("{mod}", "Ctrl");
 
 interface Props {
   /** One of the codes in LANDING_LOCALES (e.g. "en", "ja", "zh-hans"). */
@@ -44,7 +49,7 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>{copy.metaTitle}</title>
-    <meta content={copy.description} name="description" />
+    <meta content={plain(copy.description)} name="description" />
     <link href={canonical} rel="canonical" />
     {
       LANDING_LOCALES.map((entry) => (
@@ -61,14 +66,14 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     <link href="/sitemap-index.xml" rel="sitemap" />
     <meta content="ZenCopy" property="og:site_name" />
     <meta content={copy.metaTitle} property="og:title" />
-    <meta content={copy.description} property="og:description" />
+    <meta content={plain(copy.description)} property="og:description" />
     <meta content="website" property="og:type" />
     <meta content={canonical} property="og:url" />
     <meta content="https://zencopy.app/og.png" property="og:image" />
     <meta content="1200" property="og:image:width" />
     <meta content="630" property="og:image:height" />
     <meta
-      content="ZenCopy — Copy twice, act instantly. Talk to an AI anywhere."
+      content="ZenCopy — Instant AI. Right on your screen. Talk to an AI anywhere."
       property="og:image:alt"
     />
     <meta content="summary_large_image" name="twitter:card" />
@@ -224,7 +229,7 @@ const gettingStartedHref = `/${lang}/getting-started/`;
       <section aria-label={copy.demoAria} class="demo">
         <figure>
           <HeroDemo />
-          <figcaption>{copy.demoCaption}</figcaption>
+          <figcaption><ModifierText text={copy.demoCaption} /></figcaption>
         </figure>
       </section>
 
@@ -232,8 +237,12 @@ const gettingStartedHref = `/${lang}/getting-started/`;
         {
           copy.features.map((feature) => (
             <article>
-              <h2>{feature.title}</h2>
-              <p>{feature.body}</p>
+              <h2>
+                <ModifierText text={feature.title} />
+              </h2>
+              <p>
+                <ModifierText text={feature.body} />
+              </p>
             </article>
           ))
         }

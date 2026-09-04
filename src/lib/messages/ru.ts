@@ -123,7 +123,7 @@ export const ru: Messages = {
     open: "Открыть",
   },
   about: {
-    tagline: "Скопируйте дважды — действуйте сразу.",
+    tagline: "Мгновенный ИИ. Прямо на вашем экране.",
     update: (version) => `Обновить до v${version} и перезапустить приложение`,
     updateRestart: (version) => `Перезапустить приложение, чтобы обновить до v${version}`,
     updating: "Обновление…",

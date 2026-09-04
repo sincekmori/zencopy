@@ -1,12 +1,12 @@
 {
   "locale": "ar",
-  "recorded": "2026-09-05T10:34:10.507Z",
+  "recorded": "2026-09-06T12:27:46.073Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:33:29"
+      "now": "2026-09-06 21:27:17"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "يستعرض هذا المستند بروتوكول HTCPCP التقني المخصص للتحكم في ماكينات إعداد القهوة عبر الشبكة.",
+      "reply": "تم تأجيل موعد مراجعة العرض إلى 9 أكتوبر، مع طلب إرسال الأسعار المحدثة وتقديم عرض توضيحي للوحة التحكم.",
       "tokens": {
-        "input": 467,
-        "output": 38
+        "input": 169,
+        "output": 40
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "هذه الوثيقة هي مزحة تقنية نُشرت في يوم الأول من أبريل عام 1998، وهي تصف طريقة خيالية للتحكم في ماكينات صنع القهوة عبر شبكة الإنترنت.\n\nتخيل أنك تجلس في غرفتك وتريد أن تطلب من الماكينة الموجودة في المطبخ أن تبدأ في إعداد القهوة، تماماً كما تطلب من متصفح الإنترنت أن يجلب لك صفحة ويب. الطريقة التي تتحدث بها أجهزة الكمبيوتر مع بعضها البعض عبر الإنترنت تسمى \"بروتوكول\"، وهذا النص يقترح بروتوكولاً فكاهياً يسمى \"بروتوكول التحكم في إبريق القهوة عبر النص التشعبي\".\n\nإليك كيف تُفهم هذه الفكرة:\n\nأولاً، أجهزة الكمبيوتر تتفاهم بلغة معينة. لكي يفتح جهازك صفحة إلكترونية، فإنه يرسل طلباً إلى موقع ما ويستقبل رداً، وهذا ما نسميه بروتوكول نقل النص التشعبي. الفكرة في هذه الوثيقة هي استخدام نفس هذه الطريقة ولكن لإصدار أوامر لماكينة القهوة.\n\nثانياً، في ذلك الوقت، كان الناس متحمسين لفكرة ربط كل شيء في المنزل بالإنترنت، مثل الغلايات والمحامص. أراد كاتب هذه الوثيقة أن يسخر من هذا التوجه من خلال كتابة قواعد تقنية معقدة ورسمية جداً لشيء بسيط جداً وهو \"صنع فنجان قهوة\".\n\nثالثاً، يتضمن النص مصطلحات تقنية تبدو حقيقية ومقنعة، مثل ذكر \"بروتوكول إدارة الشبكة البسيط\" (Simple Network Management Protocol) الذي يستخدم فعلياً لإدارة الأجهزة، ليجعل القارئ يصدق لفترة وجيزة أن هذا الاقتراح جدي.\n\nرابعاً، هذه الوثيقة ليست قانوناً أو معياراً حقيقياً يجب على الشركات اتباعه. هي مجرد طريقة ممتعة للمبرمجين للسخرية من كيفية كتابة المعايير التقنية الجادة، ومن هوس الناس بربط الأجهزة البسيطة بشبكة الإنترنت.\n\nخلاصة القول، هذه الوثيقة هي نكتة في قالب تقني، صُممت لتضحك المبرمجين الذين يعرفون كيف تعمل الشبكات، حيث تحول عملية إعداد القهوة إلى إجراء تقني معقد لا داعي له.",
+      "reply": "هذه رسالة من عميل يخبرك فيها بتغيير في مواعيد العمل، ويطلب منك بعض التجهيزات الجديدة.\n\nأهم ما في الرسالة هو أن موعد اجتماع اتخاذ القرار قد تأجل لمدة أسبوع.\n\nإليك تفاصيل ما يطلبه العميل خطوة بخطوة:\n\nأولاً: تغير موعد الاجتماع. كان من المفترض أن يجتمع المديرون في الثاني من شهر أكتوبر، ولكنهم قاموا بتأجيله إلى التاسع من نفس الشهر. السبب في ذلك هو أن اثنين من المديرين سيكونون في رحلة عمل خارج البلاد في الموعد القديم.\n\nثانياً: طلب ورقة الأسعار الجديدة. يريد العميل منك أن ترسل له قائمة الأسعار المعدلة قبل يوم ثلاثين من شهر سبتمبر. والهدف من ذلك هو إضافتها إلى الأوراق التي سيقرؤها المديرون قبل بدء الاجتماع، حتى يكونوا مستعدين لمناقشتها.\n\nثالثاً: إضافة عرض توضيحي. يرغب العميل في إضافة فقرة جديدة إلى جدول أعمال الاجتماع. هذه الفقرة عبارة عن عرض مدته خمس عشرة دقيقة فقط، سيتم فيه استعراض \"لوحة التحكم في التقارير\". لوحة التحكم هذه هي واجهة رقمية داخل البرنامج تُظهر البيانات والمعلومات بشكل منظم ومبسط.\n\nرابعاً: التأكد من مناسبة الوقت. يطلب العميل منك أن تؤكد له ما إذا كان هذا الجدول الزمني الجديد وتلك الإضافات تناسبك أم لا.\n\nباختصار، يحتاج العميل منك تأكيداً على الموعد الجديد، وإرسال الأسعار قبل نهاية شهر سبتمبر، والاستعداد لتقديم عرض قصير عن نظام التقارير الخاص بك.",
       "tokens": {
-        "input": 773,
-        "output": 542
+        "input": 475,
+        "output": 366
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "باختصار أكثر، من فضلك",
-      "reply": "هذه الوثيقة هي \"مزحة تقنية\" نُشرت عام 1998 كنوع من الدعابة بين المبرمجين. هي تصف طريقة خيالية للتحكم في ماكينة القهوة عبر الإنترنت باستخدام قواعد تقنية تشبه الطريقة التي تعمل بها مواقع الويب.\n\nالفكرة ببساطة هي محاكاة جادة للغة البرمجة لشيء بسيط مثل \"إعداد القهوة\"، للسخرية من هوس الناس في ذلك الوقت بربط كل أجهزة المنزل بالإنترنت، وهي ليست قاعدة تقنية حقيقية.",
+      "reply": "الرسالة تطلب منك ثلاثة أمور أساسية:\n\n1. **تعديل الموعد:** الاجتماع تأجل من 2 أكتوبر إلى 9 أكتوبر بسبب سفر المديرين.\n2. **إرسال الأسعار:** يجب أن ترسل قائمة الأسعار الجديدة قبل 30 سبتمبر لتكون جاهزة للمديرين قبل الاجتماع.\n3. **تقديم عرض:** يريد العميل تخصيص 15 دقيقة خلال الاجتماع لعرض \"لوحة التحكم في التقارير\" (واجهة عرض البيانات).\n\nالمطلوب منك هو الرد بالموافقة على هذه التغييرات.",
       "tokens": {
-        "input": 1329,
-        "output": 133
+        "input": 855,
+        "output": 137
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "حول إلى جدول",
-      "reply": "| الحقل | التفاصيل |\n| :--- | :--- |\n| **اسم البروتوكول** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **رقم الطلب (RFC)** | 2324 |\n| **التاريخ** | 1 أبريل 1998 |\n| **المؤلف** | L. Masinter |\n| **الفئة** | معلوماتي (Informational) |\n| **الغرض** | التحكم في أوعية صنع القهوة ومراقبتها وتشخيص أعطالها |\n| **الأساس المنطقي** | الحاجة إلى بروتوكول موزع لتمكين التحكم عن بعد في أجهزة صنع القهوة في بيئة الحوسبة المنتشرة |",
+      "reply": "| البند | التفاصيل |\n| :--- | :--- |\n| **موضوع المراجعة** | مراجعة القيادة |\n| **التاريخ الجديد** | 9 أكتوبر |\n| **التاريخ السابق** | 2 أكتوبر |\n| **المطلوب من المورد** | إرسال قائمة الأسعار المحدثة بحلول 30 سبتمبر |\n| **إضافة إضافية** | عرض توضيحي (Demo) للوحة التحكم لمدة 15 دقيقة |",
       "tokens": {
-        "input": 696,
-        "output": 178
+        "input": 346,
+        "output": 117
       }
     }
   ],
@@ -77,11 +77,15 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          6.228,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eيستعرض هذا المستند بروتوكول HTCPCP التقني\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 18,\"totalTokenCount\": 485,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" المخصص للتحكم في ماكينات إعداد القهوة عبر الشبكة.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPSQ2HoSe/sPIvylkH/MwMjG7EKODJr7y8U1m9q190HZvU4gdIvPa8KVJqmDRl3ACdM7tCkDZb16yl1jN9SCHvv+nLOYxrZmuf3yfIRVCQsZMMX3mxoZxAAlkaMcUmGlKhVFNWLVZPZTB9wg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 38,\"totalTokenCount\": 505,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"_O-bavrXB-HLrfcPptKxOQ\"}\r\n\r\n"
+          1.039,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 2,\"totalTokenCount\": 171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JVydare8KPKZ0-kPn-bViAw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eتم تأجيل موعد مراجعة العرض إلى 9 أكتوبر، مع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 19,\"totalTokenCount\": 188,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JVydare8KPKZ0-kPn-bViAw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" طلب إرسال الأسعار المحدثة وتقديم عرض توضيحي للوحة التحكم.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 40,\"totalTokenCount\": 209,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JVydare8KPKZ0-kPn-bViAw\"}\r\n\r\n"
+        ],
+        [
+          1.043,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP7ptNtkWQstwRF1FU1uBHUMBvRbs3SYumyUWucIYD8QVdxizklRakA6In+V7UIBsVbXRd+tVB6S8jD4fjU8Ck42buKtCTbe8aVNt2Esv6qCMX2xjLEvxlkOwnkRiC9ETDmtmP14OyaB2w7g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 40,\"totalTokenCount\": 209,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JVydare8KPKZ0-kPn-bViAw\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "e05fa0cbec99550d139e08c9714447539857f7b5be5d45faf63d5bdbf4018ce2"
+      "bodySha256": "9cd5833c775c7af7329cf90d0af9e8e262e1bf8e60f5857ce03d8b8f05f4c733"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -90,87 +94,71 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.26,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nهذه الوثيقة هي مزحة تقنية نُشرت في يوم الأول من\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 22,\"totalTokenCount\": 795,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" أبريل عام 1998، وهي تصف طريقة خيالية للتحكم في ماكينات صنع القه\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 47,\"totalTokenCount\": 820,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وة عبر شبكة الإنترنت.\\n\\nتخيل أنك تجلس في غرفتك وتريد أن تطلب من الم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 72,\"totalTokenCount\": 845,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          0.878,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nهذه رسالة من عميل يخبرك فيها بتغيير\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 18,\"totalTokenCount\": 493,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.323,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"اكينة الموجودة في المطبخ أن تبدأ في إعداد القهوة، تماماً كما تطلب من متصفح الإنترنت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 100,\"totalTokenCount\": 873,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          0.898,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" في مواعيد العمل، ويطلب منك بعض التجهيزات الجديدة.\\n\\nأهم ما في الرسالة هو أن موعد اجتماع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 44,\"totalTokenCount\": 519,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.409,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" أن يجلب لك صفحة ويب. الطريقة التي تتحدث بها أجهزة الكمبيوتر مع بعضها البعض عبر الإنترنت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 124,\"totalTokenCount\": 897,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.005,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" اتخاذ القرار قد تأجل لمدة أسبوع.\\n\\nإليك تفاصيل ما يطلبه العميل خطوة بخط\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 69,\"totalTokenCount\": 544,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.529,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" تسمى \\\"بروتوكول\\\"، وهذا النص يقترح بروتوكولاً فكاهياً يسمى \\\"بروتوكول\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 152,\"totalTokenCount\": 925,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.107,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وة:\\n\\nأولاً: تغير موعد الاجتماع. كان من المفترض أن يجتمع المديرون في الثاني\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 93,\"totalTokenCount\": 568,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.674,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" التحكم في إبريق القهوة عبر النص التشعبي\\\".\\n\\nإليك كيف تُفهم هذه الفكرة:\\n\\nأ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 179,\"totalTokenCount\": 952,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.172,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" من شهر أكتوبر، ولكنهم قاموا بتأجيله إلى التاسع من نفس الشهر. السبب في ذلك هو أن اثنين\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 118,\"totalTokenCount\": 593,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.697,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ولاً، أجهزة الكمبيوتر تتفاهم بلغة معينة. لكي يفتح جهازك صفحة إ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 203,\"totalTokenCount\": 976,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.282,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" من المديرين سيكونون في رحلة عمل خارج البلاد في الموعد القديم.\\n\\nثانياً: طلب ورقة الأسعار\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 146,\"totalTokenCount\": 621,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.785,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"لكترونية، فإنه يرسل طلباً إلى موقع ما ويستقبل رداً، وهذا ما نسميه بر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1001,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.342,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" الجديدة. يريد العميل منك أن ترسل له قائمة الأسعار المعدلة قبل يوم ثلاثين من شهر سبتمبر. وال\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 170,\"totalTokenCount\": 645,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.888,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وتوكول نقل النص التشعبي. الفكرة في هذه الوثيقة هي استخدام نفس هذه الطريقة ولكن لإ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 252,\"totalTokenCount\": 1025,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.497,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"هدف من ذلك هو إضافتها إلى الأوراق التي سيقرؤها المديرون قبل بدء الاجتماع، حتى يكون\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 194,\"totalTokenCount\": 669,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          2.975,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"صدار أوامر لماكينة القهوة.\\n\\nثانياً، في ذلك الوقت، كان الناس متحمسين لف\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 278,\"totalTokenCount\": 1051,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.52,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وا مستعدين لمناقشتها.\\n\\nثالثاً: إضافة عرض توضيحي. يرغب العميل في\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 220,\"totalTokenCount\": 695,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          3.112,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"كرة ربط كل شيء في المنزل بالإنترنت، مثل الغلايات والمحامص. أراد كاتب هذه\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 303,\"totalTokenCount\": 1076,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.693,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" إضافة فقرة جديدة إلى جدول أعمال الاجتماع. هذه الفقرة عبارة عن عرض مدته خمس عشرة دقيقة فقط، سي\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 247,\"totalTokenCount\": 722,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          3.288,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" الوثيقة أن يسخر من هذا التوجه من خلال كتابة قواعد تقنية معقدة ورسمية جداً لشي\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 330,\"totalTokenCount\": 1103,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.805,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"تم فيه استعراض \\\"لوحة التحكم في التقارير\\\". لوحة التحكم هذه هي واجهة رقمية داخل البرنامج تُظهر البيانات\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 275,\"totalTokenCount\": 750,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          3.31,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ء بسيط جداً وهو \\\"صنع فنجان قهوة\\\".\\n\\nثالثاً، يتضمن النص مصطلحات تق\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 356,\"totalTokenCount\": 1129,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.912,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" والمعلومات بشكل منظم ومبسط.\\n\\nرابعاً: التأكد من مناسبة الوقت. يطلب العميل منك أن\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 301,\"totalTokenCount\": 776,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          3.479,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"نية تبدو حقيقية ومقنعة، مثل ذكر \\\"بروتوكول إدارة الشبكة البسيط\\\" (Simple Network Management\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 384,\"totalTokenCount\": 1157,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          1.957,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" تؤكد له ما إذا كان هذا الجدول الزمني الجديد وتلك الإضافات تناسبك أم لا.\\n\\nبا\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 325,\"totalTokenCount\": 800,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          3.481,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Protocol) الذي يستخدم فعلياً لإدارة الأجهزة، ليجعل القارئ يصدق لفترة وج\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 408,\"totalTokenCount\": 1181,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          2.117,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ختصار، يحتاج العميل منك تأكيداً على الموعد الجديد، وإرسال الأسعار قبل نهاية\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 349,\"totalTokenCount\": 824,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          3.694,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"يزة أن هذا الاقتراح جدي.\\n\\nرابعاً، هذه الوثيقة ليست قانوناً أو معيار\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 432,\"totalTokenCount\": 1205,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          2.141,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" شهر سبتمبر، والاستعداد لتقديم عرض قصير عن نظام التقارير الخاص بك.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 366,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ],
         [
-          3.889,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"اً حقيقياً يجب على الشركات اتباعه. هي مجرد طريقة ممتعة للمبرمجين للسخرية من كيفية\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 458,\"totalTokenCount\": 1231,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" كتابة المعايير التقنية الجادة، ومن هوس الناس بربط الأجهزة البسيطة بشبكة الإنترنت.\\n\\nخ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 486,\"totalTokenCount\": 1259,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
-        ],
-        [
-          3.993,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"لاصة القول، هذه الوثيقة هي نكتة في قالب تقني، صُممت لتضحك الم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 511,\"totalTokenCount\": 1284,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
-        ],
-        [
-          4.208,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"برمجين الذين يعرفون كيف تعمل الشبكات، حيث تحول عملية إعداد القهوة إلى إجراء تقني مع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 536,\"totalTokenCount\": 1309,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
-        ],
-        [
-          4.233,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"قد لا داعي له.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 542,\"totalTokenCount\": 1315,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
-        ],
-        [
-          4.295,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPe6eudyxxl99MnXr86v5RXyLzwTlB9ZX/plf/F9tmrpi7x3P8QTKWjgfbdaHEHQe1wmyH5AHYgLrQZpFcZcVYCOHPYN51nPmKfZBN4C/mAMLMU2SgvD3N72feG/4Gu6P1sZxo3Ge6ZRZsqQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 542,\"totalTokenCount\": 1315,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"BvCbatdG8pnT6Q-f5tWIDA\"}\r\n\r\n"
+          2.21,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPULmLxzlo4xr1Jxw9rjt4e/mc4HtqRqXZxj3VU8+IuQR+OAruQkPBYzkB+4ApKpqzKZlw2hQ7pydVKHOz40BlBSzOxlNgoWi47XvBUe9CmfepyMPvRh/u++w8HNUol8aEdo5UpDNcZHAnnw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 366,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Klydau_qE6SA2roP37CzcA\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "90306a658a2a1438428c6733b509ec26d29e80873141563146cdf09dbeefc5d1"
+      "bodySha256": "42cd56e87c877194a35503c55ea3d7d4ba956044574bfd4f158df3717642d3a9"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -179,39 +167,35 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.884,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1331,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+          1.408,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 2,\"totalTokenCount\": 857,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nالرسالة تطلب منك ثلاثة أمور أساسية:\\n\\n1. **تعد\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 22,\"totalTokenCount\": 877,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\n"
         ],
         [
-          1.886,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nهذه الوثيقة هي \\\"مزحة تقنية\\\" نُشرت عام\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 21,\"totalTokenCount\": 1350,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+          1.434,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"يل الموعد:** الاجتماع تأجل من 2 أكتوبر إلى 9 أكتوبر بسبب سفر المديرين.\\n2. **إ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 49,\"totalTokenCount\": 904,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\n"
         ],
         [
-          2.011,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 1998 كنوع من الدعابة بين المبرمجين. هي تصف طريقة خيالية لل\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 45,\"totalTokenCount\": 1374,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+          1.541,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"رسال الأسعار:** يجب أن ترسل قائمة الأسعار الجديدة قبل 30 سبتمبر لتكون جاهزة للمديرين قبل الاجتماع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 77,\"totalTokenCount\": 932,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\n"
         ],
         [
-          2.116,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"تحكم في ماكينة القهوة عبر الإنترنت باستخدام قواعد تقنية تشبه الطريقة التي تعمل بها مواقع ال\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 69,\"totalTokenCount\": 1398,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+          1.609,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \".\\n3. **تقديم عرض:** يريد العميل تخصيص 15 دقيقة خلال الاجتماع لعرض\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 101,\"totalTokenCount\": 956,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\n"
         ],
         [
-          2.203,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ويب.\\n\\nالفكرة ببساطة هي محاكاة جادة للغة البرمجة لشيء بسيط مثل \\\"إعداد\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 96,\"totalTokenCount\": 1425,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+          1.722,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" \\\"لوحة التحكم في التقارير\\\" (واجهة عرض البيانات).\\n\\nالمطلوب منك هو الرد بالم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 125,\"totalTokenCount\": 980,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\n"
         ],
         [
-          2.368,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" القهوة\\\"، للسخرية من هوس الناس في ذلك الوقت بربط كل أجهزة المنزل بالإنترنت،\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 120,\"totalTokenCount\": 1449,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+          1.81,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وافقة على هذه التغييرات.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 137,\"totalTokenCount\": 992,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\n"
         ],
         [
-          2.409,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" وهي ليست قاعدة تقنية حقيقية.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 133,\"totalTokenCount\": 1462,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
-        ],
-        [
-          2.454,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPedfw8Qa+tjengY/7tQp6AegWjThhwX/wCvYtSlJfWax39ZzS19o1EKJa2zIPgTGSewIHx/1tW0UN89uEnWz2yvr2oqHBLAA9AIRkUHDgu+hqwxby0HVF6DZKRnoTB812SBr3yl3u4RPKmw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1329,\"candidatesTokenCount\": 133,\"totalTokenCount\": 1462,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1329}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EPCbaoidLpHNrfcP5sKnqQQ\"}\r\n\r\n"
+          1.859,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPf6D+neYUI7vjH9n/VxLygKYlWoUAsg6y8pJkUZPdGEXJPs7GAvm0T+ohHcjwNpFU14/ldcOuzqoQOzjdfy4IQ6y5qihNJIvW9ScNMtLvsLtQzirFZ/H82ZD5JUFwQw7V2prfB8E4IFAkJA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 855,\"candidatesTokenCount\": 137,\"totalTokenCount\": 992,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 855}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"MlydaqLYMZnorfcP7eWCgAs\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "4ba106cbb1b621d48d6cff167bf31dccc28610649ac86be0c31353b4149eca02"
+      "bodySha256": "a425a72a356bb0aaa822dc82c5f7be7b941aec854951a6ddfbfd2e963de865a9"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -220,27 +204,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.875,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| الحقل | التفاصيل |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 21,\"totalTokenCount\": 717,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **اسم البروتوكول** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 47,\"totalTokenCount\": 743,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"رقم الطلب (RFC)** | 2324 |\\n| **التاريخ** | 1 أبريل\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 71,\"totalTokenCount\": 767,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+          0.684,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 2,\"totalTokenCount\": 348,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OlydauPvKY782roPwta-sAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| البند | التفاصيل |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 21,\"totalTokenCount\": 367,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OlydauPvKY782roPwta-sAQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **موضوع المراجعة** | مراجعة القيادة |\\n| **التاريخ الجديد** | 9 أكتوبر |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 50,\"totalTokenCount\": 396,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OlydauPvKY782roPwta-sAQ\"}\r\n\r\n"
         ],
         [
-          1.907,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 1998 |\\n| **المؤلف** | L. Masinter |\\n| **الفئة\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 95,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+          0.734,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"التاريخ السابق** | 2 أكتوبر |\\n| **المطلوب من المورد** | إرسال قائمة الأس\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 75,\"totalTokenCount\": 421,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OlydauPvKY782roPwta-sAQ\"}\r\n\r\n"
         ],
         [
-          2.005,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"** | معلوماتي (Informational) |\\n| **الغرض** | التحكم في أوعية صنع القهوة ومراقبت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 123,\"totalTokenCount\": 819,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+          0.853,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"عار المحدثة بحلول 30 سبتمبر |\\n| **إضافة إضافية** | عرض توضيحي (Demo\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 102,\"totalTokenCount\": 448,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OlydauPvKY782roPwta-sAQ\"}\r\n\r\n"
         ],
         [
-          2.092,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ها وتشخيص أعطالها |\\n| **الأساس المنطقي** | الحاجة إلى بروتوكول مو\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 150,\"totalTokenCount\": 846,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+          0.959,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \") للوحة التحكم لمدة 15 دقيقة |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 117,\"totalTokenCount\": 463,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OlydauPvKY782roPwta-sAQ\"}\r\n\r\n"
         ],
         [
-          2.276,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"زع لتمكين التحكم عن بعد في أجهزة صنع القهوة في بيئة الحوسبة المنتشرة |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 178,\"totalTokenCount\": 874,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPT5xgOCCji3dbbuYirRlW1uy2pI0iyTdsZIk25kVa+PM5e38Bh6V4zUPgBfNSv3X6wUcMOdBbkr8NZjfdF+2+Jetcqch58I1n3Nb7vkE0T9DyLdFmGE6YE2nBq5KMe5avI7XHTpzVQosTLA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 178,\"totalTokenCount\": 874,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GPCbatWQOurY2roPy5iMmQo\"}\r\n\r\n"
+          1.003,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP73ZXMOm0r5hQMYVWVK80GLGLNbARBRnh+lI6u6+4Hk9wXPHGxmeznw+NeZKQM9dVjfcy0nUIlE9uIxK4kfpPSE2d44An1yPIleRbPXhtFz5HgnwxrHfNlcYVgmY1KcQQLUX0eLf42ggc/A==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 117,\"totalTokenCount\": 463,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OlydauPvKY782roPwta-sAQ\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "824a9dd0ca379584e7102c434689140e0a194580124c1af1a7ee78c94878dd3c"
+      "bodySha256": "efc875a01bf77369aa5242968ce5c35ef4bf5a1e53a5047a9fdb5c443c0bd479"
     }
   ]
 }

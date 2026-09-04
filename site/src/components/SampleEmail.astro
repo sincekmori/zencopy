@@ -1,0 +1,18 @@
+---
+/**
+ * The English email the guide has the reader try first, read from the demo
+ * recorder's source text — the mail in the video and the mail on the page
+ * are one file (scripts/demo-video/source.txt). Blank lines separate
+ * paragraphs; the lines of a paragraph are one sentence each.
+ */
+import source from "../../../scripts/demo-video/source.txt?raw";
+
+const paragraphs = source
+  .trim()
+  .split(/\n\s*\n/u)
+  .map((paragraph) => paragraph.split("\n").join(" "));
+---
+
+<blockquote>
+  {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+</blockquote>

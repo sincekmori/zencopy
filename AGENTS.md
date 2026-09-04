@@ -20,7 +20,7 @@ Everything CI runs is scripted or is a one-liner:
 - `bun run lint:dead` — knip: unused files, exports, and dependencies across root + site.
   Note its limit: a value that is _serialized on one side of the Rust ↔ TS IPC boundary and schema-declared on the other_ looks used to every per-language tool — when adding or removing a `CapturePayload`-style field, check both sides by hand.
 - `bun run format:check` — oxfmt, then prettier (`prettier-plugin-astro`) for `site/**/*.astro` (write with `bun run format`).
-  oxfmt also formats `site/**/*.mdx`, reflowing prose to a fixed column width — so the Semantic Line Breaks policy below applies to `.md` files only, and `.mdx` edits need a `bun run format` pass before committing.
+  oxfmt also formats `site/**/*.mdx` (list markers, emphasis, tables — never the line breaks of prose), so the Semantic Line Breaks policy below applies to `.mdx` as well; run `bun run format` after editing.
 - `bun run lint:toml` — Tombi with `--error-on-warnings`
 - `bun run build` — `tsc -b && vite build` (produces `dist/`)
 - `cargo fmt --manifest-path src-tauri/Cargo.toml --check`
@@ -39,14 +39,16 @@ It renders the React app in headless Playwright WebKit (the webview's own engine
 The parts: [screenshot.html](screenshot.html) (dev-server entry) → [src/screenshot/harness.ts](src/screenshot/harness.ts) (the mock, fed by the real `src-tauri/prompts/*.md` and `rules.json`) → [scripts/screenshot.ts](scripts/screenshot.ts) (the runner); scenarios are declared in [src/lib/screenshot.ts](src/lib/screenshot.ts) and ride the URL (`?screenshot=…`), which components react to via `screenshotScenario()`.
 Dev-only throughout: production builds contain neither the harness nor a live scenario check.
 
-To generate the docs' demo videos without recording a screen per locale: `bun run demo-video [--locale <code>] [--record] [--out <root>] [--keep-work]` (each locale is one session through the four demos declared in [scripts/demo-video/demos.ts](scripts/demo-video/demos.ts) — `summarize`, `explain`, `follow-up`, `custom`, each picking up where the previous left off — captured continuously and cut into `<root>/<locale>/demo/<demo>.mp4` plus a poster `.jpg`, default root `site/public`, what [site/src/components/DemoVideo.astro](site/src/components/DemoVideo.astro) serves).
-It drives the popup through the same harness in headless WebKit, captures its window as 2× frames with a transparent background, and composites them with ffmpeg: the first demo over the one human-recorded template, [scripts/demo-video/template.mp4](scripts/demo-video/template.mp4), from the moment the template's own popup appears (that popup is never seen — the recording covers it, shadow included), the rest over a plain backdrop, the popup alone.
+To generate the docs' demo videos without recording a screen at all: `bun run demo-video [--locale <code>] [--record] [--out <root>] [--keep-work]` (each locale is one session through the four demos declared in [scripts/demo-video/demos.ts](scripts/demo-video/demos.ts) — `summarize`, `explain`, `follow-up`, `custom`, each picking up where the previous left off — captured continuously and cut into `<root>/<locale>/demo/<demo>.mp4` plus a poster `.jpg`, default root `site/public`, what [site/src/components/DemoVideo.astro](site/src/components/DemoVideo.astro) serves).
+It drives the popup through the same harness in headless WebKit, captures its window as 2× frames with a transparent background, and composites them with ffmpeg: the first demo over a page WebKit renders too — a plain, unbranded mail client ([scripts/demo-video/mail.html](scripts/demo-video/mail.html): folders, the inbox list with the mail open, the reading pane) showing the sample email of [scripts/demo-video/source.txt](scripts/demo-video/source.txt), selected before the eye, the popup landing top right — and the rest over a plain backdrop, the popup alone.
+That source text is also what the guide embeds as its sample ([site/src/components/SampleEmail.astro](site/src/components/SampleEmail.astro)), so the mail in the video and the mail on the page are one file; after editing it, re-record.
 The model's answers are real once: `--record` runs the session against Gemini 3.1 Flash Lite (`GEMINI_API_KEY` in the environment, ~$0.003 per locale) and keeps everything in `scripts/demo-video/recordings/<locale>.json` — the copied text, what was typed, each reply as text, and the responses as they streamed — and every later run replays that file (the harness answers the app's model calls from it, chunk by chunk at the recorded times), so the videos regenerate with no model call.
-A replay shows the product as it is now (the popup, its labels, the prompts) with the recording's content: the copied text, the typed messages, and the replies come from the file — edit them there and the next replay shows the edit (a reply is streamed at the recorded pace, in the recorded shape) — and only the clock is borrowed, so a request that no longer matches the recording's is reported as drift; `--record` has the model answer afresh.
+A replay shows the product as it is now (the popup, its labels, the prompts) with the recording's content: the copied text, the typed messages, and the replies come from the file — edit them there and the next replay shows the edit (a reply is streamed at the recorded pace, in the recorded shape) — and only the clock is borrowed, so a request that no longer matches the recording's, or a session that made fewer model calls than the recording holds, is reported as drift; `--record` has the model answer afresh.
+A replay refuses to run when `source.txt` no longer matches the recording's copied text — the page behind the first demo is rendered from the file and the popup shows the recording, and a video must not show two mails — so after editing the file, re-record.
+The drivers read the popup's state off the DOM (`data-run-state` on the headline, `data-turn-status` on a failed or setup reply — [src/components/popup.tsx](src/components/popup.tsx)), never off icon or utility class names.
 Locales default to the recorded ones; recording a locale needs every string the demos type (`instruction`, `concise`) in its `POPUP_RESULT_FIXTURES` entry first, and `--record` without `--locale` takes exactly those locales.
-[scripts/demo-video/template.json](scripts/demo-video/template.json) records when and where the template's popup appears; after re-recording the template (the browser page being selected and copied twice at 2× scale, the popup landing top-right), regenerate it with `bun run demo-video --measure`.
-`--keep-work` leaves each run's frames and a `report.json` (step timings, usage, replay drift) under `scratch/demo-video/`; a failed locale keeps them regardless.
-Needs ffmpeg/ffprobe 9 on PATH besides the screenshot prerequisites.
+`--keep-work` leaves each run's frames and a `report.json` (step timings, usage, replay drift) under `scratch/demo-video/`; a failed locale keeps them regardless, its `report.json` naming what stopped it.
+Needs ffmpeg 9 on PATH besides the screenshot prerequisites.
 
 Run everything relevant to your change before opening a PR.
 Windows- and Linux-side compilation is CI's job (the Rust code here is only ever compiled for macOS locally).
@@ -92,8 +94,14 @@ Both sides share the same sinks (tauri-plugin-log): stdout in dev, a rotating fi
 - Access via `useT()` from [src/lib/i18n.tsx](src/lib/i18n.tsx).
   Do not hard-code English (or Japanese) into components.
 - Adding a language = one new locale file plus `messages` / `LOCALES` entries in [src/lib/messages/index.ts](src/lib/messages/index.ts); extend `locale_from_tag` in [src-tauri/src/tray.rs](src-tauri/src/tray.rs) (tray menu) to match.
+  The docs side of it: a `POPUP_RESULT_FIXTURES` entry in [src/lib/screenshot-scenarios.ts](src/lib/screenshot-scenarios.ts) (the strings the screenshots show and the demo session types), then `bun run screenshot --locale <code>` and `bun run demo-video --record --locale <code>` for its screenshots and videos, a `LANDING_LOCALES` entry and copy in [site/src/components/landing-copy.ts](site/src/components/landing-copy.ts), and the docs under `site/src/content/docs/<code>/`.
 - RTL locales (ar, fa, he) flip the layout via `<html dir>` — use logical Tailwind utilities (`ms-*`, `me-*`, `text-start`, …), never physical ones (`ml-*`, `text-left`), except for screen-physical UI like the popup-corner picker.
 - Changing a `Messages` key means updating all 19 locale files in the same commit — the build fails otherwise, by design.
+- The ja docs are the reference the other locales are translated from, so their prose never hard-codes the reader's language: wherever it means _the language this page is in_, it renders [site/src/components/PageLanguage.astro](site/src/components/PageLanguage.astro) (`Intl.DisplayNames` on the page's locale — 日本語 on ja, English on en), and a translation keeps the component as it is.
+  外国語 means _a language the reader does not read_ — a translator may make it concrete for the locale.
+  The demo videos' sample mail is in English in every locale, so a locale whose language is English says nothing about the mail being foreign — the summary is simply a summary.
+  OS-specific wording (keys, launchers, where the tray icon is) renders through [site/src/components/OsText.astro](site/src/components/OsText.astro) (and [CopyTwice.astro](site/src/components/CopyTwice.astro) for the signal), which the head script swaps to the visitor's OS; its no-JS fallback is English, the site's default language.
+  In MDX a tag alone on its line is a block, and the sentence after it becomes a paragraph of its own — so never start a sentence with a tag; put a word before it (the Prose section says why the formatter is part of this).
 - Docs heading anchors are locale-invariant: every translated heading carries the English page's slug explicitly (`## 見出し {#english-slug}`), so section links are identical in all 19 locales and translators copy them verbatim.
   English itself keeps auto-generated slugs — renaming an English heading is SUPPOSED to ripple, and `starlight-links-validator` fails the site build at every stale anchor until the translations and links catch up.
 
@@ -112,11 +120,13 @@ TOML files are linted with [Tombi](https://tombi-toml.github.io/tombi/), the sam
 
 ## Prose (Markdown)
 
-All `.md` prose in this repo uses **Semantic Line Breaks** ([sembr.org](https://sembr.org/)): one physical line per sentence.
+All `.md` and `.mdx` prose in this repo uses **Semantic Line Breaks** ([sembr.org](https://sembr.org/)): one physical line per sentence.
 Optionally break after independent clauses (`,`, `;`, `:`, `—`) for clarity.
-oxfmt's `proseWrap` defaults to `preserve` for `.md`, so hand-authored line breaks are kept as-is.
+oxfmt's `proseWrap` defaults to `preserve` for both, so hand-authored line breaks are kept as-is.
 Do NOT reflow paragraphs to a fixed column width — it hides real prose changes in reflow noise and makes `git blame` sentence-level attribution useless.
-The exception is `site/**/*.mdx`, which oxfmt does reflow to a fixed column width: let the formatter own the wrapping there and run `bun run format` after editing.
+The one line oxfmt does re-break is an `.mdx` line that carries a component (`<OsText />`, `<CopyTwice />`, `<PageLanguage />`): it goes through the JSX printer, which splits it at the spaces around the tag once it exceeds `printWidth` — and a tag left alone on a line is a block to MDX, which cuts the paragraph in two on the rendered page.
+That is why [.oxfmtrc.json](.oxfmtrc.json) raises `printWidth` to 320 for `site/**/*.mdx` (the most oxfmt accepts) and turns embedded code formatting off there, so fenced samples in docs stay exactly as written.
+Still, never start a sentence with a tag — put a word before it.
 
 ## Commits
 

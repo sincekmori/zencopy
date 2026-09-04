@@ -1,12 +1,12 @@
 {
   "locale": "th",
-  "recorded": "2026-09-05T10:32:45.606Z",
+  "recorded": "2026-09-06T12:26:37.251Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:32:10"
+      "now": "2026-09-06 21:26:07"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "HTCPCP คือโปรโตคอลสำหรับควบคุมและสั่งการเครื่องชงกาแฟผ่านเครือข่ายอินเทอร์เน็ต",
+      "reply": "ลูกค้าขอเลื่อนการประชุมพร้อมแจ้งปรับปรุงใบเสนอราคาและเพิ่มการสาธิตระบบในวาระการประชุม",
       "tokens": {
-        "input": 467,
-        "output": 34
+        "input": 169,
+        "output": 31
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "เอกสารฉบับนี้คือเรื่องตลกที่เขียนขึ้นในวันโกหก เพื่ออธิบายถึง \"วิธีการสื่อสาร\" ระหว่างคอมพิวเตอร์กับเครื่องชงกาแฟ\n\nลองนึกภาพว่าคุณมีเครื่องใช้ไฟฟ้าในบ้าน เช่น หลอดไฟหรือพัดลม ที่คุณสามารถกดเปิดหรือปิดได้ผ่านโทรศัพท์มือถือ เพื่อให้คอมพิวเตอร์คุยกับเครื่องใช้ไฟฟ้าเหล่านี้ได้ มันต้องมี \"ภาษา\" หรือชุดคำสั่งที่ตกลงกันไว้ล่วงหน้าว่า คำสั่งไหนหมายความว่าอะไร เช่น ถ้ากดปุ่มนี้ แปลว่า \"ต้มกาแฟเดี๋ยวนี้\"\n\nผู้เขียนเอกสารฉบับนี้ได้หยิบเอาวิธีการสื่อสารที่ใช้ในอินเทอร์เน็ตจริง ๆ มาล้อเลียน โดยสมมติว่าถ้าเราจะสร้างมาตรฐานให้คอมพิวเตอร์ควบคุมเครื่องชงกาแฟ เราจะต้องออกแบบคำสั่งอย่างไรบ้าง เช่น:\n\n1. คำสั่งสำหรับสั่งให้เครื่องเริ่มชงกาแฟ\n2. คำสั่งสำหรับสอบถามว่ากาแฟชงเสร็จหรือยัง\n3. คำสั่งสำหรับบอกให้เครื่องหยุดทำงานหรือเลิกชง\n\nสิ่งที่สำคัญที่สุดที่ต้องเข้าใจคือ เอกสารนี้ไม่ได้มีไว้ใช้งานจริง เครื่องชงกาแฟในโลกความเป็นจริงไม่สามารถรับคำสั่งตามที่ระบุไว้ในเอกสารนี้ได้ นี่เป็นเพียงการเขียนเนื้อหาเชิงเทคนิคโดยใช้ภาษาทางการของอินเทอร์เน็ต มาล้อเลียนความต้องการของคนที่อยากจะเชื่อมต่อทุกอย่างในบ้านเข้ากับอินเทอร์เน็ตไปเสียหมด \n\nสรุปสั้น ๆ คือ มันเป็นเรื่องตลกของกลุ่มนักเขียนโปรแกรมที่เขียนขึ้นเพื่อความบันเทิง โดยจำลองว่าถ้าเราจะทำให้เครื่องชงกาแฟ \"ฉลาด\" จนเล่นอินเทอร์เน็ตได้ เราจะต้องกำหนดกฎเกณฑ์การพูดคุยกันอย่างไรบ้างครับ",
+      "reply": "อีเมลฉบับนี้เป็นการสื่อสารเพื่อขอเลื่อนกำหนดการและปรับเปลี่ยนรายละเอียดในการประชุมธุรกิจครับ\n\nสิ่งที่สำคัญที่สุดที่ต้องรู้คือ ผู้ว่าจ้างต้องการให้คุณเตรียมข้อมูลราคาใหม่ให้พร้อมล่วงหน้า ก่อนที่ผู้บริหารจะมาประชุมกันในวันที่ 9 ตุลาคมครับ\n\nนี่คือรายละเอียดทีละขั้นตอนครับ:\n\n1. การเลื่อนวันประชุม: เดิมทีการประชุมจะมีขึ้นในวันที่ 2 ตุลาคม แต่ต้องเลื่อนออกไปเป็นวันที่ 9 ตุลาคม เพราะกรรมการสองท่านติดภารกิจเดินทางในช่วงเวลาเดิมครับ\n\n2. การส่งเอกสารราคา: ผู้ว่าจ้างขอให้คุณส่งเอกสารราคาส่วนที่แก้ไขแล้วให้พวกเขาภายในวันที่ 30 กันยายนครับ เหตุผลคือพวกเขาต้องการนำข้อมูลนี้ไปรวมไว้ในเอกสารอ่านล่วงหน้า เพื่อให้ผู้บริหารได้ศึกษารายละเอียดก่อนจะถึงวันประชุมจริงครับ\n\n3. การเพิ่มหัวข้อสาธิตการใช้งาน: ผู้ว่าจ้างต้องการให้คุณเพิ่มการสาธิต (Demo) หรือการแสดงวิธีใช้หน้าจอแสดงผลรายงาน (Reporting Dashboard) เป็นเวลา 15 นาทีเข้าไปในการประชุมด้วยครับ\n\n4. การขอความเห็น: ในตอนท้าย ผู้ว่าจ้างถามคุณว่ากำหนดการและเงื่อนไขทั้งหมดนี้ คุณสะดวกทำตามหรือไม่ครับ",
       "tokens": {
-        "input": 773,
-        "output": 398
+        "input": 475,
+        "output": 276
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "ขอสั้นกว่านี้อีกหน่อย",
-      "reply": "เอกสารนี้เป็นเรื่องตลกที่เขียนขึ้นในวันโกหก เพื่อล้อเลียนความต้องการเชื่อมต่อเครื่องใช้ไฟฟ้าทุกอย่างเข้ากับอินเทอร์เน็ต\n\nในทางเทคนิค คอมพิวเตอร์สื่อสารกันด้วยภาษามาตรฐานชุดหนึ่ง ผู้เขียนจึงลองสมมติว่า ถ้าเราต้องสร้าง \"ภาษา\" สำหรับสั่งงานเครื่องชงกาแฟผ่านอินเทอร์เน็ตขึ้นมาจริงๆ เราจะต้องตั้งกฎเกณฑ์การสั่งงานอย่างไรบ้าง เช่น คำสั่งเริ่มต้มกาแฟ หรือคำสั่งเช็คว่ากาแฟเสร็จหรือยัง\n\nอย่างไรก็ตาม นี่เป็นเพียงการเขียนล้อเลียนเชิงเทคนิคเท่านั้น ไม่ใช่มาตรฐานที่ใช้งานจริงในโลกอินเทอร์เน็ตครับ",
+      "reply": "อีเมลนี้เป็นการแจ้งเลื่อนประชุมและขอให้คุณเตรียมงานเพิ่มครับ\n\nสิ่งที่สำคัญที่สุดคือ เขาขอเลื่อนประชุมจากวันที่ 2 ตุลาคม เป็นวันที่ 9 ตุลาคม และต้องการให้คุณเตรียมงานดังนี้ครับ:\n\n1. ส่งเอกสารราคาที่แก้ไขแล้วให้เขาภายในวันที่ 30 กันยายน เพื่อให้ผู้บริหารได้อ่านก่อนประชุม\n2. เตรียมสาธิตการใช้งานหน้าจอแสดงผลรายงาน (Reporting Dashboard) เพิ่มอีก 15 นาทีในช่วงประชุมครับ\n\nสุดท้ายนี้ เขาถามว่าคุณสะดวกตามกำหนดการใหม่นี้ไหมครับ",
       "tokens": {
-        "input": 1182,
-        "output": 153
+        "input": 762,
+        "output": 123
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "ทำเป็นตาราง",
-      "reply": "| หัวข้อ | รายละเอียด |\n| :--- | :--- |\n| **ชื่อโปรโตคอล** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **เลขที่เอกสาร** | RFC 2324 |\n| **วันที่ประกาศ** | 1 เมษายน 1998 |\n| **ผู้แต่ง** | L. Masinter |\n| **สถานะ** | Informational (ไม่ใช่มาตรฐานอินเทอร์เน็ต) |\n| **วัตถุประสงค์** | ควบคุม, ตรวจสอบ และวินิจฉัยเครื่องชงกาแฟผ่านเครือข่าย |\n| **ที่มา/แนวคิด** | การขยายขีดความสามารถของอุปกรณ์เครื่องใช้ไฟฟ้าในบ้านให้เชื่อมต่ออินเทอร์เน็ตได้ (Ubiquitous computing) |",
+      "reply": "| หัวข้อ | รายละเอียด |\n| :--- | :--- |\n| **เหตุการณ์** | การเลื่อนวันทบทวนของฝ่ายบริหาร (Leadership Review) |\n| **กำหนดการเดิม** | 2 ตุลาคม |\n| **กำหนดการใหม่** | 9 ตุลาคม |\n| **สิ่งที่ต้องดำเนินการ** | ส่งเอกสารราคาฉบับปรับปรุง (Revised Pricing Sheet) |\n| **กำหนดส่งเอกสาร** | ภายในวันที่ 30 กันยายน |\n| **คำขอเพิ่มเติม** | ต้องการเพิ่มการสาธิต (Demo) แดชบอร์ดรายงาน 15 นาที ในวาระการประชุม |",
       "tokens": {
-        "input": 697,
-        "output": 186
+        "input": 347,
+        "output": 143
       }
     }
   ],
@@ -77,15 +77,19 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.045,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eHTCPCP คือโปรโตคอลสำหรับควบคุมและสั่ง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 15,\"totalTokenCount\": 482,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qu-bapnXIPWavr0PjInXwA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"การเครื่องชงกาแฟผ่านเครือข่ายอินเทอร์เน็ต\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 34,\"totalTokenCount\": 501,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qu-bapnXIPWavr0PjInXwA8\"}\r\n\r\n"
+          0.672,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 2,\"totalTokenCount\": 171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4FudatzJCqWR1e8P6NGW8Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eลูกค้าขอเลื่อนการประชุมพร้อมแจ้งปรับปรุงใบเสนอราคาและเพิ่มการสาธิตระบบ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 23,\"totalTokenCount\": 192,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4FudatzJCqWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          2.051,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPzGx+5CF1PB3uBCT/EwL7gLnegZsP2HdEVT0KcAlTn6NFkJHReQ7VidIuj71oLMwhSvpb8IQ5eBUS6KgJUyJGTIu9wFFZlw8Lr6f7kEc3M1cZZL5wmZkRU1q78XyJjoTlzIPrzvEPehvSeQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 34,\"totalTokenCount\": 501,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qu-bapnXIPWavr0PjInXwA8\"}\r\n\r\n"
+          0.699,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ในวาระการประชุม\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 31,\"totalTokenCount\": 200,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4FudatzJCqWR1e8P6NGW8Q4\"}\r\n\r\n"
+        ],
+        [
+          0.738,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPxiz/AyKF5sFh9OvteDn2kfK2GIRuxMVVeV4rwRj7uvz+CNnOBWpC7iiwnUwhtpSzolMMwap2SAwR8/Yd0SC7znOzsl2Da7bVzqFeSWgm+Td3kEJCGNnNCOWTb4AeDeunR1eyy1rJcf8wGA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 31,\"totalTokenCount\": 200,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4FudatzJCqWR1e8P6NGW8Q4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "f690dc08450ceae538942fd1392e01dadbf431916743288cadc90843a946d655"
+      "bodySha256": "41af65b334606f40bc65192e5c2895c084994beee53b4448e64844393eae6193"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -94,75 +98,47 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.039,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eเอกสารฉบับนี้คือเรื่องตลกที่เขียนขึ้นในวัน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 18,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          1.322,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eอีเมลฉบับนี้เป็นการสื่อสารเพื่อขอเลื่อนกำหนดการและ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 19,\"totalTokenCount\": 494,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ปรับเปลี่ยนรายละเอียดในการประชุมธุรกิจครับ\\n\\nสิ่งที่สำคัญที่สุดที่ต้องรู้คือ ผู้ว่าจ้างต้องการให้คุณเตรียมข้อมูล\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 43,\"totalTokenCount\": 518,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.138,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"โกหก เพื่ออธิบายถึง \\\"วิธีการสื่อสาร\\\" ระหว่างคอมพิวเตอร์กับเครื่องชงกาแฟ\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 43,\"totalTokenCount\": 816,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          1.405,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ราคาใหม่ให้พร้อมล่วงหน้า ก่อนที่ผู้บริหารจะมาประชุมกันในวันที่ 9 ตุลาคมครับ\\n\\nนี่คือรายละเอียด\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 68,\"totalTokenCount\": 543,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.222,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ลองนึกภาพว่าคุณมีเครื่องใช้ไฟฟ้าในบ้าน เช่น หลอดไฟหรือพัดลม ที่คุณสามารถกด\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 67,\"totalTokenCount\": 840,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          1.549,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ทีละขั้นตอนครับ:\\n\\n1. การเลื่อนวันประชุม: เดิมทีการประชุมจะมีขึ้นในวันที่ 2 ตุลาคม แต่\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 94,\"totalTokenCount\": 569,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.305,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เปิดหรือปิดได้ผ่านโทรศัพท์มือถือ เพื่อให้คอมพิวเตอร์คุยกับเครื่องใช้ไฟฟ้าเหล่านี้ได้ มัน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 91,\"totalTokenCount\": 864,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          1.719,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ต้องเลื่อนออกไปเป็นวันที่ 9 ตุลาคม เพราะกรรมการสองท่านติดภารกิจเดินทางในช่วงเวลาเดิมครับ\\n\\n2. การส่ง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 122,\"totalTokenCount\": 597,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.449,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ต้องมี \\\"ภาษา\\\" หรือชุดคำสั่งที่ตกลงกันไว้ล่วงหน้าว่า คำสั่งไหนหมายความว่าอะไร เช่น\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 118,\"totalTokenCount\": 891,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          1.761,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เอกสารราคา: ผู้ว่าจ้างขอให้คุณส่งเอกสารราคาส่วนที่แก้ไขแล้วให้พวกเขาภายในวันที่ 30 กัน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 151,\"totalTokenCount\": 626,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.49,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ถ้ากดปุ่มนี้ แปลว่า \\\"ต้มกาแฟเดี๋ยวนี้\\\"\\n\\nผู้เขียนเอกสารฉบับนี้ได้\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 144,\"totalTokenCount\": 917,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          1.872,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ยายนครับ เหตุผลคือพวกเขาต้องการนำข้อมูลนี้ไปรวมไว้ในเอกสารอ่านล่วงหน้า เพื่อให้ผู้บริหารได้ศึก\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 177,\"totalTokenCount\": 652,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.651,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"หยิบเอาวิธีการสื่อสารที่ใช้ในอินเทอร์เน็ตจริง ๆ มาล้อเลียน โดยสมมติว่าถ้าเรา\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 172,\"totalTokenCount\": 945,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          2.032,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ษารายละเอียดก่อนจะถึงวันประชุมจริงครับ\\n\\n3. การเพิ่มหัวข้อสาธิตการใช้งาน: ผู้ว่าจ้าง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 205,\"totalTokenCount\": 680,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ต้องการให้คุณเพิ่มการสาธิต (Demo) หรือการแสดงวิธีใช้หน้าจอแสดงผลรายงาน (Reporting Dashboard) เป็นเวลา 1\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 234,\"totalTokenCount\": 709,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.856,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"จะสร้างมาตรฐานให้คอมพิวเตอร์ควบคุมเครื่องชงกาแฟ เราจะต้องออกแบบคำสั่งอย่างไรบ้าง เช่น:\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 196,\"totalTokenCount\": 969,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          2.21,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"5 นาทีเข้าไปในการประชุมด้วยครับ\\n\\n4. การขอความเห็น: ในตอนท้าย ผู้ว่าจ้างถามคุณว่า\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 259,\"totalTokenCount\": 734,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          2.897,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"1. คำสั่งสำหรับสั่งให้เครื่องเริ่มชงกาแฟ\\n2. คำสั่งสำหรับสอบถามว่ากาแฟช\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 221,\"totalTokenCount\": 994,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          2.259,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"กำหนดการและเงื่อนไขทั้งหมดนี้ คุณสะดวกทำตามหรือไม่ครับ\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 276,\"totalTokenCount\": 751,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ],
         [
-          3.068,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"งเสร็จหรือยัง\\n3. คำสั่งสำหรับบอกให้เครื่องหยุดทำงานหรือเลิกชง\\n\\nสิ่งที่สำคัญ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 245,\"totalTokenCount\": 1018,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ที่สุดที่ต้องเข้าใจคือ เอกสารนี้ไม่ได้มีไว้ใช้งานจริง เครื่องชงกาแฟในโลกความเป็นจริงไม่สามารถรับ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 270,\"totalTokenCount\": 1043,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          3.158,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"คำสั่งตามที่ระบุไว้ในเอกสารนี้ได้ นี่เป็นเพียงการเขียนเนื้อหาเชิงเทคนิคโดยใช้ภาษา\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 295,\"totalTokenCount\": 1068,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          3.224,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ทางการของอินเทอร์เน็ต มาล้อเลียนความต้องการของคนที่อยากจะเชื่อมต่อทุกอย่างในบ้านเข้า\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 320,\"totalTokenCount\": 1093,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          3.375,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"กับอินเทอร์เน็ตไปเสียหมด \\n\\nสรุปสั้น ๆ คือ มันเป็นเรื่องตลกของกลุ่ม\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 344,\"totalTokenCount\": 1117,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          3.466,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"นักเขียนโปรแกรมที่เขียนขึ้นเพื่อความบันเทิง โดยจำลองว่าถ้าเราจะทำให้เครื่องชงกาแฟ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 369,\"totalTokenCount\": 1142,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          3.673,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" \\\"ฉลาด\\\" จนเล่นอินเทอร์เน็ตได้ เราจะต้องกำหนดกฎเกณฑ์การพูดคุยกันอย่างไรบ้าง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 394,\"totalTokenCount\": 1167,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          3.718,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ครับ\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 398,\"totalTokenCount\": 1171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          3.781,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPLYxwwF6cjQHAkntmXWBb7aPMwtKfUCdo4tMzPN24/7TMewMdMTidM0nheCk26Fi+p7xfbXHO6RCEO4JXSUMTJPRE54UZ2fXVuec/YgraSOVFRGz4iRG4vbQB1H3sWX7TsTNuJ8eBIk45FQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 398,\"totalTokenCount\": 1171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sO-bapviB7S4vr0P6qfLyA8\"}\r\n\r\n"
+          2.264,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPYpCC+HN7JEAALgFZa6YT1J95onbh4eVCHRaw9yCyrHzFORexapi+jykYaNWyq9n/kusi8rXr2k4lmREqOfPExwcZ5gv0CqajrnTrEzK6biFh/87GqXoJdLETU0O/YaMHgi//Jx/fAsptNQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 276,\"totalTokenCount\": 751,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"5Fudas39G7Czvr0Pw4X-4AE\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "7e83b70c2992b0c799a0bc73c896c8c6b10e1640b8f16f4f01476147fa40342a"
+      "bodySha256": "f09beaefa4551467a7682f69d64aee8638d80082ca504093ab035b0a4a3a2c7e"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -171,39 +147,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.529,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1184,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nเอกสารนี้เป็นเรื่องตลกที่เขียนขึ้นในวันโกหก\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 19,\"totalTokenCount\": 1201,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+          2.579,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 2,\"totalTokenCount\": 764,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nอีเมลนี้เป็นการแจ้งเลื่อนประชุมและขอให้คุณเตรียมงาน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 18,\"totalTokenCount\": 780,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เพิ่มครับ\\n\\nสิ่งที่สำคัญที่สุดคือ เขาขอเลื่อนประชุมจากวันที่ 2 ตุลาคม เป็นวันที่ 9 ตุลาคม และต้องการ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 42,\"totalTokenCount\": 804,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ให้คุณเตรียมงานดังนี้ครับ:\\n\\n1. ส่งเอกสารราคาที่แก้ไขแล้วให้เขาภายในวันที่ 30 กัน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 68,\"totalTokenCount\": 830,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\n"
         ],
         [
-          1.552,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" เพื่อล้อเลียนความต้องการเชื่อมต่อเครื่องใช้ไฟฟ้าทุกอย่างเข้ากับอินเทอร์เน็ต\\n\\nในทาง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 43,\"totalTokenCount\": 1225,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+          2.689,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ยายน เพื่อให้ผู้บริหารได้อ่านก่อนประชุม\\n2. เตรียมสาธิตการใช้งานหน้าจอแสดงผลรายงาน (Reporting\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 93,\"totalTokenCount\": 855,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\n"
         ],
         [
-          1.635,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เทคนิค คอมพิวเตอร์สื่อสารกันด้วยภาษามาตรฐานชุดหนึ่ง ผู้เขียนจึงลองสมมติว่า ถ้าเราต้อง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 68,\"totalTokenCount\": 1250,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+          2.778,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Dashboard) เพิ่มอีก 15 นาทีในช่วงประชุมครับ\\n\\nสุดท้ายนี้ เขาถามว่าคุณสะดวกตามกำหนดการใหม่นี้\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 117,\"totalTokenCount\": 879,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\n"
         ],
         [
-          1.782,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"สร้าง \\\"ภาษา\\\" สำหรับสั่งงานเครื่องชงกาแฟผ่านอินเทอร์เน็ตขึ้นมาจริงๆ เราจะต้องตั้ง\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 92,\"totalTokenCount\": 1274,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+          2.88,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ไหมครับ\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 123,\"totalTokenCount\": 885,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\n"
         ],
         [
-          1.866,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"กฎเกณฑ์การสั่งงานอย่างไรบ้าง เช่น คำสั่งเริ่มต้มกาแฟ หรือคำสั่งเช็คว่ากาแฟเสร็จหรือ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 119,\"totalTokenCount\": 1301,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
-        ],
-        [
-          2.018,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ยัง\\n\\nอย่างไรก็ตาม นี่เป็นเพียงการเขียนล้อเลียนเชิงเทคนิคเท่านั้น ไม่ใช่มาตรฐานที่ใช้งานจริงในโลกอิน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 145,\"totalTokenCount\": 1327,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
-        ],
-        [
-          2.083,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เทอร์เน็ตครับ\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 153,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
-        ],
-        [
-          2.145,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPrt7TYxcfEhvnpJVprff3IEBr/PLRxfDY8i4hD4Bu9pas3DfJ8Tvmq6VOPJgAsK3ClfutxYbk/oC2Nhc3lWUxZwEfEz5E87ex4FcUKy4MMr6KLcYY8GgX1JpKikVI3aNhCRrRJXjBkT0hEg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1182,\"candidatesTokenCount\": 153,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1182}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"uu-bapnPFeT11e8P6rzJ0Qs\"}\r\n\r\n"
+          2.923,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPgD34o+ujvhI7AFbtCEZF8bnm+ZB39RNr7KRXiJWZDDRgzrN8keiSi2LZ+GCNL0mkzMVMHdiK35KKpa83rgIiUKhkPgohd9vv+g6Tbi0raHMRpRAVEn82UaddUhWrlSNMGAuO5OPK80JaRA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 762,\"candidatesTokenCount\": 123,\"totalTokenCount\": 885,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 762}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7Fudao-dN7yyvr0PoaH_oA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "230209615c9314e12350c5c3cabef44e32eed03fa5dd17d9114d6e59aea60a30"
+      "bodySha256": "4f8b251b71b3d98bc9371ea4b4c6a2a7ec4cd1b9bf13cd147ec66c834204aae0"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -212,39 +176,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          4.074,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 2,\"totalTokenCount\": 699,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| หัวข้อ | รายละเอียด |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 22,\"totalTokenCount\": 719,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+          0.769,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 2,\"totalTokenCount\": 349,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| หัวข้อ | รายละเอียด |\\n| :--- | :--- |\\n| **เหตุ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 23,\"totalTokenCount\": 370,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"การณ์** | การเลื่อนวันทบทวนของฝ่ายบริหาร (Leadership Review) |\\n| **กำหนดการเดิม** | 2 ตุลาคม\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 52,\"totalTokenCount\": 399,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| **กำหนดการใหม่** | 9 ตุลาคม |\\n| **สิ่งที่ต้องดำเนินการ** | ส่งเอกสารราคา\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 77,\"totalTokenCount\": 424,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\n"
         ],
         [
-          4.089,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ชื่อโปรโตคอล** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 48,\"totalTokenCount\": 745,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+          0.882,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ฉบับปรับปรุง (Revised Pricing Sheet) |\\n| **กำหนดส่งเอกสาร** | ภายในวันที่ 30 กันยายน |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 106,\"totalTokenCount\": 453,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\n"
         ],
         [
-          4.155,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"เลขที่เอกสาร** | RFC 2324 |\\n| **วันที่ประกาศ** | 1 เมษายน 199\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 77,\"totalTokenCount\": 774,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+          0.981,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **คำขอเพิ่มเติม** | ต้องการเพิ่มการสาธิต (Demo) แดชบอร์ดรายงาน \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 130,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\n"
         ],
         [
-          4.283,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"8 |\\n| **ผู้แต่ง** | L. Masinter |\\n| **สถานะ** | Informational (\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 101,\"totalTokenCount\": 798,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+          1.065,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"15 นาที ในวาระการประชุม |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 143,\"totalTokenCount\": 490,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\n"
         ],
         [
-          4.389,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ไม่ใช่มาตรฐานอินเทอร์เน็ต) |\\n| **วัตถุประสงค์** | ควบคุม, ตรวจสอบ และวิน\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 128,\"totalTokenCount\": 825,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
-        ],
-        [
-          4.45,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ิจฉัยเครื่องชงกาแฟผ่านเครือข่าย |\\n| **ที่มา/แนวคิด** | การ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 153,\"totalTokenCount\": 850,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
-        ],
-        [
-          4.598,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ขยายขีดความสามารถของอุปกรณ์เครื่องใช้ไฟฟ้าในบ้านให้เชื่อมต่ออินเทอร์เน็ตได้ (Ub\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 177,\"totalTokenCount\": 874,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"iquitous computing) |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 186,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
-        ],
-        [
-          4.641,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPbpzv6nBn6xDQ0zZng+INordAUytULrhJ1feHDL+1NRHAp+05+nS8giaAN8BHpHEzYyr88Z3JNFEVC/sYpslVJvzaK72bScba9S+HjyZi/KXph6ZF/4eO+0zQzlRGgFscCemvA3oNzMS+1w==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 186,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wu-bavaoA72ivr0PrdmsgQ8\"}\r\n\r\n"
+          1.107,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPgEDKz59hu5Jpr/yWPcUD20Yecz0+zFhFno5KMl8mYGGXm0AwATAzrpdqBMRh4gS1VP3lOWpNfYi11ft9dUBOc+WSIVm6nrSx3tH9jA411Cx1CqLkhAs1/HZFD3lkaxYTvOTK35PW8T2S3A==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 143,\"totalTokenCount\": 490,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"9VudaqS9KuqX9tMPwf3-oAI\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "4f75cf189bee816a44908862e85c085c0819ec45c1e4e24cdaa3c540d64b6e86"
+      "bodySha256": "07bec9ccd8b9e92264753969a4a60aa1fd71de89b2621fb73aef183bd3a5f8ce"
     }
   ]
 }

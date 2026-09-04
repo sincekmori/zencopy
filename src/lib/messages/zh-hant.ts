@@ -112,7 +112,7 @@ export const zhHant: Messages = {
     open: "開啟",
   },
   about: {
-    tagline: "複製兩次，立即處理。",
+    tagline: "當前螢幕，AI 立現。",
     update: (version) => `更新到 v${version} 並重新啟動應用程式`,
     updateRestart: (version) => `重新啟動應用程式以更新到 v${version}`,
     updating: "更新中…",

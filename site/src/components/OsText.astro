@@ -1,0 +1,24 @@
+---
+/**
+ * A phrase that differs by OS — a key, a menu, a launcher — shown as the
+ * visitor's own. The head script in astro.config.mjs swaps the text for the
+ * `windows` / `mac` / `linux` variant matching the user agent; until it runs,
+ * and for readers without JS or on another OS, the slot's combined wording
+ * stays — in English, the site's default language, unless the page passes
+ * its own — so the sentence is never wrong, only longer.
+ *
+ * In MDX a sentence must not begin with the tag: the formatter wraps at
+ * spaces, a tag left alone on its line is a block element, and the sentence
+ * after it becomes a paragraph of its own — put a word before it.
+ */
+interface Props {
+  windows: string;
+  mac: string;
+  linux?: string;
+}
+const { windows, mac, linux = windows } = Astro.props;
+---
+
+<span data-os-linux={linux} data-os-mac={mac} data-os-windows={windows}
+  ><slot>{`${windows} (${mac} on Mac)`}</slot></span
+>

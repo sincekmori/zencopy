@@ -121,7 +121,7 @@ export const fa: Messages = {
     open: "باز کردن",
   },
   about: {
-    tagline: "دو بار کپی کنید، بی‌درنگ اقدام کنید.",
+    tagline: "هوش مصنوعی فوری. درست روی صفحه شما.",
     update: (version) => `به‌روزرسانی به v${version} و راه‌اندازی دوباره برنامه`,
     updateRestart: (version) => `برای به‌روزرسانی به v${version}، برنامه را دوباره راه‌اندازی کنید`,
     updating: "در حال به‌روزرسانی…",

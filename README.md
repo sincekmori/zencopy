@@ -5,7 +5,7 @@
   <img src="src/assets/zencopy-logo.svg" alt="ZenCopy" width="280">
 </picture>
 
-**Copy twice, act instantly.**
+**Instant AI. Right on your screen.**
 
 Talk to an AI anywhere, the moment you want to — the answer to whatever you copied appears on the spot, and the conversation continues right there. A calm, resident desktop agent, summoned by **Ctrl/Cmd + C + C**.
 

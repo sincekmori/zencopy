@@ -1,12 +1,12 @@
 {
   "locale": "fa",
-  "recorded": "2026-09-05T10:34:49.397Z",
+  "recorded": "2026-09-06T12:28:20.601Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:34:13"
+      "now": "2026-09-06 21:27:51"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "این سند پروتکل HTCPCP را برای کنترل و نظارت بر قهوه‌سازها از طریق شبکه معرفی می‌کند.",
+      "reply": "جلسه بررسی مدیریت به ۹ اکتبر موکول شده و لازم است لیست قیمت اصلاح‌شده تا ۳۰ سپتامبر ارسال و یک دمو از داشبورد گزارش‌دهی نیز اضافه شود.",
       "tokens": {
-        "input": 467,
-        "output": 30
+        "input": 169,
+        "output": 46
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "این متن درباره‌ی یک «پروتکل کنترل قوری قهوه در محیط ابرمتن» است. این یک شوخی فنی است که در دنیای اینترنت ساخته شده تا به ما یادآوری کند که نباید هر چیزی را که در کامپیوتر می‌بینیم، لزوماً جدی بگیریم.\n\nپروتکل در دنیای کامپیوتر، مانند یک زبان مشترک یا مجموعه‌ای از قوانین است. وقتی دو کامپیوتر می‌خواهند با هم حرف بزنند، باید از یک زبان مشخص استفاده کنند تا حرف یکدیگر را بفهمند. برای مثال، وقتی شما آدرس یک وب‌سایت را در مرورگر خود می‌زنید، مرورگر از پروتکلی استفاده می‌کند تا آن صفحه را از سرورِ دوردست بگیرد و به شما نشان دهد.\n\nنویسنده‌ی این متن، همین ایده را به شوخی برای کنترل کردن قوری‌های قهوه به کار برده است. تصور کنید قهوه‌ساز شما به اینترنت وصل باشد. این متن می‌گوید اگر بخواهیم از راه دور و از طریق اینترنت به قهوه‌ساز دستور بدهیم که «قهوه را دم کن»، به یک زبان یا پروتکل خاص نیاز داریم. نویسنده اسم این پروتکل خیالی را «اچ‌تی‌سی‌پی‌سی‌پی» (HTCPCP) گذاشته است.\n\nاین متن در واقع یک «درخواست برای نظر» یا «آر‌اف‌سی» (RFC) است. «آر‌اف‌سی»ها معمولاً سندهای مهمی هستند که استانداردهای واقعی اینترنت را تعیین می‌کنند. اما این متنِ خاص، در روز اول آوریل منتشر شده است. در کشورهای غربی، اول آوریل روزی است که مردم با هم شوخی می‌کنند و دروغ‌های بی‌ضرر می‌گویند. بنابراین، این سند برای خنداندنِ برنامه‌نویس‌ها و متخصصان شبکه نوشته شده است تا نشان دهد که می‌توان با استفاده از همان قوانینِ ساختِ وب، حتی برای دم کردن قهوه هم دستورالعمل نوشت.\n\nدر اصل، این متن هیچ کاراییِ واقعی ندارد و هیچ شرکتی برای ساخت قهوه‌ساز از آن استفاده نمی‌کند. این فقط یک تمرین ذهنی است که می‌پرسد: «اگر قرار باشد همه‌چیز در دنیا به اینترنت وصل باشد، آیا باید برای قهوه‌ساز هم یک زبانِ مخصوص اختراع کنیم؟» پاسخِ جدی این است که خیر، اما نوشتنِ قواعدِ آن به شکلی که شبیه به قوانینِ جدیِ اینترنت باشد، برای افراد اهل فن، بسیار سرگرم‌کننده است.",
+      "reply": "این متن نامه‌ای است درباره تغییر زمان یک جلسه مهم کاری و درخواست‌هایی که برای آماده‌سازی آن جلسه مطرح شده است. اهمیت این نامه در این است که به شما می‌گوید برنامه‌ریزی‌ها تغییر کرده و باید کار جدیدی را تا زمان مشخصی انجام دهید.\n\nدر اینجا قدم‌به‌قدم محتوای این نامه را بررسی می‌کنیم:\n\n۱. تغییر زمان جلسه: قرار بود مدیران شرکت در تاریخ دوم اکتبر درباره پیشنهاد شما تصمیم‌گیری کنند. حالا این جلسه به نهم اکتبر افتاده است، چون دو نفر از مدیران در آن هفته در سفر هستند.\n\n۲. درخواست قیمت‌های جدید: از شما خواسته‌اند که لیست قیمت‌های اصلاح‌شده را تا سی‌ام سپتامبر برایشان بفرستید. آن‌ها می‌خواهند این قیمت‌ها را قبل از جلسه اصلی مطالعه کنند تا با آمادگی کامل در جلسه حاضر شوند.\n\n۳. درخواست نمایش زنده: آن‌ها می‌خواهند در جلسه، یک نمایش پانزده‌دقیقه‌ای از «داشبورد گزارش‌دهی» ببینند. این یعنی باید بخشی از نرم‌افزار یا سیستم خود را که اطلاعات و آمارها را نشان می‌دهد، برای آن‌ها باز کنید و طرز کارش را توضیح دهید.\n\n۴. بررسی زمان‌بندی: در نهایت، از شما پرسیده‌اند که آیا این زمان جدید و اضافه شدن این نمایش پانزده‌دقیقه‌ای برای شما امکان‌پذیر است یا خیر.\n\nخلاصه اینکه آن‌ها از شما می‌خواهند قیمت‌های نهایی را زودتر بفرستید و برای نشان دادن بخش گزارش‌های سیستم خود در جلسه جدید، آماده شوید.",
       "tokens": {
-        "input": 773,
-        "output": 562
+        "input": 475,
+        "output": 344
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "کمی خلاصه‌تر، لطفاً",
-      "reply": "این متن یک شوخیِ فنی است که در روز اول آوریل (روز دروغ‌گویی و شوخی در غرب) نوشته شده است.\n\nدر دنیای اینترنت، «پروتکل» مجموعه‌ای از قوانین است که باعث می‌شود کامپیوترها با هم حرف بزنند. نویسنده در این متن، به شوخی یک پروتکل خیالی برای «کنترل قوری قهوه‌ساز از راه دور» طراحی کرده است. او می‌گوید چون همه وسایل خانه در حال وصل شدن به اینترنت هستند، پس باید زبانی هم برای دستور دادن به قهوه‌ساز وجود داشته باشد.\n\nاین سند هیچ اعتبار فنی ندارد و قرار نیست قهوه‌سازها واقعاً با این روش کار کنند. هدف اصلی آن فقط سرگرم کردنِ مهندسان کامپیوتر و نشان دادنِ این نکته است که می‌توان قوانینِ پیچیده اینترنت را به شکل طنز برای کارهای ساده‌ای مثل دم کردن قهوه به کار برد.",
+      "reply": "این نامه درباره تغییر زمان جلسه بررسی پیشنهاد شما است. نکات اصلی این است:\n\n۱. زمان جلسه از ۲ اکتبر به ۹ اکتبر تغییر کرده است.\n۲. باید لیست قیمت‌های جدید را تا ۳۰ سپتامبر بفرستید تا قبل از جلسه بررسی کنند.\n۳. در جلسه باید یک نمایش ۱۵ دقیقه‌ای از بخش گزارش‌های سیستم (داشبورد) ارائه دهید.\n\nدر نهایت از شما پرسیده‌اند که آیا این تغییرات برای شما مقدور است یا خیر.",
       "tokens": {
-        "input": 1347,
-        "output": 211
+        "input": 831,
+        "output": 113
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "به صورت جدول",
-      "reply": "| عنوان | توضیحات |\n| :--- | :--- |\n| **نام پروتکل** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **شماره RFC** | 2324 |\n| **تاریخ انتشار** | ۱ آوریل ۱۹۹۸ |\n| **نویسنده** | L. Masinter |\n| **هدف** | کنترل، نظارت و تشخیص وضعیت قهوه‌سازهای متصل به شبکه |\n| **وضعیت** | Informational (اطلاع‌رسانی - غیر استاندارد) |\n| **دلیل ایجاد** | نیاز به کنترل از راه دور دستگاه‌های خانگی (مانند قهوه‌ساز) در دنیای متصل به اینترنت |",
+      "reply": "| موضوع | جزئیات |\n| :--- | :--- |\n| تغییر تاریخ بررسی مدیریت | از ۲ اکتبر به ۹ اکتبر |\n| دلیل تغییر | مسافرت دو تن از مدیران |\n| مهلت ارسال لیست قیمت اصلاح‌شده | ۳۰ سپتامبر |\n| درخواست جدید | افزودن دموی ۱۵ دقیقه‌ای از داشبورد گزارش‌دهی به دستور جلسه |",
       "tokens": {
-        "input": 696,
-        "output": 167
+        "input": 346,
+        "output": 93
       }
     }
   ],
@@ -77,23 +77,19 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          4.757,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
+          0.938,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 2,\"totalTokenCount\": 171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"SFydaor_BbTk1e8PtcSHyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eجلسه بررسی مدیریت به ۹ اکتبر موکول شده و لازم است لیست قیمت اصلاح\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 20,\"totalTokenCount\": 189,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"SFydaor_BbTk1e8PtcSHyA8\"}\r\n\r\n"
         ],
         [
-          4.76,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eاین سند پروتکل HTCPCP را برای کنترل و نظارت بر قه\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 18,\"totalTokenCount\": 485,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
+          0.942,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u200cشده تا ۳۰ سپتامبر ارسال و یک دمو از داشبورد گزارش\\u200cدهی نیز اضافه شود.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 46,\"totalTokenCount\": 215,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"SFydaor_BbTk1e8PtcSHyA8\"}\r\n\r\n"
         ],
         [
-          4.862,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وه\\u200cسازها از طریق شبکه معرفی می\\u200cکند.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 30,\"totalTokenCount\": 497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
-        ],
-        [
-          4.905,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP8uTpAGdu83Bz/xhWnejAqokwA/7F4uEnKi1zJzaGZntlFOTZZUtTytJ6bkFWxx9tdWLfZLeGPrEfelakfklOzdZexZ+6CeYPznpQs9sKUKkNrcTQtK4ErSvk3A5M3BbGyu8UhlCl2XY6Bg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 30,\"totalTokenCount\": 497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"JvCbaufXBrS4vr0P6qfLyA8\"}\r\n\r\n"
+          0.987,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP1AYlhns3S6xKzcWuqJwUAQ9X8KNNv464dXaC//1RvbmNx32uTTE7GbcbOU+OOxZWzvs85UABWz1TDPsH9Wqd+zQc4a+n3CXiq0eg7qQ3ZS4FK5S68fk7GSs099pICDcGjAJ7flXK1TUcbw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 46,\"totalTokenCount\": 215,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"SFydaor_BbTk1e8PtcSHyA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "2dcfe444a1e040e769cd98575005da07bd6d2c14bdf77fd466f854b267756f99"
+      "bodySha256": "db705c773b6bf10140d7c12010b17b3cc416ac2cc5aa742a5ea9fae4de2dfe33"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -102,91 +98,59 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.808,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nاین متن درباره\\u200cی یک «پروتکل کنترل قوری قهوه در محیط\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 20,\"totalTokenCount\": 793,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ابرمتن» است. این یک شوخی فنی است که در دنیای اینترنت ساخته شده تا به ما یاد\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 44,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          1.999,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nاین متن نامه\\u200cای است درباره تغییر زمان یک جلسه مهم کاری و درخواست\\u200cهایی\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 19,\"totalTokenCount\": 494,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          1.851,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"آوری کند که نباید هر چیزی را که در کامپیوتر می\\u200cبینیم، لزوماً جدی ب\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 69,\"totalTokenCount\": 842,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.02,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" که برای آماده\\u200cسازی آن جلسه مطرح شده است. اهمیت این نامه در این است که به شما می\\u200cگوید برنامه\\u200cری\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 44,\"totalTokenCount\": 519,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          1.956,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"گیریم.\\n\\nپروتکل در دنیای کامپیوتر، مانند یک زبان مشترک یا مجموعه\\u200cای از قوانین\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 94,\"totalTokenCount\": 867,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.107,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"زی\\u200cها تغییر کرده و باید کار جدیدی را تا زمان مشخصی انجام دهید.\\n\\nدر اینجا قدم\\u200cبه\\u200cقدم مح\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 70,\"totalTokenCount\": 545,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          2.096,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" است. وقتی دو کامپیوتر می\\u200cخواهند با هم حرف بزنند، باید از یک زبان مشخص استفاده کنند تا حرف\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 121,\"totalTokenCount\": 894,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.189,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"توای این نامه را بررسی می\\u200cکنیم:\\n\\n۱. تغییر زمان جلسه: قرار بود مدیران شرکت در تاریخ دوم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 94,\"totalTokenCount\": 569,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          2.325,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" یکدیگر را بفهمند. برای مثال، وقتی شما آدرس یک وب\\u200cسایت را در مرورگر خود می\\u200cزنید،\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 150,\"totalTokenCount\": 923,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.255,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" اکتبر درباره پیشنهاد شما تصمیم\\u200cگیری کنند. حالا این جلسه به نهم اکتبر افتاده است، چون دو نفر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 119,\"totalTokenCount\": 594,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          2.352,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" مرورگر از پروتکلی استفاده می\\u200cکند تا آن صفحه را از سرورِ دوردست بگیرد و به شما نشان دهد.\\n\\nنو\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 177,\"totalTokenCount\": 950,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.511,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" از مدیران در آن هفته در سفر هستند.\\n\\n۲. درخواست قیمت\\u200cهای جدید: از شما خواسته\\u200cاند که لیست قیمت\\u200cهای اصلاح\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 147,\"totalTokenCount\": 622,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u200cشده را تا سی\\u200cام سپتامبر برایشان بفرستید. آن\\u200cها می\\u200cخواهند این قیمت\\u200cها را قبل از جلسه اصلی\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 175,\"totalTokenCount\": 650,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          2.48,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"یسنده\\u200cی این متن، همین ایده را به شوخی برای کنترل کردن قوری\\u200cهای قهوه به کار بر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 201,\"totalTokenCount\": 974,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.518,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" مطالعه کنند تا با آمادگی کامل در جلسه حاضر شوند.\\n\\n۳. درخواست نمایش زنده: آن\\u200cها می\\u200cخواهند در\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 201,\"totalTokenCount\": 676,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          2.59,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ده است. تصور کنید قهوه\\u200cساز شما به اینترنت وصل باشد. این متن می\\u200cگوید اگر بخواهیم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 225,\"totalTokenCount\": 998,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.609,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" جلسه، یک نمایش پانزده\\u200cدقیقه\\u200cای از «داشبورد گزارش\\u200cدهی» ببینند. این یعنی\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 227,\"totalTokenCount\": 702,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          2.741,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" از راه دور و از طریق اینترنت به قهوه\\u200cساز دستور بدهیم که «قهوه را دم کن»، به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 250,\"totalTokenCount\": 1023,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.757,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" باید بخشی از نرم\\u200cافزار یا سیستم خود را که اطلاعات و آمارها را نشان می\\u200cدهد، برای آن\\u200cها باز\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 251,\"totalTokenCount\": 726,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          2.871,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" یک زبان یا پروتکل خاص نیاز داریم. نویسنده اسم این پروتکل خیالی را «اچ\\u200cتی\\u200cسی\\u200c\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 276,\"totalTokenCount\": 1049,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          2.87,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" کنید و طرز کارش را توضیح دهید.\\n\\n۴. بررسی زمان\\u200cبندی: در نهایت، از شما پرسیده\\u200cاند\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 278,\"totalTokenCount\": 753,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          3.025,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"پی\\u200cسی\\u200cپی» (HTCPCP) گذاشته است.\\n\\nاین متن در واقع یک «درخواست برای نظر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 302,\"totalTokenCount\": 1075,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          3.023,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" که آیا این زمان جدید و اضافه شدن این نمایش پانزده\\u200cدقیقه\\u200cای برای شما امکان\\u200cپذیر است یا خیر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 303,\"totalTokenCount\": 778,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          3.153,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"» یا «آر\\u200cاف\\u200cسی» (RFC) است. «آر\\u200cاف\\u200cسی»ها\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 326,\"totalTokenCount\": 1099,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          3.046,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \".\\n\\nخلاصه اینکه آن\\u200cها از شما می\\u200cخواهند قیمت\\u200cهای نهایی را زودتر بفرستید و برای\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 328,\"totalTokenCount\": 803,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ],
         [
-          3.343,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" معمولاً سندهای مهمی هستند که استانداردهای واقعی اینترنت را تعیین می\\u200cکنند. اما این متنِ خاص، در روز اول آ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 354,\"totalTokenCount\": 1127,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          3.366,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"وریل منتشر شده است. در کشورهای غربی، اول آوریل روزی است که مردم با هم شوخی می\\u200cکنند\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 379,\"totalTokenCount\": 1152,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          3.56,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" و دروغ\\u200cهای بی\\u200cضرر می\\u200cگویند. بنابراین، این سند برای خنداندنِ برنامه\\u200cنویس\\u200cها\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 406,\"totalTokenCount\": 1179,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          3.664,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" و متخصصان شبکه نوشته شده است تا نشان دهد که می\\u200cتوان با استفاده از همان قوانینِ ساختِ وب، حتی برای دم\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 431,\"totalTokenCount\": 1204,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          3.664,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" کردن قهوه هم دستورالعمل نوشت.\\n\\nدر اصل، این متن هیچ کاراییِ واقعی ندارد و هیچ شر\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 455,\"totalTokenCount\": 1228,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          3.709,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"کتی برای ساخت قهوه\\u200cساز از آن استفاده نمی\\u200cکند. این فقط یک تمرین ذهنی است که می\\u200c\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 479,\"totalTokenCount\": 1252,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          3.964,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"پرسد: «اگر قرار باشد همه\\u200cچیز در دنیا به اینترنت وصل باشد، آیا باید برای قهوه\\u200cساز هم یک زبان\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 508,\"totalTokenCount\": 1281,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ِ مخصوص اختراع کنیم؟» پاسخِ جدی این است که خیر، اما نوشتنِ قواعدِ آن به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 532,\"totalTokenCount\": 1305,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          4.162,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" شکلی که شبیه به قوانینِ جدیِ اینترنت باشد، برای افراد اهل فن، بسیار سرگرم\\u200cکننده\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 558,\"totalTokenCount\": 1331,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" است.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 562,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
-        ],
-        [
-          4.223,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPOIqVbyCt/1QL7Q83jOT98XMjOuHd/9jcOHSFv5ykpU6pzFw4uPECk9f/VMVV4a6ntbnFcWD9FvVhmeUtl0pgU5H2XFDeR0vLsQWD+fAYOasn6ovLEF6UNUgZyLcQn3R3YP39bdpeYO129Q==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 562,\"totalTokenCount\": 1335,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"LvCbarOjJeqX9tMPwf3-oAI\"}\r\n\r\n"
+          3.184,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" نشان دادن بخش گزارش\\u200cهای سیستم خود در جلسه جدید، آماده شوید.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 344,\"totalTokenCount\": 819,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPuM5TrqLQ9skTZ/FHFM+c0xVYbsfDjbL5lDuZ+Fl2xte6jmX3wP8FFREE6akyrgrBPC46CQWz0GzDYXTXyllOmA3tUo0QzbPj6HOEgiS3t9ImQKGnIdr2qUilVv1f3eWzFCp4yW/ajk827w==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 344,\"totalTokenCount\": 819,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"TFydaoCHLeL11e8P7JOTiA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "19402690083281506d3750f2f4cd83f642b7adba5a41862c17b97750fda312f3"
+      "bodySha256": "3cb5bd6656db2e19323e56ffea9dc89fc41982a21a982c329065335bd87d39d2"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -195,51 +159,31 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.183,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1349,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+          1.209,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 831,\"candidatesTokenCount\": 2,\"totalTokenCount\": 833,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 831}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"VlydapCaDaKN1e8P2OHO-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nاین نامه درباره تغییر زمان جلسه بررسی پیشنهاد شما است. نکات اصلی این است\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 831,\"candidatesTokenCount\": 19,\"totalTokenCount\": 850,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 831}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"VlydapCaDaKN1e8P2OHO-A4\"}\r\n\r\n"
         ],
         [
-          1.225,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nاین متن یک شوخیِ فنی است که در روز اول آوریل (\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 20,\"totalTokenCount\": 1367,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+          1.233,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \":\\n\\n۱. زمان جلسه از ۲ اکتبر به ۹ اکتبر تغییر کرده است.\\n۲. باید لیست قیمت\\u200cهای جدید را\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 831,\"candidatesTokenCount\": 46,\"totalTokenCount\": 877,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 831}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"VlydapCaDaKN1e8P2OHO-A4\"}\r\n\r\n"
         ],
         [
-          1.357,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"روز دروغ\\u200cگویی و شوخی در غرب) نوشته شده است.\\n\\nدر دنیای اینترنت، «\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 44,\"totalTokenCount\": 1391,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+          1.322,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" تا ۳۰ سپتامبر بفرستید تا قبل از جلسه بررسی کنند.\\n۳. در جلسه باید یک نمایش ۱۵ دقیقه\\u200cای از\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 831,\"candidatesTokenCount\": 75,\"totalTokenCount\": 906,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 831}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"VlydapCaDaKN1e8P2OHO-A4\"}\r\n\r\n"
         ],
         [
-          1.461,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"پروتکل» مجموعه\\u200cای از قوانین است که باعث می\\u200cشود کامپیوترها با هم حرف بزنند. نویسنده در این متن\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 73,\"totalTokenCount\": 1420,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+          1.407,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" بخش گزارش\\u200cهای سیستم (داشبورد) ارائه دهید.\\n\\nدر نهایت از شما پرسیده\\u200cاند که آیا این تغییرات برای شما\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 831,\"candidatesTokenCount\": 103,\"totalTokenCount\": 934,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 831}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"VlydapCaDaKN1e8P2OHO-A4\"}\r\n\r\n"
         ],
         [
-          1.508,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"، به شوخی یک پروتکل خیالی برای «کنترل قوری قهوه\\u200cساز از راه دور» طراحی کرده است. او می\\u200c\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 102,\"totalTokenCount\": 1449,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+          1.516,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" مقدور است یا خیر.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 831,\"candidatesTokenCount\": 113,\"totalTokenCount\": 944,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 831}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"VlydapCaDaKN1e8P2OHO-A4\"}\r\n\r\n"
         ],
         [
-          1.591,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"گوید چون همه وسایل خانه در حال وصل شدن به اینترنت هستند، پس باید زبانی هم برای دستور دادن به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 126,\"totalTokenCount\": 1473,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
-        ],
-        [
-          1.699,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" قهوه\\u200cساز وجود داشته باشد.\\n\\nاین سند هیچ اعتبار فنی ندارد و قرار نیست قهوه\\u200cسازها واقع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 150,\"totalTokenCount\": 1497,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
-        ],
-        [
-          1.806,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"اً با این روش کار کنند. هدف اصلی آن فقط سرگرم کردنِ مهندسان کامپیوتر و نشان دادنِ این\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 177,\"totalTokenCount\": 1524,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
-        ],
-        [
-          1.872,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" نکته است که می\\u200cتوان قوانینِ پیچیده اینترنت را به شکل طنز برای کارهای ساده\\u200cای مثل دم کردن قهوه به\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 204,\"totalTokenCount\": 1551,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
-        ],
-        [
-          2,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" کار برد.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 211,\"totalTokenCount\": 1558,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
-        ],
-        [
-          2.003,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP5NRG3/KMqqmTbx46ueWomF9gKsNHBK0MKWHLnyf4DUQ0EcOglRkYunv1VxOCSQXu4dwxAbDm4ZQh6aXyXeTsbG0LnhLIJlSq/oy62yqLluLlhw5DB3kbG0XmjoocVh7Uw/F/EpW/AsO9hA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1347,\"candidatesTokenCount\": 211,\"totalTokenCount\": 1558,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"OfCbavmpCIHcvr0P8LDm-Q4\"}\r\n\r\n"
+          1.539,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPlP7jWd1GDvx9HIYyiSK4d11ykk1NBCiMdap89/7AZwYZfGuwitGNgfSl02RXqyQa+B3CDgn9GAME5OQXAV3ki8pbi/HDbIqHGFJvQhzRekR+JeWwQzbOcAVsJc8h5nJAqE6yifMx2oJcvA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 831,\"candidatesTokenCount\": 113,\"totalTokenCount\": 944,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 831}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"VlydapCaDaKN1e8P2OHO-A4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "29de49b51b10f7cdd11cfd991ba9d6a67c75dc2de8200c3d4b4fab9f2339367c"
+      "bodySha256": "8d8d131c2b017f9961299b0f391752b6c54d8e0e6d469fbe8bfe17de28656f22"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -248,35 +192,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          0.945,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| عنوان | توضیحات |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 20,\"totalTokenCount\": 716,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **نام پروتکل** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 45,\"totalTokenCount\": 741,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+          0.801,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 2,\"totalTokenCount\": 348,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XVydaoLkIqaM1e8PwqiVoA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| موضوع | جزئیات |\\n| :--- | :---\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 18,\"totalTokenCount\": 364,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XVydaoLkIqaM1e8PwqiVoA8\"}\r\n\r\n"
         ],
         [
-          0.969,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"شماره RFC** | 2324 |\\n| **تاریخ انتشار** | ۱ آوریل ۱۹۹۸\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 70,\"totalTokenCount\": 766,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+          0.807,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| تغییر تاریخ بررسی مدیریت | از ۲ اکتبر به ۹ اکتبر |\\n| دلیل تغییر | مسافرت دو\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 44,\"totalTokenCount\": 390,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XVydaoLkIqaM1e8PwqiVoA8\"}\r\n\r\n"
         ],
         [
-          1.072,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| **نویسنده** | L. Masinter |\\n| **هدف** | کنترل، نظارت\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 94,\"totalTokenCount\": 790,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+          0.887,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" تن از مدیران |\\n| مهلت ارسال لیست قیمت اصلاح\\u200cشده | ۳۰ سپتامبر |\\n| درخواست جدید\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 69,\"totalTokenCount\": 415,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XVydaoLkIqaM1e8PwqiVoA8\"}\r\n\r\n"
         ],
         [
-          1.198,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" و تشخیص وضعیت قهوه\\u200cسازهای متصل به شبکه |\\n| **وضعیت** | Informational (اطلاع\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 119,\"totalTokenCount\": 815,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+          0.971,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" | افزودن دموی ۱۵ دقیقه\\u200cای از داشبورد گزارش\\u200cدهی به دستور جلسه |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 93,\"totalTokenCount\": 439,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XVydaoLkIqaM1e8PwqiVoA8\"}\r\n\r\n"
         ],
         [
-          1.354,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u200cرسانی - غیر استاندارد) |\\n| **دلیل ایجاد** | نیاز به کنترل از راه دور دستگاه\\u200cهای خان\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 145,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
-        ],
-        [
-          1.397,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"گی (مانند قهوه\\u200cساز) در دنیای متصل به اینترنت |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 167,\"totalTokenCount\": 863,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
-        ],
-        [
-          1.459,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP3swjelncGLCchuc0a/QAdX9ByCkeycX9G7QzzcqptrzhmiRnc2i5Rm6EPsh5p6tJDpaz6mm0wmENsjY/cYHLEHo2FfN/Hk8QaUPFMkdHaWhqGxu07EOZ+y53xD86F5mw55B7/PWQi7mtRQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 167,\"totalTokenCount\": 863,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"QPCbap3INdOc1e8P1JW54A8\"}\r\n\r\n"
+          1.017,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPe/t6l9kE9R4/jrrmPcuWcWdNlyb5MKqmbfd41fs1QZEbxvKgaRYYpf31j7HwGlwBHl5lF2+Yaktn/NBvQFXmUM4/i0l9Gd31g8C4EpdUql+mnjeXILqvueJgy7SXe7kexGhDQNGqI3D/oQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 93,\"totalTokenCount\": 439,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"XVydaoLkIqaM1e8PwqiVoA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "7a57c31fb58a60f35bf4b2258d05b8e45ce595623a1b8ccf2e094b271338ba3e"
+      "bodySha256": "ae584244b58dc1c8148d96aa571ee7cbee91d569d5b3d8a79b335f61c3043f93"
     }
   ]
 }

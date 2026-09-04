@@ -3,8 +3,9 @@
  *  recording keeps to serve the same call again without a network
  *  (scripts/demo-video.ts): the request, its URL and body — never its
  *  headers, which is where the API key rides — and the response as it
- *  streamed in. */
-export interface Exchange {
+ *  streamed in. (A call, not an exchange: `Exchange` is the popup's word
+ *  for one turn of the conversation, src/lib/llm.ts.) */
+export interface ModelCall {
   url: string;
   method: string;
   body: string;

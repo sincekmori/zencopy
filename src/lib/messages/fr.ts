@@ -126,7 +126,7 @@ export const fr: Messages = {
     open: "Ouvrir",
   },
   about: {
-    tagline: "Copiez deux fois, agissez aussitôt.",
+    tagline: "L'IA instantanée. Directement sur votre écran.",
     update: (version) => `Mettre à jour vers v${version} et redémarrer l'application`,
     updateRestart: (version) => `Redémarrer l'application pour mettre à jour vers v${version}`,
     updating: "Mise à jour…",

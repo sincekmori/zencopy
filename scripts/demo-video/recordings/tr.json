@@ -1,12 +1,12 @@
 {
   "locale": "tr",
-  "recorded": "2026-09-05T10:33:26.408Z",
+  "recorded": "2026-09-06T12:27:11.640Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:32:48"
+      "now": "2026-09-06 21:26:42"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "Bu belge, internet üzerinden kahve makinelerini kontrol etmek, izlemek ve tanılamak amacıyla geliştirilen şaka amaçlı bir protokolü (HTCPCP) tanımlamaktadır.",
+      "reply": "Liderlik toplantısının ertelenmesi nedeniyle revize fiyat listesinin 30 Eylül'e kadar iletilmesi ve gündeme raporlama paneli demosunun eklenmesi talep ediliyor.",
       "tokens": {
-        "input": 467,
-        "output": 41
+        "input": 169,
+        "output": 46
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "Bu metin, kahve makinelerini internet üzerinden kontrol etmek için hayali bir dil öneren eğlenceli bir şakadır. İnternet dünyasında insanlar, bilgisayarların birbirleriyle nasıl konuşacağını belirleyen kurallar bütününe \"protokol\" der. Bu belge, kahve makinelerinin internete bağlanıp nasıl kahve yapacağını veya nasıl kontrol edileceğini anlatan bir tür şaka yoluyla yazılmış kılavuzdur.\n\nİnternet dünyasında protokoller, bir web sitesini açarken bilgisayarınızın sunucuya ne göndermesi gerektiğini söyler. Örneğin, bir web sayfasını görmek için tarayıcınız \"bana bu sayfayı ver\" der. Bu metin, buna benzer bir şekilde, \"bana bir kahve yap\" veya \"kahvem hazır mı\" gibi komutları kahve makineleri için tanımlar.\n\nBu metnin yazılmasının sebebi, internetin her yere yayıldığı bir dönemde insanların her şeyi bilgisayara bağlama isteğiyle dalga geçmektir. 1990'ların sonunda insanlar internete tost makineleri veya içecek otomatları gibi cihazları bağlamaya başlamıştı. Bu belge de \"madem her şey internete bağlanıyor, o zaman kahve makineleri için de özel bir kural seti olsun\" diyerek durumu abartılı bir şekilde ele alır.\n\nYazıda geçen \"Hyper Text Coffee Pot Control Protocol\" yani \"Hiper Metin Kahve Potu Kontrol Protokolü\" ifadesi, aslında internetin temel dili olan \"Hyper Text Transfer Protocol\" (Hiper Metin Aktarım Protokolü) isimli gerçek kural setine bir göndermedir.\n\nBu belge, teknik bir standart değildir ve gerçek hayatta kullanılmaz. Bilgisayar mühendisleri, 1 Nisan şakası geleneği kapsamında her yıl böyle komik ve ciddi görünen belgeler hazırlarlar. Bu metin de 1 Nisan 1998 tarihinde yayınlanmış, bilgisayar dünyasının kendi içindeki bir şakasıdır.",
+      "reply": "Bu mesaj, sizinle çalışan bir kurumun işlerini biraz değiştirmek istediğini anlatan bir haberleşmedir. İş birliği yaptığınız bu kişiler, sizin gönderdiğiniz teklif dosyasını inceleyecekleri toplantının tarihini ertelemişler. Bu yüzden sizden bazı küçük eklemeler ve değişiklikler yapmanızı istiyorlar.\n\nİşte istenenler:\n\nBirinci olarak, toplantı tarihi 2 Ekim'den 9 Ekim'e alındı. Bu kişilerin yöneticileri o tarihte şehir dışında olacağı için bu değişikliği yapmak zorunda kalmışlar.\n\nİkinci olarak, fiyat tablonuzu gözden geçirip yeniden düzenlemenizi istiyorlar. Bu yeni belgeyi en geç 30 Eylül tarihine kadar kendilerine göndermeniz gerekiyor. Çünkü toplantıdan önce okuyacakları dosyaların içine bu bilgiyi de eklemek istiyorlar.\n\nÜçüncü olarak, toplantının gündemine yeni bir konu eklemek istiyorlar. \"Raporlama paneli\" dedikleri, verileri görmeye yarayan özel ekranlarını size 15 dakika boyunca canlı olarak göstertmek istiyorlar. Yani bu panelin nasıl çalıştığını onlara anlatmanızı bekliyorlar.\n\nSon olarak, bu yeni planın sizin çalışma takviminize uygun olup olmadığını öğrenmek istiyorlar. Yani hem 30 Eylül'de belgeyi gönderebilir misiniz, hem de 9 Ekim'deki toplantıda bu sunumu yapabilir misiniz diye size soruyorlar.",
       "tokens": {
-        "input": 773,
-        "output": 438
+        "input": 475,
+        "output": 326
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "Biraz daha kısa olsun lütfen",
-      "reply": "Bu metin, internet üzerinden kahve makinesi yönetmek için hayali bir dil öneren eğlenceli bir şakadır. Bilgisayarların birbiriyle konuşma kurallarına \"protokol\" denir. Bu belge, gerçek internet kurallarıyla dalga geçerek, kahve makinelerini internete bağlamanın komik bir yolunu anlatır.\n\nİnternet dünyasında insanlar, her şeyi bilgisayara bağlama tutkusuna zaman zaman bu gibi şakalarla yanıt verirler. Metin, \"Hiper Metin Aktarım Protokolü\" (HTTP) isimli gerçek kural setinin ismini \"Hiper Metin Kahve Potu Kontrol Protokolü\" (HTCPCP) yaparak durumu abartır.\n\nBu belge gerçek bir işe yaramaz; yazılımcıların 1 Nisan şakası geleneğiyle oluşturduğu mizahi bir yazıdır. Bilgisayar dünyasında ciddi bir standart gibi görünse de, tamamen teknik bir espri niteliği taşır.",
+      "reply": "Bu mesaj, iş yaptığınız kurumun toplantı planını değiştirdiğini ve sizden birkaç yeni talepte bulunduğunu anlatıyor.\n\nİstenenler şunlardır:\n\n1. Toplantı tarihi, yöneticilerin seyahati nedeniyle 2 Ekim'den 9 Ekim'e ertelendi.\n2. Güncellenmiş fiyat tablosunu 30 Eylül'e kadar göndermenizi bekliyorlar. Bu sayede dosyayı toplantı öncesi hazırlıklarına ekleyebilecekler.\n3. Toplantıda, \"raporlama paneli\" dedikleri ekranın nasıl çalıştığını gösteren 15 dakikalık bir sunum yapmanızı istiyorlar.\n\nSonuç olarak, bu yeni tarihin sizin için uygun olup olmadığını ve belirtilen tarihe kadar dosyayı hazırlayıp hazırlayamayacağınızı öğrenmek istiyorlar.",
       "tokens": {
-        "input": 1222,
-        "output": 228
+        "input": 812,
+        "output": 189
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "Tablo yap",
-      "reply": "| Başlık | Açıklama |\n| :--- | :--- |\n| **Protokol Adı** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **Yayın Tarihi** | 1 Nisan 1998 |\n| **Yazar** | L. Masinter |\n| **Kategori** | Bilgilendirme (Informational) |\n| **Temel Amaç** | Kahve makinelerinin kontrol edilmesi, izlenmesi ve tanılanması |\n| **Gerekçe** | Ubiquitous (her yerde bulunan) bilişim dünyasında kahve demleme ihtiyacı |\n| **Önceki Örnekler** | İnternete bağlı otomatlar (COKE) ve İnternet Tost Makinesi (RFC 2235) |",
+      "reply": "| Konu | Detay |\n| :--- | :--- |\n| **Gözden Geçirme Tarihi** | 9 Ekim (Eski tarih: 2 Ekim) |\n| **Fiyat Tablosu Son Teslimi** | 30 Eylül |\n| **Ek Talep** | Raporlama paneli için 15 dakikalık demo |\n| **Gerekçe** | Direktörlerin seyahat programı nedeniyle erteleme |",
       "tokens": {
-        "input": 696,
-        "output": 187
+        "input": 346,
+        "output": 110
       }
     }
   ],
@@ -77,19 +77,15 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          4.068,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eBu belge, internet üzerinden kahve makinelerini kontrol etmek, izlemek ve tanı\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 19,\"totalTokenCount\": 486,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\n"
+          0.953,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eLiderlik toplantısının ertelenmesi nedeniyle rev\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 13,\"totalTokenCount\": 182,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"A1ydasLEEPLcvr0Pnq-KyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ize fiyat listesinin 30 Eylül'e kadar iletilmesi ve gündeme raporlama paneli demosunun eklenmesi tal\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 40,\"totalTokenCount\": 209,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"A1ydasLEEPLcvr0Pnq-KyA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ep ediliyor.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 46,\"totalTokenCount\": 215,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"A1ydasLEEPLcvr0Pnq-KyA8\"}\r\n\r\n"
         ],
         [
-          4.096,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"lamak amacıyla geliştirilen şaka amaçlı bir protokolü (HTCPCP) tanımlamaktadır.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 41,\"totalTokenCount\": 508,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\n"
-        ],
-        [
-          4.156,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPjSVItM0fuo/hXmKL2SvR9dWy9u+tPcYjHCSgfxbVPVkL0WLY8H3JQKGPRlbeyg3h9E5xo5jiyyD2TJ/x+0wqxY/PoGjviv7P7999Praipo51leXDX40ZtVLEhvuDZlocOJlGpbjzEw1fKQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 41,\"totalTokenCount\": 508,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0O-barasNvm32roP8M-8aA\"}\r\n\r\n"
+          0.978,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPVY/cDCFI8it9muoGrFvmoV1VbsB8lQRUDd7abpIm9rWg5rr8JwxuTrMd2BPprtd7HotFqG9Rqkrdi7Jtu0JFyQV/i8gKUnYcIIA5SGklE9ulT+macqcLODaCbZvRJI1t3dk3D52PmiPRPw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 46,\"totalTokenCount\": 215,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"A1ydasLEEPLcvr0Pnq-KyA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "b8f904a627da78517859afbc46a692af95fe82799faf317b17ae0fac65e8d6d0"
+      "bodySha256": "4fba5e8f4e1b8f1bd303dd526c26aa96239a4a40f55b32bdf88f56c965c51400"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -98,75 +94,63 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.58,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eBu metin, kahve makinelerini internet üzerinden kontrol etmek için hayali\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 18,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bir dil öneren eğlenceli bir şakadır. İnternet dünyasında insanlar, bilgisayarların birbirleriyle\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 44,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          0.823,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          2.701,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" nasıl konuşacağını belirleyen kurallar bütününe \\\"protokol\\\" der. Bu belge, kahve makinelerinin internete bağlan\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 71,\"totalTokenCount\": 844,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          0.883,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eBu mesaj, sizinle çalışan bir kurumun işlerini biraz değiştirmek istediğini an\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 20,\"totalTokenCount\": 495,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          2.827,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ıp nasıl kahve yapacağını veya nasıl kontrol edileceğini anlatan bir tür şaka yoluyla yazılmış kılavuz\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 95,\"totalTokenCount\": 868,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.025,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"latan bir haberleşmedir. İş birliği yaptığınız bu kişiler, sizin gönderdiğiniz teklif dosyasını ince\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 45,\"totalTokenCount\": 520,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          2.929,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"dur.\\n\\nİnternet dünyasında protokoller, bir web sitesini açarken bilgisayarınızın sunucuya ne gönd\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 122,\"totalTokenCount\": 895,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.292,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"leyecekleri toplantının tarihini ertelemişler. Bu yüzden sizden bazı küçük eklemeler ve değişiklikler yapman\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 71,\"totalTokenCount\": 546,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ızı istiyorlar.\\n\\nİşte istenenler:\\n\\nBirinci olarak, toplantı tarihi 2 Ekim'den \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 97,\"totalTokenCount\": 572,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          2.989,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ermesi gerektiğini söyler. Örneğin, bir web sayfasını görmek için tarayıcınız \\\"bana bu sayfayı ver\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 148,\"totalTokenCount\": 921,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.392,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"9 Ekim'e alındı. Bu kişilerin yöneticileri o tarihte şehir dışında olacağı için bu değişikliği yapmak\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 122,\"totalTokenCount\": 597,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          3.137,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\\" der. Bu metin, buna benzer bir şekilde, \\\"bana bir kahve yap\\\" veya \\\"kahvem\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 172,\"totalTokenCount\": 945,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.606,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" zorunda kalmışlar.\\n\\nİkinci olarak, fiyat tablonuzu gözden geçirip yeniden düzenlemenizi istiyor\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 147,\"totalTokenCount\": 622,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          3.354,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" hazır mı\\\" gibi komutları kahve makineleri için tanımlar.\\n\\nBu metnin yazılmasının sebebi, internetin her\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 199,\"totalTokenCount\": 972,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.653,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"lar. Bu yeni belgeyi en geç 30 Eylül tarihine kadar kendilerine göndermeniz gerekiyor. Çünkü toplantıdan önce\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 174,\"totalTokenCount\": 649,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          3.548,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" yere yayıldığı bir dönemde insanların her şeyi bilgisayara bağlama isteğiyle dalga geçmektir. \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 225,\"totalTokenCount\": 998,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.816,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" okuyacakları dosyaların içine bu bilgiyi de eklemek istiyorlar.\\n\\nÜçüncü olarak, toplant\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 199,\"totalTokenCount\": 674,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          3.548,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"1990'ların sonunda insanlar internete tost makineleri veya içecek otomatları gibi cihazları bağlamaya başlam\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 251,\"totalTokenCount\": 1024,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.907,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ının gündemine yeni bir konu eklemek istiyorlar. \\\"Raporlama paneli\\\" dedikleri, ver\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 223,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          3.763,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ıştı. Bu belge de \\\"madem her şey internete bağlanıyor, o zaman kahve makineleri için de özel\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 275,\"totalTokenCount\": 1048,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          1.972,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ileri görmeye yarayan özel ekranlarını size 15 dakika boyunca canlı olarak göstertmek istiyorlar. Yani\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 247,\"totalTokenCount\": 722,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          3.763,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bir kural seti olsun\\\" diyerek durumu abartılı bir şekilde ele alır.\\n\\nYazıda geçen \\\"Hyper Text Coffee\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 301,\"totalTokenCount\": 1074,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Pot Control Protocol\\\" yani \\\"Hiper Metin Kahve Potu Kontrol Protokolü\\\" ifadesi, aslında internet\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 326,\"totalTokenCount\": 1099,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          2.118,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bu panelin nasıl çalıştığını onlara anlatmanızı bekliyorlar.\\n\\nSon olarak, bu yeni planın sizin çalışma\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 273,\"totalTokenCount\": 748,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          3.85,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"in temel dili olan \\\"Hyper Text Transfer Protocol\\\" (Hiper Metin Aktarım Protokolü) isimli gerçek\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 350,\"totalTokenCount\": 1123,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          2.183,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" takviminize uygun olup olmadığını öğrenmek istiyorlar. Yani hem 30 Eylül'de belgeyi göndere\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 298,\"totalTokenCount\": 773,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          4.063,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" kural setine bir göndermedir.\\n\\nBu belge, teknik bir standart değildir ve gerçek hayatta kullanılmaz. Bil\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 376,\"totalTokenCount\": 1149,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          2.253,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"bilir misiniz, hem de 9 Ekim'deki toplantıda bu sunumu yapabilir misiniz diye size soruyorlar.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 326,\"totalTokenCount\": 801,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ],
         [
-          4.169,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"gisayar mühendisleri, 1 Nisan şakası geleneği kapsamında her yıl böyle komik ve ciddi görü\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 400,\"totalTokenCount\": 1173,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
-        ],
-        [
-          4.191,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"nen belgeler hazırlarlar. Bu metin de 1 Nisan 1998 tarihinde yayınlanmış, bilgis\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 424,\"totalTokenCount\": 1197,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
-        ],
-        [
-          4.257,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ayar dünyasının kendi içindeki bir şakasıdır.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 438,\"totalTokenCount\": 1211,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
-        ],
-        [
-          4.301,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPahVKbiorzMjHMdcu1KgFTuUtUTbXBx6fnPoAKnaVv2AABWWU46uYR1XSvWk2obIYZcda/Pivt7LphvIFibTAMUIQo7M99Vf4EY5lZwEOd+Y6FamwaIpUmTOsR4uqvG4wJPcWKeI4pdImTw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 438,\"totalTokenCount\": 1211,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"2O-baorGK7Pdvr0Pmb3f-A4\"}\r\n\r\n"
+          2.3,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPFmOu4+U5xUn5J17/seAErorh1eAJcWIrh3RXChtlpkBe0da2WpaD24YMjeWHuLnj+cBTECm3p05S92mCOg7veP4wWZaCbu95aeL928dtHru2P82Bf4EjIEaDbdlfsoPtwON+RPKN+GOe0A==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 326,\"totalTokenCount\": 801,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"B1ydap_6NsDN1e8PvrrcgQ8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "50f8178daf773fa1f59dc4140b54fb00ed43147c72c62e31ba9c444fb816b856"
+      "bodySha256": "3c555f9fec739bb36da786004bbc59d0395d028dfd23f22dd8ab08234a159d4e"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -175,51 +159,39 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.862,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1224,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          0.82,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 2,\"totalTokenCount\": 814,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nBu mesaj, iş yaptığınız kurumun toplantı planını değiştirdiğini ve\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 20,\"totalTokenCount\": 832,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" sizden birkaç yeni talepte bulunduğunu anlatıyor.\\n\\nİstenenler şunlardır:\\n\\n1. Toplant\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 46,\"totalTokenCount\": 858,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          2.863,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nBu metin, internet üzerinden kahve makinesi yönetmek için hayali bir dil öner\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 22,\"totalTokenCount\": 1244,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          0.867,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ı tarihi, yöneticilerin seyahati nedeniyle 2 Ekim'den 9 Ekim'e ertelendi.\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 71,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          2.924,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"en eğlenceli bir şakadır. Bilgisayarların birbiriyle konuşma kurallarına \\\"protokol\\\" den\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 51,\"totalTokenCount\": 1273,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          0.934,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"2. Güncellenmiş fiyat tablosunu 30 Eylül'e kadar göndermenizi bekliyorlar. Bu\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 97,\"totalTokenCount\": 909,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          3.073,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ir. Bu belge, gerçek internet kurallarıyla dalga geçerek, kahve makinelerini internete bağlamanın\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 75,\"totalTokenCount\": 1297,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          1.021,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" sayede dosyayı toplantı öncesi hazırlıklarına ekleyebilecekler.\\n3. Toplantıda, \\\"raporlama\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 125,\"totalTokenCount\": 937,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          3.094,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" komik bir yolunu anlatır.\\n\\nİnternet dünyasında insanlar, her şeyi bilgisayara bağlama\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 99,\"totalTokenCount\": 1321,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          1.129,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" paneli\\\" dedikleri ekranın nasıl çalıştığını gösteren 15 dakikalık bir sunum yapmanızı istiyorlar.\\n\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 154,\"totalTokenCount\": 966,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          3.278,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" tutkusuna zaman zaman bu gibi şakalarla yanıt verirler. Metin, \\\"Hiper Metin Akt\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 123,\"totalTokenCount\": 1345,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"arım Protokolü\\\" (HTTP) isimli gerçek kural setinin ismini \\\"Hiper Metin Kahve Pot\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 148,\"totalTokenCount\": 1370,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          1.237,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Sonuç olarak, bu yeni tarihin sizin için uygun olup olmadığını ve belirtilen tarihe kadar dosyayı hazırlayıp hazırl\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 179,\"totalTokenCount\": 991,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          3.385,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"u Kontrol Protokolü\\\" (HTCPCP) yaparak durumu abartır.\\n\\nBu belge gerçek bir işe y\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 174,\"totalTokenCount\": 1396,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          1.264,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ayamayacağınızı öğrenmek istiyorlar.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 189,\"totalTokenCount\": 1001,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ],
         [
-          3.432,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"aramaz; yazılımcıların 1 Nisan şakası geleneğiyle oluşturduğu mizahi bir yaz\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 198,\"totalTokenCount\": 1420,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
-        ],
-        [
-          3.592,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ıdır. Bilgisayar dünyasında ciddi bir standart gibi görünse de, tamamen teknik bir espri niteliği taşır.\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 225,\"totalTokenCount\": 1447,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
-        ],
-        [
-          3.679,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1450,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
-        ],
-        [
-          3.722,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPNzBBTwZFMb3JwtwjQxDbew+kod5pE9zHW8Yd4gPmMXlJklYihCiCTim9cY8JeCcc8+JH4OaVhb7oJi8k3HVAP4sbk2GB0dhZCPNvPBG/dHUP8VYxYOT23LykDb4LP04ccRqJIQqwuOLajA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1222,\"candidatesTokenCount\": 228,\"totalTokenCount\": 1450,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1222}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"4--bapXNOZmc0-kPu4O3cA\"}\r\n\r\n"
+          1.324,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPWdzZUELJxJT35B9tqn+8EGyC+3R8H4bdj0nM6snwj4jrIVh5O1j8OxRkvtcXfbGKRUryqY4mkvOOiOGvNwPQIkQEcgfbBh1qApgsaMxEloRnZH91mRLWTqau8kU/sCBJ5RGi1bURohpo4w==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 812,\"candidatesTokenCount\": 189,\"totalTokenCount\": 1001,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 812}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"EVydau7ABKWR1e8P6NGW8Q4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "22755f3147e4b72cdf23c5a65c2e630f4aae3f1ed1b861042679fbc960a52c9b"
+      "bodySha256": "98379ec3bf221dc0bfb5c53a121c25edf3f01efc94bfbbd1934d482f50cfc24d"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -228,35 +200,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.104,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Başlık | Açıklama |\\n| :--- | :---\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 19,\"totalTokenCount\": 715,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+          0.894,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 2,\"totalTokenCount\": 348,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFydaqW1CLvdvr0PkP-4-Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n\\n| Konu | Detay |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 21,\"totalTokenCount\": 367,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFydaqW1CLvdvr0PkP-4-Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **Gözden Geçirme Tarihi** | 9 Ekim (Eski tarih: 2 Ekim) |\\n| **F\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 48,\"totalTokenCount\": 394,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFydaqW1CLvdvr0PkP-4-Q4\"}\r\n\r\n"
         ],
         [
-          1.293,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" |\\n| **Protokol Adı** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 43,\"totalTokenCount\": 739,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+          0.957,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"iyat Tablosu Son Teslimi** | 30 Eylül |\\n| **Ek Talep** | Raporlama\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 74,\"totalTokenCount\": 420,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFydaqW1CLvdvr0PkP-4-Q4\"}\r\n\r\n"
         ],
         [
-          1.5,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"0) |\\n| **Yayın Tarihi** | 1 Nisan 1998 |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 67,\"totalTokenCount\": 763,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Yazar** | L. Masinter |\\n| **Kategori** | Bilgilendirme (Informational) |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 92,\"totalTokenCount\": 788,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+          1.018,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" paneli için 15 dakikalık demo |\\n| **Gerekçe** | Direktörlerin seyahat program\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 100,\"totalTokenCount\": 446,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFydaqW1CLvdvr0PkP-4-Q4\"}\r\n\r\n"
         ],
         [
-          1.589,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Temel Amaç** | Kahve makinelerinin kontrol edilmesi, izlenmesi ve tanılanması |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 116,\"totalTokenCount\": 812,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+          1.103,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ı nedeniyle erteleme |\\n\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 110,\"totalTokenCount\": 456,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFydaqW1CLvdvr0PkP-4-Q4\"}\r\n\r\n"
         ],
         [
-          1.632,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Gerekçe** | Ubiquitous (her yerde bulunan) bilişim dünyasında kahve demleme ihtiy\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 141,\"totalTokenCount\": 837,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
-        ],
-        [
-          1.795,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"acı |\\n| **Önceki Örnekler** | İnternete bağlı otomatlar (COKE) ve İn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 168,\"totalTokenCount\": 864,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
-        ],
-        [
-          1.999,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ternet Tost Makinesi (RFC 2235) |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 187,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPMBoRfHBrl5km/t+pZhookf7EUgIpG3fVMjZE2oTkw749MuU/Z0r8iEz84krL/ly6ZG970XxaYu0CYWKHeylH2FxLh3K7TKuUg1yqd43pOrjylFNsLz5kX93sK9wmL60UUfEdKaIjjvXI2A==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 187,\"totalTokenCount\": 883,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"7O-barn9O4vhrfcPjrnEqAE\"}\r\n\r\n"
+          1.162,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPIQl0cNWNx4gFmC8+ChAjd4QIbMwqHTfuQe5bY4qqFztEwnq62GSicZyJnT0Fu+4VmDuNzUIXTzTisTGZmfpdRJcqsjHgJZOj7esExnOp89ReyCk418+psuwRNJ7wHyaE3QPbkKEawVQtHA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 110,\"totalTokenCount\": 456,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFydaqW1CLvdvr0PkP-4-Q4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "0ff91a843f10ec9c7e011ae33f502aec990d6d9843474dd4a4e812cd9a6f0d6a"
+      "bodySha256": "db87051a7847f04df07c64e5eebf1e83e52c61124ac4f6cd4e430a4f0fb5ced1"
     }
   ]
 }

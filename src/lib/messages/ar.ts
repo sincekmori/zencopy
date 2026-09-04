@@ -118,7 +118,7 @@ export const ar: Messages = {
     open: "فتح",
   },
   about: {
-    tagline: "انسخ مرتين، ونفّذ فورًا.",
+    tagline: "ذكاء اصطناعي فوري. على شاشتك مباشرة.",
     update: (version) => `التحديث إلى الإصدار v${version} وإعادة تشغيل التطبيق`,
     updateRestart: (version) => `أعد تشغيل التطبيق للتحديث إلى الإصدار v${version}`,
     updating: "جارٍ التحديث…",

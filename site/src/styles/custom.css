@@ -18,12 +18,21 @@
   height: 8rem;
 }
 
-/* Demo screen recordings embedded in the docs (top half of the screen,
-   landscape) — full content width, or the popup text becomes unreadable. */
+/* Demo screen recordings embedded in the docs: portrait frames (the popup
+   window at 2×, or the browser page it lands on), so they are capped at a
+   width that keeps a whole frame inside one viewport — a reader sees the
+   answer without scrolling — while the popup text stays legible. */
 .demo-video {
+  display: block;
   width: 100%;
+  max-width: 32.5rem;
   border: 1px solid var(--sl-color-hairline);
   border-radius: 0.75rem;
+}
+
+/* The landscape one (the mail and the popup side by side) takes the column. */
+.demo-video.wide {
+  max-width: none;
 }
 
 /* Header selects (theme, language): Starlight hard-codes narrow widths

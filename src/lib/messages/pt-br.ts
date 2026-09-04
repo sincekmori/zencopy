@@ -123,7 +123,7 @@ export const ptBR: Messages = {
     open: "Abrir",
   },
   about: {
-    tagline: "Copie duas vezes, aja na hora.",
+    tagline: "IA na hora. Direto na sua tela.",
     update: (version) => `Atualizar para v${version} e reiniciar o aplicativo`,
     updateRestart: (version) => `Reiniciar o aplicativo para atualizar para v${version}`,
     updating: "Atualizando…",

@@ -125,7 +125,7 @@ export const de: Messages = {
     open: "Öffnen",
   },
   about: {
-    tagline: "Zweimal kopieren, sofort handeln.",
+    tagline: "Sofort KI. Direkt auf dem Bildschirm.",
     update: (version) => `Auf v${version} aktualisieren und App neu starten`,
     updateRestart: (version) => `App neu starten, um auf v${version} zu aktualisieren`,
     updating: "Aktualisiere…",

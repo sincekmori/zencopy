@@ -122,7 +122,7 @@ export const ko: Messages = {
     open: "열기",
   },
   about: {
-    tagline: "두 번 복사하면, 즉시 처리.",
+    tagline: "지금 있는 화면에, 바로 AI.",
     update: (version) => `v${version}(으)로 업데이트하고 앱 재시작`,
     updateRestart: (version) => `앱을 재시작하여 v${version}(으)로 업데이트`,
     updating: "업데이트 중…",

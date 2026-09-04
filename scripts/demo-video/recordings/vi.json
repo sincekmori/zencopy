@@ -1,12 +1,12 @@
 {
   "locale": "vi",
-  "recorded": "2026-09-05T10:32:07.056Z",
+  "recorded": "2026-09-06T12:26:02.391Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:31:31"
+      "now": "2026-09-06 21:25:33"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "Tài liệu này giới thiệu HTCPCP, một giao thức được tạo ra như một trò đùa nhằm điều khiển và giám sát máy pha cà phê qua mạng.",
+      "reply": "Khách hàng dời lịch họp sang 9/10, yêu cầu gửi bảng giá mới trước 30/9 và bổ sung phần demo sản phẩm.",
       "tokens": {
-        "input": 467,
+        "input": 169,
         "output": 39
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "Giao thức điều khiển bình pha cà phê siêu văn bản (Hyper Text Coffee Pot Control Protocol - HTCPCP) là một văn bản hài hước được viết vào ngày Cá tháng Tư năm 1998, dùng để mô phỏng cách các máy tính nói chuyện với nhau.\n\nHãy tưởng tượng bạn muốn điều khiển chiếc máy pha cà phê trong bếp từ chiếc điện thoại hoặc máy tính của mình. Để làm được điều đó, máy tính của bạn và máy pha cà phê cần một \"ngôn ngữ chung\" để hiểu ý nhau. Giao thức chính là ngôn ngữ chung đó. Văn bản này tạo ra một trò đùa về việc dùng cách mà các trang web giao tiếp (gọi là Hypertext Transfer Protocol - Giao thức truyền tải siêu văn bản) để ra lệnh cho một chiếc máy pha cà phê từ xa.\n\nDưới đây là cách mọi thứ vận hành trong thế giới máy tính:\n\n**1. Giao thức là gì?**\nKhi bạn xem một trang web, máy tính của bạn gửi đi một thông điệp theo một bộ quy tắc nghiêm ngặt để yêu cầu trang web đó hiện ra. Bộ quy tắc đó được gọi là giao thức. Văn bản này giả vờ rằng chúng ta cũng cần một bộ quy tắc tương tự cho những việc đời thường, như pha cà phê.\n\n**2. Tại sao người ta viết văn bản này?**\nVào thời điểm năm 1998, các kỹ sư máy tính bắt đầu mơ về một tương lai nơi mọi thiết bị trong nhà—từ máy nướng bánh mì đến máy pha cà phê—đều được kết nối với Internet. Họ gọi đây là \"Internet vạn vật\". Văn bản này ra đời như một cách để đùa vui về xu hướng này bằng cách tạo ra các quy tắc kỹ thuật nghiêm túc cho một việc không hề quan trọng về mặt kỹ thuật: pha cà phê.\n\n**3. Nó hoạt động như thế nào trong văn bản?**\nTác giả đã dùng những thuật ngữ kỹ thuật khó hiểu để mô tả những việc rất bình thường. Ví dụ, thay vì nói \"bật máy pha cà phê\", văn bản này sử dụng các mệnh lệnh giả định dựa trên cách các trang web làm việc. Họ thậm chí còn tạo ra những thông báo lỗi hài hước, ví dụ như mã lỗi \"418 I'm a teapot\" (Tôi là một ấm trà), ngụ ý rằng chiếc máy pha cà phê đang từ chối pha cà phê vì nó là một chiếc ấm trà chứ không phải máy pha cà phê.\n\nTóm lại, đây không phải là một quy tắc thực tế mà ai cũng phải tuân theo. Đây là một trò đùa thông minh của các kỹ sư máy tính, nhằm chế giễu việc mọi người cố gắng kết nối mọi thiết bị vào Internet, ngay cả những thứ vốn không cần thiết phải làm như vậy. Nó cho thấy cách các chuyên gia công nghệ dùng chính những quy tắc khô khan của họ để tạo ra một câu chuyện hài hước.",
+      "reply": "Đây là một tin nhắn công việc. Người viết muốn thông báo rằng cuộc họp quyết định của họ đã bị lùi lại một tuần, từ ngày 2 tháng 10 sang ngày 9 tháng 10, vì có hai lãnh đạo bận đi công tác.\n\nVì thời gian thay đổi, họ có ba yêu cầu dành cho bạn:\n\n1. Bạn hãy gửi cho họ bảng giá mới trước ngày 30 tháng 9. Họ cần bảng giá này để xem trước tài liệu trước khi bước vào cuộc họp.\n2. Họ muốn dành ra 15 phút trong buổi họp để xem bạn giới thiệu trực tiếp về công cụ theo dõi số liệu (gọi là \"bảng điều khiển báo cáo\"). Công cụ này giúp họ nhìn thấy các kết quả công việc một cách dễ dàng.\n3. Bạn hãy phản hồi cho họ biết liệu bạn có thể tham gia vào thời gian mới này hay không.\n\nTóm lại, họ đang điều chỉnh lịch trình và cần bạn chuẩn bị thêm tài liệu cùng một phần trình bày ngắn để buổi họp đạt hiệu quả tốt hơn.",
       "tokens": {
-        "input": 773,
-        "output": 629
+        "input": 475,
+        "output": 230
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "Ngắn gọn hơn một chút nhé",
-      "reply": "Giao thức điều khiển bình pha cà phê (HTCPCP) là một tài liệu hài hước từ năm 1998, dùng để đùa vui về việc kết nối các đồ gia dụng vào Internet.\n\nTrong thế giới máy tính, \"giao thức\" là một bộ quy tắc để các thiết bị hiểu và ra lệnh cho nhau. Thông thường, chúng ta dùng giao thức để mở trang web. Tác giả của văn bản này đã mượn cách làm đó để đặt ra các quy tắc giả định cho việc điều khiển máy pha cà phê từ xa.\n\nTại sao nó tồn tại?\n- Vào thập niên 90, các kỹ sư bắt đầu thử nghiệm kết nối mọi thứ (như máy nướng bánh mì) vào mạng Internet.\n- Văn bản này ra đời để châm biếm xu hướng đó bằng cách viết những quy định kỹ thuật nghiêm túc cho việc pha cà phê. \n- Nó chứa các chi tiết vui nhộn, ví dụ như mã lỗi \"418 I'm a teapot\" (Tôi là một chiếc ấm trà) – dùng để báo lỗi khi máy từ chối làm việc.\n\nTóm lại, đây không phải là một tiêu chuẩn kỹ thuật thực thụ. Đó là một trò đùa của giới công nghệ, dùng ngôn ngữ máy tính khô khan để nói về một ý tưởng kỳ quặc là biến chiếc máy pha cà phê thành một thiết bị \"thông minh\" trên mạng.",
+      "reply": "Đây là một tin nhắn về việc thay đổi lịch họp. Vì có người bận đi công tác, cuộc họp của đối tác đã dời từ ngày 2 tháng 10 sang ngày 9 tháng 10.\n\nHọ muốn bạn thực hiện ba việc:\n1. Gửi lại bảng giá mới trước ngày 30 tháng 9 để họ chuẩn bị tài liệu.\n2. Thêm một phần trình bày ngắn 15 phút về công cụ theo dõi số liệu của bạn trong buổi họp.\n3. Xác nhận lại với họ xem bạn có sắp xếp được thời gian theo lịch mới này không.\n\nHọ cần những thay đổi này để buổi họp sắp tới diễn ra thuận lợi hơn.",
       "tokens": {
-        "input": 1415,
-        "output": 306
+        "input": 716,
+        "output": 156
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "Làm thành bảng",
-      "reply": "| Mục | Thông tin |\n| :--- | :--- |\n| **Tên giao thức** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **Mã RFC** | 2324 |\n| **Ngày phát hành** | 1 tháng 4 năm 1998 |\n| **Tác giả** | L. Masinter |\n| **Loại tài liệu** | Thông tin (Informational) |\n| **Mục đích** | Kiểm soát, giám sát và chẩn đoán bình pha cà phê qua mạng |\n| **Lý do ra đời** | Nhu cầu kết nối các thiết bị gia dụng (cà phê) vào Internet để điều khiển từ xa |",
+      "reply": "| Nội dung | Chi tiết |\n| :--- | :--- |\n| **Lịch họp lãnh đạo mới** | 9 tháng 10 |\n| **Hạn chót gửi bảng giá** | 30 tháng 9 |\n| **Yêu cầu bổ sung** | Bản demo 15 phút về bảng điều khiển báo cáo (reporting dashboard) |",
       "tokens": {
-        "input": 697,
-        "output": 167
+        "input": 347,
+        "output": 87
       }
     }
   ],
@@ -77,19 +77,19 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.956,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hO-basr5Af_krfcPnOa6MA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eTài liệu này giới thiệu HTCPCP, một giao thức được tạo\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 18,\"totalTokenCount\": 485,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hO-basr5Af_krfcPnOa6MA\"}\r\n\r\n"
+          1.34,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eKhách hàng dời lịch họp sang 9/1\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 15,\"totalTokenCount\": 184,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"vVudavjlMcmU1e8P6oXv0Q4\"}\r\n\r\n"
         ],
         [
-          2.002,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ra như một trò đùa nhằm điều khiển và giám sát máy pha cà phê qua mạng.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 39,\"totalTokenCount\": 506,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hO-basr5Af_krfcPnOa6MA\"}\r\n\r\n"
+          1.357,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"0, yêu cầu gửi bảng giá mới trước 30/9 và bổ sung phần demo sản phẩm.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 39,\"totalTokenCount\": 208,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"vVudavjlMcmU1e8P6oXv0Q4\"}\r\n\r\n"
         ],
         [
-          2.043,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP+uw+iOl9+4hb7c0Vw6kmZGSaqk9UNnvFVGM6Fm0bsHgjCi2LfHjrcLxmm27OOLMH9QpsRNDBw2evcX4+Aprn/OlTjiac1ZuUlYNgsetIbkext9rmVzXtuZkuErdzJsZh4HN2VuyS9SCtiQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 39,\"totalTokenCount\": 506,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"hO-basr5Af_krfcPnOa6MA\"}\r\n\r\n"
+          1.403,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP6v6raqeSjJ4qA6kmqAyaY5tBHECP2CxLSstQZw83mOUDRtsSYjQ2z2Lax3sdPAaTV7x0k/LYZpOBxihuT+tKNpMTk2So4gOxuvNzDLX5WtN/mayVtZUDmD53g+Ty+qcKpr0njo6I0KiudA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 39,\"totalTokenCount\": 208,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"vVudavjlMcmU1e8P6oXv0Q4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "1ce1b09ad1b15123137127a2bbdc16355ded580d5d064f997db4d9932fa9caf7"
+      "bodySha256": "5533fdc7bcae0307278f6525c98b5b262f1e8868967fdbaf90b75915fc95fba6"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -98,107 +98,39 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          0.982,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nGiao thức điều khiển bình pha cà phê siêu văn bản (Hyper\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 18,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          0.791,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nĐây là một tin nhắn công việc. Người viết muốn thông báo rằng cuộc họp quyết\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 21,\"totalTokenCount\": 496,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          1.024,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Text Coffee Pot Control Protocol - HTCPCP) là một văn bản hài hước được viết vào ngày Cá tháng Tư năm 19\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 46,\"totalTokenCount\": 819,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          0.792,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" định của họ đã bị lùi lại một tuần, từ ngày 2 tháng 10 sang ngày 9 tháng 10,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 49,\"totalTokenCount\": 524,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" vì có hai lãnh đạo bận đi công tác.\\n\\nVì thời gian thay đổi, họ có ba yêu cầu dành\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 73,\"totalTokenCount\": 548,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          1.083,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"98, dùng để mô phỏng cách các máy tính nói chuyện với nhau.\\n\\nHãy tưởng tượng bạn muốn điều khiển chiếc\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 72,\"totalTokenCount\": 845,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          0.814,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" cho bạn:\\n\\n1. Bạn hãy gửi cho họ bảng giá mới trước ngày 30 tháng 9. Họ cần bảng giá này để\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 102,\"totalTokenCount\": 577,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          1.204,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" máy pha cà phê trong bếp từ chiếc điện thoại hoặc máy tính của mình. Để làm được điều đó, máy tính của\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 97,\"totalTokenCount\": 870,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          0.9,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" xem trước tài liệu trước khi bước vào cuộc họp.\\n2. Họ muốn dành ra 15 phút trong buổi họp để xem bạn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 130,\"totalTokenCount\": 605,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          1.352,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bạn và máy pha cà phê cần một \\\"ngôn ngữ chung\\\" để hiểu ý nhau. Giao thức chính là ngôn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 122,\"totalTokenCount\": 895,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          1.026,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" giới thiệu trực tiếp về công cụ theo dõi số liệu (gọi là \\\"bảng điều khiển báo cáo\\\"). Công cụ này giúp\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 157,\"totalTokenCount\": 632,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          1.376,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ngữ chung đó. Văn bản này tạo ra một trò đùa về việc dùng cách mà các trang web giao tiếp (gọi\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 148,\"totalTokenCount\": 921,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          1.201,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" họ nhìn thấy các kết quả công việc một cách dễ dàng.\\n3. Bạn hãy phản hồi cho họ biết liệu bạn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 182,\"totalTokenCount\": 657,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          1.544,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" là Hypertext Transfer Protocol - Giao thức truyền tải siêu văn bản) để ra lệnh cho một chiếc máy pha cà phê từ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 174,\"totalTokenCount\": 947,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          1.412,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" có thể tham gia vào thời gian mới này hay không.\\n\\nTóm lại, họ đang điều chỉnh lịch trình và\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 206,\"totalTokenCount\": 681,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ],
         [
-          1.65,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" xa.\\n\\nDưới đây là cách mọi thứ vận hành trong thế giới máy tính:\\n\\n**1. Giao thức là gì?\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 202,\"totalTokenCount\": 975,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          1.703,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"**\\nKhi bạn xem một trang web, máy tính của bạn gửi đi một thông điệp theo một bộ quy tắc nghiêm\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 227,\"totalTokenCount\": 1000,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          1.853,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ngặt để yêu cầu trang web đó hiện ra. Bộ quy tắc đó được gọi là giao thức. Văn bản này giả\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 252,\"totalTokenCount\": 1025,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          1.9,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" vờ rằng chúng ta cũng cần một bộ quy tắc tương tự cho những việc đời thường, như pha cà phê.\\n\\n**2\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 279,\"totalTokenCount\": 1052,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.068,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". Tại sao người ta viết văn bản này?**\\nVào thời điểm năm 1998, các kỹ sư máy\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 306,\"totalTokenCount\": 1079,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.092,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" tính bắt đầu mơ về một tương lai nơi mọi thiết bị trong nhà—từ máy nướng bánh mì đến máy\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 330,\"totalTokenCount\": 1103,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.262,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" pha cà phê—đều được kết nối với Internet. Họ gọi đây là \\\"Internet vạn vật\\\". Văn bản này ra\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 356,\"totalTokenCount\": 1129,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.328,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" đời như một cách để đùa vui về xu hướng này bằng cách tạo ra các quy tắc kỹ thuật nghiêm túc cho một\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 382,\"totalTokenCount\": 1155,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.328,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" việc không hề quan trọng về mặt kỹ thuật: pha cà phê.\\n\\n**3. Nó hoạt động như thế nào trong\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 407,\"totalTokenCount\": 1180,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.476,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" văn bản?**\\nTác giả đã dùng những thuật ngữ kỹ thuật khó hiểu để mô tả những việc rất bình thường. Ví dụ,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 436,\"totalTokenCount\": 1209,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.521,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" thay vì nói \\\"bật máy pha cà phê\\\", văn bản này sử dụng các mệnh lệnh giả định dựa trên cách\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 460,\"totalTokenCount\": 1233,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.879,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" các trang web làm việc. Họ thậm chí còn tạo ra những thông báo lỗi hài hước, ví dụ như mã lỗi \\\"4\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 487,\"totalTokenCount\": 1260,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"18 I'm a teapot\\\" (Tôi là một ấm trà), ngụ ý rằng chiếc máy pha cà phê đang\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 512,\"totalTokenCount\": 1285,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          2.926,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" từ chối pha cà phê vì nó là một chiếc ấm trà chứ không phải máy pha cà phê.\\n\\nTóm lại, đây\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 539,\"totalTokenCount\": 1312,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          3.077,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" không phải là một quy tắc thực tế mà ai cũng phải tuân theo. Đây là một trò đùa thông minh của các kỹ sư máy\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 568,\"totalTokenCount\": 1341,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          3.099,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" tính, nhằm chế giễu việc mọi người cố gắng kết nối mọi thiết bị vào Internet, ngay cả những thứ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 592,\"totalTokenCount\": 1365,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          3.295,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" vốn không cần thiết phải làm như vậy. Nó cho thấy cách các chuyên gia công nghệ dùng chính những quy tắc khô\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 616,\"totalTokenCount\": 1389,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          3.384,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" khan của họ để tạo ra một câu chuyện hài hước.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 629,\"totalTokenCount\": 1402,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
-        ],
-        [
-          3.431,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPUJIqH3yXbJPJxwMLDaJQNZnWUaT3BIlxGVGcbTLROTNGiO5DA0RaiNnIz90LT4lzZAqOrN0UoY3dAqvLVQUMhFv79PDrcAmlIFNkX5jU1BDGgOaOZy5fRmnUQsfblGwLfX61p2s5/VDxWQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 629,\"totalTokenCount\": 1402,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"ie-baq-qKsv72roP0bzAiAI\"}\r\n\r\n"
+          1.612,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" cần bạn chuẩn bị thêm tài liệu cùng một phần trình bày ngắn để buổi họp đạt hiệu quả tốt hơn.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 230,\"totalTokenCount\": 705,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP3PulY83EHWcJmisJk4NgXlqoOZDwGKrr9z47BoaA3y15nwXSFyGZaSqrBQa3LLOYwvY2j7sKRKgmt8fSaqkzr7y28jQrNSG9JNCcKv7glItVynjsag3xIfX3UwuhxJBm1ZOvH93Ce56uBA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 230,\"totalTokenCount\": 705,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"wludarTgO7y6vr0PqfnJiQ8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "552f417df912aa7e3ffc2eeeea58c7a26f719450d3fa0e3f92cd4dd921f85b02"
+      "bodySha256": "77f8a85edeb08e0c9dc10ea89bca68878ac79801dc19a5f952c94bccd1d45a6e"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -207,63 +139,31 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.42,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1417,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nGiao thức điều khiển bình pha cà phê (HTCPCP) là một\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 20,\"totalTokenCount\": 1435,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
+          0.836,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 2,\"totalTokenCount\": 718,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nĐây là một tin nhắn về việc thay đổi lịch họp. Vì có người\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 19,\"totalTokenCount\": 735,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bận đi công tác, cuộc họp của đối tác đã dời từ ngày 2 tháng 10 sang ngày 9 tháng\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 46,\"totalTokenCount\": 762,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\n"
         ],
         [
-          1.421,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" tài liệu hài hước từ năm 1998, dùng để đùa vui về việc kết nối các đồ gia dụng\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 46,\"totalTokenCount\": 1461,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
+          0.923,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 10.\\n\\nHọ muốn bạn thực hiện ba việc:\\n1. Gửi lại bảng giá mới trước ngày \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 72,\"totalTokenCount\": 788,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\n"
         ],
         [
-          1.486,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" vào Internet.\\n\\nTrong thế giới máy tính, \\\"giao thức\\\" là một bộ quy tắc để các thiết bị hiểu\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 71,\"totalTokenCount\": 1486,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
+          0.983,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"30 tháng 9 để họ chuẩn bị tài liệu.\\n2. Thêm một phần trình bày ngắn 15 phút về\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 99,\"totalTokenCount\": 815,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\n"
         ],
         [
-          1.551,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" và ra lệnh cho nhau. Thông thường, chúng ta dùng giao thức để mở trang web. Tác giả của văn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 95,\"totalTokenCount\": 1510,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
+          1.049,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" công cụ theo dõi số liệu của bạn trong buổi họp.\\n3. Xác nhận lại với họ xem bạn có sắp xếp\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 124,\"totalTokenCount\": 840,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\n"
         ],
         [
-          1.662,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bản này đã mượn cách làm đó để đặt ra các quy tắc giả định cho việc điều khiển máy pha cà phê từ\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 121,\"totalTokenCount\": 1536,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
+          1.144,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" được thời gian theo lịch mới này không.\\n\\nHọ cần những thay đổi này để buổi họp sắp tới diễn ra thuận\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 149,\"totalTokenCount\": 865,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\n"
         ],
         [
-          1.825,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" xa.\\n\\nTại sao nó tồn tại?\\n- Vào thập niên 90, các kỹ sư bắt đầu thử\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 145,\"totalTokenCount\": 1560,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          1.92,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" nghiệm kết nối mọi thứ (như máy nướng bánh mì) vào mạng Internet.\\n- Văn bản này ra đời\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 170,\"totalTokenCount\": 1585,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          1.977,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" để châm biếm xu hướng đó bằng cách viết những quy định kỹ thuật nghiêm túc cho việc pha cà phê. \\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 197,\"totalTokenCount\": 1612,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          2.127,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"- Nó chứa các chi tiết vui nhộn, ví dụ như mã lỗi \\\"418 I'm a teapot\\\" (Tôi là\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 225,\"totalTokenCount\": 1640,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          2.13,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" một chiếc ấm trà) – dùng để báo lỗi khi máy từ chối làm việc.\\n\\nTóm lại, đây\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 249,\"totalTokenCount\": 1664,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          2.192,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" không phải là một tiêu chuẩn kỹ thuật thực thụ. Đó là một trò đùa của giới công nghệ, dùng ngôn\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 273,\"totalTokenCount\": 1688,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          2.34,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ngữ máy tính khô khan để nói về một ý tưởng kỳ quặc là biến chiếc máy pha cà phê thành một thiết bị \\\"\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 299,\"totalTokenCount\": 1714,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          2.364,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"thông minh\\\" trên mạng.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 306,\"totalTokenCount\": 1721,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
-        ],
-        [
-          2.426,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPlggHoHRypkYePh7D6ersXJu8M7qVAMJS/TGXkALBbbTljbn5LJfSPYmnNlxvw7UkAp95akIpQGaKPNHb0Kt5S45LgjFA4SMRpnuAb/7ZnFKxa0uHmMRW0y/Y4fd0Q/jKv1RhsZPG5sPXgw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1415,\"candidatesTokenCount\": 306,\"totalTokenCount\": 1721,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1415}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"lO-baqHLC8q52roPy4LvmAM\"}\r\n\r\n"
+          1.335,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" lợi hơn.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 156,\"totalTokenCount\": 872,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP5efu08KRvWlNpXXy+a0vL3M3l6L0aVqxxxkeI/l7NeYW0fS8KQFuTb3stTWnIqEcQCns4XQrzRP5dxMAxpnIpLb9DQPqZvhSjda2QsA+IR5J7DVtA/qAqLEzKT/91Tl80lPI/uct1rDs9w==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 716,\"candidatesTokenCount\": 156,\"totalTokenCount\": 872,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 716}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"y1udavv6FN2N1e8P5ajv-Q4\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "331781935c946d227fa12345285794ca456558c8c0c98997b085fcfacdb0d3b7"
+      "bodySha256": "1b3f5ee2225760f166096ed98768e2b22f2cc33129ee0921fb373aab1f05a04b"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -272,39 +172,23 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.551,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 2,\"totalTokenCount\": 699,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Mục | Thông tin |\\n| :--- | :--- |\\n| **T\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 22,\"totalTokenCount\": 719,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
+          0.922,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 2,\"totalTokenCount\": 349,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0ludavjWONOc1e8P1JW54A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Nội dung | Chi tiết |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 21,\"totalTokenCount\": 368,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0ludavjWONOc1e8P1JW54A8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **Lịch họp lãnh đạo mới** | 9 tháng 10 |\\n| **Hạn chót gửi bảng giá** | \"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 50,\"totalTokenCount\": 397,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0ludavjWONOc1e8P1JW54A8\"}\r\n\r\n"
         ],
         [
-          2.576,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ên giao thức** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 46,\"totalTokenCount\": 743,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
+          0.966,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"30 tháng 9 |\\n| **Yêu cầu bổ sung** | Bản demo 15 phút về bảng điều\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 75,\"totalTokenCount\": 422,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0ludavjWONOc1e8P1JW54A8\"}\r\n\r\n"
         ],
         [
-          2.676,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Mã RFC** | 2324 |\\n| **Ngày phát hành** | 1 tháng 4\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 70,\"totalTokenCount\": 767,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
+          1.028,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" khiển báo cáo (reporting dashboard) |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 87,\"totalTokenCount\": 434,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0ludavjWONOc1e8P1JW54A8\"}\r\n\r\n"
         ],
         [
-          2.741,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" năm 1998 |\\n| **Tác giả** | L. Masinter |\\n| **Lo\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 94,\"totalTokenCount\": 791,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
-        ],
-        [
-          2.802,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ại tài liệu** | Thông tin (Informational) |\\n| **Mục đích** | Kiểm soát, giám sát và\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 120,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
-        ],
-        [
-          2.947,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" chẩn đoán bình pha cà phê qua mạng |\\n| **Lý do ra đời** | Nhu cầu kết\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 144,\"totalTokenCount\": 841,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
-        ],
-        [
-          2.97,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" nối các thiết bị gia dụng (cà phê) vào Internet để điều khiển từ xa |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 167,\"totalTokenCount\": 864,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
-        ],
-        [
-          3.035,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPBmNZyAevHZLZToxjrQvRsso0gaPPOQjedtELCElf8np+w5WBw1n8lVTHoY9DDIN3ftKG0EeM1p+rKP/GKmHNlrMf1jA1SGNH+/GskJI04Qc5axKIlZ+eJx/jPNXUF3LvamaIok1/kqxFEA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 697,\"candidatesTokenCount\": 167,\"totalTokenCount\": 864,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 697}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"nO-bapyVMITnrfcPx8boeA\"}\r\n\r\n"
+          1.075,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPzqgsU7bs1xMF01/3kEZd32v2+K2TzX4R7ClaAWaJb3twNiP6zcNLx2Ld25t3qcqNAMTAP+xXBfjuq6Nf7xp3ljDYuD3Ec+FVoIbqe0UXgmA+HO61NT2UFBJB1W4f2c+4q+tvagnml7sG4g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 347,\"candidatesTokenCount\": 87,\"totalTokenCount\": 434,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 347}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"0ludavjWONOc1e8P1JW54A8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "06030103bb42d903e0387949f0c594478021adccf7a7463704cfed6e6f4c2688"
+      "bodySha256": "a0bd84d0cc81b6e3206b62cbf307a561ab13e80ad8c398d1d3af77979a7aeefe"
     }
   ]
 }

@@ -121,7 +121,7 @@ export const vi: Messages = {
     open: "Mở",
   },
   about: {
-    tagline: "Sao chép hai lần, xử lý tức thì.",
+    tagline: "AI tức thời. Ngay trên màn hình của bạn.",
     update: (version) => `Cập nhật lên v${version} và khởi động lại ứng dụng`,
     updateRestart: (version) => `Khởi động lại ứng dụng để cập nhật lên v${version}`,
     updating: "Đang cập nhật…",

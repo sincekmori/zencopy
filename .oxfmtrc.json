@@ -1,4 +1,13 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["CLAUDE.md"]
+  "ignorePatterns": ["CLAUDE.md"],
+  "overrides": [
+    {
+      "files": ["site/**/*.mdx"],
+      "options": {
+        "printWidth": 320,
+        "embeddedLanguageFormatting": "off"
+      }
+    }
+  ]
 }

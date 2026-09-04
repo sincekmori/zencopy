@@ -1,12 +1,12 @@
 {
   "locale": "id",
-  "recorded": "2026-09-05T10:31:28.616Z",
+  "recorded": "2026-09-06T12:25:27.924Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Network Working Group                                       L. Masinter\nRequest for Comments: 2324                                 1 April 1998\nCategory: Informational\n\n\n          Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)\n\nStatus of this Memo\n\n   This memo provides information for the Internet community.  It does\n   not specify an Internet standard of any kind.  Distribution of this\n   memo is unlimited.\n\nCopyright Notice\n\n   Copyright (C) The Internet Society (1998).  All Rights Reserved.\n\nAbstract\n\n   This document describes HTCPCP, a protocol for controlling,\n   monitoring, and diagnosing coffee pots.\n\n1. Rationale and Scope\n\n   There is coffee all over the world. Increasingly, in a world in which\n   computing is ubiquitous, the computists want to make coffee. Coffee\n   brewing is an art, but the distributed intelligence of the web-\n   connected world transcends art.  Thus, there is a strong, dark, rich\n   requirement for a protocol designed espressoly for the brewing of\n   coffee. Coffee is brewed using coffee pots.  Networked coffee pots\n   require a control protocol if they are to be controlled.\n\n   Increasingly, home and consumer devices are being connected to the\n   Internet. Early networking experiments demonstrated vending devices\n   connected to the Internet for status monitoring [COKE]. One of the\n   first remotely _operated_ machine to be hooked up to the Internet,\n   the Internet Toaster, (controlled via SNMP) was debuted in 1990\n   [RFC2235].\n\n   The demand for ubiquitous appliance connectivity that is causing the\n   consumption of the IPv4 address space. Consumers want remote control\n   of devices such as coffee pots so that they may wake up to freshly\n   brewed coffee, or cause coffee to be prepared at a precise time after\n   the completion of dinner preparations.\n"
+      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -19,13 +19,13 @@
       "file_name": "",
       "file_names": "",
       "file_paths": "",
-      "app_name": "Google Chrome",
-      "exec_name": "Google Chrome",
-      "exec_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "window_title": "RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)",
-      "url": "https://www.rfc-editor.org/rfc/rfc2324.html",
+      "app_name": "Mail",
+      "exec_name": "Mail",
+      "exec_path": "",
+      "window_title": "Updated proposal and review date",
+      "url": "",
       "process_id": "4242",
-      "now": "2026-09-05 19:30:51"
+      "now": "2026-09-06 21:24:59"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "Dokumen ini menjelaskan protokol HTCPCP untuk mengendalikan dan memantau mesin pembuat kopi melalui jaringan internet.",
+      "reply": "Jadwal tinjauan kepemimpinan diundur ke 9 Oktober, sehingga revisi harga diminta paling lambat 30 September disertai tambahan demo dasbor pelaporan.",
       "tokens": {
-        "input": 467,
-        "output": 29
+        "input": 169,
+        "output": 41
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "Dokumen ini adalah lelucon di dunia komputer yang berpura-pura menjadi aturan resmi untuk mengatur mesin pembuat kopi melalui internet. Hal ini penting untuk dipahami sebagai contoh budaya humor dari orang-orang yang membangun jaringan internet, yang suka membuat aturan serius untuk hal-hal yang tidak masuk akal.\n\nBayangkan jika Anda ingin memesan kopi melalui komputer, namun alih-alih mengirim pesan teks biasa, Anda harus menggunakan bahasa komputer yang sangat kaku, seperti sedang berbicara dengan robot. Dokumen ini menciptakan bahasa tersebut agar komputer bisa \"berbicara\" dengan mesin pembuat kopi.\n\nBahasa ini disebut Hyper Text Coffee Pot Control Protocol atau Protokol Kendali Teko Kopi Hiperteks. Dalam dunia komputer, \"protokol\" hanyalah sekumpulan aturan agar dua alat bisa saling mengerti satu sama lain. Sama seperti saat Anda meminta tolong kepada teman dengan sopan, komputer juga memiliki aturan bahasa untuk meminta mesin melakukan sesuatu.\n\nPenulis dokumen ini membayangkan sebuah dunia di mana setiap alat rumah tangga, termasuk teko kopi, terhubung ke internet. Tujuannya agar orang bisa menyalakan mesin kopi dari jarak jauh, misalnya saat baru bangun tidur atau tepat setelah selesai makan malam. \n\nDokumen ini ditulis pada tanggal 1 April, yang di banyak negara dirayakan sebagai hari untuk membuat lelucon. Penulisnya sengaja menggunakan istilah-istilah rumit yang biasanya dipakai para ahli komputer untuk membuat aturan internet yang benar-benar dipakai, lalu menerapkannya pada sesuatu yang konyol yaitu mesin kopi.\n\nMeskipun terdengar seperti dokumen teknis yang resmi, isi di dalamnya tidak pernah dimaksudkan untuk benar-benar digunakan. Ini adalah cara para ahli komputer menunjukkan sisi kreatif dan jenaka mereka di tengah pekerjaan yang biasanya sangat serius.",
+      "reply": "Surat ini adalah permintaan dari rekan kerja agar kamu mengubah rencana dan jadwal kerja yang sudah ada sebelumnya. Hal ini penting dilakukan agar diskusi besar tentang bisnis mereka nanti bisa berjalan lancar dengan data yang benar.\n\nBerikut adalah hal-hal yang mereka minta secara urut:\n\nPertama, waktu pertemuan mereka diundur. Awalnya, mereka akan rapat pada tanggal 2 Oktober, namun diubah menjadi tanggal 9 Oktober. Alasannya, dua orang pemimpin mereka sedang bepergian pada tanggal yang lama.\n\nKedua, mereka meminta daftar harga yang baru. Mereka ingin kamu mengirimkan daftar ini paling lambat tanggal 30 September. Mereka butuh waktu untuk membaca daftar itu sebelum rapat dimulai.\n\nKetiga, mereka ingin melihat cara kerja sistem laporan kamu. Mereka meminta waktu 15 menit dalam rapat nanti untuk melihat contoh langsung atau demo dari dasbor laporan kamu. Dasbor ini adalah layar tampilan yang berisi ringkasan data penting untuk membantu mereka mengambil keputusan.\n\nTerakhir, mereka menanyakan apakah jadwal baru ini bisa kamu ikuti atau tidak. Kamu perlu membalas surat ini untuk memberi tahu apakah kamu bisa memenuhi semua permintaan tersebut sesuai waktunya.",
       "tokens": {
-        "input": 773,
-        "output": 365
+        "input": 475,
+        "output": 239
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "Sedikit lebih ringkas, ya",
-      "reply": "Dokumen ini adalah lelucon teknis yang dibuat sebagai candaan pada tanggal 1 April. Isinya menjelaskan aturan khayalan untuk mengatur mesin pembuat kopi melalui internet.\n\nDi dunia komputer, \"protokol\" adalah sekumpulan aturan agar dua alat bisa saling berkomunikasi. Penulis dokumen ini menggunakan gaya bahasa resmi yang biasanya dipakai para ahli internet untuk membuat aturan teknis yang serius, namun menerapkannya pada hal konyol yaitu cara memerintah mesin kopi.\n\nTujuannya adalah membayangkan masa depan di mana semua alat rumah tangga terhubung ke internet, sehingga kita bisa membuat kopi dari jarak jauh lewat komputer. Meskipun formatnya terlihat seperti dokumen teknis resmi, ini hanyalah bentuk humor dari para pengembang internet untuk menunjukkan sisi kreatif mereka di luar pekerjaan yang serius. Tidak ada mesin kopi yang benar-benar menggunakan aturan ini.",
+      "reply": "Surat ini adalah permintaan agar kamu menyesuaikan jadwal dan menyiapkan dokumen untuk rapat mereka. Hal ini penting agar diskusi bisnis mereka nanti berjalan dengan data yang tepat.\n\nBerikut adalah poin utamanya:\n\nPertama, rapat diundur dari tanggal 2 Oktober ke tanggal 9 Oktober karena ada pemimpin mereka yang tidak bisa hadir di jadwal awal.\n\nKedua, mereka meminta daftar harga baru dikirimkan paling lambat tanggal 30 September agar bisa dipelajari sebelum rapat.\n\nKetiga, mereka ingin kamu mendemonstrasikan dasbor laporan—yaitu tampilan ringkasan data—selama 15 menit dalam rapat tersebut.\n\nTerakhir, mereka meminta konfirmasi apakah jadwal dan tugas baru ini bisa kamu penuhi.",
       "tokens": {
-        "input": 1149,
-        "output": 177
+        "input": 725,
+        "output": 155
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "Jadikan tabel",
-      "reply": "| Informasi | Deskripsi |\n| :--- | :--- |\n| **Judul** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\n| **Nomor RFC** | 2324 |\n| **Penulis** | L. Masinter |\n| **Tanggal** | 1 April 1998 |\n| **Kategori** | Informational |\n| **Tujuan** | Protokol untuk mengontrol, memantau, dan mendiagnosis mesin pembuat kopi |\n| **Latar Belakang** | Kebutuhan akan konektivitas perangkat rumah tangga (IoT) di internet |",
+      "reply": "| Kategori | Detail Informasi |\n| :--- | :--- |\n| **Topik Utama** | Pembaruan proposal dan penjadwalan ulang tinjauan |\n| **Tanggal Tinjauan Baru** | 9 Oktober |\n| **Alasan Perubahan** | Direktur sedang dalam perjalanan |\n| **Tenggat Waktu Harga** | 30 September |\n| **Permintaan Tambahan** | Demo dasbor pelaporan (15 menit) |",
       "tokens": {
-        "input": 696,
-        "output": 147
+        "input": 346,
+        "output": 110
       }
     }
   ],
@@ -77,15 +77,11 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          3.159,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 2,\"totalTokenCount\": 469,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W--basL5JoGN1e8PqZjrgA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eDokumen ini menjelaskan protokol HTCPCP untuk mengendalikan dan memantau mesin\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 20,\"totalTokenCount\": 487,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W--basL5JoGN1e8PqZjrgA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" pembuat kopi melalui jaringan internet.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 29,\"totalTokenCount\": 496,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W--basL5JoGN1e8PqZjrgA8\"}\r\n\r\n"
-        ],
-        [
-          3.188,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIP5Aa5YN2lzli7WzJd7CdsDEW390BnUWZiE8LNlZnvJ7btfaHNcA4EEf4GQxmsRgHE9kGFANHD4J5QuC7vhWAH9PEEi+uo2zgM/i11JuUzpauhrUE9xu+S6XZOCrMy2M35V72DrdEtuQMldA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 467,\"candidatesTokenCount\": 29,\"totalTokenCount\": 496,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 467}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"W--basL5JoGN1e8PqZjrgA8\"}\r\n\r\n"
+          1.349,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 2,\"totalTokenCount\": 171,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"m1udauuQKvThrfcPm_y2oQM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eJadwal tinjauan kepemimpinan diundur ke 9 Oktober, sehingga\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 20,\"totalTokenCount\": 189,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"m1udauuQKvThrfcPm_y2oQM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" revisi harga diminta paling lambat 30 September disertai tambahan demo dasbor pelaporan.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 41,\"totalTokenCount\": 210,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"m1udauuQKvThrfcPm_y2oQM\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPbkCTLJcnBFx/cDceKHlXGURfhzTkPCwf9YsO5j1ZhSE5HFX9zyo+3XN32hOLUV1svkKnoq2N5hI10EeaqjqK+3xE6COeuUOKgGe7IlKbItuCwqGKcB4LdCRJHPa3kqaPJ9wwRuX6qRB2Xw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 41,\"totalTokenCount\": 210,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"m1udauuQKvThrfcPm_y2oQM\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "43c425f44095b197c21a3e1ab1666bb2eb0afae87058e555ef620938d16f1dd3"
+      "bodySha256": "87abbd529719265386d8d5f098ea2124a02d2b08e01a81fd4e06f5966bd27c75"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -94,71 +90,47 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.794,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 2,\"totalTokenCount\": 775,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nDokumen ini adalah lelucon di dunia komputer yang berpura-pura menjadi\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 20,\"totalTokenCount\": 793,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          0.905,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nSurat ini adalah permintaan dari rekan kerja agar kamu mengubah rencana dan jadwal\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 18,\"totalTokenCount\": 493,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          1.874,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" aturan resmi untuk mengatur mesin pembuat kopi melalui internet. Hal ini penting untuk dipahami sebagai contoh budaya humor dari orang-orang yang\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 46,\"totalTokenCount\": 819,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          0.987,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" kerja yang sudah ada sebelumnya. Hal ini penting dilakukan agar diskusi besar tentang bisnis mereka nanti bisa berjalan lancar dengan data yang benar.\\n\\nBerikut\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 46,\"totalTokenCount\": 521,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          1.936,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" membangun jaringan internet, yang suka membuat aturan serius untuk hal-hal yang tidak masuk akal.\\n\\nBayangkan jika Anda ingin memes\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 72,\"totalTokenCount\": 845,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.087,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" adalah hal-hal yang mereka minta secara urut:\\n\\nPertama, waktu pertemuan mereka diundur. Awalnya,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 71,\"totalTokenCount\": 546,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          2.056,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"an kopi melalui komputer, namun alih-alih mengirim pesan teks biasa, Anda harus menggunakan bahasa komputer yang sangat kaku,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 97,\"totalTokenCount\": 870,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.209,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" mereka akan rapat pada tanggal 2 Oktober, namun diubah menjadi tanggal 9 Oktober. Alasannya, dua orang pemimpin mereka\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 96,\"totalTokenCount\": 571,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          2.199,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" seperti sedang berbicara dengan robot. Dokumen ini menciptakan bahasa tersebut agar komputer bisa \\\"berbicara\\\" dengan mesin pembuat kopi.\\n\\nBahasa\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 125,\"totalTokenCount\": 898,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.416,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" sedang bepergian pada tanggal yang lama.\\n\\nKedua, mereka meminta daftar harga yang baru. Mereka ingin kamu mengirimkan daftar ini\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 123,\"totalTokenCount\": 598,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" paling lambat tanggal 30 September. Mereka butuh waktu untuk membaca daftar itu sebelum rapat dimulai.\\n\\nKetiga, mereka\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 149,\"totalTokenCount\": 624,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          2.301,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ini disebut Hyper Text Coffee Pot Control Protocol atau Protokol Kendali Teko Kopi Hiperteks. Dalam dunia\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 149,\"totalTokenCount\": 922,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.521,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ingin melihat cara kerja sistem laporan kamu. Mereka meminta waktu 15 menit dalam rapat nanti untuk melihat contoh langsung atau demo dari\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 174,\"totalTokenCount\": 649,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          2.408,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" komputer, \\\"protokol\\\" hanyalah sekumpulan aturan agar dua alat bisa saling mengerti satu sama lain. Sama seperti saat Anda meminta to\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 177,\"totalTokenCount\": 950,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.63,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" dasbor laporan kamu. Dasbor ini adalah layar tampilan yang berisi ringkasan data penting untuk membantu mereka mengambil keputusan.\\n\\nTerakhir,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 202,\"totalTokenCount\": 677,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          2.518,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"long kepada teman dengan sopan, komputer juga memiliki aturan bahasa untuk meminta mesin melakukan sesuatu.\\n\\nPenulis dokumen ini memb\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 201,\"totalTokenCount\": 974,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.699,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" mereka menanyakan apakah jadwal baru ini bisa kamu ikuti atau tidak. Kamu perlu membalas surat ini untuk memberi tahu apakah kamu\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 228,\"totalTokenCount\": 703,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          2.685,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"ayangkan sebuah dunia di mana setiap alat rumah tangga, termasuk teko kopi, terhubung ke internet. Tujuannya agar\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 225,\"totalTokenCount\": 998,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.788,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bisa memenuhi semua permintaan tersebut sesuai waktunya.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 239,\"totalTokenCount\": 714,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ],
         [
-          2.813,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" orang bisa menyalakan mesin kopi dari jarak jauh, misalnya saat baru bangun tidur atau tepat setelah selesai makan malam. \\n\\nDokumen ini\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 253,\"totalTokenCount\": 1026,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
-        ],
-        [
-          2.836,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" ditulis pada tanggal 1 April, yang di banyak negara dirayakan sebagai hari untuk membuat lelucon. Penulisnya\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 277,\"totalTokenCount\": 1050,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
-        ],
-        [
-          3.018,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" sengaja menggunakan istilah-istilah rumit yang biasanya dipakai para ahli komputer untuk membuat aturan internet yang benar-benar dipakai\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 301,\"totalTokenCount\": 1074,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
-        ],
-        [
-          3.097,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", lalu menerapkannya pada sesuatu yang konyol yaitu mesin kopi.\\n\\nMeskipun terdengar seperti dokumen teknis yang resmi\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 328,\"totalTokenCount\": 1101,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
-        ],
-        [
-          3.206,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \", isi di dalamnya tidak pernah dimaksudkan untuk benar-benar digunakan. Ini adalah cara para ahli komputer menunjukkan sisi kreatif dan jen\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 353,\"totalTokenCount\": 1126,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
-        ],
-        [
-          3.274,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"aka mereka di tengah pekerjaan yang biasanya sangat serius.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 365,\"totalTokenCount\": 1138,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
-        ],
-        [
-          3.333,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPO2X6Ael/Nu/aq8xQeZoWgV+movLLg51VBYu2cVq1EcHvAX3TSBEs0wSDOKuf6CCaQe6KEhaBdu9oQgEouXSkxo4rYjP2zYwUFK/ooODdascX+oyfpm58pgmR6MBAYtTFWV81cSjlIHp8rQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 773,\"candidatesTokenCount\": 365,\"totalTokenCount\": 1138,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 773}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"Yu-bavPZGeSVvr0P6obzkQ8\"}\r\n\r\n"
+          1.836,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPWvOK0yVbw6/DxmdmohBq08Vc4Hs+Oq4x1dE5M8LBs9crWTJnJzyLM6C9+3Q3HMfimF1NzYp09XOw0lsbV4usuPBCOng2Yta0ApmLzMmB1OmCeq0K5rh7ef1fmbdkX6FlXe4UIXeDcjcm9Q==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 239,\"totalTokenCount\": 714,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"oFudapmaMNKb1e8PpNL2iA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "b1080f18b72aba7998488f420660ec803ebcec8da6b3d86ee9d5f6ac0f449d54"
+      "bodySha256": "2c5a8ab3149d413bfd7abbcf81b38080b5e82682fd4e322d87d8f9af4766dcf5"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -167,39 +139,39 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          3.355,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 2,\"totalTokenCount\": 1151,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          0.619,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 2,\"totalTokenCount\": 727,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ],
         [
-          3.396,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nDokumen ini adalah lelucon teknis yang dibuat sebagai candaan pada\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 19,\"totalTokenCount\": 1168,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          0.647,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nSurat ini adalah permintaan agar kamu menyesuaikan jadwal dan menyiapkan dokumen untuk rapat mereka\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 20,\"totalTokenCount\": 745,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ],
         [
-          3.5,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" tanggal 1 April. Isinya menjelaskan aturan khayalan untuk mengatur mesin pembuat kopi melalui internet.\\n\\nDi dunia komputer, \\\"protokol\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 48,\"totalTokenCount\": 1197,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          0.724,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". Hal ini penting agar diskusi bisnis mereka nanti berjalan dengan data yang tepat.\\n\\nBerikut adalah poin utamanya:\\n\\nPertama,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 46,\"totalTokenCount\": 771,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ],
         [
-          3.603,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\\" adalah sekumpulan aturan agar dua alat bisa saling berkomunikasi. Penulis dokumen ini menggunakan gaya bahasa resmi yang biasanya dipakai para ahli internet untuk membuat\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 77,\"totalTokenCount\": 1226,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          0.784,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" rapat diundur dari tanggal 2 Oktober ke tanggal 9 Oktober karena ada pemimpin mereka yang tidak bisa hadir di jadwal awal.\\n\\nKedua,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 75,\"totalTokenCount\": 800,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ],
         [
-          3.81,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" aturan teknis yang serius, namun menerapkannya pada hal konyol yaitu cara memerintah mesin kopi.\\n\\nTuju\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 102,\"totalTokenCount\": 1251,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"annya adalah membayangkan masa depan di mana semua alat rumah tangga terhubung ke internet, sehingga kita bisa membuat kopi dari jarak jauh lewat\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 128,\"totalTokenCount\": 1277,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          0.984,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" mereka meminta daftar harga baru dikirimkan paling lambat tanggal 30 September agar bisa dipelajari sebelum rapat.\\n\\nKetiga,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 103,\"totalTokenCount\": 828,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ],
         [
-          3.833,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" komputer. Meskipun formatnya terlihat seperti dokumen teknis resmi, ini hanyalah bentuk humor dari para pengembang internet untuk menunjukkan sisi\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 153,\"totalTokenCount\": 1302,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          1.026,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" mereka ingin kamu mendemonstrasikan dasbor laporan—yaitu tampilan ringkasan data—selama 15\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 127,\"totalTokenCount\": 852,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ],
         [
-          3.918,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" kreatif mereka di luar pekerjaan yang serius. Tidak ada mesin kopi yang benar-benar menggunakan aturan ini.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 177,\"totalTokenCount\": 1326,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          1.188,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" menit dalam rapat tersebut.\\n\\nTerakhir, mereka meminta konfirmasi apakah jadwal dan tugas baru ini bisa kamu penuhi.\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 152,\"totalTokenCount\": 877,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 155,\"totalTokenCount\": 880,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ],
         [
-          3.961,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPGmo8DyilzNbcKPfT2aM3pi65pCIp4UEUB2d4kuY16iCCEQj/5SQHzYuoUDLPLdbHHUehYrog4J3xTnfcjiAi0vd3LohqNNijxYlgH2zDNGV4D8kHOyzEx0gYhbq3AjpmYjVKQJij2Eg3Hg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 1149,\"candidatesTokenCount\": 177,\"totalTokenCount\": 1326,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 1149}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"bO-bavL6MLCzvr0Pw4X-4AE\"}\r\n\r\n"
+          1.229,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPZNGThr2Z9n5J6GXjc5Xug+M0uq92IKUaVIJM27bXSiC9TkMV4LpJynbKxntyoGQ99U3AGS1QmfWqs4OdbHRGMNdpjwszFSEsrmgvlk6dKrWlhQKlpHQtT5j8PCxLJD97GlRZ7xCLECbzxA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 725,\"candidatesTokenCount\": 155,\"totalTokenCount\": 880,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 725}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"qVudauaLJ5iQ0-kPrMDJoQE\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "ccda7f51ec87b3b6d90bea3de5d1e68109fdfa071e659105901c33025c1b18d7"
+      "bodySha256": "098ff19b120c6438e4a5e23e4d4ba7ac151c5ee50d4fa726b04a4d58e0fd68ec"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -208,31 +180,27 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.428,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 2,\"totalTokenCount\": 698,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Informasi | Deskripsi |\\n| :--- | :--- |\\n|\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 20,\"totalTokenCount\": 716,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" **Judul** | Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0) |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 44,\"totalTokenCount\": 740,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\n"
+          0.796,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 2,\"totalTokenCount\": 348,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sFudaoSmIZjs1e8PwOL2iQQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Kategori | Detail Informasi |\\n| :--- | :--- |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 22,\"totalTokenCount\": 368,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sFudaoSmIZjs1e8PwOL2iQQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Topik Utama** | Pembaruan proposal dan penjadwalan ulang tinjauan |\\n| **Tanggal Tinjauan Baru\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 49,\"totalTokenCount\": 395,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sFudaoSmIZjs1e8PwOL2iQQ\"}\r\n\r\n"
         ],
         [
-          2.455,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Nomor RFC** | 2324 |\\n| **Penulis** | L. Masinter |\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 68,\"totalTokenCount\": 764,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\n"
+          0.835,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"** | 9 Oktober |\\n| **Alasan Perubahan** | Direktur sedang dalam perjalanan |\\n| **T\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 74,\"totalTokenCount\": 420,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sFudaoSmIZjs1e8PwOL2iQQ\"}\r\n\r\n"
         ],
         [
-          2.54,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"| **Tanggal** | 1 April 1998 |\\n| **Kategori** | Informational |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 92,\"totalTokenCount\": 788,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\n"
+          0.938,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"enggat Waktu Harga** | 30 September |\\n| **Permintaan Tambahan** | Demo dasbor pel\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 99,\"totalTokenCount\": 445,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sFudaoSmIZjs1e8PwOL2iQQ\"}\r\n\r\n"
         ],
         [
-          2.606,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Tujuan** | Protokol untuk mengontrol, memantau, dan mendiagnosis mesin pembuat kopi |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 121,\"totalTokenCount\": 817,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.003,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"aporan (15 menit) |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 110,\"totalTokenCount\": 456,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sFudaoSmIZjs1e8PwOL2iQQ\"}\r\n\r\n"
         ],
         [
-          2.728,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Latar Belakang** | Kebutuhan akan konektivitas perangkat rumah tangga (IoT) di internet |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 147,\"totalTokenCount\": 843,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\n"
-        ],
-        [
-          2.753,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPMPqSN6ZkXNXdhcJ//f3oSiW3Dbd38Y9B1RUVO6nbS9eV9UPH2+YUsgD8Jqarm8BeHSjcsM0RxbfjufQ0Lc5K2PluaUvdCulg4IeZMCTMe7tZ/hHcSRVi0e1Y4LYpkqKGkAe1wX6jy5iNGQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 696,\"candidatesTokenCount\": 147,\"totalTokenCount\": 843,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 696}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"du-bauK-MNqi9tMPxqGm-Aw\"}\r\n\r\n"
+          1.044,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPuS1IeJnzpVGSjRFsVeThEKYDnf0+KuaLPQf3Nm/Fw6A7/7D935M05y43I/YonasxQQ6eiNnDyNR5I7tbKbLgA5BtA63KnIs/rfQgzQ326Pv0/gnuhpMzziO0APS1Kny9Ba/VkavQl9NEtQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 110,\"totalTokenCount\": 456,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"sFudaoSmIZjs1e8PwOL2iQQ\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "62efa1fb87b0b52d6f6192553c5ba46edbd346d19161f80556f63429b49f7f6d"
+      "bodySha256": "b3cfea5c036e7c2f7cb698737aef56333fe82abf184b947b963fb1e07a893615"
     }
   ]
 }

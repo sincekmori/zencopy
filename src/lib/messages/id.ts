@@ -121,7 +121,7 @@ export const id: Messages = {
     open: "Buka",
   },
   about: {
-    tagline: "Salin dua kali, langsung bertindak.",
+    tagline: "AI seketika. Langsung di layar Anda.",
     update: (version) => `Perbarui ke v${version} dan mulai ulang aplikasi`,
     updateRestart: (version) => `Mulai ulang aplikasi untuk memperbarui ke v${version}`,
     updating: "Memperbarui…",

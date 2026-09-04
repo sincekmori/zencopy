@@ -7,6 +7,8 @@
  *  `screenshotScenario()`; the settings tab rides the generic `tab`
  *  parameter instead of one scenario per tab. */
 
+import { geminiQuickCatalog } from "./quickstart.ts";
+
 /** `?screenshot=` values components react to. */
 export const RULE_EDITOR_SCENARIO = "rule-editor";
 export const PROMPT_EDITOR_SCENARIO = "prompt-editor";
@@ -20,12 +22,23 @@ export const POPUP_CUSTOM_SCENARIO = "popup-custom";
  *  src-tauri/src/windows.rs (pinned by a ts_mirror test there). */
 const POPUP_VIEWPORT = { width: 615, height: 620 };
 
+/** What the AI tab is shot with: the free Google key everyone starts from,
+ *  so the picture shows the reader's own screen (provider, model, the key's
+ *  dots) rather than the empty JSON editor an unconfigured app opens on. The
+ *  key is a placeholder in the real key's shape; it never reaches a network. */
+const SETTINGS_AI_CATALOG = geminiQuickCatalog(`AIzaSy${"x".repeat(33)}`);
+
 export const SCREENSHOT_SCENARIOS: Record<
   string,
-  { params: Record<string, string>; viewport?: { width: number; height: number } }
+  {
+    params: Record<string, string>;
+    viewport?: { width: number; height: number };
+    /** Seeded on the harness's driver global as the app's catalog. */
+    catalog?: unknown;
+  }
 > = {
   welcome: { params: { welcome: "1" } },
-  "settings-ai": { params: {} },
+  "settings-ai": { params: {}, catalog: SETTINGS_AI_CATALOG },
   "settings-prompts": { params: { tab: "prompts" } },
   "settings-general": { params: { tab: "general" } },
   "new-rule": { params: { tab: "prompts", screenshot: RULE_EDITOR_SCENARIO } },

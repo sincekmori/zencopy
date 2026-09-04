@@ -26,24 +26,46 @@ type Step =
 export interface Demo {
   /** The video's file name (`<locale>/demo/<name>.mp4`). */
   name: string;
+  /** What the popup plays over: the rendered mail page (the copy and its
+   *  answer side by side, landscape) or nothing — the popup's own window
+   *  alone, over a plain backdrop. */
+  stage: "page" | "popup";
   steps: Step[];
 }
+
+/** The frame each stage is filmed in, in CSS px — the videos are
+ *  VIDEO_SCALE× that. The popup's is its window: the generator checks it
+ *  against the popup scenario's viewport (src/lib/screenshot-scenarios.ts),
+ *  and DemoVideo.astro sizes its <video> from here. */
+export const FRAMES = {
+  page: { width: 1100, height: 720 },
+  popup: { width: 615, height: 620 },
+} as const;
+/** The device pixel ratio the frames are captured at. */
+export const VIDEO_SCALE = 2;
 
 const READ = { kind: "hold", seconds: 2.5 } as const;
 const LOOK = { kind: "hold", seconds: 1 } as const;
 const BEAT = { kind: "hold", seconds: 0.4 } as const;
 
-/** In session order. The first demo is composited over the template
- *  recording (the browser page being copied); the rest show the popup
- *  alone. */
+/** In session order. */
 export const DEMOS: Demo[] = [
   // Copy twice, the summary streams in, a beat to read it.
-  { name: "summarize", steps: [{ kind: "capture" }, { kind: "settled" }, READ] },
+  {
+    name: "summarize",
+    stage: "page",
+    steps: [{ kind: "capture" }, { kind: "settled" }, READ],
+  },
   // 2 switches to Explain over the same copy; the explanation streams in.
-  { name: "explain", steps: [LOOK, { kind: "slot", key: "2" }, { kind: "settled" }, READ] },
+  {
+    name: "explain",
+    stage: "popup",
+    steps: [LOOK, { kind: "slot", key: "2" }, { kind: "settled" }, READ],
+  },
   // A reply typed under the explanation continues the thread: shorter, please.
   {
     name: "follow-up",
+    stage: "popup",
     steps: [
       LOOK,
       { kind: "type", text: "concise" },
@@ -57,6 +79,7 @@ export const DEMOS: Demo[] = [
   // they want, the answer streams in.
   {
     name: "custom",
+    stage: "popup",
     steps: [
       LOOK,
       { kind: "press", key: "Escape" },

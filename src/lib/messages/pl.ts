@@ -123,7 +123,7 @@ export const pl: Messages = {
     open: "Otwórz",
   },
   about: {
-    tagline: "Skopiuj dwa razy, działaj od razu.",
+    tagline: "Błyskawiczne AI. Prosto na Twoim ekranie.",
     update: (version) => `Zaktualizuj do v${version} i uruchom aplikację ponownie`,
     updateRestart: (version) => `Uruchom aplikację ponownie, aby zaktualizować do v${version}`,
     updating: "Aktualizowanie…",

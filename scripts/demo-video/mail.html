@@ -1,0 +1,251 @@
+<!doctype html>
+<!-- The page the first demo plays over: the sample mail (source.txt) open in
+     a plain, unbranded mail client — folders, the inbox with the mail open,
+     the reading pane; no names beyond departments. scripts/demo-video.ts
+     fills in {{subject}}, {{snippet}} (the open row's preview) and
+     {{paragraphs}} (the body), and drives select(fraction) to sweep the
+     selection over the body before the popup appears. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 120px 205px 1fr;
+        background: #fff;
+        color: #1c1c1e;
+        font:
+          14px/1.5 -apple-system,
+          "Segoe UI",
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
+      }
+      ::selection {
+        background: #b4d5fe;
+      }
+      nav {
+        background: #f3f3f5;
+        border-right: 1px solid #e3e3e6;
+        padding: 14px 10px;
+      }
+      nav .compose {
+        display: block;
+        margin: 0 0 16px;
+        padding: 8px 0;
+        text-align: center;
+        border-radius: 8px;
+        background: #1c1c1e;
+        color: #fff;
+        font-weight: 600;
+      }
+      nav ul,
+      aside ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav li {
+        padding: 6px 8px;
+        border-radius: 6px;
+        color: #444;
+        display: flex;
+        justify-content: space-between;
+      }
+      nav li.open {
+        background: #e2e4ea;
+        color: #1c1c1e;
+        font-weight: 600;
+      }
+      aside {
+        border-right: 1px solid #e3e3e6;
+        overflow: hidden;
+      }
+      aside h2 {
+        margin: 0;
+        padding: 16px 14px 10px;
+        font-size: 15px;
+      }
+      aside li {
+        padding: 10px 14px;
+        border-bottom: 1px solid #ededf0;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 6px;
+        font-size: 13px;
+      }
+      aside li.open {
+        background: #e8eefb;
+      }
+      aside li b {
+        font-weight: 600;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      aside .when {
+        color: #777;
+        font-size: 12px;
+      }
+      aside .subject,
+      aside .snippet {
+        grid-column: 1 / -1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      aside .snippet {
+        color: #777;
+      }
+      section {
+        padding: 22px 32px;
+        overflow: hidden;
+      }
+      h1 {
+        margin: 0 0 14px;
+        font-size: 21px;
+        font-weight: 600;
+      }
+      .from {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #d9dde6;
+        color: #3a3f4b;
+        display: grid;
+        place-items: center;
+        font-weight: 600;
+      }
+      .from .who b {
+        display: block;
+      }
+      .from .who span {
+        color: #777;
+        font-size: 13px;
+      }
+      .from .date {
+        margin-left: auto;
+        color: #777;
+        font-size: 13px;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .actions span {
+        padding: 5px 14px;
+        border: 1px solid #d0d0d5;
+        border-radius: 999px;
+        font-size: 13px;
+        color: #333;
+      }
+      main {
+        max-width: 440px;
+        font-size: 15px;
+        line-height: 1.65;
+      }
+      p {
+        margin: 0 0 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <span class="compose">Compose</span>
+      <ul>
+        <li class="open"><span>Inbox</span><span>12</span></li>
+        <li>Starred</li>
+        <li>Sent</li>
+        <li>Drafts</li>
+        <li>Archive</li>
+        <li>Trash</li>
+      </ul>
+    </nav>
+    <aside>
+      <h2>Inbox</h2>
+      <ul>
+        <li class="open">
+          <b>Partner team</b><span class="when">9:12</span><span class="subject">{{subject}}</span
+          ><span class="snippet">{{snippet}}</span>
+        </li>
+        <li>
+          <b>Accounting</b><span class="when">8:40</span><span class="subject">August invoice</span
+          ><span class="snippet"
+            >Please find the invoice for August attached, due within 30 days of</span
+          >
+        </li>
+        <li>
+          <b>Facilities</b><span class="when">Yesterday</span
+          ><span class="subject">Office access next week</span
+          ><span class="snippet">The east entrance will be closed for maintenance from Monday</span>
+        </li>
+        <li>
+          <b>Design team</b><span class="when">Yesterday</span
+          ><span class="subject">Homepage draft v3</span
+          ><span class="snippet"
+            >Here is the latest draft with the revised hero section and the new</span
+          >
+        </li>
+        <li>
+          <b>People team</b><span class="when">Mon</span
+          ><span class="subject">Benefits enrollment reminder</span
+          ><span class="snippet">The enrollment window closes on Friday. If you have not yet</span>
+        </li>
+        <li>
+          <b>Support</b><span class="when">Mon</span
+          ><span class="subject">Ticket 4821 resolved</span
+          ><span class="snippet"
+            >We have applied the fix on your account. Please let us know if</span
+          >
+        </li>
+      </ul>
+    </aside>
+    <section>
+      <h1>{{subject}}</h1>
+      <div class="from">
+        <span class="avatar">P</span>
+        <div class="who"><b>Partner team</b><span>to me</span></div>
+        <span class="date">Today, 9:12</span>
+      </div>
+      <div class="actions"><span>Reply</span><span>Forward</span></div>
+      <main id="mail">{{paragraphs}}</main>
+    </section>
+    <script>
+      const nodes = [];
+      const walker = document.createTreeWalker(
+        document.getElementById("mail"),
+        NodeFilter.SHOW_TEXT,
+      );
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) nodes.push(node);
+      const total = nodes.reduce((sum, node) => sum + node.data.length, 0);
+      window.select = (fraction) => {
+        const selection = getSelection();
+        selection.removeAllRanges();
+        if (fraction <= 0) return;
+        let remaining = Math.round(total * fraction);
+        const range = document.createRange();
+        range.setStart(nodes[0], 0);
+        for (const node of nodes) {
+          if (remaining <= node.data.length) {
+            range.setEnd(node, remaining);
+            break;
+          }
+          remaining -= node.data.length;
+        }
+        selection.addRange(range);
+      };
+    </script>
+  </body>
+</html>
