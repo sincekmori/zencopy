@@ -8,14 +8,26 @@
 // it is filmed in are the generator's declarations
 // (scripts/demo-video/demos.ts): the mail page with the popup beside it
 // (landscape, shown at the column's full width), or the popup window alone
-// (portrait, capped narrower). The slot is the localized fallback link text
-// for browsers that cannot play the video.
+// (portrait, capped narrower). The default slot is the localized fallback
+// link text for browsers that cannot play the video.
+//
+// A demo can carry captions: the page passes a `<Fragment slot="cues">` of
+// one `<p>` per beat, in order, and they are shown over the video one at a
+// time, from the moment the generator wrote for that beat into
+// scripts/demo-video/cues.json for this locale (the first demo: the mail as
+// it is, the selection, the chord, the summary complete). The OS components
+// work inside them as anywhere on the page. Captions begin with the first
+// play, so the poster (the closing frame) is not captioned as an opening.
 import {
   DEMOS,
   FRAMES,
   VIDEO_SCALE,
 } from "../../../scripts/demo-video/demos.ts";
+import cuesJson from "../../../scripts/demo-video/cues.json";
 import { pageLocale } from "../lib/page-locale.ts";
+
+const CUES: Record<string, Record<string, number[] | undefined> | undefined> =
+  cuesJson;
 
 interface Props {
   demo: string;
@@ -31,18 +43,49 @@ const wide = declared.stage === "page";
 const frame = FRAMES[declared.stage];
 const width = frame.width * VIDEO_SCALE;
 const height = frame.height * VIDEO_SCALE;
+
+const captioned = Astro.slots.has("cues");
+const cues = CUES[locale]?.[demo];
+if (captioned) {
+  if (cues === undefined) {
+    throw new Error(
+      `${locale}/${demo} carries captions, but scripts/demo-video/cues.json has no cue moments for it — run \`bun run demo-video --locale ${locale}\``,
+    );
+  }
+  const rendered = await Astro.slots.render("cues");
+  const lines = rendered.match(/<p[\s>]/gu)?.length ?? 0;
+  if (lines !== cues.length) {
+    throw new Error(
+      `${locale}/${demo}: ${lines} caption lines for ${cues.length} cues — one <p> per cue in the cues slot, in order`,
+    );
+  }
+}
 ---
 
-<video
-  class:list={["demo-video", { wide }]}
-  controls
-  height={height}
-  muted
-  playsinline
-  poster={`${base}.jpg`}
-  preload="metadata"
-  src={`${base}.mp4`}
-  width={width}
+<div
+  class:list={["demo-stage", { wide }]}
+  data-cues={captioned ? JSON.stringify(cues) : undefined}
 >
-  <a href={`${base}.mp4`}><slot /></a>
-</video>
+  <video
+    class="demo-video"
+    controls
+    height={height}
+    muted
+    playsinline
+    poster={`${base}.jpg`}
+    preload="metadata"
+    src={`${base}.mp4`}
+    width={width}
+  >
+    <a href={`${base}.mp4`}><slot /></a>
+  </video>
+  {
+    captioned && (
+      <div class="demo-captions">
+        <slot name="cues" />
+      </div>
+    )
+  }
+</div>
+
+<script src="../scripts/demo-captions.ts"></script>

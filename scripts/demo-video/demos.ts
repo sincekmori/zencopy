@@ -45,6 +45,9 @@ export const FRAMES = {
 export const VIDEO_SCALE = 2;
 
 const READ = { kind: "hold", seconds: 2.5 } as const;
+/** The first demo's closing hold: the summary and its caption (the docs
+ *  caption the page-stage demo, see DemoVideo.astro) are read together. */
+const READ_CAPTIONED = { kind: "hold", seconds: 3.5 } as const;
 const LOOK = { kind: "hold", seconds: 1 } as const;
 const BEAT = { kind: "hold", seconds: 0.4 } as const;
 
@@ -54,7 +57,7 @@ export const DEMOS: Demo[] = [
   {
     name: "summarize",
     stage: "page",
-    steps: [{ kind: "capture" }, { kind: "settled" }, READ],
+    steps: [{ kind: "capture" }, { kind: "settled" }, READ_CAPTIONED],
   },
   // 2 switches to Explain over the same copy; the explanation streams in.
   {

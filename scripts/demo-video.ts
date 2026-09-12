@@ -84,6 +84,8 @@ if (args.length > 0) {
 const SOURCE = join(HERE, "source.txt");
 const MAIL_TEMPLATE = join(HERE, "mail.html");
 const RECORDINGS = join(HERE, "recordings");
+/** Where each locale's caption moments land (DemoVideo.astro reads it). */
+const CUES = join(HERE, "cues.json");
 const popupViewport = SCREENSHOT_SCENARIOS["popup"]?.viewport;
 if (popupViewport?.width !== FRAMES.popup.width || popupViewport.height !== FRAMES.popup.height) {
   throw new Error(
@@ -154,8 +156,9 @@ function concatLines(entries: { file: string; duration: number }[]): string {
  *  its answer are seen side by side. */
 const PAGE = FRAMES.page;
 /** The page's own beats before the popup: the mail as it is, the selection
- *  sweeping over it, the mail selected — then the popup appears. */
-const PAGE_BEATS = { still: 0.6, select: 1.4, selected: 0.4 };
+ *  sweeping over it, the mail selected — then the popup appears. The still
+ *  is long enough to read the first caption over it (see cuesOf). */
+const PAGE_BEATS = { still: 2, select: 1.4, selected: 0.4 };
 /** Seconds into the video at which the popup appears. */
 const APPEAR = PAGE_BEATS.still + PAGE_BEATS.select + PAGE_BEATS.selected;
 /** Where the popup window lands: the frame's top-right corner (the app pins
@@ -284,6 +287,45 @@ interface Turn {
   reply: string;
   /** The tokens the call cost, as the app recorded them. */
   tokens?: unknown;
+}
+
+/** The moments a page-stage demo's captions start, seconds into its video
+ *  — the mail as it is, the selection sweeping, the chord (the mail selected,
+ *  the popup a beat away), the summary complete — the beats the docs write
+ *  one caption line each for (the `cues` slot of DemoVideo.astro). Popup-
+ *  stage demos carry none. */
+function cuesOf(session: Session, demo: Session["demos"][number]): number[] | undefined {
+  if (demo.stage !== "page") {
+    return undefined;
+  }
+  const steps = session.timeline.filter((entry) => entry.demo === demo.name);
+  const settled = steps.findIndex((entry) => entry.step === "settled");
+  const after = steps[settled + 1];
+  if (settled === -1 || after === undefined) {
+    throw new Error(`${demo.name}: no step follows "settled" to time the summary's caption by`);
+  }
+  const done = after.at - demo.start;
+  return [0, PAGE_BEATS.still, PAGE_BEATS.still + PAGE_BEATS.select, APPEAR + done].map((seconds) =>
+    Number(seconds.toFixed(2)),
+  );
+}
+
+/** Merge a locale's caption moments into cues.json (locales sorted), written
+ *  as the formatter would have it: one line per demo, its moments inline. */
+function writeCues(locale: string, cues: Record<string, number[]>): void {
+  const all = existsSync(CUES)
+    ? (JSON.parse(readFileSync(CUES, "utf8")) as Record<string, Record<string, number[]>>)
+    : {};
+  all[locale] = cues;
+  const entries = Object.entries(all)
+    .toSorted(([a], [b]) => a.localeCompare(b))
+    .map(([code, demos]) => {
+      const lines = Object.entries(demos).map(
+        ([name, moments]) => `    "${name}": [${moments.join(", ")}]`,
+      );
+      return `  "${code}": {\n${lines.join(",\n")}\n  }`;
+    });
+  writeFileSync(CUES, `{\n${entries.join(",\n")}\n}\n`);
 }
 
 /** One session's trace: frames on disk, and where in time everything is. */
@@ -993,6 +1035,15 @@ async function generateOne(
         await (demo.stage === "page" ? composeOverPage(mail, span, out) : composeAlone(span, out));
         console.log(`ok ${folder}/demo/${demo.name}.mp4 (${span.duration.toFixed(1)}s)`);
       }),
+    );
+    writeCues(
+      folder,
+      Object.fromEntries(
+        session.demos.flatMap((demo) => {
+          const cues = cuesOf(session, demo);
+          return cues === undefined ? [] : [[demo.name, cues]];
+        }),
+      ),
     );
     // The recording, or how far the replayed session strayed from it: a
     // request that no longer matches means the prompt or its context changed

@@ -16,12 +16,18 @@ import SampleEmail from "../../../components/SampleEmail.astro";
 選んで、いつものコピーをダブルクリックの要領で 2 回。
 画面の隅に、<PageLanguage />の要約が流れます。
 
-{/* 動画: 要約デモ（bun run demo-video が生成）。英語のメールを選択 → Ctrl + C + C → 右上に日本語の要約が表示されるまで */}
+{/* 動画: 要約デモ（bun run demo-video が生成）。英語のメールを選択 → Ctrl + C + C → 右上に日本語の要約が表示されるまで。字幕は 4 つの拍（メール、選択、Ctrl + C + C、要約）に 1 行ずつ */}
 
 英語のメールで試すと、こうなります。
 
 <DemoVideo demo="summarize">
   デモ動画を見る
+  <Fragment slot="cues">
+    <p>英語のメールが届いたとします。</p>
+    <p>画面の文字を選んで、</p>
+    <p><CopyTwice /> を押すと……</p>
+    <p><PageLanguage />の要約が表示されます。</p>
+  </Fragment>
 </DemoVideo>
 
 無料で、アカウントは要りません。
