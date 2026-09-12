@@ -243,13 +243,13 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     </main>
 
     <footer>
-      <a href={`/${lang}/privacy/`}>{copy.privacyLabel}</a>
-      <span>·</span>
-      <a href={`/${lang}/terms/`}>{copy.termsLabel}</a>
-      <span>·</span>
-      <a href={github}>GitHub</a>
-      <span>·</span>
-      <span>Apache-2.0 © Shinsuke Mori</span>
+      <div class="links">
+        <a href={`/${lang}/privacy/`}>{copy.privacyLabel}</a>
+        <a href={`/${lang}/terms/`}>{copy.termsLabel}</a>
+        <a href={github}>GitHub</a>
+        <a href={`${github}/blob/main/LICENSE`}>Apache-2.0</a>
+      </div>
+      <p>© Shinsuke Mori</p>
     </footer>
 
     {/* The visitor's own modifier key, when the OS is known. */}
@@ -612,17 +612,30 @@ const gettingStartedHref = `/${lang}/getting-started/`;
   }
 
   /* ——— footer ——— */
+  /* The links (and the license) in one row, the copyright on its own line
+    below. The row is spaced, not dotted, like the header's nav: long labels
+    (Nutzungsbedingungen) wrap it on phones, and a dot left dangling at the
+    break is what one row of dots used to do. */
   footer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
     max-width: 64rem;
     margin: 0 auto;
     padding: 2.5rem 1.5rem 3rem;
     border-top: 1px solid var(--hairline);
     font-size: 0.78rem;
     color: var(--ink-faint);
+  }
+  footer .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 1.25rem;
+  }
+  footer p {
+    margin: 0;
   }
   footer a:hover {
     color: var(--ink);

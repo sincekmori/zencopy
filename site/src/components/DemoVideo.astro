@@ -2,27 +2,30 @@
 // One demo video embed for the docs pages. Every locale has its own demos
 // (/public/<locale>/demo/<demo>.mp4 with a matching .jpg poster), generated
 // by `bun run demo-video` (scripts/demo-video.ts) — the popup in the video
-// speaks the page's language. What a demo plays over and the frame it is
-// filmed in are the generator's declarations (scripts/demo-video/demos.ts):
-// the mail page with the popup beside it (landscape, shown at the column's
-// full width), or the popup window alone (portrait, capped narrower). The
-// slot is the localized fallback link text for browsers that cannot play
-// the video.
+// speaks the page's language, so the locale is the page's (the default
+// locale's outside a Starlight route), not a prop; recording a locale is
+// part of adding one (see AGENTS.md). What a demo plays over and the frame
+// it is filmed in are the generator's declarations
+// (scripts/demo-video/demos.ts): the mail page with the popup beside it
+// (landscape, shown at the column's full width), or the popup window alone
+// (portrait, capped narrower). The slot is the localized fallback link text
+// for browsers that cannot play the video.
 import {
   DEMOS,
   FRAMES,
   VIDEO_SCALE,
 } from "../../../scripts/demo-video/demos.ts";
+import { pageLocale } from "../lib/page-locale.ts";
 
 interface Props {
   demo: string;
-  locale: string;
 }
-const { demo, locale } = Astro.props;
+const { demo } = Astro.props;
 const declared = DEMOS.find((entry) => entry.name === demo);
 if (declared === undefined) {
   throw new Error(`no demo named "${demo}" — see scripts/demo-video/demos.ts`);
 }
+const { locale } = pageLocale(Astro.locals);
 const base = `/${locale}/demo/${demo}`;
 const wide = declared.stage === "page";
 const frame = FRAMES[declared.stage];

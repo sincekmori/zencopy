@@ -1,9 +1,11 @@
 ---
-/** Renders the docs architecture diagram for one locale.
- *  Labels come from the per-locale table in architecture-labels.ts and the
- *  markup from architectureDiagram(), a pure function of those labels — see
+/** Renders the docs architecture diagram in the page's language.
+ *  Labels come from the per-locale table in architecture-labels.ts (a page
+ *  whose locale has no entry gets the default locale's) and the markup from
+ *  architectureDiagram(), a pure function of those labels — see
  *  architecture-diagram.ts for the layout rules. RTL locales mirror
  *  automatically. */
+import { DEFAULT_LOCALE, pageLocale } from "../lib/page-locale.ts";
 import { architectureDiagram } from "./architecture-diagram.ts";
 import {
   ARCHITECTURE_LABELS,
@@ -11,11 +13,10 @@ import {
   type ArchitectureLocale,
 } from "./architecture-labels.ts";
 
-interface Props {
-  locale: ArchitectureLocale;
-}
-
-const { locale } = Astro.props;
+const labeled = (locale: string): locale is ArchitectureLocale =>
+  locale in ARCHITECTURE_LABELS;
+const page = pageLocale(Astro.locals).locale;
+const locale = labeled(page) ? page : DEFAULT_LOCALE;
 const dir = RTL_ARCHITECTURE_LOCALES.has(locale) ? "rtl" : "ltr";
 ---
 
