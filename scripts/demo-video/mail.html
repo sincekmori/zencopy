@@ -4,7 +4,11 @@
      the reading pane; no names beyond departments. scripts/demo-video.ts
      fills in {{subject}}, {{snippet}} (the open row's preview) and
      {{paragraphs}} (the body), and drives select(fraction) to sweep the
-     selection over the body before the popup appears. -->
+     selection over the body before the popup appears. The selection is
+     drawn as markup (a span over the selected prefix of each paragraph),
+     not made with the native selection: a screenshot shows the DOM as it
+     is, whereas the native highlight is painted on WebKit's own schedule,
+     and a shot taken before that update showed the sweep a step behind. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -26,8 +30,11 @@
           Arial,
           sans-serif;
       }
-      ::selection {
+      /* The selection highlight: the native one's color, padded to the line
+         box's height so wrapped lines read as one block, as a real one does. */
+      #mail .sel {
         background: #b4d5fe;
+        padding: 0.25em 0;
       }
       nav {
         background: #f3f3f5;
@@ -223,29 +230,32 @@
       <main id="mail">{{paragraphs}}</main>
     </section>
     <script>
-      const nodes = [];
-      const walker = document.createTreeWalker(
-        document.getElementById("mail"),
-        NodeFilter.SHOW_TEXT,
-      );
-      for (let node = walker.nextNode(); node; node = walker.nextNode()) nodes.push(node);
-      const total = nodes.reduce((sum, node) => sum + node.data.length, 0);
+      const mail = document.getElementById("mail");
+      const paragraphs = [...mail.querySelectorAll("p")].map((p) => ({ p, text: p.textContent }));
+      const total = paragraphs.reduce((sum, { text }) => sum + text.length, 0);
+      // Select the first `fraction` of the body's characters: each paragraph
+      // is rebuilt as its selected prefix in a span and the rest as text.
       window.select = (fraction) => {
-        const selection = getSelection();
-        selection.removeAllRanges();
-        if (fraction <= 0) return;
-        let remaining = Math.round(total * fraction);
-        const range = document.createRange();
-        range.setStart(nodes[0], 0);
-        for (const node of nodes) {
-          if (remaining <= node.data.length) {
-            range.setEnd(node, remaining);
-            break;
+        let remaining = Math.round(total * Math.min(1, Math.max(0, fraction)));
+        for (const { p, text } of paragraphs) {
+          const cut = Math.min(text.length, remaining);
+          remaining -= cut;
+          p.replaceChildren();
+          if (cut > 0) {
+            const selected = document.createElement("span");
+            selected.className = "sel";
+            selected.textContent = text.slice(0, cut);
+            p.append(selected);
           }
-          remaining -= node.data.length;
+          if (cut < text.length) {
+            p.append(text.slice(cut));
+          }
         }
-        selection.addRange(range);
       };
+      // What is selected, for the generator to check the sweep's end by.
+      window.selectedText = () =>
+        [...mail.querySelectorAll(".sel")].map((s) => s.textContent).join("");
+      window.bodyText = () => paragraphs.map(({ text }) => text).join("");
     </script>
   </body>
 </html>

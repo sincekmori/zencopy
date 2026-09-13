@@ -201,23 +201,6 @@ function mailPage(source: string): string {
     );
 }
 
-/** Two animation frames on: what the page was just told to show is drawn.
- *  A screenshot straight after a selection change could still catch the
- *  frame before it — and the sweep's last picture is held for the rest of
- *  the video. */
-async function painted(page: Page): Promise<void> {
-  // waitForFunction tries its predicate once at once, then on each animation
-  // frame — so counting the calls is counting frames.
-  await page.evaluate(() => {
-    (globalThis as { __frames?: number }).__frames = 0;
-  });
-  await page.waitForFunction(() => {
-    const seen = globalThis as { __frames?: number };
-    seen.__frames = (seen.__frames ?? 0) + 1;
-    return seen.__frames > 2;
-  });
-}
-
 function pageFrameName(index: number): string {
   return `page-${String(index + 1).padStart(5, "0")}.png`;
 }
@@ -246,11 +229,19 @@ async function renderPage(browser: Browser, dir: string): Promise<Frame[]> {
         await page.evaluate((f) => {
           (globalThis as { select?: (fraction: number) => void }).select?.(f);
         }, fraction);
-        await painted(page);
         shown = { fraction, file: pageFrameName(frames.length) };
         writeFileSync(join(dir, shown.file), await page.screenshot({ type: "png", caret: "hide" }));
       }
       frames.push({ at, file: shown.file });
+    }
+    // The picture the sweep ends on is held for the rest of the video: it
+    // must be the whole mail selected, as the DOM says it is.
+    const whole = await page.evaluate(() => {
+      const w = globalThis as { selectedText?: () => string; bodyText?: () => string };
+      return w.selectedText?.() === w.bodyText?.();
+    });
+    if (!whole) {
+      throw new Error("the page's sweep did not end on the whole mail selected");
     }
     return frames;
   } finally {
@@ -841,7 +832,6 @@ async function renderCaptions(job: {
       await page.setContent(
         `<!doctype html><html lang="${locale}"><body style="margin:0;background:transparent"><div id="caption" dir="auto" style="position:absolute;left:0;top:0;display:inline-block;max-width:${PAGE.width * 0.88}px;padding:0.3em 0.8em;border-radius:0.5em;background:rgb(0 0 0 / 0.68);color:#fff;font:500 ${CAPTION.size}px/1.5 system-ui,-apple-system,'Segoe UI','Hiragino Sans','Yu Gothic UI',sans-serif;text-align:center">${escapeHtml(text)}</div></body></html>`,
       );
-      await painted(page);
       const file = join(dir, `caption${variant.suffix}-${index + 1}.png`);
       writeFileSync(
         file,
