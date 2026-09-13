@@ -155,6 +155,7 @@ Keep the summary line short and factual; put the "why" and any surprising contex
 - **Linux support has boundaries.** The global trigger (copycopy) covers GNOME on Wayland (via a bundled GNOME Shell extension, auto-installed on first run) and X11 (key listener).
   On other Wayland compositors (KDE, wlroots, …) the app runs but the trigger stays inert — copycopy logs a warning to stderr.
   Don't claim broader Linux coverage than that in docs or UI.
+- **The popup resizes through its own handles on Linux and Windows** ([src/components/resize-handles.tsx](src/components/resize-handles.tsx)): the platforms' resize zone for an undecorated window is the window's outer edge, which the floating card's transparent margin puts out of reach, so the card's visible edge carries invisible strips that start a native resize drag (they begin just inside the runtime's zone, never over it). macOS resizes a borderless window natively and the resize drag API is unsupported there, so the handles do not render.
 - **macOS main-thread constraint.** `copycopy` installs `CGEventTap`, which must run on the main run loop; keep the Tauri `setup` hook path intact.
 
 ## Where to look first

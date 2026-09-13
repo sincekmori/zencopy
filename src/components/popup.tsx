@@ -20,6 +20,7 @@ import { Markdown } from "@/components/markdown.tsx";
 import { SourceView } from "@/components/source-view.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { FIELD } from "@/components/ui/field.ts";
+import { ResizeHandles } from "@/components/resize-handles.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { CUSTOM_PROMPT_ID, type PromptInfo, listPrompts } from "@/lib/prompts.ts";
 import {
@@ -1351,6 +1352,7 @@ export function Popup(): React.JSX.Element {
   // edge-to-edge, a window instead of a sticker.
   return (
     <div className="flex h-svh max-compact:p-2">
+      <ResizeHandles />
       <div className="flex size-full flex-col overflow-hidden rounded-xl border bg-popover text-popover-foreground shadow-xl">
         {/* The header doubles as the drag handle (PiP-style): "deep" makes
             the whole bar and everything in it draggable, while buttons keep
