@@ -46,6 +46,7 @@ import { GEMINI_DEFAULT_MODEL, geminiQuickCatalog } from "../src/lib/quickstart.
 import { POPUP_RESULT_FIXTURES, SCREENSHOT_SCENARIOS } from "../src/lib/screenshot-scenarios.ts";
 import type { ModelCall } from "../src/screenshot/model-call.ts";
 import { type Demo, DEMOS, FRAMES, VIDEO_SCALE } from "./demo-video/demos.ts";
+import { CAPTIONS, namesChord } from "./demo-video/captions.ts";
 import {
   ensureDevServer,
   harnessUrl,
@@ -84,8 +85,6 @@ if (args.length > 0) {
 const SOURCE = join(HERE, "source.txt");
 const MAIL_TEMPLATE = join(HERE, "mail.html");
 const RECORDINGS = join(HERE, "recordings");
-/** Where each locale's caption moments land (DemoVideo.astro reads it). */
-const CUES = join(HERE, "cues.json");
 const popupViewport = SCREENSHOT_SCENARIOS["popup"]?.viewport;
 if (popupViewport?.width !== FRAMES.popup.width || popupViewport.height !== FRAMES.popup.height) {
   throw new Error(
@@ -202,6 +201,15 @@ function mailPage(source: string): string {
     );
 }
 
+/** Two animation frames on: what the page was just told to show is drawn.
+ *  A screenshot straight after a selection change could still catch the
+ *  frame before it — and the sweep's last picture is held for the rest of
+ *  the video. */
+async function painted(page: Page): Promise<void> {
+  await page.waitForFunction(() => true, undefined, { polling: "raf" });
+  await page.waitForFunction(() => true, undefined, { polling: "raf" });
+}
+
 function pageFrameName(index: number): string {
   return `page-${String(index + 1).padStart(5, "0")}.png`;
 }
@@ -230,6 +238,7 @@ async function renderPage(browser: Browser, dir: string): Promise<Frame[]> {
         await page.evaluate((f) => {
           (globalThis as { select?: (fraction: number) => void }).select?.(f);
         }, fraction);
+        await painted(page);
         shown = { fraction, file: pageFrameName(frames.length) };
         writeFileSync(join(dir, shown.file), await page.screenshot({ type: "png", caret: "hide" }));
       }
@@ -291,9 +300,8 @@ interface Turn {
 
 /** The moments a page-stage demo's captions start, seconds into its video
  *  — the mail as it is, the selection sweeping, the chord (the mail selected,
- *  the popup a beat away), the summary complete — the beats the docs write
- *  one caption line each for (the `cues` slot of DemoVideo.astro). Popup-
- *  stage demos carry none. */
+ *  the popup a beat away), the summary complete — the beats captions.ts
+ *  holds one line each for. Popup-stage demos carry none. */
 function cuesOf(session: Session, demo: Session["demos"][number]): number[] | undefined {
   if (demo.stage !== "page") {
     return undefined;
@@ -308,24 +316,6 @@ function cuesOf(session: Session, demo: Session["demos"][number]): number[] | un
   return [0, PAGE_BEATS.still, PAGE_BEATS.still + PAGE_BEATS.select, APPEAR + done].map((seconds) =>
     Number(seconds.toFixed(2)),
   );
-}
-
-/** Merge a locale's caption moments into cues.json (locales sorted), written
- *  as the formatter would have it: one line per demo, its moments inline. */
-function writeCues(locale: string, cues: Record<string, number[]>): void {
-  const all = existsSync(CUES)
-    ? (JSON.parse(readFileSync(CUES, "utf8")) as Record<string, Record<string, number[]>>)
-    : {};
-  all[locale] = cues;
-  const entries = Object.entries(all)
-    .toSorted(([a], [b]) => a.localeCompare(b))
-    .map(([code, demos]) => {
-      const lines = Object.entries(demos).map(
-        ([name, moments]) => `    "${name}": [${moments.join(", ")}]`,
-      );
-      return `  "${code}": {\n${lines.join(",\n")}\n  }`;
-    });
-  writeFileSync(CUES, `{\n${entries.join(",\n")}\n}\n`);
 }
 
 /** One session's trace: frames on disk, and where in time everything is. */
@@ -763,7 +753,8 @@ interface Span {
 
 interface Output {
   mp4: string;
-  jpg: string;
+  /** The poster — the default video's; a `.mac` variant has none of its own. */
+  jpg?: string;
 }
 
 /** The frames a demo spans, concat-demuxer style: the one on screen when the
@@ -788,6 +779,87 @@ function concatList(session: Session, demo: Session["demos"][number], workDir: s
   const listFile = join(workDir, `${demo.name}.txt`);
   writeFileSync(listFile, concatLines(entries));
   return { listFile, duration: entries.reduce((sum, entry) => sum + entry.duration, 0) };
+}
+
+// ---- Captions: lines rendered by WebKit, laid over the video in turn ------------
+
+/** How a caption sits on the frame, in CSS px of the page stage: the type
+ *  size and the room under it (above where a player draws its controls). */
+const CAPTION = { size: PAGE.width * 0.026, bottom: PAGE.height * 0.13 };
+
+/** The locale's own name for its language, for `{lang}`. */
+function languageName(locale: string): string {
+  return new Intl.DisplayNames([locale], { type: "language" }).of(locale) ?? locale;
+}
+
+/** A demo's videos: the default one, and a `.mac` one when its lines name
+ *  the chord. */
+interface Variant {
+  suffix: "" | ".mac";
+  chord: string;
+}
+const VARIANTS: Variant[] = [
+  { suffix: "", chord: "Ctrl + C + C" },
+  { suffix: ".mac", chord: "⌘ + C + C" },
+];
+function variantsOf(lines: readonly string[] | undefined): Variant[] {
+  return lines !== undefined && namesChord(lines) ? VARIANTS : VARIANTS.slice(0, 1);
+}
+
+/** Render a demo's caption lines for one variant as 2× PNGs with alpha —
+ *  WebKit sets the type, in the site's font stack, so every script the
+ *  docs come in (and ⌘) is drawn as the page would draw it. */
+async function renderCaptions(job: {
+  browser: Browser;
+  locale: string;
+  lines: readonly string[];
+  variant: Variant;
+  dir: string;
+}): Promise<string[]> {
+  const { browser, locale, lines, variant, dir } = job;
+  mkdirSync(dir, { recursive: true });
+  const context = await browser.newContext({
+    viewport: PAGE,
+    deviceScaleFactor: VIDEO_SCALE,
+    colorScheme: "light",
+  });
+  try {
+    const page = await context.newPage();
+    const files: string[] = [];
+    for (const [index, line] of lines.entries()) {
+      const text = line
+        .replaceAll("{chord}", variant.chord)
+        .replaceAll("{lang}", languageName(locale));
+      await page.setContent(
+        `<!doctype html><html lang="${locale}"><body style="margin:0;background:transparent"><div id="caption" dir="auto" style="position:absolute;left:0;top:0;display:inline-block;max-width:${PAGE.width * 0.88}px;padding:0.3em 0.8em;border-radius:0.5em;background:rgb(0 0 0 / 0.68);color:#fff;font:500 ${CAPTION.size}px/1.5 system-ui,-apple-system,'Segoe UI','Hiragino Sans','Yu Gothic UI',sans-serif;text-align:center">${escapeHtml(text)}</div></body></html>`,
+      );
+      await painted(page);
+      const file = join(dir, `caption${variant.suffix}-${index + 1}.png`);
+      writeFileSync(
+        file,
+        await page.locator("#caption").screenshot({ type: "png", omitBackground: true }),
+      );
+      files.push(file);
+    }
+    return files;
+  } finally {
+    await context.close();
+  }
+}
+
+/** The caption overlays as filter steps, from the composited stream `[m]`
+ *  to `[cap]`: inputs 2 onward (after the two concat lists), one per line,
+ *  each shown from its moment to the next one's (the last to the end),
+ *  centered, CAPTION.bottom above the frame's bottom edge. */
+function captionSteps(moments: number[]): string[] {
+  const bottom = Math.round(CAPTION.bottom * VIDEO_SCALE);
+  return moments.map((at, index) => {
+    const next = moments[index + 1];
+    const enable = next === undefined ? `gte(t,${at})` : `between(t,${at},${next})`;
+    const label = index === moments.length - 1 ? "cap" : `m${index + 1}`;
+    const input = index === 0 ? "m" : `m${index}`;
+    return `[${input}][${2 + index}:v]overlay=x=(W-w)/2:y=H-${bottom}-h:enable='${enable}'[${label}]`;
+  });
 }
 
 /** The frames as an overlay stream: 2× RGBA PNGs to bt709 yuva, starting
@@ -838,13 +910,7 @@ async function compose(inputs: string[], filter: string, out: Output): Promise<v
     filter,
     ...ENCODE,
     out.mp4,
-    "-map",
-    "[p]",
-    "-frames:v",
-    "1",
-    "-q:v",
-    "2",
-    out.jpg,
+    ...(out.jpg === undefined ? [] : ["-map", "[p]", "-frames:v", "1", "-q:v", "2", out.jpg]),
   ]);
 }
 
@@ -854,8 +920,9 @@ async function compose(inputs: string[], filter: string, out: Output): Promise<v
 async function composeOverPage(
   mail: { dir: string; frames: Frame[] },
   span: Span,
-  out: Output,
+  out: Output & { captions?: { files: string[]; moments: number[] } | undefined },
 ): Promise<void> {
+  const { captions } = out;
   const entries = mail.frames.map((frame, index) => ({
     file: join(mail.dir, frame.file),
     duration: (mail.frames[index + 1]?.at ?? APPEAR) - frame.at,
@@ -869,11 +936,17 @@ async function composeOverPage(
     baseList,
     concatLines([...entries, { file: last.file, duration: span.duration + 1 }]),
   );
+  // The base, the popup over it, the captions over that in turn, then the
+  // stream the encode takes — split once more for the poster when this is
+  // the video that has one.
+  const topmost = captions === undefined ? "m" : "cap";
   const filter = [
     `[0:v]fps=${FPS}[base]`,
     overlayFilter(APPEAR),
-    `[base][ov]overlay=x=${POPUP_AT.x}:y=${POPUP_AT.y}:eof_action=endall:format=yuv420,split[v][pv]`,
-    posterFilter(APPEAR + span.duration, PAGE.width),
+    `[base][ov]overlay=x=${POPUP_AT.x}:y=${POPUP_AT.y}:eof_action=endall:format=yuv420[m]`,
+    ...(captions === undefined ? [] : captionSteps(captions.moments)),
+    out.jpg === undefined ? `[${topmost}]null[v]` : `[${topmost}]split[v][pv]`,
+    ...(out.jpg === undefined ? [] : [posterFilter(APPEAR + span.duration, PAGE.width)]),
   ].join(";");
   await compose(
     [
@@ -889,6 +962,7 @@ async function composeOverPage(
       "0",
       "-i",
       span.listFile,
+      ...(captions?.files ?? []).flatMap((file) => ["-i", file]),
     ],
     filter,
     out,
@@ -1024,26 +1098,49 @@ async function generateOne(
       workDir,
       errors,
     });
-    // The four encodes are independent: one ffmpeg each, side by side.
+    // The encodes are independent: one ffmpeg each, side by side — a
+    // captioned demo once per variant, the poster from the default one.
     await Promise.all(
-      session.demos.map(async (demo) => {
+      session.demos.flatMap((demo) => {
         const span = concatList(session, demo, workDir);
-        const out = {
-          mp4: join(outDir, `${demo.name}.mp4`),
-          jpg: join(outDir, `${demo.name}.jpg`),
-        };
-        await (demo.stage === "page" ? composeOverPage(mail, span, out) : composeAlone(span, out));
-        console.log(`ok ${folder}/demo/${demo.name}.mp4 (${span.duration.toFixed(1)}s)`);
+        const lines = CAPTIONS[folder]?.[demo.name];
+        const moments = lines === undefined ? undefined : cuesOf(session, demo);
+        if (lines !== undefined && moments === undefined) {
+          throw new Error(
+            `${demo.name} has captions in captions.ts, but only the page-stage demo can carry them`,
+          );
+        }
+        if (lines !== undefined && moments !== undefined && lines.length !== moments.length) {
+          throw new Error(
+            `${folder}/${demo.name}: ${lines.length} caption lines for ${moments.length} beats`,
+          );
+        }
+        return variantsOf(lines).map(async (variant, index) => {
+          const out: Output = {
+            mp4: join(outDir, `${demo.name}${variant.suffix}.mp4`),
+            ...(index === 0 ? { jpg: join(outDir, `${demo.name}.jpg`) } : {}),
+          };
+          const captions =
+            lines === undefined || moments === undefined
+              ? undefined
+              : {
+                  files: await renderCaptions({
+                    browser,
+                    locale: folder,
+                    lines,
+                    variant,
+                    dir: join(workDir, "captions"),
+                  }),
+                  moments,
+                };
+          await (demo.stage === "page"
+            ? composeOverPage(mail, span, { ...out, captions })
+            : composeAlone(span, out));
+          console.log(
+            `ok ${folder}/demo/${demo.name}${variant.suffix}.mp4 (${span.duration.toFixed(1)}s)`,
+          );
+        });
       }),
-    );
-    writeCues(
-      folder,
-      Object.fromEntries(
-        session.demos.flatMap((demo) => {
-          const cues = cuesOf(session, demo);
-          return cues === undefined ? [] : [[demo.name, cues]];
-        }),
-      ),
     );
     // The recording, or how far the replayed session strayed from it: a
     // request that no longer matches means the prompt or its context changed

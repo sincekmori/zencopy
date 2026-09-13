@@ -22,49 +22,17 @@
    window at 2×, or the browser page it lands on), so they are capped at a
    width that keeps a whole frame inside one viewport — a reader sees the
    answer without scrolling — while the popup text stays legible. */
-.demo-stage {
-  position: relative;
-  width: 100%;
-  max-width: 32.5rem;
-  container-type: inline-size;
-}
-
-/* The landscape one (the mail and the popup side by side) takes the column. */
-.demo-stage.wide {
-  max-width: none;
-}
-
 .demo-video {
   display: block;
   width: 100%;
+  max-width: 32.5rem;
   border: 1px solid var(--sl-color-hairline);
   border-radius: 0.75rem;
 }
 
-/* Captions over the video (DemoVideo.astro): one line at a time, set like
-   subtitles above the controls, sized to the video's width. */
-.demo-captions {
-  position: absolute;
-  inset-inline: 6%;
-  bottom: 13%;
-  text-align: center;
-  pointer-events: none;
-}
-
-.demo-captions > * {
-  display: none;
-  margin: 0;
-  padding: 0.3em 0.8em;
-  border-radius: 0.5em;
-  background: rgb(0 0 0 / 0.68);
-  color: #fff;
-  font-size: clamp(0.8rem, 2.6cqw, 1.15rem);
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.demo-captions > [data-active] {
-  display: inline-block;
+/* The landscape one (the mail and the popup side by side) takes the column. */
+.demo-video.wide {
+  max-width: none;
 }
 
 /* Header selects (theme, language): Starlight hard-codes narrow widths

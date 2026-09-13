@@ -118,7 +118,8 @@ export default defineConfig({
         // Progressive enhancement for the visitor's OS: elements marked
         // data-os-modifier show their own key (⌘ or Ctrl), elements with
         // data-os-windows / -mac / -linux (the OsText component) show their
-        // own variant of a phrase, and the "os" synced tabs get pre-selected
+        // own variant of a phrase, a video with data-mac-src plays its ⌘ cut
+        // on a Mac (DemoVideo.astro), and the "os" synced tabs get pre-selected
         // on first visit (a manual choice then wins — Starlight persists it
         // under the same key). Other OSes and no-JS keep the combined
         // fallback wording and the first tab.
@@ -147,6 +148,12 @@ export default defineConfig({
             '    for (const el of document.querySelectorAll("[data-os-windows]")) {',
             '      const own = el.getAttribute("data-os-" + os);',
             "      if (own) el.textContent = own;",
+            "    }",
+            "    // A demo video captioned with the chord has a ⌘ + C + C cut for Macs.",
+            "    if (isMac) {",
+            '      for (const el of document.querySelectorAll("[data-mac-src]")) {',
+            '        el.setAttribute("src", el.getAttribute("data-mac-src"));',
+            "      }",
             "    }",
             "  };",
             '  if (document.readyState === "loading") {',
