@@ -120,6 +120,24 @@ pub(crate) fn follow_text_size(app: &tauri::App) {
     });
 }
 
+/// Linux: the popup is a listed window — in Alt+Tab, the overview, the dock
+/// — not a skip-taskbar one. The conf's `skipTaskbar` is meant for Windows,
+/// where it removes nothing but the taskbar button (`ITaskbarList::DeleteTab`)
+/// of a panel that floats above everything anyway. On GNOME the same flag
+/// hides the popup from every window list, and Tiling Assistant — Ubuntu's
+/// default since 23.10, which takes over Super+←/→ there — refuses to tile a
+/// skip-taskbar window at all (`tile()` in its tilingWindowManager.js returns
+/// on `is_skip_taskbar()`), so a panel the user drags, resizes, and tiles
+/// must not carry it. Mutter's own tiling never minded; the extension does.
+#[cfg(target_os = "linux")]
+pub(crate) fn expose_popup_to_shell(app: &tauri::App) {
+    if let Some(popup) = app.get_webview_window("popup") {
+        popup
+            .set_skip_taskbar(false)
+            .or_log("popup: listing it in the shell");
+    }
+}
+
 /// Show `window` on the desktop (macOS Space) the user is on right now, focused,
 /// and pin it there. A hidden window keeps its previous Space assignment, so a
 /// plain `show` could surface it on the wrong desktop; joining all Spaces just

@@ -341,6 +341,8 @@ pub fn run() {
             // config migrations (none yet) and stamp the running version.
             crate::config::migrate_config(app.handle());
             crate::windows::follow_text_size(app);
+            #[cfg(target_os = "linux")]
+            crate::windows::expose_popup_to_shell(app);
             // One-line banner so an attached log answers "which version, on
             // what?" without a follow-up question.
             let os = os_info::get();
