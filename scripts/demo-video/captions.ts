@@ -7,11 +7,19 @@
 // DemoVideo.astro swaps in on a Mac; `{lang}` is the locale's own language
 // name (日本語 on ja). A locale without an entry gets uncaptioned videos.
 export const CAPTIONS: Record<string, Partial<Record<string, readonly string[]>> | undefined> = {
+  en: {
+    summarize: [
+      "Say an email comes in.",
+      "Select the text,",
+      "press {chord}",
+      "and a summary appears.",
+    ],
+  },
   ja: {
     summarize: [
       "英語のメールが届いたとします。",
       "画面の文字を選んで、",
-      "{chord} を押すと……",
+      "{chord} を押すと",
       "{lang}の要約が表示されます。",
     ],
   },

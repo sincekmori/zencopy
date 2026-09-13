@@ -206,8 +206,16 @@ function mailPage(source: string): string {
  *  frame before it — and the sweep's last picture is held for the rest of
  *  the video. */
 async function painted(page: Page): Promise<void> {
-  await page.waitForFunction(() => true, undefined, { polling: "raf" });
-  await page.waitForFunction(() => true, undefined, { polling: "raf" });
+  // waitForFunction tries its predicate once at once, then on each animation
+  // frame — so counting the calls is counting frames.
+  await page.evaluate(() => {
+    (globalThis as { __frames?: number }).__frames = 0;
+  });
+  await page.waitForFunction(() => {
+    const seen = globalThis as { __frames?: number };
+    seen.__frames = (seen.__frames ?? 0) + 1;
+    return seen.__frames > 2;
+  });
 }
 
 function pageFrameName(index: number): string {
