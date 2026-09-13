@@ -786,11 +786,6 @@ function concatList(session: Session, demo: Session["demos"][number], workDir: s
  *  size and the room under it (above where a player draws its controls). */
 const CAPTION = { size: PAGE.width * 0.026, bottom: PAGE.height * 0.13 };
 
-/** The locale's own name for its language, for `{lang}`. */
-function languageName(locale: string): string {
-  return new Intl.DisplayNames([locale], { type: "language" }).of(locale) ?? locale;
-}
-
 /** A demo's videos: the default one, and a `.mac` one when its lines name
  *  the chord. */
 interface Variant {
@@ -826,9 +821,7 @@ async function renderCaptions(job: {
     const page = await context.newPage();
     const files: string[] = [];
     for (const [index, line] of lines.entries()) {
-      const text = line
-        .replaceAll("{chord}", variant.chord)
-        .replaceAll("{lang}", languageName(locale));
+      const text = line.replaceAll("{chord}", variant.chord);
       await page.setContent(
         `<!doctype html><html lang="${locale}"><body style="margin:0;background:transparent"><div id="caption" dir="auto" style="position:absolute;left:0;top:0;display:inline-block;max-width:${PAGE.width * 0.88}px;padding:0.3em 0.8em;border-radius:0.5em;background:rgb(0 0 0 / 0.68);color:#fff;font:500 ${CAPTION.size}px/1.5 system-ui,-apple-system,'Segoe UI','Hiragino Sans','Yu Gothic UI',sans-serif;text-align:center">${escapeHtml(text)}</div></body></html>`,
       );
