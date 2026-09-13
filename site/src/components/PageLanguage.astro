@@ -1,16 +1,27 @@
 ---
 /**
- * The name of the page's own language, in that language — 日本語 on a ja
- * page, English on an en page — from the locale, so prose that says "into
- * your language" is written once and stays true in every translation. The
- * ja source (the reference the other locales are translated from) uses it
- * wherever it means the reader's language.
+ * The name of the page's own language, in the form the sentence needs —
+ * 日本語 / 日本語で / 日本語に on a ja page, Deutsch / auf Deutsch / ins Deutsche
+ * on de — from src/lib/language-forms.ts, so prose that means "the language
+ * this page is in" is a variable that stays correct in every translation,
+ * and a literal 日本語 in the ja source stays the literal language. The ja
+ * docs use it wherever they mean the reader's language; a translation keeps
+ * the tag and picks the form its own sentence needs.
  */
-import { pageLocale } from "../lib/page-locale.ts";
+import { languageForms } from "../../../src/lib/language-forms.ts";
+import { DEFAULT_LOCALE, pageLocale } from "../lib/page-locale.ts";
 
-const { lang } = pageLocale(Astro.locals);
-const name =
-  new Intl.DisplayNames([lang], { type: "language" }).of(lang) ?? lang;
+interface Props {
+  form?: "name" | "in" | "into";
+}
+const { form = "name" } = Astro.props;
+const { locale } = pageLocale(Astro.locals);
+const forms = languageForms(locale) ?? languageForms(DEFAULT_LOCALE);
+if (forms === undefined) {
+  throw new Error(
+    `no language forms for "${locale}" — see src/lib/language-forms.ts`,
+  );
+}
 ---
 
-<span>{name}</span>
+<span>{forms[form]}</span>

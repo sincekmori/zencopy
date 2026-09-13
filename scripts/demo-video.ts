@@ -47,6 +47,7 @@ import { POPUP_RESULT_FIXTURES, SCREENSHOT_SCENARIOS } from "../src/lib/screensh
 import type { ModelCall } from "../src/screenshot/model-call.ts";
 import { type Demo, DEMOS, FRAMES, VIDEO_SCALE } from "./demo-video/demos.ts";
 import { CAPTIONS, namesChord } from "./demo-video/captions.ts";
+import { fillLanguage, languageForms } from "../src/lib/language-forms.ts";
 import {
   ensureDevServer,
   harnessUrl,
@@ -811,6 +812,10 @@ async function renderCaptions(job: {
   dir: string;
 }): Promise<string[]> {
   const { browser, locale, lines, variant, dir } = job;
+  const forms = languageForms(locale);
+  if (forms === undefined) {
+    throw new Error(`no language forms for "${locale}" — see src/lib/language-forms.ts`);
+  }
   mkdirSync(dir, { recursive: true });
   const context = await browser.newContext({
     viewport: PAGE,
@@ -821,7 +826,7 @@ async function renderCaptions(job: {
     const page = await context.newPage();
     const files: string[] = [];
     for (const [index, line] of lines.entries()) {
-      const text = line.replaceAll("{chord}", variant.chord);
+      const text = fillLanguage(line.replaceAll("{chord}", variant.chord), forms);
       await page.setContent(
         `<!doctype html><html lang="${locale}"><body style="margin:0;background:transparent"><div id="caption" dir="auto" style="position:absolute;left:0;top:0;display:inline-block;max-width:${PAGE.width * 0.88}px;padding:0.3em 0.8em;border-radius:0.5em;background:rgb(0 0 0 / 0.68);color:#fff;font:500 ${CAPTION.size}px/1.5 system-ui,-apple-system,'Segoe UI','Hiragino Sans','Yu Gothic UI',sans-serif;text-align:center">${escapeHtml(text)}</div></body></html>`,
       );
