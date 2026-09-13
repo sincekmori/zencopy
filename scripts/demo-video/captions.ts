@@ -9,10 +9,10 @@
 export const CAPTIONS: Record<string, Partial<Record<string, readonly string[]>> | undefined> = {
   en: {
     summarize: [
-      "Say an email comes in.",
+      "Say you've got an email.",
       "Select the text,",
-      "press {chord}",
-      "and a summary appears.",
+      "press {chord},",
+      "and there's your summary.",
     ],
   },
   ja: {
