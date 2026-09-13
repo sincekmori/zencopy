@@ -35,15 +35,22 @@ export const SCREENSHOT_SCENARIOS: Record<
     viewport?: { width: number; height: number };
     /** Seeded on the harness's driver global as the app's catalog. */
     catalog?: unknown;
+    /** The screen carries the key chord (⌘ + C + C on macOS, Ctrl + C + C
+     *  elsewhere — the welcome hero, and the settings window's tagline under
+     *  every tab and dialog): the runner shoots it as both and the docs show
+     *  the visitor's own. A scenario without the flag must render the same
+     *  on both, in every locale — the runner fails otherwise, so a chord
+     *  cannot slip into an unflagged screen unnoticed. */
+    os?: true;
   }
 > = {
-  welcome: { params: { welcome: "1" } },
-  "settings-ai": { params: {}, catalog: SETTINGS_AI_CATALOG },
-  "settings-prompts": { params: { tab: "prompts" } },
-  "settings-general": { params: { tab: "general" } },
-  "new-rule": { params: { tab: "prompts", screenshot: RULE_EDITOR_SCENARIO } },
-  "prompt-editor": { params: { tab: "prompts", screenshot: PROMPT_EDITOR_SCENARIO } },
-  "prompt-import": { params: { tab: "prompts", screenshot: PROMPT_IMPORT_SCENARIO } },
+  welcome: { params: { welcome: "1" }, os: true },
+  "settings-ai": { params: {}, catalog: SETTINGS_AI_CATALOG, os: true },
+  "settings-prompts": { params: { tab: "prompts" }, os: true },
+  "settings-general": { params: { tab: "general" }, os: true },
+  "new-rule": { params: { tab: "prompts", screenshot: RULE_EDITOR_SCENARIO }, os: true },
+  "prompt-editor": { params: { tab: "prompts", screenshot: PROMPT_EDITOR_SCENARIO }, os: true },
+  "prompt-import": { params: { tab: "prompts", screenshot: PROMPT_IMPORT_SCENARIO }, os: true },
   // The other two windows; the about viewport mirrors tauri.conf.json minus
   // the title bar.
   about: { params: { window: "about" }, viewport: { width: 360, height: 412 } },

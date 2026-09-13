@@ -6,6 +6,7 @@ description: 設定画面でできること。つなぐ AI の変更、あなた
 import OsText from "../../../components/OsText.astro";
 import PageLanguage from "../../../components/PageLanguage.astro";
 import CopyTwice from "../../../components/CopyTwice.astro";
+import Screenshot from "../../../components/Screenshot.astro";
 
 ZenCopy は、入れたその日から何も設定せずに使えます。
 このページは、「もっと自分に合わせたい」と思ったときの案内です。
@@ -40,7 +41,7 @@ ZenCopy は、入れたその日から何も設定せずに使えます。
 
 ようこそ画面で無料の Google のキーを貼った人なら、このタブはもう設定済みです。
 
-![設定画面の AI タブ。プロバイダーで Google が選ばれ、デフォルトモデルと API キーの欄、保存とテストのボタンが並ぶ](/ja/screenshots/settings-ai.png)
+<Screenshot name="settings-ai" alt="設定画面の AI タブ。プロバイダーで Google が選ばれ、デフォルトモデルと API キーの欄、保存とテストのボタンが並ぶ" />
 
 ### まずは無料のまま {#free-with-gemini}
 
@@ -84,7 +85,7 @@ AI タブの下のほうに、「あなたについて」という欄があり�
 
 毎回の <CopyTwice /> のあとに AI にする頼みごとの型を、**プロンプト**と呼びます。 プロンプトタブは、その一覧です。
 
-![設定画面のプロンプトタブ。要約、解説、翻訳、清書、カスタムの一覧と、クイックプロンプトの欄](/ja/screenshots/settings-prompts.png)
+<Screenshot name="settings-prompts" alt="設定画面のプロンプトタブ。要約、解説、翻訳、清書、カスタムの一覧と、クイックプロンプトの欄" />
 
 最初から入っている 5 つ（要約、解説、翻訳、清書、カスタム）は、行の右端の目のアイコン（「内容を見る」）で中身が読めます。
 自分で書くときの手本になります。
@@ -93,7 +94,7 @@ AI タブの下のほうに、「あなたについて」という欄があり�
 
 「新しいプロンプト」を押して書くのは、「名前」と「指示」の 2 つだけです。
 
-![プロンプトの作成画面。名前と指示の欄、AI で下書きのボタン](/ja/screenshots/prompt-editor.png)
+<Screenshot name="prompt-editor" alt="プロンプトの作成画面。名前と指示の欄、AI で下書きのボタン" />
 
 > 名前「3 行まとめ」、指示「3 行で要約してください」
 
@@ -108,7 +109,7 @@ AI タブの下のほうに、「あなたについて」という欄があり�
 そのファイルを、チャットやメールで渡します。
 受け取る側は「インポート」を押し、本文を貼り付けるか「ファイルを選択」で取り込みます。
 
-![プロンプトのインポート画面。貼り付け欄と、ファイルを選択のボタン](/ja/screenshots/prompt-import.png)
+<Screenshot name="prompt-import" alt="プロンプトのインポート画面。貼り付け欄と、ファイルを選択のボタン" />
 
 ### 数字キーの割り当て（クイックプロンプト） {#quick-prompts}
 
@@ -131,7 +132,7 @@ AI タブの下のほうに、「あなたについて」という欄があり�
 
 条件つきで変えたいときは、「ルール」の「新しいルール」を押します。
 
-![新しいルールの作成画面。アプリや URL などの条件の欄と、実行するプロンプトの選択](/ja/screenshots/new-rule.png)
+<Screenshot name="new-rule" alt="新しいルールの作成画面。アプリや URL などの条件の欄と、実行するプロンプトの選択" />
 
 - Slack で 200 文字以上をコピーしたときは、自作の「決まったことだけ」を使う（「アプリ」に Slack、「最小文字数」に 200）。
 - PDF をコピーしたときは、自作の「契約チェック」を使う（「ファイル名」に `*.pdf`）。

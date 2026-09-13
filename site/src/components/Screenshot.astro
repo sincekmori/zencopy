@@ -1,0 +1,34 @@
+---
+/**
+ * A screenshot of the app for the docs, in the visitor's OS. `bun run
+ * screenshot` (scripts/screenshot.ts) shoots every scenario as Windows
+ * (<name>.png) and, where the picture depends on the OS — the key chord is
+ * ⌘ + C + C on macOS — as macOS too (<name>.mac.png; the `os` flag in
+ * src/lib/screenshot-scenarios.ts, which the runner checks against the
+ * renders); the head script (astro.config.mjs) swaps the source on a Mac,
+ * as it does for the demo videos. The locale is the page's; the alt text is
+ * the page's own words.
+ */
+import { SCREENSHOT_SCENARIOS } from "../../../src/lib/screenshot-scenarios.ts";
+import { pageLocale } from "../lib/page-locale.ts";
+
+interface Props {
+  name: string;
+  alt: string;
+}
+const { name, alt } = Astro.props;
+const scenario = SCREENSHOT_SCENARIOS[name];
+if (scenario === undefined) {
+  throw new Error(
+    `no screenshot scenario "${name}" — see src/lib/screenshot-scenarios.ts`,
+  );
+}
+const { locale } = pageLocale(Astro.locals);
+const base = `/${locale}/screenshots/${name}`;
+---
+
+<img
+  alt={alt}
+  data-mac-src={scenario.os ? `${base}.mac.png` : undefined}
+  src={`${base}.png`}
+/>
