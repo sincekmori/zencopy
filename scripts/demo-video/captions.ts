@@ -2,9 +2,10 @@
 // per beat of the demo (the first demo's four: the mail as it is, the
 // selection sweeping, the chord, the summary complete; scripts/demo-video.ts
 // times them off the page beats and the session's own clock). `{chord}` is
-// the visitor's key chord, so a captioned demo comes in two videos, the
-// default with Ctrl + C + C and a `.mac` one with ⌘ + C + C, which
-// DemoVideo.astro swaps in on a Mac; `{lang}`, `{lang:in}` and `{lang:into}`
+// the visitor's key chord, so a captioned demo comes in three cuts: the
+// default spelling it Ctrl/⌘ (for a visitor whose OS the page cannot tell),
+// `.ctrl` with Ctrl + C + C and `.cmd` with ⌘ + C + C, which DemoVideo.astro
+// swaps in by OS; `{lang}`, `{lang:in}` and `{lang:into}`
 // are the viewer's language in the form the sentence needs (日本語 / 日本語で /
 // 日本語に), from src/lib/language-forms.ts — so a literal 日本語 in a line
 // would mean Japanese. A locale without an entry gets uncaptioned videos.

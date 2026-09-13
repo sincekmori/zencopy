@@ -12,9 +12,11 @@
 // for browsers that cannot play the video.
 //
 // A captioned demo (scripts/demo-video/captions.ts) whose lines name the key
-// chord comes as two videos: the default says Ctrl + C + C, the `.mac` one
-// ⌘ + C + C, and the head script (astro.config.mjs) swaps the source to the
-// latter on a Mac — the same progressive enhancement as the OS wording.
+// chord comes as three cuts: the default says Ctrl/⌘ + C + C (what a visitor
+// of unknown OS sees, as with the site's OS wording), `.ctrl` says
+// Ctrl + C + C and `.cmd` says ⌘ + C + C, and the head script
+// (astro.config.mjs) swaps the source by OS — the same progressive
+// enhancement as the OS wording.
 import { CAPTIONS, namesChord } from "../../../scripts/demo-video/captions.ts";
 import {
   DEMOS,
@@ -38,13 +40,14 @@ const frame = FRAMES[declared.stage];
 const width = frame.width * VIDEO_SCALE;
 const height = frame.height * VIDEO_SCALE;
 const lines = CAPTIONS[locale]?.[demo];
-const mac = lines !== undefined && namesChord(lines);
+const cuts = lines !== undefined && namesChord(lines);
 ---
 
 <video
   class:list={["demo-video", { wide }]}
   controls
-  data-mac-src={mac ? `${base}.mac.mp4` : undefined}
+  data-src-cmd={cuts ? `${base}.cmd.mp4` : undefined}
+  data-src-ctrl={cuts ? `${base}.ctrl.mp4` : undefined}
   height={height}
   muted
   playsinline

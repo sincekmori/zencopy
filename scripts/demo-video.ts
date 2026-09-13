@@ -753,7 +753,7 @@ interface Span {
 
 interface Output {
   mp4: string;
-  /** The poster — the default video's; a `.mac` variant has none of its own. */
+  /** The poster — the default video's; a `.ctrl` or `.cmd` cut has none of its own. */
   jpg?: string;
 }
 
@@ -787,15 +787,18 @@ function concatList(session: Session, demo: Session["demos"][number], workDir: s
  *  size and the room under it (above where a player draws its controls). */
 const CAPTION = { size: PAGE.width * 0.026, bottom: PAGE.height * 0.13 };
 
-/** A demo's videos: the default one, and a `.mac` one when its lines name
- *  the chord. */
+/** A demo's videos: one, or — when its lines name the chord — three cuts:
+ *  the default spelling it Ctrl/⌘ (the neutral form the site's animation and
+ *  OS wording fall back to, for a visitor whose OS the page cannot tell),
+ *  `.ctrl` for Windows and Linux, `.cmd` for macOS. */
 interface Variant {
-  suffix: "" | ".mac";
+  suffix: "" | ".ctrl" | ".cmd";
   chord: string;
 }
 const VARIANTS: Variant[] = [
-  { suffix: "", chord: "Ctrl + C + C" },
-  { suffix: ".mac", chord: "⌘ + C + C" },
+  { suffix: "", chord: "Ctrl/⌘ + C + C" },
+  { suffix: ".ctrl", chord: "Ctrl + C + C" },
+  { suffix: ".cmd", chord: "⌘ + C + C" },
 ];
 function variantsOf(lines: readonly string[] | undefined): Variant[] {
   return lines !== undefined && namesChord(lines) ? VARIANTS : VARIANTS.slice(0, 1);
@@ -1095,7 +1098,7 @@ async function generateOne(
       errors,
     });
     // The encodes are independent: one ffmpeg each, side by side — a
-    // captioned demo once per variant, the poster from the default one.
+    // captioned demo once per cut, the poster from the default (neutral) one.
     await Promise.all(
       session.demos.flatMap((demo) => {
         const span = concatList(session, demo, workDir);
