@@ -81,6 +81,48 @@ function Kbd({ children }: { children: React.ReactNode }): React.JSX.Element {
 
 const log = createLogger("popup");
 
+/** What a press on the header must not drag by — the controls in it, the
+ *  same set Tauri's drag script exempts. */
+const CLICKABLE = [
+  "a",
+  "button",
+  "input",
+  "select",
+  "textarea",
+  "label",
+  "summary",
+  "[contenteditable]:not([contenteditable='false'])",
+  "[tabindex]:not([tabindex='-1'])",
+  "[role='button']",
+  "[role='link']",
+  "[role='menuitem']",
+  "[role='tab']",
+  "[role='checkbox']",
+  "[role='radio']",
+  "[role='switch']",
+  "[role='option']",
+].join(", ");
+
+/** Start the OS's move of the window from a primary-button press on the
+ *  header, unless the press lands on a control. Every press counts, a
+ *  double-click's second one too: nothing happens on a double-click, so
+ *  there is nothing to tell apart. */
+async function dragWindow(event: React.PointerEvent<HTMLDivElement>): Promise<void> {
+  if (event.button !== 0 || !event.isPrimary) {
+    return;
+  }
+  const control = event.target instanceof Element ? event.target.closest(CLICKABLE) : undefined;
+  if (control && event.currentTarget.contains(control)) {
+    return;
+  }
+  event.preventDefault();
+  try {
+    await getCurrentWindow().startDragging();
+  } catch (error) {
+    log.error("window drag", error);
+  }
+}
+
 function openSettings(): void {
   void invoke("open_settings");
 }
@@ -1354,10 +1396,19 @@ export function Popup(): React.JSX.Element {
     <div className="flex h-svh max-compact:p-2">
       <ResizeHandles />
       <div className="flex size-full flex-col overflow-hidden rounded-xl border bg-popover text-popover-foreground shadow-xl">
-        {/* The header doubles as the drag handle (PiP-style): "deep" makes
-            the whole bar and everything in it draggable, while buttons keep
-            being buttons (Tauri's drag script exempts clickable elements). */}
-        <div className="flex items-center gap-2 border-b px-3 py-2" data-tauri-drag-region="deep">
+        {/* The header doubles as the drag handle (PiP-style): a press
+            anywhere on the bar starts the OS's own move of the window, while
+            buttons keep being buttons. Not Tauri's data-tauri-drag-region:
+            its script maximizes the window on a double-click, and this
+            panel has to be maximizable — Windows snaps a dragged window to a
+            screen edge only if it has a maximize box — without ever
+            maximizing by accident. */}
+        <div
+          className="flex cursor-default items-center gap-2 border-b px-3 py-2 select-none"
+          onPointerDown={(event) => {
+            void dragWindow(event);
+          }}
+        >
           <ZenCopyMark className="size-4" />
           <span className="text-xs font-medium">ZenCopy</span>
           {costShown && statsEnabled && monthCost !== undefined ? (
