@@ -21,6 +21,7 @@ import {
   TIMED_OUT,
   type StreamOutcome,
   type TokenUsage,
+  OPTIONAL_ROLES,
   REQUIRED_ROLES,
 } from "@/lib/llm.ts";
 import { createLogger } from "@/lib/log.ts";
@@ -50,9 +51,17 @@ type ZenCatalog = Catalog<(typeof REQUIRED_ROLES)[number]>;
 
 /** A role by name, for the roles PROMPTS declare — anything beyond the
  *  required ones is the user's own vocabulary, so the typed record widens
- *  back to a dictionary and absence means "the config doesn't map it". */
+ *  back to a dictionary and absence means "the config doesn't map it".
+ *  One of the {@link OPTIONAL_ROLES} left unmapped runs as `default`
+ *  instead: the built-in prompt declaring it must keep working on a config
+ *  that predates the role. */
 function roleFor(resolved: ZenCatalog, role: string): RoleEntry | undefined {
-  return (resolved.roles as Record<string, RoleEntry | undefined>)[role];
+  const entry = (resolved.roles as Record<string, RoleEntry | undefined>)[role];
+  if (entry === undefined && OPTIONAL_ROLES.some((optional) => optional === role)) {
+    log.debug(`role "${role}" is not mapped in ai-sdk-catalog.json; running as "default"`);
+    return resolved.roles.default;
+  }
+  return entry;
 }
 
 let catalogPromise: Promise<ZenCatalog> | undefined;
@@ -368,7 +377,8 @@ export async function streamPrompt(
   // others (API errors) go to `onError` and the stream just ends. Capture them
   // so we surface the real reason instead of silently rendering nothing.
   let streamError: unknown;
-  // The prompt's role must be mapped in the config — an unmapped name is a
+  // The prompt's role must be mapped in the config (or be an optional
+  // built-in one, which roleFor runs as default) — an unmapped name is a
   // config problem and deserves the config-problem message, not a raw throw
   // from deep inside the model lookup. `default` itself is proven present.
   const roleEntry = roleFor(resolved, input.role);

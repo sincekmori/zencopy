@@ -25,6 +25,14 @@ export const EMPTY_RESULT = "empty-result";
  *  editor" and "valid at run time" can never disagree. */
 export const REQUIRED_ROLES = ["default"] as const;
 
+/** The catalog roles a built-in prompt may declare without the config
+ *  mapping them: one the config leaves unmapped runs as `default`, so a
+ *  config written before the role existed keeps working unchanged, and
+ *  mapping it (`roles.custom`) is how the user gives that prompt a model of
+ *  its own. A user prompt's role gets no such grace — an unmapped name
+ *  there is a config problem and stays one. */
+export const OPTIONAL_ROLES = ["custom"] as const;
+
 /** One turn of an prompt thread: the follow-up question that produced the
  *  reply (`text` is partial while the turn still streams). The first turn
  *  has no `question` — its question is the prompt's rendered prompt itself —
