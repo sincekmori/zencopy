@@ -11,13 +11,13 @@
 // (portrait, capped narrower). The slot is the localized fallback link text
 // for browsers that cannot play the video.
 //
-// A captioned demo (scripts/demo-video/captions.ts) whose lines name the key
-// chord comes as three cuts: the default says Ctrl/⌘ + C + C (what a visitor
-// of unknown OS sees, as with the site's OS wording), `.ctrl` says
-// Ctrl + C + C and `.cmd` says ⌘ + C + C, and the head script
+// A captioned demo (scripts/demo-video/captions.ts) shows the keys, so it
+// comes as three cuts by the modifier the keycap reads: the default reads
+// Ctrl/⌘ (what a visitor of unknown OS sees, as with the site's OS wording),
+// `.ctrl` reads Ctrl and `.cmd` reads ⌘, and the head script
 // (astro.config.mjs) swaps the source by OS — the same progressive
 // enhancement as the OS wording.
-import { CAPTIONS, namesChord } from "../../../scripts/demo-video/captions.ts";
+import { CAPTIONS } from "../../../scripts/demo-video/captions.ts";
 import {
   DEMOS,
   FRAMES,
@@ -40,7 +40,7 @@ const frame = FRAMES[declared.stage];
 const width = frame.width * VIDEO_SCALE;
 const height = frame.height * VIDEO_SCALE;
 const lines = CAPTIONS[locale]?.[demo];
-const cuts = lines !== undefined && namesChord(lines);
+const cuts = lines !== undefined;
 ---
 
 <video

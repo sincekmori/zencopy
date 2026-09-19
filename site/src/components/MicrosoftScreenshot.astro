@@ -1,0 +1,41 @@
+---
+/**
+ * A screenshot of Windows itself for the docs — the SmartScreen screens an
+ * unsigned installer meets. These are hand-taken captures, not renders (see
+ * AGENTS.md), and Microsoft permits them in documentation on two conditions:
+ * unaltered, and credited with its own sentence. So the credit is part of
+ * the figure, a caption under the picture where a photo credit goes, and it
+ * stays English in every locale as the wording Microsoft asks for. The
+ * locale is the page's; the alt text is the page's own words.
+ */
+import { pageLocale } from "../lib/page-locale.ts";
+
+interface Props {
+  name: string;
+  alt: string;
+}
+const { name, alt } = Astro.props;
+const { locale } = pageLocale(Astro.locals);
+---
+
+<figure class="not-content">
+  <img alt={alt} src={`/${locale}/screenshots/${name}.png`} />
+  <figcaption>Used with permission from Microsoft.</figcaption>
+</figure>
+
+<style>
+  /* Starlight's own picture rules stop at .not-content, so the picture
+     sizes itself here; the figure's place — centered like every picture,
+     shrunk to its picture, in the column's rhythm — is custom.css's and
+     Starlight's sibling gap, which reach it. */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  figcaption {
+    margin-top: 0.375rem;
+    font-size: var(--sl-text-xs);
+    line-height: var(--sl-line-height-headings);
+    color: var(--sl-color-gray-3);
+  }
+</style>

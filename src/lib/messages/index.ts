@@ -77,6 +77,12 @@ export const LOCALES: { value: Locale; label: string }[] = [
 const RTL_LOCALES = new Set<Locale>(["ar", "fa", "he"]);
 
 /** The text direction a locale renders in — feed it to `<html dir>`. */
+/** The locale a code names, in any case (`zh-hans` as the site's paths spell
+ *  it) — undefined for a code that is not one. */
+export function localeOf(code: string): Locale | undefined {
+  return LOCALES.find(({ value }) => value.toLowerCase() === code.toLowerCase())?.value;
+}
+
 export function localeDir(locale: Locale): "ltr" | "rtl" {
   return RTL_LOCALES.has(locale) ? "rtl" : "ltr";
 }

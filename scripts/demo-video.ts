@@ -41,12 +41,14 @@ import { join } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 import { promisify } from "node:util";
 import { type Browser, type Locator, type Page, webkit } from "playwright";
+import { heroKeycaps } from "../src/lib/hero-demo.ts";
+import { NEUTRAL_MODIFIER } from "../src/lib/modifier.ts";
 import { extractResult, stripResultTags, wrapResult } from "../src/lib/protocol.ts";
 import { GEMINI_DEFAULT_MODEL, geminiQuickCatalog } from "../src/lib/quickstart.ts";
 import { POPUP_RESULT_FIXTURES, SCREENSHOT_SCENARIOS } from "../src/lib/screenshot-scenarios.ts";
 import type { ModelCall } from "../src/screenshot/model-call.ts";
 import { type Demo, DEMOS, FRAMES, VIDEO_SCALE } from "./demo-video/demos.ts";
-import { CAPTIONS, namesChord } from "./demo-video/captions.ts";
+import { CAPTIONS, KEYS, type PageCaptions } from "./demo-video/captions.ts";
 import { fillLanguage, languageForms } from "../src/lib/language-forms.ts";
 import {
   ensureDevServer,
@@ -156,11 +158,16 @@ function concatLines(entries: { file: string; duration: number }[]): string {
  *  its answer are seen side by side. */
 const PAGE = FRAMES.page;
 /** The page's own beats before the popup: the mail as it is, the selection
- *  sweeping over it, the mail selected — then the popup appears. The still
- *  is long enough to read the first caption over it (see cuesOf). */
-const PAGE_BEATS = { still: 2, select: 1.4, selected: 0.4 };
+ *  sweeping over it, the selection settling (the whole mail selected and
+ *  nothing moving, while the eye catches up with what the sweep did), then
+ *  the chord — the mail still selected while the keys are pressed: they
+ *  appear as the beat opens, rest a breath, and go down so that their
+ *  release — the popup's moment in the hero animation — lands as the popup
+ *  does (captureKeys checks the beat has room for that). The still is long
+ *  enough to read the first caption over it (see cuesOf). */
+const PAGE_BEATS = { still: 2, select: 1.4, settle: 1, chord: 1.4 };
 /** Seconds into the video at which the popup appears. */
-const APPEAR = PAGE_BEATS.still + PAGE_BEATS.select + PAGE_BEATS.selected;
+const APPEAR = PAGE_BEATS.still + PAGE_BEATS.select + PAGE_BEATS.settle + PAGE_BEATS.chord;
 /** Where the popup window lands: the frame's top-right corner (the app pins
  *  the popup to the work area's top-right; the window's own margin keeps the
  *  card off the edges). */
@@ -299,10 +306,11 @@ interface Turn {
 }
 
 /** The moments a page-stage demo's captions start, seconds into its video
- *  — the mail as it is, the selection sweeping, the chord (the mail selected,
- *  the popup a beat away), the summary complete — the beats captions.ts
- *  holds one line each for. Popup-stage demos carry none. */
-function cuesOf(session: Session, demo: Session["demos"][number]): number[] | undefined {
+ *  — the mail as it is, the selection sweeping and settling, the chord (the
+ *  mail selected, the keys pressed, the popup a beat away), the summary
+ *  complete — the beats captions.ts holds one line each for. Popup-stage
+ *  demos carry none. */
+function cuesOf(session: Session, demo: Session["demos"][number]): Moments | undefined {
   if (demo.stage !== "page") {
     return undefined;
   }
@@ -313,10 +321,16 @@ function cuesOf(session: Session, demo: Session["demos"][number]): number[] | un
     throw new Error(`${demo.name}: no step follows "settled" to time the summary's caption by`);
   }
   const done = after.at - demo.start;
-  return [0, PAGE_BEATS.still, PAGE_BEATS.still + PAGE_BEATS.select, APPEAR + done].map((seconds) =>
-    Number(seconds.toFixed(2)),
-  );
+  return [
+    0,
+    PAGE_BEATS.still,
+    PAGE_BEATS.still + PAGE_BEATS.select + PAGE_BEATS.settle,
+    rounded(APPEAR + done),
+  ];
 }
+/** The four beats' moments, one per line of the captions (PageCaptions). */
+type Moments = [number, number, number, number];
+const rounded = (seconds: number): number => Number(seconds.toFixed(2));
 
 /** One session's trace: frames on disk, and where in time everything is. */
 interface Session {
@@ -786,35 +800,47 @@ function concatList(session: Session, demo: Session["demos"][number], workDir: s
 /** How a caption sits on the frame, in CSS px of the page stage: the type
  *  size and the room under it (above where a player draws its controls). */
 const CAPTION = { size: PAGE.width * 0.026, bottom: PAGE.height * 0.13 };
+/** The pill a caption sits in: the site's font stack, so every script the
+ *  docs come in (and ⌘) is drawn as the page would draw it. */
+const PILL = `display:inline-block;max-width:${PAGE.width * 0.88}px;padding:0.3em 0.8em;border-radius:0.5em;background:rgb(0 0 0 / 0.68);color:#fff;font:500 ${CAPTION.size}px/1.5 system-ui,-apple-system,'Segoe UI','Hiragino Sans','Yu Gothic UI',sans-serif;text-align:center`;
 
-/** A demo's videos: one, or — when its lines name the chord — three cuts:
- *  the default spelling it Ctrl/⌘ (the neutral form the site's animation and
- *  OS wording fall back to, for a visitor whose OS the page cannot tell),
- *  `.ctrl` for Windows and Linux, `.cmd` for macOS. */
+/** A demo's videos: one, or — captioned, so showing the keys — three cuts
+ *  by the modifier the keycap reads: the default Ctrl/⌘ (the neutral form
+ *  the site's animation and OS wording fall back to, for a visitor whose OS
+ *  the page cannot tell), `.ctrl` for Windows and Linux, `.cmd` for macOS. */
 interface Variant {
   suffix: "" | ".ctrl" | ".cmd";
-  chord: string;
+  modifier: string;
 }
 const VARIANTS: Variant[] = [
-  { suffix: "", chord: "Ctrl/⌘ + C + C" },
-  { suffix: ".ctrl", chord: "Ctrl + C + C" },
-  { suffix: ".cmd", chord: "⌘ + C + C" },
+  { suffix: "", modifier: NEUTRAL_MODIFIER },
+  { suffix: ".ctrl", modifier: "Ctrl" },
+  { suffix: ".cmd", modifier: "⌘" },
 ];
-function variantsOf(lines: readonly string[] | undefined): Variant[] {
-  return lines !== undefined && namesChord(lines) ? VARIANTS : VARIANTS.slice(0, 1);
+function variantsOf(lines: PageCaptions | undefined): Variant[] {
+  return lines === undefined ? VARIANTS.slice(0, 1) : VARIANTS;
 }
 
-/** Render a demo's caption lines for one variant as 2× PNGs with alpha —
- *  WebKit sets the type, in the site's font stack, so every script the
- *  docs come in (and ⌘) is drawn as the page would draw it. */
+/** A beat's caption as ffmpeg takes it: its moment, and a PNG — or, for the
+ *  line showing the keys, a concat list of PNG frames that starts at that
+ *  moment (see captureKeys). */
+interface Cue {
+  at: number;
+  file: string;
+  frames: boolean;
+}
+
+/** Render a demo's caption lines for one variant as 2× PNGs with alpha, one
+ *  per beat — the line showing the keys as its frames. */
 async function renderCaptions(job: {
   browser: Browser;
   locale: string;
-  lines: readonly string[];
+  lines: PageCaptions;
+  moments: Moments;
   variant: Variant;
   dir: string;
-}): Promise<string[]> {
-  const { browser, locale, lines, variant, dir } = job;
+}): Promise<Cue[]> {
+  const { browser, locale, lines, moments, variant, dir } = job;
   const forms = languageForms(locale);
   if (forms === undefined) {
     throw new Error(`no language forms for "${locale}" — see src/lib/language-forms.ts`);
@@ -827,44 +853,213 @@ async function renderCaptions(job: {
   });
   try {
     const page = await context.newPage();
-    const files: string[] = [];
+    const cues: Cue[] = [];
     for (const [index, line] of lines.entries()) {
-      const text = fillLanguage(line.replaceAll("{chord}", variant.chord), forms);
+      const at = moments[index];
+      const keys = line.includes(KEYS);
+      const html = fillLanguage(line, forms)
+        .split(KEYS)
+        .map((part) => escapeHtml(part))
+        .join(keycaps(variant));
       await page.setContent(
-        `<!doctype html><html lang="${locale}"><body style="margin:0;background:transparent"><div id="caption" dir="auto" style="position:absolute;left:0;top:0;display:inline-block;max-width:${PAGE.width * 0.88}px;padding:0.3em 0.8em;border-radius:0.5em;background:rgb(0 0 0 / 0.68);color:#fff;font:500 ${CAPTION.size}px/1.5 system-ui,-apple-system,'Segoe UI','Hiragino Sans','Yu Gothic UI',sans-serif;text-align:center">${escapeHtml(text)}</div></body></html>`,
+        `<!doctype html><html lang="${locale}"><head><style>${HERO_CSS}</style></head><body style="margin:0;background:transparent"><div id="caption" dir="auto" style="position:absolute;left:0;top:0;${PILL}">${html}</div></body></html>`,
       );
-      const file = join(dir, `caption${variant.suffix}-${index + 1}.png`);
-      writeFileSync(
-        file,
-        await page.locator("#caption").screenshot({ type: "png", omitBackground: true }),
-      );
-      files.push(file);
+      if (keys) {
+        cues.push({ at, file: await captureKeys({ page, variant, dir }), frames: true });
+      } else {
+        const file = join(dir, `caption${variant.suffix}-${index + 1}.png`);
+        writeFileSync(
+          file,
+          await page.locator("#caption").screenshot({ type: "png", omitBackground: true }),
+        );
+        cues.push({ at, file, frames: false });
+      }
     }
-    return files;
+    return cues;
   } finally {
     await context.close();
   }
 }
 
+// ---- The keys: the hero animation's chord, in the line, a frame at a time ------
+
+/** The stylesheet the landing page and the welcome screen animate with. */
+const HERO_CSS = readFileSync(join(ROOT, "src", "assets", "hero-demo.css"), "utf8");
+/** How tall a keycap stands in the line, in em of the caption's type. */
+const KEY_HEIGHT = 1.7;
+/** The keys' row as the line hosts it, on the hero animation's hooks
+ *  (hero-demo.css): a light keyboard's palette — a pale face with dark type,
+ *  the pressed face shaded — inside the dark pill; the row sits in the line
+ *  as a word does, a keycap standing KEY_HEIGHT em tall (the stylesheet says
+ *  how many units a keycap is), the lip under the keys given its room. */
+const KEYS_STYLE = `display:inline-flex;vertical-align:middle;margin:0 0 var(--hd-key-lip);--u:calc(${KEY_HEIGHT}em / var(--hd-key-units));--hd-track:#ededed;--hd-text:#333;--hd-border:rgb(0 0 0 / 0.2);--hd-accent:#000`;
+/** The least the keys rest, in seconds, between appearing and going down. */
+const KEYS_REST = 0.4;
+
+/** The keys as the line shows them — the hero animation's keycaps
+ *  (src/lib/hero-demo.ts), the modifier the variant's — set left to right
+ *  whatever the line's direction, as on a keyboard. */
+function keycaps(variant: Variant): string {
+  const caps = heroKeycaps(variant.modifier)
+    .map(
+      (cap) =>
+        `<span class="hd-keycap ${cap.pulse}"><span class="hd-glow"></span><span class="hd-label">${escapeHtml(cap.label)}</span></span>`,
+    )
+    .join("");
+  return `<span class="hd-keys" dir="ltr" style="${KEYS_STYLE}">${caps}</span>`;
+}
+
+/** The keys' page as the driver reaches it — through globalThis, as the
+ *  rest of this file does (the scripts compile without the DOM lib): its
+ *  animations, to hold still and step through, and the modifier's keyframes. */
+interface KeysWindow {
+  document: { getAnimations: () => KeysAnimation[] };
+}
+interface KeysAnimation {
+  animationName?: string;
+  currentTime: number | null;
+  effect: {
+    getTiming: () => { duration?: unknown };
+    getKeyframes: () => { computedOffset: number; transform?: unknown }[];
+  } | null;
+  pause: () => void;
+}
+
+/** The chord's timing in the hero animation, seconds into its loop, read
+ *  off the modifier's own keyframes: the last rest before it goes down, the
+ *  moment it starts to release (the popup appears then, on the landing page
+ *  as here), and the rest it returns to. */
+interface Chord {
+  start: number;
+  popup: number;
+  end: number;
+}
+
+async function chordOf(page: Page): Promise<Chord> {
+  const read = await page.evaluate(() => {
+    const { document } = globalThis as unknown as KeysWindow;
+    const effect = document
+      .getAnimations()
+      .find((entry) => entry.animationName === "hd-press-mod")?.effect;
+    if (effect === undefined || effect === null) {
+      return undefined;
+    }
+    const { duration } = effect.getTiming();
+    return {
+      duration: typeof duration === "number" ? duration : undefined,
+      keyframes: effect.getKeyframes().map((keyframe) => ({
+        offset: keyframe.computedOffset,
+        pressed: keyframe.transform !== "none",
+      })),
+    };
+  });
+  const duration = read?.duration;
+  if (read === undefined || duration === undefined) {
+    throw new Error("the keys carry no hd-press-mod animation — see src/assets/hero-demo.css");
+  }
+  const seconds = (index: number): number => {
+    const keyframe = read.keyframes[index];
+    if (keyframe === undefined) {
+      throw new Error(
+        "hd-press-mod does not go rest, pressed, rest — see src/assets/hero-demo.css",
+      );
+    }
+    return (keyframe.offset * duration) / 1000;
+  };
+  const first = read.keyframes.findIndex((keyframe) => keyframe.pressed);
+  const last = read.keyframes.findLastIndex((keyframe) => keyframe.pressed);
+  return { start: seconds(first - 1), popup: seconds(last), end: seconds(last + 1) };
+}
+
+/** The line showing the keys, on the page, as frames into `dir`, listed for
+ *  the concat demuxer: WebKit holds the animation still and is stepped
+ *  through it a video frame at a time, so the motion and its timing come
+ *  from the one stylesheet. The keys appear at their beat resting, go down
+ *  so that their release — the popup's moment in the animation — lands on
+ *  APPEAR, and the released keys, the last frame, hold for the rest of the
+ *  beat. */
+async function captureKeys(job: { page: Page; variant: Variant; dir: string }): Promise<string> {
+  const { page, variant, dir } = job;
+  await page.evaluate(() => {
+    const { document } = globalThis as unknown as KeysWindow;
+    for (const animation of document.getAnimations()) {
+      animation.pause();
+    }
+  });
+  const timing = await chordOf(page);
+  const rest = PAGE_BEATS.chord - (timing.popup - timing.start);
+  if (rest < KEYS_REST) {
+    throw new Error(
+      `PAGE_BEATS.chord (${PAGE_BEATS.chord} s) leaves the keys ${rest.toFixed(2)} s at rest before they go down, under the ${KEYS_REST} s they need: the chord takes ${(timing.popup - timing.start).toFixed(2)} s to the popup (src/assets/hero-demo.css)`,
+    );
+  }
+  const steps = Math.ceil((timing.end - timing.start) * FPS);
+  const moments = [
+    { at: timing.start, duration: Math.round(rest * FPS) / FPS },
+    ...Array.from({ length: steps }, (_, index) => ({
+      at: Math.min(timing.end, timing.start + (index + 1) / FPS),
+      duration: 1 / FPS,
+    })),
+  ];
+  const files = new Map<string, string>();
+  const entries: { file: string; duration: number }[] = [];
+  let size: string | undefined;
+  for (const { at, duration } of moments) {
+    await page.evaluate((ms) => {
+      const { document } = globalThis as unknown as KeysWindow;
+      for (const animation of document.getAnimations()) {
+        animation.currentTime = ms;
+      }
+    }, at * 1000);
+    const png = await page.locator("#caption").screenshot({ type: "png", omitBackground: true });
+    const dimensions = `${png.readUInt32BE(16)}×${png.readUInt32BE(20)}`;
+    size ??= dimensions;
+    if (dimensions !== size) {
+      throw new Error(
+        `the keys' frames differ in size (${size}, then ${dimensions}) — a sinking key must stay inside the pill`,
+      );
+    }
+    const hash = createHash("sha256").update(png).digest("hex");
+    let file = files.get(hash);
+    if (file === undefined) {
+      file = join(dir, `keys${variant.suffix}-${String(files.size + 1).padStart(3, "0")}.png`);
+      writeFileSync(file, png);
+      files.set(hash, file);
+    }
+    entries.push({ file, duration });
+  }
+  const list = join(dir, `keys${variant.suffix}.txt`);
+  writeFileSync(list, concatLines(entries));
+  return list;
+}
+
+// ---- Compositing ---------------------------------------------------------------
+
 /** The caption overlays as filter steps, from the composited stream `[m]`
- *  to `[cap]`: inputs 2 onward (after the two concat lists), one per line,
+ *  to `[cap]`: inputs 2 onward (after the two concat lists), one per beat,
  *  each shown from its moment to the next one's (the last to the end),
- *  centered, CAPTION.bottom above the frame's bottom edge. */
-function captionSteps(moments: number[]): string[] {
+ *  centered, CAPTION.bottom above the frame's bottom edge — the keys'
+ *  frames first made a stream that starts at their moment, as the popup's. */
+function captionSteps(cues: Cue[]): string[] {
   const bottom = Math.round(CAPTION.bottom * VIDEO_SCALE);
-  return moments.map((at, index) => {
-    const next = moments[index + 1];
-    const enable = next === undefined ? `gte(t,${at})` : `between(t,${at},${next})`;
-    const label = index === moments.length - 1 ? "cap" : `m${index + 1}`;
-    const input = index === 0 ? "m" : `m${index}`;
-    return `[${input}][${2 + index}:v]overlay=x=(W-w)/2:y=H-${bottom}-h:enable='${enable}'[${label}]`;
+  return cues.flatMap((cue, index) => {
+    const next = cues[index + 1];
+    const enable = next === undefined ? `gte(t,${cue.at})` : `between(t,${cue.at},${next.at})`;
+    const from = index === 0 ? "m" : `m${index}`;
+    const to = next === undefined ? "cap" : `m${index + 1}`;
+    const input = 2 + index;
+    const source = cue.frames ? `k${index}` : `${input}:v`;
+    return [
+      ...(cue.frames ? [overlayFilter(input, cue.at, source)] : []),
+      `[${from}][${source}]overlay=x=(W-w)/2:y=H-${bottom}-h:enable='${enable}'[${to}]`,
+    ];
   });
 }
 
-/** The frames as an overlay stream: 2× RGBA PNGs to bt709 yuva, starting
- *  `delay` seconds into the base. */
-function overlayFilter(delay: number): string {
-  return `[1:v]fps=${FPS},scale=out_color_matrix=bt709:out_range=tv:flags=lanczos,format=yuva420p,setpts=PTS+${delay}/TB[ov]`;
+/** Input `input`'s frames as an overlay stream `[label]`: 2× RGBA PNGs to
+ *  bt709 yuva, starting `delay` seconds into the base. */
+function overlayFilter(input: number, delay: number, label: string): string {
+  return `[${input}:v]fps=${FPS},scale=out_color_matrix=bt709:out_range=tv:flags=lanczos,format=yuva420p,setpts=PTS+${delay}/TB[${label}]`;
 }
 
 /** The poster, off the composited stream `[pv]`: the frame 0.2 s before
@@ -917,11 +1112,11 @@ async function compose(inputs: string[], filter: string, out: Output): Promise<v
  *  its last frame held for the rest of the demo (and a second more, so the
  *  overlay is what ends the video). */
 async function composeOverPage(
-  mail: { dir: string; frames: Frame[] },
+  mail: Mail,
   span: Span,
-  out: Output & { captions?: { files: string[]; moments: number[] } | undefined },
+  out: Output & { cues?: Cue[] | undefined },
 ): Promise<void> {
-  const { captions } = out;
+  const { cues } = out;
   const entries = mail.frames.map((frame, index) => ({
     file: join(mail.dir, frame.file),
     duration: (mail.frames[index + 1]?.at ?? APPEAR) - frame.at,
@@ -938,12 +1133,12 @@ async function composeOverPage(
   // The base, the popup over it, the captions over that in turn, then the
   // stream the encode takes — split once more for the poster when this is
   // the video that has one.
-  const topmost = captions === undefined ? "m" : "cap";
+  const topmost = cues === undefined ? "m" : "cap";
   const filter = [
     `[0:v]fps=${FPS}[base]`,
-    overlayFilter(APPEAR),
+    overlayFilter(1, APPEAR, "ov"),
     `[base][ov]overlay=x=${POPUP_AT.x}:y=${POPUP_AT.y}:eof_action=endall:format=yuv420[m]`,
-    ...(captions === undefined ? [] : captionSteps(captions.moments)),
+    ...(cues === undefined ? [] : captionSteps(cues)),
     out.jpg === undefined ? `[${topmost}]null[v]` : `[${topmost}]split[v][pv]`,
     ...(out.jpg === undefined ? [] : [posterFilter(APPEAR + span.duration, PAGE.width)]),
   ].join(";");
@@ -961,7 +1156,9 @@ async function composeOverPage(
       "0",
       "-i",
       span.listFile,
-      ...(captions?.files ?? []).flatMap((file) => ["-i", file]),
+      ...(cues ?? []).flatMap((cue) =>
+        cue.frames ? ["-f", "concat", "-safe", "0", "-i", cue.file] : ["-i", cue.file],
+      ),
     ],
     filter,
     out,
@@ -971,7 +1168,7 @@ async function composeOverPage(
 /** The other demos: the popup's window alone, over the backdrop. */
 async function composeAlone(span: Span, out: Output): Promise<void> {
   const filter = [
-    overlayFilter(0),
+    overlayFilter(1, 0, "ov"),
     `[0:v][ov]overlay=x=0:y=0:eof_action=endall:format=yuv420,split[v][pv]`,
     posterFilter(span.duration, WINDOW.w / VIDEO_SCALE),
   ].join(";");
@@ -1029,14 +1226,64 @@ if (skipped.length > 0) {
 const workRoot = join(ROOT, "scratch", "demo-video");
 const failures: string[] = [];
 
+/** The page's frames, rendered once per run: the same for every locale. */
+interface Mail {
+  dir: string;
+  frames: Frame[];
+}
+
+/** One demo of a session, cut and encoded: its videos side by side, one
+ *  ffmpeg each — a captioned demo once per cut, the poster from the default
+ *  (neutral) one. */
+async function generateDemo(job: {
+  browser: Browser;
+  mail: Mail;
+  session: Session;
+  demo: Session["demos"][number];
+  folder: string;
+  workDir: string;
+  outDir: string;
+}): Promise<void> {
+  const { browser, mail, session, demo, folder, workDir, outDir } = job;
+  const span = concatList(session, demo, workDir);
+  const lines = CAPTIONS[folder]?.[demo.name];
+  const moments = lines === undefined ? undefined : cuesOf(session, demo);
+  if (lines !== undefined && moments === undefined) {
+    throw new Error(
+      `${demo.name} has captions in captions.ts, but only the page-stage demo can carry them`,
+    );
+  }
+  await Promise.all(
+    variantsOf(lines).map(async (variant, index) => {
+      const out: Output = {
+        mp4: join(outDir, `${demo.name}${variant.suffix}.mp4`),
+        ...(index === 0 ? { jpg: join(outDir, `${demo.name}.jpg`) } : {}),
+      };
+      const cues =
+        lines === undefined || moments === undefined
+          ? undefined
+          : await renderCaptions({
+              browser,
+              locale: folder,
+              lines,
+              moments,
+              variant,
+              dir: join(workDir, "captions"),
+            });
+      await (demo.stage === "page"
+        ? composeOverPage(mail, span, { ...out, cues })
+        : composeAlone(span, out));
+      console.log(
+        `ok ${folder}/demo/${demo.name}${variant.suffix}.mp4 (${span.duration.toFixed(1)}s)`,
+      );
+    }),
+  );
+}
+
 /** One locale: the session, recorded or replayed, cut into its videos.
  *  Throws on any failure — the work directory stays, its report.json naming
  *  what stopped it. */
-async function generateOne(
-  browser: Browser,
-  mail: { dir: string; frames: Frame[] },
-  locale: string,
-): Promise<void> {
+async function generateOne(browser: Browser, mail: Mail, locale: string): Promise<void> {
   const folder = locale.toLowerCase();
   const workDir = join(workRoot, folder);
   rmSync(workDir, { recursive: true, force: true });
@@ -1097,49 +1344,11 @@ async function generateOne(
       workDir,
       errors,
     });
-    // The encodes are independent: one ffmpeg each, side by side — a
-    // captioned demo once per cut, the poster from the default (neutral) one.
+    // The demos' encodes are independent: side by side.
     await Promise.all(
-      session.demos.flatMap((demo) => {
-        const span = concatList(session, demo, workDir);
-        const lines = CAPTIONS[folder]?.[demo.name];
-        const moments = lines === undefined ? undefined : cuesOf(session, demo);
-        if (lines !== undefined && moments === undefined) {
-          throw new Error(
-            `${demo.name} has captions in captions.ts, but only the page-stage demo can carry them`,
-          );
-        }
-        if (lines !== undefined && moments !== undefined && lines.length !== moments.length) {
-          throw new Error(
-            `${folder}/${demo.name}: ${lines.length} caption lines for ${moments.length} beats`,
-          );
-        }
-        return variantsOf(lines).map(async (variant, index) => {
-          const out: Output = {
-            mp4: join(outDir, `${demo.name}${variant.suffix}.mp4`),
-            ...(index === 0 ? { jpg: join(outDir, `${demo.name}.jpg`) } : {}),
-          };
-          const captions =
-            lines === undefined || moments === undefined
-              ? undefined
-              : {
-                  files: await renderCaptions({
-                    browser,
-                    locale: folder,
-                    lines,
-                    variant,
-                    dir: join(workDir, "captions"),
-                  }),
-                  moments,
-                };
-          await (demo.stage === "page"
-            ? composeOverPage(mail, span, { ...out, captions })
-            : composeAlone(span, out));
-          console.log(
-            `ok ${folder}/demo/${demo.name}${variant.suffix}.mp4 (${span.duration.toFixed(1)}s)`,
-          );
-        });
-      }),
+      session.demos.map((demo) =>
+        generateDemo({ browser, mail, session, demo, folder, workDir, outDir }),
+      ),
     );
     // The recording, or how far the replayed session strayed from it: a
     // request that no longer matches means the prompt or its context changed
@@ -1202,10 +1411,7 @@ async function generateOne(
   }
 }
 
-async function generateAll(
-  browser: Browser,
-  mail: { dir: string; frames: Frame[] },
-): Promise<void> {
+async function generateAll(browser: Browser, mail: Mail): Promise<void> {
   for (const locale of locales.filter((entry) => !skipped.includes(entry))) {
     try {
       await generateOne(browser, mail, locale);

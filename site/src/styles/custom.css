@@ -18,12 +18,28 @@
   height: 8rem;
 }
 
+/* Every picture in the docs — screenshots, the figures, the demo videos —
+   sits centered in the column: a picture is a thing to look at, not a line
+   of the text, and the eye finds it in the middle. A figure shrinks to its
+   picture so the caption travels with it. Inline icons are svg and stay put. */
+.sl-markdown-content :is(img, video, figure) {
+  display: block;
+  margin-inline: auto;
+}
+
+.sl-markdown-content figure {
+  width: fit-content;
+  max-width: 100%;
+  /* Its own bottom margin goes: the column's rhythm (Starlight's sibling
+     gap, which a figure gets like any block) spaces it. */
+  margin-block-end: 0;
+}
+
 /* Demo screen recordings embedded in the docs: portrait frames (the popup
    window at 2×, or the browser page it lands on), so they are capped at a
    width that keeps a whole frame inside one viewport — a reader sees the
    answer without scrolling — while the popup text stays legible. */
 .demo-video {
-  display: block;
   width: 100%;
   max-width: 32.5rem;
   border: 1px solid var(--sl-color-hairline);

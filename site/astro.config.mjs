@@ -407,6 +407,7 @@ export default defineConfig({
         },
       ],
       customCss: ["./src/styles/custom.css"],
+      // Frontmatter's `{mod}` spelled for the meta tags — see the file.
       components: {
         // The active page expands into its h2 sections in the left sidebar —
         // see src/components/Sidebar.astro.

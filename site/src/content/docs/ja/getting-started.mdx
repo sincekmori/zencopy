@@ -1,12 +1,14 @@
 ---
 title: はじめる
-description: 外国語のメールも、長いスレッドも、謎のエラー画面も、選んで Ctrl + C + C。無料の AI が、その場で答えます。やることは 3 つ、10 分です。
+description: 外国語のメールも、長いスレッドも、謎のエラー画面も、選んで {mod} + C + C。無料の AI が、その場で答えます。
 ---
 
 import { Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 import ArchitectureDiagram from "../../../components/ArchitectureDiagram.astro";
 import CopyTwice from "../../../components/CopyTwice.astro";
 import DemoVideo from "../../../components/DemoVideo.astro";
+import Diagram from "../../../components/Diagram.astro";
+import MicrosoftScreenshot from "../../../components/MicrosoftScreenshot.astro";
 import DownloadLink from "../../../components/DownloadLink.astro";
 import OsText from "../../../components/OsText.astro";
 import PageLanguage from "../../../components/PageLanguage.astro";
@@ -17,13 +19,13 @@ import Screenshot from "../../../components/Screenshot.astro";
 選んで、いつものコピーをダブルクリックの要領で 2 回。
 画面の隅に、<PageLanguage />の要約が流れます。
 
-{/* 動画: 要約デモ（bun run demo-video が生成）。英語のメールを選択 → Ctrl + C + C → 右上に日本語の要約が表示されるまで。字幕（4 行、scripts/demo-video/captions.ts）は焼き込み。Mac 向けの ⌘ 版に head script が差し替える */}
-
-英語のメールで試すと、こうなります。
+{/* 動画: 要約デモ（bun run demo-video が生成）。英語のメールを選択 → Ctrl + C + C → 右上に日本語の要約が表示されるまで。字幕（4 拍、scripts/demo-video/captions.ts）は焼き込みで、3 拍目は「[Ctrl][C] を押すと」のようにキーの絵（LP のアニメーションと同じ CSS で描く）を文中に置く。修飾キーの表記が違う 3 本（Ctrl/⌘・Ctrl・⌘）を head script が OS で差し替える */}
 
 <DemoVideo demo="summarize">
   デモ動画を見る
 </DemoVideo>
+
+英語のメールで試すと、こうなります。
 
 無料で、アカウントは要りません。
 やることは 3 つ。
@@ -32,7 +34,9 @@ import Screenshot from "../../../components/Screenshot.astro";
 
 ## 要約のほかにできること {#what-you-can-do}
 
-同じ <CopyTwice />のまま、頼みごとを切り替えるだけで、別の答えが出ます。
+<Diagram name="overview" alt="メール、チャット、画面、ファイル、そのほかコピーできるもの何でもから、ZenCopy が要約、解説、翻訳、清書、そしてカスタム（何でも）の答えを返す図" />
+
+同じ <CopyTwice />のまま、入れるものと頼みごとを変えるだけで、別の答えが出ます。
 
 - 意味のわからないエラー画面：スクリーンショットを <CopyTwice />。**解説**が、やさしい言葉でかみ砕きます。
 - 外国語の資料：**翻訳**で全文を<PageLanguage form="into" />。自分で書いた<PageLanguage />の下書きなら、英語に。
@@ -67,23 +71,35 @@ ZenCopy は無料です。
     {/* 要実機確認: Chrome / Edge が未署名の exe に出す警告の文言と「保存」「継続」の位置。確定したら上の文をその文言にする */}
 
     開くと、「Windows によって PC が保護されました」という画面が出ます。
-
     まだ利用者の少ない新しいアプリに Windows が出す確認で、一度だけです。
 
-    ![「Windows によって PC が保護されました」の画面。文の下に「詳細情報」がある](/ja/screenshots/win-smartscreen-more-info.png)
+    <MicrosoftScreenshot name="win-smartscreen-more-info" alt="「Windows によって PC が保護されました」の画面。文の下に「詳細情報」がある" />
 
-    「詳細情報」を押すと「実行」のボタンが現れるので、「実行」で進みます。
+    「詳細情報」を押すと、「実行」のボタンが現れます。
 
-    ![「詳細情報」を押したあとの画面。「アプリ」の欄にファイル名、右下に「実行」のボタンがある](/ja/screenshots/win-smartscreen-run-anyway.png)
+    <MicrosoftScreenshot name="win-smartscreen-run-anyway" alt="「詳細情報」を押したあとの画面。「アプリ」の欄にファイル名、右下に「実行」のボタンがある" />
 
-    「アプリ」の欄には、ダウンロードしたファイルの名前が出ます。
-    画像は一例で、名前の中の数字はこれより新しいことがあります。
+    「アプリ」の欄の名前は一例で、数字はこれより新しいことがあります。
+    「実行」で進みます。
 
     インストーラーが開きます。
-    画面は英語ですが、「Next」を 3 回、最後に「Finish」を押すだけです。
-    ZenCopy が起動して、ようこそ画面が開きます。
+    画面は英語ですが、押すのは「Next」と、最後の「Finish」だけです。
 
-    <small>Used with permission from Microsoft.</small>
+    ![「Welcome to ZenCopy Setup」の画面。右下に「Next」のボタンがある](/screenshots/win-installer-welcome.png)
+
+    「Next」を押します。
+
+    ![「Choose Install Location」の画面。インストール先が入っていて、右下に「Next」のボタンがある](/screenshots/win-installer-location.png)
+
+    インストール先はそのままで「Next」を押します。
+
+    ![「Installation Complete」の画面。緑のバーが右端まで来ていて、右下に「Next」のボタンがある](/screenshots/win-installer-complete.png)
+
+    緑のバーが右端まで進んだら「Next」を押します。
+
+    ![「Completing ZenCopy Setup」の画面。「Run ZenCopy」にチェックが入り、右下に「Finish」のボタンがある](/screenshots/win-installer-finish.png)
+
+    「Finish」を押すと、ZenCopy が起動して、ようこそ画面が開きます。
 
   </TabItem>
   <TabItem label="macOS">
@@ -207,11 +223,11 @@ ChatGPT や Claude の API キーを持っている人や、仕事の資料で�
 
 {/* 動画: 解説デモ（bun run demo-video が生成）。要約の答えの画面で「解説」に切り替え、解説が表示されるまで */}
 
-「解説」に切り替えると、同じ文章をやさしい言葉でかみ砕きます。
-
 <DemoVideo demo="explain">
   デモ動画を見る
 </DemoVideo>
+
+「解説」に切り替えると、同じ文章をやさしい言葉でかみ砕きます。
 
 - **要約**：一文で要点。
 - **解説**：前提知識がなくてもわかる言葉で、かみ砕いて。
@@ -225,12 +241,11 @@ ChatGPT や Claude の API キーを持っている人や、仕事の資料で�
 
 {/* 動画: 返信デモ（bun run demo-video が生成）。解説の答えに「もう少し簡潔に」と返信し、短い答えが表示されるまで */}
 
-「もう少し簡潔に」と返すと、答えが短くなります。
-
 <DemoVideo demo="follow-up">
   デモ動画を見る
 </DemoVideo>
 
+「もう少し簡潔に」と返すと、答えが短くなります。
 Enter で送信、Shift + Enter で改行です。
 変換を確定する Enter では送信されません。
 答えごとに「コピー」と「やり直す」のアイコンがついています（重ねると名前が出ます）。
@@ -242,11 +257,11 @@ Enter で送信、Shift + Enter で改行です。
 
 {/* 動画: カスタムデモ（bun run demo-video が生成）。返信の答えの画面から Esc で入力欄を抜け、「カスタム」に切り替え、「表にして」と入力 → 表が表示されるまで */}
 
-「表にして」と書くと、表になります。
-
 <DemoVideo demo="custom">
   デモ動画を見る
 </DemoVideo>
+
+「表にして」と書くと、表になります。
 
 ### 画像やファイルも同じ操作 {#images-and-files}
 

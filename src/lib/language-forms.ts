@@ -1,4 +1,4 @@
-import type { Locale } from "./messages/index.ts";
+import { type Locale, localeOf } from "./messages/index.ts";
 
 /**
  * The reader's own language, in the forms a sentence needs — so text that
@@ -46,9 +46,7 @@ const LANGUAGE_FORMS: Record<Locale, LanguageForms> = {
 
 /** The forms for a locale code in any case (`zh-hans` as the site spells it). */
 export function languageForms(locale: string): LanguageForms | undefined {
-  const key = (Object.keys(LANGUAGE_FORMS) as Locale[]).find(
-    (code) => code.toLowerCase() === locale.toLowerCase(),
-  );
+  const key = localeOf(locale);
   return key === undefined ? undefined : LANGUAGE_FORMS[key];
 }
 

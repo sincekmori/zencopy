@@ -3,6 +3,7 @@
     "oxc.oxc-vscode",
     "tauri-apps.tauri-vscode",
     "rust-lang.rust-analyzer",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "unifiedjs.vscode-mdx"
   ]
 }

@@ -8,6 +8,7 @@
  * 320×180 grid scales fluidly.
  */
 import "../../../src/assets/hero-demo.css";
+import { NEUTRAL_MODIFIER } from "../../../src/lib/modifier.ts";
 import {
   HERO_BARS,
   HERO_LINES,
@@ -16,7 +17,7 @@ import {
 
 // "Ctrl/⌘" is the no-JS fallback; data-os-modifier swaps it to the visitor's
 // own key (⌘ or Ctrl) via the head script in astro.config.mjs.
-const keycaps = heroKeycaps("Ctrl/⌘");
+const keycaps = heroKeycaps(NEUTRAL_MODIFIER);
 ---
 
 <div aria-hidden="true" class="stage">

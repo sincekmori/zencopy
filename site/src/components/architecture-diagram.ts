@@ -21,6 +21,7 @@
  *  the step badges move to the start (right) side of their labels. The brand
  *  lockup ({mark} ZenCopy) stays LTR — it is a wordmark, not prose.
  */
+import { escapeXml } from "../lib/figure.ts";
 import { markGroup } from "../../../src/lib/brand.ts";
 
 export type DiagramDir = "ltr" | "rtl";
@@ -106,14 +107,6 @@ function estimateWidth(text: string, fontSize: number, bold = false): number {
     em += WIDE_CHAR.test(ch) ? 1 : 0.62;
   }
   return em * fontSize * (bold ? 1.05 : 1);
-}
-
-function escapeXml(text: string): string {
-  return text
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
 }
 
 export function architectureDiagram(l: ArchitectureLabels, dir: DiagramDir = "ltr"): string {

@@ -9,13 +9,14 @@
  */
 import { getEntry } from "astro:content";
 import { markSvg } from "../../../src/lib/brand.ts";
+import { plainModifier } from "../../../src/lib/modifier.ts";
 import HeroDemo from "./HeroDemo.astro";
 import ModifierText from "./ModifierText.astro";
 import { LANDING_COPY, LANDING_LOCALES, THEME_LABELS } from "./landing-copy.ts";
 
-// Where only text can go (the meta description), the copy's `{mod}` is Ctrl —
+// Where only text can go (the meta description), the copy's `{mod}` is the
+// neutral Ctrl/⌘ (src/lib/modifier.ts, which the docs' frontmatter shares) —
 // in prose, ModifierText renders it as the span the script below swaps.
-const plain = (text: string): string => text.replaceAll("{mod}", "Ctrl");
 
 interface Props {
   /** One of the codes in LANDING_LOCALES (e.g. "en", "ja", "zh-hans"). */
@@ -50,7 +51,7 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>{copy.metaTitle}</title>
-    <meta content={plain(copy.description)} name="description" />
+    <meta content={plainModifier(copy.description)} name="description" />
     <link href={canonical} rel="canonical" />
     {
       LANDING_LOCALES.map((entry) => (
@@ -67,7 +68,7 @@ const gettingStartedHref = `/${lang}/getting-started/`;
     <link href="/sitemap-index.xml" rel="sitemap" />
     <meta content="ZenCopy" property="og:site_name" />
     <meta content={copy.metaTitle} property="og:title" />
-    <meta content={plain(copy.description)} property="og:description" />
+    <meta content={plainModifier(copy.description)} property="og:description" />
     <meta content="website" property="og:type" />
     <meta content={canonical} property="og:url" />
     <meta content="https://zencopy.app/og.png" property="og:image" />

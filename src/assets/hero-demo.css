@@ -16,12 +16,26 @@
 
 .hd-canvas {
   --hd-sweep: color-mix(in oklab, var(--hd-accent) 25%, transparent);
-  --hd-glow: color-mix(in oklab, var(--hd-accent) 15%, transparent);
   --hd-bar: color-mix(in oklab, var(--hd-text) 35%, transparent);
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+/* The keys' own tokens — on the stage, and on a .hd-keys row hosted by
+   itself (the demo videos set one inside a caption, on the same hooks): the
+   pressed face's shading; a keycap's size in units, its side, the side's
+   height, and the shadows of a key up and a key down — the face's own color
+   in shadow for the side, so a keycap reads as one on any palette. */
+:where(.hd-canvas, .hd-keys) {
+  --hd-glow: color-mix(in oklab, var(--hd-accent) 15%, transparent);
+  --hd-key-units: 28;
+  --hd-key-side: color-mix(in oklab, var(--hd-track), black 28%);
+  --hd-key-lip: calc(3 * var(--u));
+  --hd-key-up:
+    0 var(--hd-key-lip) 0 var(--hd-key-side),
+    0 calc(4 * var(--u)) calc(8 * var(--u)) rgb(0 0 0 / 0.1);
+  --hd-key-down: 0 0 0 var(--hd-key-side), 0 calc(1 * var(--u)) calc(2 * var(--u)) rgb(0 0 0 / 0.1);
 }
 
 /* ——— the copied text ——— */
@@ -219,24 +233,32 @@
 
 /* ——— the trigger ——— */
 .hd-keys {
-  position: absolute;
-  bottom: calc(20 * var(--u));
-  left: calc(20 * var(--u));
   display: flex;
   align-items: center;
   gap: calc(8 * var(--u));
 }
+.hd-canvas > .hd-keys {
+  position: absolute;
+  bottom: calc(20 * var(--u));
+  left: calc(20 * var(--u));
+}
+/* A keycap as on a keyboard, seen a little from above: a face on a darker
+   side (the lip under it — a shadow that never blurs), under a soft cast
+   shadow. Pressing it is sinking it: the face travels down the lip's height
+   and the lip goes with it, the cast shadow closing in as the key nears the
+   board. */
 .hd-keycap {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: calc(28 * var(--u));
-  height: calc(28 * var(--u));
+  min-width: calc(var(--hd-key-units) * var(--u));
+  height: calc(var(--hd-key-units) * var(--u));
   padding: 0 calc(6 * var(--u));
   border: 1px solid var(--hd-border);
   border-radius: calc(6 * var(--u));
   background: var(--hd-track);
+  box-shadow: var(--hd-key-up);
 }
 .hd-glow {
   position: absolute;
@@ -263,19 +285,21 @@
 .hd-kc .hd-glow {
   animation: hd-glow-c 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
-/* Ctrl/⌘ is a modifier: it is held down for the whole chord, so it presses
-   and lights, stays lit through both C taps, then releases with the second C
-   as the popup appears. */
+/* Ctrl/⌘ is a modifier: it is held down for the whole chord, so it sinks
+   and shades, stays down through both C taps, then comes up with the second
+   C as the popup appears. */
 @keyframes hd-press-mod {
   0%,
   32.7%,
   52.4%,
   100% {
     transform: none;
+    box-shadow: var(--hd-key-up);
   }
   35.9%,
   49.1% {
-    transform: translateY(calc(1 * var(--u))) scale(0.94);
+    transform: translateY(var(--hd-key-lip));
+    box-shadow: var(--hd-key-down);
   }
 }
 @keyframes hd-glow-mod {
@@ -293,7 +317,7 @@
 /* One C key, pressed twice while the modifier is held: the first press is a
    tap (down then straight back up — a blink), then the second lands at real
    double-copy rhythm (peak to peak 3.6% of the 5.5s cycle ≈ 200 ms, the
-   tempo of an actual double-click) and stays lit (held) until it releases
+   tempo of an actual double-click) and stays down (held) until it comes up
    with the modifier as the popup appears — about 150 ms after the second
    tap lands, the way the real popup follows the real second copy. */
 @keyframes hd-press-c {
@@ -304,13 +328,13 @@
   52.4%,
   100% {
     transform: none;
+    box-shadow: var(--hd-key-up);
   }
-  42.7% {
-    transform: translateY(calc(1 * var(--u))) scale(0.93);
-  }
+  42.7%,
   46.3%,
   49.1% {
-    transform: translateY(calc(1 * var(--u))) scale(0.94);
+    transform: translateY(var(--hd-key-lip));
+    box-shadow: var(--hd-key-down);
   }
 }
 @keyframes hd-glow-c {

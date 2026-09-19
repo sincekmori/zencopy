@@ -26,6 +26,7 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { type BrowserContext, webkit } from "playwright";
+import { NEUTRAL_MODIFIER } from "../src/lib/modifier.ts";
 import { SCREENSHOT_SCENARIOS } from "../src/lib/screenshot-scenarios.ts";
 import {
   DEVICE_SCALE,
@@ -61,7 +62,7 @@ const DEFAULT_VIEWPORT = { width: 640, height: 792 };
 const WINDOWS_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15";
 const RENDERS = [
-  { os: "neutral", suffix: "", userAgent: WINDOWS_UA, params: { modifier: "Ctrl/⌘" } },
+  { os: "neutral", suffix: "", userAgent: WINDOWS_UA, params: { modifier: NEUTRAL_MODIFIER } },
   { os: "ctrl", suffix: ".ctrl", userAgent: WINDOWS_UA, params: {} },
   {
     os: "cmd",

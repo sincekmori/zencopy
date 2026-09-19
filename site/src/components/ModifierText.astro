@@ -1,11 +1,14 @@
 ---
 /**
  * A landing copy string with `{mod}` where the visitor's modifier key goes:
- * Ctrl, swapped to ⌘ by the landing's inline script once it has seen a Mac —
- * so `{mod} + C + C` reads as the visitor's own signal. No-JS and other
- * OSes keep Ctrl, and so does the meta description, where only text can go
- * (Landing.astro substitutes it there).
+ * the head script writes ⌘ for a Mac and Ctrl for Windows and Linux into
+ * the span, so `{mod} + C + C` reads as the visitor's own signal. Until it
+ * runs, and without JS or on another OS, the span says the neutral Ctrl/⌘
+ * (src/lib/modifier.ts) — the spelling the meta description gets too, where
+ * only text can go (Landing.astro substitutes it there).
  */
+import { NEUTRAL_MODIFIER } from "../../../src/lib/modifier.ts";
+
 interface Props {
   text: string;
 }
@@ -16,7 +19,7 @@ const parts = text.split("{mod}");
 {
   parts.map((part, index) => (
     <>
-      {index > 0 && <span data-os-modifier>Ctrl</span>}
+      {index > 0 && <span data-os-modifier>{NEUTRAL_MODIFIER}</span>}
       {part}
     </>
   ))

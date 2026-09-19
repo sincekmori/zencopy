@@ -1,159 +1,174 @@
 // Caption lines burned into the demo videos, per locale and demo — one line
 // per beat of the demo (the first demo's four: the mail as it is, the
 // selection sweeping, the chord, the summary complete; scripts/demo-video.ts
-// times them off the page beats and the session's own clock). `{chord}` is
-// the visitor's key chord, so a captioned demo comes in three cuts: the
-// default spelling it Ctrl/⌘ (for a visitor whose OS the page cannot tell),
-// `.ctrl` with Ctrl + C + C and `.cmd` with ⌘ + C + C, which DemoVideo.astro
-// swaps in by OS; `{lang}`, `{lang:in}` and `{lang:into}`
-// are the viewer's language in the form the sentence needs (日本語 / 日本語で /
-// 日本語に), from src/lib/language-forms.ts — so a literal 日本語 in a line
+// times them off the page beats and the session's own clock). The chord is
+// shown, not spelled: its line writes `{keys}` where the keys go, kept
+// verbatim, with the locale's own words around it ("{keys} を押すと"), and
+// the generator draws the hero animation's keycaps there, in the line — the
+// modifier pressed and held, C tapped twice, released as the popup lands
+// (src/assets/hero-demo.css, a video frame at a time). The modifier the
+// keycap reads is the visitor's, which is why a demo with the keys comes in
+// three cuts: the default reading Ctrl/⌘ (for a visitor whose OS the page
+// cannot tell), `.ctrl` reading Ctrl and `.cmd` reading ⌘, which
+// DemoVideo.astro swaps in by OS. `{lang}`, `{lang:in}` and `{lang:into}`
+// are the viewer's language in the form the sentence needs (日本語 / 日本語で
+// / 日本語に), from src/lib/language-forms.ts — so a literal 日本語 in a line
 // would mean Japanese. A locale without an entry gets uncaptioned videos.
-export const CAPTIONS: Record<string, Partial<Record<string, readonly string[]>> | undefined> = {
+
+/** Where the keys go in the chord's line: drawn there — never words. */
+export const KEYS = "{keys}";
+
+/** The four beats' lines of a page-stage demo: the mail as it is, the
+ *  selection sweeping and settling, the chord (its line writes the keys), the
+ *  summary complete — held to that shape by the compiler, for every locale. */
+export type PageCaptions = readonly [
+  still: string,
+  select: string,
+  chord: `${string}${typeof KEYS}${string}`,
+  done: string,
+];
+
+export const CAPTIONS: Record<string, Partial<Record<string, PageCaptions>> | undefined> = {
   ar: {
     summarize: [
-      "وصلك بريد إلكتروني بالإنجليزية.",
+      "لديك بريد إلكتروني بالإنجليزية.",
       "حدد النص،",
-      "واضغط {chord}،",
+      "واضغط {keys}،",
       "وسيظهر لك التلخيص {lang:in}.",
     ],
   },
   de: {
     summarize: [
-      "Du bekommst eine englische E-Mail.",
+      "Du hast eine englische E-Mail.",
       "Markiere den Text,",
-      "drücke {chord},",
+      "drücke {keys},",
       "und da ist deine Zusammenfassung {lang:in}.",
     ],
   },
   en: {
     summarize: [
-      "Say you've got an email.",
+      "Say you have an email.",
       "Select the text,",
-      "press {chord},",
+      "press {keys},",
       "and there's your summary.",
     ],
   },
   es: {
     summarize: [
-      "Te llega un correo en inglés.",
+      "Tienes un correo en inglés.",
       "Selecciona el texto,",
-      "presiona {chord},",
+      "presiona {keys},",
       "y aparece tu resumen {lang:in}.",
     ],
   },
   fa: {
     summarize: [
-      "فرض کنید یک ایمیل انگلیسی آمده.",
+      "فرض کنید یک ایمیل انگلیسی دارید.",
       "متن را انتخاب کنید،",
-      "{chord} را فشار دهید،",
+      "{keys} را فشار دهید،",
       "و خلاصه {lang:in} ظاهر می‌شود.",
     ],
   },
   fr: {
     summarize: [
-      "Tu reçois un e-mail en anglais.",
+      "Tu as un e-mail en anglais.",
       "Sélectionne le texte,",
-      "appuie sur {chord},",
+      "appuie sur {keys},",
       "et voilà ton résumé {lang:in}.",
     ],
   },
   he: {
     summarize: [
-      "נניח שקיבלת אימייל באנגלית.",
+      "נניח שיש לך אימייל באנגלית.",
       "סמן את הטקסט,",
-      "לחץ על {chord},",
+      "לחץ על {keys},",
       "ומופיע סיכום {lang:in}.",
     ],
   },
   id: {
     summarize: [
-      "Dapat email dalam bahasa Inggris.",
+      "Ada email dalam bahasa Inggris.",
       "Pilih teksnya,",
-      "tekan {chord},",
+      "tekan {keys},",
       "dan ringkasan {lang:in} muncul.",
     ],
   },
   it: {
     summarize: [
-      "Ti arriva un'email in inglese.",
+      "Hai un'email in inglese.",
       "Seleziona il testo,",
-      "premi {chord},",
+      "premi {keys},",
       "ed ecco il tuo riassunto {lang:in}.",
     ],
   },
   ja: {
     summarize: [
-      "英語のメールが届いたとします。",
+      "英語のメールがあるとします。",
       "画面の文字を選んで、",
-      "{chord} を押すと",
+      "{keys} を押すと",
       "{lang}の要約が表示されます。",
     ],
   },
   ko: {
     summarize: [
-      "영어 이메일이 왔을 때,",
+      "영어 이메일이 있을 때,",
       "텍스트를 선택하고",
-      "{chord}를 누르면",
+      "{keys}를 누르면",
       "{lang:in} 요약이 나타납니다.",
     ],
   },
   pl: {
     summarize: [
-      "Dostajesz maila po angielsku.",
+      "Masz maila po angielsku.",
       "Zaznacz tekst,",
-      "naciśnij {chord},",
+      "naciśnij {keys},",
       "i masz streszczenie {lang:in}.",
     ],
   },
   "pt-br": {
     summarize: [
-      "Você recebe um e-mail em inglês.",
+      "Você tem um e-mail em inglês.",
       "Selecione o texto,",
-      "pressione {chord},",
+      "pressione {keys},",
       "e o resumo {lang:in} aparece.",
     ],
   },
   ru: {
     summarize: [
-      "Пришло письмо на английском.",
+      "У тебя письмо на английском.",
       "Выдели текст,",
-      "нажми {chord},",
+      "нажми {keys},",
       "и появится пересказ {lang:in}.",
     ],
   },
   th: {
     summarize: [
-      "สมมุติว่าได้รับอีเมลภาษาอังกฤษ",
+      "สมมุติว่ามีอีเมลภาษาอังกฤษ",
       "เลือกข้อความบนหน้าจอ",
-      "กด {chord}",
+      "กด {keys}",
       "สรุป{lang:in}ก็จะแสดงขึ้นมา",
     ],
   },
   tr: {
     summarize: [
-      "İngilizce bir e-posta geldi diyelim.",
+      "İngilizce bir e-posta var diyelim.",
       "Metni seç,",
-      "{chord} tuşlarına bas,",
+      "{keys} tuşlarına bas,",
       "ve {lang} özet karşında.",
     ],
   },
   vi: {
     summarize: [
-      "Bạn nhận được email tiếng Anh.",
+      "Bạn có một email tiếng Anh.",
       "Chọn đoạn văn bản,",
-      "nhấn {chord},",
+      "nhấn {keys},",
       "và bản tóm tắt {lang:in} hiện ra.",
     ],
   },
   "zh-hans": {
-    summarize: ["比如收到一封英文邮件，", "选中文本，", "按下 {chord}，", "就会显示{lang}总结。"],
+    summarize: ["比如有一封英文邮件，", "选中文本，", "按下 {keys}，", "就会显示{lang}总结。"],
   },
   "zh-hant": {
-    summarize: ["比如收到一封英文郵件，", "選取文字，", "按下 {chord}，", "就會顯示{lang}摘要。"],
+    summarize: ["比如有一封英文郵件，", "選取文字，", "按下 {keys}，", "就會顯示{lang}摘要。"],
   },
 };
-
-/** Whether a demo's lines name the chord — and so come as two videos. */
-export const namesChord = (lines: readonly string[]): boolean =>
-  lines.some((line) => line.includes("{chord}"));
