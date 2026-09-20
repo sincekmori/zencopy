@@ -7,9 +7,16 @@
  * which the runner checks against the renders), as Windows (<name>.ctrl.png,
  * Ctrl + C + C) and macOS (<name>.cmd.png, ⌘ + C + C) too; the head script
  * (astro.config.mjs) swaps the source by OS, as it does for the demo videos.
+ * The picture is the window at its own size — the scenario's viewport in
+ * logical px, one PNG pixel each, written as the image's width and height
+ * so the page lays it out before it loads — as big on the page as the
+ * window is on the screen, shrinking only where the column is narrower.
  * The locale is the page's; the alt text is the page's own words.
  */
-import { SCREENSHOT_SCENARIOS } from "../../../src/lib/screenshot-scenarios.ts";
+import {
+  SCREENSHOT_SCENARIOS,
+  viewportOf,
+} from "../../../src/lib/screenshot-scenarios.ts";
 import { pageLocale } from "../lib/page-locale.ts";
 
 interface Props {
@@ -25,11 +32,14 @@ if (scenario === undefined) {
 }
 const { locale } = pageLocale(Astro.locals);
 const base = `/${locale}/screenshots/${name}`;
+const { width, height } = viewportOf(scenario);
 ---
 
 <img
   alt={alt}
   data-src-cmd={scenario.os ? `${base}.cmd.png` : undefined}
   data-src-ctrl={scenario.os ? `${base}.ctrl.png` : undefined}
+  height={height}
   src={`${base}.png`}
+  width={width}
 />

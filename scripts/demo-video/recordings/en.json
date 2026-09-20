@@ -1,12 +1,12 @@
 {
   "locale": "en",
-  "recorded": "2026-09-06T12:18:57.472Z",
+  "recorded": "2026-09-20T05:49:18.776Z",
   "model": "google:gemini-3.1-flash-lite",
   "capture": {
     "kind": "text",
     "source": {
       "kind": "text",
-      "text": "Hello,\n\nThank you for sending over the updated proposal last week.\nOur leadership review has been moved from October 2 to October 9, because two of our directors will be traveling that week.\nCould you send us the revised pricing sheet by September 30, so that we can include it in the pre-read?\nWe would also like to add a 15-minute demo of the reporting dashboard to the agenda.\nPlease let me know if that timing works on your side.\n\nBest regards,\n"
+      "text": "お世話になっております。\n\n先週は更新版のご提案書をお送りいただき、ありがとうございました。\n取締役 2 名がその週に出張となるため、経営陣によるレビューは 10 月 2 日の予定から 10 月 9 日に延期になりました。\n事前資料に含めたいので、改訂後の価格表を 9 月 30 日までにお送りいただけますでしょうか。\nまた、レポートダッシュボードの 15 分ほどのデモも議題に加えたいと考えております。\nこの日程でご都合が合うかどうか、お知らせください。\n\nどうぞよろしくお願いいたします。\n"
     },
     "prompt_id": "zencopy-summarize",
     "label": "Summarize",
@@ -22,10 +22,10 @@
       "app_name": "Mail",
       "exec_name": "Mail",
       "exec_path": "",
-      "window_title": "Updated proposal and review date",
+      "window_title": "提案書の更新とレビュー日程について",
       "url": "",
       "process_id": "4242",
-      "now": "2026-09-06 21:18:26"
+      "now": "2026-09-20 14:48:43"
     },
     "runnable": true
   },
@@ -33,39 +33,39 @@
     {
       "demo": "summarize",
       "prompt": "zencopy-summarize",
-      "reply": "The client has rescheduled their leadership review to October 9 and requested a revised pricing sheet by September 30, along with a 15-minute dashboard demo.",
+      "reply": "The client has postponed the management review to October 9th and requested a revised price list by September 30th, alongside a short demo of the dashboard.",
       "tokens": {
-        "input": 169,
-        "output": 39
+        "input": 190,
+        "output": 38
       }
     },
     {
       "demo": "explain",
       "prompt": "zencopy-explain",
-      "reply": "This message is a professional request to change the timing of a business meeting and update the materials needed for it. It matters because it ensures that the people in charge have the right information before they make a final decision.\n\nHere is the breakdown of what the sender is asking for:\n\n**A schedule change**\nThe people who need to look at the proposal are having their meeting one week later than planned. This is because two of the leaders will be away on a trip during the first week of October.\n\n**A new document**\nThe sender wants an updated price list. They need this document by September 30. They use the term \"pre-read\" to describe this. A pre-read is simply a set of documents that people look at before a meeting starts so that everyone is already prepared when the discussion begins.\n\n**Adding a demonstration**\nThe sender wants to add a short presentation to the meeting. They want to see a 15-minute demo of the \"reporting dashboard.\" A dashboard, in this context, is a digital screen that shows important data and summaries in one place. A demo is just a live showing of how that tool works.\n\n**Asking for agreement**\nFinally, the sender asks if these new dates and the extra 15 minutes for the demo work for the person receiving the email. They are checking to make sure the other person is available and can get the work done in time.",
+      "reply": "The email you received is a polite request to change a business schedule.\n\nThink of this like moving a meeting to show your work to a group of bosses. Because some of the bosses are away on a trip, the date to look at your proposal has been moved from October 2 to October 9.\n\nHere is what the sender is asking for:\n\nFirst, they want a new list of prices. They need this by September 30 so they can give it to the bosses to look at before the meeting.\n\nSecond, they want you to show them how your computer program works. They call this a \"demo,\" which is just a short live look at the program's features. They want to spend about 15 minutes on this during the meeting.\n\nFinally, they are asking if you are free to meet on this new date of October 9. They want you to tell them if this works for you or if you need to pick a different time.",
       "tokens": {
-        "input": 475,
-        "output": 298
+        "input": 496,
+        "output": 204
       }
     },
     {
       "demo": "follow-up",
       "prompt": "zencopy-explain",
       "message": "A bit shorter, please",
-      "reply": "This message is a request to adjust the timing of a business meeting and update the materials for it. It matters because it ensures the company leaders have the right information before they make a decision.\n\nHere is what the sender is asking for:\n\n**A new meeting date**\nThe meeting is moving from October 2 to October 9 because two leaders will be away.\n\n**A document update**\nThe sender needs a revised price list by September 30. They want to include this in the \"pre-read,\" which is the set of materials sent to people before a meeting so they can study the information ahead of time.\n\n**A live demonstration**\nThe sender wants to add a 15-minute slot to the meeting to see a demonstration of the reporting dashboard. This is a digital screen where users can see summaries of their data.\n\n**A confirmation**\nThe sender is asking if these new plans work for you and if you can finish the new price list by their deadline.",
+      "reply": "The person who sent you this email is rescheduling a meeting to review your proposal. \n\nBecause two bosses are away on business, the meeting date is moving from October 2 to October 9. They have three requests for you:\n\n1. Send an updated price list by September 30 so they can review it before the meeting.\n2. Include a 15-minute live demonstration of your report dashboard during the meeting.\n3. Confirm if you are available to meet on the new date of October 9. \n\nIn short, they are asking for new paperwork and a time check for the rescheduled meeting.",
       "tokens": {
-        "input": 783,
-        "output": 212
+        "input": 710,
+        "output": 132
       }
     },
     {
       "demo": "custom",
       "prompt": "zencopy-custom",
       "message": "Make a table",
-      "reply": "| Item | Details |\n| :--- | :--- |\n| **New Leadership Review Date** | October 9 |\n| **Original Review Date** | October 2 |\n| **Revised Pricing Sheet Deadline** | September 30 |\n| **Additional Request** | 15-minute reporting dashboard demo |",
+      "reply": "| Item | Details |\n| :--- | :--- |\n| **Topic** | Update on proposal review schedule |\n| **New Review Date** | October 9th |\n| **Required Item** | Revised price list |\n| **Deadline for Price List** | September 30th |\n| **Additional Request** | 15-minute demo of the report dashboard |\n| **Action Required** | Confirm availability for the new date |",
       "tokens": {
-        "input": 346,
-        "output": 76
+        "input": 369,
+        "output": 104
       }
     }
   ],
@@ -77,11 +77,19 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.286,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eThe client has rescheduled their leadership review to October 9 and requested a\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 17,\"totalTokenCount\": 186,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"E1qdarOiG7Czvr0Pw4X-4AE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" revised pricing sheet by September 30, along with a 15-minute dashboard demo.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 39,\"totalTokenCount\": 208,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"E1qdarOiG7Czvr0Pw4X-4AE\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPsEhpfZWoo89OPA3ebuGfjO0DPVi+CNX/LCCdLBqonlggCnR8O7sOgTG0K2WmwcrmPOZ0rhYWyfVq7/2cnAw+dXUqUDH0evSTjpFmGbh6WDrIH9oOpdcd6XoLAyGNIbGrRKiO6ZeWfd+mJQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 169,\"candidatesTokenCount\": 39,\"totalTokenCount\": 208,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 169}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"E1qdarOiG7Czvr0Pw4X-4AE\"}\r\n\r\n"
+          2.376,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\\u003eThe client has postponed the management review to October 9th\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 190,\"candidatesTokenCount\": 15,\"totalTokenCount\": 205,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 190}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"vHOvaujiA4rKrfcPzZPq2AI\"}\r\n\r\n"
+        ],
+        [
+          2.502,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" and requested a revised price list by September 30th, alongside a short demo of the dashboard.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 190,\"candidatesTokenCount\": 38,\"totalTokenCount\": 228,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 190}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"vHOvaujiA4rKrfcPzZPq2AI\"}\r\n\r\n"
+        ],
+        [
+          2.53,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwFpFH0Tia+iilZRd2uGmtJ/SG5UVwy9/KoUuD+Sl69Un6lbx4MZkqJOPzmelW3hcTGoZ0tBw3/VWiwrWGjYY2OX8fMwbgqMkfasVFFQUiIqiafy2C63nvvepPCEntw6cFPPCxPm+QlB79gMzG+UKA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 190,\"candidatesTokenCount\": 38,\"totalTokenCount\": 228,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 190}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"vHOvaujiA4rKrfcPzZPq2AI\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "5dcb9ce7d64955e471571efe4982358dbb47762d660cc0e52b5d0e57b9f3b11e"
+      "bodySha256": "cc0208c667112ed9ff22d23976fd368780e2d38c7cab33023bb3f7c34eb0697e"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -90,63 +98,47 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          0.919,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 2,\"totalTokenCount\": 477,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eThis message is a professional request to change the timing of a business meeting and\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 18,\"totalTokenCount\": 493,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          3.352,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 2,\"totalTokenCount\": 498,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          0.98,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" update the materials needed for it. It matters because it ensures that the people in charge have the right information before they make a final\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 44,\"totalTokenCount\": 519,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          3.369,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003eThe email you received is a polite request to change a business schedule.\\n\\nThink\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 19,\"totalTokenCount\": 515,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.122,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" decision.\\n\\nHere is the breakdown of what the sender is asking for:\\n\\n**A schedule change**\\nThe people who\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 69,\"totalTokenCount\": 544,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          3.726,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" of this like moving a meeting to show your work to a group of bosses. Because some of the bosses are away on a trip,\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 46,\"totalTokenCount\": 542,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.168,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" need to look at the proposal are having their meeting one week later than planned. This is because two of the leaders will\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 93,\"totalTokenCount\": 568,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          3.774,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" the date to look at your proposal has been moved from October 2 to October 9.\\n\\nHere is what the sender is asking\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 73,\"totalTokenCount\": 569,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.272,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" be away on a trip during the first week of October.\\n\\n**A new document**\\nThe sender wants an updated price list\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 119,\"totalTokenCount\": 594,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          3.977,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" for:\\n\\nFirst, they want a new list of prices. They need this by September 30 so they can give it to the\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 101,\"totalTokenCount\": 597,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.375,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". They need this document by September 30. They use the term \\\"pre-read\\\" to describe this. A\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 144,\"totalTokenCount\": 619,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          4.348,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" bosses to look at before the meeting.\\n\\nSecond, they want you to show them how your computer program works. They call\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 126,\"totalTokenCount\": 622,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.503,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" pre-read is simply a set of documents that people look at before a meeting starts so that everyone is already prepared when\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 168,\"totalTokenCount\": 643,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          4.349,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" this a \\\"demo,\\\" which is just a short live look at the program's features. They want to spend about 15\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 153,\"totalTokenCount\": 649,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.551,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" the discussion begins.\\n\\n**Adding a demonstration**\\nThe sender wants to add a short presentation to the meeting. They want to see a\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 196,\"totalTokenCount\": 671,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          4.652,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" minutes on this during the meeting.\\n\\nFinally, they are asking if you are free to meet on this new date of October 9\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 180,\"totalTokenCount\": 676,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.632,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 15-minute demo of the \\\"reporting dashboard.\\\" A dashboard, in this context, is a digital screen that shows important\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 222,\"totalTokenCount\": 697,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          4.719,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". They want you to tell them if this works for you or if you need to pick a different time.\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 204,\"totalTokenCount\": 700,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ],
         [
-          1.757,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" data and summaries in one place. A demo is just a live showing of how that tool works.\\n\\n**Asking for agreement\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 247,\"totalTokenCount\": 722,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
-        ],
-        [
-          1.806,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"**\\nFinally, the sender asks if these new dates and the extra 15 minutes for the demo work for the person\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 272,\"totalTokenCount\": 747,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
-        ],
-        [
-          1.892,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" receiving the email. They are checking to make sure the other person is available and can get the work done in time.\\u003c/\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 296,\"totalTokenCount\": 771,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
-        ],
-        [
-          1.995,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 298,\"totalTokenCount\": 773,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
-        ],
-        [
-          2.035,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPVh7gYlb3ZEsnPhf+tGUInZ7oWrr6iUFFcWGDM2JUV63IeDT/KoBUuCN4Kj7fPgvFDgrrKY7N0tzINy2ODO5v1hFEirCNBsJIwnNn6waoJGAuTDw9x5+0VxD/3T0UxiZT5UiWmOgHolR9RQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 475,\"candidatesTokenCount\": 298,\"totalTokenCount\": 773,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 475}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"GFqdatGMBNGN1e8P3qip0Qw\"}\r\n\r\n"
+          4.771,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwFpFH0TX+Hj6x1nsoh/PDxcnvEMFGF8344O5SBj3U8gHhTpNhfPG+rGTX7CAjDooWqMurVagfDHVpR9+5N96q3WCVw33HPVS9rTkOJPXKKvNmFylvseuVxZbrTH1aYnHhSmYENivDzpbeWsaGEUaw==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 496,\"candidatesTokenCount\": 204,\"totalTokenCount\": 700,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 496}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"w3OvatmYCq_MrfcP6ojn0A0\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "45b3741711734dbf059ffd38139858c81d2a0821168df9589e9a82c47f08999f"
+      "bodySha256": "ab0cb1fe31eb9d912d07a91124fd1f6f50d7651295b8153c6cd8400b47f947ae"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -155,39 +147,39 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          1.163,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 2,\"totalTokenCount\": 785,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nThis message is a request to adjust the timing of a business meeting and\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 18,\"totalTokenCount\": 801,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" update the materials for it. It matters because it ensures the company leaders have the right information before they make a decision.\\n\\nHere\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 44,\"totalTokenCount\": 827,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          1.148,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 2,\"totalTokenCount\": 712,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ],
         [
-          1.206,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" is what the sender is asking for:\\n\\n**A new meeting date**\\nThe meeting is moving from October 2 to\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 69,\"totalTokenCount\": 852,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          1.425,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\nThe person who sent you this email is rescheduling a meeting to review your proposal\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 19,\"totalTokenCount\": 729,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ],
         [
-          1.251,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" October 9 because two leaders will be away.\\n\\n**A document update**\\nThe sender needs a revised price list by September\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 95,\"totalTokenCount\": 878,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          1.526,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \". \\n\\nBecause two bosses are away on business, the meeting date is moving from October 2 to October 9. They\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 45,\"totalTokenCount\": 755,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ],
         [
-          1.454,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" 30. They want to include this in the \\\"pre-read,\\\" which is the set of materials sent to people\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 120,\"totalTokenCount\": 903,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" before a meeting so they can study the information ahead of time.\\n\\n**A live demonstration**\\nThe sender wants to add a 15\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 149,\"totalTokenCount\": 932,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          1.733,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" have three requests for you:\\n\\n1. Send an updated price list by September 30 so they can review it before\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 70,\"totalTokenCount\": 780,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ],
         [
-          1.497,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"-minute slot to the meeting to see a demonstration of the reporting dashboard. This is a digital screen where users can see summaries\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 174,\"totalTokenCount\": 957,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          1.887,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" the meeting.\\n2. Include a 15-minute live demonstration of your report dashboard during the meeting.\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 94,\"totalTokenCount\": 804,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ],
         [
-          1.623,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" of their data.\\n\\n**A confirmation**\\nThe sender is asking if these new plans work for you and if you can\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 199,\"totalTokenCount\": 982,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          2.091,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"3. Confirm if you are available to meet on the new date of October 9. \\n\\nIn short, they are\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 119,\"totalTokenCount\": 829,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ],
         [
-          1.725,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" finish the new price list by their deadline.\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 212,\"totalTokenCount\": 995,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          2.21,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" asking for new paperwork and a time check for the rescheduled meeting.\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 132,\"totalTokenCount\": 842,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ],
         [
-          1.787,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPeEtvHuV8XrdYVyXSLjqmAv/bWezedk9nWAtXqoT20D1e2taqX5H6IkG6Ox5inZir+zjLZ4H+rL/iENvqvWScj3bKG08BBethGqI3VGs1TG0cqXqt7F9hC1N/MFYIwbuHwL4rmCEGG3jeYQ==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 783,\"candidatesTokenCount\": 212,\"totalTokenCount\": 995,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 783}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"IFqdatjLINaz9tMPq9cX\"}\r\n\r\n"
+          2.261,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwFpFH0TvY60hlpO45bzguwDmAeAuMCuk0Vij8uS/k1PI3eBVV6xkjPbLl9robiFuhl6lAK7SkVv1kR5p0eExXBOrq+EsMPX/Bej3zuBfWDWNXE767IoTbpFzYd6joPu+WRJ+UMGvaqMB7Il7RVhEg==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 710,\"candidatesTokenCount\": 132,\"totalTokenCount\": 842,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 710}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"zXOvaurvOpqC0-kP6ZCtsA8\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "6676a6df0d1ef422ddb53b7cb74537cea0e59f73ebf49e1ca9a0b699f6fdef1c"
+      "bodySha256": "d2f2c1eb0cf5864935558765dcb14f97ff26d8d8bb1623108ec773e7d9f88528"
     },
     {
       "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:streamGenerateContent?alt=sse",
@@ -196,27 +188,35 @@
       "contentType": "text/event-stream",
       "chunks": [
         [
-          2.904,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 2,\"totalTokenCount\": 348,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"J1qdaoiQNsmj9tMPjJDIGQ\"}\r\n\r\ndata: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n| Item | Details |\\n| :--- | :--- |\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 18,\"totalTokenCount\": 364,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"J1qdaoiQNsmj9tMPjJDIGQ\"}\r\n\r\n"
+          1.914,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003cresult\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 369,\"candidatesTokenCount\": 2,\"totalTokenCount\": 371,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 369}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1XOvauWWLMGf2roP-rHu4QE\"}\r\n\r\n"
         ],
         [
-          2.913,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"| **New Leadership Review Date** | October 9 |\\n| **Original Review Date** | October 2 |\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 42,\"totalTokenCount\": 388,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"J1qdaoiQNsmj9tMPjJDIGQ\"}\r\n\r\n"
+          2.083,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\u003e\\n\\n| Item | Details |\\n| :--- | :--- |\\n\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 369,\"candidatesTokenCount\": 18,\"totalTokenCount\": 387,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 369}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1XOvauWWLMGf2roP-rHu4QE\"}\r\n\r\n"
         ],
         [
-          2.974,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\\n| **Revised Pricing Sheet Deadline** | September 30 |\\n| **Additional Request** | 15\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 66,\"totalTokenCount\": 412,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"J1qdaoiQNsmj9tMPjJDIGQ\"}\r\n\r\n"
+          2.287,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"| **Topic** | Update on proposal review schedule |\\n| **New Review Date** | October 9th |\\n| **Required\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 369,\"candidatesTokenCount\": 46,\"totalTokenCount\": 415,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 369}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1XOvauWWLMGf2roP-rHu4QE\"}\r\n\r\n"
         ],
         [
-          3.054,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"-minute reporting dashboard demo |\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 76,\"totalTokenCount\": 422,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"J1qdaoiQNsmj9tMPjJDIGQ\"}\r\n\r\n"
+          2.422,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" Item** | Revised price list |\\n| **Deadline for Price List** | September 30th |\\n| **\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 369,\"candidatesTokenCount\": 71,\"totalTokenCount\": 440,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 369}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1XOvauWWLMGf2roP-rHu4QE\"}\r\n\r\n"
         ],
         [
-          3.1,
-          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwERTTIPSXcgY3HPUZT9aVZlAduT820L52xIkmJNGXF7X70hJPp/upl0ZFbdkXnSzDOZsKZVCe2fan4ghtCbz2Gt82ZwCKnAzpab0nom/OlPyZidrYOrUu+5Z2C5zaA7WUKXWX93OMtirXc3RNWY0g==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 346,\"candidatesTokenCount\": 76,\"totalTokenCount\": 422,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 346}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"J1qdaoiQNsmj9tMPjJDIGQ\"}\r\n\r\n"
+          2.705,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"Additional Request** | 15-minute demo of the report dashboard |\\n| **Action Required** | Confirm availability for the new\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 369,\"candidatesTokenCount\": 98,\"totalTokenCount\": 467,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 369}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1XOvauWWLMGf2roP-rHu4QE\"}\r\n\r\n"
+        ],
+        [
+          2.91,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \" date |\\n\\n\\u003c/result\\u003e\"}],\"role\": \"model\"},\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 369,\"candidatesTokenCount\": 104,\"totalTokenCount\": 473,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 369}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1XOvauWWLMGf2roP-rHu4QE\"}\r\n\r\n"
+        ],
+        [
+          2.942,
+          "data: {\"candidates\": [{\"content\": {\"parts\": [{\"text\": \"\",\"thoughtSignature\": \"EnEKbwFpFH0Tx8Pr4xxGOUoIZ8k030lHJk1w4YTrqK6N/l0VcAE9xgApQ269C0nWiog8YE/iCcWgKfsSvwPOApV1qL8OP6Ba4uQYQNxsS6cIYI4KBskCHqQokWZS874BHO9GBZbjD+Ubq7+/n7kwDhqsOA==\"}],\"role\": \"model\"},\"finishReason\": \"STOP\",\"index\": 0}],\"usageMetadata\": {\"promptTokenCount\": 369,\"candidatesTokenCount\": 104,\"totalTokenCount\": 473,\"promptTokensDetails\": [{\"modality\": \"TEXT\",\"tokenCount\": 369}],\"serviceTier\": \"standard\"},\"modelVersion\": \"gemini-3.1-flash-lite\",\"responseId\": \"1XOvauWWLMGf2roP-rHu4QE\"}\r\n\r\n"
         ]
       ],
-      "bodySha256": "ccd2916988bf1a0865db40ef41f676c9d88821ea5a2eef2c04616cf5b50374d4"
+      "bodySha256": "ab4b4ff3ba2250167eeb69ca5512184007ac17f63a7319ed3c979cc893f5eca9"
     }
   ]
 }

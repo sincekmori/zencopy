@@ -100,7 +100,7 @@
   },
   "overrides": [
     {
-      "files": ["*.config.ts", "vite.config.ts", "scripts/**/*.ts"],
+      "files": ["*.config.ts", "vite.config.ts", "scripts/**/*.ts", "site/src/lib/capture.ts"],
       "rules": {
         "import/no-nodejs-modules": "off"
       }

@@ -1,0 +1,20 @@
+---
+/**
+ * A hand-taken capture of another product's screen for the docs — Google AI
+ * Studio, where the reader makes their key — in the page's language where
+ * that product speaks it and in English where it does not (the default
+ * locale's file; src/lib/capture.ts resolves it at build), shown at its own
+ * size. The alt text is the page's own words.
+ */
+import { captureOf } from "../lib/capture.ts";
+import { pageLocale } from "../lib/page-locale.ts";
+
+interface Props {
+  name: string;
+  alt: string;
+}
+const { name, alt } = Astro.props;
+const { src, width, height } = captureOf(pageLocale(Astro.locals).locale, name);
+---
+
+<img alt={alt} height={height} src={src} width={width} />

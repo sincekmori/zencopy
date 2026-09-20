@@ -562,7 +562,6 @@ export function AiSettings(): React.JSX.Element {
               className={FIELD}
               type="password"
               value={drafts[selected].apiKey}
-              placeholder="sk-..."
               onChange={(event) => {
                 editDraft({ apiKey: event.target.value });
               }}

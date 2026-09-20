@@ -87,7 +87,6 @@ export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element
             id="gemini-key"
             className={cn(FIELD, failed === "test" && "border-destructive")}
             type="password"
-            placeholder="AIza…"
             value={key}
             onChange={(event) => {
               setFailed(undefined);

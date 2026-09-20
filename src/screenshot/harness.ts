@@ -24,6 +24,10 @@
  *               as the JSON object or its text — with a real API key in it,
  *               the popup runs real model calls (the demo recordings). Never
  *               a URL parameter: a key must not land in a URL or a log line.
+ *  - `settings` (in): the app's state for the shot — settings.json's keys as
+ *               src/lib/settings.ts names them, and `autostart` for the
+ *               login-time start, which the autostart plugin holds rather
+ *               than the store — laid over the store mock's defaults.
  *  - `emit` (out): `emit(event, payload)` delivers a Tauri event to the app's
  *               `listen` handlers, the way Rust's `emit` would — a `capture`
  *               event with a CapturePayload is a C+C without the trigger.
@@ -74,10 +78,6 @@ const storeData: Record<string, unknown> = {
 };
 if (!params.has("welcome")) {
   storeData["welcomeSeen"] = true;
-}
-const extra = params.get("store");
-if (extra !== null) {
-  Object.assign(storeData, JSON.parse(extra) as Record<string, unknown>);
 }
 
 // ---- Real data from src-tauri/, served by the dev server ----------------
@@ -141,6 +141,10 @@ function defaultRules(): Record<string, unknown> {
 interface HarnessGlobal {
   /** In: the catalog `read_catalog` returns (object or JSON text). */
   catalog?: unknown;
+  /** In: the app's state for the shot — settings.json's keys (popupCorner,
+   *  theme, textSize, devMode, …) and `autostart`; a key left out keeps the
+   *  store mock's default, so a plain shot shows the app as installed. */
+  settings?: Record<string, unknown>;
   /** Out: deliver a Tauri event to the app's listeners; returns how many
    *  received it, so a driver can tell "nobody listens yet" from "handled". */
   emit?: (event: string, payload: unknown) => number;
@@ -159,6 +163,8 @@ type Replay = Pick<ModelCall, "status" | "contentType" | "chunks">;
 const harnessHost = globalThis as { __zencopyHarness?: HarnessGlobal };
 const harness: HarnessGlobal = harnessHost.__zencopyHarness ?? {};
 harnessHost.__zencopyHarness = harness;
+const { autostart: autostartOn, ...seededSettings } = harness.settings ?? {};
+Object.assign(storeData, seededSettings);
 
 /** What `read_catalog` returns: the seeded catalog, else the empty object
  *  the app reads as "nothing configured" (its Not-configured state). */
@@ -347,7 +353,7 @@ const handlers: Record<string, (args: Record<string, unknown>) => unknown> = {
     emit(args["event"] as string, args["payload"]);
     return null;
   },
-  "plugin:autostart|is_enabled": () => false,
+  "plugin:autostart|is_enabled": () => autostartOn === true,
   // Sinks, not data: the log plugin must swallow silently — an "unhandled"
   // warning for it would be forwarded to the log plugin again, and that
   // recursion has crashed the WebKit renderer — and the zoom call is a no-op

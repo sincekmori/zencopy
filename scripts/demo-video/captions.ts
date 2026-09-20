@@ -47,10 +47,10 @@ export const CAPTIONS: Record<string, Partial<Record<string, PageCaptions>> | un
   },
   en: {
     summarize: [
-      "Say you have an email.",
+      "Say you have an email in Japanese.",
       "Select the text,",
       "press {keys},",
-      "and there's your summary.",
+      "and there's your summary {lang:in}.",
     ],
   },
   es: {
@@ -106,7 +106,7 @@ export const CAPTIONS: Record<string, Partial<Record<string, PageCaptions>> | un
       "英語のメールがあるとします。",
       "画面の文字を選んで、",
       "{keys} を押すと",
-      "{lang}の要約が表示されます。",
+      "{lang:in}要約が表示されます。",
     ],
   },
   ko: {
@@ -154,7 +154,7 @@ export const CAPTIONS: Record<string, Partial<Record<string, PageCaptions>> | un
       "İngilizce bir e-posta var diyelim.",
       "Metni seç,",
       "{keys} tuşlarına bas,",
-      "ve {lang} özet karşında.",
+      "ve {lang:in} özet karşında.",
     ],
   },
   vi: {
@@ -166,9 +166,9 @@ export const CAPTIONS: Record<string, Partial<Record<string, PageCaptions>> | un
     ],
   },
   "zh-hans": {
-    summarize: ["比如有一封英文邮件，", "选中文本，", "按下 {keys}，", "就会显示{lang}总结。"],
+    summarize: ["比如有一封英文邮件，", "选中文本，", "按下 {keys}，", "就会{lang:in}显示总结。"],
   },
   "zh-hant": {
-    summarize: ["比如有一封英文郵件，", "選取文字，", "按下 {keys}，", "就會顯示{lang}摘要。"],
+    summarize: ["比如有一封英文郵件，", "選取文字，", "按下 {keys}，", "就會{lang:in}顯示摘要。"],
   },
 };

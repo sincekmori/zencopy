@@ -1,11 +1,16 @@
 /** The screenshot scenario registry — pure data, importable from both the
  *  browser side (components, via src/lib/screenshot.ts) and the node side
  *  (scripts/screenshot.ts), so a scenario name exists in exactly one place.
- *  `params` are the URL parameters a shot loads screenshot.html with;
- *  `viewport` overrides the runner's settings-window default (logical px)
- *  for other windows. Components react to the `screenshot` parameter via
- *  `screenshotScenario()`; the settings tab rides the generic `tab`
- *  parameter instead of one scenario per tab. */
+ *  `params` are the URL parameters a shot loads screenshot.html with, and
+ *  `settings` the app's state it is taken in (see ScenarioSettings);
+ *  `viewport` is the window the shot shows, in logical px — the settings
+ *  window's unless a scenario says otherwise (viewportOf) — which the runner
+ *  shoots one PNG pixel per logical pixel and the docs show at that size
+ *  (Screenshot.astro), so a picture is as big as the window on the screen,
+ *  on the page and opened on its own alike.
+ *  Components react to the `screenshot` parameter via `screenshotScenario()`;
+ *  the settings tab rides the generic `tab` parameter instead of one
+ *  scenario per tab. */
 
 import { geminiQuickCatalog } from "./quickstart.ts";
 
@@ -25,29 +30,59 @@ const POPUP_VIEWPORT = { width: 615, height: 620 };
 /** What the AI tab is shot with: the free Google key everyone starts from,
  *  so the picture shows the reader's own screen (provider, model, the key's
  *  dots) rather than the empty JSON editor an unconfigured app opens on. The
- *  key is a placeholder in the real key's shape; it never reaches a network. */
-const SETTINGS_AI_CATALOG = geminiQuickCatalog(`AIzaSy${"x".repeat(33)}`);
+ *  key is a placeholder of a key's length — Gemini keys share no fixed
+ *  prefix any more, so none is imitated — and never reaches a network. */
+const SETTINGS_AI_CATALOG = geminiQuickCatalog("x".repeat(39));
 
-export const SCREENSHOT_SCENARIOS: Record<
-  string,
-  {
-    params: Record<string, string>;
-    viewport?: { width: number; height: number };
-    /** Seeded on the harness's driver global as the app's catalog. */
-    catalog?: unknown;
-    /** The screen carries the key chord (⌘ + C + C on macOS, Ctrl + C + C
-     *  elsewhere — the welcome hero, and the settings window's tagline under
-     *  every tab and dialog): the runner shoots it as both and the docs show
-     *  the visitor's own. A scenario without the flag must render the same
-     *  on both, in every locale — the runner fails otherwise, so a chord
-     *  cannot slip into an unflagged screen unnoticed. */
-    os?: true;
-  }
-> = {
+interface Viewport {
+  width: number;
+  height: number;
+}
+
+/** The settings window minus its title bar (tauri.conf.json's 640×820, less
+ *  the 28 px of macOS's bar): what the welcome screen, the settings tabs and
+ *  their dialogs are shot in. */
+const SETTINGS_VIEWPORT: Viewport = { width: 640, height: 792 };
+
+/** The app's state a shot is taken in: settings.json's keys as
+ *  src/lib/settings.ts names them (popupCorner, theme, textSize, devMode,
+ *  …), plus `autostart`, the login-time start, which the autostart plugin
+ *  holds rather than the store. A key left out keeps the harness's default,
+ *  so a scenario without `settings` shows the app as it is installed. */
+interface ScenarioSettings extends Record<string, unknown> {
+  autostart?: boolean;
+}
+
+export interface ScreenshotScenario {
+  params: Record<string, string>;
+  /** The app's state for the shot, where the installed defaults are not it. */
+  settings?: ScenarioSettings;
+  /** The window the shot shows, where it is not the settings window. */
+  viewport?: Viewport;
+  /** Seeded on the harness's driver global as the app's catalog. */
+  catalog?: unknown;
+  /** The screen carries the key chord (⌘ + C + C on macOS, Ctrl + C + C
+   *  elsewhere — the welcome hero, and the settings window's tagline under
+   *  every tab and dialog): the runner shoots it as both and the docs show
+   *  the visitor's own. A scenario without the flag must render the same
+   *  on both, in every locale — the runner fails otherwise, so a chord
+   *  cannot slip into an unflagged screen unnoticed. */
+  os?: true;
+}
+
+/** The window a scenario is shot in, in logical px. */
+export function viewportOf(scenario: ScreenshotScenario): Viewport {
+  return scenario.viewport ?? SETTINGS_VIEWPORT;
+}
+
+export const SCREENSHOT_SCENARIOS: Record<string, ScreenshotScenario> = {
   welcome: { params: { welcome: "1" }, os: true },
   "settings-ai": { params: {}, catalog: SETTINGS_AI_CATALOG, os: true },
   "settings-prompts": { params: { tab: "prompts" }, os: true },
   "settings-general": { params: { tab: "general" }, os: true },
+  // The general tab with the login-time start on: the state the guide's last
+  // section has the reader reach, shown rather than described.
+  "settings-autostart": { params: { tab: "general" }, settings: { autostart: true }, os: true },
   "new-rule": { params: { tab: "prompts", screenshot: RULE_EDITOR_SCENARIO }, os: true },
   "prompt-editor": { params: { tab: "prompts", screenshot: PROMPT_EDITOR_SCENARIO }, os: true },
   "prompt-import": { params: { tab: "prompts", screenshot: PROMPT_IMPORT_SCENARIO }, os: true },

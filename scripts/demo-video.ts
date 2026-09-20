@@ -3,9 +3,10 @@
 // headless WebKit, its window is captured as 2× frames with a transparent
 // background (card, shadow, and all), and those frames become the videos: the
 // first demo composited over a page WebKit renders as well — the guide's
-// sample email open in a plain, unbranded mail client (scripts/demo-video/
-// mail.html around scripts/demo-video/source.txt, the file the guide embeds
-// too), selected before the eye, the popup landing top right — and the rest
+// sample mail open in a plain, unbranded mail client (scripts/demo-video/
+// mail.html around the locale's mail of scripts/demo-video/sample-mail.ts,
+// the file the guide embeds too), selected before the eye, the popup landing
+// top right — and the rest
 // over a plain backdrop, the popup alone.
 //
 // The model's answers are real once: `--record` runs the session against
@@ -16,8 +17,8 @@
 // recorded times), so the same videos come out of any later run with no
 // model call — and of a changed popup, since the product side is live. The
 // texts in the file are the content: edit a typed message or a reply there
-// and the next replay shows the edit; the copied text is source.txt's, and a
-// replay refuses to run until the two agree again.
+// and the next replay shows the edit; the copied text is the mail file's,
+// and a replay refuses to run until the two agree again.
 //
 // Usage: bun run demo-video [--locale <code>] [--record] [--out <root>] [--keep-work]
 // The demos (scripts/demo-video/demos.ts) are one session per locale; each
@@ -49,6 +50,7 @@ import { POPUP_RESULT_FIXTURES, SCREENSHOT_SCENARIOS } from "../src/lib/screensh
 import type { ModelCall } from "../src/screenshot/model-call.ts";
 import { type Demo, DEMOS, FRAMES, VIDEO_SCALE } from "./demo-video/demos.ts";
 import { CAPTIONS, KEYS, type PageCaptions } from "./demo-video/captions.ts";
+import { MAILS, type MailLang, mailLangFor, paragraphsOf } from "./demo-video/sample-mail.ts";
 import { fillLanguage, languageForms } from "../src/lib/language-forms.ts";
 import {
   ensureDevServer,
@@ -85,7 +87,6 @@ if (args.length > 0) {
   process.exit(1);
 }
 
-const SOURCE = join(HERE, "source.txt");
 const MAIL_TEMPLATE = join(HERE, "mail.html");
 const RECORDINGS = join(HERE, "recordings");
 const popupViewport = SCREENSHOT_SCENARIOS["popup"]?.viewport;
@@ -172,40 +173,47 @@ const APPEAR = PAGE_BEATS.still + PAGE_BEATS.select + PAGE_BEATS.settle + PAGE_B
  *  the popup to the work area's top-right; the window's own margin keeps the
  *  card off the edges). */
 const POPUP_AT = { x: PAGE.width * VIDEO_SCALE - WINDOW.w, y: 0 };
-/** The mail's subject: the reading pane's heading, the inbox row's, and the
- *  window title the capture carries. */
-const SUBJECT = "Updated proposal and review date";
-
 function escapeHtml(text: string): string {
   return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-/** The source's paragraphs: blank lines separate them, and the lines of one
- *  are one sentence each. */
-function paragraphsOf(source: string): string[] {
-  return source
-    .trim()
-    .split(/\n\s*\n/u)
-    .map((paragraph) => paragraph.split("\n").join(" "));
+/** A sample mail as the run holds it: the file, whole — the text the reader
+ *  copies — with what the page and the capture show of it. */
+interface SampleMail {
+  lang: MailLang;
+  subject: string;
+  from: string;
+  body: string;
+  paragraphs: string[];
 }
 
-/** The sample email as a page: scripts/demo-video/mail.html with the mail's
- *  own parts filled in — the subject, the inbox row's preview (the opening,
- *  greeting and sign-off skipped, cut at a word), the body. */
-function mailPage(source: string): string {
-  const paragraphs = paragraphsOf(source);
-  const opening = paragraphs
+/** The mail written in `lang`, read from its file (sample-mail.ts). */
+function mailIn(lang: MailLang): SampleMail {
+  const { subject, from } = MAILS[lang];
+  const body = readFileSync(join(HERE, `source.${lang}.txt`), "utf8");
+  return { lang, subject, from, body, paragraphs: paragraphsOf(body, lang) };
+}
+
+/** The sample mail as a page: scripts/demo-video/mail.html with the mail's
+ *  own parts filled in — the subject, the sender and its avatar's initial,
+ *  the inbox row's preview (the opening, greeting and sign-off skipped, cut
+ *  at a word), the body, its language. */
+function mailPage(mail: SampleMail): string {
+  const opening = mail.paragraphs
     .filter((paragraph) => !paragraph.endsWith(","))
     .join(" ")
     .slice(0, 64);
   const cut = opening.lastIndexOf(" ");
   const snippet = cut === -1 ? opening : opening.slice(0, cut);
   return readFileSync(MAIL_TEMPLATE, "utf8")
-    .replaceAll("{{subject}}", escapeHtml(SUBJECT))
+    .replaceAll("{{subject}}", escapeHtml(mail.subject))
+    .replaceAll("{{from}}", escapeHtml(mail.from))
+    .replaceAll("{{initial}}", escapeHtml(mail.from.charAt(0)))
     .replaceAll("{{snippet}}", escapeHtml(snippet))
+    .replaceAll("{{lang}}", mail.lang)
     .replaceAll(
       "{{paragraphs}}",
-      paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join(""),
+      mail.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join(""),
     );
 }
 
@@ -213,11 +221,11 @@ function pageFrameName(index: number): string {
   return `page-${String(index + 1).padStart(5, "0")}.png`;
 }
 
-/** Render the page's frames up to the moment the popup appears, into `dir`
- *  — one file per distinct picture: the still and the selected mail are one
- *  frame each, however long they hold. Once per run — the page is the same
- *  for every locale. */
-async function renderPage(browser: Browser, dir: string): Promise<Frame[]> {
+/** Render the page's frames for one mail up to the moment the popup
+ *  appears, into `dir` — one file per distinct picture: the still and the
+ *  selected mail are one frame each, however long they hold. Once per run
+ *  and mail — the page is the same for every locale reading that mail. */
+async function renderPage(browser: Browser, dir: string, mail: SampleMail): Promise<Frame[]> {
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(dir, { recursive: true });
   const context = await browser.newContext({
@@ -227,7 +235,7 @@ async function renderPage(browser: Browser, dir: string): Promise<Frame[]> {
   });
   try {
     const page = await context.newPage();
-    await page.setContent(mailPage(readFileSync(SOURCE, "utf8")));
+    await page.setContent(mailPage(mail));
     const frames: Frame[] = [];
     let shown: { fraction: number; file: string } | undefined;
     while (frames.length / FPS < APPEAR) {
@@ -383,9 +391,9 @@ async function openPopup(page: Page, locale: string, errors: string[]): Promise<
   await page.goto(harnessUrl({ locale, window: "popup" }), { waitUntil: "networkidle" });
 }
 
-/** The capture, as Rust would send it: the Summarize prompt over the source
+/** The capture, as Rust would send it: the Summarize prompt over the mail's
  *  text, with the template variables a mail client's copy carries. */
-async function buildCapture(page: Page, text: string): Promise<Record<string, unknown>> {
+async function buildCapture(page: Page, mail: SampleMail): Promise<Record<string, unknown>> {
   const prompts = await page.evaluate(() =>
     (
       globalThis as unknown as {
@@ -395,6 +403,7 @@ async function buildCapture(page: Page, text: string): Promise<Record<string, un
   );
   const summarize = frontmatterPrompt(prompts, "zencopy-summarize");
   const now = new Date();
+  const text = mail.body;
   return {
     kind: "text",
     source: { kind: "text", text },
@@ -413,7 +422,7 @@ async function buildCapture(page: Page, text: string): Promise<Record<string, un
       app_name: "Mail",
       exec_name: "Mail",
       exec_path: "",
-      window_title: SUBJECT,
+      window_title: mail.subject,
       url: "",
       process_id: "4242",
       now: `${now.getFullYear()}-${two(now.getMonth() + 1)}-${two(now.getDate())} ${two(now.getHours())}:${two(now.getMinutes())}:${two(now.getSeconds())}`,
@@ -1112,7 +1121,7 @@ async function compose(inputs: string[], filter: string, out: Output): Promise<v
  *  its last frame held for the rest of the demo (and a second more, so the
  *  overlay is what ends the video). */
 async function composeOverPage(
-  mail: Mail,
+  mail: MailFrames,
   span: Span,
   out: Output & { cues?: Cue[] | undefined },
 ): Promise<void> {
@@ -1223,11 +1232,12 @@ if (skipped.length > 0) {
   console.log(`skipped ${list} — ${why}`);
 }
 
+const running = locales.filter((entry) => !skipped.includes(entry));
 const workRoot = join(ROOT, "scratch", "demo-video");
 const failures: string[] = [];
 
-/** The page's frames, rendered once per run: the same for every locale. */
-interface Mail {
+/** A mail's page as frames, rendered once per run (see renderPage). */
+interface MailFrames {
   dir: string;
   frames: Frame[];
 }
@@ -1237,7 +1247,7 @@ interface Mail {
  *  (neutral) one. */
 async function generateDemo(job: {
   browser: Browser;
-  mail: Mail;
+  mail: MailFrames;
   session: Session;
   demo: Session["demos"][number];
   folder: string;
@@ -1283,7 +1293,11 @@ async function generateDemo(job: {
 /** One locale: the session, recorded or replayed, cut into its videos.
  *  Throws on any failure — the work directory stays, its report.json naming
  *  what stopped it. */
-async function generateOne(browser: Browser, mail: Mail, locale: string): Promise<void> {
+async function generateOne(
+  browser: Browser,
+  pages: ReadonlyMap<MailLang, MailFrames>,
+  locale: string,
+): Promise<void> {
   const folder = locale.toLowerCase();
   const workDir = join(workRoot, folder);
   rmSync(workDir, { recursive: true, force: true });
@@ -1294,15 +1308,19 @@ async function generateOne(browser: Browser, mail: Mail, locale: string): Promis
     ? undefined
     : (JSON.parse(readFileSync(recordingFile(locale), "utf8")) as Recording);
   const mode = recording === undefined ? "record" : "replay";
-  const source = readFileSync(SOURCE, "utf8");
+  const sample = mailIn(mailLangFor(locale));
+  const mail = pages.get(sample.lang);
+  if (mail === undefined) {
+    throw new Error(`no page rendered for the ${sample.lang} mail`);
+  }
   if (recording !== undefined) {
     // One mail: the page behind the first demo is rendered from the file,
     // the popup shows the recording's copy of it, and the video must not
     // show two texts.
     const recordedText = (recording.capture["source"] as { text?: unknown }).text;
-    if (recordedText !== source) {
+    if (recordedText !== sample.body) {
       throw new Error(
-        `scripts/demo-video/source.txt is not the mail ${recordingFile(locale)} was recorded with — re-record with --record, or put the recorded text back in the file`,
+        `scripts/demo-video/source.${sample.lang}.txt is not the mail ${recordingFile(locale)} was recorded with — re-record with --record, or put the recorded text back in the file`,
       );
     }
   }
@@ -1334,7 +1352,7 @@ async function generateOne(browser: Browser, mail: Mail, locale: string): Promis
   try {
     const page = await context.newPage();
     await openPopup(page, locale, errors);
-    const live = await buildCapture(page, source);
+    const live = await buildCapture(page, sample);
     const capture = recording === undefined ? live : replayCapture(live, recording.capture);
     const session = await runSession({
       page,
@@ -1411,10 +1429,13 @@ async function generateOne(browser: Browser, mail: Mail, locale: string): Promis
   }
 }
 
-async function generateAll(browser: Browser, mail: Mail): Promise<void> {
-  for (const locale of locales.filter((entry) => !skipped.includes(entry))) {
+async function generateAll(
+  browser: Browser,
+  pages: ReadonlyMap<MailLang, MailFrames>,
+): Promise<void> {
+  for (const locale of running) {
     try {
-      await generateOne(browser, mail, locale);
+      await generateOne(browser, pages, locale);
     } catch (error) {
       failures.push(`${locale}: ${error instanceof Error ? error.message : String(error)}`);
       console.error(`FAILED ${locale} — work kept at ${join(workRoot, locale.toLowerCase())}`);
@@ -1425,14 +1446,20 @@ async function generateAll(browser: Browser, mail: Mail): Promise<void> {
 const stopDevServer = await ensureDevServer();
 try {
   const browser = await webkit.launch();
-  const pageDir = join(workRoot, "page");
+  // The mails the run's locales read, each as a page once.
+  const pages = new Map<MailLang, MailFrames>();
   try {
-    const mail = { dir: pageDir, frames: await renderPage(browser, pageDir) };
-    await generateAll(browser, mail);
+    for (const lang of new Set(running.map((locale) => mailLangFor(locale)))) {
+      const dir = join(workRoot, `page-${lang}`);
+      pages.set(lang, { dir, frames: await renderPage(browser, dir, mailIn(lang)) });
+    }
+    await generateAll(browser, pages);
   } finally {
     await browser.close();
     if (!keepWork) {
-      rmSync(pageDir, { recursive: true, force: true });
+      for (const { dir } of pages.values()) {
+        rmSync(dir, { recursive: true, force: true });
+      }
     }
   }
 } finally {

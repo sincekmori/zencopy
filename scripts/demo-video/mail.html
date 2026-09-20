@@ -1,9 +1,11 @@
 <!doctype html>
-<!-- The page the first demo plays over: the sample mail (source.txt) open in
-     a plain, unbranded mail client — folders, the inbox with the mail open,
-     the reading pane; no names beyond departments. scripts/demo-video.ts
-     fills in {{subject}}, {{snippet}} (the open row's preview) and
-     {{paragraphs}} (the body), and drives select(fraction) to sweep the
+<!-- The page the first demo plays over: the locale's sample mail
+     (sample-mail.ts) open in a plain, unbranded mail client — folders, the
+     inbox with the mail open, the reading pane; no names beyond departments.
+     scripts/demo-video.ts fills in {{subject}}, {{from}} and {{initial}}
+     (the sender and its avatar), {{snippet}} (the open row's preview),
+     {{paragraphs}} (the body) and {{lang}} (the mail's language, on what
+     shows it), and drives select(fraction) to sweep the
      selection over the body before the popup appears. The selection is
      drawn as markup (a span over the selected prefix of each paragraph),
      not made with the native selection: a screenshot shows the DOM as it
@@ -183,8 +185,8 @@
     <aside>
       <h2>Inbox</h2>
       <ul>
-        <li class="open">
-          <b>Partner team</b><span class="when">9:12</span><span class="subject">{{subject}}</span
+        <li class="open" lang="{{lang}}">
+          <b>{{from}}</b><span class="when">9:12</span><span class="subject">{{subject}}</span
           ><span class="snippet">{{snippet}}</span>
         </li>
         <li>
@@ -220,14 +222,14 @@
       </ul>
     </aside>
     <section>
-      <h1>{{subject}}</h1>
+      <h1 lang="{{lang}}">{{subject}}</h1>
       <div class="from">
-        <span class="avatar">P</span>
-        <div class="who"><b>Partner team</b><span>to me</span></div>
+        <span class="avatar">{{initial}}</span>
+        <div class="who"><b>{{from}}</b><span>to me</span></div>
         <span class="date">Today, 9:12</span>
       </div>
       <div class="actions"><span>Reply</span><span>Forward</span></div>
-      <main id="mail">{{paragraphs}}</main>
+      <main id="mail" lang="{{lang}}">{{paragraphs}}</main>
     </section>
     <script>
       const mail = document.getElementById("mail");

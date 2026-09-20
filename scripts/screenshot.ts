@@ -27,9 +27,8 @@ import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { type BrowserContext, webkit } from "playwright";
 import { NEUTRAL_MODIFIER } from "../src/lib/modifier.ts";
-import { SCREENSHOT_SCENARIOS } from "../src/lib/screenshot-scenarios.ts";
+import { SCREENSHOT_SCENARIOS, viewportOf } from "../src/lib/screenshot-scenarios.ts";
 import {
-  DEVICE_SCALE,
   ensureDevServer,
   harnessUrl,
   localesMatching,
@@ -50,10 +49,6 @@ for (const name of names) {
     process.exit(1);
   }
 }
-
-// The settings window minus its title bar; a scenario override covers other
-// windows (the popup, About).
-const DEFAULT_VIEWPORT = { width: 640, height: 792 };
 
 /** The three renders: what the app reads its OS off (src/lib/platform.ts
  *  checks the user agent for "mac", and the harness may spell the modifier
@@ -148,13 +143,17 @@ try {
     const shots = new Map<string, Shots>();
     for (const render of RENDERS) {
       const context = await browser.newContext({
-        viewport: scenario.viewport ?? DEFAULT_VIEWPORT,
-        deviceScaleFactor: DEVICE_SCALE,
+        viewport: viewportOf(scenario),
+        // One PNG pixel per logical pixel: a shot is the window's size, on
+        // the page and opened on its own alike, at a third the bytes of a
+        // 2× one. A Retina display doubles it and softens the type — taken
+        // on purpose over files twice the window's size.
+        deviceScaleFactor: 1,
         colorScheme: "light",
         userAgent: render.userAgent,
       });
-      if (scenario.catalog !== undefined) {
-        await seedHarness(context, { catalog: scenario.catalog });
+      if (scenario.catalog !== undefined || scenario.settings !== undefined) {
+        await seedHarness(context, { catalog: scenario.catalog, settings: scenario.settings });
       }
       for (const value of locales) {
         const url = harnessUrl({ locale: value, ...scenario.params, ...render.params });

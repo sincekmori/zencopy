@@ -1,18 +1,79 @@
 ---
 /**
- * The English email the guide has the reader try first, read from the demo
- * recorder's source text — the mail in the video and the mail on the page
- * are one file (scripts/demo-video/source.txt). Blank lines separate
- * paragraphs; the lines of a paragraph are one sentence each.
+ * The mail the guide has the reader try first, on the page as the demo video
+ * shows it in its mail client: the subject, the sender, the body. It is the
+ * locale's sample mail (scripts/demo-video/sample-mail.ts — English, or
+ * Japanese for English readers), the very file the first demo copies, so the
+ * mail in the video and the mail on the page are one. A figure of ordinary
+ * paragraphs, never a code block: the reader is about to select this text
+ * and copy it twice, which a code block's copy button would skip — and its
+ * monospace would make a mail look like code.
  */
-import source from "../../../scripts/demo-video/source.txt?raw";
+import en from "../../../scripts/demo-video/source.en.txt?raw";
+import ja from "../../../scripts/demo-video/source.ja.txt?raw";
+import {
+  MAILS,
+  mailLangFor,
+  paragraphsOf,
+} from "../../../scripts/demo-video/sample-mail.ts";
+import { pageLocale } from "../lib/page-locale.ts";
 
-const paragraphs = source
-  .trim()
-  .split(/\n\s*\n/u)
-  .map((paragraph) => paragraph.split("\n").join(" "));
+const lang = mailLangFor(pageLocale(Astro.locals).locale);
+const { subject, from } = MAILS[lang];
+const paragraphs = paragraphsOf({ en, ja }[lang], lang);
 ---
 
-<blockquote>
-  {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-</blockquote>
+<figure class="mail not-content" lang={lang}>
+  <p class="subject">{subject}</p>
+  <p class="from">
+    <span aria-hidden="true" class="avatar">{from.charAt(0)}</span>
+    {from}
+  </p>
+  <div class="body">
+    {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+</figure>
+
+<style>
+  /* The reading pane of the video's mail client, in the page's own colors. */
+  .mail {
+    width: 100%;
+    margin-inline: 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.75rem;
+    background: var(--sl-color-bg);
+    line-height: var(--sl-line-height);
+  }
+  .subject {
+    margin: 0;
+    font-size: var(--sl-text-lg);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .from {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0 1rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
+  .avatar {
+    display: inline-flex;
+    width: 1.75rem;
+    height: 1.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--sl-color-gray-6);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .body p {
+    margin: 0;
+  }
+  .body p + p {
+    margin-top: 1em;
+  }
+</style>

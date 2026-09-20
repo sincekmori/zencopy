@@ -1,0 +1,74 @@
+---
+title: After the answer
+description: Switch the kind of answer, keep the conversation going, ask in your own words, hand over images and files, close an answer and bring it back. What you can do once an answer is on screen.
+---
+
+import CopyTwice from "../../../components/CopyTwice.astro";
+import DemoVideo from "../../../components/DemoVideo.astro";
+import OsText from "../../../components/OsText.astro";
+
+## Switch with number keys
+
+The row above the answer — Summarize, Explain, Translate, Polish, Custom — is the set of things you can ask the AI after <CopyTwice />, and they are called **prompts**.
+Click one, or press its number key (the order can be changed in the settings).
+
+<DemoVideo demo="explain">
+  Watch the demo
+</DemoVideo>
+
+Switch to Explain, and the same text is broken down in plain words.
+
+- **Summarize**: the point, in one sentence.
+- **Explain**: a plain-language walkthrough that assumes no prior knowledge.
+- **Translate**: any language into English. Text that is already English is reported as such.
+- **Polish**: typos, tone and wording fixed into a message you can send. Copied from a mail it stays a mail, from a chat a chat.
+- **Custom**: whatever you type in the box becomes the request.
+
+## Follow up
+
+Reply in the box under the answer (“Message…”) and the same conversation continues.
+
+<DemoVideo demo="follow-up">
+  Watch the demo
+</DemoVideo>
+
+Reply “A bit shorter, please” and the answer gets shorter.
+Enter sends, Shift + Enter breaks a line.
+An Enter that confirms an input-method conversion does not send.
+Every answer carries a Copy and a Retry icon (hover for their names).
+
+## Ask in your own words (Custom)
+
+Switch to Custom and the box changes to “Question or instruction…” and waits.
+Write what you want done with what you copied — “Make a table”, “What does this word mean?”, “Draft a reply in Japanese” — and press Enter.
+
+<DemoVideo demo="custom">
+  Watch the demo
+</DemoVideo>
+
+Write “Make a table”, and you get a table.
+
+## Images and files
+
+For an error screen, take a screenshot with <OsText windows="Win + Shift + S" mac="⌘ + Shift + Control + 4" /> and the picture is what is copied.
+On a desktop or a browser with nothing selected, <CopyTwice /> as you are, and the answer comes back as Explain.
+
+PDF, Word, Excel and PowerPoint files: select the file in <OsText windows="File Explorer" mac="Finder" /> and <CopyTwice />.
+Its content goes to the AI as it is (up to 10 MB at a time), again as Explain.
+
+Before an image or a PDF is sent, a card asks “Send this capture to your AI provider? Images and files can cost more than text.” — press Send.
+With the free key, this costs nothing either.
+
+## Close and recall
+
+While an answer is streaming, the ■ (Stop) at the right end of the box stops it.
+Once it has stopped, Esc or the × (Close) at the top right closes the popup.
+While you are typing in the box, the first Esc leaves the box and the second closes the popup.
+
+A closed answer comes back from the tray icon's menu, “Show App”.
+
+<CopyTwice /> the same text or image again and nothing is sent: the previous answer is shown as it was (a file is read again, since its content may have changed).
+The moment you <CopyTwice /> something else, the previous answer is gone.
+Keep an answer you want with its Copy.
+
+The popup moves when you drag its top band (where it says ZenCopy) and resizes when you drag an edge.

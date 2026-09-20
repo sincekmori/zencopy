@@ -1,0 +1,50 @@
+---
+/**
+ * An icon the reader is to find on the screen, drawn as the app draws it:
+ * Lucide's data for the glyph, from the very package the popup renders its
+ * icons with (src/lib/icons.ts), inline at the text's size — so the guide
+ * shows the picture the reader will match, not a word for it (歯車). Its
+ * <title> is the control's own name in the page's language, from the app's
+ * messages — what a screen reader says for it — so the prose need not
+ * repeat the name.
+ */
+import { ICONS } from "../../../src/lib/icons.ts";
+import { localeOf, messages } from "../../../src/lib/messages/index.ts";
+import { pageLocale } from "../lib/page-locale.ts";
+
+interface Props {
+  name: keyof typeof ICONS;
+}
+const { name } = Astro.props;
+const { locale: path } = pageLocale(Astro.locals);
+const locale = localeOf(path);
+if (locale === undefined) {
+  throw new Error(
+    `"${path}" is not a locale of the app — see src/lib/messages/index.ts`,
+  );
+}
+const { size, node, label } = ICONS[name];
+---
+
+<svg
+  class="glyph"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  viewBox={`0 0 ${size} ${size}`}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title>{label(messages[locale])}</title>
+  {node.map(([Tag, attrs]) => <Tag {...attrs} />)}
+</svg>
+
+<style>
+  .glyph {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+  }
+</style>

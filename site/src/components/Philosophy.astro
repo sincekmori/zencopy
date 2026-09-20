@@ -1,0 +1,48 @@
+---
+/**
+ * ZenCopy's one-line philosophy, where a page quotes it: the landing page's
+ * own line for the page's locale (landing-copy.ts), so the docs and the
+ * landing say it in the same words and a translation retypes nothing. Set
+ * apart as the landing sets it — serif, centered, a breath of space around
+ * it — with the slant dropped for Japanese, where italic looks broken.
+ */
+import { pageLocale } from "../lib/page-locale.ts";
+import { LANDING_COPY } from "./landing-copy.ts";
+
+const { locale } = pageLocale(Astro.locals);
+const copy = LANDING_COPY[locale];
+if (copy === undefined) {
+  throw new Error(`no landing copy for "${locale}" — see landing-copy.ts`);
+}
+---
+
+<blockquote
+  cite={`/${locale}/`}
+  class:list={["philosophy", "not-content", { ja: locale === "ja" }]}
+>
+  <p>{copy.philosophy}</p>
+</blockquote>
+
+<style>
+  .philosophy {
+    max-width: 30rem;
+    margin: 2rem auto;
+    padding: 0;
+    border: 0;
+    font-family: ui-serif, Georgia, "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-size: var(--sl-text-lg);
+    font-style: italic;
+    letter-spacing: 0.04em;
+    text-align: center;
+    color: var(--sl-color-gray-2);
+  }
+  .philosophy p {
+    margin: 0;
+  }
+  /* As on the landing page: italic serif reads as quotation in Latin script
+     but looks broken in Japanese, so the slant goes and the spacing breathes. */
+  .philosophy.ja {
+    font-style: normal;
+    letter-spacing: 0.2em;
+  }
+</style>

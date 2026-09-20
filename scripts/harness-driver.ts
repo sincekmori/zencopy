@@ -15,9 +15,6 @@ import { LOCALES } from "../src/lib/messages/index.ts";
 /** The repository root. */
 export const ROOT = join(import.meta.dirname, "..");
 const DEV_URL = "http://localhost:1420";
-/** The device pixel ratio the shots and frames are taken at: 2×, what the
- *  app's webview renders at on the displays the docs are read on. */
-export const DEVICE_SCALE = 2;
 
 /** Consume a `--flag value` pair from `args`, returning the value. */
 export function takeFlag(args: string[], flag: string): string | undefined {

@@ -8,6 +8,7 @@
  * stays English in every locale as the wording Microsoft asks for. The
  * locale is the page's; the alt text is the page's own words.
  */
+import { captureOf } from "../lib/capture.ts";
 import { pageLocale } from "../lib/page-locale.ts";
 
 interface Props {
@@ -15,11 +16,11 @@ interface Props {
   alt: string;
 }
 const { name, alt } = Astro.props;
-const { locale } = pageLocale(Astro.locals);
+const { src, width, height } = captureOf(pageLocale(Astro.locals).locale, name);
 ---
 
 <figure class="not-content">
-  <img alt={alt} src={`/${locale}/screenshots/${name}.png`} />
+  <img alt={alt} height={height} src={src} width={width} />
   <figcaption>Used with permission from Microsoft.</figcaption>
 </figure>
 
