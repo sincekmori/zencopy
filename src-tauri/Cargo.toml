@@ -65,7 +65,7 @@ calamine = { version = "0.36", default-features = false }
 # The engine: detects the global Ctrl/Cmd+C+C trigger and hands us a
 # CaptureEvent. Windows, macOS, and Linux (GNOME Wayland via a bundled Shell
 # extension, X11 via a key listener).
-copycopy = "0.4.1"
+copycopy = "0.4.2"
 
 # Native file-open dialog — "import a prompt from a .md file" in settings
 # (Rust-side only; the webview never gains dialog permissions).

@@ -433,7 +433,11 @@ pub fn run() {
                     copycopy::Config::default(),
                     move |event| {
                         let Some(source) = source_preview(&event) else {
-                            log::debug!("capture: blank content, ignored");
+                            // Info, so a release build's log says it too:
+                            // the keys were seen and nothing readable came
+                            // with them, which is otherwise indistinguishable
+                            // from a trigger that never fired.
+                            log::info!("capture: blank content, ignored");
                             return;
                         };
                         let prompts = load_prompts(&handle);
