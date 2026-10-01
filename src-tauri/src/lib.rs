@@ -719,6 +719,24 @@ mod ts_mirror_tests {
         );
     }
 
+    /// A run that finds no role of its prompt's own mapped ends at
+    /// DEFAULT_ROLE, and the frontend holds every config to mapping one role
+    /// (REQUIRED_ROLES in llm.ts). The two must be the same role: named
+    /// differently, a config would pass validation and leave every
+    /// pre-installed prompt without a model.
+    #[test]
+    fn default_role_matches_the_frontend() {
+        use crate::prompts::DEFAULT_ROLE;
+        const LLM_TS: &str = include_str!("../../src/lib/llm.ts");
+
+        assert!(
+            LLM_TS.contains(&format!(
+                "export const REQUIRED_ROLES = [\"{DEFAULT_ROLE}\"] as const;"
+            )),
+            "llm.ts must require the role Rust's prompts fall back to ({DEFAULT_ROLE})"
+        );
+    }
+
     /// rules.json (the default rules table) may only reference built-ins;
     /// an unknown id would make captures of that kind silently do nothing.
     /// It must also route EVERY kind — a missing key would leave captures of

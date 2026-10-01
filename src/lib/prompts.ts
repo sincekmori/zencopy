@@ -12,11 +12,15 @@ const log = createLogger("prompts");
 /** An prompt as listed by Rust (`list_prompts_ui`), sorted by label.
  *  `instructions` is the system prompt and `prompt` the user prompt body
  *  (both Liquid templates); "builtin" ships with the app and is immutable,
- *  "custom" is a local file. */
+ *  "custom" is a local file. `role` is the catalog role the prompt names —
+ *  its frontmatter's, or a pre-installed prompt's own id — which the
+ *  settings forms show and edit; `roles` is what a run of it tries, in
+ *  order (see CapturePayload's field of the same name). */
 const PromptInfoSchema = z.object({
   id: z.string(),
   label: z.string(),
   role: z.string().nullable(),
+  roles: z.array(z.string()),
   instructions: z.string(),
   prompt: z.string(),
   origin: z.enum(["builtin", "custom"]),

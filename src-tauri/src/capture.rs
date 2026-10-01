@@ -45,7 +45,7 @@ impl SourcePreview {
 }
 
 /// A capture, prepared for the UI. The popup shows `source` ("what is being acted
-/// on") and runs `role`/`instructions`/`prompt` when `runnable`.
+/// on") and runs `roles`/`instructions`/`prompt` when `runnable`.
 #[derive(Clone, serde::Serialize)]
 pub(crate) struct CapturePayload {
     pub(crate) kind: &'static str,
@@ -56,8 +56,9 @@ pub(crate) struct CapturePayload {
     pub(crate) prompt_id: String,
     /// The matched prompt's label (empty if none).
     pub(crate) label: String,
-    /// Catalog role to run with (already resolved to "default" when omitted).
-    pub(crate) role: String,
+    /// The catalog roles to run with, in the order they are tried
+    /// (`Prompt::roles`; none when no prompt matched).
+    pub(crate) roles: Vec<String>,
     /// The prompt's system prompt as a Liquid template (the frontend renders it).
     pub(crate) instructions: String,
     /// The prompt body (user prompt) as a Liquid template (the frontend renders it).
@@ -238,9 +239,7 @@ pub(crate) fn build_capture_payload(
         source,
         prompt_id: prompt.map(|a| a.id.clone()).unwrap_or_default(),
         label: prompt.map(|a| a.label.clone()).unwrap_or_default(),
-        role: prompt
-            .and_then(|a| a.role.clone())
-            .unwrap_or_else(|| "default".to_string()),
+        roles: prompt.map(Prompt::roles).unwrap_or_default(),
         instructions: prompt.map(|a| a.instructions.clone()).unwrap_or_default(),
         prompt: prompt.map(|a| a.body.clone()).unwrap_or_default(),
         vars: template_vars(event),

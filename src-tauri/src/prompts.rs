@@ -12,9 +12,53 @@ use tauri::Manager;
 pub(crate) struct Prompt {
     pub(crate) id: String,
     pub(crate) label: String,
-    pub(crate) role: Option<String>,
+    /// The frontmatter's `role`; what the prompt runs with is `roles()`.
+    role: Option<String>,
     pub(crate) instructions: String,
     pub(crate) body: String,
+}
+
+/// The catalog role every config maps (REQUIRED_ROLES in src/lib/llm.ts,
+/// pinned by a ts_mirror test in lib.rs).
+pub(crate) const DEFAULT_ROLE: &str = "default";
+
+impl Prompt {
+    /// The catalog role the prompt names. A pre-installed prompt names one
+    /// without declaring it: its own id (`zencopy-summarize`), the name
+    /// rules.json already knows it by. A prompt that joins DEFAULT_PROMPTS
+    /// has its role and one that leaves takes it along — no list of these
+    /// roles exists anywhere. And the id carries the prefix no user's prompt
+    /// can take, so a role a user makes up for prompts of their own
+    /// (`summarize`) never moves a pre-installed one. A user's prompt names
+    /// what its frontmatter says, or nothing.
+    pub(crate) fn role(&self) -> Option<&str> {
+        if is_builtin_prompt(&self.id) {
+            Some(&self.id)
+        } else {
+            self.role.as_deref()
+        }
+    }
+
+    /// The catalog roles a run of the prompt tries, in order: it runs with
+    /// the first one the config maps (`roleFor` in src/lib/llm-impl.ts).
+    /// The role the prompt names comes first. `default` follows it for a
+    /// pre-installed prompt, whose role is an offer: mapping it
+    /// (`"zencopy-summarize": "provider:model"`) gives that prompt a model
+    /// of its own, and a config that says nothing of it — every config the
+    /// settings window writes — runs the prompt as `default`. Nothing
+    /// follows the role a user's prompt names, which is a choice: left
+    /// unmapped it is a config problem and stays one, so a prompt sent to a
+    /// local model on purpose never reaches another over a typo. A prompt
+    /// naming none runs as `default`.
+    pub(crate) fn roles(&self) -> Vec<String> {
+        let named = self.role();
+        let fallback = (named.is_none() || is_builtin_prompt(&self.id)).then_some(DEFAULT_ROLE);
+        named
+            .into_iter()
+            .chain(fallback)
+            .map(str::to_string)
+            .collect()
+    }
 }
 
 /// Compatibility contract for the prompt format (shared files live for years
@@ -227,7 +271,12 @@ pub(crate) fn load_prompts(handle: &tauri::AppHandle) -> Vec<Prompt> {
 pub(crate) struct PromptInfo {
     id: String,
     label: String,
+    /// The role the prompt names (`Prompt::role`): what the settings forms
+    /// show and edit.
     role: Option<String>,
+    /// The roles a run tries (`Prompt::roles`): what the popup's switcher
+    /// runs the prompt with.
+    roles: Vec<String>,
     instructions: String,
     prompt: String,
     origin: &'static str,
@@ -245,9 +294,10 @@ pub(crate) fn list_prompts_ui(app: tauri::AppHandle) -> Vec<PromptInfo> {
             } else {
                 "custom"
             },
+            role: prompt.role().map(str::to_string),
+            roles: prompt.roles(),
             id: prompt.id,
             label: prompt.label,
-            role: prompt.role,
             instructions: prompt.instructions,
             prompt: prompt.body,
         })
@@ -578,7 +628,35 @@ mod tests {
             );
             assert!(!prompt.label.is_empty(), "'{id}' must have a label");
             assert!(!prompt.body.is_empty(), "'{id}' must have a prompt body");
+            assert!(
+                prompt.role.is_none(),
+                "'{id}' declares a role, which nothing reads: a pre-installed prompt's role is its id"
+            );
         }
+    }
+
+    /// Every pre-installed prompt offers the role named by its id and runs
+    /// as `default` where the config maps none; a user's prompt runs with
+    /// the one role it names — a pre-installed prompt's included — or as
+    /// `default` when it names none.
+    #[test]
+    fn a_prompt_runs_with_the_role_it_names_first() {
+        for (id, raw) in DEFAULT_PROMPTS {
+            let prompt = parse_prompt(raw, id).expect("built-in prompts parse");
+            assert_eq!(prompt.role(), Some(*id));
+            assert_eq!(prompt.roles(), [*id, DEFAULT_ROLE]);
+        }
+        let users = |role: Option<&str>| {
+            let file =
+                serialize_prompt_md(None, "Mine", role, "", "{{ text }}").expect("serializes");
+            parse_prompt(&file, "mine").expect("parses")
+        };
+        assert_eq!(users(Some("smart")).roles(), ["smart"]);
+        assert_eq!(
+            users(Some("zencopy-summarize")).roles(),
+            ["zencopy-summarize"]
+        );
+        assert_eq!(users(None).roles(), [DEFAULT_ROLE]);
     }
 
     /// Deleting an prompt that rules references must heal the file, not

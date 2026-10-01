@@ -20,7 +20,6 @@ import {
   TIMED_OUT,
   type StreamOutcome,
   type TokenUsage,
-  OPTIONAL_ROLES,
   REQUIRED_ROLES,
 } from "@/lib/llm.ts";
 import { createLogger } from "@/lib/log.ts";
@@ -48,19 +47,27 @@ const INACTIVITY_TIMEOUT_MS = 90_000;
  *  can't miss. */
 type ZenCatalog = Catalog<(typeof REQUIRED_ROLES)[number]>;
 
-/** A role by name, for the roles PROMPTS declare — anything beyond the
- *  required ones is the user's own vocabulary, so the typed record widens
- *  back to a dictionary and absence means "the config doesn't map it".
- *  One of the {@link OPTIONAL_ROLES} left unmapped runs as `default`
- *  instead: the built-in prompt declaring it must keep working on a config
- *  that predates the role. */
-function roleFor(resolved: ZenCatalog, role: string): RoleEntry | undefined {
-  const entry = (resolved.roles as Record<string, RoleEntry | undefined>)[role];
-  if (entry === undefined && OPTIONAL_ROLES.some((optional) => optional === role)) {
-    log.debug(`role "${role}" is not mapped in ai-sdk-catalog.json; running as "default"`);
-    return resolved.roles.default;
+/** The role a run uses, with what it resolves to: the first of the prompt's
+ *  roles the config maps, or undefined when it maps none of them. Which
+ *  roles a prompt runs with, and in what order, is Rust's to say
+ *  (`Prompt::roles` in src-tauri/src/prompts.rs: a pre-installed prompt
+ *  offers the one its id names and then `default`, a user's prompt names
+ *  exactly one), so nothing here tells one prompt from another. Beyond the
+ *  required roles the names are the user's own vocabulary, looked up among
+ *  the config's own keys: what every object inherits (`constructor`) is no
+ *  role. */
+function roleFor(
+  resolved: ZenCatalog,
+  roles: readonly string[],
+): { role: string; entry: RoleEntry } | undefined {
+  const mapped = new Map<string, RoleEntry>(Object.entries(resolved.roles));
+  for (const role of roles) {
+    const entry = mapped.get(role);
+    if (entry !== undefined) {
+      return { role, entry };
+    }
   }
-  return entry;
+  return undefined;
 }
 
 /** The fetch every provider's requests go through. The webview is a browser
@@ -413,18 +420,18 @@ export async function streamPrompt(
   // others (API errors) go to `onError` and the stream just ends. Capture them
   // so we surface the real reason instead of silently rendering nothing.
   let streamError: unknown;
-  // The prompt's role must be mapped in the config (or be an optional
-  // built-in one, which roleFor runs as default) — an unmapped name is a
+  // One of the prompt's roles must be mapped in the config — none is a
   // config problem and deserves the config-problem message, not a raw throw
   // from deep inside the model lookup. `default` itself is proven present.
-  const roleEntry = roleFor(resolved, input.role);
-  if (roleEntry === undefined) {
-    const detail = new Error(`the config's roles do not map "${input.role}"`);
+  const served = roleFor(resolved, input.roles);
+  if (served === undefined) {
+    const names = input.roles.map((role) => `"${role}"`).join(", ");
+    const detail = new Error(`the config's roles map none of ${names}`);
     log.error("ai-sdk-catalog.json failed validation", detail);
     throw new Error(INVALID_CONFIG, { cause: detail });
   }
   const stream = streamText({
-    model: resolved.model(roleEntry.key),
+    model: resolved.model(served.entry.key),
     instructions: composeInstructions(instructions, userContext),
     messages,
     abortSignal: aborter.signal,
@@ -435,7 +442,7 @@ export async function streamPrompt(
   const { textStream } = stream;
   // The catalog address that serves this run — the fact cost math needs
   // (roles are indirection; the statistics record what they resolved to).
-  const modelRef = roleEntry.key;
+  const modelRef = served.entry.key;
   // The SDK settles `usage` when the stream ends; an aborted stream may
   // reject it or leave it hanging, so cap the wait and settle for "unknown".
   // The mapping to our own field names is the schema firewall: when the SDK
@@ -509,7 +516,7 @@ export async function streamPrompt(
 
   const elapsed = `${Date.now() - startedAt}ms`;
   if (signal.aborted) {
-    log.debug(`run stopped by the user after ${elapsed} (role=${input.role})`);
+    log.debug(`run stopped by the user after ${elapsed} (role=${served.role})`);
     // Stopped — keep what we have (and whatever tokens the provider reported).
     return {
       text: stripResultTags(extractResult(raw, true) ?? raw),
@@ -524,7 +531,7 @@ export async function streamPrompt(
   }
   if (timedOut) {
     log.warn(
-      `run timed out after ${elapsed} of silence (role=${input.role}, ${raw.length} chars received)`,
+      `run timed out after ${elapsed} of silence (role=${served.role}, ${raw.length} chars received)`,
     );
     throw new Error(TIMED_OUT);
   }
@@ -540,14 +547,14 @@ export async function streamPrompt(
   const tagged = extractResult(raw, true);
   if (tagged === undefined && raw.trim()) {
     log.warn(
-      `model ignored the result-tag protocol; falling back to the full output (role=${input.role})`,
+      `model ignored the result-tag protocol; falling back to the full output (role=${served.role})`,
     );
   }
   const result = stripResultTags(tagged ?? raw);
   if (!result) {
     throw new Error(EMPTY_RESULT);
   }
-  log.debug(`run finished in ${elapsed} (role=${input.role}, ${result.length} chars)`);
+  log.debug(`run finished in ${elapsed} (role=${served.role}, ${result.length} chars)`);
   onChunk(result);
   return { text: result, model: modelRef, tokens: await harvestTokens() };
 }

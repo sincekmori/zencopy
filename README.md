@@ -101,6 +101,8 @@ Settings split into two layers:
 - **Files (power users)** — read from the per-user app config dir (macOS: `~/Library/Application Support/app.zencopy/`; the exact path is logged at startup).
   Defaults for rules and prompts are embedded in the app, so these files only ever override:
   - `ai-sdk-catalog.json` — providers and **role → model** mapping.
+    Only `default` is required.
+    Each pre-installed prompt also answers to a role named by its id (`zencopy-summarize`, `zencopy-explain`, …): map one and that prompt runs on its own model, leave it out and the prompt runs as `default`.
     API keys live inline in this local file (what the settings UI writes) and never leave your machine.
   - `rules.json` — `kind → prompt`, plus higher-priority `overrides`.
   - `prompts/*.md` — prompt definitions: YAML frontmatter (`id`, `label`, optional `role`, `instructions`) + a Liquid prompt body.

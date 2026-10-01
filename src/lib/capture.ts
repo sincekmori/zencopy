@@ -36,7 +36,9 @@ export type Source = z.infer<typeof SourceSchema>;
  *  the boundary. Field notes:
  *  - `prompt_id` / `label`: the matched prompt (empty if none) — what the
  *    switcher has selected.
- *  - `role`: catalog role to run with (already resolved to "default").
+ *  - `roles`: the catalog roles to run with, in the order they are tried —
+ *    the run uses the first one the config maps (Rust's `Prompt::roles`
+ *    says which; none when no prompt matched).
  *  - `instructions` / `prompt`: the prompt's system prompt and body, as
  *    Liquid templates rendered on the frontend with `vars`.
  *  - `runnable`: whether an prompt applies and is ready to run. */
@@ -45,7 +47,7 @@ export const CapturePayloadSchema = z.object({
   source: SourceSchema,
   prompt_id: z.string(),
   label: z.string(),
-  role: z.string(),
+  roles: z.array(z.string()),
   instructions: z.string(),
   prompt: z.string(),
   vars: z.record(z.string(), z.string()),

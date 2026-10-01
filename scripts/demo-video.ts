@@ -356,8 +356,8 @@ interface Session {
   errors: string[];
 }
 
-function frontmatterPrompt(prompts: unknown, id: string): Record<string, string> {
-  const list = prompts as Record<string, string>[];
+function frontmatterPrompt(prompts: unknown, id: string): Record<string, unknown> {
+  const list = prompts as Record<string, unknown>[];
   const prompt = list.find((entry) => entry["id"] === id);
   if (prompt === undefined) {
     throw new Error(`the harness lists no prompt "${id}"`);
@@ -408,7 +408,7 @@ async function buildCapture(page: Page, mail: SampleMail): Promise<Record<string
     source: { kind: "text", text },
     prompt_id: summarize["id"],
     label: summarize["label"],
-    role: summarize["role"] ?? "default",
+    roles: summarize["roles"],
     instructions: summarize["instructions"],
     prompt: summarize["prompt"],
     vars: {

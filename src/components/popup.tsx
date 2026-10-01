@@ -375,7 +375,7 @@ async function runPrompt(request: {
 /** The reuse gate's fingerprint of what a run would do. One definition site:
  *  the gate in run() compares exactly what execute() records. */
 const definitionOf = (payload: CapturePayload): string =>
-  `${payload.role}\n${payload.instructions}\n${payload.prompt}`;
+  `${payload.roles.join("\n")}\n${payload.instructions}\n${payload.prompt}`;
 
 export function Popup(): React.JSX.Element {
   const [payload, setPayload] = useState<CapturePayload | undefined>(undefined);
@@ -436,7 +436,7 @@ export function Popup(): React.JSX.Element {
   const pendingSend = useRef<
     { payload: CapturePayload; prior: Exchange[]; question?: string | undefined } | undefined
   >(undefined);
-  // What each kept result was produced WITH (role + instructions + prompt at
+  // What each kept result was produced WITH (roles + instructions + prompt at
   // run time): editing an prompt and re-copying the same test text must run
   // the new definition, not parrot the old result — that edit-and-retry loop
   // is exactly how prompts get written.
@@ -809,7 +809,7 @@ export function Popup(): React.JSX.Element {
         source,
         prompt_id: custom ? CUSTOM_PROMPT_ID : "zencopy-summarize",
         label: custom ? "Custom" : "Summarize",
-        role: "",
+        roles: [],
         instructions: "",
         prompt: POPUP_RESULT_SOURCE,
         vars: {},
@@ -1013,7 +1013,7 @@ export function Popup(): React.JSX.Element {
       ...payload,
       prompt_id: prompt.id,
       label: prompt.label,
-      role: prompt.role ?? "default",
+      roles: prompt.roles,
       instructions: prompt.instructions,
       prompt: prompt.prompt,
       runnable: true,

@@ -214,6 +214,11 @@ Keep the summary line short and factual; put the "why" and any surprising contex
 - **The update manifest's links are release download addresses.**
   tauri-action writes REST API addresses into `latest.json`, which count against GitHub's hourly quota for unauthenticated requests per IP; the release workflow's `manifest` job rewrites them once every platform has uploaded, and fails when a platform's entry is missing.
   Publish a draft only after that job is green.
+- **A pre-installed prompt's catalog role is its id, and listed nowhere.**
+  `Prompt::role` in [src-tauri/src/prompts.rs](src-tauri/src/prompts.rs) answers with the id (`zencopy-summarize`, the name `rules.json` knows the prompt by) and `Prompt::roles` puts `default` after it: a config that maps the role gives that prompt a model of its own, one that leaves it out runs the prompt as `default`.
+  The id carries the prefix no user's prompt can take, so a role a user makes up for prompts of their own (`summarize`) never moves a pre-installed one.
+  Rust says which roles a run tries and in what order, and the frontend takes the first one the config maps (`roleFor` in [src/lib/llm-impl.ts](src/lib/llm-impl.ts)) without telling one prompt from another — so a prompt that joins or leaves `DEFAULT_PROMPTS` needs no change for its role, and its file declares none (a test fails one that does).
+  A user's prompt is the opposite on purpose: the role its frontmatter names must be mapped, or the run is a config error, so a prompt sent to a local model never reaches another over a typo.
 
 ## Where to look first
 

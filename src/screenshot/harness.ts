@@ -123,12 +123,16 @@ function parsePrompts(raws: string[]): { id: string; [key: string]: unknown }[] 
         fields[block] = `${fields[block]}${fields[block] === "" ? "" : "\n"}${line.trim()}`;
       }
     }
+    const id = fields["id"] ?? "";
     return {
-      id: fields["id"] ?? "",
+      id,
       label: fields["label"] ?? "",
       instructions: fields["instructions"] ?? "",
       prompt: rest.join("---\n").trim(),
-      role: fields["role"] ?? null,
+      // A pre-installed prompt's role is its id, and a run tries it before
+      // `default` (Prompt::role and Prompt::roles in prompts.rs).
+      role: id,
+      roles: [id, "default"],
       origin: "builtin",
     };
   });

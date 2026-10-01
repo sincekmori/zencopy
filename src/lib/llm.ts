@@ -19,17 +19,11 @@ export const TIMED_OUT = "timed-out";
  *  empty body would read as "success with no output". */
 export const EMPTY_RESULT = "empty-result";
 
-/** The catalog roles ZenCopy itself depends on: every prompt without a
- *  frontmatter role runs as `default`, and the connection test pings it. */
+/** The catalog roles ZenCopy itself depends on: a prompt that names no role
+ *  runs as `default`, so does a pre-installed prompt whose own role the
+ *  config does not map, and the connection test pings it. (Rust's
+ *  DEFAULT_ROLE is the same role, pinned by a ts_mirror test there.) */
 export const REQUIRED_ROLES = ["default"] as const;
-
-/** The catalog roles a built-in prompt may declare without the config
- *  mapping them: one the config leaves unmapped runs as `default`, so a
- *  config written before the role existed keeps working unchanged, and
- *  mapping it (`roles.custom`) is how the user gives that prompt a model of
- *  its own. A user prompt's role gets no such grace — an unmapped name
- *  there is a config problem and stays one. */
-export const OPTIONAL_ROLES = ["custom"] as const;
 
 /** One turn of an prompt thread: the follow-up question that produced the
  *  reply (`text` is partial while the turn still streams). The first turn
@@ -44,7 +38,10 @@ export interface Exchange {
 }
 
 export interface PromptInput {
-  role: string;
+  /** The catalog roles to run with, in the order they are tried: the run
+   *  uses the first one the config maps, and a config that maps none of
+   *  them is INVALID_CONFIG. */
+  roles: readonly string[];
   instructions: string;
   prompt: string;
   vars: Record<string, string>;
