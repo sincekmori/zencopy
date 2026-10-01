@@ -582,6 +582,23 @@ mod ts_mirror_tests {
         codes
     }
 
+    /// macOS asks whether ZenCopy may read a browser's page address in the
+    /// user's own language: every locale of the frontend has the sentence
+    /// the request shows (infoplist/<code>.lproj, bundled on macOS).
+    #[test]
+    fn every_frontend_locale_words_the_automation_request() {
+        for code in frontend_locales() {
+            let file = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+                .join(format!("infoplist/{code}.lproj/InfoPlist.strings"));
+            let text = std::fs::read_to_string(&file).unwrap_or_default();
+            assert!(
+                text.starts_with("NSAppleEventsUsageDescription = \""),
+                "{} must word the request for '{code}'",
+                file.display()
+            );
+        }
+    }
+
     /// A Chinese tag that names no script goes Traditional by the same
     /// subtags on both sides, or the tray and the windows would disagree
     /// about which Chinese a region reads.

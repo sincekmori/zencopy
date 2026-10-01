@@ -68,7 +68,8 @@
     "createUpdaterArtifacts": true,
     "copyright": "© 2026 Shinsuke Mori",
     "macOS": {
-      "minimumSystemVersion": "13.3"
+      "minimumSystemVersion": "13.3",
+      "entitlements": "./Entitlements.plist"
     },
     "linux": {
       "deb": {

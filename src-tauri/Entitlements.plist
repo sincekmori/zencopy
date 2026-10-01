@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Reading the address of the browser page a copy came from (copycopy
+	     asks the browser through an Apple event). Under the hardened runtime
+	     macOS refuses that without a word unless the app holds this; with it,
+	     the user is asked once per browser (the sentence shown is
+	     NSAppleEventsUsageDescription in Info.plist and infoplist/). -->
+	<key>com.apple.security.automation.apple-events</key>
+	<true/>
+</dict>
+</plist>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Merged into the Info.plist Tauri generates. What macOS shows when it
+	     asks whether ZenCopy may read a browser's page address (once per
+	     browser); each language's own wording is in infoplist/<lproj>/. -->
+	<key>NSAppleEventsUsageDescription</key>
+	<string>ZenCopy reads only the address of the page you copied from, so that your rules and prompts can use it.</string>
+</dict>
+</plist>

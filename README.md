@@ -75,6 +75,10 @@ On Linux, GNOME on Wayland is supported via a bundled GNOME Shell extension (ins
 other Wayland compositors (KDE, wlroots, …) are not supported yet.
 The Linux packages are built on Ubuntu 22.04 and need glibc 2.35 or later.
 
+The browser's address — the URL condition of a rule, `{{ url }}` in a prompt — is read on Windows and macOS.
+macOS asks for it once per browser, the first time you copy there (Automation, in Privacy & Security); declined, everything else works and the address stays empty.
+Linux offers no way to read it.
+
 ## Develop
 
 Prerequisites: [Bun](https://bun.sh), the [Rust toolchain](https://rustup.rs), and the [Tauri v2 system dependencies](https://v2.tauri.app/start/prerequisites/).
