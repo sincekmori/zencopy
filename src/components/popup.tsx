@@ -377,6 +377,14 @@ async function runPrompt(request: {
 const definitionOf = (payload: CapturePayload): string =>
   `${payload.roles.join("\n")}\n${payload.instructions}\n${payload.prompt}`;
 
+/** The usage trail: one line per invocation, uniform across fresh runs,
+ *  retries, and kept results being shown — prose for the human reading the
+ *  log (statistics live in their own store, not here). Ids and kinds only,
+ *  never content. */
+const logUsage = (promptId: string, kind: string): void => {
+  log.info(`prompt run: ${promptId} (${kind})`);
+};
+
 export function Popup(): React.JSX.Element {
   const [payload, setPayload] = useState<CapturePayload | undefined>(undefined);
   // Every prompt's output for the current capture, keyed by prompt id —
@@ -490,14 +498,6 @@ export function Popup(): React.JSX.Element {
       }
       return next;
     });
-  };
-
-  // The usage trail: one line per invocation, uniform across fresh runs,
-  // retries, and kept results being shown — prose for the human reading the
-  // log (statistics live in their own store, not here). Ids and kinds only,
-  // never content.
-  const logUsage = (promptId: string, kind: string): void => {
-    log.info(`prompt run: ${promptId} (${kind})`);
   };
 
   // Refresh the header's month estimate; a failure hides the number rather
