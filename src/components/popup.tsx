@@ -37,6 +37,7 @@ import { formatUsd, monthCostUsd } from "@/lib/costs.ts";
 import { usePromptLabel, useLocale, useT } from "@/lib/i18n.tsx";
 import { isImeKey } from "@/lib/ime.ts";
 import { createLogger, errorMessage } from "@/lib/log.ts";
+import type { Locale, Messages } from "@/lib/messages/index.ts";
 import {
   type Exchange,
   EMPTY_RESULT,
@@ -63,6 +64,7 @@ import { useUpdateVersion } from "@/lib/updater.ts";
 import { useLiveValue, useTauriEvent } from "@/lib/use-tauri-event.ts";
 import { screenshotScenario } from "@/lib/screenshot.ts";
 import { POPUP_CUSTOM_SCENARIO, POPUP_RESULT_SCENARIO } from "@/lib/screenshot-scenarios.ts";
+import type * as Scenarios from "@/lib/screenshot-scenarios.ts";
 
 type Result =
   // The last turn streams; completed turns before it are settled.
@@ -251,6 +253,123 @@ function Turn({
       )}
     </div>
   );
+}
+
+/** The screenshot scenarios' fixture table, as a chunk of its own: a dynamic
+ *  import, so it stays out of the production chunks — its one caller sits
+ *  behind a build-time DEV check, and with that branch folded away this
+ *  function (and the chunk) die. (Out of the component: the React Compiler
+ *  cannot take an `import()` inside one.) */
+async function screenshotFixtures(): Promise<typeof Scenarios> {
+  return await import("@/lib/screenshot-scenarios.ts");
+}
+
+/** How a run of a prompt ended, before the popup has shown anything of it. */
+type RunEnd =
+  /** The capture carries images or files the user has not agreed to send. */
+  | { kind: "unapproved" }
+  /** The stream settled: finished, or stopped by the user with what had
+   *  arrived by then. */
+  | { kind: "settled"; outcome: StreamOutcome }
+  /** Nothing to show but a sentence — and, when the config is what is wrong
+   *  (`setup`), a way into the settings. */
+  | { kind: "failed"; text: string; setup: boolean };
+
+/** The sentence a failed run is told in, by what its error says. */
+function failureText(t: Messages, reason: string): string {
+  if (reason === TIMED_OUT) {
+    return t.popup.timedOut;
+  }
+  if (reason === EMPTY_RESULT) {
+    return t.popup.emptyResult;
+  }
+  if (reason === ATTACHMENT_TOO_LARGE) {
+    return t.popup.attachmentTooLarge(MAX_ATTACHMENT_MB);
+  }
+  if (reason.startsWith(UNSUPPORTED_FILE_PREFIX)) {
+    return t.popup.unsupportedFile(reason.slice(UNSUPPORTED_FILE_PREFIX.length));
+  }
+  if (reason.startsWith(FILE_UNREADABLE_PREFIX)) {
+    return t.popup.fileUnreadable(reason.slice(FILE_UNREADABLE_PREFIX.length));
+  }
+  return t.popup.failed(reason);
+}
+
+/** Run a prompt on a capture — the cost cap, the attachments, the stream —
+ *  and say how it ended. It touches nothing of the popup's: the caller shows
+ *  the end, if the run is still its own by then. Never throws. (It is also
+ *  kept out of the component for the React Compiler's sake, which cannot
+ *  take a `try` block with conditions in it.) */
+async function runPrompt(request: {
+  payload: CapturePayload;
+  /** The thread so far and the user turn extending it (see execute). */
+  prior: Exchange[];
+  question: string | undefined;
+  locale: Locale;
+  t: Messages;
+  /** The monthly cap in USD; 0 for none. */
+  costLimit: number;
+  /** Whether sending images or files still needs the user's go-ahead —
+   *  asked once the attachments are read, which is when it is known. */
+  mustAsk: () => boolean;
+  onChunk: (text: string) => void;
+  signal: AbortSignal;
+}): Promise<RunEnd> {
+  const { payload, prior, question, locale, t, costLimit } = request;
+  try {
+    // The monthly cost cap: when this month's estimate has reached the
+    // user's limit, refuse before anything is sent. Fail-open on purpose
+    // — a cap that cannot be computed must not stop the user's work.
+    if (costLimit > 0) {
+      let spent: number | undefined;
+      try {
+        spent = await monthCostUsd();
+      } catch {
+        spent = undefined; // fail-open: an uncomputable cap must not stop work
+      }
+      if (spent !== undefined && spent >= costLimit) {
+        const capped = t.popup.costLimitReached(formatUsd(locale, costLimit));
+        return { kind: "failed", text: capped, setup: false };
+      }
+    }
+    const attachments = await buildAttachments(payload.source);
+    // Only binary attachments (image, PDF, audio) are the expensive path
+    // worth a gate — text files ride like copied text and run right away.
+    // Known only after reading the files, hence the gate sits here.
+    const expensive = attachments?.some((file) => !file.media_type.startsWith("text/"));
+    if (expensive && request.mustAsk()) {
+      return { kind: "unapproved" };
+    }
+    const followUp = question === undefined ? undefined : { turns: prior, question };
+    const outcome = await streamPrompt(
+      // Expose the user's locale to prompt templates ({{ locale }}).
+      {
+        ...payload,
+        vars: { ...payload.vars, locale },
+        ...(attachments ? { attachments } : {}),
+        ...(followUp ? { followUp } : {}),
+      },
+      request.onChunk,
+      request.signal,
+    );
+    return { kind: "settled", outcome };
+  } catch (error) {
+    const reason = errorMessage(error);
+    if (reason === NOT_CONFIGURED) {
+      // No provider set up yet. The popup stays put and offers a way into
+      // settings — auto-opening it would steal focus.
+      return { kind: "failed", text: t.ai.notConfigured, setup: true };
+    }
+    if (reason === INVALID_CONFIG) {
+      // The catalog file exists but fails the schema. Same treatment as
+      // "not configured" — a human sentence plus a way into settings; the
+      // zod detail is already in the log.
+      log.error("prompt failed: invalid ai-sdk-catalog.json", error);
+      return { kind: "failed", text: t.ai.invalidConfig, setup: true };
+    }
+    log.error("prompt failed", error);
+    return { kind: "failed", text: failureText(t, reason), setup: false };
+  }
 }
 
 /** The reuse gate's fingerprint of what a run would do. One definition site:
@@ -550,59 +669,44 @@ export function Popup(): React.JSX.Element {
     };
 
     void (async () => {
-      // The outcome once the stream settles — undefined when the run never
-      // reached a model (gate, config errors), so the recorded event carries
-      // exactly the facts that exist.
-      let settled: StreamOutcome | undefined;
-      try {
-        // The monthly cost cap: when this month's estimate has reached the
-        // user's limit, refuse before anything is sent. Fail-open on purpose
-        // — a cap that cannot be computed must not stop the user's work.
-        if (costLimit > 0 && statsEnabled) {
-          let spent: number | undefined;
-          try {
-            spent = await monthCostUsd();
-          } catch {
-            spent = undefined; // fail-open: an uncomputable cap must not stop work
-          }
-          if (owns() && spent !== undefined && spent >= costLimit) {
-            const capped = t.popup.costLimitReached(formatUsd(locale, costLimit));
-            putResult(promptId, { phase: "done", turns: turnsWith(capped), ok: false });
-            return;
-          }
+      const end = await runPrompt({
+        payload: next,
+        prior,
+        question,
+        locale,
+        t,
+        // The cap is an estimate from the usage ledger: no ledger, no cap.
+        costLimit: statsEnabled ? costLimit : 0,
+        mustAsk: () => confirmSend && approvedSig.current !== sig,
+        onChunk: paintSoon,
+        signal: controller.signal,
+      });
+      clearTimeout(paint);
+      if (!owns()) {
+        return;
+      }
+      runsRef.current.delete(promptId); // free the slot for a later re-run
+      switch (end.kind) {
+        case "unapproved": {
+          // Suspend THIS run — approval must resume a follow-up or retry
+          // as itself, not restart the capture from scratch via run().
+          pendingSend.current = { payload: next, prior, question };
+          revert();
+          setDontAsk(false);
+          setAwaitingSend(true);
+          break;
         }
-        const attachments = await buildAttachments(next.source);
-        // Only binary attachments (image, PDF, audio) are the expensive path
-        // worth a gate — text files ride like copied text and run right away.
-        // Known only after reading the files, hence the gate sits here.
-        const expensive = attachments?.some((file) => !file.media_type.startsWith("text/"));
-        if (expensive && confirmSend && approvedSig.current !== sig) {
-          if (owns()) {
-            runsRef.current.delete(promptId);
-            // Suspend THIS run — approval must resume a follow-up or retry
-            // as itself, not restart the capture from scratch via run().
-            pendingSend.current = { payload: next, prior, question };
-            revert();
-            setDontAsk(false);
-            setAwaitingSend(true);
-          }
-          return;
+        case "failed": {
+          putResult(promptId, {
+            phase: "done",
+            turns: turnsWith(end.text),
+            ok: false,
+            setup: end.setup,
+          });
+          break;
         }
-        const followUp = question === undefined ? undefined : { turns: prior, question };
-        const outcome = await streamPrompt(
-          // Expose the user's locale to prompt templates ({{ locale }}).
-          {
-            ...next,
-            vars: { ...next.vars, locale },
-            ...(attachments ? { attachments } : {}),
-            ...(followUp ? { followUp } : {}),
-          },
-          paintSoon,
-          controller.signal,
-        );
-        settled = outcome;
-        const { text } = outcome;
-        if (owns()) {
+        case "settled": {
+          const { text } = end.outcome;
           const stopped = controller.signal.aborted;
           if (stopped && !text) {
             revert();
@@ -614,61 +718,15 @@ export function Popup(): React.JSX.Element {
           } else {
             putResult(promptId, { phase: "done", turns: turnsWith(text), ok: true, stopped });
           }
-        }
-      } catch (error) {
-        const reason = errorMessage(error);
-        if (reason === NOT_CONFIGURED) {
-          // No provider set up yet. Stay put and offer a way into settings —
-          // auto-opening it would steal focus from this popup.
-          if (owns()) {
-            putResult(promptId, {
-              phase: "done",
-              turns: turnsWith(t.ai.notConfigured),
-              ok: false,
-              setup: true,
-            });
-          }
-        } else if (reason === INVALID_CONFIG) {
-          // The catalog file exists but fails the schema. Same treatment as
-          // "not configured" — a human sentence plus a way into settings; the
-          // zod detail is already in the log.
-          log.error("prompt failed: invalid ai-sdk-catalog.json", error);
-          if (owns()) {
-            putResult(promptId, {
-              phase: "done",
-              turns: turnsWith(t.ai.invalidConfig),
-              ok: false,
-              setup: true,
-            });
-          }
-        } else {
-          log.error("prompt failed", error);
-          if (owns()) {
-            let text: string;
-            if (reason === TIMED_OUT) {
-              text = t.popup.timedOut;
-            } else if (reason === EMPTY_RESULT) {
-              text = t.popup.emptyResult;
-            } else if (reason === ATTACHMENT_TOO_LARGE) {
-              text = t.popup.attachmentTooLarge(MAX_ATTACHMENT_MB);
-            } else if (reason.startsWith(UNSUPPORTED_FILE_PREFIX)) {
-              text = t.popup.unsupportedFile(reason.slice(UNSUPPORTED_FILE_PREFIX.length));
-            } else if (reason.startsWith(FILE_UNREADABLE_PREFIX)) {
-              text = t.popup.fileUnreadable(reason.slice(FILE_UNREADABLE_PREFIX.length));
-            } else {
-              text = t.popup.failed(reason);
-            }
-            putResult(promptId, { phase: "done", turns: turnsWith(text), ok: false });
-          }
-        }
-      } finally {
-        clearTimeout(paint);
-        if (owns()) {
-          runsRef.current.delete(promptId); // free the slot for a later re-run
-          if (settled && !controller.signal.aborted) {
-            recordUsage(promptId, next.kind, settled);
+          // The ledger keeps completed runs only.
+          if (!stopped) {
+            recordUsage(promptId, next.kind, end.outcome);
             refreshMonthCost(); // the number just changed (fire-and-forget race is fine)
           }
+          break;
+        }
+        default: {
+          end satisfies never;
         }
       }
     })();
@@ -735,11 +793,8 @@ export function Popup(): React.JSX.Element {
     if (scenario !== POPUP_RESULT_SCENARIO && scenario !== POPUP_CUSTOM_SCENARIO) {
       return;
     }
-    // Dynamic import: the fixture table stays out of production chunks —
-    // with the scenario check folded away, this branch (and the chunk) die.
     void (async () => {
-      const { POPUP_RESULT_FIXTURES, POPUP_RESULT_SOURCE } =
-        await import("@/lib/screenshot-scenarios.ts");
+      const { POPUP_RESULT_FIXTURES, POPUP_RESULT_SOURCE } = await screenshotFixtures();
       const fixture = POPUP_RESULT_FIXTURES[locale] ?? POPUP_RESULT_FIXTURES["en"];
       if (fixture === undefined) {
         return;

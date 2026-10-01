@@ -281,20 +281,19 @@ export function PromptsSettings(): React.JSX.Element {
         }
       } catch (error) {
         log.error("drafting an instruction failed", error);
-        if (editorSession.current !== asked) {
-          return; // the error is that editor's too
+        // The error is that editor's too.
+        if (editorSession.current === asked) {
+          const reason = errorMessage(error);
+          if (reason === NOT_CONFIGURED) {
+            setFormError(t.ai.notConfigured);
+          } else if (reason === INVALID_CONFIG) {
+            setFormError(t.ai.invalidConfig);
+          } else {
+            setFormError(t.prompts.draftFailed);
+          }
         }
-        const reason = errorMessage(error);
-        if (reason === NOT_CONFIGURED) {
-          setFormError(t.ai.notConfigured);
-        } else if (reason === INVALID_CONFIG) {
-          setFormError(t.ai.invalidConfig);
-        } else {
-          setFormError(t.prompts.draftFailed);
-        }
-      } finally {
-        setDrafting(false);
       }
+      setDrafting(false);
     })();
   };
 
@@ -317,15 +316,16 @@ export function PromptsSettings(): React.JSX.Element {
       setFormError(t.prompts.labelExists(draft.label.trim()));
       return;
     }
+    const edited = {
+      id: draft.id,
+      label: draft.label,
+      instructions: draft.instructions,
+      prompt: draft.prompt.trim() === "" ? "{{ text }}" : draft.prompt,
+      role: draft.role.trim() === "" ? undefined : draft.role.trim(),
+    };
     void (async () => {
       try {
-        await savePrompt({
-          id: draft.id,
-          label: draft.label,
-          instructions: draft.instructions,
-          prompt: draft.prompt.trim() === "" ? "{{ text }}" : draft.prompt,
-          role: draft.role.trim() === "" ? undefined : draft.role.trim(),
-        });
+        await savePrompt(edited);
         showDraft(undefined);
         reload();
       } catch (error) {
@@ -387,9 +387,8 @@ export function PromptsSettings(): React.JSX.Element {
       } catch (error) {
         log.error("importing prompt failed", error);
         setImportError(promptErrorText(t, error));
-      } finally {
-        setImportBusy(false);
       }
+      setImportBusy(false);
     })();
   };
 
@@ -409,9 +408,8 @@ export function PromptsSettings(): React.JSX.Element {
       } catch (error) {
         log.error("importing prompt from a file failed", error);
         setImportError(promptErrorText(t, error));
-      } finally {
-        setImportBusy(false);
       }
+      setImportBusy(false);
     })();
   };
 
@@ -427,15 +425,15 @@ export function PromptsSettings(): React.JSX.Element {
       }
       return { ...prev, by_kind: byKind };
     });
+    const assigned = id === "" ? undefined : id;
     void (async () => {
       try {
-        await setKindPrompt(kind, id === "" ? undefined : id);
+        await setKindPrompt(kind, assigned);
       } catch (error) {
         log.error("updating rules failed", error);
         setRulesError(t.prompts.failed(errorMessage(error).slice(0, 200)));
-      } finally {
-        reload();
       }
+      reload();
     })();
   };
 
@@ -455,9 +453,8 @@ export function PromptsSettings(): React.JSX.Element {
       } catch (error) {
         log.error("saving override rules failed", error);
         setRulesError(t.prompts.failed(errorMessage(error).slice(0, 200)));
-      } finally {
-        reload();
       }
+      reload();
     })();
   };
 

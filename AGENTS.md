@@ -15,7 +15,7 @@ See [README.md](README.md) for the product overview.
 Everything CI runs is scripted or is a one-liner:
 
 - `bun install` — install JS deps (also `bun install --cwd site` for the knip site workspace)
-- `bun run lint` — oxlint (`--deny-warnings`: a warning fails the run, locally and in CI), then the site workspace: eslint (eslint-plugin-astro `flat/all` + strict a11y, for the `.astro` files oxlint cannot parse) and `astro check`.
+- `bun run lint` — oxlint (`--deny-warnings`: a warning fails the run, locally and in CI), then the React Compiler check ([scripts/compiler-check.ts](scripts/compiler-check.ts): a component or hook the compiler gives up on fails the run — see React below), then the site workspace: eslint (eslint-plugin-astro `flat/all` + strict a11y, for the `.astro` files oxlint cannot parse) and `astro check`.
   Needs `bun install --cwd site` once.
 - `bun run lint:dead` — knip: unused files, exports, and dependencies across root + site.
   Note its limit: a value that is _serialized on one side of the Rust ↔ TS IPC boundary and schema-declared on the other_ looks used to every per-language tool — when adding or removing a `CapturePayload`-style field, check both sides by hand.
@@ -94,6 +94,12 @@ It auto-memoizes components and hooks at build time.
   Add a short comment saying why.
 - Follow the [Rules of React](https://react.dev/reference/rules) strictly so the compiler can optimize freely.
   Rule violations cause silent bail-outs (the affected component is skipped, the rest of the app is still optimized).
+- So does syntax the compiler cannot lower, and `bun run lint` fails on every bail-out: [scripts/compiler-check.ts](scripts/compiler-check.ts) runs each source under `src/` through the compiler and names the line and the reason.
+  Inside a component or a hook it cannot take a `try … finally`, a `throw` inside a `try`, a conditional, logical or optional-chaining expression (`?:`, `&&`, `||`, `??`, `?.`) inside a `try` block, `??=`, or a dynamic `import()`.
+  Write around it: compute the value before the `try`, or move the procedure into a module-level function that reports how it ended and let the component act on that (`runPrompt` in [src/components/popup.tsx](src/components/popup.tsx), `editCatalog` in [src/lib/catalog-file.ts](src/lib/catalog-file.ts)).
+- **Babel stays on the 7 line** (`@babel/core` in package.json).
+  The compiler is built against Babel 7's AST; under Babel 8 it skips every component whose destructured props carry a default (`{ size = "default" }`) — [react/react#36868](https://github.com/react/react/issues/36868).
+  Lift the pin, and Dependabot's ignore for it, when a compiler release supports Babel 8; the check above says whether one does.
 
 ## TypeScript & frontend style
 

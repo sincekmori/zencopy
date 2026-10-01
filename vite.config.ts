@@ -30,7 +30,10 @@ function devFavicon(): Plugin {
 export default defineConfig({
   // React Compiler runs as a Babel preset over the same files @vitejs/plugin-react
   // handles; it auto-memoizes components and hooks at build time so we don't need
-  // to reach for useMemo / useCallback / React.memo by hand.
+  // to reach for useMemo / useCallback / React.memo by hand. Babel itself is
+  // the 7 line on purpose (package.json): the compiler is built against it
+  // and skips components under 8 — scripts/compiler-check.ts holds the build
+  // to compiling every one.
   plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss(), devFavicon()],
   resolve: {
     alias: {

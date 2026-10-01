@@ -15,6 +15,17 @@ export type TriggerStatus =
   | { kind: "unsupported_session" }
   | { kind: "failed"; message: string };
 
+/** The status Rust holds: undefined when none has been reported yet (its
+ *  `None` arrives as `null`), or when asking failed (logged). */
+async function reportedStatus(): Promise<TriggerStatus | undefined> {
+  try {
+    return (await invoke<TriggerStatus | null>("trigger_status")) ?? undefined;
+  } catch (error) {
+    log.error("querying the trigger status failed", error);
+    return undefined;
+  }
+}
+
 /** The latest trigger status, or undefined while none has been reported.
  *  Queried once on mount (the report usually predates the window opening),
  *  then kept live via the `trigger-status` event. */
@@ -24,16 +35,11 @@ export function useTriggerStatus(): TriggerStatus | undefined {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
-      try {
-        // Rust's Option<TriggerStatus> arrives as `null` for None.
-        const initial = await invoke<TriggerStatus | null>("trigger_status");
-        if (!cancelled && initial !== null) {
-          // Events win over the initial query: apply the query result only
-          // when no event has landed in the meantime.
-          setStatus((current) => current ?? initial);
-        }
-      } catch (error) {
-        log.error("querying the trigger status failed", error);
+      const initial = await reportedStatus();
+      if (!cancelled && initial !== undefined) {
+        // Events win over the initial query: apply the query result only
+        // when no event has landed in the meantime.
+        setStatus((current) => current ?? initial);
       }
     })();
     return () => {
