@@ -2,8 +2,8 @@
 //! helpers every window shares.
 
 use crate::OrLog;
-use crate::config::STORE_FILE;
-use tauri::{Manager, WebviewWindow};
+use crate::config::store_str;
+use tauri::{Emitter, Manager, WebviewWindow};
 /// The screen corner the popup is pinned to. Default is top-right.
 #[derive(Clone, Copy)]
 pub(crate) enum Corner {
@@ -13,23 +13,16 @@ pub(crate) enum Corner {
     BottomLeft,
 }
 
-/// A string setting from the settings store, if present and a string.
-fn store_str(handle: &tauri::AppHandle, key: &str) -> Option<String> {
-    use tauri_plugin_store::StoreExt;
-
-    let value = handle
-        .store(STORE_FILE)
-        .ok()
-        .and_then(|store| store.get(key));
-    value
-        .as_ref()
-        .and_then(serde_json::Value::as_str)
-        .map(str::to_owned)
-}
+/// Settings-store keys and the events the settings window broadcasts on a
+/// change, as the frontend spells them (src/lib/settings.ts and
+/// src/components/settings.tsx; pinned by the ts_mirror tests in lib.rs).
+pub(crate) const POPUP_CORNER_KEY: &str = "popupCorner";
+pub(crate) const TEXT_SIZE_KEY: &str = "textSize";
+pub(crate) const TEXT_SIZE_CHANGED: &str = "text-size-changed";
 
 /// Read the user's chosen popup corner from the settings store (default top-right).
 pub(crate) fn current_corner(handle: &tauri::AppHandle) -> Corner {
-    match store_str(handle, "popupCorner").as_deref() {
+    match store_str(handle, POPUP_CORNER_KEY).as_deref() {
         Some("bottom-right") => Corner::BottomRight,
         Some("top-left") => Corner::TopLeft,
         Some("bottom-left") => Corner::BottomLeft,
@@ -73,7 +66,7 @@ pub(crate) const ZOOM_LARGE: f64 = 1.15;
 /// `home_width_for` keyed by the stored text size (the summon path — by show
 /// time any settings write has landed).
 fn popup_home_width(handle: &tauri::AppHandle) -> f64 {
-    home_width_for(store_str(handle, "textSize").as_deref())
+    home_width_for(store_str(handle, TEXT_SIZE_KEY).as_deref())
 }
 
 /// While the popup is visible, a text-size change re-fits it immediately: the
@@ -86,7 +79,7 @@ pub(crate) fn follow_text_size(app: &tauri::App) {
     use tauri::{Listener, PhysicalPosition, PhysicalSize};
 
     let handle = app.handle().clone();
-    app.listen("text-size-changed", move |event| {
+    app.listen(TEXT_SIZE_CHANGED, move |event| {
         let Some(popup) = handle.get_webview_window("popup") else {
             return;
         };
@@ -213,19 +206,53 @@ pub(crate) fn focus_with_server_time(window: &WebviewWindow) {
 }
 
 /// The monitor the user is working on right now (the one with the cursor).
+///
+/// Windows reports the cursor and looks a monitor up in one physical space.
+/// macOS and Linux look it up in logical points, yet tao (0.35) hands the
+/// cursor back scaled by the primary monitor's factor — on a Retina primary a
+/// cursor outside the top-left quarter then lands on another monitor, or on
+/// none. Undo that scaling before asking.
 pub(crate) fn monitor_at_cursor(handle: &tauri::AppHandle) -> Option<tauri::Monitor> {
+    let cursor = handle.cursor_position().ok()?;
+    let scale = if cfg!(windows) {
+        1.0
+    } else {
+        handle.primary_monitor().ok().flatten()?.scale_factor()
+    };
     handle
-        .cursor_position()
+        .monitor_from_point(cursor.x / scale, cursor.y / scale)
         .ok()
-        .and_then(|c| handle.monitor_from_point(c.x, c.y).ok().flatten())
+        .flatten()
+}
+
+/// Move `window` to a point of `monitor`'s own physical space — what its
+/// `work_area` is measured in. macOS turns a physical position into points
+/// with the scale of the display the window is on *now*, which is wrong the
+/// moment the target display has another one; points are the same on every
+/// display there, so that is what it gets. Elsewhere physical pixels are the
+/// shared space.
+fn place(window: &WebviewWindow, monitor: &tauri::Monitor, x: i32, y: i32) -> tauri::Result<()> {
+    let position = tauri::PhysicalPosition::new(x, y);
+    if cfg!(target_os = "macos") {
+        window.set_position(position.to_logical::<f64>(monitor.scale_factor()))
+    } else {
+        window.set_position(position)
+    }
+}
+
+/// Bring a minimized window back to its size. `show` alone does not: on
+/// Windows a minimized window still counts as visible, so showing it changes
+/// nothing and focusing it is skipped.
+fn restore(window: &WebviewWindow) {
+    window
+        .unminimize()
+        .or_log(&format!("{}: restore", window.label()));
 }
 
 /// Show the popup pinned to the user's chosen corner of the active monitor's work
 /// area. A fixed corner is predictable and never clipped — a calmer fit than
 /// chasing the pointer or the (not-yet-reliable) text selection.
 fn show_popup_in_corner(handle: &tauri::AppHandle, popup: &WebviewWindow, corner: Corner) {
-    use tauri::PhysicalPosition;
-
     // The monitor the user is working on (where the cursor is), else the primary.
     let monitor = monitor_at_cursor(handle).or_else(|| handle.primary_monitor().ok().flatten());
     let Some(monitor) = monitor else {
@@ -268,9 +295,7 @@ fn show_popup_in_corner(handle: &tauri::AppHandle, popup: &WebviewWindow, corner
         Corner::BottomLeft => (left, bottom),
     };
 
-    popup
-        .set_position(PhysicalPosition::new(x, y))
-        .or_log("popup: set corner position");
+    place(popup, &monitor, x, y).or_log("popup: set corner position");
     show_on_active_space(popup);
 }
 
@@ -284,6 +309,7 @@ pub(crate) fn summon_popup(handle: &tauri::AppHandle, corner: Corner) {
         return;
     };
     if popup.is_visible().unwrap_or(false) {
+        restore(&popup);
         show_on_active_space(&popup);
     } else {
         show_popup_in_corner(handle, &popup, corner);
@@ -307,8 +333,6 @@ pub(crate) fn open_about(app: tauri::AppHandle) {
 /// so it opens where they are working — not back on whatever display it was last
 /// shown. Falls back to the platform's own centering.
 pub(crate) fn center_on_active_monitor(handle: &tauri::AppHandle, window: &WebviewWindow) {
-    use tauri::PhysicalPosition;
-
     let label = window.label();
     let monitor = monitor_at_cursor(handle)
         .or_else(|| window.current_monitor().ok().flatten())
@@ -319,48 +343,102 @@ pub(crate) fn center_on_active_monitor(handle: &tauri::AppHandle, window: &Webvi
             .or_log(&format!("{label}: center (no monitor found)"));
         return;
     };
-    let Ok(size) = window.outer_size() else {
+    let (Ok(outer), Ok(inner), Ok(scale)) = (
+        window.outer_size(),
+        window.inner_size(),
+        window.scale_factor(),
+    ) else {
         window
             .center()
             .or_log(&format!("{label}: center (size unknown)"));
         return;
     };
-    if size.width == 0 || size.height == 0 {
+    if outer.width == 0 || outer.height == 0 {
         window
             .center()
             .or_log(&format!("{label}: center (zero size)"));
         return;
     }
+    // Measured in logical units: the window's sizes come in the scale of the
+    // display it is on now, the work area in the target monitor's.
+    let outer = outer.to_logical::<f64>(scale);
+    let inner = inner.to_logical::<f64>(scale);
+    let monitor_scale = monitor.scale_factor();
     let area = monitor.work_area();
+    let area_size = area.size.to_logical::<f64>(monitor_scale);
     // A window taller than the work area (the settings default on a short
     // monitor) is shrunk to fit, never grown — a user's own resize survives.
-    let mut size = size;
-    if size.height > area.size.height {
-        size.height = area.size.height;
+    // `set_size` sets the inner size, so the frame comes off the height that
+    // fits: handed the outer size, the window would grow by its frame on
+    // every reveal.
+    let mut height = outer.height;
+    if height > area_size.height {
+        height = area_size.height;
+        let frame = outer.height - inner.height;
         window
-            .set_size(tauri::PhysicalSize::new(size.width, size.height))
+            .set_size(tauri::LogicalSize::new(inner.width, height - frame))
             .or_log(&format!("{label}: clamp to work area"));
     }
-    let x = area.position.x + (area.size.width as i32 - size.width as i32) / 2;
-    let y = area.position.y + (area.size.height as i32 - size.height as i32) / 2;
-    window
-        .set_position(PhysicalPosition::new(x, y))
-        .or_log(&format!("{label}: set centered position"));
+    let x = area.position.x + ((area_size.width - outer.width) / 2.0 * monitor_scale) as i32;
+    let y = area.position.y + ((area_size.height - height) / 2.0 * monitor_scale) as i32;
+    place(window, &monitor, x, y).or_log(&format!("{label}: set centered position"));
 }
+
+/// Whether a URL is one of the app's own pages: the bundled frontend
+/// (`tauri://localhost`, or `http://tauri.localhost` on Windows), the dev
+/// server in a dev build, and `about:` (an iframe's `srcdoc`).
+fn is_app_url(url: &tauri::Url) -> bool {
+    let host = url.host_str();
+    match url.scheme() {
+        "about" | "tauri" => true,
+        "http" | "https" => {
+            host == Some("tauri.localhost") || (cfg!(dev) && host == Some("localhost"))
+        }
+        _ => false,
+    }
+}
+
+/// Keeps every webview on the app's own pages. Nothing in the app navigates
+/// anywhere else — links go to the system browser — but a webview's own
+/// gestures would (the context menu's Open Link, a middle click), and a page
+/// loaded into the popup keeps receiving every capture made after it.
+pub(crate) fn stay_on_app_pages() -> tauri::plugin::TauriPlugin<tauri::Wry> {
+    tauri::plugin::Builder::new("stay-on-app-pages")
+        .on_navigation(|webview, url| {
+            let allowed = is_app_url(url);
+            if !allowed {
+                // The scheme only: the rest may quote what the user copied.
+                log::warn!(
+                    "{}: refused to navigate away from the app ({}:)",
+                    webview.label(),
+                    url.scheme()
+                );
+            }
+            allowed
+        })
+        .build()
+}
+
+/// The events a dialog window's webview hears when it comes on screen and when
+/// it leaves (mirrored by useWindowOpen in src/lib/use-tauri-event.ts).
+pub(crate) const WINDOW_OPENED: &str = "window-opened";
+pub(crate) const WINDOW_CLOSED: &str = "window-closed";
 
 /// ZenCopy's dialog windows. While any of them is visible, the popup's
 /// always-on-top is suspended so they can stack above it naturally.
-pub(crate) const DIALOG_LABELS: [&str; 2] = ["settings", "about"];
+const DIALOG_LABELS: [&str; 2] = ["settings", "about"];
 
 /// One rule, one place: the popup floats above everything (a PiP panel)
-/// unless one of our own dialogs is on screen. Recomputed from what is
-/// actually visible — called after a dialog shows (reveal_window) and after
-/// one hides (lib.rs's CloseRequested handler).
-pub(crate) fn sync_popup_float(handle: &tauri::AppHandle) {
+/// unless one of our own dialogs is on screen. Called after a dialog shows
+/// (reveal_window) and as one closes (conceal_window), which names it in
+/// `closing`: its hide has been asked for, but on Linux it lands only once
+/// the event loop turns, so the window still reads as visible.
+fn sync_popup_float(handle: &tauri::AppHandle, closing: Option<&str>) {
     let dialog_open = DIALOG_LABELS.iter().any(|label| {
-        handle
-            .get_webview_window(label)
-            .is_some_and(|w| w.is_visible().unwrap_or(false))
+        Some(*label) != closing
+            && handle
+                .get_webview_window(label)
+                .is_some_and(|w| w.is_visible().unwrap_or(false))
     });
     if let Some(popup) = handle.get_webview_window("popup") {
         popup
@@ -372,10 +450,37 @@ pub(crate) fn sync_popup_float(handle: &tauri::AppHandle) {
 /// Reveal a window on the active monitor and focus it (settings / about).
 pub(crate) fn reveal_window(handle: &tauri::AppHandle, label: &str) {
     if let Some(window) = handle.get_webview_window(label) {
+        // First, so the centering measures the window and not its icon.
+        restore(&window);
         center_on_active_monitor(handle, &window);
         show_on_active_space(&window);
+        // Tell the webview it is on screen (the twin of `window-closed`):
+        // these windows exist hidden from launch, and what they would load or
+        // tick over waits for this (useWindowOpen in use-tauri-event.ts).
+        window
+            .emit_to(label, WINDOW_OPENED, ())
+            .or_log(&format!("{label}: emit {WINDOW_OPENED}"));
         // A dialog must never sit underneath the floating popup.
-        sync_popup_float(handle);
+        sync_popup_float(handle, None);
+    }
+}
+
+/// Take a window off the screen instead of closing it (the twin of
+/// reveal_window): a tray-resident app hides its windows rather than
+/// destroying them, so they can always be reopened.
+pub(crate) fn conceal_window(window: &tauri::Window) {
+    let label = window.label();
+    window.hide().or_log(&format!("{label}: hide on close"));
+    // Tell the webview its session just ended: a hidden window keeps its
+    // React state, so transient feedback (a "saved" confirmation) must be
+    // dropped now or it would still be on screen at the next open. Minimize
+    // and app-hide stay silent on purpose — the window is still "open" then.
+    window
+        .emit_to(label, WINDOW_CLOSED, ())
+        .or_log(&format!("{label}: emit {WINDOW_CLOSED}"));
+    // A dialog is leaving the screen — the popup's float may resume.
+    if DIALOG_LABELS.contains(&label) {
+        sync_popup_float(window.app_handle(), Some(label));
     }
 }
 
@@ -383,4 +488,37 @@ pub(crate) fn reveal_window(handle: &tauri::AppHandle, label: &str) {
 #[tauri::command]
 pub(crate) fn open_settings(app: tauri::AppHandle) {
     reveal_window(&app, "settings");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::is_app_url;
+
+    /// The guard must let the app load itself on every platform — a wrong
+    /// "no" here is a blank window — and nothing else.
+    #[test]
+    fn only_the_app_s_own_pages_may_load() {
+        let allowed = |url: &str| is_app_url(&url.parse().expect("a URL"));
+        for url in [
+            "tauri://localhost/",
+            "tauri://localhost/index.html",
+            "http://tauri.localhost/",
+            "https://tauri.localhost/assets/popup.js",
+            "about:srcdoc",
+            "about:blank",
+        ] {
+            assert!(allowed(url), "{url} is the app");
+        }
+        for url in [
+            "https://example.com/",
+            "http://example.com/",
+            "https://tauri.localhost.example.com/",
+            "file:///etc/passwd",
+            "data:text/html,<p>hi",
+        ] {
+            assert!(!allowed(url), "{url} is not the app");
+        }
+        // The dev server is the app in a dev build only.
+        assert_eq!(allowed("http://localhost:1420/"), cfg!(dev));
+    }
 }

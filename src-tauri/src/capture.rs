@@ -26,7 +26,22 @@ pub(crate) enum SourcePreview {
     Files {
         paths: Vec<String>,
     },
-    Empty,
+}
+
+impl SourcePreview {
+    /// The capture's content kind, used for rules and shown in the payload.
+    /// Rich text is deliberately just "text": which clipboard flavor a copy
+    /// carries is the source app's habit, not the user's intent, so the kind
+    /// vocabulary ignores it. The richness itself survives where it is useful
+    /// — the source preview renders the markup, and templates still get
+    /// `{{ markup }}` / `{{ format }}`.
+    pub(crate) fn kind(&self) -> &'static str {
+        match self {
+            Self::Text { .. } | Self::RichText { .. } => "text",
+            Self::Image { .. } => "image",
+            Self::Files { .. } => "files",
+        }
+    }
 }
 
 /// A capture, prepared for the UI. The popup shows `source` ("what is being acted
@@ -56,13 +71,47 @@ pub(crate) struct CapturePayload {
 /// An HTML copy's `{{ text }}`: the markup converted to Markdown, so its
 /// formatting survives the model round trip — the popup renders Markdown, so
 /// inline code, bold, and links come back as themselves instead of degrading
-/// to plain text. Falls back to the app-provided plain text on a conversion
-/// error.
+/// to plain text. Falls back to the app-provided plain text when the
+/// conversion fails or comes back empty.
 pub(crate) fn html_to_markdown(markup: &str, plain: &str) -> String {
-    htmd::convert(markup).unwrap_or_else(|error| {
-        log::warn!("rich capture: HTML to Markdown failed ({error}), using plain text");
-        plain.to_string()
-    })
+    match html_converter().convert(markup) {
+        Ok(markdown) if !markdown.trim().is_empty() => markdown,
+        Ok(_) => plain.to_string(),
+        Err(error) => {
+            log::warn!("rich capture: HTML to Markdown failed ({error}), using plain text");
+            plain.to_string()
+        }
+    }
+}
+
+/// The converter behind [`html_to_markdown`]. Two things a page does not show
+/// stay out of the Markdown. One is what sits in `<head>`, `<script>`,
+/// `<style>` and `<title>`, whose text htmd passes through by default: Word
+/// and Outlook hand over a whole document, its stylesheet — kilobytes of it —
+/// ahead of the body. The other is the payload of an inline `data:` image,
+/// which would put the whole base64 into the text; such an image leaves its
+/// alt text.
+fn html_converter() -> htmd::HtmlToMarkdown {
+    use htmd::{Element, element_handler::Handlers};
+
+    htmd::HtmlToMarkdown::builder()
+        .skip_tags(vec!["head", "script", "style", "title"])
+        .add_handler(vec!["img"], |handlers: &dyn Handlers, element: Element| {
+            let attrs = element.attrs;
+            let attr = |name: &str| {
+                attrs
+                    .iter()
+                    .find(|attr| &*attr.name.local == name)
+                    .map(|attr| attr.value.to_string())
+            };
+            match attr("src") {
+                Some(src) if src.trim_start().starts_with("data:") => {
+                    Some(attr("alt").unwrap_or_default().into())
+                }
+                _ => handlers.fallback(element),
+            }
+        })
+        .build()
 }
 
 /// Template variables available to prompt prompts, from the capture plus now.
@@ -138,13 +187,18 @@ pub(crate) fn file_basename(path: &str) -> String {
     )
 }
 
-/// The captured content, shaped for display in the popup. Images are PNG, encoded
-/// as a base64 data URL so the webview can render them with a plain `<img>`.
-pub(crate) fn source_preview(event: &copycopy::CaptureEvent) -> SourcePreview {
+/// The captured content, shaped for display in the popup — `None` when there
+/// is nothing to act on (see [`is_blank`]), and then no popup and no prompt.
+/// Images are PNG, encoded as a base64 data URL so the webview can render
+/// them with a plain `<img>`.
+pub(crate) fn source_preview(event: &copycopy::CaptureEvent) -> Option<SourcePreview> {
     use base64::{Engine, engine::general_purpose::STANDARD};
     use copycopy::{Captured, RichFormat};
 
-    match &event.content {
+    if is_blank(event) {
+        return None;
+    }
+    Some(match &event.content {
         Captured::Text { text } => SourcePreview::Text { text: text.clone() },
         Captured::RichText {
             format,
@@ -167,24 +221,8 @@ pub(crate) fn source_preview(event: &copycopy::CaptureEvent) -> SourcePreview {
         Captured::Files { paths } => SourcePreview::Files {
             paths: paths.clone(),
         },
-        Captured::Empty => SourcePreview::Empty,
-    }
-}
-
-/// The capture's content kind, used for rules and shown in the payload.
-/// Rich text is deliberately just "text": which clipboard flavor a copy
-/// carries is the source app's habit, not the user's intent, so the kind
-/// vocabulary ignores it. The richness itself survives where it is useful —
-/// the source preview renders the markup, and templates still get
-/// `{{ markup }}` / `{{ format }}`.
-pub(crate) fn capture_kind(event: &copycopy::CaptureEvent) -> &'static str {
-    use copycopy::Captured;
-    match &event.content {
-        Captured::Text { .. } | Captured::RichText { .. } => "text",
-        Captured::Image { .. } => "image",
-        Captured::Files { .. } => "files",
-        Captured::Empty => "empty",
-    }
+        Captured::Empty => return None,
+    })
 }
 
 /// With no routed prompt the prompt fields stay empty but the template vars
@@ -192,11 +230,12 @@ pub(crate) fn capture_kind(event: &copycopy::CaptureEvent) -> &'static str {
 /// switcher can run on this capture.
 pub(crate) fn build_capture_payload(
     event: &copycopy::CaptureEvent,
+    source: SourcePreview,
     prompt: Option<&Prompt>,
 ) -> CapturePayload {
     CapturePayload {
-        kind: capture_kind(event),
-        source: source_preview(event),
+        kind: source.kind(),
+        source,
         prompt_id: prompt.map(|a| a.id.clone()).unwrap_or_default(),
         label: prompt.map(|a| a.label.clone()).unwrap_or_default(),
         role: prompt
@@ -266,13 +305,14 @@ pub(crate) fn rtf_visible_text(rtf: &str) -> String {
 }
 
 /// Whether a capture has nothing worth acting on — empty clipboard, or text /
-/// rich text whose *visible* content is only whitespace. Such captures are ignored
-/// entirely (no popup, no prompt). Images and files are never considered blank.
+/// rich text whose *visible* content is only whitespace. Such captures are
+/// ignored entirely (see [`source_preview`]). Images and files are never
+/// considered blank.
 ///
 /// For rich text we can't trust `plain` alone: it comes from the clipboard's
 /// plain-text format, which some apps omit (leaving it empty though the markup has
 /// real text). So we fall back to the markup's visible text when `plain` is empty.
-pub(crate) fn is_blank(event: &copycopy::CaptureEvent) -> bool {
+fn is_blank(event: &copycopy::CaptureEvent) -> bool {
     use copycopy::{Captured, RichFormat};
     match &event.content {
         Captured::Empty => true,
@@ -336,6 +376,38 @@ mod markup_tests {
         assert!(
             markdown.contains("[a link](https://example.com)"),
             "got: {markdown}"
+        );
+    }
+
+    /// Word hands over a whole document: the stylesheet and the script are
+    /// not what was copied.
+    #[test]
+    fn what_a_page_does_not_show_stays_out() {
+        let html = "<html><head><title>Doc</title><style><!-- p.MsoNormal {margin:0cm;} -->\
+                    </style></head><body><p><b>Hello</b> world</p>\
+                    <script>let x = 0;</script></body></html>";
+        assert_eq!(html_to_markdown(html, "fallback"), "**Hello** world");
+    }
+
+    /// An inline image keeps its description, never its bytes.
+    #[test]
+    fn a_data_image_leaves_only_its_alt_text() {
+        let html = r#"<p>Chart: <img alt="Q3 sales" src="data:image/png;base64,iVBORw0KGgo="> and <img alt="logo" src="https://example.com/logo.png"></p>"#;
+        let markdown = html_to_markdown(html, "fallback");
+        assert!(!markdown.contains("base64"), "got: {markdown}");
+        assert!(markdown.contains("Q3 sales"), "got: {markdown}");
+        assert!(
+            markdown.contains("![logo](https://example.com/logo.png)"),
+            "got: {markdown}"
+        );
+    }
+
+    /// Markup that converts to nothing falls back to the plain text.
+    #[test]
+    fn empty_markdown_falls_back_to_the_plain_text() {
+        assert_eq!(
+            html_to_markdown("<style>p {}</style>", "fallback"),
+            "fallback"
         );
     }
 }

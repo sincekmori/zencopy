@@ -116,7 +116,6 @@ export const de: Messages = {
   source: {
     inputLabel: "Kopierter Inhalt",
     richText: "Formatierter Text",
-    emptyClipboard: "Die Zwischenablage ist leer.",
     imageAlt: "Kopiertes Bild",
     cannotPreview: "(keine Vorschau)",
   },

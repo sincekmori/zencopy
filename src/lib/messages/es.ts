@@ -115,7 +115,6 @@ export const es: Messages = {
   source: {
     inputLabel: "Contenido copiado",
     richText: "Texto con formato",
-    emptyClipboard: "El portapapeles está vacío.",
     imageAlt: "Imagen copiada",
     cannotPreview: "(sin vista previa)",
   },

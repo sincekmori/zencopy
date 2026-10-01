@@ -3,9 +3,10 @@
  * A figure of the docs drawn from data — labels per locale, rendered to a
  * PNG at build by an endpoint under src/pages/[lang]/diagrams/, so nothing
  * is kept by hand and a translation is a labels entry. The locale is the
- * page's; the alt text is the page's own words. The width is the figure's
- * own for the locale (its longest label decides it), so the 2× PNG shows at
- * the size it was drawn for.
+ * page's; the alt text is the page's own words. The width and height are
+ * the figure's own for the locale (its longest label decides the width), so
+ * the 2× PNG shows at the size it was drawn for and the page keeps its place
+ * for it before it loads.
  */
 import { localeOf } from "../../../src/lib/messages/index.ts";
 import { overviewGeometry } from "../lib/overview-diagram.ts";
@@ -23,7 +24,12 @@ if (locale === undefined) {
     `"${path}" is not a locale of the app — see src/lib/messages/index.ts`,
   );
 }
-const { width } = await overviewGeometry(locale);
+const { width, height } = await overviewGeometry(locale);
 ---
 
-<img alt={alt} src={`/${path}/diagrams/${name}.png`} width={width} />
+<img
+  alt={alt}
+  height={height}
+  src={`/${path}/diagrams/${name}.png`}
+  width={width}
+/>

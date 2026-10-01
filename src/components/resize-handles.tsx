@@ -1,6 +1,6 @@
 import { getCurrentWindow, type Window } from "@tauri-apps/api/window";
 import { createLogger } from "@/lib/log.ts";
-import { IS_MAC } from "@/lib/platform.ts";
+import { IS_MAC, IS_WINDOWS } from "@/lib/platform.ts";
 import { cn } from "@/lib/utils.ts";
 
 const log = createLogger("resize-handles");
@@ -24,8 +24,12 @@ type ResizeDirection = Parameters<Window["startResizeDragging"]>[0];
  */
 const THICKNESS = 6;
 const CORNER = 14;
-/** The window edge the runtime already claims, in CSS px. */
-const BAND = 5 * Math.max(1, Math.round(globalThis.devicePixelRatio));
+/** The window edge the runtime already claims, in CSS px. Linux: 5 logical px
+ *  per whole step of scale. Windows: the system frame, 4 physical px per 100%
+ *  of scale — under 5 CSS px at every scale, so the strips start there and
+ *  stay on the card's edge (the Linux figure would push them 2 px inside it
+ *  from 150% up). */
+const BAND = IS_WINDOWS ? 5 : 5 * Math.max(1, Math.round(globalThis.devicePixelRatio));
 
 interface Handle {
   direction: ResizeDirection;

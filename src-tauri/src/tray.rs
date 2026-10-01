@@ -1,213 +1,267 @@
-//! The locale-aware tray and app menus, and the locale resolution they
-//! (and the frontend default) share.
+//! The locale-aware tray menu, the macOS app menu (its key equivalents; no
+//! one sees its labels), and the locale resolution the tray and the frontend
+//! default share.
 
 use crate::UPDATE_VERSION;
-use crate::config::STORE_FILE;
+use crate::config::store_str;
 use tauri::menu::{Menu, MenuItem, PredefinedMenuItem};
-/// The OS locale, mapped to a supported code — the fallback when the in-app
-/// language preference is "system".
-pub(crate) fn ui_locale() -> &'static str {
-    let tag = sys_locale::get_locale()
-        .unwrap_or_default()
-        .to_ascii_lowercase();
-    locale_from_tag(&tag)
+
+/// The settings-store key of the in-app language, and the event the settings
+/// window broadcasts when it changes — as the frontend spells them
+/// (src/lib/settings.ts, src/components/settings.tsx; pinned by the ts_mirror
+/// tests in lib.rs).
+pub(crate) const LOCALE_KEY: &str = "locale";
+pub(crate) const LOCALE_CHANGED: &str = "locale-changed";
+
+/// A language the UI speaks: one variant per locale file in
+/// src/lib/messages/. The label tables below match on it without a wildcard,
+/// so a language added here does not build until every menu label exists.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum Locale {
+    Ar,
+    De,
+    En,
+    Es,
+    Fa,
+    Fr,
+    He,
+    Id,
+    It,
+    Ja,
+    Ko,
+    Pl,
+    PtBr,
+    Ru,
+    Th,
+    Tr,
+    Vi,
+    ZhHans,
+    ZhHant,
 }
 
-/// The UI language for native chrome (tray + app menu): the in-app preference
+/// The OS locale, mapped to a supported one — the fallback when the in-app
+/// language preference is "system".
+pub(crate) fn ui_locale() -> Locale {
+    locale_from_tag(&sys_locale::get_locale().unwrap_or_default())
+}
+
+/// The UI language for native chrome (the tray menu): the in-app preference
 /// when it names a concrete locale, else the OS locale. Mirrors the
 /// frontend's resolveLocale, so the tray speaks the same language as the
 /// windows — including after a settings change (see the locale-changed
 /// listener in setup).
-pub(crate) fn app_locale(app: &tauri::AppHandle) -> &'static str {
-    use tauri_plugin_store::StoreExt;
-    let stored = app
-        .store(STORE_FILE)
-        .ok()
-        .and_then(|store| store.get("locale"))
-        .and_then(|value| value.as_str().map(str::to_ascii_lowercase));
-    match stored.as_deref() {
+pub(crate) fn app_locale(app: &tauri::AppHandle) -> Locale {
+    match store_str(app, LOCALE_KEY).as_deref() {
         None | Some("system") => ui_locale(),
         Some(tag) => locale_from_tag(tag),
     }
 }
 
-/// Best-matching supported locale for a lowercased BCP-47 tag. Mirrors the
-/// frontend's `detectLocale` (src/lib/messages/index.ts) — keep them in sync.
-pub(crate) fn locale_from_tag(tag: &str) -> &'static str {
-    if tag.starts_with("zh") {
-        // Chinese needs the script, not just the language: Traditional for
-        // Taiwan / Hong Kong / Macau (or an explicit Hant), Simplified else.
-        return if ["hant", "tw", "hk", "mo"]
-            .iter()
-            .any(|hint| tag.contains(hint))
-        {
-            "zh-hant"
-        } else {
-            "zh-hans"
+/// The subtags that make a Chinese tag Traditional when it names no script:
+/// the script itself, and Taiwan, Hong Kong and Macau — as `matchLocaleTag`
+/// lists them (pinned by the ts_mirror tests in lib.rs).
+pub(crate) const TRADITIONAL_HINTS: [&str; 4] = ["hant", "tw", "hk", "mo"];
+
+/// Best-matching supported locale for a BCP-47 tag, in any case. Mirrors
+/// `matchLocaleTag` (src/lib/locale-tag.ts), which the windows and the site's
+/// worker share — keep them in step.
+pub(crate) fn locale_from_tag(tag: &str) -> Locale {
+    let tag = tag.to_ascii_lowercase();
+    let mut subtags = tag.split(['-', '_']);
+    match subtags.next().unwrap_or_default() {
+        // Chinese needs the script, not just the language: the one the tag
+        // names, else Traditional for Taiwan / Hong Kong / Macau and
+        // Simplified everywhere else.
+        "zh" => {
+            let rest: Vec<&str> = subtags.collect();
+            let traditional =
+                !rest.contains(&"hans") && TRADITIONAL_HINTS.iter().any(|hint| rest.contains(hint));
+            if traditional {
+                Locale::ZhHant
+            } else {
+                Locale::ZhHans
+            }
+        }
+        "ar" => Locale::Ar,
+        "de" => Locale::De,
+        "es" => Locale::Es,
+        "fa" => Locale::Fa,
+        "fr" => Locale::Fr,
+        "he" => Locale::He,
+        "id" => Locale::Id,
+        "it" => Locale::It,
+        "ja" => Locale::Ja,
+        "ko" => Locale::Ko,
+        "pl" => Locale::Pl,
+        // Any Portuguese lands on the (Brazilian) translation we ship.
+        "pt" => Locale::PtBr,
+        "ru" => Locale::Ru,
+        "th" => Locale::Th,
+        "tr" => Locale::Tr,
+        "vi" => Locale::Vi,
+        _ => Locale::En,
+    }
+}
+
+/// The tray menu's labels in one language. "Show" names the app generically —
+/// the menu already sits under ZenCopy's own icon, so repeating the name
+/// reads as noise.
+struct TrayLabels {
+    show: &'static str,
+    settings: &'static str,
+    about: &'static str,
+    quit: &'static str,
+    /// The update item, with `{version}` where the number goes. Shown only
+    /// while an update is pending, it opens About — the one place where
+    /// installing actually happens — so it names the destination version,
+    /// not the restart mechanics.
+    update: &'static str,
+}
+
+impl Locale {
+    fn tray_labels(self) -> TrayLabels {
+        let (show, settings, about, quit, update) = match self {
+            Locale::Ar => (
+                "إظهار التطبيق",
+                "فتح الإعدادات",
+                "حول ZenCopy",
+                "إنهاء",
+                "التحديث إلى v{version}",
+            ),
+            Locale::De => (
+                "App anzeigen",
+                "Einstellungen öffnen",
+                "Über ZenCopy",
+                "Beenden",
+                "Auf v{version} aktualisieren",
+            ),
+            Locale::En => (
+                "Show App",
+                "Open Settings",
+                "About ZenCopy",
+                "Quit",
+                "Update to v{version}",
+            ),
+            Locale::Es => (
+                "Mostrar la aplicación",
+                "Abrir ajustes",
+                "Acerca de ZenCopy",
+                "Salir",
+                "Actualizar a v{version}",
+            ),
+            Locale::Fa => (
+                "نمایش برنامه",
+                "باز کردن تنظیمات",
+                "دربارهٔ ZenCopy",
+                "خروج",
+                "به‌روزرسانی به v{version}",
+            ),
+            Locale::Fr => (
+                "Afficher l'application",
+                "Ouvrir les réglages",
+                "À propos de ZenCopy",
+                "Quitter",
+                "Mettre à jour vers v{version}",
+            ),
+            Locale::He => (
+                "הצגת האפליקציה",
+                "פתיחת ההגדרות",
+                "על ZenCopy",
+                "יציאה",
+                "עדכון ל‑v{version}",
+            ),
+            Locale::Id => (
+                "Tampilkan aplikasi",
+                "Buka pengaturan",
+                "Tentang ZenCopy",
+                "Keluar",
+                "Perbarui ke v{version}",
+            ),
+            Locale::It => (
+                "Mostra l'app",
+                "Apri impostazioni",
+                "Informazioni su ZenCopy",
+                "Esci",
+                "Aggiorna alla v{version}",
+            ),
+            Locale::Ja => (
+                "アプリを表示",
+                "設定を開く",
+                "ZenCopy について",
+                "終了",
+                "v{version} にアップデート",
+            ),
+            Locale::Ko => (
+                "앱 표시",
+                "설정 열기",
+                "ZenCopy 정보",
+                "종료",
+                "v{version}(으)로 업데이트",
+            ),
+            Locale::Pl => (
+                "Pokaż aplikację",
+                "Otwórz ustawienia",
+                "O ZenCopy",
+                "Zakończ",
+                "Zaktualizuj do v{version}",
+            ),
+            Locale::PtBr => (
+                "Mostrar o aplicativo",
+                "Abrir configurações",
+                "Sobre o ZenCopy",
+                "Sair",
+                "Atualizar para v{version}",
+            ),
+            Locale::Ru => (
+                "Показать приложение",
+                "Открыть настройки",
+                "О ZenCopy",
+                "Выход",
+                "Обновить до v{version}",
+            ),
+            Locale::Th => (
+                "แสดงแอป",
+                "เปิดการตั้งค่า",
+                "เกี่ยวกับ ZenCopy",
+                "ออก",
+                "อัปเดตเป็น v{version}",
+            ),
+            Locale::Tr => (
+                "Uygulamayı göster",
+                "Ayarları aç",
+                "ZenCopy hakkında",
+                "Çık",
+                "v{version} sürümüne güncelle",
+            ),
+            Locale::Vi => (
+                "Hiện ứng dụng",
+                "Mở cài đặt",
+                "Về ZenCopy",
+                "Thoát",
+                "Cập nhật lên v{version}",
+            ),
+            Locale::ZhHans => (
+                "显示应用",
+                "打开设置",
+                "关于 ZenCopy",
+                "退出",
+                "更新到 v{version}",
+            ),
+            Locale::ZhHant => (
+                "顯示應用程式",
+                "開啟設定",
+                "關於 ZenCopy",
+                "結束",
+                "更新到 v{version}",
+            ),
         };
-    }
-    if tag.starts_with("pt") {
-        return "pt-br";
-    }
-    [
-        "ar", "de", "es", "fa", "fr", "he", "id", "it", "ja", "ko", "pl", "ru", "th", "tr", "vi",
-    ]
-    .into_iter()
-    .find(|code| tag.starts_with(code))
-    .unwrap_or("en")
-}
-
-/// Tray menu labels (show, open settings, about, quit) for a locale code.
-/// "Show" names the app generically — the menu already sits under ZenCopy's
-/// own icon, so repeating the name reads as noise.
-pub(crate) fn tray_labels(
-    locale: &str,
-) -> (&'static str, &'static str, &'static str, &'static str) {
-    match locale {
-        "ja" => ("アプリを表示", "設定を開く", "ZenCopy について", "終了"),
-        "zh-hans" => ("显示应用", "打开设置", "关于 ZenCopy", "退出"),
-        "zh-hant" => ("顯示應用程式", "開啟設定", "關於 ZenCopy", "結束"),
-        "ko" => ("앱 표시", "설정 열기", "ZenCopy 정보", "종료"),
-        "es" => (
-            "Mostrar la aplicación",
-            "Abrir ajustes",
-            "Acerca de ZenCopy",
-            "Salir",
-        ),
-        "pt-br" => (
-            "Mostrar o aplicativo",
-            "Abrir configurações",
-            "Sobre o ZenCopy",
-            "Sair",
-        ),
-        "fr" => (
-            "Afficher l'application",
-            "Ouvrir les réglages",
-            "À propos de ZenCopy",
-            "Quitter",
-        ),
-        "de" => (
-            "App anzeigen",
-            "Einstellungen öffnen",
-            "Über ZenCopy",
-            "Beenden",
-        ),
-        "it" => (
-            "Mostra l'app",
-            "Apri impostazioni",
-            "Informazioni su ZenCopy",
-            "Esci",
-        ),
-        "pl" => (
-            "Pokaż aplikację",
-            "Otwórz ustawienia",
-            "O ZenCopy",
-            "Zakończ",
-        ),
-        "ru" => (
-            "Показать приложение",
-            "Открыть настройки",
-            "О ZenCopy",
-            "Выход",
-        ),
-        "id" => (
-            "Tampilkan aplikasi",
-            "Buka pengaturan",
-            "Tentang ZenCopy",
-            "Keluar",
-        ),
-        "vi" => ("Hiện ứng dụng", "Mở cài đặt", "Về ZenCopy", "Thoát"),
-        "th" => ("แสดงแอป", "เปิดการตั้งค่า", "เกี่ยวกับ ZenCopy", "ออก"),
-        "tr" => (
-            "Uygulamayı göster",
-            "Ayarları aç",
-            "ZenCopy hakkında",
-            "Çık",
-        ),
-        "ar" => ("إظهار التطبيق", "فتح الإعدادات", "حول ZenCopy", "إنهاء"),
-        "fa" => ("نمایش برنامه", "باز کردن تنظیمات", "دربارهٔ ZenCopy", "خروج"),
-        "he" => ("הצגת האפליקציה", "פתיחת ההגדרות", "על ZenCopy", "יציאה"),
-        _ => ("Show App", "Open Settings", "About ZenCopy", "Quit"),
-    }
-}
-
-/// The tray's update item, shown only while an update is pending. It opens
-/// About — the one place where installing actually happens — so the label
-/// names the destination version, not the restart mechanics.
-pub(crate) fn tray_update_label(locale: &str, version: &str) -> String {
-    match locale {
-        "ja" => format!("v{version} にアップデート"),
-        "zh-hans" => format!("更新到 v{version}"),
-        "zh-hant" => format!("更新到 v{version}"),
-        "ko" => format!("v{version}(으)로 업데이트"),
-        "es" => format!("Actualizar a v{version}"),
-        "pt-br" => format!("Atualizar para v{version}"),
-        "fr" => format!("Mettre à jour vers v{version}"),
-        "de" => format!("Auf v{version} aktualisieren"),
-        "it" => format!("Aggiorna alla v{version}"),
-        "pl" => format!("Zaktualizuj do v{version}"),
-        "ru" => format!("Обновить до v{version}"),
-        "id" => format!("Perbarui ke v{version}"),
-        "vi" => format!("Cập nhật lên v{version}"),
-        "th" => format!("อัปเดตเป็น v{version}"),
-        "tr" => format!("v{version} sürümüne güncelle"),
-        "ar" => format!("التحديث إلى v{version}"),
-        "fa" => format!("به‌روزرسانی به v{version}"),
-        "he" => format!("עדכון ל‑v{version}"),
-        _ => format!("Update to v{version}"),
-    }
-}
-
-/// macOS Window-menu labels (title, minimize, close) for a `ui_locale` code.
-#[cfg(target_os = "macos")]
-pub(crate) fn window_menu_labels(locale: &str) -> (&'static str, &'static str, &'static str) {
-    match locale {
-        "ja" => ("ウィンドウ", "しまう", "ウィンドウを閉じる"),
-        "zh-hans" => ("窗口", "最小化", "关闭窗口"),
-        "zh-hant" => ("視窗", "縮到最小", "關閉視窗"),
-        "ko" => ("윈도우", "최소화", "윈도우 닫기"),
-        "es" => ("Ventana", "Minimizar", "Cerrar ventana"),
-        "pt-br" => ("Janela", "Minimizar", "Fechar janela"),
-        "fr" => ("Fenêtre", "Réduire", "Fermer la fenêtre"),
-        "de" => ("Fenster", "Minimieren", "Fenster schließen"),
-        "it" => ("Finestra", "Riduci", "Chiudi finestra"),
-        "pl" => ("Okno", "Minimalizuj", "Zamknij okno"),
-        "ru" => ("Окно", "Свернуть", "Закрыть окно"),
-        "id" => ("Jendela", "Minimalkan", "Tutup jendela"),
-        "vi" => ("Cửa sổ", "Thu nhỏ", "Đóng cửa sổ"),
-        "th" => ("หน้าต่าง", "ย่อ", "ปิดหน้าต่าง"),
-        "tr" => ("Pencere", "Küçült", "Pencereyi kapat"),
-        "ar" => ("النافذة", "تصغير", "إغلاق النافذة"),
-        "fa" => ("پنجره", "کمینه کردن", "بستن پنجره"),
-        "he" => ("חלון", "מזעור", "סגירת החלון"),
-        _ => ("Window", "Minimize", "Close Window"),
-    }
-}
-
-/// The macOS Edit submenu's title for a locale code (its items are the
-/// predefined clipboard set).
-#[cfg(target_os = "macos")]
-pub(crate) fn edit_menu_label(locale: &str) -> &'static str {
-    match locale {
-        "ja" => "編集",
-        "zh-hans" => "编辑",
-        "zh-hant" => "編輯",
-        "ko" => "편집",
-        "es" => "Edición",
-        "pt-br" => "Editar",
-        "fr" => "Édition",
-        "de" => "Bearbeiten",
-        "it" => "Modifica",
-        "pl" => "Edycja",
-        "ru" => "Правка",
-        "id" => "Edit",
-        "vi" => "Chỉnh sửa",
-        "th" => "แก้ไข",
-        "tr" => "Düzen",
-        "ar" => "تحرير",
-        "fa" => "ویرایش",
-        "he" => "עריכה",
-        _ => "Edit",
+        TrayLabels {
+            show,
+            settings,
+            about,
+            quit,
+            update,
+        }
     }
 }
 
@@ -215,9 +269,9 @@ pub(crate) fn edit_menu_label(locale: &str) -> &'static str {
 /// the item ids never change, so the tray's click handler keeps working.
 pub(crate) fn build_tray_menu(
     handle: &tauri::AppHandle,
-    locale: &str,
+    locale: Locale,
 ) -> tauri::Result<tauri::menu::Menu<tauri::Wry>> {
-    let (show_label, open_label, about_label, quit_label) = tray_labels(locale);
+    let labels = locale.tray_labels();
     // Accelerators are macOS-only: there the app menu (build_app_menu) gives
     // ⌘, and ⌘Q real key bindings, and the tray shows them right-aligned as a
     // reminder. On Windows and Linux a tray menu's accelerator is display-only
@@ -228,10 +282,10 @@ pub(crate) fn build_tray_menu(
     } else {
         (None, None)
     };
-    let show_item = MenuItem::with_id(handle, "show", show_label, true, None::<&str>)?;
-    let open_item = MenuItem::with_id(handle, "open", open_label, true, settings_accelerator)?;
-    let about_item = MenuItem::with_id(handle, "about", about_label, true, None::<&str>)?;
-    let quit_item = MenuItem::with_id(handle, "quit", quit_label, true, quit_accelerator)?;
+    let show_item = MenuItem::with_id(handle, "show", labels.show, true, None::<&str>)?;
+    let open_item = MenuItem::with_id(handle, "open", labels.settings, true, settings_accelerator)?;
+    let about_item = MenuItem::with_id(handle, "about", labels.about, true, None::<&str>)?;
+    let quit_item = MenuItem::with_id(handle, "quit", labels.quit, true, quit_accelerator)?;
     // Present only while an update is pending — a permanent "check for
     // updates" item would be noise the app already handles by itself.
     let update_item = UPDATE_VERSION
@@ -242,7 +296,7 @@ pub(crate) fn build_tray_menu(
             MenuItem::with_id(
                 handle,
                 "update",
-                tray_update_label(locale, &version),
+                labels.update.replace("{version}", &version),
                 true,
                 None::<&str>,
             )
@@ -261,22 +315,21 @@ pub(crate) fn build_tray_menu(
     Menu::with_items(handle, &items)
 }
 
-/// The macOS app menu, labelled for `locale`. An Accessory app shows no menu
-/// bar, but the menu's key equivalents work whenever a ZenCopy window is
-/// focused — that is what makes ⌘, (settings) and ⌘Q (quit) real shortcuts.
-/// The Edit submenu keeps the standard clipboard shortcuts working in text
-/// fields; the Window submenu gives ⌘W / ⌘M their bindings (⌘W goes through
-/// CloseRequested, so it hides, never destroys). Ids mirror the tray items.
+/// The macOS app menu. An Accessory app shows no menu bar, so nobody reads
+/// these labels — they are English in every language — but the menu's key
+/// equivalents work whenever a ZenCopy window is focused: that is what makes
+/// ⌘, (settings) and ⌘Q (quit) real shortcuts. The Edit submenu keeps the
+/// standard clipboard shortcuts working in text fields; the Window submenu
+/// gives ⌘W / ⌘M their bindings (⌘W goes through CloseRequested, so it hides,
+/// never destroys). Ids mirror the tray items.
 #[cfg(target_os = "macos")]
 pub(crate) fn build_app_menu(
     handle: &tauri::AppHandle,
-    locale: &str,
 ) -> tauri::Result<tauri::menu::Menu<tauri::Wry>> {
     use tauri::menu::{MenuBuilder, SubmenuBuilder};
 
-    let (_, open_label, about_label, quit_label) = tray_labels(locale);
-    let menu_settings = MenuItem::with_id(handle, "open", open_label, true, Some("CmdOrCtrl+,"))?;
-    let menu_about = MenuItem::with_id(handle, "about", about_label, true, None::<&str>)?;
+    let menu_settings = MenuItem::with_id(handle, "open", "Settings…", true, Some("CmdOrCtrl+,"))?;
+    let menu_about = MenuItem::with_id(handle, "about", "About ZenCopy", true, None::<&str>)?;
     let zencopy_submenu = SubmenuBuilder::new(handle, "ZenCopy")
         .item(&menu_about)
         .separator()
@@ -286,9 +339,9 @@ pub(crate) fn build_app_menu(
         .hide_others()
         .show_all()
         .separator()
-        .quit_with_text(quit_label)
+        .quit()
         .build()?;
-    let edit_submenu = SubmenuBuilder::new(handle, edit_menu_label(locale))
+    let edit_submenu = SubmenuBuilder::new(handle, "Edit")
         .undo()
         .redo()
         .separator()
@@ -298,13 +351,9 @@ pub(crate) fn build_app_menu(
         .separator()
         .select_all()
         .build()?;
-    let (window_label, minimize_label, close_label) = window_menu_labels(locale);
-    let window_submenu = SubmenuBuilder::new(handle, window_label)
-        .item(&PredefinedMenuItem::minimize(handle, Some(minimize_label))?)
-        .item(&PredefinedMenuItem::close_window(
-            handle,
-            Some(close_label),
-        )?)
+    let window_submenu = SubmenuBuilder::new(handle, "Window")
+        .minimize()
+        .close_window()
         .build()?;
     MenuBuilder::new(handle)
         .items(&[&zencopy_submenu, &edit_submenu, &window_submenu])
@@ -313,32 +362,45 @@ pub(crate) fn build_app_menu(
 
 #[cfg(test)]
 mod locale_tests {
-    use super::locale_from_tag;
+    use super::{Locale, locale_from_tag};
 
     #[test]
     fn chinese_resolves_by_script_and_region() {
-        assert_eq!(locale_from_tag("zh-cn"), "zh-hans");
-        assert_eq!(locale_from_tag("zh-sg"), "zh-hans");
-        assert_eq!(locale_from_tag("zh-hans-cn"), "zh-hans");
-        assert_eq!(locale_from_tag("zh-tw"), "zh-hant");
-        assert_eq!(locale_from_tag("zh-hant-hk"), "zh-hant");
-        assert_eq!(locale_from_tag("zh-mo"), "zh-hant");
+        assert_eq!(locale_from_tag("zh-cn"), Locale::ZhHans);
+        assert_eq!(locale_from_tag("zh-sg"), Locale::ZhHans);
+        assert_eq!(locale_from_tag("zh-hans-cn"), Locale::ZhHans);
+        assert_eq!(locale_from_tag("zh-tw"), Locale::ZhHant);
+        assert_eq!(locale_from_tag("zh-hant-hk"), Locale::ZhHant);
+        assert_eq!(locale_from_tag("zh-mo"), Locale::ZhHant);
+        assert_eq!(locale_from_tag("zh"), Locale::ZhHans);
+    }
+
+    /// The script a tag names outranks its region: Simplified Chinese as
+    /// read in Hong Kong is still Simplified.
+    #[test]
+    fn an_explicit_script_outranks_the_region() {
+        assert_eq!(locale_from_tag("zh-Hans-HK"), Locale::ZhHans);
+        assert_eq!(locale_from_tag("zh_Hans_TW"), Locale::ZhHans);
+        assert_eq!(locale_from_tag("zh-Hant-CN"), Locale::ZhHant);
     }
 
     #[test]
     fn portuguese_lands_on_the_brazilian_translation() {
-        assert_eq!(locale_from_tag("pt-br"), "pt-br");
-        assert_eq!(locale_from_tag("pt-pt"), "pt-br");
-        assert_eq!(locale_from_tag("pt"), "pt-br");
+        assert_eq!(locale_from_tag("pt-br"), Locale::PtBr);
+        assert_eq!(locale_from_tag("pt-pt"), Locale::PtBr);
+        assert_eq!(locale_from_tag("pt"), Locale::PtBr);
     }
 
     #[test]
-    fn simple_prefixes_match_and_unknowns_fall_back_to_english() {
-        assert_eq!(locale_from_tag("ja-jp"), "ja");
-        assert_eq!(locale_from_tag("de-at"), "de");
-        assert_eq!(locale_from_tag("id-id"), "id");
-        assert_eq!(locale_from_tag("he-il"), "he");
-        assert_eq!(locale_from_tag("nl-nl"), "en");
-        assert_eq!(locale_from_tag(""), "en");
+    fn the_language_subtag_decides_and_unknowns_fall_back_to_english() {
+        assert_eq!(locale_from_tag("ja-JP"), Locale::Ja);
+        assert_eq!(locale_from_tag("de-at"), Locale::De);
+        assert_eq!(locale_from_tag("id-id"), Locale::Id);
+        assert_eq!(locale_from_tag("he-il"), Locale::He);
+        assert_eq!(locale_from_tag("nl-nl"), Locale::En);
+        assert_eq!(locale_from_tag(""), Locale::En);
+        // A language whose code merely starts like one of ours is not ours.
+        assert_eq!(locale_from_tag("frr-DE"), Locale::En);
+        assert_eq!(locale_from_tag("arn-CL"), Locale::En);
     }
 }

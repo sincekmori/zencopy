@@ -5,6 +5,13 @@ on:
   push:
     tags: ["v*"]
 
+# Every action is pinned to a commit, the comment beside it naming the
+# version: these jobs hold the signing keys, and a tag can be moved onto code
+# published minutes ago. Dependabot proposes the bumps, a week after a
+# release (.github/dependabot.yml). Bun is the one package.json's
+# `packageManager` names, and cargo builds from Cargo.lock as it stands
+# (`--locked`), so nothing here resolves a version at release time.
+
 jobs:
   # The draft is created exactly once, before any build starts. Without this,
   # each platform job's tauri-action would "create the release if missing" —
@@ -17,6 +24,19 @@ jobs:
     outputs:
       release_id: ${{ steps.create.outputs.release_id }}
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # The app, its installers, the update manifest and the site's download
+      # links all take their version from package.json; a tag that says
+      # another number would publish installers the links do not name.
+      - name: Check that the tag is package.json's version
+        run: |
+          version=$(jq -r .version package.json)
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::the tag is $GITHUB_REF_NAME, but package.json says $version"
+            exit 1
+          fi
+
       - name: Create the draft release
         id: create
         env:
@@ -37,14 +57,21 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            args: "--target universal-apple-darwin"
+            args: "--target universal-apple-darwin -- --locked"
           - os: windows-latest
-            args: ""
-          - os: ubuntu-latest
-            args: ""
+            args: "-- --locked"
+          # Not ubuntu-latest: a binary asks for the glibc it was linked
+          # against, so the build's base is the oldest system the app runs
+          # on. Ubuntu 22.04 (glibc 2.35) is the oldest with the WebKitGTK
+          # 4.1 Tauri v2 needs; the packages declare that floor
+          # (bundle.linux in tauri.conf.json) and a step below holds the
+          # binary to it. When GitHub retires this image, build in an
+          # ubuntu:22.04 container rather than move the floor by accident.
+          - os: ubuntu-22.04
+            args: "-- --locked"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # Tauri v2 system libraries, plus the X11 headers rdev (copycopy's Linux
       # key listener) compiles against.
@@ -56,13 +83,16 @@ jobs:
             libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev \
             libx11-dev libxtst-dev libxi-dev
 
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 
-      - uses: dtolnay/rust-toolchain@stable
+      # Pinned to a commit of master, the toolchain is no longer read off the
+      # ref and is named here.
+      - uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de # master
         with:
+          toolchain: stable
           targets: ${{ matrix.os == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           workspaces: src-tauri
 
@@ -85,7 +115,7 @@ jobs:
       # Windows ships NSIS only (bundle.targets excludes msi), the recommended
       # updater format for Tauri v2, so latest.json points at NSIS without
       # needing updaterJsonPreferNsis.
-      - uses: tauri-apps/tauri-action@v1.0.0
+      - uses: tauri-apps/tauri-action@1deb371b0cd8bd54025b384f1cd735e725c4060f # v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
@@ -102,3 +132,101 @@ jobs:
           releaseId: ${{ needs.draft.outputs.release_id }}
           retryAttempts: 2
           args: ${{ matrix.args }}
+
+      # The floor the packages promise (see the matrix), read from where they
+      # declare it: a binary that asks for a newer glibc installs fine and
+      # then does not start, and the updater would hand it to everyone below
+      # that version. The bundles are in the draft by now; a failure here
+      # keeps the manifest job from running and leaves the run red.
+      - name: Check the glibc the Linux binary asks for
+        if: runner.os == 'Linux'
+        run: |
+          deb=$(jq -r '.bundle.linux.deb.depends[] | select(startswith("libc6")) | capture("(?<v>[0-9]+(\\.[0-9]+)+)").v' src-tauri/tauri.conf.json)
+          rpm=$(jq -r '.bundle.linux.rpm.depends[] | select(startswith("libc.so.6")) | capture("GLIBC_(?<v>[0-9]+(\\.[0-9]+)+)").v' src-tauri/tauri.conf.json)
+          if [ -z "$deb" ] || [ "$deb" != "$rpm" ]; then
+            echo "::error::tauri.conf.json declares glibc '$deb' for the deb and '$rpm' for the rpm"
+            exit 1
+          fi
+          floor=GLIBC_$deb
+          asked=$(objdump -T src-tauri/target/release/zencopy | grep -oE 'GLIBC_[0-9]+(\.[0-9]+)+' | sort -uV | tail -n 1)
+          if [ -z "$asked" ]; then
+            echo "::error::found no glibc version in the binary's symbols"
+            exit 1
+          fi
+          echo "the binary asks for up to $asked"
+          if [ "$(printf '%s\n' "$asked" "$floor" | sort -V | tail -n 1)" != "$floor" ]; then
+            echo "::error::the Linux binary asks for $asked, newer than the $floor its packages declare"
+            exit 1
+          fi
+
+  # Once every platform has uploaded, the update manifest is looked at as a
+  # whole, which no platform job can do.
+  #
+  # Its platforms: the three jobs each read latest.json, add their entries
+  # and write it back, with nothing to lock it — two writes a second apart
+  # can drop one job's entries without an error. A release missing a
+  # platform stops that platform's updates, so a short manifest fails here
+  # (re-run the platform's job, then this one).
+  #
+  # Its links: tauri-action writes each installer's REST API address
+  # (api.github.com/…/releases/assets/<id>), which counts against the 60
+  # requests an hour GitHub allows an unauthenticated IP — shared by a whole
+  # office behind one NAT, where a spent quota turns the download into a 403
+  # the app can only retry a day later. They are rewritten to the release's
+  # download addresses, the kind the update check itself uses, which have no
+  # such quota. The signatures cover the files, not their addresses.
+  manifest:
+    needs: [draft, release]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_ID: ${{ needs.draft.outputs.release_id }}
+    steps:
+      - name: Check the update manifest and rewrite its links
+        run: |
+          set -euo pipefail
+          assets=$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets?per_page=100" | jq -s add)
+          manifest=$(jq -r '.[] | select(.name == "latest.json") | .url' <<<"$assets")
+          if [ -z "$manifest" ]; then
+            echo "::error::the draft has no latest.json"
+            exit 1
+          fi
+          gh api -H "Accept: application/octet-stream" "$manifest" > uploaded.json
+
+          version=$(jq -r .version uploaded.json)
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::latest.json says version $version under the tag $GITHUB_REF_NAME"
+            exit 1
+          fi
+
+          # What the app's updater asks for: its OS and architecture, alone
+          # and with the kind of installer it came from.
+          missing=$(jq -r '
+            [
+              "darwin-aarch64", "darwin-aarch64-app", "darwin-x86_64", "darwin-x86_64-app",
+              "darwin-universal", "darwin-universal-app",
+              "linux-x86_64", "linux-x86_64-appimage", "linux-x86_64-deb", "linux-x86_64-rpm",
+              "windows-x86_64", "windows-x86_64-nsis"
+            ] - (.platforms | keys) | join(", ")' uploaded.json)
+          if [ -n "$missing" ]; then
+            echo "::error::latest.json has no entry for $missing — re-run that platform's job, then this one"
+            exit 1
+          fi
+
+          # An address already rewritten (a re-run) stays as it is.
+          jq --argjson assets "$assets" \
+            --arg base "https://github.com/$GITHUB_REPOSITORY/releases/download/$GITHUB_REF_NAME" '
+            ($assets | map({ key: .url, value: .name }) | from_entries) as $names
+            | .platforms |= map_values(
+                .url |= (
+                  if startswith($base + "/") then .
+                  else ($names[.] // error("latest.json links \(.), which is not an asset of this release"))
+                    | "\($base)/\(@uri)"
+                  end
+                )
+              )' uploaded.json > latest.json
+          jq -r '.platforms | to_entries[] | "\(.key)  \(.value.url)"' latest.json
+
+          gh release upload "$GITHUB_REF_NAME" latest.json --clobber --repo "$GITHUB_REPOSITORY"

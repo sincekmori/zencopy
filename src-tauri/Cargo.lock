@@ -784,9 +784,9 @@ dependencies = [
 
 [[package]]
 name = "copycopy"
-version = "0.3.6"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fbfea35fd9ea367ef8500f704156c0354a6868faa0122fd83161fd7664f56952"
+checksum = "569bc4066cd207c90476b1ecbbefdd55f17a8ea7a2e11b3bf4a563cf0b64aed1"
 dependencies = [
  "clipboard-rs",
  "dispatch2",
@@ -7098,7 +7098,7 @@ dependencies = [
 
 [[package]]
 name = "zencopy"
-version = "0.16.0"
+version = "0.0.0"
 dependencies = [
  "base64 0.23.1",
  "calamine",

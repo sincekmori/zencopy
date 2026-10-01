@@ -31,9 +31,10 @@ pub(crate) enum SniffedType {
 
 /// Decode a text file to a clean UTF-8 string, or `None` if it isn't text.
 /// Browser-grade pipeline: a BOM decides first (UTF-8/UTF-16 — before the NUL
-/// guard, since UTF-16 is full of NULs), then strict UTF-8, then chardetng's
-/// guess for legacy encodings (Shift_JIS on Japanese Windows, …). Line
-/// endings normalize to LF, so CRLF and mixed files come out uniform.
+/// guard, since UTF-16 is full of NULs), then ISO-2022-JP, then strict UTF-8,
+/// then chardetng's guess for legacy encodings (Shift_JIS on Japanese
+/// Windows, …). Line endings normalize to LF, so CRLF and mixed files come
+/// out uniform.
 pub(crate) fn decode_text(bytes: &[u8]) -> Option<String> {
     let decoded = if let Some((encoding, _)) = encoding_rs::Encoding::for_bom(bytes) {
         let (text, _, had_errors) = encoding.decode(bytes);
@@ -43,12 +44,14 @@ pub(crate) fn decode_text(bytes: &[u8]) -> Option<String> {
         text.into_owned()
     } else if bytes.contains(&0) {
         return None; // git's own not-text heuristic
+    } else if let Some(text) = decode_iso_2022_jp(bytes) {
+        text
     } else if let Ok(text) = std::str::from_utf8(bytes) {
         text.to_string()
     } else {
-        // Local files, not web content: ISO-2022-JP is fair game (the email
-        // semantics), and UTF-8 was already settled by the strict check above.
-        let mut detector = chardetng::EncodingDetector::new(chardetng::Iso2022JpDetection::Allow);
+        // Bytes that are not UTF-8 carry a byte past ASCII, which ISO-2022-JP
+        // never does — it was settled above, and the detector need not look.
+        let mut detector = chardetng::EncodingDetector::new(chardetng::Iso2022JpDetection::Deny);
         detector.feed(bytes, true);
         let encoding = detector.guess(None, chardetng::Utf8Detection::Deny);
         let (text, _, had_errors) = encoding.decode(bytes);
@@ -60,27 +63,63 @@ pub(crate) fn decode_text(bytes: &[u8]) -> Option<String> {
     Some(decoded.replace("\r\n", "\n").replace('\r', "\n"))
 }
 
-/// Sniff a file: magic bytes first (images, PDF, audio — normalized to the
-/// media types providers expect; office files become their extracted text),
-/// else the text decoding above. `None` means a recognized-but-unsupported or
-/// opaque binary (zip, executable, …).
+/// ISO-2022-JP — Japanese mail, and text files of its time — is ASCII bytes
+/// with escape sequences switching character sets, so it passes for UTF-8 and
+/// would come out as the bytes between the escapes. Only what decodes without
+/// a single error counts: a log colored with ANSI escapes (`ESC [`) does not.
+fn decode_iso_2022_jp(bytes: &[u8]) -> Option<String> {
+    if !bytes.is_ascii() || !bytes.contains(&0x1b) {
+        return None;
+    }
+    encoding_rs::ISO_2022_JP
+        .decode_without_bom_handling_and_without_replacement(bytes)
+        .map(std::borrow::Cow::into_owned)
+}
+
+/// Whether bytes are text on their face: a byte-order mark, or UTF-8 with no
+/// NUL in it. A real PDF can be all ASCII, so its header keeps it one.
+fn is_plainly_text(bytes: &[u8]) -> bool {
+    !bytes.starts_with(b"%PDF-")
+        && (encoding_rs::Encoding::for_bom(bytes).is_some()
+            || (!bytes.contains(&0) && std::str::from_utf8(bytes).is_ok()))
+}
+
+/// The media type to send a binary format as, by what infer calls it — the
+/// images, PDF and audio that at least one major provider documents as input.
+/// `None` for the rest of what infer recognizes (a TIFF, a PSD, a MIDI file):
+/// those are refused here, in the app's own words, rather than sent off to
+/// come back as a provider's raw error.
+fn accepted_media_type(sniffed: &'static str) -> Option<&'static str> {
+    Some(match sniffed {
+        "image/png" | "image/jpeg" | "image/gif" | "image/webp" | "image/heif"
+        | "application/pdf" | "audio/mpeg" | "audio/ogg" | "audio/opus" | "audio/aac" => sniffed,
+        // infer's own names for these, under the registered ones.
+        "audio/x-wav" => "audio/wav",
+        "audio/x-flac" => "audio/flac",
+        "audio/m4a" => "audio/mp4",
+        "audio/x-aiff" => "audio/aiff",
+        _ => return None,
+    })
+}
+
+/// Sniff a file. What is plainly text is text, whatever it starts with — a
+/// magic number is a handful of bytes, and a CSV headed `BMI,Age` or notes
+/// that mention `%PDF` in their first lines are not a bitmap or a PDF. Then
+/// magic bytes (images, PDF, audio — as the media types providers expect;
+/// office files become their extracted text), else the text decoding above.
+/// `None` means a recognized-but-unsupported or opaque binary (zip,
+/// executable, …).
 pub(crate) fn sniff_attachment(bytes: &[u8]) -> Option<SniffedType> {
+    if is_plainly_text(bytes) {
+        return decode_text(bytes).map(SniffedType::Text);
+    }
     // infer's Text matchers (HTML, XML, shell scripts) are content heuristics,
-    // not binary signatures — an SVG's `<?xml` prolog matches text/xml, for
-    // example. Those files are text like any other: let decode_text decide.
+    // not binary signatures. Files they catch that are not UTF-8 — a
+    // Shift_JIS page — are text like any other: let decode_text decide.
     if let Some(kind) =
         infer::get(bytes).filter(|kind| kind.matcher_type() != infer::MatcherType::Text)
     {
-        let media_type = match kind.mime_type() {
-            "audio/x-wav" => "audio/wav",
-            "audio/x-flac" => "audio/flac",
-            "audio/m4a" => "audio/mp4",
-            other => other,
-        };
-        if media_type.starts_with("image/")
-            || media_type.starts_with("audio/")
-            || media_type == "application/pdf"
-        {
+        if let Some(media_type) = accepted_media_type(kind.mime_type()) {
             return Some(SniffedType::Binary(media_type));
         }
         // docx/pptx/xlsx: providers don't take the binary, but the text
@@ -185,8 +224,12 @@ mod attachment_tests {
             Some(SniffedType::Text(_))
         ));
 
-        let zip = b"PK\x03\x04 not something a model can take";
+        let zip = b"PK\x03\x04\x14\x00\x00\x00 not something a model can take";
         assert!(sniff_attachment(zip).is_none());
+
+        // A real format no provider takes: refused, not passed along.
+        let tiff = b"II*\x00\x08\x00\x00\x00 rest of the scan";
+        assert!(sniff_attachment(tiff).is_none());
 
         let opaque = b"\x01\x02\x00\xff random binary";
         assert!(sniff_attachment(opaque).is_none());
@@ -224,6 +267,30 @@ mod attachment_tests {
             panic!("docx must sniff to its extracted text");
         };
         assert_eq!(text, "議事録の本文\n");
+    }
+
+    /// Text that happens to open with a magic number is still text: `BM` is
+    /// a bitmap's, `MAC ` an audio format's, `GIF` and `ID3` speak for
+    /// themselves, and `%PDF` anywhere in the first kilobyte passes for a PDF.
+    #[test]
+    fn text_that_starts_like_a_binary_stays_text() {
+        for text in [
+            "BMI,Age,Weight\n22.5,31,64\n",
+            "MAC Address,IP,Hostname\n00:1b:63:84:45:e6,10.0.0.2,printer\n",
+            "GIFs for the launch post\n",
+            "ID3 tags to fix\n",
+            "MZ世代のメモ\n",
+            "# Notes\n\nA PDF starts with %PDF-1.7, then the objects.\n",
+            "%!TEX root = main.tex\n\\documentclass{article}\n",
+        ] {
+            assert!(
+                matches!(
+                    sniff_attachment(text.as_bytes()),
+                    Some(SniffedType::Text(_))
+                ),
+                "must stay text: {text:?}"
+            );
+        }
     }
 
     /// infer also has *text* matchers (HTML, XML, shell scripts); those hits
@@ -267,6 +334,20 @@ mod attachment_tests {
             panic!("BOM'd UTF-16 must decode as text");
         };
         assert_eq!(text, "日本語のメモ\nCRLF行");
+
+        // Japanese mail: ISO-2022-JP is all ASCII bytes, yet not UTF-8 text.
+        let (jis, _, _) = encoding_rs::ISO_2022_JP.encode("会議の決定事項について");
+        let Some(SniffedType::Text(text)) = sniff_attachment(&jis) else {
+            panic!("ISO-2022-JP must decode as text");
+        };
+        assert_eq!(text, "会議の決定事項について");
+
+        // ...while a log colored with ANSI escapes is left as it is.
+        let colored = b"\x1b[31merror\x1b[0m: build failed\n";
+        let Some(SniffedType::Text(text)) = sniff_attachment(colored) else {
+            panic!("an ANSI-colored log must stay text");
+        };
+        assert_eq!(text, "\u{1b}[31merror\u{1b}[0m: build failed\n");
 
         // Mixed CRLF/LF UTF-8 normalizes to LF-only.
         let mixed = b"line one\r\nline two\nline three\r\n";

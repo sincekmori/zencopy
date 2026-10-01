@@ -1,3 +1,4 @@
+import { isolate } from "./isolate.ts";
 import type { Messages } from "./types.ts";
 
 export const he: Messages = {
@@ -102,12 +103,11 @@ export const he: Messages = {
     copied: "הועתק",
     close: "סגירה",
     openSettings: "פתיחת ההגדרות",
-    updateHint: (version) => `עדכון זמין (v${version})`,
+    updateHint: (version) => `עדכון זמין (${isolate(`v${version}`)})`,
   },
   source: {
     inputLabel: "התוכן שהועתק",
     richText: "טקסט מעוצב",
-    emptyClipboard: "הלוח ריק.",
     imageAlt: "תמונה שהועתקה",
     cannotPreview: "(אין תצוגה מקדימה)",
   },
@@ -117,8 +117,8 @@ export const he: Messages = {
   },
   about: {
     tagline: "‏AI מיידי. ישירות על המסך שלך.",
-    update: (version) => `עדכון ל‑v${version} והפעלת האפליקציה מחדש`,
-    updateRestart: (version) => `הפעלת האפליקציה מחדש לעדכון ל‑v${version}`,
+    update: (version) => `עדכון ל‑${isolate(`v${version}`)} והפעלת האפליקציה מחדש`,
+    updateRestart: (version) => `הפעלת האפליקציה מחדש לעדכון ל‑${isolate(`v${version}`)}`,
     updating: "מעדכן…",
     checkUpdates: "בדיקת עדכונים",
     checkingUpdates: "בודק עדכונים…",
@@ -156,7 +156,7 @@ export const he: Messages = {
     title: "פרומפטים",
     hint: (keys) => `מה ${keys} יודעת לעשות. אפשר להחליף גם מתווית התוצאה בחלון.`,
     add: "פרומפט חדש",
-    export: "ייצוא (.md)",
+    export: `ייצוא (${isolate(".md")})`,
     import: "ייבוא",
     importHint: "הדביקו את ה‑Markdown של פרומפט משותף, או בחרו את הקובץ.",
     importFromFile: "בחירת קובץ",
@@ -181,7 +181,7 @@ export const he: Messages = {
     importInvalidId: (id) => `ה‑id של הפרומפט אינו תקין: '${id}'`,
     importBuiltinId: (id) => `'${id}' הוא id של פרומפט מובנה — שנו את ה‑id בקובץ ונסו שוב.`,
     importReservedId: (id) =>
-      `'${id}' מתחיל ב-'zencopy-' — קידומת id זו שמורה לפרומפטים המותקנים מראש.`,
+      `'${id}' מתחיל ב-'${isolate("zencopy-")}' — קידומת id זו שמורה לפרומפטים המותקנים מראש.`,
     importIdExists: (id) =>
       `פרומפט עם ה‑id '${id}' כבר קיים — מחקו אותו קודם, או שנו את ה‑id בקובץ.`,
     importTooLarge: "הקובץ גדול מדי בשביל פרומפט.",
@@ -236,7 +236,7 @@ export const he: Messages = {
     invalidJson: "‏JSON לא תקין.",
     invalidSchema: "‏JSON תקין, אבל זו לא הגדרה תקפה. הפרטים ביומן.",
     saveFailed: "השמירה נכשלה. הפרטים ביומן.",
-    invalidConfig: "קובץ ai-sdk-catalog.json שלכם לא תקין. תקנו אותו בהגדרות (AI ← JSON).",
+    invalidConfig: `קובץ ai-sdk-catalog.json שלכם לא תקין. תקנו אותו בהגדרות (${isolate("AI")} ← ${isolate("JSON")}).`,
     notConfigured: "כדי להתחיל, הגדירו ספק AI בהגדרות.",
   },
 };

@@ -6,7 +6,9 @@
  * picture carries the chord (the `os` flag in src/lib/screenshot-scenarios.ts,
  * which the runner checks against the renders), as Windows (<name>.ctrl.png,
  * Ctrl + C + C) and macOS (<name>.cmd.png, ⌘ + C + C) too; the head script
- * (astro.config.mjs) swaps the source by OS, as it does for the demo videos.
+ * (astro.config.mjs) swaps the source by OS, as it does for the demo videos —
+ * as the parser adds the picture, and the picture loads lazily, so the swap
+ * comes before the fetch and only the visitor's own cut is downloaded.
  * The picture is the window at its own size — the scenario's viewport in
  * logical px, one PNG pixel each, written as the image's width and height
  * so the page lays it out before it loads — as big on the page as the
@@ -40,6 +42,7 @@ const { width, height } = viewportOf(scenario);
   data-src-cmd={scenario.os ? `${base}.cmd.png` : undefined}
   data-src-ctrl={scenario.os ? `${base}.ctrl.png` : undefined}
   height={height}
+  loading="lazy"
   src={`${base}.png`}
   width={width}
 />

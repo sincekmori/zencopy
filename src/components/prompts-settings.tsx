@@ -14,7 +14,7 @@ import {
   Trash2,
   Upload,
 } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as z from "zod";
 import { QuickPromptsSettings } from "@/components/quick-prompts-settings.tsx";
 import { Button } from "@/components/ui/button.tsx";
@@ -50,6 +50,7 @@ import { usePromptLabel, useLocale, useT } from "@/lib/i18n.tsx";
 import { draftInstruction, INVALID_CONFIG, NOT_CONFIGURED } from "@/lib/llm.ts";
 import type { Messages } from "@/lib/messages/types.ts";
 import { createLogger, errorMessage } from "@/lib/log.ts";
+import { integerText } from "@/lib/number-text.ts";
 import { TRIGGER_KEYS } from "@/lib/platform.ts";
 import { cn } from "@/lib/utils.ts";
 import { siteUrl } from "@/lib/site.ts";
@@ -158,6 +159,14 @@ export function PromptsSettings(): React.JSX.Element {
   const [formError, setFormError] = useState<string | undefined>(undefined);
   // The ✨ button: the configured model is rewriting the instruction field.
   const [drafting, setDrafting] = useState(false);
+  // Counts the editor's openings and closings, so an answer that took a while
+  // (the AI draft) can tell whether the editor it was asked from is still the
+  // one on screen.
+  const editorSession = useRef(0);
+  const showDraft = (next: Draft | undefined): void => {
+    editorSession.current += 1;
+    setDraft(next);
+  };
   // The effective kind → prompt assignments, kept in the same reload path as
   // the list so the selects and the prompt list never disagree.
   const [rules, setRules] = useState<RulesInfo>({ by_kind: {}, overrides: [] });
@@ -218,11 +227,11 @@ export function PromptsSettings(): React.JSX.Element {
   }, [reload]);
 
   const closeViewer = (): void => {
-    setDraft(undefined);
+    showDraft(undefined);
   };
 
   const closeEditor = (): void => {
-    setDraft(undefined);
+    showDraft(undefined);
     setFormError(undefined);
   };
 
@@ -233,7 +242,7 @@ export function PromptsSettings(): React.JSX.Element {
 
   const edit = (prompt: PromptInfo): void => {
     setFormError(undefined);
-    setDraft({
+    showDraft({
       id: prompt.id,
       label: prompt.label,
       instructions: prompt.instructions,
@@ -260,12 +269,21 @@ export function PromptsSettings(): React.JSX.Element {
     }
     setFormError(undefined);
     setDrafting(true);
+    // The answer takes seconds, and belongs to the editor that asked for it:
+    // one closed in the meantime — or closed and opened on another prompt —
+    // is not the place to write it.
+    const asked = editorSession.current;
     void (async () => {
       try {
         const instructions = await draftInstruction(draft.instructions);
-        setDraft((prev) => (prev ? { ...prev, instructions } : prev));
+        if (editorSession.current === asked) {
+          setDraft((prev) => (prev ? { ...prev, instructions } : prev));
+        }
       } catch (error) {
         log.error("drafting an instruction failed", error);
+        if (editorSession.current !== asked) {
+          return; // the error is that editor's too
+        }
         const reason = errorMessage(error);
         if (reason === NOT_CONFIGURED) {
           setFormError(t.ai.notConfigured);
@@ -308,7 +326,7 @@ export function PromptsSettings(): React.JSX.Element {
           prompt: draft.prompt.trim() === "" ? "{{ text }}" : draft.prompt,
           role: draft.role.trim() === "" ? undefined : draft.role.trim(),
         });
-        setDraft(undefined);
+        showDraft(undefined);
         reload();
       } catch (error) {
         log.error("saving prompt failed", error);
@@ -620,7 +638,7 @@ export function PromptsSettings(): React.JSX.Element {
               variant="outline"
               onClick={() => {
                 setFormError(undefined);
-                setDraft({ ...NEW_DRAFT });
+                showDraft({ ...NEW_DRAFT });
               }}
             >
               <Plus className="size-3.5" />
@@ -879,7 +897,7 @@ export function PromptsSettings(): React.JSX.Element {
         {formError && !draft ? <p className="text-xs text-destructive">{formError}</p> : undefined}
       </section>
 
-      <QuickPromptsSettings />
+      <QuickPromptsSettings prompts={prompts} />
 
       <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
         <div>
@@ -1112,7 +1130,7 @@ export function PromptsSettings(): React.JSX.Element {
                     inputMode="numeric"
                     value={rule.minChars}
                     onChange={(event) => {
-                      setRule({ ...rule, minChars: event.target.value.replaceAll(/\D+/gu, "") });
+                      setRule({ ...rule, minChars: integerText(event.target.value) });
                     }}
                   />
                 </label>
@@ -1125,7 +1143,7 @@ export function PromptsSettings(): React.JSX.Element {
                     inputMode="numeric"
                     value={rule.maxChars}
                     onChange={(event) => {
-                      setRule({ ...rule, maxChars: event.target.value.replaceAll(/\D+/gu, "") });
+                      setRule({ ...rule, maxChars: integerText(event.target.value) });
                     }}
                   />
                 </label>

@@ -9,7 +9,7 @@
  * repeat the name.
  */
 import { ICONS } from "../../../src/lib/icons.ts";
-import { localeOf, messages } from "../../../src/lib/messages/index.ts";
+import { loadMessages, localeOf } from "../../../src/lib/messages/index.ts";
 import { pageLocale } from "../lib/page-locale.ts";
 
 interface Props {
@@ -24,6 +24,7 @@ if (locale === undefined) {
   );
 }
 const { size, node, label } = ICONS[name];
+const title = label(await loadMessages(locale));
 ---
 
 <svg
@@ -36,7 +37,7 @@ const { size, node, label } = ICONS[name];
   viewBox={`0 0 ${size} ${size}`}
   xmlns="http://www.w3.org/2000/svg"
 >
-  <title>{label(messages[locale])}</title>
+  <title>{title}</title>
   {node.map(([Tag, attrs]) => <Tag {...attrs} />)}
 </svg>
 

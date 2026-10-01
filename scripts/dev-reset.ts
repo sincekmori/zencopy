@@ -19,6 +19,7 @@ import { existsSync, rmSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
+import { xdgDir } from "./xdg.ts";
 
 const IDENTIFIER = "app.zencopy";
 const PRODUCT = "ZenCopy";
@@ -81,14 +82,15 @@ function targetsFor(platform: NodeJS.Platform): Target[] {
       ];
     }
     case "linux": {
-      const config = process.env["XDG_CONFIG_HOME"] ?? join(home, ".config");
-      const data = process.env["XDG_DATA_HOME"] ?? join(home, ".local", "share");
-      const cache = process.env["XDG_CACHE_HOME"] ?? join(home, ".cache");
+      const config = xdgDir("XDG_CONFIG_HOME", ".config");
+      const data = xdgDir("XDG_DATA_HOME", ".local", "share");
+      const cache = xdgDir("XDG_CACHE_HOME", ".cache");
       return [
         pathTarget(join(config, IDENTIFIER)), // config (catalog, rules, prompts/)
         pathTarget(join(data, IDENTIFIER)), // data dir (settings store, stats/, logs/, webview data)
         pathTarget(join(cache, IDENTIFIER)),
-        pathTarget(join(config, "autostart", `${PRODUCT}.desktop`)), // autostart
+        // autostart: auto-launch writes under ~/.config whatever XDG_CONFIG_HOME says
+        pathTarget(join(home, ".config", "autostart", `${PRODUCT}.desktop`)),
         pathTarget(join(data, "gnome-shell", "extensions", GNOME_EXT_UUID)), // copycopy extension
       ];
     }

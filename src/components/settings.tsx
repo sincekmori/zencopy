@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { emit } from "@tauri-apps/api/event";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { PromptsSettings } from "@/components/prompts-settings.tsx";
 import { AiSettings } from "@/components/ai-settings.tsx";
 import { TriggerNotice } from "@/components/trigger-notice.tsx";
@@ -17,8 +17,8 @@ import { Welcome } from "@/components/welcome.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
 import { useT } from "@/lib/i18n.tsx";
 import { createLogger, errorMessage } from "@/lib/log.ts";
-import { eventMonth, runCost, type UsageEvent } from "@/lib/costs.ts";
-import { modelCosts } from "@/lib/llm.ts";
+import { costCsv, type CostCsvIssue } from "@/lib/costs.ts";
+import { decimalText } from "@/lib/number-text.ts";
 import { LOCALES } from "@/lib/messages/index.ts";
 import {
   type Corner,
@@ -67,23 +67,6 @@ const CORNER_POSITION: Record<Corner, string> = {
   "bottom-right": "bottom-3 right-3",
 };
 
-/** Fold one priced run into its month × model row. */
-function addToGroup(
-  groups: Map<string, { month: string; model: string; cost: number }>,
-  row: { month: string; model: string },
-  cost: number,
-): void {
-  const key = `${row.month}\u0000${row.model}`;
-  const group = groups.get(key) ?? { ...row, cost: 0 };
-  group.cost += cost;
-  groups.set(key, group);
-}
-
-/** RFC 4180 quoting, only when the value needs it. */
-function csvCell(value: string): string {
-  return /[",\n]/u.test(value) ? `"${value.replaceAll('"', '""')}"` : value;
-}
-
 export function Settings(): React.JSX.Element {
   const t = useT();
   const [corner, setCorner] = useState<Corner>(DEFAULT_CORNER);
@@ -115,7 +98,7 @@ export function Settings(): React.JSX.Element {
   const [statsResetDone, setStatsResetDone] = useState(false);
   // The CSV export's inline complaint: models it could not price, or the
   // nothing-recorded notice. Cleared on the next attempt.
-  const [exportIssue, setExportIssue] = useState<"empty" | string[] | undefined>(undefined);
+  const [exportIssue, setExportIssue] = useState<CostCsvIssue | undefined>(undefined);
   const [resetError, setResetError] = useState<string | undefined>(undefined);
   // The window's tab. AI first: it's the one thing that must be set up.
   // Screenshot scenarios (dev-only, see src/lib/screenshot.ts) pick the tab
@@ -238,10 +221,10 @@ export function Settings(): React.JSX.Element {
     void emit("popup-cost-changed", next); // live-update the popup
   };
 
-  // The cap input: digits and one dot only, persisted as it settles. An
-  // empty (or unparsable) value stores the 0 sentinel: no cap.
+  // The cap input: a decimal number, persisted as it settles. An empty (or
+  // unparsable) value stores the 0 sentinel: no cap.
   const changeCostLimit = (raw: string): void => {
-    const text = raw.replaceAll(/[^0-9.]/gu, "").replaceAll(/\.(?=.*\.)/gu, "");
+    const text = decimalText(raw);
     setCostLimitText(text);
     const value = Number(text);
     const limit = text !== "" && Number.isFinite(value) && value > 0 ? value : 0;
@@ -266,48 +249,17 @@ export function Settings(): React.JSX.Element {
     })();
   };
 
-  // Download the all-time cost table as CSV: one row per month × model, cost
-  // in plain USD decimals. Models the catalog can't price block the export
-  // and are named inline — that hole has a fix (a cost block in the config),
-  // and a report with silent holes would read as cheaper than reality. A
-  // completed run whose provider reported no usage (the schema allows absent
-  // tokens) must not block forever — nothing can ever supply the counts — so
-  // it stays in its model's row, contributing the tokens it reported: none.
+  // Download the all-time cost table as CSV (see costCsv for what is in it,
+  // and what holds it back).
   const exportCosts = (): void => {
     setExportIssue(undefined);
     void (async () => {
       try {
-        const [events, prices] = await Promise.all([
-          invoke<UsageEvent[]>("read_usage_stats"),
-          modelCosts(),
-        ]);
-        if (events.length === 0) {
-          setExportIssue("empty");
-          return;
+        const report = await costCsv();
+        setExportIssue(report.issue);
+        if (report.csv !== undefined) {
+          await invoke("export_usage_csv", { csv: report.csv });
         }
-        const groups = new Map<string, { month: string; model: string; cost: number }>();
-        const unpriced = new Set<string>();
-        for (const event of events) {
-          const month = eventMonth(event);
-          if (month) {
-            const model = event.model ?? "?";
-            const price = event.model === undefined ? undefined : prices[event.model];
-            if (price) {
-              addToGroup(groups, { month, model }, event.tokens ? runCost(event.tokens, price) : 0);
-            } else {
-              unpriced.add(model);
-            }
-          }
-        }
-        if (unpriced.size > 0) {
-          setExportIssue([...unpriced].toSorted());
-          return;
-        }
-        const lines = [...groups.values()]
-          .toSorted((a, b) => a.month.localeCompare(b.month) || a.model.localeCompare(b.model))
-          .map((group) => `${group.month},${csvCell(group.model)},${group.cost.toFixed(6)}`);
-        const csv = ["month,model,cost_usd", ...lines, ""].join("\n");
-        await invoke("export_usage_csv", { csv });
       } catch (error) {
         log.error("exporting the cost CSV failed", error);
       }
@@ -381,9 +333,10 @@ export function Settings(): React.JSX.Element {
 
   const toggleAutostart = (next: boolean): void => {
     setAutostart(next); // optimistic
+    const apply = next ? enable : disable;
     void (async () => {
       try {
-        await (next ? enable() : disable());
+        await apply();
       } catch (error) {
         setAutostart(!next); // revert if the OS rejected it
         log.error("autostart toggle failed", error);
@@ -391,18 +344,11 @@ export function Settings(): React.JSX.Element {
     })();
   };
 
-  // The three arrays handed to SegmentedControl are memoized because
-  // react-perf/jsx-no-new-array-as-prop can't see the compiler doing the
-  // same thing; the inline-mapped arrays below (corners, languages) are not
-  // props and stay plain.
-  const tabs = useMemo(
-    (): { value: "ai" | "prompts" | "general"; label: string }[] => [
-      { value: "ai", label: t.ai.title },
-      { value: "prompts", label: t.prompts.title },
-      { value: "general", label: t.settings.tabGeneral },
-    ],
-    [t],
-  );
+  const tabs: { value: "ai" | "prompts" | "general"; label: string }[] = [
+    { value: "ai", label: t.ai.title },
+    { value: "prompts", label: t.prompts.title },
+    { value: "general", label: t.settings.tabGeneral },
+  ];
 
   const corners: { value: Corner; label: string }[] = [
     { value: "top-left", label: t.settings.cornerTopLeft },
@@ -410,22 +356,16 @@ export function Settings(): React.JSX.Element {
     { value: "bottom-left", label: t.settings.cornerBottomLeft },
     { value: "bottom-right", label: t.settings.cornerBottomRight },
   ];
-  const themes = useMemo(
-    (): { value: Theme; label: string }[] => [
-      { value: "system", label: t.settings.optionSystem },
-      { value: "light", label: t.settings.optionLight },
-      { value: "dark", label: t.settings.optionDark },
-    ],
-    [t],
-  );
-  const textSizes = useMemo(
-    (): { value: TextSize; label: string }[] => [
-      { value: "small", label: t.settings.textSizeSmall },
-      { value: "standard", label: t.settings.textSizeStandard },
-      { value: "large", label: t.settings.textSizeLarge },
-    ],
-    [t],
-  );
+  const themes: { value: Theme; label: string }[] = [
+    { value: "system", label: t.settings.optionSystem },
+    { value: "light", label: t.settings.optionLight },
+    { value: "dark", label: t.settings.optionDark },
+  ];
+  const textSizes: { value: TextSize; label: string }[] = [
+    { value: "small", label: t.settings.textSizeSmall },
+    { value: "standard", label: t.settings.textSizeStandard },
+    { value: "large", label: t.settings.textSizeLarge },
+  ];
   const languages: { value: LocalePreference; label: string }[] = [
     { value: "system", label: t.settings.optionSystem },
     ...LOCALES.map((locale) => ({ value: locale.value, label: locale.label })),

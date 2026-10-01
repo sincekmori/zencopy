@@ -1,7 +1,7 @@
 import { emit } from "@tauri-apps/api/event";
 import { GripVertical } from "lucide-react";
 import { useEffect, useState, useCallback } from "react";
-import { type PromptInfo, listPrompts } from "@/lib/prompts.ts";
+import type { PromptInfo } from "@/lib/prompts.ts";
 import { usePromptLabel, useT } from "@/lib/i18n.tsx";
 import { createLogger } from "@/lib/log.ts";
 import { getQuickPrompts, QUICK_SLOT_COUNT, setQuickPrompts } from "@/lib/settings.ts";
@@ -14,11 +14,12 @@ const log = createLogger("quick-prompts-settings");
  *  to reorder, pick the prompt per slot. Positions are stable so the numbers
  *  a user memorizes never move on their own; assignments stay duplicate-free
  *  (choosing a prompt already in another slot swaps the two). What runs by
- *  default is the routing section's business, not this one's. */
-export function QuickPromptsSettings(): React.JSX.Element {
+ *  default is the routing section's business, not this one's. `prompts` is
+ *  the list the section above it shows and keeps current — one list, so a
+ *  prompt added, renamed or deleted there is offered (or gone) here at once. */
+export function QuickPromptsSettings({ prompts }: { prompts: PromptInfo[] }): React.JSX.Element {
   const t = useT();
   const promptLabel = usePromptLabel();
-  const [prompts, setPrompts] = useState<PromptInfo[]>([]);
   const [slots, setSlots] = useState<string[]>([]);
   const [dragIndex, setDragIndex] = useState<number | undefined>(undefined);
 
@@ -27,9 +28,7 @@ export function QuickPromptsSettings(): React.JSX.Element {
   const reload = useCallback((): void => {
     void (async () => {
       try {
-        const [list, quick] = await Promise.all([listPrompts(), getQuickPrompts()]);
-        setPrompts(list);
-        setSlots(quick);
+        setSlots(await getQuickPrompts());
       } catch (error) {
         log.error("loading quick prompts failed", error);
       }

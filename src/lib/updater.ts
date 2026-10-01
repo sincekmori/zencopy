@@ -7,11 +7,11 @@
 // for the tray item and the popup's footer hint.
 
 import { invoke } from "@tauri-apps/api/core";
-import { listen } from "@tauri-apps/api/event";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { check } from "@tauri-apps/plugin-updater";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { createLogger } from "@/lib/log.ts";
+import { useLiveValue } from "@/lib/use-tauri-event.ts";
 
 const log = createLogger("updater");
 
@@ -34,6 +34,10 @@ interface UpdateHandle {
   version: string;
   download: () => Promise<void>;
   install: () => Promise<void>;
+  /** Free what the handle holds on the Rust side: the update's metadata and,
+   *  once downloaded, the installer itself — megabytes that stay in the
+   *  process until it exits unless someone lets them go. */
+  close: () => Promise<void>;
 }
 
 /** Dev-only escape hatch: `VITE_ZENCOPY_FAKE_UPDATE=9.9.9 bun tauri dev`
@@ -51,7 +55,12 @@ function delay(ms: number): Promise<void> {
 }
 
 function fakeUpdate(version: string): UpdateHandle {
-  return { version, download: () => delay(4000), install: () => delay(1500) };
+  return {
+    version,
+    download: () => delay(4000),
+    install: () => delay(1500),
+    close: () => Promise.resolve(),
+  };
 }
 
 // Module-level singleton: the manager outlives React renders (the About window
@@ -121,6 +130,30 @@ async function downloadOnce(update: UpdateHandle): Promise<void> {
   }
 }
 
+/** Close a handle nobody will use again. */
+async function close(update: UpdateHandle): Promise<void> {
+  try {
+    await update.close();
+  } catch (error) {
+    log.warn(`v${update.version}: releasing an unused update failed`, error);
+  }
+}
+
+/** Let go of an update a newer one replaced, download and all. A download
+ *  still under way is waited for: closed under it, its bytes would land in
+ *  the process with no one left to free them. */
+async function retire(update: UpdateHandle): Promise<void> {
+  const pending = downloads.get(update.version);
+  downloads.delete(update.version);
+  readyVersions.delete(update.version);
+  try {
+    await pending;
+  } catch {
+    // Logged where it failed; there is nothing of it to keep either way.
+  }
+  await close(update);
+}
+
 function ensureDownloaded(update: UpdateHandle): Promise<void> {
   let pending = downloads.get(update.version);
   if (!pending) {
@@ -169,13 +202,19 @@ async function runCheck(): Promise<void> {
   setCheckStatus("idle");
   if (offered?.version === found.version) {
     // Same version still on offer: keep the object whose download may already
-    // be done, and let ensureDownloaded retry if a past attempt failed.
+    // be done, and let ensureDownloaded retry if a past attempt failed. The
+    // handle this check made is a second one for the same update.
+    void close(found);
     found = offered;
   } else {
+    const superseded = offered;
     offered = found;
     log.info(`update available: ${found.version}`);
     setState({ phase: "available", version: found.version });
     void announce(found.version);
+    if (superseded) {
+      void retire(superseded);
+    }
   }
   const target = found;
   try {
@@ -257,38 +296,26 @@ export function useUpdateManager(): {
   return { update, checkStatus: status, install, check: checkNow };
 }
 
+/** What Rust holds as the offered version, for a window that loads after it
+ *  was announced. */
+async function offeredVersion(): Promise<string | undefined> {
+  try {
+    const version = await invoke<string | null>("update_state");
+    return version ?? undefined;
+  } catch (error) {
+    log.warn("update state unavailable", error);
+    return undefined;
+  }
+}
+
 /** The pending update's version for read-only surfaces (the popup's footer
- *  hint): initial value from Rust, then live via `update-state` broadcasts. */
+ *  hint): initial value from Rust, then live via `update-state` broadcasts
+ *  (whose payload is the version, or null once there is none). */
 export function useUpdateVersion(): string | undefined {
-  const [version, setVersion] = useState<string | undefined>(undefined);
-  useEffect(() => {
-    let disposed = false;
-    let sawEvent = false;
-    let unlisten: (() => void) | undefined;
-    void (async () => {
-      try {
-        unlisten = await listen<string | null>("update-state", (event) => {
-          sawEvent = true;
-          if (!disposed) {
-            setVersion(event.payload ?? undefined);
-          }
-        });
-        if (disposed) {
-          unlisten();
-          return;
-        }
-        const current = await invoke<string | null>("update_state");
-        if (!disposed && !sawEvent) {
-          setVersion(current ?? undefined);
-        }
-      } catch (error) {
-        log.warn("update state unavailable", error);
-      }
-    })();
-    return () => {
-      disposed = true;
-      unlisten?.();
-    };
-  }, []);
-  return version;
+  const [version] = useLiveValue<string | null | undefined>(
+    offeredVersion,
+    "update-state",
+    undefined,
+  );
+  return version ?? undefined;
 }

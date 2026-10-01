@@ -114,7 +114,6 @@ export const pl: Messages = {
   source: {
     inputLabel: "Skopiowana treść",
     richText: "Tekst sformatowany",
-    emptyClipboard: "Schowek jest pusty.",
     imageAlt: "Skopiowany obraz",
     cannotPreview: "(brak podglądu)",
   },

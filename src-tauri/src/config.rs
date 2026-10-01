@@ -1,7 +1,9 @@
 //! Config-dir plumbing: paths, the AI catalog file, and full reset.
 
 use crate::OrLog;
+use std::path::Path;
 use tauri::Manager;
+
 /// Where user config files (ai-sdk-catalog.json, rules.json, prompts/) are read
 /// from: the per-user app config dir, in dev and release alike — one
 /// predictable location (logged at startup). Defaults for rules and prompts
@@ -18,6 +20,20 @@ pub(crate) fn config_base(handle: &tauri::AppHandle) -> Option<std::path::PathBu
 /// The tauri-plugin-store file; the frontend reads the same file via its own
 /// STORE_FILE constant in src/lib/settings.ts (kept in sync by a test below).
 pub(crate) const STORE_FILE: &str = "settings.json";
+
+/// A string setting from the settings store, if present and a string.
+pub(crate) fn store_str(handle: &tauri::AppHandle, key: &str) -> Option<String> {
+    use tauri_plugin_store::StoreExt;
+
+    let value = handle
+        .store(STORE_FILE)
+        .ok()
+        .and_then(|store| store.get(key));
+    value
+        .as_ref()
+        .and_then(serde_json::Value::as_str)
+        .map(str::to_owned)
+}
 
 /// The catalog config file, named after the schema that defines it
 /// (ai-sdk-catalog). Never bundled/seeded — created by the user via the
@@ -74,8 +90,9 @@ pub(crate) fn catalog_path(app: &tauri::AppHandle) -> Option<std::path::PathBuf>
 /// settings store and the usage statistics), which are the same directory on
 /// macOS — the just-installed state the Reset button promises. Whole directories,
 /// not a file list, so the reset stays complete as future versions add or
-/// rename files. The log dir is deliberately spared: a reset should still be
-/// diagnosable afterwards. Every window is then reloaded in place — NOT the
+/// rename files. The log dir is deliberately spared, also where it sits inside
+/// the data dir (Linux): a reset should still be diagnosable afterwards.
+/// Every window is then reloaded in place — NOT the
 /// app relaunched: a relaunch detaches a dev app from its dev server (vite
 /// dies with the original process, leaving every window white), and the live
 /// settings store would flush its in-memory values right back over the
@@ -83,13 +100,6 @@ pub(crate) fn catalog_path(app: &tauri::AppHandle) -> Option<std::path::PathBuf>
 /// release alike.
 #[tauri::command]
 pub(crate) fn reset_all_settings(app: tauri::AppHandle) -> Result<(), String> {
-    fn remove_dir_if_present(path: &std::path::Path) -> Result<(), String> {
-        match std::fs::remove_dir_all(path) {
-            Ok(()) => Ok(()),
-            Err(e) if e.kind() == std::io::ErrorKind::NotFound => Ok(()),
-            Err(e) => Err(format!("{}: {e}", path.display())),
-        }
-    }
     // Empty the live store BEFORE deleting its file, and close the resource
     // so the next `load()` in a reloaded window rereads from disk (defaults)
     // instead of getting this cached instance back. The explicit save() after
@@ -106,11 +116,12 @@ pub(crate) fn reset_all_settings(app: tauri::AppHandle) -> Result<(), String> {
             store.close_resource();
         }
     }
+    let logs = app.path().app_log_dir().ok();
     let config = config_base(&app).ok_or_else(|| "config dir unavailable".to_string())?;
-    remove_dir_if_present(&config)?;
+    remove_dir_sparing(&config, logs.as_deref())?;
     let data = app.path().app_data_dir().map_err(|e| e.to_string())?;
     if data != config {
-        remove_dir_if_present(&data)?;
+        remove_dir_sparing(&data, logs.as_deref())?;
     }
     for (_, window) in app.webview_windows() {
         window
@@ -118,6 +129,37 @@ pub(crate) fn reset_all_settings(app: tauri::AppHandle) -> Result<(), String> {
             .or_log("reload a window after reset");
     }
     log::info!("factory reset: all local data deleted");
+    Ok(())
+}
+
+/// Delete `dir` and all it holds — except `spared`, when that lies inside:
+/// then everything around it goes, and the directories leading to it stay.
+/// A `dir` that is not there is already deleted.
+fn remove_dir_sparing(dir: &Path, spared: Option<&Path>) -> Result<(), String> {
+    let failed = |error: std::io::Error| format!("{}: {error}", dir.display());
+    let Some(spared) = spared.filter(|spared| spared.starts_with(dir)) else {
+        return match std::fs::remove_dir_all(dir) {
+            Err(error) if error.kind() != std::io::ErrorKind::NotFound => Err(failed(error)),
+            _ => Ok(()),
+        };
+    };
+    if spared == dir {
+        return Ok(());
+    }
+    let entries = match std::fs::read_dir(dir) {
+        Ok(entries) => entries,
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(()),
+        Err(error) => return Err(failed(error)),
+    };
+    for entry in entries {
+        let entry = entry.map_err(failed)?;
+        let path = entry.path();
+        if entry.file_type().map_err(failed)?.is_dir() {
+            remove_dir_sparing(&path, Some(spared))?;
+        } else {
+            std::fs::remove_file(&path).map_err(failed)?;
+        }
+    }
     Ok(())
 }
 
@@ -143,21 +185,60 @@ pub(crate) fn write_catalog(app: tauri::AppHandle, json: String) -> Result<(), S
     Ok(())
 }
 
+/// A directory of its own for a test to write in: under the system's temp
+/// dir, named for the test and this process, and not there yet.
+#[cfg(test)]
+pub(crate) fn scratch_dir(name: &str) -> std::path::PathBuf {
+    let dir = std::env::temp_dir().join(format!("zencopy-{name}-test-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    dir
+}
+
+#[cfg(test)]
+mod reset_tests {
+    use super::{remove_dir_sparing, scratch_dir};
+
+    /// Linux keeps the logs inside the data dir: the reset must take
+    /// everything around them and leave them, with the path that leads there.
+    #[test]
+    fn a_reset_spares_the_logs_inside_the_data_dir() {
+        let data = scratch_dir("reset");
+        let logs = data.join("logs");
+        for dir in [data.join("stats"), logs.clone(), data.join("webview/cache")] {
+            std::fs::create_dir_all(dir).unwrap();
+        }
+        for file in [
+            "settings.json",
+            "stats/usage.jsonl",
+            "logs/ZenCopy.log",
+            "webview/cache/x",
+        ] {
+            std::fs::write(data.join(file), "x").unwrap();
+        }
+
+        remove_dir_sparing(&data, Some(&logs)).unwrap();
+        let left: Vec<_> = std::fs::read_dir(&data)
+            .unwrap()
+            .map(|entry| entry.unwrap().file_name())
+            .collect();
+        assert_eq!(left, ["logs"]);
+        assert!(logs.join("ZenCopy.log").exists());
+
+        // Logs elsewhere (macOS, Windows): the directory goes whole, and a
+        // directory that is not there is no error.
+        remove_dir_sparing(&data, Some(std::path::Path::new("/elsewhere/logs"))).unwrap();
+        assert!(!data.exists());
+        remove_dir_sparing(&data, None).unwrap();
+    }
+}
+
 #[cfg(test)]
 mod version_stamp_tests {
     use super::*;
 
-    fn scratch_dir(name: &str) -> std::path::PathBuf {
-        let dir = std::env::temp_dir()
-            .join("zencopy-version-stamp-tests")
-            .join(format!("{name}-{}", std::process::id()));
-        let _ = std::fs::remove_dir_all(&dir);
-        dir
-    }
-
     #[test]
     fn stamps_a_fresh_config_dir() {
-        let dir = scratch_dir("fresh");
+        let dir = scratch_dir("stamp-fresh");
         migrate_config_dir(&dir, "0.14.0");
         let stamped = std::fs::read_to_string(dir.join(VERSION_FILE)).unwrap();
         assert_eq!(stamped, "0.14.0\n");
@@ -165,7 +246,7 @@ mod version_stamp_tests {
 
     #[test]
     fn rewrites_the_stamp_on_a_version_change() {
-        let dir = scratch_dir("upgrade");
+        let dir = scratch_dir("stamp-upgrade");
         std::fs::create_dir_all(&dir).unwrap();
         std::fs::write(dir.join(VERSION_FILE), "0.13.0\n").unwrap();
         migrate_config_dir(&dir, "0.14.0");
@@ -175,7 +256,7 @@ mod version_stamp_tests {
 
     #[test]
     fn tolerates_a_stamp_without_a_trailing_newline() {
-        let dir = scratch_dir("no-newline");
+        let dir = scratch_dir("stamp-no-newline");
         std::fs::create_dir_all(&dir).unwrap();
         std::fs::write(dir.join(VERSION_FILE), "0.14.0").unwrap();
         migrate_config_dir(&dir, "0.14.0");

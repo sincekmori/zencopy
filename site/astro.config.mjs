@@ -123,7 +123,10 @@ export default defineConfig({
         // Screenshot.astro), and the "os" synced tabs get pre-selected
         // on first visit (a manual choice then wins — Starlight persists it
         // under the same key). Other OSes and no-JS keep the combined
-        // fallback wording and the first tab.
+        // fallback wording and the first tab. The swap runs as the parser
+        // adds the elements, ahead of the first paint: the wording never
+        // flashes its fallback, and a lazy screenshot has not begun to load,
+        // so the cut it is swapped away from is never fetched.
         {
           tag: "script",
           content: [
@@ -141,28 +144,36 @@ export default defineConfig({
             "    // Storage blocked (Safari with cookies off, some sandboxes): the",
             "    // tabs keep their first pane; the wording below still swaps.",
             "  }",
+            "  // Each write is made once: the swap runs again at every batch the",
+            "  // parser adds, its own writes included.",
+            "  const say = (el, text) => {",
+            "    if (el.textContent !== text) el.textContent = text;",
+            "  };",
             "  const swap = () => {",
             '    for (const el of document.querySelectorAll("[data-os-modifier]")) {',
-            '      el.textContent = isMac ? "⌘" : "Ctrl";',
+            '      say(el, isMac ? "⌘" : "Ctrl");',
             "    }",
             '    const os = isMac ? "mac" : isLinux ? "linux" : "windows";',
             '    for (const el of document.querySelectorAll("[data-os-windows]")) {',
             '      const own = el.getAttribute("data-os-" + os);',
-            "      if (own) el.textContent = own;",
+            "      if (own) say(el, own);",
             "    }",
             "    // A demo video or screenshot that carries the chord has a cut per",
             "    // spelling: ⌘ for a Mac, Ctrl for Windows and Linux; its default",
             "    // says Ctrl/⌘ for everyone else.",
             '    const cut = isMac ? "data-src-cmd" : "data-src-ctrl";',
             '    for (const el of document.querySelectorAll("[" + cut + "]")) {',
-            '      el.setAttribute("src", el.getAttribute(cut));',
+            "      const own = el.getAttribute(cut);",
+            '      if (el.getAttribute("src") !== own) el.setAttribute("src", own);',
             "    }",
             "  };",
-            '  if (document.readyState === "loading") {',
-            '    document.addEventListener("DOMContentLoaded", swap);',
-            "  } else {",
+            '  if (document.readyState !== "loading") return swap();',
+            "  const parsed = new MutationObserver(swap);",
+            "  parsed.observe(document.documentElement, { childList: true, subtree: true });",
+            '  document.addEventListener("DOMContentLoaded", () => {',
+            "    parsed.disconnect();",
             "    swap();",
-            "  }",
+            "  });",
             "})();",
           ].join("\n"),
         },

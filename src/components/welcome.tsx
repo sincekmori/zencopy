@@ -1,5 +1,4 @@
 import { invoke } from "@tauri-apps/api/core";
-import { emit } from "@tauri-apps/api/event";
 import { ExternalLink, LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import { TriggerNotice } from "@/components/trigger-notice.tsx";
@@ -7,11 +6,12 @@ import { Button } from "@/components/ui/button.tsx";
 import { FIELD } from "@/components/ui/field.ts";
 import { WelcomeHero } from "@/components/welcome-hero.tsx";
 import { ZenCopyMark } from "@/components/zencopy-mark.tsx";
+import { type CatalogProblem, catalogProblemText, editCatalog } from "@/lib/catalog-file.ts";
 import { useT } from "@/lib/i18n.tsx";
 import { testConnection } from "@/lib/llm.ts";
 import { createLogger } from "@/lib/log.ts";
 import { TRIGGER_KEYS, TRIGGER_MODIFIER } from "@/lib/platform.ts";
-import { FREE_KEY_URL, geminiQuickCatalog } from "@/lib/quickstart.ts";
+import { FREE_KEY_URL, withGeminiKey } from "@/lib/quickstart.ts";
 import { cn } from "@/lib/utils.ts";
 
 const log = createLogger("welcome");
@@ -23,17 +23,20 @@ export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element
   const t = useT();
   const [key, setKey] = useState("");
   // The one round trip between click and start: the pasted key is pinged for
-  // real before the welcome closes. Failures split by what the fix is —
-  // "save" means the write itself broke, "test" means the key (or the
-  // network) doesn't work and the field lights up red.
+  // real before the welcome closes. Failures split by what the fix is — the
+  // save was refused (and why), or "test": the key (or the network) doesn't
+  // work and the field lights up red.
   const [checking, setChecking] = useState(false);
-  const [failed, setFailed] = useState<"save" | "test" | undefined>(undefined);
+  const [failed, setFailed] = useState<CatalogProblem | "test" | undefined>(undefined);
 
-  // The quick path: save the pasted key as a ready-to-run Gemini catalog,
-  // then prove it works with one live ping — an invalid key must fail HERE,
-  // with the field in sight, not later as a broken first copy. The
-  // alternative path (the secondary button) skips straight to the full
-  // provider settings — a key is one way in, never a requirement.
+  // The quick path: save the pasted key as a ready-to-run Gemini setup — into
+  // the config already there, when a reinstall finds one, so nothing in it is
+  // lost (one the app cannot run is left as it is and said to be invalid:
+  // the full settings show it) — then prove it works with one live ping: an
+  // invalid key must fail HERE, with the field in sight, not later as a
+  // broken first copy. The alternative path (the secondary button) skips
+  // straight to the full provider settings — a key is one way in, never a
+  // requirement.
   const start = (): void => {
     if (key.trim() === "" || checking) {
       return; // the button is disabled; belt and suspenders
@@ -41,13 +44,10 @@ export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element
     setFailed(undefined);
     setChecking(true);
     void (async () => {
-      try {
-        await invoke("write_catalog", { json: geminiQuickCatalog(key) });
-        await emit("catalog-changed");
-      } catch (error) {
-        log.error("quick setup failed", error);
+      const saved = await editCatalog((config) => withGeminiKey(config, key));
+      if (saved.problem) {
         setChecking(false);
-        setFailed("save");
+        setFailed(saved.problem);
         return;
       }
       try {
@@ -123,7 +123,7 @@ export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element
           </Button>
           {failed === undefined ? undefined : (
             <p className="text-xs text-destructive">
-              {failed === "save" ? t.ai.saveFailed : t.ai.testUnreachable}
+              {failed === "test" ? t.ai.testUnreachable : catalogProblemText(t, failed)}
             </p>
           )}
         </div>

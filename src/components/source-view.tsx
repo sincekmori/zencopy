@@ -23,12 +23,19 @@ function Body({ source }: { source: Source }): React.JSX.Element {
       if (source.format !== "html") {
         return <p className={TEXT_CLASS}>{source.plain || t.source.cannotPreview}</p>;
       }
-      // Render HTML in a script-less sandbox. Match the app's light/dark scheme and
-      // keep the background transparent so it never shows as a white block.
-      const doc = `<!doctype html><meta name="color-scheme" content="${dark ? "dark" : "light"}"><style>html,body{margin:0;background:transparent}body{padding:2px 4px;font:12px/1.6 system-ui,-apple-system,sans-serif}img{max-width:100%}</style>${source.markup}`;
+      // Render HTML in a script-less sandbox that fetches nothing: the copy's
+      // markup points at its page's images, stylesheets and fonts, and a
+      // sandbox alone would go and get them — a mail's tracking pixel
+      // included — the moment the popup shows. The policy leaves inline
+      // styles and inline (`data:`) images, which need no network. `inert`:
+      // a glance at what was copied, never a page to click around in.
+      // Match the app's light/dark scheme and keep the background transparent
+      // so it never shows as a white block.
+      const doc = `<!doctype html><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'"><meta name="color-scheme" content="${dark ? "dark" : "light"}"><style>html,body{margin:0;background:transparent}body{padding:2px 4px;font:12px/1.6 system-ui,-apple-system,sans-serif}img{max-width:100%}</style>${source.markup}`;
       return (
         <iframe
           sandbox=""
+          inert
           srcDoc={doc}
           title={t.source.richText}
           className="h-12 w-full rounded border-0 bg-transparent"
@@ -57,9 +64,6 @@ function Body({ source }: { source: Source }): React.JSX.Element {
         </ul>
       );
     }
-    case "empty": {
-      return <p className="text-xs text-muted-foreground">{t.source.emptyClipboard}</p>;
-    }
   }
 }
 
@@ -71,12 +75,10 @@ export function SourceView({ source }: { source: Source }): React.JSX.Element {
   const t = useT();
   return (
     <div className="rounded-lg border-s-2 border-border bg-muted/40 px-2.5 py-2">
-      {source.kind === "empty" ? undefined : (
-        <div className="mb-1 flex items-center gap-1 text-[10px] font-medium text-muted-foreground/70 uppercase">
-          <ClipboardCheck className="size-3" />
-          <span className="tracking-wide">{t.source.inputLabel}</span>
-        </div>
-      )}
+      <div className="mb-1 flex items-center gap-1 text-[10px] font-medium text-muted-foreground/70 uppercase">
+        <ClipboardCheck className="size-3" />
+        <span className="tracking-wide">{t.source.inputLabel}</span>
+      </div>
       <Body source={source} />
     </div>
   );

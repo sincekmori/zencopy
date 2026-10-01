@@ -13,6 +13,7 @@
 import { appendFileSync, existsSync, mkdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
+import { xdgDir } from "./xdg.ts";
 
 const IDENTIFIER = "app.zencopy";
 
@@ -26,7 +27,7 @@ function dataDir(): string {
       return join(process.env["APPDATA"] ?? join(home, "AppData", "Roaming"), IDENTIFIER);
     }
     default: {
-      return join(process.env["XDG_DATA_HOME"] ?? join(home, ".local", "share"), IDENTIFIER);
+      return join(xdgDir("XDG_DATA_HOME", ".local", "share"), IDENTIFIER);
     }
   }
 }

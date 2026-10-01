@@ -6,7 +6,9 @@ use tauri::Manager;
 
 /// Open an https URL in the default browser. Called with literal URLs from our
 /// own frontend (repository, docs) and with links the model emitted in Markdown
-/// results; anything not https is ignored.
+/// results; anything not https is refused — the frontend offers no other link
+/// (SystemBrowserLink in src/components/markdown.tsx), so a refusal here is a
+/// bug there.
 #[tauri::command]
 pub(crate) fn open_url(app: tauri::AppHandle, url: String) {
     use tauri_plugin_opener::OpenerExt;
@@ -14,6 +16,10 @@ pub(crate) fn open_url(app: tauri::AppHandle, url: String) {
         app.opener()
             .open_url(url, None::<&str>)
             .or_log("open url in the default browser");
+    } else {
+        // The scheme only: the rest may quote what the user copied.
+        let scheme = url.split(':').next().unwrap_or_default();
+        log::warn!("open url: refused a link that is not https ({scheme}:)");
     }
 }
 

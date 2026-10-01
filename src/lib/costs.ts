@@ -11,7 +11,7 @@ import { modelCosts, type TokenUsage } from "@/lib/llm.ts";
 /** One recorded model run, as read back from usage.jsonl. Lenient by design:
  *  any field may be absent (absence means unknown) — the reader must accept
  *  every line the ledger's frozen contract allows. */
-export interface UsageEvent {
+interface UsageEvent {
   at?: string;
   model?: string;
   tokens?: Record<string, number>;
@@ -22,7 +22,7 @@ export interface UsageEvent {
 const COST_BUCKETS = ["input", "output", "cache_read", "cache_write"] as const;
 
 /** One run's cost in USD: Σ tokens[bucket] × price[bucket] / 1M. */
-export function runCost(tokens: Record<string, number>, price: TokenUsage): number {
+function runCost(tokens: Record<string, number>, price: TokenUsage): number {
   let sum = 0;
   for (const bucket of COST_BUCKETS) {
     sum += (tokens[bucket] ?? 0) * (price[bucket] ?? 0);
@@ -31,7 +31,7 @@ export function runCost(tokens: Record<string, number>, price: TokenUsage): numb
 }
 
 /** The local YYYY-MM an event belongs to ("" when it carries no timestamp). */
-export function eventMonth(event: UsageEvent): string {
+function eventMonth(event: UsageEvent): string {
   return (event.at ?? "").slice(0, 7);
 }
 
@@ -69,14 +69,17 @@ export function formatUsd(locale: string, value: number): string {
  * fail-open (the cap) or hide (the readout).
  */
 export async function monthCostUsd(): Promise<number> {
+  // The month is asked for by name: the ledger only grows, and this runs
+  // around every prompt run — Rust hands back that month's lines and parses
+  // no others.
+  const month = currentMonth();
   const [events, prices] = await Promise.all([
-    invoke<UsageEvent[]>("read_usage_stats"),
+    invoke<UsageEvent[]>("read_usage_stats", { month }),
     modelCosts(),
   ]);
-  const month = currentMonth();
   let sum = 0;
   for (const event of events) {
-    if (eventMonth(event) === month && event.model !== undefined && event.tokens) {
+    if (event.model !== undefined && event.tokens) {
       const price = prices[event.model];
       if (price) {
         sum += runCost(event.tokens, price);
@@ -84,4 +87,58 @@ export async function monthCostUsd(): Promise<number> {
     }
   }
   return sum;
+}
+
+/** RFC 4180 quoting, only when the value needs it. */
+function csvCell(value: string): string {
+  return /[",\n]/u.test(value) ? `"${value.replaceAll('"', '""')}"` : value;
+}
+
+/** Why there is no cost table to export: nothing recorded yet, or the models
+ *  the catalog cannot price, by name. */
+export type CostCsvIssue = "empty" | string[];
+
+/**
+ * The all-time cost table as CSV: one row per month × model, cost in plain
+ * USD decimals. Models the catalog can't price hold the export back and are
+ * named — that hole has a fix (a cost block in the config), and a report
+ * with silent holes would read as cheaper than reality. A completed run
+ * whose provider reported no usage (the schema allows absent tokens) must
+ * not block forever — nothing can ever supply the counts — so it stays in
+ * its model's row, contributing the tokens it reported: none.
+ */
+export async function costCsv(): Promise<
+  { csv: string; issue?: undefined } | { csv?: undefined; issue: CostCsvIssue }
+> {
+  const [events, prices] = await Promise.all([
+    invoke<UsageEvent[]>("read_usage_stats"),
+    modelCosts(),
+  ]);
+  if (events.length === 0) {
+    return { issue: "empty" };
+  }
+  const rows = new Map<string, { month: string; model: string; cost: number }>();
+  const unpriced = new Set<string>();
+  for (const event of events) {
+    const month = eventMonth(event);
+    if (month) {
+      const model = event.model ?? "?";
+      const price = event.model === undefined ? undefined : prices[event.model];
+      if (price) {
+        const key = `${month}\u0000${model}`;
+        const row = rows.get(key) ?? { month, model, cost: 0 };
+        row.cost += event.tokens ? runCost(event.tokens, price) : 0;
+        rows.set(key, row);
+      } else {
+        unpriced.add(model);
+      }
+    }
+  }
+  if (unpriced.size > 0) {
+    return { issue: [...unpriced].toSorted() };
+  }
+  const lines = [...rows.values()]
+    .toSorted((a, b) => a.month.localeCompare(b.month) || a.model.localeCompare(b.model))
+    .map((row) => `${row.month},${csvCell(row.model)},${row.cost.toFixed(6)}`);
+  return { csv: ["month,model,cost_usd", ...lines, ""].join("\n") };
 }

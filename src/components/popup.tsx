@@ -35,6 +35,7 @@ import {
 } from "@/lib/capture.ts";
 import { formatUsd, monthCostUsd } from "@/lib/costs.ts";
 import { usePromptLabel, useLocale, useT } from "@/lib/i18n.tsx";
+import { isImeKey } from "@/lib/ime.ts";
 import { createLogger, errorMessage } from "@/lib/log.ts";
 import {
   type Exchange,
@@ -68,7 +69,14 @@ type Result =
   | { phase: "running"; turns: Exchange[] }
   // `setup` marks "no provider configured yet": guidance, not an error — the
   // popup stays calm and offers a way into settings instead of red text.
-  | { phase: "done"; turns: Exchange[]; ok: boolean; setup?: boolean };
+  // `stopped` marks a last turn the user cut short: what arrived is kept and
+  // shown, but it is not the answer — it never passes for a finished one.
+  | { phase: "done"; turns: Exchange[]; ok: boolean; setup?: boolean; stopped?: boolean };
+
+/** How often a streaming reply repaints. Every chunk re-parses the whole
+ *  reply as Markdown, so a provider that streams token by token would repaint
+ *  — and re-parse — hundreds of times a second on a long answer. */
+const STREAM_PAINT_MS = 50;
 
 /** A single keycap, e.g. ⌘ or C. */
 function Kbd({ children }: { children: React.ReactNode }): React.JSX.Element {
@@ -160,7 +168,7 @@ function Turn({
   setup,
   copyable,
   onRetry,
-  imageHost,
+  source,
 }: {
   turn: Exchange;
   failed: boolean;
@@ -169,7 +177,9 @@ function Turn({
   copyable: boolean;
   /** Re-run this reply's request, rewinding the thread to this turn. */
   onRetry?: (() => void) | undefined;
-  imageHost: string | undefined;
+  /** The copied content the reply is about — the capture's variables (see
+   *  Markdown's isAllowedImage). */
+  source: Record<string, string> | undefined;
 }): React.JSX.Element {
   const t = useT();
   const [copied, setCopied] = useState(false);
@@ -206,7 +216,7 @@ function Turn({
             {turn.text}
           </p>
         ) : (
-          <Markdown text={turn.text} imageHost={imageHost} />
+          <Markdown text={turn.text} source={source} />
         ))}
       {/* The reply's own prompt row, start-aligned — the convention every AI
           chat converged on. Always visible but a size quieter than the text;
@@ -339,13 +349,14 @@ export function Popup(): React.JSX.Element {
   };
   // The palette's filter field, focused when the palette opens.
   const filterRef = useRef<HTMLInputElement>(null);
-  // The digit that switched slots, until it is released: Custom focuses the
-  // composer during that keydown, so the key's auto-repeats would otherwise
-  // type into it — they are the same keystroke and are swallowed.
+  // The key (its `code`) that switched slots, until it is released: Custom
+  // focuses the composer during that keydown, so the key's auto-repeats would
+  // otherwise type into it — they are the same keystroke and are swallowed.
   const switchingKey = useRef<string | undefined>(undefined);
 
   // What the popup shows: the current prompt's entry (live or kept).
   const result = payload ? results.get(payload.prompt_id) : undefined;
+  const running = result?.phase === "running";
   // Custom waiting for its instruction: no thread yet — the composer is the
   // whole interaction.
   const awaitingInstruction = payload?.prompt_id === CUSTOM_PROMPT_ID && result === undefined;
@@ -429,12 +440,14 @@ export function Popup(): React.JSX.Element {
       setResults(new Map());
     }
     setPayload(next);
+    // Whatever was waiting for a go-ahead, this is what is on screen now —
+    // also when nothing runs for it: a card left up would keep the number
+    // keys off.
+    setAwaitingSend(false);
 
     if (!next.runnable) {
       return;
     }
-
-    setAwaitingSend(false);
 
     const promptId = next.prompt_id;
     // Custom runs nothing by itself: the view waits, composer focused, for the
@@ -453,7 +466,7 @@ export function Popup(): React.JSX.Element {
     // network blip would be data loss, and Retry re-asks that question),
     // runs of an edited prompt (the definition fingerprint differs), and
     // `files` captures (their signature is the paths, so the files' contents
-    // may have changed).
+    // may have changed), and a reply the user stopped (it is not the answer).
     const definition = definitionOf(next);
     const kept = results.get(promptId);
     if (
@@ -463,7 +476,7 @@ export function Popup(): React.JSX.Element {
       // than one turn — whatever its last turn's fate (error or config
       // trouble), overwriting the good turns before it would be data loss.
       // Only a failed FIRST run re-runs (a fresh C+C means "retry it" there).
-      (kept.turns.length > 1 || (kept.ok && !kept.setup)) &&
+      (kept.turns.length > 1 || (kept.ok && !kept.setup && !kept.stopped)) &&
       next.kind !== "files" &&
       ranDefinition.current.get(promptId) === definition
     ) {
@@ -518,6 +531,23 @@ export function Popup(): React.JSX.Element {
       );
     };
     putResult(promptId, { phase: "running", turns: turnsWith("") });
+    // The reply so far, painted at most once per STREAM_PAINT_MS: chunks in
+    // between only replace what the next paint will show. The settle below
+    // writes the whole reply, so nothing is lost to the timer.
+    let streamed = "";
+    let paint: ReturnType<typeof setTimeout> | undefined;
+    const paintSoon = (text: string): void => {
+      streamed = text;
+      if (paint !== undefined) {
+        return;
+      }
+      paint = setTimeout(() => {
+        paint = undefined;
+        if (owns()) {
+          putResult(promptId, { phase: "running", turns: turnsWith(streamed) });
+        }
+      }, STREAM_PAINT_MS);
+    };
 
     void (async () => {
       // The outcome once the stream settles — undefined when the run never
@@ -567,17 +597,14 @@ export function Popup(): React.JSX.Element {
             ...(attachments ? { attachments } : {}),
             ...(followUp ? { followUp } : {}),
           },
-          (chunk) => {
-            if (owns()) {
-              putResult(promptId, { phase: "running", turns: turnsWith(chunk) });
-            }
-          },
+          paintSoon,
           controller.signal,
         );
         settled = outcome;
         const { text } = outcome;
         if (owns()) {
-          if (controller.signal.aborted && !text) {
+          const stopped = controller.signal.aborted;
+          if (stopped && !text) {
             revert();
             // The stopped question returns to the composer (unless a new
             // draft is already there) — Stop must not cost the typed text.
@@ -585,7 +612,7 @@ export function Popup(): React.JSX.Element {
               setFollowUpText((draft) => draft || question);
             }
           } else {
-            putResult(promptId, { phase: "done", turns: turnsWith(text), ok: true });
+            putResult(promptId, { phase: "done", turns: turnsWith(text), ok: true, stopped });
           }
         }
       } catch (error) {
@@ -635,6 +662,7 @@ export function Popup(): React.JSX.Element {
           }
         }
       } finally {
+        clearTimeout(paint);
         if (owns()) {
           runsRef.current.delete(promptId); // free the slot for a later re-run
           if (settled && !controller.signal.aborted) {
@@ -656,6 +684,14 @@ export function Popup(): React.JSX.Element {
       log.warn("capture payload has an unexpected shape; using it as-is", checked.error);
     }
     const incoming = checked.success ? checked.data : raw;
+    // Files are known here by their paths only, and what is in them may have
+    // changed since the last copy — so a copy of files always starts clean:
+    // nothing kept for those paths is shown again, by any prompt, and sending
+    // them is asked about again.
+    if (incoming.kind === "files") {
+      captureSig.current = undefined;
+      approvedSig.current = undefined;
+    }
     // run() drops kept results itself when the content actually changed; a
     // re-copy of identical content keeps every prompt's result valid.
     // Refresh the prompt list so edits on disk show up without the menu
@@ -885,9 +921,11 @@ export function Popup(): React.JSX.Element {
     }
   };
   const dismiss = (): void => {
-    // Ignore dismiss while any run is in flight — only the explicit Stop
-    // button cancels. Finished results are kept so the tray can bring them back.
-    if (runsRef.current.size > 0) {
+    // Not while the reply on screen still streams — Stop comes first, and the
+    // close button says so by being disabled. A prompt streaming in the
+    // background holds nothing up: hiding cancels no run, and its result is
+    // there when the tray brings the popup back.
+    if (running) {
       return;
     }
     hidePopup();
@@ -959,12 +997,10 @@ export function Popup(): React.JSX.Element {
   const onKeyDown = useEffectEvent((event: KeyboardEvent): void => {
     // Keys that belong to an IME composition (the Esc cancelling a
     // conversion, digits picking a candidate) are the IME's, not ours.
-    // Safari reports the composition-commit key with isComposing already
-    // false but the legacy keyCode 229 — guard both.
-    if (event.isComposing || event.keyCode === 229) {
+    if (isImeKey(event)) {
       return;
     }
-    if (event.repeat && event.key === switchingKey.current) {
+    if (event.repeat && event.code === switchingKey.current) {
       event.preventDefault();
       return;
     }
@@ -990,14 +1026,19 @@ export function Popup(): React.JSX.Element {
     if (menuOpen || event.metaKey || event.ctrlKey || event.altKey || inTextField) {
       return;
     }
-    if (/^[1-9]$/u.test(event.key)) {
+    // The digit typed — or, where the layout's digit row types something
+    // else (Persian and Arabic digits, Thai letters, AZERTY's punctuation),
+    // the digit printed on the key. The numpad is left to `key`: with NumLock
+    // off its keys are arrows.
+    const slot = /^[1-9]$/u.test(event.key) ? event.key : /^Digit([1-9])$/u.exec(event.code)?.[1];
+    if (slot !== undefined) {
       // Consumed here, or the digit's default action lands in the composer
       // Custom focuses during this very keydown (React flushes the effect
       // before the browser inserts the character); see switchingKey for the
       // key's repeats.
       event.preventDefault();
-      switchingKey.current = event.key;
-      switchToSlot(Number(event.key));
+      switchingKey.current = event.code;
+      switchToSlot(Number(slot));
     }
   });
   // Dismiss on Escape only. Losing focus is deliberately NOT a dismissal: the
@@ -1008,7 +1049,7 @@ export function Popup(): React.JSX.Element {
   useEffect(() => {
     // The switching digit's release (a ref write only, so no Effect Event).
     const onKeyUp = (event: KeyboardEvent): void => {
-      if (event.key === switchingKey.current) {
+      if (event.code === switchingKey.current) {
         switchingKey.current = undefined;
       }
     };
@@ -1020,25 +1061,12 @@ export function Popup(): React.JSX.Element {
     };
   }, []);
 
-  const running = result?.phase === "running";
   const done = result?.phase === "done";
   const setup = result?.phase === "done" && result.setup === true;
   const failed = result?.phase === "done" && !result.ok && !result.setup;
+  const stopped = result?.phase === "done" && result.stopped === true;
   // What the composer asks for: Custom's opening request, else a follow-up.
   const composerLabel = awaitingInstruction ? t.popup.custom : t.popup.followUp;
-  // The one host the result may load remote images from: where the capture
-  // came from (see Markdown's isAllowedImage for the threat model).
-  const imageHost = (() => {
-    const url = payload?.vars["url"];
-    if (!url) {
-      return undefined;
-    }
-    try {
-      return new URL(url).host;
-    } catch {
-      return undefined;
-    }
-  })();
 
   // The quick slots, resolved: each number's prompt, or undefined when its id
   // names a deleted prompt. Positions are preserved (the number IS the slot),
@@ -1049,12 +1077,15 @@ export function Popup(): React.JSX.Element {
   // rather than guessing from glyphs. The attachment gate holding the turn
   // (confirm — the card IS the state, so no glyph, not even the pen), Custom
   // waiting for your words (compose — the pen, the state twin of the trait
-  // on its chip, see slotGlyph), running, done, setup (nothing configured,
-  // or a config the app cannot read), failed, else idle.
+  // on its chip, see slotGlyph), running, stopped (a reply cut short: the
+  // Stop square it was cut with, never the check of a finished one), done,
+  // setup (nothing configured, or a config the app cannot read), failed,
+  // else idle.
   const runState = (():
     | "confirm"
     | "compose"
     | "running"
+    | "stopped"
     | "done"
     | "setup"
     | "failed"
@@ -1067,6 +1098,9 @@ export function Popup(): React.JSX.Element {
     }
     if (running) {
       return "running";
+    }
+    if (stopped) {
+      return "stopped";
     }
     if (done && result.ok) {
       return "done";
@@ -1083,6 +1117,7 @@ export function Popup(): React.JSX.Element {
     confirm: undefined,
     compose: <PenLine className="size-4 shrink-0" />,
     running: <LoaderCircle className="size-4 shrink-0 animate-spin" />,
+    stopped: <Square className="size-4 shrink-0" />,
     done: <Check className="size-4 shrink-0" />,
     setup: <Settings className="size-4 shrink-0" />,
     failed: <TriangleAlert className="size-4 shrink-0" />,
@@ -1318,7 +1353,10 @@ export function Popup(): React.JSX.Element {
                       }
                     : undefined
                 }
-                imageHost={imageHost}
+                // The copied content as the model was given it: the only
+                // remote images a reply may load are ones whose address
+                // stands in it (see Markdown's isAllowedImage).
+                source={payload?.vars}
               />
             );
           })}
@@ -1366,22 +1404,20 @@ export function Popup(): React.JSX.Element {
         <SourceView source={payload.source} />
         {devVarsView}
         {promptRow}
-        {payload.kind === "empty" ? undefined : (
-          <div className="flex flex-col gap-2">
-            <p className="text-xs text-muted-foreground">{t.popup.noPrompt}</p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="self-start"
-              onClick={() => {
-                void invoke("open_url", { url: siteUrl(locale, "configuration/#rulesjson") });
-              }}
-            >
-              {t.popup.rulesDocs}
-              <ExternalLink className="size-3" />
-            </Button>
-          </div>
-        )}
+        <div className="flex flex-col gap-2">
+          <p className="text-xs text-muted-foreground">{t.popup.noPrompt}</p>
+          <Button
+            variant="outline"
+            size="sm"
+            className="self-start"
+            onClick={() => {
+              void invoke("open_url", { url: siteUrl(locale, "configuration/#rulesjson") });
+            }}
+          >
+            {t.popup.rulesDocs}
+            <ExternalLink className="size-3" />
+          </Button>
+        </div>
       </>
     );
   }
@@ -1464,9 +1500,7 @@ export function Popup(): React.JSX.Element {
                     return;
                   }
                   // The Enter that commits an IME conversion must never send.
-                  // Safari reports it with isComposing already false but the
-                  // legacy keyCode 229 — guard both.
-                  if (event.nativeEvent.isComposing || event.nativeEvent.keyCode === 229) {
+                  if (isImeKey(event.nativeEvent)) {
                     return;
                   }
                   if (event.shiftKey) {

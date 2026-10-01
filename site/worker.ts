@@ -4,27 +4,16 @@
 // long-lived noindex root also degrades how search engines treat links to
 // the bare domain. Since the site runs on a Worker, the server CAN read
 // Accept-Language: "/" answers with a 302 to the best-matching locale
-// (mirroring the app's locale_from_tag in src-tauri/src/tray.rs), and the
+// (by the app's own rule for a language tag, src/lib/locale-tag.ts), and the
 // noindex page is gone. Every other path is served from the built assets,
 // including Starlight's 404 page (`not_found_handling` in wrangler.jsonc).
+import { matchLocaleTag } from "../src/lib/locale-tag.ts";
 import { LANDING_LOCALES } from "./src/components/landing-copy.ts";
 
 // Every locale INCLUDING en: the old client-side picker excluded en from the
 // candidates, so a visitor preferring English with a supported second
 // language was sent to the second language. Here English wins when it wins.
 const CODES = LANDING_LOCALES.map((entry) => entry.code);
-
-/** The locale path segment for one language tag, or undefined. */
-function pick(raw: string): string | undefined {
-  const tag = raw.toLowerCase();
-  if (tag.startsWith("zh")) {
-    return ["hant", "tw", "hk", "mo"].some((hint) => tag.includes(hint)) ? "zh-hant" : "zh-hans";
-  }
-  if (tag.startsWith("pt")) {
-    return "pt-br";
-  }
-  return CODES.find((code) => tag.startsWith(code));
-}
 
 /** Accept-Language tags in preference order (RFC 9110 q-values). */
 function preferredTags(header: string): string[] {
@@ -47,7 +36,7 @@ function preferredTags(header: string): string[] {
  *  x-default (/en/, which carries a visible language selector). */
 export function localePathFor(acceptLanguage: string): string {
   for (const tag of preferredTags(acceptLanguage)) {
-    const code = pick(tag);
+    const code = matchLocaleTag(tag, CODES);
     if (code !== undefined) {
       return `/${code}/`;
     }

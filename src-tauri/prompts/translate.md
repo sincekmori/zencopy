@@ -3,8 +3,9 @@ id: zencopy-translate
 label: Translate
 instructions: |-
   {%- assign target = locale | language_name -%}
+  {%- assign own = locale | split: "-" | first | language_name -%}
   {%- assign source = text | language_of -%}
-  {%- if source == target -%}
+  {%- if source == own -%}
     {%- assign destination = "English" -%}
   {%- else -%}
     {%- assign destination = target -%}

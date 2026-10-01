@@ -113,7 +113,6 @@ export const ko: Messages = {
   source: {
     inputLabel: "복사한 내용",
     richText: "서식 있는 텍스트",
-    emptyClipboard: "클립보드가 비어 있습니다.",
     imageAlt: "복사한 이미지",
     cannotPreview: "(미리보기 불가)",
   },

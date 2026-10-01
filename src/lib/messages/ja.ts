@@ -56,7 +56,7 @@ export const ja: Messages = {
       "ここでのコストはあくまで概算です。エラーや中断した実行は集計されず、モデルの判定が実際と異なることもあります。正確な金額はプロバイダーの請求ページで確認してください。",
     userContext: "あなたについて",
     userContextHint:
-      "AI に知っておいてほしいこと(役割・得意分野・好みなど)。すべてのプロンプトに添えられます。",
+      "AI に知っておいてほしいこと（役割・得意分野・好みなど）。すべてのプロンプトに添えられます。",
     userContextPlaceholders: [
       "会社員。メールは社外とのやりとりが多いので丁寧めに、それ以外は結論から短く。",
       "幹部社員。長い文章は要点だけ知りたい。判断材料を先に、数字は根拠つきで。",
@@ -68,7 +68,7 @@ export const ja: Messages = {
     userContextCleared: "クリアしました",
     quickTitle: "クイックプロンプト",
     quickHint:
-      "ポップアップで数字キー(1〜5)に割り当てる5つのプロンプト。ドラッグで並び替えできます。",
+      "ポップアップで数字キー（1〜5）に割り当てる5つのプロンプト。ドラッグで並び替えできます。",
     resetTitle: "初期化",
     resetHint:
       "ZenCopy をインストール直後の状態に戻します。設定・プロンプト・利用統計もすべて削除されます",
@@ -84,7 +84,7 @@ export const ja: Messages = {
     placeholder: "ダブルクリックの要領で素早く 2 回コピー — 結果がここに表示されます。",
     devVars: "テンプレート変数",
     noPrompt:
-      "このキャプチャは自動では実行されません。下のプロンプトを選ぶか、数字キー 1–5 で実行できます。",
+      "このキャプチャは自動では実行されません。下のプロンプトを選ぶか、数字キー 1〜5 で実行できます。",
     rulesDocs: "振り分けの仕組みを見る",
     confirmSend:
       "このキャプチャを AI プロバイダーに送信しますか？画像やファイルはテキストより料金がかかることがあります。",
@@ -100,7 +100,7 @@ export const ja: Messages = {
     timedOut:
       "モデルから応答がありませんでした。ネットワークとプロバイダー設定を確認して、やり直してください。",
     emptyResult: "モデルの応答が空でした。",
-    costLimitReached: (limit) => `今月のコスト上限(${limit})に達しました。設定から変更できます。`,
+    costLimitReached: (limit) => `今月のコスト上限（${limit}）に達しました。設定から変更できます。`,
     monthCost: "今月のコスト",
     stop: "停止",
     retry: "やり直す",
@@ -115,9 +115,8 @@ export const ja: Messages = {
   source: {
     inputLabel: "コピーした内容",
     richText: "書式付きテキスト",
-    emptyClipboard: "クリップボードは空です。",
     imageAlt: "コピーした画像",
-    cannotPreview: "(プレビューできません)",
+    cannotPreview: "（プレビューできません）",
   },
   markdown: {
     openLink: "このリンクをブラウザで開きますか？",
@@ -148,7 +147,7 @@ export const ja: Messages = {
     awaitingLogin:
       "あと一歩です。GNOME はトリガー拡張をログイン時に読み込みます。一度ログアウトして再ログインし、ZenCopy をもう一度起動してください。",
     unsupportedSession:
-      "このデスクトップセッションではトリガーを検知できません。GNOME(Wayland)または X11 が必要です。",
+      "このデスクトップセッションではトリガーを検知できません。GNOME（Wayland）または X11 が必要です。",
     failed: "トリガーを開始できませんでした。詳細はログを確認してください。",
     macosPermissions:
       "あと一歩です。コピーの 2 連打を検知するには macOS の許可が必要です。システム設定 → プライバシーとセキュリティ の「入力監視」で ZenCopy を許可し、ZenCopy を起動し直してください。",

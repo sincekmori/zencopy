@@ -12,25 +12,37 @@ import { useT } from "@/lib/i18n.tsx";
 const remarkPlugins = [remarkGfm, remarkBreaks];
 
 // Context, not a prop drilled through react-markdown's `components` — that
-// map must stay a stable module-level object (see ImageHostContext below).
+// map must stay a stable module-level object (see SourceContext below).
 const LinkConfirmContext = createContext<(href: string) => void>(() => undefined);
+
+function suppress(event: React.SyntheticEvent): void {
+  event.preventDefault();
+}
 
 /** Anchors in model output: never navigate the popup webview. A click asks
  *  first, showing the real URL — link text in model output can lie, and a
  *  clicked URL's query string is an exfiltration channel for the captured
  *  content. Confirmed links go to the system browser via `open_url`, which
- *  enforces https. */
+ *  opens https and nothing else — so a link of another kind (`http://`, the
+ *  `mailto:` remark-gfm makes of a bare address) is left as its text rather
+ *  than offered as a button that does nothing. The webview's own ways of
+ *  following a link, which bypass the click (the context menu's Open Link, a
+ *  middle click), are switched off; the navigation guard in windows.rs is
+ *  the backstop. */
 function SystemBrowserLink({ href, children }: React.ComponentProps<"a">): React.JSX.Element {
   const requestOpen = useContext(LinkConfirmContext);
+  if (!href?.startsWith("https://")) {
+    return <span>{children}</span>;
+  }
   return (
     <a
       href={href}
       onClick={(event) => {
         event.preventDefault();
-        if (href) {
-          requestOpen(href);
-        }
+        requestOpen(href);
       }}
+      onAuxClick={suppress}
+      onContextMenu={suppress}
     >
       {children}
     </a>
@@ -47,37 +59,39 @@ function ScrollableTable({ children }: React.ComponentProps<"table">): React.JSX
   );
 }
 
+/** The copied content as the model was given it: the capture's template
+ *  variables, of which `text` and `markup` (a formatted copy's HTML) are what
+ *  was copied. Passed as the capture holds them — no second copy of a large
+ *  selection is made to look through. */
+type Source = Readonly<Record<string, string>>;
+
 /** Whether an image URL may load. Remote images in model output are an
- *  exfiltration channel — a malicious prompt could instruct the model to
- *  embed the captured text in an image URL, and rendering it would ship the
- *  data to that server. Policy: `data:` images always (no network), http(s)
- *  only from the host the capture came from (that host already served the
- *  copied content, so it learns nothing new), everything else is dropped. */
-function isAllowedImage(src: string, imageHost: string | undefined): boolean {
-  if (src.startsWith("data:image/")) {
-    return true;
-  }
-  if (imageHost === undefined) {
-    return false;
-  }
-  try {
-    const url = new URL(src);
-    return (url.protocol === "https:" || url.protocol === "http:") && url.host === imageHost;
-  } catch {
-    return false; // relative URLs have no meaningful base inside the popup
-  }
+ *  exfiltration channel — a page can tell the model to put what it knows
+ *  into an image URL, and rendering that ships it off without a click. And
+ *  the model knows more than the copy: the user's self-introduction, a typed
+ *  instruction, the window title, file paths. So an image loads only over
+ *  https and only when its URL stands, character for character, in the copied
+ *  content — an address the model was handed, to which it has added nothing.
+ *  Everything else is dropped (`data:` never gets here: react-markdown
+ *  blanks it). */
+function isAllowedImage(src: string, source: Source): boolean {
+  return (
+    src.startsWith("https://") &&
+    [source["text"], source["markup"]].some((copied) => copied?.includes(src) === true)
+  );
 }
 
 // Context, not a prop drilled through react-markdown's `components` — that
 // map must stay a stable module-level object so images don't remount (and
 // refetch) on every streaming re-render.
-const ImageHostContext = createContext<string | undefined>(undefined);
+const NO_SOURCE: Source = {};
+const SourceContext = createContext(NO_SOURCE);
 
 /** Images in model output, gated by isAllowedImage — a blocked image
  *  degrades to its alt text, silently. */
 function GuardedImage({ src, alt }: React.ComponentProps<"img">): React.JSX.Element {
-  const imageHost = useContext(ImageHostContext);
-  return typeof src === "string" && isAllowedImage(src, imageHost) ? (
+  const source = useContext(SourceContext);
+  return typeof src === "string" && isAllowedImage(src, source) ? (
     <img src={src} alt={alt} />
   ) : (
     <span className="text-muted-foreground">{alt}</span>
@@ -88,27 +102,27 @@ const components = { a: SystemBrowserLink, table: ScrollableTable, img: GuardedI
 
 /** Model output, rendered as Markdown (GFM: tables, task lists, strikethrough).
  *  Raw HTML in the output is never rendered — react-markdown ignores it by
- *  default. `imageHost` is the one host remote images may load from (the
- *  capture's source). */
+ *  default. `source` is the copied content the output answers: the only
+ *  remote images that load are ones whose address appears in it. */
 export function Markdown({
   text,
-  imageHost,
+  source,
 }: {
   text: string;
-  imageHost?: string | undefined;
+  source: Source | undefined;
 }): React.JSX.Element {
   const t = useT();
   const [pendingHref, setPendingHref] = useState<string | undefined>(undefined);
   return (
     <>
       <div className="prose prose-sm max-w-none wrap-break-word">
-        <ImageHostContext value={imageHost}>
+        <SourceContext value={source ?? NO_SOURCE}>
           <LinkConfirmContext value={setPendingHref}>
             <ReactMarkdown remarkPlugins={remarkPlugins} components={components}>
               {text}
             </ReactMarkdown>
           </LinkConfirmContext>
-        </ImageHostContext>
+        </SourceContext>
       </div>
       {pendingHref !== undefined && (
         <>

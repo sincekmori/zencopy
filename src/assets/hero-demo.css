@@ -21,6 +21,11 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  /* The stage is drawn left to right — the lines' ragged edge, the sweep,
+     the cursor's path, the keys as on a keyboard — in every language, as
+     the demo videos' keys are: under a right-to-left page it would come
+     apart (lines flush right, swept from their uneven left edge). */
+  direction: ltr;
 }
 /* The keys' own tokens — on the stage, and on a .hd-keys row hosted by
    itself (the demo videos set one inside a caption, on the same hooks): the

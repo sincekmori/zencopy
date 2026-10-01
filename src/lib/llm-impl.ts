@@ -1,5 +1,4 @@
 import { invoke } from "@tauri-apps/api/core";
-import { listen } from "@tauri-apps/api/event";
 import { generateText, type ModelMessage, streamText } from "ai";
 import { type Catalog, type Config, createCatalog, type RoleEntry } from "ai-sdk-catalog";
 import { ping } from "ai-sdk-ping";
@@ -64,50 +63,70 @@ function roleFor(resolved: ZenCatalog, role: string): RoleEntry | undefined {
   return entry;
 }
 
-let catalogPromise: Promise<ZenCatalog> | undefined;
+/** The fetch every provider's requests go through. The webview is a browser
+ *  origin, and Anthropic's API turns a browser away at the CORS preflight
+ *  unless the request states that calling it directly is intended; no option
+ *  of the AI SDK sends that header, so it is added here, to requests that
+ *  speak Anthropic's protocol and to no other. (`globalThis.fetch` is read
+ *  per call: the screenshot harness swaps it.) */
+const providerFetch: typeof fetch = async (input, init) => {
+  const headers = new Headers(init?.headers);
+  if (!headers.has("anthropic-version")) {
+    return await globalThis.fetch(input, init);
+  }
+  headers.set("anthropic-dangerous-direct-browser-access", "true");
+  return await globalThis.fetch(input, { ...init, headers });
+};
 
-// Settings broadcasts this after writing the catalog; drop the cache so the next
-// run rebuilds with the new provider/model/key.
-void listen("catalog-changed", () => {
-  catalogPromise = undefined;
-});
+/** Build the catalog a config describes — one validating pass: createCatalog
+ *  checks it against the package's zod schema (readable, path-annotated
+ *  issues), that every provider is one it can drive, AND that the roles
+ *  ZenCopy requires are assigned. Throws what it finds. */
+function build(config: Config): ZenCatalog {
+  return createCatalog(config, { requiredRoles: REQUIRED_ROLES, fetch: providerFetch });
+}
 
-async function buildCatalog(): Promise<ZenCatalog> {
-  // Rust is IO only (read text); all parsing and validation happens here, in
-  // one zod-checked pass. API keys are inline in the file — a GUI app never
-  // sees shell environment variables (launchd, not the shell, is its parent),
-  // so the catalog's `{ "envVarName": … }` key form would resolve to nothing
-  // here; inline strings are the only form that works in ZenCopy.
+/** The last catalog built, with the config text it was built from. */
+let cached: { text: string; catalog: ZenCatalog } | undefined;
+
+/** The config a text holds, proven to be one a run can use: it is built
+ *  exactly as a run builds it. The settings screens check what they are
+ *  about to save with this, so "valid in the editor" and "valid at run time"
+ *  are one judgement. Throws what it finds — a SyntaxError for text that is
+ *  not JSON. Building reads no key and touches no network, and what is built
+ *  is kept: the run or the test that follows a save finds it made. */
+export function runnableConfig(text: string): Config {
+  const config = JSON.parse(text) as Config;
+  cached = { text, catalog: build(config) };
+  return config;
+}
+
+/** The catalog for what ai-sdk-catalog.json says right now. The file is read
+ *  on every call (one small IPC round trip) and the catalog rebuilt only when
+ *  its text has changed — so an edit takes effect on the next run whoever
+ *  made it: the settings window, a text editor, a sync tool. A failure is
+ *  never kept: Retry reads the file again. */
+async function catalog(): Promise<ZenCatalog> {
+  // Rust is IO only (read text); all parsing and validation happens here.
+  // API keys are inline in the file — a GUI app never sees shell environment
+  // variables (launchd, not the shell, is its parent), so the catalog's
+  // `{ "envVarName": … }` key form would resolve to nothing here; inline
+  // strings are the only form that works in ZenCopy.
   const text = await invoke<string>("read_catalog");
+  if (cached?.text === text) {
+    return cached.catalog;
+  }
   if (!text.trim()) {
     throw new Error(NOT_CONFIGURED);
   }
   try {
-    // One validating pass: createCatalog checks the parsed JSON against the
-    // package's zod schema (readable, path-annotated issues) AND that the
-    // roles ZenCopy requires are assigned. The thrown detail is for the log
-    // only — the user always sees an i18n sentence, never the raw issues.
-    return createCatalog(JSON.parse(text) as Config, { requiredRoles: REQUIRED_ROLES });
+    cached = { text, catalog: build(JSON.parse(text) as Config) };
+    return cached.catalog;
   } catch (error) {
+    // The thrown detail is for the log only — the user always sees an i18n
+    // sentence, never the raw issues.
     log.error("ai-sdk-catalog.json failed validation", error);
     throw new Error(INVALID_CONFIG, { cause: error });
-  }
-}
-
-async function catalog(): Promise<ZenCatalog> {
-  catalogPromise ??= buildCatalog();
-  const pending = catalogPromise;
-  try {
-    return await pending;
-  } catch (error) {
-    // Never cache a failure: the config may be fixed (settings save, a repaired
-    // file) before the next run — Retry must re-read the config from Rust
-    // instead of replaying a stale rejection. Only drop the cache if it still
-    // holds this failed attempt (a rebuild may already be underway).
-    if (catalogPromise === pending) {
-      catalogPromise = undefined;
-    }
-    throw error;
   }
 }
 
@@ -118,13 +137,6 @@ const UNREACHABLE = "unreachable";
  *  watchdog — a test is an interactive "is my config right?" check. */
 const TEST_TIMEOUT_MS = 30_000;
 
-/**
- * Verify the saved catalog end to end: build it fresh from disk, then probe
- * the `default` role with ai-sdk-ping (which aborts on the first stream event,
- * so latency and cost stay minimal). Config errors (missing file, bad JSON,
- * unknown role) throw with their real reason; an unreachable model throws
- * UNREACHABLE — ping reports reachability only, not why.
- */
 /**
  * Price sheets for every cataloged model, keyed by the same "provider:model"
  * address the usage ledger records, with the prices renamed into the ledger's
@@ -164,8 +176,14 @@ export async function modelCosts(): Promise<Record<string, TokenUsage>> {
   return prices;
 }
 
+/**
+ * Verify the saved catalog end to end: build it from what is on disk, then probe
+ * the `default` role with ai-sdk-ping (which aborts on the first stream event,
+ * so latency and cost stay minimal). Config errors (missing file, bad JSON,
+ * unknown role) throw with their real reason; an unreachable model throws
+ * UNREACHABLE — ping reports reachability only, not why.
+ */
 export async function testConnection(): Promise<void> {
-  catalogPromise = undefined; // test what is on disk right now, not a cache
   const resolved = await catalog();
 
   let watchdog: ReturnType<typeof setTimeout> | undefined;
@@ -255,16 +273,34 @@ liquid.registerFilter("language_name", (code: unknown): string => {
 // *branch* on the input's language, so direction decisions happen in Liquid,
 // deterministically, instead of being delegated to the model mid-prompt.
 // Returns "" when detection is unsure — templates treat that as "no match".
-const MACRO_LANGUAGES: Record<string, string> = {
-  cmn: "zh", // franc reports Mandarin; align with the "zh" the UI would use
+// The name is the bare language's ("Chinese", "Portuguese"), the vocabulary
+// `{{ locale | split: "-" | first | language_name }}` speaks: that is how a
+// template asks "is this written in the reader's own language?".
+/** franc names a language more narrowly than the UI's tags do. */
+const UI_LANGUAGES: Record<string, string> = {
+  cmn: "zh", // Mandarin
+  arb: "ar", // Standard Arabic
 };
+/** How much of a text franc reads to name its language (its MAX_LENGTH). */
+const FRANC_SAMPLE = 2048;
+/** franc-min knows the languages with the most speakers, and Hebrew is not
+ *  among them — but its script gives it away. Judged on what franc itself
+ *  would read, so the two never answer about different stretches of a text
+ *  (nor does a ten-megabyte file get matched letter by letter). */
+function writtenInHebrew(text: string): boolean {
+  const sample = text.slice(0, FRANC_SAMPLE);
+  const letters = sample.match(/\p{L}/gu)?.length ?? 0;
+  const hebrew = sample.match(/\p{Script=Hebrew}/gu)?.length ?? 0;
+  return hebrew > 0 && hebrew * 2 > letters;
+}
 liquid.registerFilter("language_of", (value: unknown): string => {
-  const code = franc(String(value));
+  const text = String(value);
+  const code = writtenInHebrew(text) ? "he" : franc(text);
   if (code === "und") {
     return "";
   }
   try {
-    return languageNames.of(MACRO_LANGUAGES[code] ?? code) ?? "";
+    return languageNames.of(UI_LANGUAGES[code] ?? code) ?? "";
   } catch {
     return "";
   }
@@ -294,14 +330,14 @@ export async function streamPrompt(
     vars["text"] = texts.map((file) => file.data).join("\n\n---\n\n");
   }
 
-  const [instructions, prompt, userContext] = await Promise.all([
+  const [instructions, prompt, userContext, resolved] = await Promise.all([
     liquid.parseAndRender(input.instructions, vars),
     liquid.parseAndRender(input.prompt, vars),
     // Read fresh per run, so a just-saved profile applies without any event
     // plumbing (a settings-store read is one cheap IPC round trip).
     getUserContext(),
+    catalog(),
   ]);
-  const resolved = await catalog();
 
   // One signal reaches the SDK, fed by two sources: the caller's Stop and the
   // inactivity watchdog. `timedOut` remembers which one fired — the caller's

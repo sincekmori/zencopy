@@ -18,22 +18,24 @@
 // not flagged must render identically in every locale, or the runner fails
 // naming the shot to flag.
 //
-// Prerequisite once: `bunx playwright install webkit`. A dev server on :1420
-// is reused when already running, started (and stopped) otherwise.
-/* oxlint-disable no-await-in-loop -- deliberately sequential: shots are taken
-   one page at a time so the output order is deterministic and WebKit stays
-   light. */
+// Prerequisite once: `bunx playwright install webkit`. The run serves the
+// harness itself (its own dev server, for as long as it runs).
+/* oxlint-disable no-await-in-loop, no-underscore-dangle -- deliberately
+   sequential: shots are taken one page at a time so the output order is
+   deterministic and WebKit stays light; the dunder name is the harness's
+   driver global, spoken as it is. */
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { type BrowserContext, webkit } from "playwright";
 import { NEUTRAL_MODIFIER } from "../src/lib/modifier.ts";
 import { SCREENSHOT_SCENARIOS, viewportOf } from "../src/lib/screenshot-scenarios.ts";
+import type { HarnessGlobal } from "../src/screenshot/harness-global.ts";
 import {
-  ensureDevServer,
   harnessUrl,
   localesMatching,
   ROOT,
   seedHarness,
+  serveHarness,
   takeFlag,
 } from "./harness-driver.ts";
 
@@ -108,15 +110,39 @@ function settle(shot: { name: string; os: boolean; value: string; shots: Shots }
   console.log(`ok ${folder}/screenshots/${name}.png${note}`);
 }
 
-/** One shot: the page loaded and settled, then captured. A load that idles
- *  out is tried once more on a fresh page — a long run has seen one hang in
- *  WebKit for no reason the dev server could name — and said so. */
+/** One shot: the page loaded and settled, then captured — and only if it is
+ *  the app's screen: the page answered, the app mounted, nothing threw on
+ *  the way, and every command it invoked had a handler in the mock (an error
+ *  page, a blank root or a screen built on a missing answer would otherwise
+ *  be saved as the picture). A load that idles out is tried once more on a
+ *  fresh page — a long run has seen one hang in WebKit for no reason the
+ *  dev server could name — and said so. */
 async function shoot(context: BrowserContext, url: string): Promise<Buffer> {
   for (const attempt of [1, 2]) {
     const page = await context.newPage();
+    const thrown: string[] = [];
+    page.on("pageerror", (error) => {
+      thrown.push(error.message);
+    });
     try {
-      await page.goto(url, { waitUntil: "networkidle", timeout: 60_000 });
+      const response = await page.goto(url, { waitUntil: "networkidle", timeout: 60_000 });
+      if (response?.ok() !== true) {
+        throw new Error(`${url} answered ${response?.status() ?? "nothing"}`);
+      }
+      await page.locator("#root > *").first().waitFor({ state: "attached", timeout: 15_000 });
       await page.waitForTimeout(1200); // lazy chunks, fonts, dialog mounts
+      const unhandled = await page.evaluate(
+        () =>
+          (globalThis as { __zencopyHarness?: HarnessGlobal }).__zencopyHarness?.unhandled ?? [],
+      );
+      if (unhandled.length > 0) {
+        throw new Error(
+          `${url} invoked ${[...new Set(unhandled)].join(", ")}, which the mock does not answer — add a handler in src/screenshot/harness.ts`,
+        );
+      }
+      if (thrown.length > 0) {
+        throw new Error(`${url} threw: ${thrown.join(" | ")}`);
+      }
       return await page.screenshot({ caret: "hide", animations: "disabled" });
     } catch (error) {
       if (attempt === 2 || !(error instanceof Error && error.name === "TimeoutError")) {
@@ -130,7 +156,7 @@ async function shoot(context: BrowserContext, url: string): Promise<Buffer> {
   throw new Error(`unreachable: ${url}`);
 }
 
-const stopDevServer = await ensureDevServer();
+const stopServing = await serveHarness();
 try {
   const scenarios = Object.entries(SCREENSHOT_SCENARIOS).filter(([name]) => names.includes(name));
   for (const [name, scenario] of scenarios) {
@@ -167,6 +193,6 @@ try {
     }
   }
 } finally {
-  stopDevServer();
+  await stopServing();
 }
 console.log(`shots under ${outRoot}`);

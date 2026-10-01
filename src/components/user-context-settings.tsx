@@ -4,7 +4,7 @@ import { FIELD } from "@/components/ui/field.ts";
 import { useT } from "@/lib/i18n.tsx";
 import { createLogger } from "@/lib/log.ts";
 import { getUserContext, setUserContext } from "@/lib/settings.ts";
-import { useTauriEvent } from "@/lib/use-tauri-event.ts";
+import { useTauriEvent, useWindowOpen, WINDOW_CLOSED } from "@/lib/use-tauri-event.ts";
 import { cn } from "@/lib/utils.ts";
 
 const log = createLogger("user-context");
@@ -25,7 +25,7 @@ export function UserContextSettings(): React.JSX.Element {
 
   // The settings window hides on close instead of being destroyed, so state
   // survives — a confirmation left standing would greet the next open.
-  useTauriEvent("window-closed", () => {
+  useTauriEvent(WINDOW_CLOSED, () => {
     setConfirmation(undefined);
   });
   // Which example persona the (empty) field is currently showing.
@@ -45,10 +45,13 @@ export function UserContextSettings(): React.JSX.Element {
   }, []);
 
   // Rotate the example personas while the field is empty (a placeholder is
-  // only visible then); pause the timer as soon as the user types.
+  // only visible then) and the window is open — it lives on hidden for as
+  // long as the app runs, and a timer there would wake it every few seconds
+  // for nobody. The timer pauses as soon as the user types.
   const empty = text === "";
+  const open = useWindowOpen();
   useEffect(() => {
-    if (!empty) {
+    if (!empty || !open) {
       return;
     }
     const id = setInterval(() => {
@@ -57,7 +60,7 @@ export function UserContextSettings(): React.JSX.Element {
     return () => {
       clearInterval(id);
     };
-  }, [empty]);
+  }, [empty, open]);
 
   const placeholder =
     t.settings.userContextPlaceholders[

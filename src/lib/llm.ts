@@ -1,3 +1,4 @@
+import type { Config } from "ai-sdk-catalog";
 import type { Attachment } from "@/lib/capture.ts";
 
 /** Thrown when no LLM provider has been set up yet (first run). The popup shows a
@@ -19,10 +20,7 @@ export const TIMED_OUT = "timed-out";
 export const EMPTY_RESULT = "empty-result";
 
 /** The catalog roles ZenCopy itself depends on: every prompt without a
- *  frontmatter role runs as `default`, and the connection test pings it.
- *  The single definition feeds both the runtime catalog (createCatalog's
- *  `requiredRoles`) and the settings editor's validation, so "valid in the
- *  editor" and "valid at run time" can never disagree. */
+ *  frontmatter role runs as `default`, and the connection test pings it. */
 export const REQUIRED_ROLES = ["default"] as const;
 
 /** The catalog roles a built-in prompt may declare without the config
@@ -106,11 +104,6 @@ export async function streamPrompt(
   return impl.streamPrompt(input, onChunk, signal);
 }
 
-/**
- * Verify the saved catalog end to end: build it fresh from disk, then probe
- * the `default` role. Config errors (missing file, bad JSON, unknown role)
- * throw with their real reason; an unreachable model throws "unreachable".
- */
 /** Price per 1M tokens for every cataloged model ("provider:model" -> buckets
  *  matching {@link TokenUsage}); empty when the config is missing or broken. */
 export async function modelCosts(): Promise<Record<string, TokenUsage>> {
@@ -118,6 +111,23 @@ export async function modelCosts(): Promise<Record<string, TokenUsage>> {
   return impl.modelCosts();
 }
 
+/**
+ * The config a text holds, proven to be one a run can use — built exactly as
+ * a run builds it, so the settings screens and the runtime cannot disagree
+ * about what is valid. Throws what it finds (a SyntaxError for text that is
+ * not JSON).
+ */
+export async function runnableConfig(text: string): Promise<Config> {
+  const impl = await import("@/lib/llm-impl.ts");
+  return impl.runnableConfig(text);
+}
+
+/**
+ * Verify the saved catalog end to end: build it from what is on disk, then
+ * probe the `default` role. Config errors (missing file, bad JSON, unknown
+ * role) throw with their real reason; an unreachable model throws
+ * "unreachable".
+ */
 export async function testConnection(): Promise<void> {
   const impl = await import("@/lib/llm-impl.ts");
   return impl.testConnection();

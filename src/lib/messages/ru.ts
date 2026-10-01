@@ -76,7 +76,7 @@ export const ru: Messages = {
     resetWarning:
       "Это необратимо. Настройки ИИ (включая ключи API), правила, пользовательские промпты и настройки окон будут удалены, а ZenCopy вернётся к состоянию первого запуска.",
     resetConfirm: "Удалить всё",
-    optionSystem: "Системная",
+    optionSystem: "Как в системе",
     optionLight: "Светлая",
     optionDark: "Тёмная",
   },
@@ -114,7 +114,6 @@ export const ru: Messages = {
   source: {
     inputLabel: "Скопированное",
     richText: "Форматированный текст",
-    emptyClipboard: "Буфер обмена пуст.",
     imageAlt: "Скопированное изображение",
     cannotPreview: "(нет предпросмотра)",
   },

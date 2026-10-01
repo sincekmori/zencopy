@@ -133,8 +133,9 @@ export function iconSvg(): string {
   );
 }
 
-/** The tray glyph: the mark alone in white on nothing (macOS re-tints it as a
- *  template image; the menu bar and the taskbar show it small). */
+/** The tray glyph: the mark alone in white on nothing, for the macOS menu
+ *  bar, which re-tints it as a template image. Windows and Linux draw a tray
+ *  icon as it is, so there the tray shows the app icon (lib.rs). */
 export function traySvg(): string {
   return svg(
     { width: ICON_GRID, height: ICON_GRID },

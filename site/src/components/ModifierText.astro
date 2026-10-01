@@ -6,6 +6,11 @@
  * runs, and without JS or on another OS, the span says the neutral Ctrl/⌘
  * (src/lib/modifier.ts) — the spelling the meta description gets too, where
  * only text can go (Landing.astro substitutes it there).
+ *
+ * A left-to-right mark goes before the key: ⌘ has no direction of its own,
+ * so in a right-to-left sentence it would land on the far side of the keys
+ * that follow it (C + C + ⌘, where Ctrl + C + C stays put) — with the mark
+ * the signal reads as it is pressed, in every language.
  */
 import { NEUTRAL_MODIFIER } from "../../../src/lib/modifier.ts";
 
@@ -13,13 +18,19 @@ interface Props {
   text: string;
 }
 const { text } = Astro.props;
+const LRM = "\u200E";
 const parts = text.split("{mod}");
 ---
 
 {
   parts.map((part, index) => (
     <>
-      {index > 0 && <span data-os-modifier>{NEUTRAL_MODIFIER}</span>}
+      {index > 0 && (
+        <>
+          {LRM}
+          <span data-os-modifier>{NEUTRAL_MODIFIER}</span>
+        </>
+      )}
       {part}
     </>
   ))

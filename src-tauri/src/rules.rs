@@ -1,9 +1,10 @@
 //! Rules: which prompt handles a capture — the flat kind map, the
 //! override rules, and the commands the settings rules section calls.
 
-use crate::capture::{capture_kind, capture_text};
+use crate::capture::capture_text;
 use crate::config::config_base;
 use crate::prompts::{Prompt, checked_prompt_id};
+
 /// A rules override's `when` condition. Every present field must match (AND).
 /// String fields support `*` wildcards and match case-sensitively — except
 /// `file_name`, which matches case-insensitively (file systems mostly do, and
@@ -47,49 +48,80 @@ pub(crate) struct RulesConfig {
     overrides: Vec<Override>,
 }
 
-/// Parse rules JSON into a config (top-level `kind: prompt` plus `overrides`).
-pub(crate) fn parse_rules(text: &str) -> Option<RulesConfig> {
-    let value = serde_json::from_str::<serde_json::Value>(text).ok()?;
-    let object = value.as_object()?;
+/// The user's rules.json as a JSON object: `Ok(None)` when there is no file
+/// (or an empty one), `Err` with the reason when there is one that cannot be
+/// read as an object — a hand-edited file with a stray comma, say. A UTF-8
+/// byte-order mark, which some editors put first, is not part of the JSON.
+fn read_rules_object(
+    path: &std::path::Path,
+) -> Result<Option<serde_json::Map<String, serde_json::Value>>, String> {
+    let text = match std::fs::read_to_string(path) {
+        Ok(text) => text,
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+        Err(error) => return Err(format!("rules.json cannot be read ({error})")),
+    };
+    let text = text.trim_start_matches('\u{feff}');
+    if text.trim().is_empty() {
+        return Ok(None);
+    }
+    parse_rules_object(text).map(Some)
+}
+
+fn parse_rules_object(text: &str) -> Result<serde_json::Map<String, serde_json::Value>, String> {
+    match serde_json::from_str(text) {
+        Ok(serde_json::Value::Object(object)) => Ok(object),
+        Ok(_) => Err("rules.json is not a JSON object".to_string()),
+        Err(error) => Err(format!("rules.json is not valid JSON ({error})")),
+    }
+}
+
+/// A rules object as a config (top-level `kind: prompt` plus `overrides`).
+/// An override that is not a valid rule is dropped alone, with a trace; the
+/// rest of the list stands.
+fn rules_from_object(object: &serde_json::Map<String, serde_json::Value>) -> RulesConfig {
     let mut by_kind = std::collections::HashMap::new();
     let mut overrides = Vec::new();
     for (key, val) in object {
         if key == "overrides" {
-            if let Ok(parsed) = serde_json::from_value::<Vec<Override>>(val.clone()) {
-                overrides = parsed;
+            let Some(entries) = val.as_array() else {
+                log::warn!("rules.json: \"overrides\" is not a list, ignored");
+                continue;
+            };
+            for (index, entry) in entries.iter().enumerate() {
+                match serde_json::from_value::<Override>(entry.clone()) {
+                    Ok(rule) => overrides.push(rule),
+                    Err(error) => log::warn!(
+                        "rules.json: override {} is not a valid rule ({error}), ignored",
+                        index + 1
+                    ),
+                }
             }
         } else if let Some(prompt) = val.as_str() {
             by_kind.insert(key.clone(), prompt.to_string());
         }
     }
-    Some(RulesConfig { by_kind, overrides })
+    RulesConfig { by_kind, overrides }
 }
 
 /// The embedded default rules, parsed once — it is a compile-time constant.
 pub(crate) static DEFAULT_ROUTING: std::sync::LazyLock<RulesConfig> =
     std::sync::LazyLock::new(|| {
-        parse_rules(include_str!("../rules.json")).unwrap_or(RulesConfig {
-            by_kind: std::collections::HashMap::new(),
-            overrides: Vec::new(),
-        })
+        let object = parse_rules_object(include_str!("../rules.json")).unwrap_or_default();
+        rules_from_object(&object)
     });
 
 /// Rules: the user's `rules.json` if present and valid, else the embedded
 /// default. A missing/broken file can't disable rules — the default stands.
 pub(crate) fn load_rules(handle: &tauri::AppHandle) -> RulesConfig {
-    let user = config_base(handle)
-        .map(|base| base.join("rules.json"))
-        .filter(|path| path.exists())
-        .and_then(|path| std::fs::read_to_string(path).ok())
-        .filter(|text| !text.trim().is_empty());
-    let user_rules = user.as_deref().and_then(|text| {
-        let parsed = parse_rules(text);
-        if parsed.is_none() {
-            log::warn!("rules.json: not valid rules JSON, falling back to the default rules");
-        }
-        parsed
+    let user = config_base(handle).and_then(|base| {
+        read_rules_object(&base.join("rules.json")).unwrap_or_else(|reason| {
+            log::warn!("{reason}, falling back to the default rules");
+            None
+        })
     });
-    let rules = user_rules.unwrap_or_else(|| DEFAULT_ROUTING.clone());
+    let rules = user
+        .as_ref()
+        .map_or_else(|| DEFAULT_ROUTING.clone(), rules_from_object);
     // A rule naming a kind that doesn't exist (a typo, or a leftover from a
     // removed kind) can never fire — silent config decay deserves a trace.
     for kind in rules.by_kind.keys() {
@@ -207,14 +239,14 @@ pub(crate) fn when_matches(
     true
 }
 
-/// Resolve which prompt handles a capture: a matching override (first wins) takes
-/// priority over the 1:1 kind map.
+/// Resolve which prompt handles a capture of `kind`: a matching override (first
+/// wins) takes priority over the 1:1 kind map.
 pub(crate) fn resolve_prompt<'a>(
     rules: &RulesConfig,
     prompts: &'a [Prompt],
     event: &copycopy::CaptureEvent,
+    kind: &str,
 ) -> Option<&'a Prompt> {
-    let kind = capture_kind(event);
     for rule in &rules.overrides {
         if when_matches(&rule.when, event, kind)
             && let Some(prompt) = prompts.iter().find(|prompt| prompt.id == rule.prompt)
@@ -255,30 +287,26 @@ pub(crate) fn purge_prompt_from_rules_object(
     }
 }
 
-/// The capture kinds the rules UI exposes (mirrors `capture_kind`; `empty`
-/// is deliberately not routable).
+/// The capture kinds there are (mirrors `SourcePreview::kind`).
 pub(crate) const RULE_KINDS: [&str; 3] = ["text", "image", "files"];
 
 /// Read-modify-write the user's rules.json as a JSON object (seeded from
 /// the embedded default when none exists). Everything the mutation doesn't
-/// touch is preserved verbatim.
+/// touch is preserved verbatim — and a file that cannot be read as an object
+/// is left alone, the edit refused: writing over it would throw away what
+/// its author wrote.
 pub(crate) fn edit_rules_json(
     app: &tauri::AppHandle,
     mutate: impl FnOnce(&mut serde_json::Map<String, serde_json::Value>),
 ) -> Result<(), String> {
     let base = config_base(app).ok_or_else(|| "config dir unavailable".to_string())?;
     let path = base.join("rules.json");
-    let current = std::fs::read_to_string(&path)
-        .ok()
-        .filter(|text| !text.trim().is_empty())
-        .unwrap_or_else(|| include_str!("../rules.json").to_string());
-    let mut value: serde_json::Value =
-        serde_json::from_str(&current).unwrap_or_else(|_| serde_json::json!({}));
-    let object = value
-        .as_object_mut()
-        .ok_or_else(|| "rules.json is not a JSON object".to_string())?;
-    mutate(object);
-    let text = serde_json::to_string_pretty(&value).map_err(|e| e.to_string())?;
+    let mut object = match read_rules_object(&path)? {
+        Some(object) => object,
+        None => parse_rules_object(include_str!("../rules.json"))?,
+    };
+    mutate(&mut object);
+    let text = serde_json::to_string_pretty(&object).map_err(|e| e.to_string())?;
     std::fs::create_dir_all(&base).map_err(|e| e.to_string())?;
     std::fs::write(&path, text).map_err(|e| e.to_string())?;
     Ok(())
@@ -356,6 +384,65 @@ pub(crate) fn get_rules_ui(app: tauri::AppHandle) -> RulesInfo {
     RulesInfo {
         by_kind: rules.by_kind,
         overrides: rules.overrides,
+    }
+}
+
+#[cfg(test)]
+mod parse_tests {
+    use super::{parse_rules_object, read_rules_object, rules_from_object};
+
+    /// One bad override must not take the others — or the kind map — with it.
+    #[test]
+    fn a_bad_override_is_dropped_alone() {
+        let object = parse_rules_object(
+            r#"{
+                "text": "zencopy-translate",
+                "overrides": [
+                    { "when": { "app_name": "Slack" }, "prompt": "a" },
+                    { "when": { "min_chars": "200" }, "prompt": "b" },
+                    { "when": { "file_name": "*.pdf" }, "prompt": "c" }
+                ]
+            }"#,
+        )
+        .expect("valid JSON");
+        let rules = rules_from_object(&object);
+        assert_eq!(
+            rules.by_kind.get("text").map(String::as_str),
+            Some("zencopy-translate")
+        );
+        let kept: Vec<&str> = rules
+            .overrides
+            .iter()
+            .map(|rule| rule.prompt.as_str())
+            .collect();
+        assert_eq!(kept, ["a", "c"]);
+    }
+
+    /// What `edit_rules_json` refuses to write over: a file that is there but
+    /// is not a JSON object. A missing or empty one is simply no rules yet,
+    /// and a byte-order mark is not a reason to refuse.
+    #[test]
+    fn a_file_that_cannot_be_read_as_an_object_is_an_error() {
+        let dir = crate::config::scratch_dir("rules");
+        std::fs::create_dir_all(&dir).expect("temp dir");
+        let path = dir.join("rules.json");
+
+        assert_eq!(read_rules_object(&path), Ok(None));
+        std::fs::write(&path, "  \n").expect("write");
+        assert_eq!(read_rules_object(&path), Ok(None));
+
+        std::fs::write(&path, r#"{ "text": "a", }"#).expect("write");
+        assert!(read_rules_object(&path).is_err());
+        std::fs::write(&path, r#"["text"]"#).expect("write");
+        assert!(read_rules_object(&path).is_err());
+
+        std::fs::write(&path, "\u{feff}{ \"text\": \"a\" }").expect("write");
+        let object = read_rules_object(&path)
+            .expect("readable")
+            .expect("present");
+        assert_eq!(object.get("text").and_then(|v| v.as_str()), Some("a"));
+
+        std::fs::remove_dir_all(&dir).expect("cleanup");
     }
 }
 

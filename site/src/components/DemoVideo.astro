@@ -16,7 +16,9 @@
 // Ctrl/⌘ (what a visitor of unknown OS sees, as with the site's OS wording),
 // `.ctrl` reads Ctrl and `.cmd` reads ⌘, and the head script
 // (astro.config.mjs) swaps the source by OS — the same progressive
-// enhancement as the OS wording.
+// enhancement as the OS wording. Nothing of the video is fetched before the
+// visitor plays it (`preload="none"`; the poster and the declared size hold
+// its place), so the cut swapped away from is never downloaded.
 import { CAPTIONS } from "../../../scripts/demo-video/captions.ts";
 import {
   DEMOS,
@@ -52,7 +54,7 @@ const cuts = lines !== undefined;
   muted
   playsinline
   poster={`${base}.jpg`}
-  preload="metadata"
+  preload="none"
   src={`${base}.mp4`}
   width={width}
 >

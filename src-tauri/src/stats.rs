@@ -17,6 +17,9 @@
 //! - Evolution is additive only: new keys may appear, existing keys are
 //!   never renamed or repurposed. No version field; absence is version 1.
 //! - An absent key means zero or unknown, never an error.
+//! - The one rename there has been: lines written before v0.12.0 carry the
+//!   prompt's id as `action`, later ones as `prompt`. A reader that wants it
+//!   takes either.
 //! - `model` is the catalog address `provider:model`, split at the FIRST
 //!   colon (model ids may contain colons, e.g. `local:gemma4:e4b`). The
 //!   provider half is the user's own alias — it is what identifies local
@@ -115,19 +118,42 @@ pub(crate) fn record_usage(
 
 /// The recorded events, one JSON value per line, parsed leniently: a torn or
 /// foreign line is skipped, never fatal — the reader must not be the thing
-/// that breaks an append-only ledger. Powers the cost viewer in settings.
-#[tauri::command]
-pub(crate) fn read_usage_stats(app: tauri::AppHandle) -> Result<Vec<serde_json::Value>, String> {
+/// that breaks an append-only ledger. With `month` (a local `YYYY-MM`), only
+/// that month's events: the popup's cost readout and cap ask on every run,
+/// and the ledger only grows. Powers the cost viewer in settings too, which
+/// takes it whole.
+///
+/// `(async)`: reading and parsing a ledger of years stays off the main thread.
+#[tauri::command(async)]
+pub(crate) fn read_usage_stats(
+    app: tauri::AppHandle,
+    month: Option<String>,
+) -> Result<Vec<serde_json::Value>, String> {
     let path = stats_file(&app).ok_or("stats dir unavailable")?;
     let text = match std::fs::read_to_string(&path) {
         Ok(text) => text,
         Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(Vec::new()),
         Err(error) => return Err(error.to_string()),
     };
-    Ok(text
+    Ok(events_of(&text, month.as_deref()))
+}
+
+/// The ledger's lines as events — of one month, when asked. A line that does
+/// not even mention the month is passed over without being parsed.
+fn events_of(ledger: &str, month: Option<&str>) -> Vec<serde_json::Value> {
+    ledger
         .lines()
-        .filter_map(|line| serde_json::from_str(line).ok())
-        .collect())
+        .filter(|line| month.is_none_or(|month| line.contains(month)))
+        .filter_map(|line| serde_json::from_str::<serde_json::Value>(line).ok())
+        .filter(|event| {
+            month.is_none_or(|month| {
+                event
+                    .get("at")
+                    .and_then(serde_json::Value::as_str)
+                    .is_some_and(|at| at.starts_with(month))
+            })
+        })
+        .collect()
 }
 
 /// Delete the recorded statistics — the settings section's quiet reset link.
@@ -213,4 +239,39 @@ pub(crate) fn open_stats_dir(app: tauri::AppHandle) {
     app.opener()
         .open_path(dir.to_string_lossy(), None::<&str>)
         .or_log("open the stats directory");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::events_of;
+
+    /// The month filter keeps exactly the events stamped in that month — a
+    /// line that merely mentions it elsewhere is not one — and torn lines are
+    /// skipped either way.
+    #[test]
+    fn a_month_reads_only_its_own_events() {
+        let ledger = concat!(
+            r#"{"at":"2026-09-30T23:59:59+09:00","model":"google:a","prompt":"p"}"#,
+            "\n",
+            r#"{"at":"2026-10-01T00:00:00+09:00","model":"google:b","prompt":"p"}"#,
+            "\n",
+            r#"{"at": "2026-10-02T08:00:00+09:00", "model": "google:c"}"#,
+            "\n",
+            r#"{"at":"2025-01-01T00:00:00+09:00","model":"local:2026-10"}"#,
+            "\n",
+            r#"{"at":"2026-10-03T"#,
+            "\n",
+        );
+        let models = |events: Vec<serde_json::Value>| -> Vec<String> {
+            events
+                .iter()
+                .map(|event| event["model"].as_str().unwrap_or_default().to_string())
+                .collect()
+        };
+        assert_eq!(
+            models(events_of(ledger, Some("2026-10"))),
+            ["google:b", "google:c"]
+        );
+        assert_eq!(models(events_of(ledger, None)).len(), 4);
+    }
 }

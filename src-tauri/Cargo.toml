@@ -1,6 +1,8 @@
+# No version here: the app's is package.json's, which tauri.conf.json points
+# at — the one number the app, its installers, the update manifest and the
+# site's download links are built from (Cargo calls the crate 0.0.0).
 [package]
 name = "zencopy"
-version = "0.16.0"
 description = "ZenCopy — instant AI, right on your screen"
 license = "Apache-2.0"
 edition = "2024"
@@ -63,7 +65,7 @@ calamine = { version = "0.36", default-features = false }
 # The engine: detects the global Ctrl/Cmd+C+C trigger and hands us a
 # CaptureEvent. Windows, macOS, and Linux (GNOME Wayland via a bundled Shell
 # extension, X11 via a key listener).
-copycopy = "0.3.2"
+copycopy = "0.4.1"
 
 # Native file-open dialog — "import a prompt from a .md file" in settings
 # (Rust-side only; the webview never gains dialog permissions).

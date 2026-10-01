@@ -112,7 +112,6 @@ export const id: Messages = {
   source: {
     inputLabel: "Konten yang disalin",
     richText: "Teks berformat",
-    emptyClipboard: "Papan klip kosong.",
     imageAlt: "Gambar yang disalin",
     cannotPreview: "(tidak ada pratinjau)",
   },

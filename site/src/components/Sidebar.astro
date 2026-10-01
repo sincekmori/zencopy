@@ -8,7 +8,16 @@
  *
  * The site's sidebar config is deliberately a flat list of links; this
  * component asserts that instead of half-supporting groups it never sees.
+ *
+ * Everything else the default sidebar does stays: the list sits in
+ * Starlight's persister (the rail keeps its scroll position from page to
+ * page), and below it comes the mobile menu's footer — under 50rem the
+ * header hides its language and theme selects and the GitHub link, and the
+ * menu is the only place left to carry them. The landmark is PageFrame's
+ * `<nav>`, labelled in the page's language, so the list adds none of its own.
  */
+import MobileMenuFooter from "@astrojs/starlight/components/MobileMenuFooter.astro";
+import SidebarPersister from "@astrojs/starlight/components/SidebarPersister.astro";
 import type { MarkdownHeading } from "astro";
 import { getCollection, render } from "astro:content";
 
@@ -47,36 +56,46 @@ const links = await Promise.all(
 );
 ---
 
-<nav aria-label="Main">
-  <ul>
-    {
-      links.map(({ entry, sections }) => (
-        <li>
-          <a
-            aria-current={entry.isCurrent ? "page" : undefined}
-            href={entry.href}
-            {...entry.attrs}
-          >
-            {entry.label}
-          </a>
-          {sections.length > 0 ? (
-            <ul class="sections">
-              {sections.map((section) => (
-                <li>
-                  <a href={`${entry.href}#${section.slug}`}>{section.text}</a>
-                </li>
-              ))}
-            </ul>
-          ) : undefined}
-        </li>
-      ))
-    }
-  </ul>
-</nav>
+<SidebarPersister>
+  <div class="pages">
+    <ul>
+      {
+        links.map(({ entry, sections }) => (
+          <li>
+            <a
+              aria-current={entry.isCurrent ? "page" : undefined}
+              href={entry.href}
+              {...entry.attrs}
+            >
+              {entry.label}
+            </a>
+            {sections.length > 0 ? (
+              <ul class="sections">
+                {sections.map((section) => (
+                  <li>
+                    <a href={`${entry.href}#${section.slug}`}>{section.text}</a>
+                  </li>
+                ))}
+              </ul>
+            ) : undefined}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</SidebarPersister>
+
+<div class="preferences md:sl-hidden">
+  <MobileMenuFooter />
+</div>
 
 <style>
-  nav {
+  .pages {
     padding: 1rem var(--sl-sidebar-pad-x, 1rem);
+  }
+  /* The footer lines up with the list above it. */
+  .preferences {
+    padding-inline: var(--sl-sidebar-pad-x, 1rem);
   }
   ul {
     margin: 0;

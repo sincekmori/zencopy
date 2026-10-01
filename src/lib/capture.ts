@@ -20,14 +20,14 @@ const ImageSourceSchema = z.object({
   data_url: z.string(),
 });
 const FilesSourceSchema = z.object({ kind: z.literal("files"), paths: z.array(z.string()) });
-const EmptySourceSchema = z.object({ kind: z.literal("empty") });
 
+// An empty clipboard is not among them: Rust drops a capture with nothing in
+// it before it gets here.
 const SourceSchema = z.discriminatedUnion("kind", [
   TextSourceSchema,
   RichTextSourceSchema,
   ImageSourceSchema,
   FilesSourceSchema,
-  EmptySourceSchema,
 ]);
 export type Source = z.infer<typeof SourceSchema>;
 
@@ -41,7 +41,7 @@ export type Source = z.infer<typeof SourceSchema>;
  *    Liquid templates rendered on the frontend with `vars`.
  *  - `runnable`: whether an prompt applies and is ready to run. */
 export const CapturePayloadSchema = z.object({
-  kind: z.enum([...ROUTABLE_KINDS, "empty"]),
+  kind: z.enum(ROUTABLE_KINDS),
   source: SourceSchema,
   prompt_id: z.string(),
   label: z.string(),
@@ -109,7 +109,11 @@ export async function buildAttachments(source: Source): Promise<Attachment[] | u
   }
 }
 
-/** A stable signature of a capture's content, for de-duplicating triggers. */
+/** A stable signature of a capture's content, for de-duplicating triggers.
+ *  An image signs with its size and the end of its data: a PNG closes on the
+ *  checksums of its pixels, so two screenshots of the same dimensions that
+ *  happen to encode to the same length still sign differently. Files sign
+ *  with their paths alone — the popup treats every copy of files as new. */
 export function sourceSignature(source: Source): string {
   switch (source.kind) {
     case "text": {
@@ -119,13 +123,10 @@ export function sourceSignature(source: Source): string {
       return `rich_text:${source.format}:${source.markup}`;
     }
     case "image": {
-      return `image:${source.width}x${source.height}:${source.data_url.length}`;
+      return `image:${source.width}x${source.height}:${source.data_url.length}:${source.data_url.slice(-64)}`;
     }
     case "files": {
       return `files:${source.paths.join("\0")}`;
-    }
-    case "empty": {
-      return "empty";
     }
   }
 }

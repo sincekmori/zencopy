@@ -17,13 +17,13 @@ mod rules;
 mod shell;
 /// Usage statistics: the append-only invocation JSONL.
 mod stats;
-/// The locale-aware tray and app menus.
+/// The locale-aware tray menu, and the macOS app menu.
 mod tray;
 /// Window placement and reveal helpers.
 mod windows;
 
 use crate::attachments::read_capture_files;
-use crate::capture::{build_capture_payload, is_blank};
+use crate::capture::{build_capture_payload, source_preview};
 use crate::config::{STORE_FILE, config_base, read_catalog, reset_all_settings, write_catalog};
 use crate::prompts::{
     delete_prompt, export_prompt_file, import_prompt, import_prompt_from_file, list_prompts_ui,
@@ -38,11 +38,16 @@ use crate::stats::{
 // The app menu exists only on macOS (tray.rs gates the builder the same way).
 #[cfg(target_os = "macos")]
 use crate::tray::build_app_menu;
-use crate::tray::{app_locale, build_tray_menu, locale_from_tag};
+use crate::tray::{LOCALE_CHANGED, app_locale, build_tray_menu, locale_from_tag};
 use crate::windows::{
-    DIALOG_LABELS, current_corner, open_about, open_settings, reveal_popup, reveal_window,
-    summon_popup, sync_popup_float,
+    conceal_window, current_corner, open_about, open_settings, reveal_popup, reveal_window,
+    summon_popup,
 };
+
+/// The settings-store key of the first-run flag: written by the frontend once
+/// the welcome flow is done (src/lib/settings.ts; pinned by the ts_mirror
+/// tests below), read by setup to decide whether to surface the window.
+const WELCOME_SEEN_KEY: &str = "welcomeSeen";
 
 /// Log-and-continue for fallible calls whose failure must not break the flow
 /// (window operations on a resident HUD degrade, they don't crash). Prefer this
@@ -266,6 +271,7 @@ pub fn run() {
                 .rotation_strategy(tauri_plugin_log::RotationStrategy::KeepOne)
                 .build(),
         )
+        .plugin(crate::windows::stay_on_app_pages())
         .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_autostart::init(
@@ -303,37 +309,24 @@ pub fn run() {
             update_state,
             set_update_state
         ])
+        // The one menu handler. Tauri hands every menu event — the tray's and
+        // the macOS app menu's alike — to every registered handler, so a
+        // second one on the tray would run each click twice. The app menu
+        // (⌘, / ⌘Q) mirrors the tray item ids; its predefined items (Edit
+        // set, Quit) handle themselves.
         .on_menu_event(|app, event| match event.id.as_ref() {
-            // The macOS app menu (⌘, / ⌘Q) mirrors the tray item ids; the
-            // predefined items (Edit set, Quit) handle themselves. Revealing
-            // twice when a tray handler also fires is harmless.
+            "show" => reveal_popup(app),
             "open" => reveal_window(app, "settings"),
-            "about" => reveal_window(app, "about"),
+            "about" | "update" => reveal_window(app, "about"),
+            "quit" => app.exit(0),
             _ => {}
         })
         .on_window_event(|window, event| {
-            // A tray-resident app hides its windows instead of destroying them, so
-            // they can always be reopened. Without this, closing the settings
-            // window (its title-bar close button) would destroy it for good.
+            // Closing hides: without this, the settings window's title-bar
+            // close button would destroy it for good.
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 api.prevent_close();
-                window
-                    .hide()
-                    .or_log(&format!("{}: hide on close", window.label()));
-                // Tell the webview its session just ended: a hidden window
-                // keeps its React state, so transient feedback (a "saved"
-                // confirmation) must be dropped now or it would still be on
-                // screen at the next open. Minimize and app-hide stay silent
-                // on purpose — the window is still "open" then.
-                window
-                    .emit_to(window.label(), "window-closed", ())
-                    .or_log(&format!("{}: emit window-closed", window.label()));
-                // A dialog just left the screen — the popup's float may
-                // resume (the hide above has already landed, so the recompute
-                // sees the truth).
-                if DIALOG_LABELS.contains(&window.label()) {
-                    sync_popup_float(window.app_handle());
-                }
+                conceal_window(window);
             }
         })
         .setup(|app| {
@@ -384,25 +377,28 @@ pub fn run() {
             let menu = build_tray_menu(app.handle(), startup_locale)?;
 
             #[cfg(target_os = "macos")]
-            app.set_menu(build_app_menu(app.handle(), startup_locale)?)?;
+            app.set_menu(build_app_menu(app.handle())?)?;
 
-            // A monochrome mark on transparency: macOS renders it as a template
-            // (auto light/dark in the menu bar), Windows and Linux show it as-is
-            // in the tray.
+            // macOS gets the monochrome mark on transparency and renders it as
+            // a template (auto light/dark in the menu bar). Windows and Linux
+            // draw a tray icon's pixels as they are, where a white mark all
+            // but disappears on a light taskbar — Windows 11's default — so
+            // they get the app icon, which brings its own ground.
+            let tray_icon = if cfg!(target_os = "macos") {
+                tauri::include_image!("icons/tray.png")
+            } else {
+                app.default_window_icon()
+                    .cloned()
+                    .ok_or("the app icon is missing")?
+            };
             // The fixed id lets set_update_state find the tray again when the
-            // update item needs to appear or disappear.
+            // update item needs to appear or disappear. Its menu's clicks land
+            // in the builder's on_menu_event.
             let tray = TrayIconBuilder::with_id("main")
-                .icon(tauri::include_image!("icons/tray.png"))
+                .icon(tray_icon)
                 .icon_as_template(true)
                 .tooltip("ZenCopy")
                 .menu(&menu)
-                .on_menu_event(|app, event| match event.id.as_ref() {
-                    "show" => reveal_popup(app),
-                    "open" => reveal_window(app, "settings"),
-                    "about" | "update" => reveal_window(app, "about"),
-                    "quit" => app.exit(0),
-                    _ => {}
-                })
                 .build(app)?;
 
             // The settings window broadcasts `locale-changed` (with the
@@ -412,25 +408,15 @@ pub fn run() {
             {
                 use tauri::Listener;
                 let handle = app.handle().clone();
-                app.listen("locale-changed", move |event| {
+                app.listen(LOCALE_CHANGED, move |event| {
                     let locale = serde_json::from_str::<String>(event.payload())
-                        .map(|tag| locale_from_tag(&tag.to_ascii_lowercase()))
+                        .map(|tag| locale_from_tag(&tag))
                         .unwrap_or_else(|_| app_locale(&handle));
                     match build_tray_menu(&handle, locale) {
                         Ok(menu) => tray
                             .set_menu(Some(menu))
                             .or_log("tray: relabel on locale change"),
                         Err(error) => log::warn!("tray relabel failed: {error}"),
-                    }
-                    #[cfg(target_os = "macos")]
-                    match build_app_menu(&handle, locale) {
-                        Ok(menu) => {
-                            handle
-                                .set_menu(menu)
-                                .map(|_| ())
-                                .or_log("app menu: relabel on locale change");
-                        }
-                        Err(error) => log::warn!("app menu relabel failed: {error}"),
                     }
                 });
             }
@@ -446,15 +432,15 @@ pub fn run() {
                 let capture = copycopy::start_with_status(
                     copycopy::Config::default(),
                     move |event| {
-                        if is_blank(&event) {
+                        let Some(source) = source_preview(&event) else {
                             log::debug!("capture: blank content, ignored");
                             return;
-                        }
+                        };
                         let prompts = load_prompts(&handle);
                         let rules = load_rules(&handle);
-                        let prompt = resolve_prompt(&rules, &prompts, &event);
+                        let prompt = resolve_prompt(&rules, &prompts, &event, source.kind());
                         let corner = current_corner(&handle);
-                        let payload = build_capture_payload(&event, prompt);
+                        let payload = build_capture_payload(&event, source, prompt);
                         log::debug!(
                             "capture: kind={} runnable={}",
                             payload.kind,
@@ -504,15 +490,14 @@ pub fn run() {
             // First run (fresh install, or a factory reset followed by a
             // relaunch): the app lives in the tray, so a silent start would
             // look like nothing happened. Surface the settings window — it
-            // renders the welcome flow until `welcomeSeen` is written by the
-            // frontend (the key is mirrored in src/lib/settings.ts).
+            // renders the welcome flow until the frontend writes the flag.
             {
                 use tauri_plugin_store::StoreExt;
                 let welcomed = app
                     .handle()
                     .store(STORE_FILE)
                     .ok()
-                    .and_then(|store| store.get("welcomeSeen"))
+                    .and_then(|store| store.get(WELCOME_SEEN_KEY))
                     .and_then(|value| value.as_bool())
                     .unwrap_or(false);
                 if !welcomed {
@@ -549,15 +534,82 @@ mod ts_mirror_tests {
         );
     }
 
-    /// The first-run gate in setup reads the same store key the frontend
-    /// writes after the welcome flow; a rename on either side would make the
-    /// settings window pop up on every launch.
+    /// The names both sides must spell alike, with nothing but a silent
+    /// fallback when they do not: a store key Rust reads and the frontend
+    /// writes, an event one side emits and the other listens for. A rename on
+    /// either side would leave the popup in the default corner, the tray in
+    /// the OS language, a visible popup at its old width, a settings window
+    /// that never loads its catalog — or pops up on every launch, the welcome
+    /// flag never found.
     #[test]
-    fn welcome_seen_key_matches_the_frontend() {
+    fn shared_names_match_the_frontend() {
+        const SETTINGS_TSX: &str = include_str!("../../src/components/settings.tsx");
+        const EVENTS_TS: &str = include_str!("../../src/lib/use-tauri-event.ts");
+        use crate::tray::LOCALE_KEY;
+        use crate::windows::{
+            POPUP_CORNER_KEY, TEXT_SIZE_CHANGED, TEXT_SIZE_KEY, WINDOW_CLOSED, WINDOW_OPENED,
+        };
+
+        for (source, file, name) in [
+            (SETTINGS_TS, "settings.ts", WELCOME_SEEN_KEY),
+            (SETTINGS_TS, "settings.ts", POPUP_CORNER_KEY),
+            (SETTINGS_TS, "settings.ts", TEXT_SIZE_KEY),
+            (SETTINGS_TS, "settings.ts", LOCALE_KEY),
+            (SETTINGS_TSX, "settings.tsx", TEXT_SIZE_CHANGED),
+            (SETTINGS_TSX, "settings.tsx", LOCALE_CHANGED),
+            (EVENTS_TS, "use-tauri-event.ts", WINDOW_OPENED),
+            (EVENTS_TS, "use-tauri-event.ts", WINDOW_CLOSED),
+        ] {
+            assert!(
+                source.contains(&format!("\"{name}\"")),
+                "{file} must spell \"{name}\" as Rust does"
+            );
+        }
+    }
+
+    /// The frontend's locale codes, as messages/index.ts lists them.
+    fn frontend_locales() -> Vec<&'static str> {
+        const MESSAGES_TS: &str = include_str!("../../src/lib/messages/index.ts");
+        let codes: Vec<&str> = MESSAGES_TS
+            .lines()
+            .filter_map(|line| line.trim().strip_prefix("{ value: \""))
+            .filter_map(|rest| rest.split('"').next())
+            .collect();
         assert!(
-            SETTINGS_TS.contains("\"welcomeSeen\""),
-            "settings.ts must persist the welcome flag under the key setup reads"
+            codes.contains(&"en") && codes.contains(&"zh-Hant"),
+            "messages/index.ts lists its locales as `{{ value: \"…\", … }}`, got {codes:?}"
         );
+        codes
+    }
+
+    /// A Chinese tag that names no script goes Traditional by the same
+    /// subtags on both sides, or the tray and the windows would disagree
+    /// about which Chinese a region reads.
+    #[test]
+    fn chinese_script_hints_match_the_frontend() {
+        const LOCALE_TAG_TS: &str = include_str!("../../src/lib/locale-tag.ts");
+        let hints = format!("{:?}", crate::tray::TRADITIONAL_HINTS);
+        assert!(
+            LOCALE_TAG_TS.contains(&hints),
+            "locale-tag.ts must list the Traditional hints as tray.rs does ({hints})"
+        );
+    }
+
+    /// Every language the windows can speak has its native menus: each of the
+    /// frontend's locale codes resolves to a `Locale` of its own. A language
+    /// added there and not in tray.rs would fall to English — and collide
+    /// with it here.
+    #[test]
+    fn every_frontend_locale_has_native_menus() {
+        let mut seen = Vec::new();
+        for code in frontend_locales() {
+            let locale = locale_from_tag(code);
+            assert!(
+                !seen.contains(&locale),
+                "tray.rs has no Locale of its own for the frontend's '{code}'"
+            );
+            seen.push(locale);
+        }
     }
 
     /// The popup's home width is POPUP_HOME_VIEWPORT times the zoom the
@@ -575,10 +627,10 @@ mod ts_mirror_tests {
             TEXT_SIZE_TS.contains(&ladder),
             "text-size.ts must apply the zoom ladder windows.rs sizes the popup with ({ladder})"
         );
-        for key in ["\"textSize\"", "\"small\"", "\"large\""] {
+        for value in ["\"small\"", "\"large\""] {
             assert!(
-                SETTINGS_TS.contains(key),
-                "settings.ts must carry the text-size key/value {key} windows.rs matches on"
+                SETTINGS_TS.contains(value),
+                "settings.ts must carry the text size {value} windows.rs matches on"
             );
         }
     }

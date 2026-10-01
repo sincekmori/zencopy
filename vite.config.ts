@@ -26,7 +26,7 @@ function devFavicon(): Plugin {
 }
 
 // @tauri-apps/cli launches Vite, so the config is tuned for the Tauri dev flow:
-// a fixed port, no screen clearing, and ignoring the Rust source tree.
+// a fixed port, no screen clearing, and ignoring what the Rust build writes.
 export default defineConfig({
   // React Compiler runs as a Babel preset over the same files @vitejs/plugin-react
   // handles; it auto-memoizes components and hooks at build time so we don't need
@@ -42,7 +42,11 @@ export default defineConfig({
     port: 1420,
     strictPort: true,
     watch: {
-      ignored: ["**/src-tauri/**"],
+      // The Rust build's output only (a churn of thousands of files). The
+      // rest of src-tauri is watched: the screenshot harness imports the
+      // prompts, the rules and prompts.rs as text, and an edit to one must
+      // reach a running dev server like any other.
+      ignored: ["**/src-tauri/target/**", "**/src-tauri/gen/**"],
     },
   },
 });

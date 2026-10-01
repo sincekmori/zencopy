@@ -1,3 +1,4 @@
+import { isolate } from "./isolate.ts";
 import type { Messages } from "./types.ts";
 
 export const ar: Messages = {
@@ -104,12 +105,11 @@ export const ar: Messages = {
     copied: "نُسخ",
     close: "إغلاق",
     openSettings: "فتح الإعدادات",
-    updateHint: (version) => `يتوفر تحديث (v${version})`,
+    updateHint: (version) => `يتوفر تحديث (${isolate(`v${version}`)})`,
   },
   source: {
     inputLabel: "المحتوى المنسوخ",
     richText: "نص منسّق",
-    emptyClipboard: "الحافظة فارغة.",
     imageAlt: "الصورة المنسوخة",
     cannotPreview: "(لا معاينة)",
   },
@@ -119,8 +119,8 @@ export const ar: Messages = {
   },
   about: {
     tagline: "ذكاء اصطناعي فوري. على شاشتك مباشرة.",
-    update: (version) => `التحديث إلى الإصدار v${version} وإعادة تشغيل التطبيق`,
-    updateRestart: (version) => `أعد تشغيل التطبيق للتحديث إلى الإصدار v${version}`,
+    update: (version) => `التحديث إلى الإصدار ${isolate(`v${version}`)} وإعادة تشغيل التطبيق`,
+    updateRestart: (version) => `أعد تشغيل التطبيق للتحديث إلى الإصدار ${isolate(`v${version}`)}`,
     updating: "جارٍ التحديث…",
     checkUpdates: "التحقق من التحديثات",
     checkingUpdates: "جارٍ التحقق من التحديثات…",
@@ -159,7 +159,7 @@ export const ar: Messages = {
     hint: (keys) =>
       `ما يمكن لـ ${keys} فعله. يمكن التبديل أيضًا من تسمية النتيجة في النافذة المنبثقة.`,
     add: "موجّه جديد",
-    export: "تصدير (.md)",
+    export: `تصدير (${isolate(".md")})`,
     import: "استيراد",
     importHint: "الصق Markdown الخاص بموجّه مُشارك، أو اختر الملف.",
     importFromFile: "اختيار ملف",
@@ -184,7 +184,7 @@ export const ar: Messages = {
     importInvalidId: (id) => `قيمة id غير صالحة للموجّه: '${id}'.`,
     importBuiltinId: (id) => `'${id}' هو id لموجّه مضمّن — غيّر الـ id في الملف ثم أعد المحاولة.`,
     importReservedId: (id) =>
-      `'${id}' يبدأ بـ 'zencopy-' — بادئة الـ id هذه محجوزة للموجّهات المثبتة مسبقًا.`,
+      `'${id}' يبدأ بـ '${isolate("zencopy-")}' — بادئة الـ id هذه محجوزة للموجّهات المثبتة مسبقًا.`,
     importIdExists: (id) => `يوجد بالفعل موجّه بالـ id '${id}' — احذفه أولًا أو غيّر الـ id في الملف.`,
     importTooLarge: "الملف أكبر من أن يكون موجّهًا.",
     labelExists: (label) => `يوجد بالفعل موجّه باسم '${label}' — اختر اسمًا آخر.`,

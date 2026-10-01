@@ -28,9 +28,8 @@
 // string the demos type.
 //
 // Prerequisites: `bunx playwright install webkit`, ffmpeg 9 on PATH, and for
-// --record GEMINI_API_KEY in the environment (`source ~/.zshrc`). A dev
-// server on :1420 is reused when already running, started (and stopped)
-// otherwise.
+// --record GEMINI_API_KEY in the environment (`source ~/.zshrc`). The run
+// serves the harness itself (its own dev server, for as long as it runs).
 /* oxlint-disable no-await-in-loop, no-underscore-dangle -- deliberately
    sequential: frames are captured one after another, steps wait on the popup,
    and locales share the one dev server; the dunder name is Tauri's IPC
@@ -53,11 +52,11 @@ import { CAPTIONS, KEYS, type PageCaptions } from "./demo-video/captions.ts";
 import { MAILS, type MailLang, mailLangFor, paragraphsOf } from "./demo-video/sample-mail.ts";
 import { fillLanguage, languageForms } from "../src/lib/language-forms.ts";
 import {
-  ensureDevServer,
   harnessUrl,
   localesMatching,
   ROOT,
   seedHarness,
+  serveHarness,
   takeFlag,
   takeSwitch,
 } from "./harness-driver.ts";
@@ -498,27 +497,41 @@ async function runSession(job: {
   const frames: Frame[] = [];
   const capturing = { on: false };
   let poller: Promise<void> | undefined;
+  // A frame that could not be taken ends the session. The steps do not wait
+  // on the poller, and left to finish they would hand over demos cut from
+  // the last frame it wrote: a still picture, saved as a video.
+  let stalled: Error | undefined;
+  const framesFlowing = (): void => {
+    if (stalled !== undefined) {
+      throw stalled;
+    }
+  };
   const poll = async (): Promise<void> => {
     let previous: { png: Buffer; file: string } | undefined;
     let written = 0;
-    while (capturing.on) {
-      const at = performance.now();
-      const png = await page.screenshot({
-        type: "png",
-        omitBackground: true,
-        caret: "initial",
-        animations: "allow",
-      });
-      if (previous === undefined || !png.equals(previous.png)) {
-        previous = { png, file: frameName(written) };
-        written += 1;
-        writeFileSync(join(workDir, previous.file), png);
+    try {
+      while (capturing.on) {
+        const at = performance.now();
+        const png = await page.screenshot({
+          type: "png",
+          omitBackground: true,
+          caret: "initial",
+          animations: "allow",
+        });
+        if (previous === undefined || !png.equals(previous.png)) {
+          previous = { png, file: frameName(written) };
+          written += 1;
+          writeFileSync(join(workDir, previous.file), png);
+        }
+        frames.push({ at: (at - (started ?? at)) / 1000, file: previous.file });
+        const spent = performance.now() - at;
+        if (spent < 1000 / FPS) {
+          await sleep(1000 / FPS - spent);
+        }
       }
-      frames.push({ at: (at - (started ?? at)) / 1000, file: previous.file });
-      const spent = performance.now() - at;
-      if (spent < 1000 / FPS) {
-        await sleep(1000 / FPS - spent);
-      }
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      stalled = new Error(`the frame capture stopped: ${reason}`, { cause: error });
     }
   };
   // The popup's state, read off its headline (`data-run-state`, see
@@ -548,6 +561,7 @@ async function runSession(job: {
     for (const demo of DEMOS) {
       const start = since();
       for (const step of demo.steps) {
+        framesFlowing();
         timeline.push({ at: since(), demo: demo.name, step: Object.values(step).join(" ") });
         switch (step.kind) {
           case "capture": {
@@ -603,10 +617,9 @@ async function runSession(job: {
     // flight completes (the context is still open here), and nothing is
     // left to reject later.
     capturing.on = false;
-    await poller?.catch((error: unknown) => {
-      errors.push(`poller: ${error instanceof Error ? error.message : String(error)}`);
-    });
+    await poller;
   }
+  framesFlowing();
   const harness = await page.evaluate(
     () =>
       (globalThis as unknown as { __zencopyHarness: Partial<Pick<Session, "exchanges" | "usage">> })
@@ -1046,14 +1059,16 @@ async function captureKeys(job: { page: Page; variant: Variant; dir: string }): 
 
 /** The caption overlays as filter steps, from the composited stream `[m]`
  *  to `[cap]`: inputs 2 onward (after the two concat lists), one per beat,
- *  each shown from its moment to the next one's (the last to the end),
- *  centered, CAPTION.bottom above the frame's bottom edge — the keys'
- *  frames first made a stream that starts at their moment, as the popup's. */
+ *  each shown from its moment up to the next one's, the frame at that moment
+ *  being the next line's alone (`between` would count it for both, and the
+ *  two lines would show over each other for a frame) — the last to the end —
+ *  centered, CAPTION.bottom above the frame's bottom edge; the keys' frames
+ *  first made a stream that starts at their moment, as the popup's. */
 function captionSteps(cues: Cue[]): string[] {
   const bottom = Math.round(CAPTION.bottom * VIDEO_SCALE);
   return cues.flatMap((cue, index) => {
     const next = cues[index + 1];
-    const enable = next === undefined ? `gte(t,${cue.at})` : `between(t,${cue.at},${next.at})`;
+    const enable = next === undefined ? `gte(t,${cue.at})` : `gte(t,${cue.at})*lt(t,${next.at})`;
     const from = index === 0 ? "m" : `m${index}`;
     const to = next === undefined ? "cap" : `m${index + 1}`;
     const input = 2 + index;
@@ -1292,7 +1307,8 @@ async function generateDemo(job: {
 
 /** One locale: the session, recorded or replayed, cut into its videos.
  *  Throws on any failure — the work directory stays, its report.json naming
- *  what stopped it. */
+ *  what stopped it, from the first thing that can (a recording that does not
+ *  parse, a mail that is no longer the recorded one). */
 async function generateOne(
   browser: Browser,
   pages: ReadonlyMap<MailLang, MailFrames>,
@@ -1302,12 +1318,43 @@ async function generateOne(
   const workDir = join(workRoot, folder);
   rmSync(workDir, { recursive: true, force: true });
   mkdirSync(workDir, { recursive: true });
+  const mode = recordMode ? "record" : "replay";
+  const errors: string[] = [];
+  try {
+    const report = await generateVideos({ browser, pages, locale, workDir, errors });
+    writeFileSync(
+      join(workDir, "report.json"),
+      `${JSON.stringify({ locale: folder, mode, ...report }, undefined, 2)}\n`,
+    );
+    if (!keepWork) {
+      rmSync(workDir, { recursive: true, force: true });
+    }
+  } catch (error) {
+    // The failed locale's work stays; the report says what stopped it.
+    writeFileSync(
+      join(workDir, "report.json"),
+      `${JSON.stringify({ locale: folder, mode, failed: error instanceof Error ? error.message : String(error), errors }, undefined, 2)}\n`,
+    );
+    throw error;
+  }
+}
+
+/** The locale's session and its videos, in `workDir`; what the run's report
+ *  says of it. The page's errors collect into `errors` as they happen. */
+async function generateVideos(job: {
+  browser: Browser;
+  pages: ReadonlyMap<MailLang, MailFrames>;
+  locale: string;
+  workDir: string;
+  errors: string[];
+}): Promise<Record<string, unknown>> {
+  const { browser, pages, locale, workDir, errors } = job;
+  const folder = locale.toLowerCase();
   const outDir = join(outRoot, folder, "demo");
   mkdirSync(outDir, { recursive: true });
   const recording = recordMode
     ? undefined
     : (JSON.parse(readFileSync(recordingFile(locale), "utf8")) as Recording);
-  const mode = recording === undefined ? "record" : "replay";
   const sample = mailIn(mailLangFor(locale));
   const mail = pages.get(sample.lang);
   if (mail === undefined) {
@@ -1342,14 +1389,13 @@ async function generateOne(
     deviceScaleFactor: VIDEO_SCALE,
     colorScheme: "light",
   });
-  // The catalog rides the harness's global, never a URL: it holds the key.
-  await seedHarness(context, {
-    catalog,
-    ...(recording === undefined ? {} : { replay: replayStreams(recording) }),
-  });
   const startedAt = performance.now();
-  const errors: string[] = [];
   try {
+    // The catalog rides the harness's global, never a URL: it holds the key.
+    await seedHarness(context, {
+      catalog,
+      ...(recording === undefined ? {} : { replay: replayStreams(recording) }),
+    });
     const page = await context.newPage();
     await openPopup(page, locale, errors);
     const live = await buildCapture(page, sample);
@@ -1362,16 +1408,13 @@ async function generateOne(
       workDir,
       errors,
     });
-    // The demos' encodes are independent: side by side.
-    await Promise.all(
-      session.demos.map((demo) =>
-        generateDemo({ browser, mail, session, demo, folder, workDir, outDir }),
-      ),
-    );
     // The recording, or how far the replayed session strayed from it: a
     // request that no longer matches means the prompt or its context changed
     // since — the reply shown is still the recorded one — and fewer calls
-    // than recorded means the demos themselves changed.
+    // than recorded means the demos themselves changed. The recording is
+    // kept before anything is cut from the session: the model's answers are
+    // the one thing a failed encode could not make again, and a video on the
+    // disk must have the recording it replays from.
     let drift: number[] = [];
     if (recording === undefined) {
       const { turns, exchanges } = recordedCalls(session);
@@ -1405,25 +1448,18 @@ async function generateOne(
         );
       }
     }
-    writeFileSync(
-      join(workDir, "report.json"),
-      `${JSON.stringify({ locale: folder, mode, ...session, frames: session.frames.length, exchanges: undefined, drift }, undefined, 2)}\n`,
+    // The demos' encodes are independent: side by side.
+    await Promise.all(
+      session.demos.map((demo) =>
+        generateDemo({ browser, mail, session, demo, folder, workDir, outDir }),
+      ),
     );
     const seconds = ((performance.now() - startedAt) / 1000).toFixed(1);
     console.log(`   ${folder}: ${session.frames.length} frames, ${seconds}s`);
     if (session.errors.length > 0) {
       console.log(`   page errors: ${session.errors.join(" | ")}`);
     }
-    if (!keepWork) {
-      rmSync(workDir, { recursive: true, force: true });
-    }
-  } catch (error) {
-    // The failed locale's work stays; the report says what stopped it.
-    writeFileSync(
-      join(workDir, "report.json"),
-      `${JSON.stringify({ locale: folder, mode, failed: error instanceof Error ? error.message : String(error), errors }, undefined, 2)}\n`,
-    );
-    throw error;
+    return { ...session, frames: session.frames.length, exchanges: undefined, drift };
   } finally {
     await context.close();
   }
@@ -1443,7 +1479,7 @@ async function generateAll(
   }
 }
 
-const stopDevServer = await ensureDevServer();
+const stopServing = await serveHarness();
 try {
   const browser = await webkit.launch();
   // The mails the run's locales read, each as a page once.
@@ -1463,7 +1499,7 @@ try {
     }
   }
 } finally {
-  stopDevServer();
+  await stopServing();
 }
 if (failures.length > 0) {
   console.error(`\n${failures.length} failed:\n${failures.join("\n")}`);

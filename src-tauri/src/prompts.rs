@@ -4,7 +4,9 @@
 use crate::OrLog;
 use crate::config::config_base;
 use crate::rules::{edit_rules_json, purge_prompt_from_rules_object};
+use std::path::{Path, PathBuf};
 use tauri::Manager;
+
 /// A parsed prompt: frontmatter metadata + the Markdown body (the prompt).
 #[derive(Clone)]
 pub(crate) struct Prompt {
@@ -31,6 +33,9 @@ pub(crate) struct PromptMeta {
 
 /// Parse one prompt file: YAML frontmatter (between `---` lines) + Markdown body.
 /// `default_id` (e.g. the filename stem) is used when frontmatter omits `id`.
+/// The closing `---` starts its line: a multi-line value in the frontmatter is
+/// indented, so a `---` its author wrote there (a rule between two parts of
+/// the instructions) is content, not the end.
 pub(crate) fn parse_prompt(raw: &str, default_id: &str) -> Option<Prompt> {
     let mut lines = raw
         .trim_start_matches(['\u{feff}', '\n', '\r', ' '])
@@ -41,7 +46,7 @@ pub(crate) fn parse_prompt(raw: &str, default_id: &str) -> Option<Prompt> {
     let mut frontmatter = String::new();
     let mut closed = false;
     for line in lines.by_ref() {
-        if line.trim() == "---" {
+        if line.trim_end() == "---" {
             closed = true;
             break;
         }
@@ -88,40 +93,94 @@ pub(crate) fn is_builtin_prompt(id: &str) -> bool {
     DEFAULT_PROMPTS.iter().any(|(builtin, _)| *builtin == id)
 }
 
-/// Prompts defined by local files in the config dir — the user's additions and
-/// overrides. Invalid files are logged and skipped.
-pub(crate) fn load_local_prompts(handle: &tauri::AppHandle) -> Vec<Prompt> {
-    let mut prompts = Vec::new();
-    if let Some(base) = config_base(handle)
-        && let Ok(entries) = std::fs::read_dir(base.join("prompts"))
-    {
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.extension().and_then(|ext| ext.to_str()) != Some("md") {
-                continue;
-            }
-            let Some(stem) = path.file_stem().and_then(|s| s.to_str()) else {
-                continue;
-            };
-            // Falling back to the built-ins keeps the app working, but the why
-            // must survive somewhere — a broken prompt "not doing anything" is
-            // undebuggable without it.
-            match std::fs::read_to_string(&path) {
-                Ok(raw) => match parse_prompt(&raw, stem) {
-                    Some(prompt) => prompts.push(prompt),
-                    None => log::warn!(
-                        "prompt {}: missing or malformed frontmatter, file ignored",
-                        path.display()
-                    ),
-                },
-                Err(error) => log::warn!(
+/// The `prompts/` folder of the config dir, where the user's prompts live.
+fn prompts_dir(handle: &tauri::AppHandle) -> Result<PathBuf, String> {
+    Ok(config_base(handle)
+        .ok_or_else(|| "config dir unavailable".to_string())?
+        .join("prompts"))
+}
+
+/// Where a prompt created under `id` is written: a file named after it.
+fn new_prompt_path(handle: &tauri::AppHandle, id: &str) -> Result<PathBuf, String> {
+    Ok(prompts_dir(handle)?.join(format!("{}.md", checked_prompt_id(id)?)))
+}
+
+/// A user's prompt and the file that defines it. The file is not always
+/// `<id>.md`: a hand-written one may be named anything and state its id in
+/// the frontmatter, so everything that touches a prompt's file finds it here
+/// rather than guessing its name.
+pub(crate) struct LocalPrompt {
+    path: PathBuf,
+    prompt: Prompt,
+}
+
+/// Prompts defined by local files in the config dir — the user's additions.
+/// Files are read in name order, so when two define the same id it is always
+/// the same one that counts. Invalid files are logged and skipped.
+pub(crate) fn load_local_prompts(handle: &tauri::AppHandle) -> Vec<LocalPrompt> {
+    // No folder yet is the normal state before the first custom prompt.
+    let Some(entries) = prompts_dir(handle)
+        .ok()
+        .and_then(|dir| std::fs::read_dir(dir).ok())
+    else {
+        return Vec::new();
+    };
+    let mut paths: Vec<PathBuf> = entries
+        .flatten()
+        .map(|entry| entry.path())
+        .filter(|path| path.extension().and_then(|ext| ext.to_str()) == Some("md"))
+        .collect();
+    paths.sort();
+
+    let mut prompts: Vec<LocalPrompt> = Vec::new();
+    for path in paths {
+        let Some(stem) = path.file_stem().and_then(|s| s.to_str()) else {
+            continue;
+        };
+        // Falling back to the built-ins keeps the app working, but the why
+        // must survive somewhere — a broken prompt "not doing anything" is
+        // undebuggable without it.
+        let prompt = match std::fs::read_to_string(&path) {
+            Ok(raw) => parse_prompt(&raw, stem),
+            Err(error) => {
+                log::warn!(
                     "prompt {}: unreadable ({error}), file ignored",
                     path.display()
-                ),
+                );
+                continue;
             }
+        };
+        let Some(prompt) = prompt else {
+            log::warn!(
+                "prompt {}: missing or malformed frontmatter, file ignored",
+                path.display()
+            );
+            continue;
+        };
+        if let Err(reason) = checked_prompt_id(&prompt.id) {
+            log::warn!("prompt {}: {reason}, file ignored", path.display());
+            continue;
         }
+        if let Some(first) = prompts.iter().find(|local| local.prompt.id == prompt.id) {
+            log::warn!(
+                "prompt {}: its id '{}' is already defined by {}, file ignored",
+                path.display(),
+                prompt.id,
+                first.path.display()
+            );
+            continue;
+        }
+        prompts.push(LocalPrompt { path, prompt });
     }
     prompts
+}
+
+/// The file that defines the user's prompt `id`, if there is one.
+fn local_prompt_path(handle: &tauri::AppHandle, id: &str) -> Option<PathBuf> {
+    load_local_prompts(handle)
+        .into_iter()
+        .find(|local| local.prompt.id == id)
+        .map(|local| local.path)
 }
 
 /// The prompt list: immutable built-ins plus local files in the config dir.
@@ -141,7 +200,7 @@ pub(crate) fn load_prompts(handle: &tauri::AppHandle) -> Vec<Prompt> {
         .iter()
         .map(|prompt| (prompt.id.clone(), prompt.clone()))
         .collect();
-    for prompt in load_local_prompts(handle) {
+    for LocalPrompt { prompt, .. } in load_local_prompts(handle) {
         if is_builtin_prompt(&prompt.id) {
             log::warn!(
                 "prompt '{}': shadows a built-in and is ignored (built-ins are immutable)",
@@ -207,9 +266,19 @@ pub(crate) fn list_prompts_ui(app: tauri::AppHandle) -> Vec<PromptInfo> {
     infos
 }
 
-/// Guard for ids used as file names: nothing that can escape `prompts/`.
+/// Whether a character cannot go into a file name on some system we run on:
+/// path separators, control characters, and the rest of what Windows refuses.
+fn hostile_in_file_names(c: char) -> bool {
+    c.is_control() || r#"/\:*?"<>|"#.contains(c)
+}
+
+/// Guard for ids, which double as file names: nothing that can escape
+/// `prompts/`, and nothing a file system refuses. Windows takes none of
+/// `< > : " | ? *` — a `:` there does not even fail, it writes into another
+/// file's alternate data stream — and a prompt is shared across systems, so
+/// its id must hold on all of them.
 pub(crate) fn checked_prompt_id(id: &str) -> Result<&str, String> {
-    if id.is_empty() || id.contains(['/', '\\']) || id.contains("..") {
+    if id.is_empty() || id.contains("..") || id.contains(hostile_in_file_names) {
         return Err(format!("invalid prompt id: {id:?}"));
     }
     Ok(id)
@@ -238,6 +307,8 @@ pub(crate) fn label_taken(app: &tauri::AppHandle, label: &str, own_id: Option<&s
 /// accepts — hand-written files can carry more).
 #[derive(serde::Serialize)]
 pub(crate) struct PromptMetaFile<'a> {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    id: Option<&'a str>,
     label: &'a str,
     #[serde(skip_serializing_if = "Option::is_none")]
     role: Option<&'a str>,
@@ -246,14 +317,17 @@ pub(crate) struct PromptMetaFile<'a> {
 }
 
 /// Serialize an prompt's fields into the .md file format (frontmatter + body)
-/// — the one shape `save_prompt` writes and `import_prompt` falls back to.
+/// — the shape `save_prompt` writes. `id` is stated only for a file not named
+/// after it; a file's name is its id otherwise.
 pub(crate) fn serialize_prompt_md(
+    id: Option<&str>,
     label: &str,
     role: Option<&str>,
     instructions: &str,
     body: &str,
 ) -> Result<String, String> {
     let meta = PromptMetaFile {
+        id,
         label,
         role,
         instructions,
@@ -282,10 +356,7 @@ pub(crate) fn save_prompt(
         Some(id) if !id.is_empty() => {
             let id = checked_prompt_id(id).map_err(|_| PromptError::with("invalid-id", id))?;
             if is_builtin_prompt(id) {
-                return Err(PromptError::with(
-                    "failed",
-                    "built-in prompts cannot be edited",
-                ));
+                return Err(PromptError::failed("built-in prompts cannot be edited"));
             }
             if id.starts_with(RESERVED_ID_PREFIX) {
                 return Err(PromptError::with("reserved-id", id));
@@ -298,46 +369,50 @@ pub(crate) fn save_prompt(
         return Err(PromptError::with("label-exists", label));
     }
     let role = role.as_deref().map(str::trim).filter(|r| !r.is_empty());
-    let content = serialize_prompt_md(label, role, instructions.trim(), prompt.trim())
-        .map_err(|reason| PromptError::with("failed", reason))?;
-    write_prompt_md(&app, &id, &content).map_err(|reason| PromptError::with("failed", reason))?;
+    // An existing prompt is saved back into its own file, whatever that is
+    // called — and a file not named after its id has to state the id, or the
+    // save would quietly rename the prompt to the file's name.
+    let (path, stated_id) = match local_prompt_path(&app, &id) {
+        Some(path) => {
+            let named_after_id = path.file_stem().and_then(|stem| stem.to_str()) == Some(&id);
+            (path, (!named_after_id).then_some(id.as_str()))
+        }
+        None => (
+            new_prompt_path(&app, &id).map_err(PromptError::failed)?,
+            None,
+        ),
+    };
+    let content = serialize_prompt_md(stated_id, label, role, instructions.trim(), prompt.trim())
+        .map_err(PromptError::failed)?;
+    write_prompt_file(&path, &content).map_err(PromptError::failed)?;
     Ok(id)
 }
 
-/// Write an prompt's .md file into the config dir's `prompts/`.
-pub(crate) fn write_prompt_md(
-    app: &tauri::AppHandle,
-    id: &str,
-    content: &str,
-) -> Result<(), String> {
-    let dir = config_base(app)
-        .ok_or_else(|| "config dir unavailable".to_string())?
-        .join("prompts");
-    std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
-    std::fs::write(dir.join(format!("{id}.md")), content).map_err(|e| e.to_string())
+/// Write a prompt's .md file, creating `prompts/` on the way.
+fn write_prompt_file(path: &Path, content: &str) -> Result<(), String> {
+    if let Some(dir) = path.parent() {
+        std::fs::create_dir_all(dir).map_err(|e| e.to_string())?;
+    }
+    std::fs::write(path, content).map_err(|e| e.to_string())
 }
 
 /// The prompt's .md source: built-ins come from the embedded copies, custom
 /// prompts from their file. The text IS the prompt — importing it into
 /// another ZenCopy (paste or URL) reinstalls it.
 pub(crate) fn prompt_source(app: &tauri::AppHandle, id: &str) -> Result<String, String> {
-    let id = checked_prompt_id(id)?;
     if let Some((_, raw)) = DEFAULT_PROMPTS.iter().find(|(builtin, _)| *builtin == id) {
         return Ok((*raw).to_string());
     }
-    let path = config_base(app)
-        .ok_or_else(|| "config dir unavailable".to_string())?
-        .join("prompts")
-        .join(format!("{id}.md"));
+    let path = local_prompt_path(app, id).ok_or_else(|| format!("no prompt {id:?}"))?;
     std::fs::read_to_string(&path).map_err(|e| e.to_string())
 }
 
 /// Export an prompt as a .md file into the user's Downloads folder and reveal
 /// it in the file manager — a download, browser-style: no dialog to dismiss,
 /// and the revealed file is its own confirmation. The file is named after the
-/// label (ids are opaque uuids), with path-hostile characters flattened; name
-/// collisions get a browser-style " (n)" suffix rather than overwriting.
-/// Returns the path.
+/// label (ids are opaque uuids), with the characters a file name cannot hold
+/// on some system flattened; name collisions get a browser-style " (n)"
+/// suffix rather than overwriting. Returns the path.
 #[tauri::command]
 pub(crate) fn export_prompt_file(app: tauri::AppHandle, id: String) -> Result<String, String> {
     let text = prompt_source(&app, &id)?;
@@ -347,13 +422,7 @@ pub(crate) fn export_prompt_file(app: tauri::AppHandle, id: String) -> Result<St
         .unwrap_or(&id)
         .trim()
         .chars()
-        .map(|c| {
-            if c == '/' || c == '\\' || c == ':' || c.is_control() {
-                '-'
-            } else {
-                c
-            }
-        })
+        .map(|c| if hostile_in_file_names(c) { '-' } else { c })
         .collect();
     let stem = if stem.is_empty() { id.clone() } else { stem };
     let dir = app.path().download_dir().map_err(|e| e.to_string())?;
@@ -389,6 +458,10 @@ impl PromptError {
             detail: Some(detail.into()),
         }
     }
+    /// "failed": nothing the user did wrong, with the raw reason.
+    fn failed(reason: impl ToString) -> Self {
+        Self::with("failed", reason.to_string())
+    }
 }
 
 /// Install a shared prompt from its raw .md text (the exact file format).
@@ -416,11 +489,10 @@ pub(crate) fn import_prompt(app: tauri::AppHandle, text: String) -> Result<Strin
     if id.starts_with(RESERVED_ID_PREFIX) {
         return Err(PromptError::with("reserved-id", id));
     }
-    let existing = config_base(&app)
-        .ok_or_else(|| PromptError::with("failed", "config dir unavailable"))?
-        .join("prompts")
-        .join(format!("{id}.md"));
-    if existing.exists() {
+    // Taken by a prompt under that id, or by a file under that name (which
+    // may define another id, and must not be written over either).
+    let path = new_prompt_path(&app, &id).map_err(PromptError::failed)?;
+    if path.exists() || local_prompt_path(&app, &id).is_some() {
         return Err(PromptError::with("id-exists", id));
     }
     if label_taken(&app, &prompt.label, None) {
@@ -428,7 +500,7 @@ pub(crate) fn import_prompt(app: tauri::AppHandle, text: String) -> Result<Strin
     }
     // Verbatim: the shared text may carry more than save_prompt writes
     // (comments, future fields) — keep every byte the author shared.
-    write_prompt_md(&app, &id, &text).map_err(|reason| PromptError::with("failed", reason))?;
+    write_prompt_file(&path, &text).map_err(PromptError::failed)?;
     log::info!("prompt '{id}' imported");
     Ok(id)
 }
@@ -456,17 +528,12 @@ pub(crate) fn import_prompt_from_file(
     else {
         return Ok(None);
     };
-    let path = picked
-        .into_path()
-        .map_err(|e| PromptError::with("failed", e.to_string()))?;
-    let size = std::fs::metadata(&path)
-        .map_err(|e| PromptError::with("failed", e.to_string()))?
-        .len();
+    let path = picked.into_path().map_err(PromptError::failed)?;
+    let size = std::fs::metadata(&path).map_err(PromptError::failed)?.len();
     if size > MAX_PROMPT_TEXT_BYTES {
         return Err(PromptError::code("file-too-large"));
     }
-    let text =
-        std::fs::read_to_string(&path).map_err(|e| PromptError::with("failed", e.to_string()))?;
+    let text = std::fs::read_to_string(&path).map_err(PromptError::failed)?;
     import_prompt(app, text).map(Some)
 }
 
@@ -475,20 +542,19 @@ pub(crate) fn import_prompt_from_file(
 /// built-in default), never silently dead.
 #[tauri::command]
 pub(crate) fn delete_prompt(app: tauri::AppHandle, id: String) -> Result<(), String> {
-    let id = checked_prompt_id(&id)?;
-    if is_builtin_prompt(id) {
+    if is_builtin_prompt(&id) {
         return Err("built-in prompts cannot be deleted".to_string());
     }
     let base = config_base(&app).ok_or_else(|| "config dir unavailable".to_string())?;
-    std::fs::remove_file(base.join("prompts").join(format!("{id}.md")))
-        .map_err(|e| e.to_string())?;
+    let path = local_prompt_path(&app, &id).ok_or_else(|| format!("no prompt {id:?}"))?;
+    std::fs::remove_file(path).map_err(|e| e.to_string())?;
     // No rules.json means only the embedded defaults are in play, and those
     // never reference a custom prompt — nothing to heal (and nothing to seed).
     if base.join("rules.json").exists() {
         // The prompt is already gone; a failed cleanup degrades to the old
         // dangling-reference behavior (visible in the settings UI), so log
         // rather than fail the deletion.
-        edit_rules_json(&app, |object| purge_prompt_from_rules_object(object, id))
+        edit_rules_json(&app, |object| purge_prompt_from_rules_object(object, &id))
             .or_log("heal rules after an prompt deletion");
     }
     Ok(())
@@ -554,6 +620,58 @@ mod tests {
             "rules running the deleted prompt are dropped"
         );
         assert_eq!(rules[0]["prompt"], "zencopy-summarize");
+    }
+
+    /// What the editor saves must read back as it was written — including
+    /// instructions with a rule (`---`) between their parts, which the
+    /// frontmatter holds as an indented block.
+    #[test]
+    fn a_saved_prompt_reads_back_as_written() {
+        for instructions in [
+            "Rules:\n---\nDo X",
+            "---\nRules\n  ---\nDo X",
+            "Rules:\n\n---\n\nDo X\n---",
+            "One line",
+            "",
+        ] {
+            let file = serialize_prompt_md(None, "Test", Some("smart"), instructions, "{{ text }}")
+                .expect("serializes");
+            let prompt = parse_prompt(&file, "test").expect("parses");
+            assert_eq!(prompt.instructions, instructions, "in:\n{file}");
+            assert_eq!(prompt.body, "{{ text }}", "in:\n{file}");
+            assert_eq!(prompt.role.as_deref(), Some("smart"));
+            assert_eq!(prompt.id, "test");
+        }
+        // A file not named after its id states it, and the id survives.
+        let file = serialize_prompt_md(Some("daily-standup"), "Daily", None, "", "Body")
+            .expect("serializes");
+        let prompt = parse_prompt(&file, "standup").expect("parses");
+        assert_eq!(prompt.id, "daily-standup");
+        // A hand-written terminator may carry trailing spaces or a CR.
+        let prompt =
+            parse_prompt("---\r\nlabel: Hand\r\n---  \r\n\r\nBody\r\n", "hand").expect("parses");
+        assert_eq!(
+            (prompt.label.as_str(), prompt.body.as_str()),
+            ("Hand", "Body")
+        );
+    }
+
+    /// An id doubles as a file name on every system the prompt may travel to.
+    #[test]
+    fn ids_must_work_as_file_names_everywhere() {
+        for id in [
+            "three-lines",
+            "要約",
+            "a.b",
+            "550e8400-e29b-41d4-a716-446655440000",
+        ] {
+            assert!(checked_prompt_id(id).is_ok(), "{id:?} is a fine id");
+        }
+        for id in [
+            "", "a/b", "a\\b", "..", "a:b", "what?", "a*b", "a|b", "<a>", "a\"b", "a\nb",
+        ] {
+            assert!(checked_prompt_id(id).is_err(), "{id:?} must be refused");
+        }
     }
 
     /// The prompt format's compatibility contract (see PromptMeta): shared

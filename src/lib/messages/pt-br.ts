@@ -114,7 +114,6 @@ export const ptBR: Messages = {
   source: {
     inputLabel: "Conteúdo copiado",
     richText: "Texto formatado",
-    emptyClipboard: "A área de transferência está vazia.",
     imageAlt: "Imagem copiada",
     cannotPreview: "(sem pré-visualização)",
   },

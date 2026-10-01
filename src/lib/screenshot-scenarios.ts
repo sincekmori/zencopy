@@ -131,7 +131,7 @@ export const POPUP_RESULT_FIXTURES: Record<
   "zh-Hans": {
     answer: "一个用于控制咖啡壶的恶搞 HTTP 扩展协议。",
     question: "再讲一个细节。",
-    reply: "它还定义了 418「I'm a teapot」状态码。",
+    reply: "它还定义了 418 “I'm a teapot” 状态码。",
     instruction: "做成表格",
     concise: "再简洁一点",
   },

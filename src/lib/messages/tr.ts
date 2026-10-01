@@ -114,7 +114,6 @@ export const tr: Messages = {
   source: {
     inputLabel: "Kopyalanan içerik",
     richText: "Biçimlendirilmiş metin",
-    emptyClipboard: "Pano boş.",
     imageAlt: "Kopyalanan görsel",
     cannotPreview: "(önizleme yok)",
   },

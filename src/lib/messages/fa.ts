@@ -1,3 +1,4 @@
+import { isolate } from "./isolate.ts";
 import type { Messages } from "./types.ts";
 
 export const fa: Messages = {
@@ -107,12 +108,11 @@ export const fa: Messages = {
     copied: "کپی شد",
     close: "بستن",
     openSettings: "باز کردن تنظیمات",
-    updateHint: (version) => `به‌روزرسانی موجود است (v${version})`,
+    updateHint: (version) => `به‌روزرسانی موجود است (${isolate(`v${version}`)})`,
   },
   source: {
     inputLabel: "محتوای کپی‌شده",
     richText: "متن قالب‌دار",
-    emptyClipboard: "کلیپ‌بورد خالی است.",
     imageAlt: "تصویر کپی‌شده",
     cannotPreview: "(پیش‌نمایش ندارد)",
   },
@@ -122,8 +122,9 @@ export const fa: Messages = {
   },
   about: {
     tagline: "هوش مصنوعی فوری. درست روی صفحه شما.",
-    update: (version) => `به‌روزرسانی به v${version} و راه‌اندازی دوباره برنامه`,
-    updateRestart: (version) => `برای به‌روزرسانی به v${version}، برنامه را دوباره راه‌اندازی کنید`,
+    update: (version) => `به‌روزرسانی به ${isolate(`v${version}`)} و راه‌اندازی دوباره برنامه`,
+    updateRestart: (version) =>
+      `برای به‌روزرسانی به ${isolate(`v${version}`)}، برنامه را دوباره راه‌اندازی کنید`,
     updating: "در حال به‌روزرسانی…",
     checkUpdates: "بررسی به‌روزرسانی‌ها",
     checkingUpdates: "در حال بررسی به‌روزرسانی‌ها…",
@@ -161,7 +162,7 @@ export const fa: Messages = {
     title: "پرامپت‌ها",
     hint: (keys) => `کاری که ${keys} انجام می‌دهد. از برچسب نتیجه در پنجره هم قابل تعویض است.`,
     add: "پرامپت جدید",
-    export: "برون‌بری (.md)",
+    export: `برون‌بری (${isolate(".md")})`,
     import: "درون‌ریزی",
     importHint: "‏Markdown پرامپت هم‌رسانی‌شده را بچسبانید، یا فایل را انتخاب کنید.",
     importFromFile: "انتخاب فایل",
@@ -188,7 +189,7 @@ export const fa: Messages = {
     importBuiltinId: (id) =>
       `'${id}' id یک پرامپت داخلی است — id را در فایل تغییر دهید و دوباره تلاش کنید.`,
     importReservedId: (id) =>
-      `'${id}' با 'zencopy-' شروع می‌شود — این پیشوند id مخصوص پرامپت‌های ازپیش‌نصب‌شده است.`,
+      `'${id}' با '${isolate("zencopy-")}' شروع می‌شود — این پیشوند id مخصوص پرامپت‌های ازپیش‌نصب‌شده است.`,
     importIdExists: (id) =>
       `پرامپتی با id '${id}' از قبل وجود دارد — ابتدا آن را حذف کنید یا id را در فایل تغییر دهید.`,
     importTooLarge: "فایل بزرگ‌تر از آن است که یک پرامپت باشد.",

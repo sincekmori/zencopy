@@ -103,7 +103,6 @@ export const th: Messages = {
   source: {
     inputLabel: "เนื้อหาที่คัดลอก",
     richText: "ข้อความแบบมีรูปแบบ",
-    emptyClipboard: "คลิปบอร์ดว่างเปล่า",
     imageAlt: "รูปภาพที่คัดลอก",
     cannotPreview: "(ดูตัวอย่างไม่ได้)",
   },

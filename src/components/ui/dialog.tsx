@@ -1,12 +1,16 @@
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { DIALOG_CARD, DIALOG_OVERLAY, DIALOG_TITLE } from "@/components/ui/dialog-shell.ts";
+import { isImeKey } from "@/lib/ime.ts";
 import { cn } from "@/lib/utils.ts";
 
 /** A modal overlay for forms and viewers (the prompt editor, the import box,
  *  the rule editor): Radix Dialog underneath (portal, focus trap, scroll
  *  lock, Escape). Clicking outside does NOT dismiss — typed content must
  *  never vanish under a stray click; closing is Escape or the form's own
- *  buttons. Content scrolls within the card when it outgrows the window. */
+ *  buttons. The Escape that cancels an IME conversion is the input method's,
+ *  not the dialog's: Radix looks at the key alone, and on macOS that Escape
+ *  would close the form over everything typed into it. Content scrolls
+ *  within the card when it outgrows the window. */
 export function FormDialog({
   open,
   title,
@@ -33,6 +37,12 @@ export function FormDialog({
           aria-describedby={undefined}
           onInteractOutside={(event) => {
             event.preventDefault();
+          }}
+          onEscapeKeyDown={(event) => {
+            // The Esc that cancels a conversion closes nothing.
+            if (isImeKey(event)) {
+              event.preventDefault();
+            }
           }}
           className={cn(DIALOG_CARD, "max-h-[calc(100vh-2rem)] w-[30rem] overflow-y-auto")}
         >

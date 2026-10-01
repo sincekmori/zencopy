@@ -1,7 +1,7 @@
 import { LazyStore } from "@tauri-apps/plugin-store";
 import * as z from "zod";
 import { createLogger } from "@/lib/log.ts";
-import { detectLocale, type Locale, messages } from "@/lib/messages/index.ts";
+import { detectLocale, type Locale, LOCALES } from "@/lib/messages/index.ts";
 
 const log = createLogger("settings");
 
@@ -31,10 +31,10 @@ export type TextSize = z.infer<typeof TextSizeSchema>;
 export const DEFAULT_TEXT_SIZE: TextSize = "standard";
 
 /** A concrete supported locale — the wire shape of `locale-changed`. */
-export const LocaleSchema = z.enum(Object.keys(messages) as Locale[]);
+export const LocaleSchema = z.enum(LOCALES.map(({ value }) => value));
 
 /** The display language. "system" follows the OS/browser locale. The concrete
- *  codes come from `messages`, so a new language is accepted automatically. */
+ *  codes come from `LOCALES`, so a new language is accepted automatically. */
 const LocalePreferenceSchema = z.union([z.literal("system"), LocaleSchema]);
 export type LocalePreference = z.infer<typeof LocalePreferenceSchema>;
 

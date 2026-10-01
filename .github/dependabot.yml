@@ -3,6 +3,8 @@
 # Only our own first-party libraries skip the wait: the bun exempt list matches
 # bunfig.toml's minimumReleaseAgeExcludes exactly (ai-sdk-catalog, ai-sdk-ping),
 # and cargo exempts copycopy for the same reason.
+# The workflows pin every action to a commit; the same wait applies to the
+# bumps proposed here, so a release a week old is the newest a job ever runs.
 version: 2
 updates:
   - package-ecosystem: bun
@@ -43,3 +45,5 @@ updates:
     schedule:
       interval: weekly
       day: monday
+    cooldown:
+      default-days: 7

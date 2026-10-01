@@ -5,6 +5,9 @@ import { screenshotParam } from "./screenshot.ts";
 /** Whether the app runs on macOS. */
 export const IS_MAC = navigator.userAgent.toLowerCase().includes("mac");
 
+/** Whether the app runs on Windows. */
+export const IS_WINDOWS = navigator.userAgent.toLowerCase().includes("windows");
+
 /** The trigger modifier on this OS: ⌘ on macOS, Ctrl elsewhere. The
  *  screenshot harness (dev-only) may spell it as it likes — `Ctrl/⌘` for
  *  the docs' neutral shots, shown where a visitor's OS is not known. */

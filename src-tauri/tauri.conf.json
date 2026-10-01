@@ -1,6 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "ZenCopy",
+  "version": "../package.json",
   "identifier": "app.zencopy",
   "build": {
     "frontendDist": "../dist",
@@ -26,6 +27,7 @@
       },
       {
         "label": "popup",
+        "title": "ZenCopy",
         "width": 380,
         "height": 360,
         "minWidth": 320,
@@ -35,6 +37,7 @@
         "alwaysOnTop": true,
         "skipTaskbar": true,
         "resizable": true,
+        "minimizable": false,
         "shadow": false,
         "focus": false,
         "visible": false
@@ -64,6 +67,17 @@
     "targets": ["nsis", "app", "dmg", "appimage", "deb", "rpm"],
     "createUpdaterArtifacts": true,
     "copyright": "© 2026 Shinsuke Mori",
+    "macOS": {
+      "minimumSystemVersion": "13.3"
+    },
+    "linux": {
+      "deb": {
+        "depends": ["libc6 (>= 2.35)", "libxtst6"]
+      },
+      "rpm": {
+        "depends": ["libc.so.6(GLIBC_2.35)(64bit)", "libXtst.so.6()(64bit)"]
+      }
+    },
     "windows": {
       "nsis": {
         "installerIcon": "icons/icon.ico",

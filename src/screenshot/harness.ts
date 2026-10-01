@@ -4,8 +4,9 @@
 /** Dev-only screenshot harness: renders the app's windows in a plain browser
  *  by mocking the Tauri IPC layer, so per-locale screenshots can be taken
  *  headlessly (scripts/screenshot.ts) with no window automation and no OS
- *  screen-recording permission. Entry: /screenshot.html, served by
- *  `bun run dev` — this module is never imported by the app itself.
+ *  screen-recording permission. Entry: /screenshot.html, served by the
+ *  runners' own dev server (or `bun run dev`, to look at it in a browser) —
+ *  this module is never imported by the app itself.
  *
  *  URL parameters:
  *  - `window`:  the window to render (`settings` | `popup` | `about`),
@@ -37,6 +38,9 @@
  *  - `replay` (in): recorded exchanges to serve instead of the network, in
  *               order, each chunk at its recorded time — the same demo
  *               again, without a model call.
+ *  - `unhandled` (out): the commands the app invoked that the mock has no
+ *               handler for — a screen that depends on one is not the app's,
+ *               so a driver fails on any.
  *
  *  Mock data is the real thing where the dev server can reach it: the
  *  pre-installed prompts and default rules come from src-tauri/, not copies.
@@ -45,6 +49,7 @@
 import rulesRaw from "../../src-tauri/rules.json?raw";
 import promptsRs from "../../src-tauri/src/prompts.rs?raw";
 import { version } from "../../package.json";
+import type { HarnessGlobal, Replay } from "./harness-global.ts";
 import type { ModelCall } from "./model-call.ts";
 
 // Playwright's WebKit driver crashes rendering console previews of object
@@ -137,28 +142,6 @@ function defaultRules(): Record<string, unknown> {
 }
 
 // ---- The driver global ---------------------------------------------------
-
-interface HarnessGlobal {
-  /** In: the catalog `read_catalog` returns (object or JSON text). */
-  catalog?: unknown;
-  /** In: the app's state for the shot — settings.json's keys (popupCorner,
-   *  theme, textSize, devMode, …) and `autostart`; a key left out keeps the
-   *  store mock's default, so a plain shot shows the app as installed. */
-  settings?: Record<string, unknown>;
-  /** Out: deliver a Tauri event to the app's listeners; returns how many
-   *  received it, so a driver can tell "nobody listens yet" from "handled". */
-  emit?: (event: string, payload: unknown) => number;
-  /** Out: every `record_usage` call's arguments (prompt, kind, model,
-   *  tokens), so a driver can report what its real model calls cost. */
-  usage?: unknown[];
-  /** Out: the model calls, as they went over `fetch` (see {@link ModelCall}). */
-  exchanges?: ModelCall[];
-  /** In: recorded responses to answer the app's model calls with, in order. */
-  replay?: Replay[];
-}
-
-/** What a replayed call needs of a {@link ModelCall}: the response. */
-type Replay = Pick<ModelCall, "status" | "contentType" | "chunks">;
 
 const harnessHost = globalThis as { __zencopyHarness?: HarnessGlobal };
 const harness: HarnessGlobal = harnessHost.__zencopyHarness ?? {};
@@ -327,7 +310,8 @@ function emit(event: string, payload: unknown): number {
 harness.emit = emit;
 
 /** Handlers by command — only what the app actually invokes; an unhandled
- *  command warns below, which is the signal to extend this map. */
+ *  command warns below and is noted for the driver, which is the signal to
+ *  extend this map. */
 const handlers: Record<string, (args: Record<string, unknown>) => unknown> = {
   "plugin:store|load": () => 1,
   "plugin:store|get": (args) => {
@@ -370,8 +354,14 @@ const handlers: Record<string, (args: Record<string, unknown>) => unknown> = {
   },
   "plugin:clipboard-manager|write_text": () => null,
   "plugin:window|hide": () => null,
-  // The updater's "is an update on offer?" read: none, ever, here.
+  // The page IS the window, on screen (what useWindowOpen asks).
+  "plugin:window|is_visible": () => true,
+  // The updater's "is an update on offer?" read, and the About window's own
+  // check for one: none, ever, here.
   update_state: () => null,
+  "plugin:updater|check": () => null,
+  // The trigger's last word on itself: nothing to report — it works.
+  trigger_status: () => null,
   list_prompts_ui: () => builtinPrompts(),
   get_rules_ui: () => defaultRules(),
   read_usage_stats: () => [],
@@ -418,6 +408,7 @@ const label = params.get("window") ?? "settings";
     const handler = handlers[cmd];
     if (handler === undefined) {
       console.warn(`tauri mock: unhandled command ${cmd}`, args);
+      (harness.unhandled ??= []).push(cmd);
       return Promise.resolve(null);
     }
     return Promise.resolve(handler(args));

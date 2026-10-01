@@ -1,5 +1,10 @@
 import { INK, MARK_GRID, SLATE, markGroup } from "../../../src/lib/brand.ts";
-import { type Locale, localeDir, messages } from "../../../src/lib/messages/index.ts";
+import {
+  loadMessages,
+  type Locale,
+  localeDir,
+  type Messages,
+} from "../../../src/lib/messages/index.ts";
 import { escapeXml, FIGURE_FONT, ink, rasterize } from "./figure.ts";
 
 /** The pre-installed prompts' own labels, off their .md frontmatter — what
@@ -133,10 +138,10 @@ const PROMPTS = [
   ["zencopy-custom", "custom"],
 ] as const;
 
-/** A prompt's name as the app shows it in `locale`: the locale's label, else
- *  the prompt file's own (i18n.tsx does the same). */
-function promptName(locale: Locale, [id, file]: (typeof PROMPTS)[number]): string {
-  const own = messages[locale].prompts.builtinLabels[id];
+/** A prompt's name as the app shows it in a locale: the label of the
+ *  locale's messages, else the prompt file's own (i18n.tsx does the same). */
+function promptName(messages: Messages, [id, file]: (typeof PROMPTS)[number]): string {
+  const own = messages.prompts.builtinLabels[id];
   if (own !== undefined) {
     return own;
   }
@@ -172,7 +177,8 @@ const GEOMETRY = new Map<Locale, Promise<Geometry>>();
 
 async function measure(locale: Locale): Promise<Geometry> {
   const labels = OVERVIEW_LABELS[locale];
-  const prompts = PROMPTS.map((prompt) => promptName(locale, prompt));
+  const messages = await loadMessages(locale);
+  const prompts = PROMPTS.map((prompt) => promptName(messages, prompt));
   const inks = await Promise.all([
     ...labels.inputs.map((text) => ink(text, { size: LABEL })),
     ...prompts.map((text) => ink(text, { size: LABEL })),

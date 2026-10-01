@@ -7,7 +7,8 @@
  * mail in the video and the mail on the page are one. A figure of ordinary
  * paragraphs, never a code block: the reader is about to select this text
  * and copy it twice, which a code block's copy button would skip — and its
- * monospace would make a mail look like code.
+ * monospace would make a mail look like code. Its direction is the mail's,
+ * not the page's: both mails are left-to-right, on a right-to-left page too.
  */
 import en from "../../../scripts/demo-video/source.en.txt?raw";
 import ja from "../../../scripts/demo-video/source.ja.txt?raw";
@@ -23,7 +24,7 @@ const { subject, from } = MAILS[lang];
 const paragraphs = paragraphsOf({ en, ja }[lang], lang);
 ---
 
-<figure class="mail not-content" lang={lang}>
+<figure class="mail not-content" dir="ltr" lang={lang}>
   <p class="subject">{subject}</p>
   <p class="from">
     <span aria-hidden="true" class="avatar">{from.charAt(0)}</span>

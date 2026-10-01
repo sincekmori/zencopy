@@ -67,6 +67,7 @@
     "import/group-exports": "off",
     "import/max-dependencies": "off",
     "react-perf/jsx-no-new-function-as-prop": "off",
+    "react-perf/jsx-no-new-array-as-prop": "off",
     "import/no-namespace": "off",
     "import/no-unassigned-import": "off",
     "import/consistent-type-specifier-style": "off",
