@@ -27,11 +27,15 @@ const paragraphs = paragraphsOf({ en, ja }[lang], lang);
 <figure class="mail not-content" dir="ltr" lang={lang}>
   <p class="subject">{subject}</p>
   <p class="from">
-    <span aria-hidden="true" class="avatar">{from.charAt(0)}</span>
+    <span aria-hidden="true" class="avatar">
+      {from.charAt(0)}
+    </span>
     {from}
   </p>
   <div class="body">
-    {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    {paragraphs.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
   </div>
 </figure>
 

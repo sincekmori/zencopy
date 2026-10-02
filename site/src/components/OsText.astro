@@ -19,6 +19,6 @@ interface Props {
 const { windows, mac, linux = windows } = Astro.props;
 ---
 
-<span data-os-linux={linux} data-os-mac={mac} data-os-windows={windows}
-  ><slot>{`${windows} (${mac} on Mac)`}</slot></span
->
+<span data-os-linux={linux} data-os-mac={mac} data-os-windows={windows}>
+  <slot>{`${windows} (${mac} on Mac)`}</slot>
+</span>

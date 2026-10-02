@@ -22,16 +22,14 @@ const LRM = "\u200E";
 const parts = text.split("{mod}");
 ---
 
-{
-  parts.map((part, index) => (
-    <>
-      {index > 0 && (
-        <>
-          {LRM}
-          <span data-os-modifier>{NEUTRAL_MODIFIER}</span>
-        </>
-      )}
-      {part}
-    </>
-  ))
-}
+{parts.map((part, index) => (
+  <>
+    {index > 0 && (
+      <>
+        {LRM}
+        <span data-os-modifier>{NEUTRAL_MODIFIER}</span>
+      </>
+    )}
+    {part}
+  </>
+))}

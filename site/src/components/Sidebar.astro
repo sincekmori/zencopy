@@ -59,28 +59,26 @@ const links = await Promise.all(
 <SidebarPersister>
   <div class="pages">
     <ul>
-      {
-        links.map(({ entry, sections }) => (
-          <li>
-            <a
-              aria-current={entry.isCurrent ? "page" : undefined}
-              href={entry.href}
-              {...entry.attrs}
-            >
-              {entry.label}
-            </a>
-            {sections.length > 0 ? (
-              <ul class="sections">
-                {sections.map((section) => (
-                  <li>
-                    <a href={`${entry.href}#${section.slug}`}>{section.text}</a>
-                  </li>
-                ))}
-              </ul>
-            ) : undefined}
-          </li>
-        ))
-      }
+      {links.map(({ entry, sections }) => (
+        <li>
+          <a
+            aria-current={entry.isCurrent ? "page" : undefined}
+            href={entry.href}
+            {...entry.attrs}
+          >
+            {entry.label}
+          </a>
+          {sections.length > 0 ? (
+            <ul class="sections">
+              {sections.map((section) => (
+                <li>
+                  <a href={`${entry.href}#${section.slug}`}>{section.text}</a>
+                </li>
+              ))}
+            </ul>
+          ) : undefined}
+        </li>
+      ))}
     </ul>
   </div>
 </SidebarPersister>

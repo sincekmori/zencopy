@@ -38,7 +38,9 @@ const title = label(await loadMessages(locale));
   xmlns="http://www.w3.org/2000/svg"
 >
   <title>{title}</title>
-  {node.map(([Tag, attrs]) => <Tag {...attrs} />)}
+  {node.map(([Tag, attrs]) => (
+    <Tag {...attrs} />
+  ))}
 </svg>
 
 <style>

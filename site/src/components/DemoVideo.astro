@@ -58,5 +58,7 @@ const cuts = lines !== undefined;
   src={`${base}.mp4`}
   width={width}
 >
-  <a href={`${base}.mp4`}><slot /></a>
+  <a href={`${base}.mp4`}>
+    <slot />
+  </a>
 </video>
