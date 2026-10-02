@@ -784,9 +784,9 @@ dependencies = [
 
 [[package]]
 name = "copycopy"
-version = "0.4.2"
+version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1b2cf04d145adc7b42d3b84ea136127ea2acab0069cb5b3699a0a961f27380cb"
+checksum = "504809f8c0439dbc4786a7039c389feddeb56015dd74c426324d9ad3f23c35af"
 dependencies = [
  "clipboard-rs",
  "dispatch2",
