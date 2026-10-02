@@ -30,6 +30,7 @@ Everything CI runs is scripted or is a one-liner:
 
 `--locked` holds cargo to Cargo.lock as it stands: after editing `Cargo.toml`, update the lockfile deliberately (`cargo update -p <crate>`), or the commands fail rather than resolve versions nobody chose.
 CI installs the Bun that package.json's `packageManager` names, and its workflows pin every action to a commit (the comment beside each names the version; Dependabot proposes the bumps).
+The one pin Dependabot leaves alone is dtolnay/rust-toolchain's: it is a commit of that action's master branch, which has no releases for the 7-day cooldown to count from, so it is moved by hand, to a commit a week old.
 
 To reset the local app state to a clean first-run (config with API keys, settings store, logs, autostart entry, and on Linux the copycopy GNOME Shell extension): `bun run dev-reset` (asks for confirmation; `-y` skips it).
 It is a TypeScript script ([scripts/dev-reset.ts](scripts/dev-reset.ts)) running on bun, covering macOS, Linux, and Windows.

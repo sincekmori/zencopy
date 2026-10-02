@@ -52,3 +52,9 @@ updates:
       day: monday
     cooldown:
       default-days: 7
+    ignore:
+      # dtolnay/rust-toolchain is pinned to a commit of its master branch,
+      # which has no releases for the cooldown to count from: Dependabot
+      # proposes each commit as it lands (#31 offered one half a day old).
+      # That pin is moved by hand, to a commit a week old.
+      - dependency-name: "dtolnay/rust-toolchain"
