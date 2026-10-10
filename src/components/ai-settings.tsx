@@ -42,14 +42,16 @@ const VENDOR_LABELS: Record<Exclude<FormProvider, "openai-compatible">, string> 
 // this list is a starting point, not a catalog.
 // First entry is the default (the fallback when the model field is left empty,
 // see persist): each provider's best speed/quality pick for a copy→popup.
-// The rest are the current GA generation, ordered light to smart. Anthropic
-// defaults to Sonnet 5, not the lighter Haiku: Haiku 4.5 is a non-reasoning
-// tier that gives up too much quality, whereas Google's flash-lite and
-// OpenAI's Luna stay sharp enough at their light tier.
+// The rest are the current GA generation, ordered light to smart. Google's
+// two are the `-latest` aliases, which Google itself moves to each new
+// Flash-Lite and Flash release. Anthropic defaults to Sonnet 5.5 with Haiku
+// 5.5 listed below it: Haiku 5.5 is the first Haiku that reasons (4.5 did
+// not, and stayed off the list), and whether it stays sharp enough for a
+// copy→popup is unmeasured.
 const MODEL_SUGGESTIONS: Record<FormProvider, [string, ...string[]]> = {
-  openai: ["gpt-5.6-luna", "gpt-5.6-terra", "gpt-5.6-sol"],
-  google: [GEMINI_DEFAULT_MODEL, "gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.6-flash"],
-  anthropic: ["claude-sonnet-5", "claude-opus-5"],
+  openai: ["gpt-6-luna", "gpt-6.1-sol", "gpt-6-astra"],
+  google: [GEMINI_DEFAULT_MODEL, "gemini-flash-latest"],
+  anthropic: ["claude-sonnet-5-5", "claude-haiku-5-5", "claude-opus-5-5"],
   "openai-compatible": ["gemma4:e4b", "gpt-oss:20b"],
 };
 

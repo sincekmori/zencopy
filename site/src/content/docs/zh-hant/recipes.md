@@ -20,11 +20,11 @@ description: 可直接複製貼上的 ai-sdk-catalog.json 設定，從單一供�
     {
       "id": "openai",
       "vendor": { "apiKey": "sk-…" },
-      "models": [{ "id": "gpt-5.6-luna" }]
+      "models": [{ "id": "gpt-6-luna" }]
     }
   ],
   "roles": {
-    "default": "openai:gpt-5.6-luna"
+    "default": "openai:gpt-6-luna"
   }
 }
 ```
@@ -62,17 +62,17 @@ role 把提示詞與模型脫鉤。
     {
       "id": "google",
       "vendor": { "apiKey": "AIza…" },
-      "models": [{ "id": "gemini-3.1-flash-lite" }]
+      "models": [{ "id": "gemini-flash-lite-latest" }]
     },
     {
       "id": "anthropic",
       "vendor": { "apiKey": "sk-ant-…" },
-      "models": [{ "id": "claude-opus-4-8" }]
+      "models": [{ "id": "claude-opus-5-5" }]
     }
   ],
   "roles": {
-    "default": "google:gemini-3.1-flash-lite",
-    "smart": "anthropic:claude-opus-4-8"
+    "default": "google:gemini-flash-lite-latest",
+    "smart": "anthropic:claude-opus-5-5"
   }
 }
 ```

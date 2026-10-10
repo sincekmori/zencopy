@@ -10,10 +10,13 @@ import { version as catalogVersion } from "ai-sdk-catalog/package.json";
  *  way to try ZenCopy, and the default the welcome screen suggests. */
 export const FREE_KEY_URL = "https://aistudio.google.com/api-keys";
 
-// Google's newest flash-lite — the fastest, cheapest Gemini tier, so it fits a
-// free-tier key's rate limits best. (gemini-3.5-flash is heavier; offered as the
-// step-up suggestion in AI settings.)
-export const GEMINI_DEFAULT_MODEL = "gemini-3.1-flash-lite";
+// Google's alias for the newest Flash-Lite — the fastest, cheapest Gemini tier,
+// so it fits a free-tier key's rate limits best — which Google itself moves to
+// each new Flash-Lite release, stable or preview (two weeks' notice by mail
+// when a move breaks something), so the default never names a model that has
+// since been retired. (The Flash alias, gemini-flash-latest, is heavier;
+// offered as the step-up suggestion in AI settings.)
+export const GEMINI_DEFAULT_MODEL = "gemini-flash-lite-latest";
 
 // Editors that understand `$schema` validate and autocomplete the file; pin the
 // URL to the installed ai-sdk-catalog so the hints always match the runtime.

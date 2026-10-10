@@ -36,7 +36,7 @@ function dataDir(): string {
 const PROMPTS = ["zencopy-summarize", "zencopy-explain", "zencopy-translate", "zencopy-polish"];
 const KINDS = ["text", "image", "files"];
 const MODELS = [
-  { model: "google:gemini-3.1-flash-lite", weight: 8 }, // priced by the catalog
+  { model: "google:gemini-flash-lite-latest", weight: 8 }, // priced by the catalog
   { model: "local:gemma4:e4b", weight: 2 }, // no price sheet -> "*" row
 ];
 
