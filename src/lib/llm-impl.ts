@@ -2,8 +2,8 @@ import { invoke } from "@tauri-apps/api/core";
 import { generateText, type ModelMessage, streamText } from "ai";
 import { type Catalog, type Config, createCatalog, type RoleEntry } from "ai-sdk-catalog";
 import { ping } from "ai-sdk-ping";
-import { franc } from "franc-min";
 import { Liquid } from "liquidjs";
+import { languageOf } from "@/lib/language-of.ts";
 import { listPrompts } from "@/lib/prompts.ts";
 import { getUserContext } from "@/lib/settings.ts";
 // Meta-prompt for the prompts form: turns a rough "what I want" into a proper
@@ -275,39 +275,22 @@ liquid.registerFilter("language_name", (code: unknown): string => {
   }
 });
 
-// `{{ text | language_of }}` → "Japanese": which language a text is written in,
-// via franc (trigram statistics — no network, no model). Lets a template
-// *branch* on the input's language, so direction decisions happen in Liquid,
-// deterministically, instead of being delegated to the model mid-prompt.
-// Returns "" when detection is unsure — templates treat that as "no match".
-// The name is the bare language's ("Chinese", "Portuguese"), the vocabulary
+// `{{ text | language_of }}` → "Japanese": which language a text is written in
+// (src/lib/language-of.ts — the script of its prose, then franc's trigram
+// statistics; no network, no model). Lets a template *branch* on the input's
+// language, so direction decisions happen in Liquid, deterministically,
+// instead of being delegated to the model mid-prompt. Returns "" when
+// detection is unsure — templates treat that as "no match". The name is the
+// bare language's ("Chinese", "Portuguese"), the vocabulary
 // `{{ locale | split: "-" | first | language_name }}` speaks: that is how a
 // template asks "is this written in the reader's own language?".
-/** franc names a language more narrowly than the UI's tags do. */
-const UI_LANGUAGES: Record<string, string> = {
-  cmn: "zh", // Mandarin
-  arb: "ar", // Standard Arabic
-};
-/** How much of a text franc reads to name its language (its MAX_LENGTH). */
-const FRANC_SAMPLE = 2048;
-/** franc-min knows the languages with the most speakers, and Hebrew is not
- *  among them — but its script gives it away. Judged on what franc itself
- *  would read, so the two never answer about different stretches of a text
- *  (nor does a ten-megabyte file get matched letter by letter). */
-function writtenInHebrew(text: string): boolean {
-  const sample = text.slice(0, FRANC_SAMPLE);
-  const letters = sample.match(/\p{L}/gu)?.length ?? 0;
-  const hebrew = sample.match(/\p{Script=Hebrew}/gu)?.length ?? 0;
-  return hebrew > 0 && hebrew * 2 > letters;
-}
 liquid.registerFilter("language_of", (value: unknown): string => {
-  const text = String(value);
-  const code = writtenInHebrew(text) ? "he" : franc(text);
-  if (code === "und") {
+  const code = languageOf(String(value));
+  if (code === "") {
     return "";
   }
   try {
-    return languageNames.of(UI_LANGUAGES[code] ?? code) ?? "";
+    return languageNames.of(code) ?? "";
   } catch {
     return "";
   }
