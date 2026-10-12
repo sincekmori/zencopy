@@ -110,7 +110,6 @@ export const en: Messages = {
   },
   source: {
     inputLabel: "Copied content",
-    richText: "Formatted text",
     imageAlt: "Copied image",
     cannotPreview: "(no preview)",
   },

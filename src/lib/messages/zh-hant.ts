@@ -102,7 +102,6 @@ export const zhHant: Messages = {
   },
   source: {
     inputLabel: "複製的內容",
-    richText: "帶格式的文字",
     imageAlt: "複製的圖片",
     cannotPreview: "（無法預覽）",
   },

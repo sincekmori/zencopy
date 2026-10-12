@@ -113,7 +113,6 @@ export const it: Messages = {
   },
   source: {
     inputLabel: "Contenuto copiato",
-    richText: "Testo formattato",
     imageAlt: "Immagine copiata",
     cannotPreview: "(nessuna anteprima)",
   },

@@ -135,7 +135,6 @@ export interface Messages {
   source: {
     /** Eyebrow over the copied content, so it reads as the input, not output. */
     inputLabel: string;
-    richText: string;
     imageAlt: string;
     cannotPreview: string;
   };

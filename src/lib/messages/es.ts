@@ -114,7 +114,6 @@ export const es: Messages = {
   },
   source: {
     inputLabel: "Contenido copiado",
-    richText: "Texto con formato",
     imageAlt: "Imagen copiada",
     cannotPreview: "(sin vista previa)",
   },

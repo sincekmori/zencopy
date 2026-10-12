@@ -113,7 +113,6 @@ export const pl: Messages = {
   },
   source: {
     inputLabel: "Skopiowana treść",
-    richText: "Tekst sformatowany",
     imageAlt: "Skopiowany obraz",
     cannotPreview: "(brak podglądu)",
   },

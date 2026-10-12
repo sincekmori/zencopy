@@ -33,8 +33,8 @@ impl SourcePreview {
     /// Rich text is deliberately just "text": which clipboard flavor a copy
     /// carries is the source app's habit, not the user's intent, so the kind
     /// vocabulary ignores it. The richness itself survives where it is useful
-    /// — the source preview renders the markup, and templates still get
-    /// `{{ markup }}` / `{{ format }}`.
+    /// — the source preview shows a formatted copy as the Markdown made of
+    /// it, and templates still get `{{ markup }}` / `{{ format }}`.
     pub(crate) fn kind(&self) -> &'static str {
         match self {
             Self::Text { .. } | Self::RichText { .. } => "text",

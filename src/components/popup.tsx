@@ -147,7 +147,9 @@ function hidePopup(): void {
   })();
 }
 
-// Hidden from the developer-mode JSON: the source view already shows them.
+// Hidden from the developer-mode JSON: the copy itself is on screen in the
+// source view (opened, as the model reads it), and a formatted copy's markup
+// runs to hundreds of KB.
 const VISIBLE_ELSEWHERE = new Set(["text", "markup"]);
 
 /** The quiet small-icon affordance (per-turn Copy/Retry, the composer's
@@ -1342,8 +1344,8 @@ export function Popup(): React.JSX.Element {
   ) : undefined;
 
   // Template variables: exactly what the Liquid templates receive — locale
-  // included (it is injected at run time), text/markup omitted because the
-  // source view above already shows them. A collapsed one-line summary, so it
+  // included (it is injected at run time), text/markup omitted: the copy is on
+  // screen in the source view above. A collapsed one-line summary, so it
   // is discoverable without scrolling and never dominates the popup.
   const devVarsView =
     devMode && payload ? (
@@ -1441,7 +1443,7 @@ export function Popup(): React.JSX.Element {
     );
     body = (
       <>
-        <SourceView source={payload.source} />
+        <SourceView source={payload.source} text={payload.vars["text"]} />
         {devVarsView}
         {promptRow}
         {awaitingSend ? confirmCard : resultView}
@@ -1456,7 +1458,7 @@ export function Popup(): React.JSX.Element {
   } else {
     body = (
       <>
-        <SourceView source={payload.source} />
+        <SourceView source={payload.source} text={payload.vars["text"]} />
         {devVarsView}
         {promptRow}
         <div className="flex flex-col gap-2">

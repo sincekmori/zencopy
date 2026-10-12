@@ -112,7 +112,6 @@ export const fa: Messages = {
   },
   source: {
     inputLabel: "محتوای کپی‌شده",
-    richText: "متن قالب‌دار",
     imageAlt: "تصویر کپی‌شده",
     cannotPreview: "(پیش‌نمایش ندارد)",
   },

@@ -113,7 +113,6 @@ export const ru: Messages = {
   },
   source: {
     inputLabel: "Скопированное",
-    richText: "Форматированный текст",
     imageAlt: "Скопированное изображение",
     cannotPreview: "(нет предпросмотра)",
   },

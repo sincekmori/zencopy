@@ -113,7 +113,6 @@ export const ptBR: Messages = {
   },
   source: {
     inputLabel: "Conteúdo copiado",
-    richText: "Texto formatado",
     imageAlt: "Imagem copiada",
     cannotPreview: "(sem pré-visualização)",
   },

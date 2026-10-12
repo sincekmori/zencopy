@@ -109,7 +109,6 @@ export const ar: Messages = {
   },
   source: {
     inputLabel: "المحتوى المنسوخ",
-    richText: "نص منسّق",
     imageAlt: "الصورة المنسوخة",
     cannotPreview: "(لا معاينة)",
   },

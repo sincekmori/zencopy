@@ -111,7 +111,6 @@ export const vi: Messages = {
   },
   source: {
     inputLabel: "Nội dung đã sao chép",
-    richText: "Văn bản định dạng",
     imageAlt: "Hình ảnh đã sao chép",
     cannotPreview: "(không có bản xem trước)",
   },

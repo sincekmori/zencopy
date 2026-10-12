@@ -107,7 +107,6 @@ export const he: Messages = {
   },
   source: {
     inputLabel: "התוכן שהועתק",
-    richText: "טקסט מעוצב",
     imageAlt: "תמונה שהועתקה",
     cannotPreview: "(אין תצוגה מקדימה)",
   },

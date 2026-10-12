@@ -115,7 +115,6 @@ export const de: Messages = {
   },
   source: {
     inputLabel: "Kopierter Inhalt",
-    richText: "Formatierter Text",
     imageAlt: "Kopiertes Bild",
     cannotPreview: "(keine Vorschau)",
   },

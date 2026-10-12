@@ -1,4 +1,3 @@
-import { useSyncExternalStore } from "react";
 import type { Theme } from "@/lib/settings.ts";
 
 const media = globalThis.matchMedia("(prefers-color-scheme: dark)");
@@ -27,23 +26,4 @@ export function applyTheme(theme: Theme): void {
   } else {
     setDark(theme === "dark");
   }
-}
-
-function subscribeToRootClass(onChange: () => void): () => void {
-  const observer = new MutationObserver(onChange);
-  observer.observe(document.documentElement, { attributeFilter: ["class"] });
-  return () => {
-    observer.disconnect();
-  };
-}
-
-/**
- * Whether the applied theme is dark right now, as React state. Watching the
- * `dark` class (rather than the settings value) also tracks live OS appearance
- * changes under "system" — everything funnels through setDark above.
- */
-export function useDarkScheme(): boolean {
-  return useSyncExternalStore(subscribeToRootClass, () =>
-    document.documentElement.classList.contains("dark"),
-  );
 }

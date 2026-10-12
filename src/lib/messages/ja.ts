@@ -114,7 +114,6 @@ export const ja: Messages = {
   },
   source: {
     inputLabel: "コピーした内容",
-    richText: "書式付きテキスト",
     imageAlt: "コピーした画像",
     cannotPreview: "（プレビューできません）",
   },

@@ -103,7 +103,9 @@ const components = { a: SystemBrowserLink, table: ScrollableTable, img: GuardedI
 /** Model output, rendered as Markdown (GFM: tables, task lists, strikethrough).
  *  Raw HTML in the output is never rendered — react-markdown ignores it by
  *  default. `source` is the copied content the output answers: the only
- *  remote images that load are ones whose address appears in it. */
+ *  remote images that load are ones whose address appears in it — and with
+ *  `undefined`, none at all, which the source view relies on to show the
+ *  copy itself. */
 export function Markdown({
   text,
   source,

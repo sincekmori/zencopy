@@ -386,7 +386,8 @@ pub(crate) fn center_on_active_monitor(handle: &tauri::AppHandle, window: &Webvi
 
 /// Whether a URL is one of the app's own pages: the bundled frontend
 /// (`tauri://localhost`, or `http://tauri.localhost` on Windows), the dev
-/// server in a dev build, and `about:` (an iframe's `srcdoc`).
+/// server in a dev build, and `about:` (`about:blank`, `about:srcdoc` — pages
+/// with no origin of their own).
 fn is_app_url(url: &tauri::Url) -> bool {
     let host = url.host_str();
     match url.scheme() {
