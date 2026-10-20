@@ -17,10 +17,19 @@
 //! its farthest cells span; and extraction stops once the text has outgrown
 //! what an attachment may carry ([`TEXT_BUDGET`]).
 
+use std::borrow::Cow;
 use std::io::{Cursor, Read};
 
 type Archive<'a> = zip::ZipArchive<Cursor<&'a [u8]>>;
 type Extraction<T> = Result<T, Box<dyn std::error::Error>>;
+
+/// The archive's entry names. zip 9 decodes a name only when it is asked for
+/// (UTF-8, or CP437 when the bytes are not UTF-8) and hands back an `Err` for
+/// one it cannot decode; no OOXML part is named that way, so such an entry is
+/// skipped rather than failing the whole document.
+fn entry_names<'a>(archive: &'a Archive<'_>) -> impl Iterator<Item = Cow<'a, str>> {
+    archive.file_names().filter_map(Result::ok)
+}
 
 /// Hard ceiling for what an OOXML zip may inflate to, all entries together.
 const MAX_INFLATED_BYTES: u64 = 50 * 1024 * 1024;
@@ -47,10 +56,7 @@ pub fn extract_text(bytes: &[u8]) -> Option<String> {
     };
     let kind = if archive.index_for_name("word/document.xml").is_some() {
         "docx"
-    } else if archive
-        .file_names()
-        .any(|name| name.starts_with("ppt/slides/slide"))
-    {
+    } else if entry_names(&archive).any(|name| name.starts_with("ppt/slides/slide")) {
         "pptx"
     } else if archive.index_for_name("xl/workbook.xml").is_some() {
         "xlsx"
@@ -154,15 +160,14 @@ fn extract_docx(mut archive: Archive) -> Extraction<String> {
 /// pptx: every slide's text in slide order, slides separated by a blank line.
 fn extract_pptx(mut archive: Archive) -> Extraction<String> {
     // Slide entries are "ppt/slides/slideN.xml"; N is the presentation order.
-    let mut slides: Vec<(u32, String)> = archive
-        .file_names()
+    let mut slides: Vec<(u32, String)> = entry_names(&archive)
         .filter_map(|name| {
             let number = name
                 .strip_prefix("ppt/slides/slide")?
                 .strip_suffix(".xml")?
                 .parse()
                 .ok()?;
-            Some((number, name.to_string()))
+            Some((number, name.into_owned()))
         })
         .collect();
     slides.sort_unstable();
@@ -200,10 +205,9 @@ fn check_shared_strings(archive: &mut Archive) -> Extraction<()> {
     use quick_xml::events::Event;
 
     const SMALLEST_STRING: usize = "<si/>".len();
-    let tables: Vec<String> = archive
-        .file_names()
+    let tables: Vec<String> = entry_names(archive)
         .filter(|name| name.ends_with("sharedStrings.xml"))
-        .map(str::to_string)
+        .map(Cow::into_owned)
         .collect();
     for name in tables {
         let xml = read_entry(archive, &name)?;
