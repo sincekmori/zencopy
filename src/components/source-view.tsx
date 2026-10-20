@@ -133,7 +133,7 @@ export function SourceView({ source, text }: Props): React.JSX.Element {
       className="rounded-lg border-s-2 border-border bg-muted/40 px-2.5 py-2"
     >
       <summary className="cursor-pointer list-none select-none [&::-webkit-details-marker]:hidden">
-        <span className="mb-1 flex items-center gap-1 text-[10px] font-medium text-muted-foreground/70 uppercase">
+        <span className="mbe-1 flex items-center gap-1 text-[10px] font-medium text-muted-foreground/70 uppercase">
           <ClipboardCheck className="size-3" />
           <span className="tracking-wide">{t.source.inputLabel}</span>
           <ChevronDown

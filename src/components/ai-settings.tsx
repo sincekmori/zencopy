@@ -332,7 +332,7 @@ export function AiSettings(): React.JSX.Element {
     <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
       <div>
         <h2 className="text-sm font-medium">{t.ai.title}</h2>
-        <p className="mt-1 text-xs text-muted-foreground">{t.ai.hint}</p>
+        <p className="mbs-1 text-xs text-muted-foreground">{t.ai.hint}</p>
       </div>
 
       <div className="flex flex-col gap-1.5">

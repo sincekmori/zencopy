@@ -616,7 +616,7 @@ export function PromptsSettings(): React.JSX.Element {
         <div className="flex items-center justify-between gap-4">
           <div>
             <h2 className="text-sm font-medium">{t.prompts.title}</h2>
-            <p className="mt-1 text-xs text-muted-foreground">{t.prompts.hint(TRIGGER_KEYS)}</p>
+            <p className="mbs-1 text-xs text-muted-foreground">{t.prompts.hint(TRIGGER_KEYS)}</p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <Button
@@ -837,7 +837,7 @@ export function PromptsSettings(): React.JSX.Element {
               <summary className="cursor-pointer text-xs text-muted-foreground select-none">
                 {t.prompts.advanced}
               </summary>
-              <div className="mt-3 flex flex-col gap-3">
+              <div className="mbs-3 flex flex-col gap-3">
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-medium text-muted-foreground">
                     {t.prompts.template}
@@ -899,13 +899,13 @@ export function PromptsSettings(): React.JSX.Element {
       <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
         <div>
           <h2 className="text-sm font-medium">{t.rules.title}</h2>
-          <p className="mt-1 text-xs text-muted-foreground">{t.rules.hint}</p>
+          <p className="mbs-1 text-xs text-muted-foreground">{t.rules.hint}</p>
         </div>
         <div className="flex flex-col gap-2">{ROUTABLE_KINDS.map((kind) => routeRow(kind))}</div>
-        <div className="mt-1 flex items-center justify-between gap-4 border-t pt-4">
+        <div className="mbs-1 flex items-center justify-between gap-4 border-bs pbs-4">
           <div>
             <h3 className="text-sm font-medium">{t.rules.overridesTitle}</h3>
-            <p className="mt-1 text-xs text-muted-foreground">
+            <p className="mbs-1 text-xs text-muted-foreground">
               {t.rules.overridesHint}{" "}
               <button
                 type="button"

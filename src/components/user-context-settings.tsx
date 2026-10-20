@@ -98,7 +98,7 @@ export function UserContextSettings(): React.JSX.Element {
     <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
       <div>
         <h2 className="text-sm font-medium">{t.settings.userContext}</h2>
-        <p className="mt-1 text-xs text-muted-foreground">{t.settings.userContextHint}</p>
+        <p className="mbs-1 text-xs text-muted-foreground">{t.settings.userContextHint}</p>
       </div>
       {/* The wrapper carries the field's background: the textarea itself is
           transparent so the ghost overlay shows through it. */}

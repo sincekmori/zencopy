@@ -82,7 +82,7 @@ export function QuickPromptsSettings({ prompts }: { prompts: PromptInfo[] }): Re
     <section className="flex flex-col gap-4 rounded-xl border bg-card p-6">
       <div>
         <h2 className="text-sm font-medium">{t.settings.quickTitle}</h2>
-        <p className="mt-1 text-xs text-muted-foreground">{t.settings.quickHint}</p>
+        <p className="mbs-1 text-xs text-muted-foreground">{t.settings.quickHint}</p>
       </div>
       <ul className="flex flex-col gap-2">
         {slots.map((id, index) => {

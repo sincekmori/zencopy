@@ -18,7 +18,7 @@ function Select({ className, ...props }: React.ComponentProps<"select">) {
         className="w-full appearance-none rounded-md border bg-background py-1.5 ps-3 pe-8 text-sm outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
         {...props}
       />
-      <ChevronDown className="pointer-events-none absolute inset-e-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+      <ChevronDown className="pointer-events-none absolute inset-e-2.5 inset-bs-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
     </div>
   );
 }

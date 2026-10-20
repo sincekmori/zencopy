@@ -49,7 +49,7 @@ export function ConfirmDialog({
           <AlertDialogPrimitive.Description className="text-xs leading-relaxed text-muted-foreground">
             {description}
           </AlertDialogPrimitive.Description>
-          <div className="mt-1 flex items-center justify-end gap-3">
+          <div className="mbs-1 flex items-center justify-end gap-3">
             <AlertDialogPrimitive.Cancel asChild>
               <Button size="sm" variant="ghost" disabled={busy}>
                 {cancelLabel}

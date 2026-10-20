@@ -394,7 +394,9 @@ export function Settings(): React.JSX.Element {
           </span>
           <div>
             <h1 className="text-xl font-semibold tracking-tight">{t.settings.title}</h1>
-            <p className="mt-1 text-sm text-muted-foreground">{t.settings.tagline(TRIGGER_KEYS)}</p>
+            <p className="mbs-1 text-sm text-muted-foreground">
+              {t.settings.tagline(TRIGGER_KEYS)}
+            </p>
           </div>
         </header>
 
@@ -424,7 +426,7 @@ export function Settings(): React.JSX.Element {
           <section className="flex flex-col gap-5 rounded-xl border bg-card p-6">
             <div>
               <h2 className="text-sm font-medium">{t.settings.position}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">{t.settings.positionHint}</p>
+              <p className="mbs-1 text-xs text-muted-foreground">{t.settings.positionHint}</p>
             </div>
             <div className="flex justify-center">
               <div className="relative aspect-16/10 w-72 rounded-lg border-2 border-dashed border-muted-foreground/25 bg-muted/30">
@@ -454,7 +456,7 @@ export function Settings(): React.JSX.Element {
           <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">
             <div>
               <h2 className="text-sm font-medium">{t.settings.startup}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">{t.settings.startupHint}</p>
+              <p className="mbs-1 text-xs text-muted-foreground">{t.settings.startupHint}</p>
             </div>
             <Switch
               checked={autostart}
@@ -466,7 +468,7 @@ export function Settings(): React.JSX.Element {
           <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">
             <div>
               <h2 className="text-sm font-medium">{t.settings.devMode}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">{t.settings.devModeHint}</p>
+              <p className="mbs-1 text-xs text-muted-foreground">{t.settings.devModeHint}</p>
             </div>
             <Switch
               checked={devMode}
@@ -479,7 +481,7 @@ export function Settings(): React.JSX.Element {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-sm font-medium">{t.settings.stats}</h2>
-                <p className="mt-1 text-xs text-muted-foreground">{t.settings.statsHint}</p>
+                <p className="mbs-1 text-xs text-muted-foreground">{t.settings.statsHint}</p>
               </div>
               <Switch
                 checked={statsOn}
@@ -510,10 +512,10 @@ export function Settings(): React.JSX.Element {
               {statsResetRow}
             </div>
             {exportIssueRow}
-            <div className="flex items-center justify-between gap-4 border-t pt-3">
+            <div className="flex items-center justify-between gap-4 border-bs pbs-3">
               <div>
                 <h3 className="text-sm font-medium">{t.settings.popupCost}</h3>
-                <p className="mt-1 text-xs text-muted-foreground">{t.settings.popupCostHint}</p>
+                <p className="mbs-1 text-xs text-muted-foreground">{t.settings.popupCostHint}</p>
               </div>
               <Switch
                 checked={popupCost && statsOn}
@@ -525,7 +527,7 @@ export function Settings(): React.JSX.Element {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h3 className="text-sm font-medium">{t.settings.costLimit}</h3>
-                <p className="mt-1 text-xs text-muted-foreground">{t.settings.costLimitHint}</p>
+                <p className="mbs-1 text-xs text-muted-foreground">{t.settings.costLimitHint}</p>
               </div>
               <input
                 className={cn(FIELD, "w-24 text-end tabular-nums")}
@@ -545,7 +547,7 @@ export function Settings(): React.JSX.Element {
           <section className="flex items-center justify-between gap-4 rounded-xl border bg-card p-6">
             <div>
               <h2 className="text-sm font-medium">{t.settings.confirmSend}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">{t.settings.confirmSendHint}</p>
+              <p className="mbs-1 text-xs text-muted-foreground">{t.settings.confirmSendHint}</p>
             </div>
             <Switch
               checked={confirmSend}
@@ -598,7 +600,7 @@ export function Settings(): React.JSX.Element {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-sm font-medium">{t.settings.resetTitle}</h2>
-                <p className="mt-1 text-xs text-muted-foreground">{t.settings.resetHint}</p>
+                <p className="mbs-1 text-xs text-muted-foreground">{t.settings.resetHint}</p>
               </div>
               <Button
                 size="sm"

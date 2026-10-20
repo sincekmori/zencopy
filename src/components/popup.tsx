@@ -1296,7 +1296,7 @@ export function Popup(): React.JSX.Element {
           {/* Centered overlay with a filter field — the long-tail palette. */}
           <div
             role="menu"
-            className="fixed inset-x-0 top-1/2 z-20 mx-auto flex w-64 max-w-[calc(100vw-2rem)] -translate-y-1/2 flex-col rounded-xl border bg-popover p-1 shadow-xl"
+            className="fixed inset-x-0 inset-bs-1/2 z-20 mx-auto flex w-64 max-w-[calc(100vw-2rem)] -translate-y-1/2 flex-col rounded-xl border bg-popover p-1 shadow-xl"
           >
             <input
               ref={filterRef}
@@ -1305,7 +1305,7 @@ export function Popup(): React.JSX.Element {
               onChange={(event) => {
                 setMenuFilter(event.target.value);
               }}
-              className="mb-1 rounded-md border bg-background px-2 py-1.5 text-xs outline-none focus-visible:border-ring"
+              className="mbe-1 rounded-md border bg-background px-2 py-1.5 text-xs outline-none focus-visible:border-ring"
             />
             <div className="max-h-[45svh] overflow-auto">
               {prompts
@@ -1353,7 +1353,7 @@ export function Popup(): React.JSX.Element {
         <summary className="cursor-pointer font-mono text-[10px] text-muted-foreground select-none">
           {t.popup.devVars}
         </summary>
-        <pre className="mt-1.5 max-h-40 overflow-auto font-mono text-[10px] leading-relaxed whitespace-pre-wrap text-muted-foreground">
+        <pre className="mbs-1.5 max-h-40 overflow-auto font-mono text-[10px] leading-relaxed whitespace-pre-wrap text-muted-foreground">
           {JSON.stringify(
             Object.fromEntries([
               ...Object.entries(payload.vars).filter(([key]) => !VISIBLE_ELSEWHERE.has(key)),
@@ -1497,7 +1497,7 @@ export function Popup(): React.JSX.Element {
             screen edge only if it has a maximize box — without ever
             maximizing by accident. */}
         <div
-          className="flex cursor-default items-center gap-2 border-b px-3 py-2 select-none"
+          className="flex cursor-default items-center gap-2 border-be px-3 py-2 select-none"
           onPointerDown={(event) => {
             void dragWindow(event);
           }}
@@ -1543,7 +1543,7 @@ export function Popup(): React.JSX.Element {
         {payload?.runnable &&
           !awaitingSend &&
           (awaitingInstruction || running || (done && !failed && !setup)) && (
-            <div className="relative border-t px-3 py-2">
+            <div className="relative border-bs px-3 py-2">
               <textarea
                 ref={composerRef}
                 rows={1}
@@ -1581,7 +1581,7 @@ export function Popup(): React.JSX.Element {
                   onClick={stop}
                   aria-label={t.popup.stop}
                   title={t.popup.stop}
-                  className={cn(QUIET_ICON, "absolute inset-e-5 top-1/2 -translate-y-1/2")}
+                  className={cn(QUIET_ICON, "absolute inset-e-5 inset-bs-1/2 -translate-y-1/2")}
                 >
                   <Square />
                 </Button>
@@ -1599,7 +1599,7 @@ export function Popup(): React.JSX.Element {
             onClick={() => {
               void invoke("open_about");
             }}
-            className="cursor-pointer border-t px-3 py-1.5 text-start text-[10px] text-muted-foreground/80 transition-colors hover:text-foreground"
+            className="cursor-pointer border-bs px-3 py-1.5 text-start text-[10px] text-muted-foreground/80 transition-colors hover:text-foreground"
           >
             {t.popup.updateHint(updateVersion)}
           </button>

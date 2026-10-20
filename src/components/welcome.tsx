@@ -70,7 +70,7 @@ export function Welcome({ onStart }: { onStart: () => void }): React.JSX.Element
         </span>
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">{t.welcome.title}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">{t.settings.tagline(TRIGGER_KEYS)}</p>
+          <p className="mbs-2 text-sm text-muted-foreground">{t.settings.tagline(TRIGGER_KEYS)}</p>
         </div>
 
         {/* The whole app in one loop: select, copy twice, popup — wordless,

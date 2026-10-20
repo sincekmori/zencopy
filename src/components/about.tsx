@@ -158,7 +158,7 @@ export function About(): React.JSX.Element {
   }
 
   return (
-    <main className="flex min-h-svh flex-col items-center bg-background px-8 pt-10 pb-5 text-center">
+    <main className="flex min-h-svh flex-col items-center bg-background px-8 pbs-10 pbe-5 text-center">
       {/* Hero: identity and the one dynamic element (the update row), centered
           in the remaining space so the window reads as a single calm card. */}
       <div className="flex flex-1 flex-col items-center justify-center gap-5">

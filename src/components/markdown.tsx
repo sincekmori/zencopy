@@ -138,7 +138,7 @@ export function Markdown({
           />
           <div
             role="alertdialog"
-            className="fixed inset-x-0 top-1/2 z-20 mx-auto flex w-64 max-w-[calc(100vw-2rem)] -translate-y-1/2 flex-col gap-2 rounded-xl border bg-popover p-3 shadow-xl"
+            className="fixed inset-x-0 inset-bs-1/2 z-20 mx-auto flex w-64 max-w-[calc(100vw-2rem)] -translate-y-1/2 flex-col gap-2 rounded-xl border bg-popover p-3 shadow-xl"
           >
             <p className="text-xs">{t.markdown.openLink}</p>
             {/* The URL stays LTR even in RTL locales — it is code, not prose. */}
