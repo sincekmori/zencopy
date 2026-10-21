@@ -58,7 +58,7 @@ htmd = "0.5"
 # providers don't take OOXML, and text is far cheaper. zip + quick-xml unpack
 # docx/pptx (a shallow XML walk collects the text runs); calamine reads xlsx
 # (it brings the same zip/quick-xml, so the marginal cost is calamine itself).
-zip = { version = "8.6", default-features = false, features = ["deflate"] }
+zip = { version = "9.0", default-features = false, features = ["deflate"] }
 quick-xml = "0.42"
 calamine = { version = "0.36", default-features = false }
 
