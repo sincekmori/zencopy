@@ -163,6 +163,39 @@ function growComposer(element: HTMLTextAreaElement): void {
   element.style.height = `${element.scrollHeight}px`;
 }
 
+/** Glue the body to its bottom edge, announcing the scroll as our own: where
+ *  it was sent is left in `target`, for the scroll handler to recognize. */
+function autoScroll(body: HTMLDivElement, target: { current: number | undefined }): void {
+  const bottom = body.scrollHeight - body.clientHeight;
+  // Only a real movement dispatches an event; recording a target without
+  // one would mislabel the user's next scroll as ours.
+  if (bottom - body.scrollTop >= 1) {
+    target.current = bottom;
+    body.scrollTop = bottom;
+  }
+}
+
+/** Abort every in-flight run and forget them all. */
+function abortRuns(runs: Map<string, AbortController>): void {
+  for (const controller of runs.values()) {
+    controller.abort();
+  }
+  runs.clear();
+}
+
+/** Fetch this month's estimate and hand it to `show` — or hand it nothing
+ *  when the ledger cannot be read: a courtesy readout, not a feature gate,
+ *  never surfaces an error. Fire-and-forget. */
+function showMonthCost(show: (cost: number | undefined) => void): void {
+  void (async () => {
+    try {
+      show(await monthCostUsd());
+    } catch {
+      show(undefined);
+    }
+  })();
+}
+
 /** One turn of a thread. Its own component so the compiler's memoization
  *  works per turn: settled turns keep their rendered Markdown while the last
  *  one streams (inside a `.map`, the compiler cannot cache per item). */
@@ -413,7 +446,7 @@ export function Popup(): React.JSX.Element {
   // monthly cap — both estimates from the same local ledger.
   const [costShown] = useLiveValue(isPopupCostShown, "popup-cost-changed", false);
   const [costLimit] = useLiveValue<number>(getCostLimit, "cost-limit-changed", 0); // 0 = no cap
-  // This month's estimate, refreshed when a capture arrives and after every
+  // This month's estimate, fetched when the readout comes on and after every
   // recorded run — "live" at the moments the number can actually change.
   const [monthCost, setMonthCost] = useState<number | undefined>(undefined);
   // Ask before sending an image/files to the provider (settings toggle, or
@@ -456,7 +489,7 @@ export function Popup(): React.JSX.Element {
   // scrolling up to read leaves it (auto-scroll stops), scrolling back down
   // re-engages it — the usual AI-chat pattern.
   const pinnedRef = useRef(true);
-  // Where our own follow (autoScroll below) last scrolled to. Its scroll
+  // Where our own follow (autoScroll) last scrolled to. Its scroll
   // event dispatches asynchronously, and a burst of streamed content can
   // commit in between — the handler would then read the old scrollTop against
   // the grown scrollHeight, conclude "not at the bottom anymore", and unpin
@@ -465,17 +498,6 @@ export function Popup(): React.JSX.Element {
   // — and only by its position, so a user scroll coalesced into the same
   // event still reads as the user's and wins.
   const autoScrollTargetRef = useRef<number | undefined>(undefined);
-
-  /** Glue the body to its bottom edge, announcing the scroll as our own. */
-  const autoScroll = (body: HTMLDivElement): void => {
-    const bottom = body.scrollHeight - body.clientHeight;
-    // Only a real movement dispatches an event; recording a target without
-    // one would mislabel the user's next scroll as ours.
-    if (bottom - body.scrollTop >= 1) {
-      autoScrollTargetRef.current = bottom;
-      body.scrollTop = bottom;
-    }
-  };
   // The palette's filter field, focused when the palette opens.
   const filterRef = useRef<HTMLInputElement>(null);
   // The key (its `code`) that switched slots, until it is released: Custom
@@ -502,29 +524,15 @@ export function Popup(): React.JSX.Element {
     });
   };
 
-  // Refresh the header's month estimate; a failure hides the number rather
-  // than surfacing an error (it is a courtesy readout, not a feature gate).
-  const refreshMonthCost = (): void => {
-    if (!costShown || !statsEnabled) {
-      return;
-    }
-    void (async () => {
-      try {
-        setMonthCost(await monthCostUsd());
-      } catch {
-        setMonthCost(undefined); // a courtesy readout never surfaces errors
-      }
-    })();
-  };
-
+  // The header's month estimate is live while its switch is on and there is
+  // a ledger to read it from. Off, the header shows nothing, whatever was
+  // fetched before: coming back on fetches afresh.
+  const costReadout = costShown && statsEnabled;
   useEffect(() => {
-    if (costShown && statsEnabled) {
-      refreshMonthCost();
-    } else {
-      setMonthCost(undefined);
+    if (costReadout) {
+      showMonthCost(setMonthCost);
     }
-    // oxlint-disable-next-line react-hooks/exhaustive-deps -- refreshMonthCost reads the same two flags this effect keys on
-  }, [costShown, statsEnabled]);
+  }, [costReadout]);
 
   // The statistics append — a ledger of COMPLETED runs only: reuses, gates,
   // config errors, user stops, timeouts, and error responses all leave no
@@ -541,11 +549,16 @@ export function Popup(): React.JSX.Element {
     }
   };
 
-  const abortAll = (): void => {
-    for (const controller of runsRef.current.values()) {
-      controller.abort();
+  // A different view (a new capture or a switched prompt) starts back at the
+  // top with fresh content — follow its stream until the user says otherwise,
+  // and drop any half-typed follow-up (and the height it grew) that belonged
+  // to the previous view.
+  const startView = (): void => {
+    pinnedRef.current = true;
+    setFollowUpText("");
+    if (composerRef.current) {
+      composerRef.current.style.height = "auto";
     }
-    runsRef.current.clear();
   };
 
   const run = (next: CapturePayload, force = false): void => {
@@ -554,7 +567,7 @@ export function Popup(): React.JSX.Element {
     // results dropped. The same capture keeps both — prompts run in parallel
     // and every prompt's result stays valid for identical content.
     if (captureSig.current !== sig) {
-      abortAll();
+      abortRuns(runsRef.current);
       captureSig.current = sig;
       ranDefinition.current.clear();
       pendingSend.current = undefined;
@@ -576,6 +589,11 @@ export function Popup(): React.JSX.Element {
     // submitFollowUp). A kept thread, whatever its outcome, just shows;
     // Retry is its explicit re-run.
     if (promptId === CUSTOM_PROMPT_ID) {
+      // Already waiting when this capture arrived: nothing the focus effect
+      // keys on changes, so the composer on screen takes the caret here.
+      if (awaitingInstruction) {
+        composerRef.current?.focus();
+      }
       return;
     }
     // Same content, same prompt, same definition, and a finished result:
@@ -723,7 +741,9 @@ export function Popup(): React.JSX.Element {
           // The ledger keeps completed runs only.
           if (!stopped) {
             recordUsage(promptId, next.kind, end.outcome);
-            refreshMonthCost(); // the number just changed (fire-and-forget race is fine)
+            if (costReadout) {
+              showMonthCost(setMonthCost); // the number just changed (fire-and-forget race is fine)
+            }
           }
           break;
         }
@@ -763,16 +783,17 @@ export function Popup(): React.JSX.Element {
         log.error("listing prompts failed", error);
       }
     })();
+    startView();
     run(incoming);
   });
 
   // Abort every in-flight run if the popup ever unmounts.
-  useEffect(
-    () => () => {
-      abortAll();
-    },
-    [],
-  );
+  useEffect(() => {
+    const runs = runsRef.current; // the one map the popup ever holds
+    return () => {
+      abortRuns(runs);
+    };
+  }, []);
 
   // Warm the lazy LLM machinery off the first paint, so the first C+C never
   // pays the module load.
@@ -885,21 +906,9 @@ export function Popup(): React.JSX.Element {
       id === undefined || result === undefined ? undefined : { id, phase: result.phase };
     const settled = result?.phase === "done" && previous?.phase === "running" && previous.id === id;
     if ((result?.phase === "running" || settled) && pinnedRef.current && bodyRef.current) {
-      autoScroll(bodyRef.current);
+      autoScroll(bodyRef.current, autoScrollTargetRef);
     }
   }, [payload?.prompt_id, result]);
-
-  // A different view (new capture or a switched prompt) starts back at the
-  // top with fresh content — follow its stream until the user says otherwise,
-  // and drop any half-typed follow-up (and the height it grew) that belonged
-  // to the previous view.
-  useEffect(() => {
-    pinnedRef.current = true;
-    setFollowUpText("");
-    if (composerRef.current) {
-      composerRef.current.style.height = "auto";
-    }
-  }, [payload?.prompt_id, payload?.source]);
 
   // A palette that opens for typing should receive the caret immediately.
   useEffect(() => {
@@ -910,11 +919,12 @@ export function Popup(): React.JSX.Element {
 
   // Custom's composer takes the caret the moment it is the interaction: a C+C
   // routed to Custom (or a 5 pressed on a result) is typing-ready, no click.
+  // (A capture that finds Custom already waiting is run()'s to hand over.)
   useEffect(() => {
     if (awaitingInstruction && !awaitingSend) {
       composerRef.current?.focus();
     }
-  }, [awaitingInstruction, awaitingSend, payload?.source]);
+  }, [awaitingInstruction, awaitingSend]);
 
   // Stop cancels only the prompt on screen; other prompts keep streaming.
   const stop = (): void => {
@@ -1020,6 +1030,7 @@ export function Popup(): React.JSX.Element {
       prompt: prompt.prompt,
       runnable: true,
     };
+    startView();
     // An prompt that already ran (or is still streaming) just becomes the
     // view: the derived result shows its kept text or its live stream — no
     // cancellation, no silent re-execution; Retry is the explicit re-run.
@@ -1504,7 +1515,7 @@ export function Popup(): React.JSX.Element {
         >
           <ZenCopyMark className="size-4" />
           <span className="text-xs font-medium">ZenCopy</span>
-          {costShown && statsEnabled && monthCost !== undefined ? (
+          {costReadout && monthCost !== undefined ? (
             <span
               className="ms-2 text-[10px] text-muted-foreground tabular-nums"
               title={t.popup.monthCost}
