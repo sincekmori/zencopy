@@ -75,5 +75,5 @@
     "@ai-sdk/provider": "4.0.39",
     "@ai-sdk/provider-utils": "5.0.85"
   },
-  "packageManager": "bun@1.4.2"
+  "packageManager": "bun@1.4.5"
 }
