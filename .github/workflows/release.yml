@@ -7,7 +7,7 @@ on:
 
 # Every action is pinned to a commit, the comment beside it naming the
 # version: these jobs hold the signing keys, and a tag can be moved onto code
-# published minutes ago. Dependabot proposes the bumps, a week after a
+# published minutes ago. Dependabot proposes the bumps, a day after a
 # release (.github/dependabot.yml). Bun is the one package.json's
 # `packageManager` names, and cargo builds from Cargo.lock as it stands
 # (`--locked`), so nothing here resolves a version at release time.

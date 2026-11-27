@@ -1,10 +1,11 @@
 # Weekly dependency PRs for every ecosystem in the repo.
-# The 7-day cooldown mirrors the machine-wide bun minimumReleaseAge policy.
+# The one-day cooldown mirrors the machine-wide bun minimumReleaseAge policy
+# (written out because Dependabot waits three days where none is set).
 # Only our own first-party libraries skip the wait: the bun exempt list matches
 # bunfig.toml's minimumReleaseAgeExcludes exactly (ai-sdk-catalog, ai-sdk-ping),
 # and cargo exempts copycopy for the same reason.
 # The workflows pin every action to a commit; the same wait applies to the
-# bumps proposed here, so a release a week old is the newest a job ever runs.
+# bumps proposed here, so a release a day old is the newest a job ever runs.
 version: 2
 updates:
   - package-ecosystem: bun
@@ -15,7 +16,7 @@ updates:
       interval: weekly
       day: monday
     cooldown:
-      default-days: 7
+      default-days: 1
       exclude:
         - ai-sdk-catalog
         - ai-sdk-ping
@@ -36,7 +37,7 @@ updates:
       interval: weekly
       day: monday
     cooldown:
-      default-days: 7
+      default-days: 1
       exclude:
         - copycopy
     groups:
@@ -51,10 +52,10 @@ updates:
       interval: weekly
       day: monday
     cooldown:
-      default-days: 7
+      default-days: 1
     ignore:
       # dtolnay/rust-toolchain is pinned to a commit of its master branch,
       # which has no releases for the cooldown to count from: Dependabot
       # proposes each commit as it lands (#31 offered one half a day old).
-      # That pin is moved by hand, to a commit a week old.
+      # That pin is moved by hand, to a commit a day old.
       - dependency-name: "dtolnay/rust-toolchain"
